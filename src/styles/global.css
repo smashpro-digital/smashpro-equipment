@@ -3,3 +3,74 @@
 @media(max-width:768px){.shell{width:min(calc(100% - 1.5rem),var(--max))}.nav-toggle{display:block}.nav-menu{position:absolute;top:82px;left:.75rem;right:.75rem;display:none;align-items:stretch;padding:1rem;border:1px solid var(--line);background:#070a08}.nav-menu.is-open{display:grid}.nav-menu>a{padding:.65rem}.home-hero,.detail-hero{min-height:680px}.home-hero__shade,.detail-hero__shade{background:linear-gradient(0deg,#050806fa 4%,#050806c9 64%,#05080640)}.hero-rail{display:none}.section{padding:75px 0}.section-heading,.split-section,.two-columns,.detail-intro,.related{grid-template-columns:1fr;gap:1.5rem}.equipment-grid{grid-template-columns:1fr}.equipment-card{min-height:540px}.capability-grid,.attachment-grid,.spec-grid{grid-template-columns:repeat(2,1fr)}.process-section,.capability-section,.spec-section,.safety-section{padding:75px 0}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:last-child{grid-column:auto}.breadcrumbs{padding-top:100px}.related-image img{height:300px}}
 @media(max-width:480px){.home-hero,.detail-hero{min-height:630px;padding-bottom:60px}.home-hero>img,.detail-hero>img{object-position:59% center}.button-row{display:grid}.button{width:100%}.equipment-card{min-height:500px}.equipment-card__content{padding:1.25rem}.card-meta{display:grid}.mini-specs{grid-template-columns:1fr}.mini-specs>span{padding:.45rem}.capability-grid,.attachment-grid,.spec-grid,.process-grid,.gallery,.footer-grid{grid-template-columns:1fr}.capability-grid>div{min-height:135px}.capability-grid h3{margin-top:1.8rem}.process-grid li{min-height:115px}.process-grid h3{margin-top:1.7rem}.gallery img,.gallery video{height:340px}.footer-bottom{flex-direction:column;gap:.5rem}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* SP-ARDHI-26 flagship identity: desktop retains the established detail treatment. */
+.ardhi-mobile-identity{display:none}
+
+@media(max-width:768px){
+  .detail-hero--ardhi{min-height:0;display:block;padding:0 0 68px;background:#070a08;isolation:isolate}
+  .detail-hero--ardhi>img{top:0;left:-15%;width:115%;height:auto;max-width:none;object-fit:contain;object-position:center;filter:brightness(1.1) contrast(1.06) saturate(1.04);transform:translateZ(0)}
+  .detail-hero--ardhi .detail-hero__shade{bottom:auto;z-index:0;height:80vw;background:linear-gradient(180deg,rgba(7,10,8,0) 70%,rgba(7,10,8,.18) 82%,#070a08 100%),linear-gradient(90deg,rgba(7,10,8,.08),transparent 35%,rgba(7,10,8,.03))}
+  .detail-hero--ardhi .detail-hero__content{padding-top:80vw}
+  .ardhi-desktop-identity{display:none}
+  .ardhi-mobile-identity{display:block;max-width:570px}
+  .ardhi-mobile-identity .eyebrow{margin-bottom:14px;color:#9bdf67}
+  .ardhi-mobile-identity h1{max-width:none;margin:0;font-size:clamp(3.7rem,10vw,5.35rem);line-height:.88;letter-spacing:-.07em;text-wrap:nowrap}
+  .ardhi-name{display:flex;align-items:baseline;gap:12px;margin-top:24px}
+  .ardhi-name strong{color:var(--green);font-size:1.65rem;line-height:1;letter-spacing:.04em}
+  .ardhi-name span{color:#d5dcd6;font-size:.78rem;font-weight:800;letter-spacing:.12em}
+  .ardhi-translation{margin:20px 0 3px;color:#fff;font-size:1.25rem;font-weight:800}
+  .ardhi-meaning{margin:0;color:#aeb8b0;font-size:.95rem}
+  .ardhi-slogan{display:grid;gap:1px;margin:32px 0;color:#fff;font-size:1rem;font-weight:950;letter-spacing:.2em;line-height:1.25;text-transform:uppercase}
+  .detail-hero--ardhi .button-row{gap:12px}
+  .detail-hero--ardhi .button{min-height:58px;padding-inline:1.35rem;box-shadow:0 12px 28px rgba(0,0,0,.18);transition:transform .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease,opacity .18s ease}
+  .detail-hero--ardhi .button--outline{border-color:#5b675f;background:rgba(7,10,8,.4);backdrop-filter:blur(4px)}
+  .detail-hero--ardhi .button:active{transform:scale(.985)}
+}
+
+@media(max-width:480px){
+  .detail-hero--ardhi>img{left:-58%;width:158%}
+  .detail-hero--ardhi .detail-hero__shade{height:105vw}
+  .detail-hero--ardhi .detail-hero__content{padding-top:105vw}
+  .ardhi-mobile-identity h1{font-size:clamp(2.72rem,13vw,3.45rem)}
+  .ardhi-name{margin-top:22px}
+}
+
+@media(max-width:350px){
+  .detail-hero--ardhi>img{left:-61%;width:161%}
+  .detail-hero--ardhi .detail-hero__shade{height:107vw}
+  .detail-hero--ardhi .detail-hero__content{padding-top:107vw}
+  .ardhi-mobile-identity h1{font-size:2.62rem}
+}
+
+/* SP-MZIGO-26E electric identity treatment. */
+.detail-hero--electric:after{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 76% 38%,rgba(118,192,67,.18),transparent 25%);content:""}
+.detail-hero--electric .detail-hero__content{z-index:2}
+.electric-badge{display:inline-flex;align-items:center;gap:.55rem;margin:0 0 1.2rem;padding:.55rem .75rem;border:1px solid rgba(139,212,86,.7);background:rgba(7,16,8,.68);box-shadow:0 0 26px rgba(118,192,67,.12);color:#a6e676;font-size:.7rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(5px)}
+.electric-badge>span{font-size:.95rem}
+.electric-badge small{padding-left:.55rem;border-left:1px solid rgba(139,212,86,.35);color:#dce5dd;font-size:.6rem;letter-spacing:.1em}
+.green-fleet-callout{position:relative;overflow:hidden;padding:72px 0;border-block:1px solid rgba(118,192,67,.28);background:linear-gradient(120deg,#0b130d,#101d12 55%,#0a100b)}
+.green-fleet-callout:before{position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 58px,rgba(118,192,67,.035) 59px 60px);content:""}
+.green-fleet-callout__inner{position:relative;display:grid;grid-template-columns:120px 1fr;gap:2.3rem;align-items:center}
+.green-fleet-callout h2{max-width:850px;margin-bottom:.8rem;font-size:clamp(2rem,4.4vw,4rem);line-height:.98;letter-spacing:-.05em;text-transform:uppercase}
+.green-fleet-callout p:last-child{max-width:780px;margin-bottom:0;color:#b9c6bb}
+.energy-mark{display:grid;place-items:center;width:108px;height:108px;border:1px solid var(--green);box-shadow:inset 0 0 24px rgba(118,192,67,.12),0 0 35px rgba(118,192,67,.08);color:var(--green);font-size:3.4rem;font-weight:950;transform:skew(-6deg)}
+.electric-capabilities .feature-list li{display:flex;align-items:center;gap:.8rem;padding-left:.3rem}
+.electric-capabilities .feature-list li:before{display:none}
+.electric-capability-icon{display:grid;flex:0 0 34px;place-items:center;width:34px;height:34px;border:1px solid rgba(118,192,67,.42);color:#9bdf67;font-size:.9rem}
+
+@media(max-width:768px){
+  .detail-hero--electric:after{background:radial-gradient(circle at 72% 28%,rgba(118,192,67,.2),transparent 30%)}
+  .detail-hero--electric .detail-hero__content h1{font-size:clamp(2.7rem,11.8vw,5rem);text-wrap:nowrap}
+  .electric-badge{margin-bottom:1rem}
+  .green-fleet-callout{padding:58px 0}
+  .green-fleet-callout__inner{grid-template-columns:76px 1fr;gap:1.3rem}
+  .energy-mark{width:70px;height:70px;font-size:2.2rem}
+}
+
+@media(max-width:480px){
+  .electric-badge{display:grid;grid-template-columns:auto 1fr;width:max-content;max-width:100%}
+  .electric-badge small{grid-column:1/-1;padding:6px 0 0;border-top:1px solid rgba(139,212,86,.3);border-left:0}
+  .green-fleet-callout__inner{grid-template-columns:1fr}
+  .energy-mark{width:58px;height:58px;font-size:1.85rem}
+}
