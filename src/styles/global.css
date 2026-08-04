@@ -74,3 +74,80 @@
   .green-fleet-callout__inner{grid-template-columns:1fr}
   .energy-mark{width:58px;height:58px;font-size:1.85rem}
 }
+
+/* Mobile showroom pacing and premium product-card hierarchy. */
+.home-flow{display:contents}
+.equipment-card__media{position:absolute;inset:0}
+.equipment-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.equipment-card:hover .equipment-card__media img{transform:scale(1.035)}
+.card-status{display:none}
+.card-fleet-id{margin:0;color:var(--green);font-size:.68rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
+.card-capability{color:#c4cdc6}
+.mini-specs{margin:1.25rem 0}
+.mini-specs>div{padding:.75rem;border-left:1px solid var(--line);font-size:.72rem}
+.mini-specs dt{color:#89938b;text-transform:uppercase}
+.mini-specs dd{margin:0;color:#fff}
+.card-cta{color:var(--green);font-size:.75rem;font-weight:900;letter-spacing:.08em;text-decoration:none;text-transform:uppercase}
+
+@media(max-width:768px){
+  .site-header .brand{min-height:44px}
+  .nav-toggle{min-width:48px;min-height:48px}
+  .nav-menu>a{display:flex;align-items:center;min-height:48px}
+  .home-hero{min-height:570px;padding:118px 0 44px}
+  .home-hero>img{object-position:67% center}
+  .home-hero__shade{background:linear-gradient(0deg,#050806fa 3%,rgba(5,8,6,.86) 58%,rgba(5,8,6,.3)),linear-gradient(90deg,rgba(5,8,6,.82),rgba(5,8,6,.08))}
+  .home-hero h1{margin-bottom:1rem;font-size:clamp(2.7rem,11.8vw,4rem);line-height:.92}
+  .home-hero__content>p:not(.eyebrow,.motto){font-size:.98rem;line-height:1.55}
+  .home-hero .motto{margin:1.15rem 0;font-size:.73rem;letter-spacing:.17em}
+  .home-hero .button-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+  .home-hero .button{min-height:50px;padding:.65rem;font-size:.66rem;line-height:1.25}
+  .home-flow{display:flex;flex-direction:column}
+  .home-flow>#fleet{order:1}
+  .home-flow>.split-section{order:2}
+  .home-flow>#attachments{order:3}
+  .home-flow>#rental-process{order:4}
+  .home-flow>.capability-section{order:5}
+  .home-flow>#contractors{order:6}
+  #fleet.section{padding-top:52px;padding-bottom:68px}
+  #fleet .section-heading{gap:1rem;margin-bottom:1.8rem}
+  #fleet .section-heading h2{font-size:clamp(2rem,8vw,3rem)}
+  #fleet .section-heading>p{font-size:.88rem}
+  .equipment-grid{gap:1.25rem}
+  .equipment-card{min-height:0;display:grid;grid-template-rows:auto 1fr;align-items:stretch;border-color:#354139;background:#0d120f}
+  .equipment-card__media{position:relative;inset:auto;aspect-ratio:4/3;overflow:hidden;background:#050705}
+  .equipment-card__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center;transform:scale(1.12)}
+  .equipment-card:hover .equipment-card__media img{transform:scale(1.16)}
+  .equipment-card__media:after{position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,8,5,.18),transparent 35%);content:""}
+  .card-status{position:absolute;right:12px;bottom:12px;z-index:1;display:block;padding:.42rem .6rem;border:1px solid rgba(118,192,67,.58);background:rgba(5,9,6,.78);color:#a1df74;font-size:.58rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase;backdrop-filter:blur(4px)}
+  .equipment-card__overlay{display:none}
+  .equipment-card__content{position:relative;display:flex;height:420px;min-height:0;flex-direction:column;padding:1.4rem}
+  .equipment-card h3{margin:.35rem 0 .25rem;font-size:2.35rem}
+  .category-label{margin-bottom:.8rem;font-size:.7rem;letter-spacing:.04em}
+  .card-capability{display:-webkit-box;min-height:44px;margin-bottom:1rem;overflow:hidden;color:#b8c2ba;font-size:.9rem;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  .mini-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0 0 1.1rem;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .mini-specs>div{height:68px;padding:.65rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-left:0;font-size:.7rem}
+  .mini-specs dt{font-size:.58rem;line-height:1.2}
+  .mini-specs dd{margin-top:.3rem;line-height:1.25}
+  .card-cta{display:flex;min-height:50px;align-items:center;justify-content:space-between;margin-top:auto;padding:0 1rem;border:1px solid var(--green);background:var(--green);color:#071006;font-size:.7rem;transition:transform .18s ease,background-color .18s ease}
+  .card-cta:active{transform:scale(.988)}
+  .site-footer .brand,.footer-grid a:not(.brand){display:flex;min-height:44px;align-items:center}
+}
+
+@media(max-width:360px){
+  .home-hero{min-height:600px;padding-top:112px}
+  .home-hero h1{font-size:2.62rem}
+  .home-hero .button{font-size:.61rem}
+  .equipment-card__content{padding:1.15rem}
+}
+
+@media(min-width:600px) and (max-width:768px){
+  #fleet .equipment-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+  #fleet .equipment-card{height:100%}
+  #fleet .equipment-card__media{aspect-ratio:4/3}
+  #fleet .equipment-card__content{height:430px;min-height:0;padding:1.15rem}
+  #fleet .equipment-card h3{font-size:2rem}
+  #fleet .category-label{min-height:34px}
+  #fleet .card-capability{min-height:66px;-webkit-line-clamp:3}
+  #fleet .mini-specs{grid-template-columns:1fr}
+  #fleet .mini-specs>div{height:56px}
+}

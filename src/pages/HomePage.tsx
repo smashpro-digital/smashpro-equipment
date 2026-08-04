@@ -17,6 +17,7 @@ export function HomePage() {
         <div className="hero-rail"><span>01</span><p>Compact capability.<br />Professional standards.</p></div>
       </section>
 
+      <div className="home-flow">
       <section className="section shell" id="fleet"><div className="section-heading"><div><p className="eyebrow">Featured fleet</p><h2>Equipment with a defined purpose.</h2></div><p>Every fleet asset is documented around the work it supports. Availability is published only when the operating program is ready.</p></div><div className="equipment-grid">{equipment.map((item) => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
 
       <section className="capability-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Work capabilities</p><h2>Made for the places work gets difficult.</h2></div><p>Compact equipment expands what a prepared crew can move, handle, and finish.</p></div><div className="capability-grid">{capabilities.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3></div>)}</div></div></section>
@@ -28,6 +29,7 @@ export function HomePage() {
       <section className="section shell" id="attachments"><div className="section-heading"><div><p className="eyebrow">Attachment library</p><h2>One fleet. More ways to work.</h2></div><p>Only the bucket and pallet forks are documented with the initial Ardhi fleet record. Remaining attachments are planned, not offered.</p></div><div className="attachment-grid">{attachments.map((item) => <article key={item.name}><span className={item.status === "included" ? "badge badge--live" : "badge"}>{item.status === "included" ? "Documented" : "Future"}</span><h3>{item.name}</h3><p>{item.category}</p></article>)}</div></section>
 
       <section className="contractor-cta" id="contractors"><div className="shell"><p className="eyebrow">For independent contractors</p><h2>Fleet access begins with readiness.</h2><p>SP Fleet rental access may require account approval, equipment-specific qualification, insurance, certification, and agreement to inspection and rental terms. A public SPgO network URL has not yet been approved.</p><div className="button-row"><ButtonLink href="https://smashpro.app/contact" variant="primary">Request SPgO Network Access</ButtonLink><ButtonLink href="https://smashpro.app/contact" variant="outline">Ask About Eligibility</ButtonLink></div></div></section>
+      </div>
     </PageFrame>
   );
 }
