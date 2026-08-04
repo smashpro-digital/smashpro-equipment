@@ -13,7 +13,7 @@ export function HomePage() {
     <PageFrame>
       <section className="home-hero">
         <img src="/equipment/images/ardhibanner.png" alt="SmashPro compact tracked loader prepared for project work" width="1536" height="1024" />
-        <div className="home-hero__shade" /><div className="shell home-hero__content"><p className="eyebrow">Official SmashPro Fleet Showroom</p><h1>Built to Move the Work Forward.</h1><p>Professional-grade compact equipment selected for capability, access, and project support—from moving earth to moving the load.</p><p className="motto">Power. Precision. Purpose.</p><div className="button-row"><ButtonLink href="#fleet">Explore Equipment</ButtonLink><ButtonLink href="https://smashpro.app/contact" variant="outline">Request Availability</ButtonLink></div></div>
+        <div className="home-hero__shade" /><div className="ambient-light" aria-hidden="true" /><div className="shell home-hero__content"><p className="eyebrow">Official SmashPro Fleet Showroom</p><h1>Built to Move the Work Forward.</h1><p>Professional-grade compact equipment selected for capability, access, and project support—from moving earth to moving the load.</p><p className="motto">Power. Precision. Purpose.</p><div className="button-row"><ButtonLink href="#fleet">Explore Equipment</ButtonLink><ButtonLink href="https://smashpro.app/contact" variant="outline">Request Availability</ButtonLink></div></div>
         <div className="hero-rail"><span>01</span><p>Compact capability.<br />Professional standards.</p></div>
       </section>
 
