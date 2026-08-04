@@ -1,0 +1,68 @@
+name: Deploy Equipment Catalog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-equipment-catalog
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy static catalog to production
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://smashpro.app/equipment/
+    steps:
+      - name: Check out catalog source
+        uses: actions/checkout@v4
+
+      - name: Verify required deployment settings
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        run: |
+          missing=0
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_PORT; do
+            if [ -z "${!name}" ]; then
+              echo "::error title=Missing deployment secret::GitHub secret $name is required for the equipment catalog deployment."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Deploy catalog incrementally
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftp
+          local-dir: ./
+          server-dir: /public_html/smashpro.app/equipment/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.agents/**
+            **/.codex/**
+            **/node_modules/**
+            **/.env*
+            **/*secret*
+            **/*credential*
+            **/*.log
+            **/*.tmp
+            **/tmp/**
+            **/notes/**
+            README.md
+            DEPLOYMENT.md
