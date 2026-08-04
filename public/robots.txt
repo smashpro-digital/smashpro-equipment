@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /equipment/
+
+Sitemap: https://smashpro.app/equipment/sitemap.xml

@@ -1,4 +1,4 @@
-name: Deploy Equipment Catalog
+name: Build and Deploy Equipment Showroom
 
 on:
   push:
@@ -9,20 +9,60 @@ permissions:
   contents: read
 
 concurrency:
-  group: production-equipment-catalog
+  group: production-equipment-showroom
   cancel-in-progress: false
 
 jobs:
+  validate:
+    name: Validate production build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out showroom source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run TypeScript checks
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Build static showroom
+        run: npm run build
+      - name: Verify protected build outputs
+        run: |
+          missing=0
+          for path in dist/index.html dist/sp-ardhi-26.html dist/sp-mzigo-26.html dist/images/ardhibanner.png dist/images/mzigobanner.png; do
+            if [ ! -f "$path" ]; then
+              echo "::error title=Missing build output::$path was not generated."
+              missing=1
+            fi
+          done
+          exit "$missing"
+      - name: Upload validated showroom artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: equipment-showroom-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
   deploy:
-    name: Deploy static catalog to production
+    name: Deploy static showroom to production
+    needs: validate
     runs-on: ubuntu-latest
     environment:
       name: production
       url: https://smashpro.app/equipment/
     steps:
-      - name: Check out catalog source
-        uses: actions/checkout@v4
-
+      - name: Download validated showroom artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: equipment-showroom-dist
+          path: dist
       - name: Verify required deployment settings
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -33,13 +73,12 @@ jobs:
           missing=0
           for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_PORT; do
             if [ -z "${!name}" ]; then
-              echo "::error title=Missing deployment secret::GitHub secret $name is required for the equipment catalog deployment."
+              echo "::error title=Missing deployment secret::GitHub secret $name is required for the equipment showroom deployment."
               missing=1
             fi
           done
           exit "$missing"
-
-      - name: Deploy catalog incrementally
+      - name: Deploy generated output incrementally
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -47,22 +86,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           protocol: ftp
-          local-dir: ./
+          local-dir: ./dist/
           server-dir: /public_html/smashpro.app/equipment/
           dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/.agents/**
-            **/.codex/**
-            **/node_modules/**
-            **/.env*
-            **/*secret*
-            **/*credential*
-            **/*.log
-            **/*.tmp
-            **/tmp/**
-            **/notes/**
-            README.md
-            DEPLOYMENT.md
