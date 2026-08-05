@@ -3,6 +3,13 @@ export type EquipmentStatus = "fleet-build" | "planned" | "request-only";
 export interface EquipmentSpecification { label: string; value: string; confirmed: boolean; }
 export interface GalleryImage { src: string; alt: string; caption: string; kind?: "image" | "video"; }
 export interface RentalRequirement { title: string; detail: string; }
+export interface FactoryFinish {
+  paintColor: string;
+  colorStandard: string;
+  coatingProcess: string;
+  factoryCure: string;
+  summary: string;
+}
 export interface Equipment {
   slug: string;
   publicPath: string;
@@ -18,6 +25,7 @@ export interface Equipment {
   status: EquipmentStatus;
   statusLabel: string;
   specifications: EquipmentSpecification[];
+  factoryFinish?: FactoryFinish;
   capabilities: string[];
   idealUses: string[];
   includedAttachments: string[];

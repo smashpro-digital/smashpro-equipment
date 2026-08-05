@@ -227,6 +227,18 @@ body:after{position:fixed;top:-22vw;right:-18vw;z-index:-1;width:52vw;height:52v
 .reveal-ready [data-reveal].is-revealed .gallery figure:hover{transform:translateY(-6px)}
 .reveal-ready [data-reveal].is-revealed .spec-grid>div:hover{transform:translateY(-3px)}
 
+/* Official SP-ARDHI-26 manufacturing finish. */
+.factory-finish{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--line)}
+.factory-finish__heading{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:1.5rem}
+.factory-finish__heading .eyebrow{margin-bottom:.4rem}
+.factory-finish__heading h3{margin:0;font-size:clamp(2rem,4vw,3.25rem);line-height:1;letter-spacing:-.045em;text-transform:uppercase}
+.factory-finish__grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.factory-finish__grid>div{position:relative;min-height:145px;background:linear-gradient(145deg,rgba(118,192,67,.055),transparent 55%)}
+.factory-finish__grid>div:first-child:after{position:absolute;top:1.3rem;right:1.3rem;width:14px;height:14px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:#76c043;box-shadow:0 0 18px rgba(118,192,67,.32);content:""}
+.factory-finish__callout{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center;margin-top:1.25rem;padding:1.1rem 1.25rem;border:1px solid rgba(118,192,67,.28);background:rgba(118,192,67,.045)}
+.factory-finish__callout span{padding:.45rem .65rem;border:1px solid rgba(118,192,67,.55);color:var(--green);font-size:.65rem;font-weight:950;letter-spacing:.12em;white-space:nowrap}
+.factory-finish__callout p{margin:0;color:#c6d0c8;font-size:.92rem}
+
 @keyframes hero-content-in{from{opacity:0;transform:translate3d(0,26px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes accent-line-in{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
 @keyframes hero-breathe{from{transform:scale(1.005)}to{transform:scale(1.035)}}
@@ -243,6 +255,16 @@ body:after{position:fixed;top:-22vw;right:-18vw;z-index:-1;width:52vw;height:52v
   .equipment-card:hover,.gallery figure:hover,.related-image:hover{transform:translateY(-3px)}
   .reveal-ready [data-reveal]{transform:translate3d(0,16px,0)}
   .reveal-ready [data-reveal].is-revealed .equipment-card:hover,.reveal-ready [data-reveal].is-revealed .gallery figure:hover{transform:translateY(-3px)}
+  .factory-finish{margin-top:3rem;padding-top:2.4rem}
+  .factory-finish__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:480px){
+  .factory-finish__heading{display:block}
+  .factory-finish__grid{grid-template-columns:1fr}
+  .factory-finish__grid>div{min-height:112px}
+  .factory-finish__callout{grid-template-columns:1fr}
+  .factory-finish__callout span{width:max-content}
 }
 
 @media(prefers-reduced-motion:reduce){
