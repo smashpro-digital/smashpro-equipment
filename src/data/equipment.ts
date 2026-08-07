@@ -33,7 +33,7 @@ export const equipment: Equipment[] = [
       { src: image("4226184114972.PNM.jpg"), alt: "SP-ARDHI-26 on the assembly floor", caption: "Assembly floor" },
       { src: image("4226178255974.PNM.jpg"), alt: "SP-ARDHI-26 powertrain installation", caption: "Powertrain installation" },
       { src: image("4237421509220.PNM.jpg"), alt: "SP-ARDHI-26 hydraulic system", caption: "Hydraulic system" },
-      { src: image("4235928499026.PNM.mp4"), alt: "SP-ARDHI-26 testing the pallet fork attachment", caption: "Pallet fork testing", kind: "video" },
+      { src: image("4235928499026.PNM.mp4?v=h264-20260807"), alt: "SP-ARDHI-26 testing the pallet fork attachment", caption: "Pallet fork testing", kind: "video" },
       { src: image("4231418373820.PNM.mp4"), alt: "SP-ARDHI-26 factory testing video", caption: "Factory testing", kind: "video" },
       { src: image("4242703936515.mp4"), alt: "SP-ARDHI-26 factory build video", caption: "Factory build", kind: "video" },
     ],
