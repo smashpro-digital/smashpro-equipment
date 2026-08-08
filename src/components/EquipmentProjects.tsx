@@ -42,6 +42,7 @@ function estimateUrl(service: EquipmentService, fleetId: string) {
 export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], attachmentIds = [] }: { fleetId: string; equipmentName: string; capabilityIds?: string[]; attachmentIds?: string[] }) {
   const [services, setServices] = useState<EquipmentService[]>([]);
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -50,9 +51,9 @@ export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], 
       signal: controller.signal,
     })
       .then((response) => response.ok ? response.json() : Promise.reject(new Error("catalog unavailable")))
-      .then((payload) => {const source:EquipmentService[]=Array.isArray(payload?.services)?payload.services:[];const rows=recommendedServices({fleetId,capabilityIds,attachmentIds},source);setServices(rows);track("equipment_services_loaded",{equipment_id:fleetId,service_count:rows.length});})
+      .then((payload) => {const source:EquipmentService[]=Array.isArray(payload?.services)?payload.services:[];const rows=recommendedServices({fleetId,capabilityIds,attachmentIds},source);setServices(rows);setLoaded(true);track("equipment_services_loaded",{equipment_id:fleetId,service_count:rows.length});})
       .catch((error) => {
-        if (error?.name !== "AbortError") setFailed(true);
+        if (error?.name !== "AbortError") {setFailed(true);setLoaded(true);}
       });
     return () => controller.abort();
   }, [fleetId, capabilityIds, attachmentIds]);
@@ -71,7 +72,7 @@ export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], 
       <h3>{service.name}</h3><p>{service.tagline || service.description}</p>
       <strong>{service.quote_required ? "Custom Estimate" : "Estimate required"}</strong>
       <ButtonLink href={estimateUrl(service, fleetId)} onClick={()=>track("equipment_service_selected",{equipment_id:fleetId,service_slug:service.slug})}>Get Estimate</ButtonLink>
-    </article>)}</div> : failed ? <p className="empty-state">Project services are temporarily unavailable. The equipment passport remains available below.</p> : <p className="empty-state">Loading current project services…</p>}
+    </article>)}</div> : failed ? <p className="empty-state">Project services are temporarily unavailable. The equipment passport remains available below.</p> : loaded ? <p className="empty-state">Project recommendations have not been published for this equipment yet. Explore SmashPro Services for other ways we can help.</p> : <p className="empty-state">Loading current project services…</p>}
     <div className="contractor-availability"><div><p className="eyebrow">Contractor workflow</p><h3>Need fleet access?</h3><p>Contractor availability remains subject to eligibility, readiness, insurance, and operating requirements.</p></div><ButtonLink href="https://smashpro.app/contact" variant="outline" onClick={()=>track("contractor_availability_clicked",{equipment_id:fleetId})}>Request Availability</ButtonLink></div>
   </div></section>;
 }

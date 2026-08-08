@@ -34,10 +34,12 @@ jobs:
         run: npm test
       - name: Build static showroom
         run: npm run build
+      - name: Validate customer-safe Equipment Passport index
+        run: npm run validate:index
       - name: Verify protected build outputs
         run: |
           missing=0
-          for path in dist/index.html dist/sp-ardhi-26.html dist/sp-mzigo-26.html dist/images/ardhibanner.png dist/images/mzigobanner.png dist/images/4235928499026.PNM.mp4; do
+          for path in dist/index.html dist/sp-ardhi-26.html dist/sp-mzigo-26.html dist/equipment-index.json dist/images/ardhibanner.png dist/images/mzigobanner.png dist/images/4235928499026.PNM.mp4; do
             if [ ! -f "$path" ]; then
               echo "::error title=Missing build output::$path was not generated."
               missing=1

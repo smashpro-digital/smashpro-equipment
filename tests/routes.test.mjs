@@ -93,3 +93,11 @@ test("public index and recommendations are metadata driven", () => {
   assert.match(recommendations, /required\.some/);
   assert.match(recommendations, /localeCompare/);
 });
+
+test("equipment projects distinguish loading, unavailable, and settled empty states", () => {
+  const projects = readFileSync("src/components/EquipmentProjects.tsx", "utf8");
+  assert.match(projects, /const \[loaded, setLoaded\] = useState\(false\)/);
+  assert.match(projects, /Project recommendations have not been published/);
+  assert.match(projects, /Project services are temporarily unavailable/);
+  assert.match(projects, /Loading current project services/);
+});
