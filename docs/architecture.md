@@ -19,4 +19,4 @@ Vite emits `index.html`, `sp-ardhi-26.html`, and `sp-mzigo-26.html`. A small bui
 
 ## Boundaries
 
-The public catalog does not read fleet databases, expose contractor-private data, or assert live availability. SPGo remains the future source of contractor eligibility and reservation workflows; the showroom links only to public entry points.
+The public catalog does not read private fleet tables, expose contractor-private data, or assert live availability. The Equipment Passport model is normalized in `docs/sql/equipment_passport_v1.sql`; a server-owned public projection is the future integration boundary. `admin.html` is a no-index client for that authenticated API and deliberately does not persist locally when the API is absent. SPGo remains the source of contractor eligibility and reservation workflows.

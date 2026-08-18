@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
-interface Props { href: string; children: ReactNode; variant?: "primary" | "outline" | "quiet"; external?: boolean; }
+interface Props { href:string; children:ReactNode; variant?:"primary"|"outline"|"quiet"; external?:boolean; onClick?:MouseEventHandler<HTMLAnchorElement>; }
 
-export function ButtonLink({ href, children, variant = "primary", external = false }: Props) {
-  return <a className={`button button--${variant}`} href={href} {...(external ? { rel: "noreferrer" } : {})}>{children}<span aria-hidden="true">↗</span></a>;
+export function ButtonLink({href,children,variant="primary",external=false,onClick}:Props){
+  return <a className={`button button--${variant}`} href={href} onClick={onClick} {...(external?{rel:"noreferrer"}:{})}>{children}<span aria-hidden="true">↗</span></a>;
 }
