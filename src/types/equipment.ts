@@ -3,10 +3,10 @@ export type RecordVisibility = "public" | "private";
 export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade" | "maintenance" | "attachment" | "media" | "rental" | "revenue" | "hours" | "state" | "status";
 
 export interface EquipmentSpecification { label: string; value: string; confirmed: boolean; group?: string; source?: string; sortOrder?: number; }
-export interface GalleryImage { src: string; alt: string; caption: string; kind?: "image" | "video"; capturedAt?: string; }
+export interface GalleryImage { id?: string; src: string; alt: string; caption: string; kind?: "image" | "video"; capturedAt?: string; }
 export interface RentalRequirement { title: string; detail: string; }
 export interface FactoryFinish { paintColor: string; colorStandard: string; coatingProcess: string; factoryCure: string; summary: string; }
-export interface FactoryOption { id: string; name: string; description: string; publicDisplay: boolean; installationSource: "factory"; }
+export interface FactoryOption { id: string; name: string; description: string; publicDisplay: boolean; installationSource: "factory"; evidenceMediaId?: string; evidenceObjectPosition?: string; }
 export interface EquipmentUpgrade {
   id: string; name: string; category: string; description: string; installDate?: string; installedBy?: string; vendor?: string;
   estimatedAddedValue?: number; youtubeUrl?: string; imageUrls: string[]; vendorUrl?: string; warranty?: string;
@@ -16,7 +16,7 @@ export interface PackageRule { id: string; packageName: string; description: str
 export interface CalculatedPackage { id: string; name: string; description: string; qualifyingUpgradeIds: string[]; }
 export interface EquipmentAttachment { id: string; name: string; category: string; status: "installed" | "available" | "planned" | "removed"; addedAt?: string; description?: string; }
 export interface IncludedItem { id: string; name: string; category: "accessory" | "spare-part"; }
-export interface EquipmentDocument { id: string; title: string; kind: "manual" | "brochure" | "spec-sheet" | "warranty" | "invoice" | "receipt" | "other"; url?: string; publicDisplay: boolean; }
+export interface EquipmentDocument { id: string; title: string; kind: "manual" | "brochure" | "spec-sheet" | "warranty" | "invoice" | "receipt" | "other"; description?: string; source?: string; downloadName?: string; url?: string; publicDisplay: boolean; }
 export interface ServiceRecord { id: string; performedAt: string; serviceType: string; summary: string; provider?: string; operatingHours?: number; status: "completed" | "scheduled"; }
 export interface TimelineEvent { id: string; occurredAt?: string; kind: TimelineKind; title: string; detail?: string; publicDisplay: boolean; milestone?: "first-machine" | "first-rental" | "first-100-hours" | "first-revenue" | "first-state" | "first-youtube" | "first-major-upgrade" | "completed-build" | "500-hours" | "1000-hours"; }
 export interface MediaRecord { id: string; title: string; kind: "image" | "video" | "youtube"; role?: "installation" | "walkaround" | "review" | "maintenance" | "short" | "build"; url: string; publishedAt?: string; description?: string; upgradeId?: string; }

@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const payload = JSON.parse(readFileSync(new URL("../dist/equipment-index.json", import.meta.url), "utf8"));
 const allowedKeys = new Set([
@@ -28,3 +28,6 @@ for (const item of payload.equipment) {
 }
 
 console.log(`Equipment public index validation passed (${payload.equipment.length} customer-safe records).`);
+
+const ardhiManufacturerPdf = new URL("../dist/documents/sp-ardhi-26/yf380-manufacturer-promo-spec-sheet.pdf", import.meta.url);
+if (!existsSync(ardhiManufacturerPdf)) throw new Error("SP-ARDHI-26 manufacturer specification PDF was not emitted to dist.");

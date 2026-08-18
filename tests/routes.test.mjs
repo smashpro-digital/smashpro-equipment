@@ -101,3 +101,10 @@ test("equipment projects distinguish loading, unavailable, and settled empty sta
   assert.match(projects, /Project services are temporarily unavailable/);
   assert.match(projects, /Loading current project services/);
 });
+
+test("Ardhi public factory document has a deployable URL and cannot render as an empty document state", () => {
+  const data = readFileSync("src/data/equipment.ts", "utf8");
+  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
+  assert.match(data, /ardhi-factory-specification-20260816[\s\S]*url: "\/equipment\/documents\/sp-ardhi-26\/yf380-manufacturer-promo-spec-sheet\.pdf"/);
+  assert.match(detail, /downloads\.length \? <div className="public-document-list">/);
+});
