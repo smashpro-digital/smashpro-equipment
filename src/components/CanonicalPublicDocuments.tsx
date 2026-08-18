@@ -25,7 +25,7 @@ export function CanonicalPublicDocuments({ assetCode }: { assetCode: string }) {
   return <div className="canonical-public-documents">
     <p className="eyebrow">Factory documentation</p>
     <div className="download-list">
-      {documents.map((document) => <a key={document.document_id} href={document.document_url} target="_blank" rel="noreferrer">
+      {documents.map((document) => <a key={document.document_id} href={document.document_url.startsWith("/") ? `https://smashpro.app${document.document_url}` : document.document_url} target="_blank" rel="noreferrer">
         {document.title}<span>{document.document_type.replaceAll("_", " ")} · {document.source_type}</span>
       </a>)}
     </div>
