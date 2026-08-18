@@ -15,6 +15,7 @@ export function WindowSticker({ item, packages, scores }: { item: Equipment; pac
         <h3>Factory Options</h3>{item.factoryOptions.filter(({ publicDisplay }) => publicDisplay).length ? <ul>{item.factoryOptions.filter(({ publicDisplay }) => publicDisplay).map(({ id, name }) => <li key={id}>{name}</li>)}</ul> : <p>None published</p>}
         <h3>Installed Packages</h3>{packages.length ? <ul>{packages.map(({ id, name }) => <li key={id}>{name}</li>)}</ul> : <p>No package currently qualified</p>}
         <h3>Attachments Included</h3><ul>{item.attachments.filter(({ status }) => status === "installed").map(({ id, name }) => <li key={id}>{name}</li>)}</ul>
+        {item.includedItems.length ? <><h3>Included Accessories</h3><ul>{item.includedItems.map(({ id, name }) => <li key={id}>{name}</li>)}</ul></> : null}
       </aside></div>
       <footer><div><span>Documentation Score</span><strong>{scores.documentation}/100</strong></div><div><span>Maintenance Score</span><strong>{scores.maintenance}/100</strong></div><p>Scan to verify this machine's living equipment passport.</p></footer>
     </article>

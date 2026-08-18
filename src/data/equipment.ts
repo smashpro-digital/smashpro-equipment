@@ -2,7 +2,7 @@ import type { Equipment, EquipmentSpecification } from "../types/equipment";
 import { standardPackageRules } from "./packageRules";
 
 const image = (name: string) => `/equipment/images/${name}`;
-const specs = (values: Array<[string, string, string?]>): EquipmentSpecification[] => values.map(([label, value, group], sortOrder) => ({ label, value, group: group ?? "General", confirmed: true, sortOrder }));
+const specs = (values: Array<[string, string, string?, string?]>): EquipmentSpecification[] => values.map(([label, value, group, source], sortOrder) => ({ label, value, group: group ?? "General", source, confirmed: true, sortOrder }));
 
 export const equipment: Equipment[] = [
   {
@@ -13,10 +13,20 @@ export const equipment: Equipment[] = [
     identity: { passportId: "SPP-2026-0001", model: "SP-ARDHI-26", edition: "Founder's Edition", finish: "SmashPro Green (RAL 6018)", assetClass: "Compact tracked loader", powertrain: "Internal combustion", modelYear: 2026 },
     specifications: specs([
       ["Fleet ID", "SP-ARDHI-26", "Identity"], ["Manufacturer model reference", "YF380", "Identity"], ["Machine type", "Compact mini skid loader", "Configuration"],
-      ["Drive", "Tracked", "Undercarriage"], ["Hydraulics", "Auxiliary quick attach", "Hydraulic system"], ["Factory finish", "Green High Gloss / RAL 6018", "Finish"], ["Factory cure", "195°C × 15 min", "Finish"],
+      ["Engine manufacturer", "Runtong", "Powertrain", "Procurement record"], ["Engine configuration", "Twin-cylinder gasoline engine", "Powertrain", "Procurement record"], ["Engine displacement", "739 cc", "Powertrain", "Procurement record"], ["EPA designation", "EPA Certified", "Powertrain", "Procurement record"], ["Engine output", "23 HP, manufacturer-stated", "Powertrain", "Manufacturer specification PDF · 2026-08-16"], ["Rated power", "18.2 kW, manufacturer-stated", "Powertrain", "Manufacturer specification PDF · 2026-08-16"], ["Rated engine speed", "3,600 rpm", "Powertrain", "Manufacturer specification PDF · 2026-08-16"], ["Noise", "≤95 dB", "Powertrain", "Manufacturer specification PDF · 2026-08-16"],
+      ["Track drive", "Tracked", "Undercarriage"], ["Hydraulic configuration", "Three-pump / three-valve", "Hydraulic system", "Manufacturer specification PDF · 2026-08-16"], ["Hydraulic pressure", "17 MPa", "Hydraulic system", "Manufacturer specification PDF · 2026-08-16"], ["Auxiliary hydraulics", "Auxiliary circuit / quick attach", "Hydraulic system"], ["Attachment interface", "Quick attach", "Hydraulic system"],
+      ["Operating weight", "880 kg (1,940 lb)", "Capacity", "Manufacturer specification PDF · 2026-08-16"], ["Rated operating load", "280 kg (617 lb)", "Capacity", "Manufacturer specification PDF · 2026-08-16"], ["Maximum lifting force", "458 kg (1,009 lb)", "Capacity", "Manufacturer specification PDF · 2026-08-16"], ["Bucket capacity", "0.13 m³ (4.59 ft³)", "Capacity", "Manufacturer specification PDF · 2026-08-16"], ["Travel speed", "0–5.5 km/h (3.5 mph)", "Performance", "Manufacturer specification PDF · 2026-08-16"],
+      ["Raise cycle time", "4 s", "Performance", "Manufacturer specification PDF · 2026-08-16"], ["Dump cycle time", "1.3 s", "Performance", "Manufacturer specification PDF · 2026-08-16"], ["Lower cycle time", "3.2 s", "Performance", "Manufacturer specification PDF · 2026-08-16"],
+      ["Overall dimensions with bucket", "2,285 × 810 × 1,270 mm (89.96 × 31.88 × 50 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Overall length without bucket", "1,782 mm (70.15 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Length without bucket, pedal folded", "1,570 mm (61.81 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Bucket width", "1,090 mm (42.91 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Wheelbase", "760 mm (29.92 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Ground clearance", "110 mm (4.33 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Forward turning radius", "1,300 mm (51.18 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum working height", "2,100 mm (82.7 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum pin height", "1,880 mm (74.01 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum dumping height", "1,480 mm (58.26 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum dumping distance", "430 mm (16.92 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum dumping angle", "30°", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Bucket rollback at ground", "25°", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Departure angle", "27°", "Dimensions", "Manufacturer specification PDF · 2026-08-16"],
+      ["Factory finish", "Green High Gloss / RAL 6018", "Finish"], ["Factory cure", "195°C × 15 min", "Finish"],
     ]),
     factoryFinish: { paintColor: "Green High Gloss", colorStandard: "RAL 6018", coatingProcess: "Industrial powder-coated finish", factoryCure: "195°C (383°F) for 15 minutes", summary: "Finished in a high-gloss RAL 6018 industrial coating and factory-cured for long-term durability and professional appearance." },
-    factoryOptions: [], upgrades: [
+    factoryOptions: [
+      { id: "ardhi-three-pump-hydraulics", name: "Three-Pump / Three-Valve Hydraulic System", description: "Factory-installed hydraulic upgrade providing dedicated pump and valve capacity for smoother machine functions and auxiliary attachment operation.", publicDisplay: true, installationSource: "factory" },
+      { id: "ardhi-ral-6018-finish", name: "Custom RAL 6018 High-Gloss Factory Finish", description: "SmashPro Green high-gloss industrial coating, factory-cured for durability.", publicDisplay: true, installationSource: "factory" },
+      { id: "ardhi-smashpro-branding", name: "Custom SmashPro Branding Package", description: "Factory-applied SmashPro and SP-ARDHI-26 identification graphics.", publicDisplay: true, installationSource: "factory" },
+      { id: "ardhi-front-led-lights", name: "Front LED Work Lights", description: "Factory-installed front work lighting documented in the completed-build media.", publicDisplay: true, installationSource: "factory" },
+    ], upgrades: [
       { id: "ardhi-gps", name: "GPS Tracking", category: "Command", description: "Planned location and fleet-security system.", imageUrls: [], status: "planned", tags: ["gps"] },
       { id: "ardhi-solar", name: "Solar Charging", category: "Command", description: "Planned auxiliary solar charging system.", imageUrls: [], status: "planned", tags: ["solar"] },
       { id: "ardhi-rock-lights", name: "Rock Lights", category: "Lighting", description: "Planned equipment lighting upgrade.", imageUrls: [], status: "planned", tags: ["rock lights"] },
@@ -25,13 +35,17 @@ export const equipment: Equipment[] = [
     ], packageRules: standardPackageRules,
     attachments: [
       { id: "ardhi-bucket", name: "General-purpose bucket", category: "Earthmoving", status: "installed", description: "Documented initial equipment configuration." },
-      { id: "ardhi-forks", name: "Pallet forks", category: "Material handling", status: "available", description: "Documented with the initial fleet record." },
+      { id: "ardhi-forks", name: "Pallet forks", category: "Material handling", status: "installed", description: "Included with the delivered factory configuration." },
       { id: "ardhi-brush-cutter", name: "Brush cutter", category: "Land management", status: "planned" },
       { id: "ardhi-grapple", name: "Grapple", category: "Material handling", status: "planned" },
       { id: "ardhi-rake", name: "Landscape rake", category: "Site finishing", status: "planned" },
     ],
-    documents: [], serviceHistory: [],
+    includedItems: [
+      { id: "ardhi-toolbox", name: "Toolbox", category: "accessory" }, { id: "ardhi-tool-kit", name: "Common tool kit", category: "accessory" }, { id: "ardhi-spare-belt", name: "Spare drive belt", category: "spare-part" }, { id: "ardhi-spare-filter", name: "Spare hydraulic filter", category: "spare-part" },
+    ],
+    documents: [{ id: "ardhi-factory-specification-20260816", title: "YF380 factory specification", kind: "spec-sheet", publicDisplay: true }], serviceHistory: [],
     timeline: [
+      { id: "ardhi-completed-build", occurredAt: "2026-08-18", kind: "factory-build", milestone: "completed-build", title: "Latest Factory Update · August 2026", detail: "Completed SP-ARDHI-26 build documented with finished RAL 6018 green and black paint, SmashPro branding, bucket, and branded pallet forks.", publicDisplay: true },
       { id: "ardhi-factory-build", kind: "factory-build", title: "Factory build documented", detail: "Assembly, powertrain, hydraulic, and factory test media recorded.", publicDisplay: true },
       { id: "ardhi-current", kind: "status", title: "Current status", detail: "Fleet build — availability not announced.", publicDisplay: true },
     ],
@@ -45,6 +59,11 @@ export const equipment: Equipment[] = [
     idealUses: ["Landscape installation", "Property cleanup", "Residential access", "Material staging", "Site preparation"],
     restrictions: ["Rental availability has not been announced.", "Operator eligibility, transport, site access, and attachment approval must be confirmed before use."],
     gallery: [
+      { src: image("4252411788962.PNM.jpg"), alt: "SP-ARDHI-26 completed factory build with bucket and branded pallet forks", caption: "SP-ARDHI-26 completed factory build with bucket and branded pallet forks" },
+      { src: image("4240844120787.PNM.jpg"), alt: "SP-ARDHI-26 left-side profile in RAL 6018 green and black", caption: "SP-ARDHI-26 left-side profile in RAL 6018 green and black" },
+      { src: image("4252403944587.PNM.jpg"), alt: "SP-ARDHI-26 rear factory detail with SmashPro branding and work lights", caption: "SP-ARDHI-26 rear factory detail with SmashPro branding and work lights" },
+      { src: image("4250317002305.PNM.jpg"), alt: "SP-ARDHI-26 right-side profile showing tracks and loader arms", caption: "SP-ARDHI-26 right-side profile showing tracks and loader arms" },
+      { src: image("4240822497785.PNM.jpg"), alt: "SP-ARDHI-26 front attachment interface and completed factory finish", caption: "SP-ARDHI-26 front attachment interface and completed factory finish" },
       { src: image("Alibaba8CB04EF34984AFF4D67CA841BE05F4F6_original.png"), alt: "SP-ARDHI-26 factory side profile", caption: "Factory side profile" },
       { src: image("sideProfile.png"), alt: "SP-ARDHI-26 front branding", caption: "Front branding" },
       { src: image("AlibabaEEC8AE1C3990982EDC0DD061D4AE73BB_original.png"), alt: "SP-ARDHI-26 bucket branding", caption: "Bucket branding" },
@@ -64,7 +83,7 @@ export const equipment: Equipment[] = [
     identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", edition: "Fleet Edition", finish: "SmashPro Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026 },
     specifications: specs([["Fleet ID", "SP-MZIGO-26E", "Identity"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"], ["Payload", "500 kg (1,102 lb)", "Capacity"], ["Power source", "Electric", "Powertrain"], ["Electric drive system", "4WD electric", "Powertrain"], ["Dump bed", "Hydraulic", "Hydraulics"], ["Operation", "Remote control", "Controls"]]),
     factoryOptions: [], upgrades: [], packageRules: standardPackageRules,
-    attachments: [{ id: "mzigo-bed", name: "Hydraulic dump bed", category: "Material handling", status: "installed" }, { id: "mzigo-recovery", name: "Recovery and towing accessories", category: "Fleet support", status: "planned" }],
+    attachments: [{ id: "mzigo-bed", name: "Hydraulic dump bed", category: "Material handling", status: "installed" }, { id: "mzigo-recovery", name: "Recovery and towing accessories", category: "Fleet support", status: "planned" }], includedItems: [],
     documents: [], serviceHistory: [], timeline: [{ id: "mzigo-current", kind: "status", title: "Current status", detail: "Electric fleet build — availability not announced.", publicDisplay: true }], media: [],
     scores: { documentation: 0, maintenance: 0 }, valuation: { currency: "USD", status: "pending" },
     capabilities: ["Fully Electric", "Zero Tailpipe Emissions", "Quiet Operation", "Remote Controlled", "Built for Job Sites", "Ideal Around Homes"], idealUses: ["Landscape materials", "Property cleanup", "Construction support", "Residential-friendly hauling", "Material staging", "Indoor-capable work where site rules permit"],
