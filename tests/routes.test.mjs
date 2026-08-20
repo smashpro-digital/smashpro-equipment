@@ -108,3 +108,68 @@ test("Ardhi public factory document has a deployable URL and cannot render as an
   assert.match(data, /ardhi-factory-specification-20260816[\s\S]*url: "\/equipment\/documents\/sp-ardhi-26\/yf380-manufacturer-promo-spec-sheet\.pdf"/);
   assert.match(detail, /downloads\.length \? <div className="public-document-list">/);
 });
+
+test("both fleet equipment passport markdown files exist with matching identity sections", () => {
+  ["docs/fleet/SP-ARDHI-26-PASSPORT.md", "docs/fleet/SP-MZIGO-26E-PASSPORT.md"].forEach((file) => assert.equal(existsSync(file), true, `${file} must exist`));
+  const ardhiPassport = readFileSync("docs/fleet/SP-ARDHI-26-PASSPORT.md", "utf8");
+  const mzigoPassport = readFileSync("docs/fleet/SP-MZIGO-26E-PASSPORT.md", "utf8");
+  ["# Identity", "# Mission", "# Factory Model", "# Build Summary", "# Specifications", "# Included Attachments", "# Future Attachments", "# Lighting", "# Branding", "# Color Scheme", "# Security", "# Planned Fleet Pairing", "# Primary Services", "# Factory Documentation", "# Shipping", "# Equipment Timeline", "# Maintenance Log", "# Asset Status", "# Motto", "# Fleet Legacy"]
+    .forEach((heading) => { assert.match(ardhiPassport, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))); assert.match(mzigoPassport, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))); });
+  assert.match(mzigoPassport, /\*\*SP-MZIGO-26E\*\*/);
+  assert.match(mzigoPassport, /pending manufacturer specification sheet/);
+});
+
+test("SP-MZIGO-26E is classified as electric with a correctly converted published payload", () => {
+  const data = readFileSync("src/data/equipment.ts", "utf8");
+  assert.match(data, /fleetId: "SP-MZIGO-26E"/);
+  assert.match(data, /powertrain: "Electric 4WD"/);
+  assert.match(data, /\["Payload", "500 kg \(1,102 lb\)", "Capacity"\]/);
+});
+
+test("public equipment fleet IDs and slugs are unique", () => {
+  const module = readFileSync("src/data/equipment.ts", "utf8");
+  const fleetIds = [...module.matchAll(/fleetId: "([^"]+)"/g)].map(([, id]) => id);
+  const slugs = [...module.matchAll(/slug: "([^"]+)"/g)].map(([, slug]) => slug);
+  assert.equal(new Set(fleetIds).size, fleetIds.length, "fleet IDs must be unique");
+  assert.equal(new Set(slugs).size, slugs.length, "slugs must be unique");
+});
+
+const futureAcquisitionFiles = ["docs/fleet/SP-BEBA-HD-26-PASSPORT.md", "docs/fleet/SP-INAMA-26-PASSPORT.md", "docs/fleet/SP-NYASI-26-PASSPORT.md"];
+const futureAcquisitionIds = ["SP-BEBA-HD-26", "SP-INAMA-26", "SP-NYASI-26"];
+const sharedPassportHeadings = ["# Identity", "# Mission", "# Specification Verification", "# Factory Model", "# Configuration Summary", "# Specifications", "# Included Equipment", "# Planned Options", "# Lighting", "# Branding", "# Color Scheme", "# Safety Systems", "# Security", "# Planned Fleet Pairing", "# Primary Services", "# Factory Documentation", "# Coupler, Hitch & Transport Requirements", "# Hydraulic System", "# Shipping", "# Registration, Title & Serial Information", "# Acquisition Timeline", "# Supplier and Procurement Status", "# Inspection and Commissioning", "# Maintenance Log", "# Parts and Consumables", "# Warranty and Support", "# Asset Status", "# Motto", "# Fleet Legacy", "# Media and Gallery", "# Supporting Documents", "# Valuation and Ownership", "# Open Information Requests", "# Revision History"];
+
+test("future acquisition passport files exist for BEBA-HD, INAMA, and NYASI", () => {
+  futureAcquisitionFiles.forEach((file) => assert.equal(existsSync(file), true, `${file} must exist`));
+});
+
+test("future acquisition fleet IDs are not renamed and share the required passport structure", () => {
+  futureAcquisitionFiles.forEach((file, index) => {
+    const content = readFileSync(file, "utf8");
+    assert.match(content, new RegExp(`\\*\\*${futureAcquisitionIds[index]}\\*\\*`));
+    sharedPassportHeadings.forEach((heading) => assert.match(content, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${file} must contain heading ${heading}`));
+  });
+});
+
+test("future acquisitions are represented as planned, not active, owned, or rentable", () => {
+  futureAcquisitionFiles.forEach((file) => {
+    const content = readFileSync(file, "utf8");
+    assert.match(content, /Planned Future Acquisition/);
+    assert.doesNotMatch(content, /available now|rent now|book now|status: active/i);
+  });
+});
+
+test("future acquisitions are not published to the public catalog, sitemap, or equipment data", () => {
+  const equipmentData = readFileSync("src/data/equipment.ts", "utf8");
+  const sitemap = readFileSync("public/sitemap.xml", "utf8");
+  futureAcquisitionIds.forEach((id) => {
+    assert.doesNotMatch(equipmentData, new RegExp(id));
+    assert.doesNotMatch(sitemap, new RegExp(id));
+  });
+});
+
+test("fleet passport index links resolve to existing files", () => {
+  const index = readFileSync("docs/fleet/README.md", "utf8");
+  const links = [...index.matchAll(/\]\(([^)]+\.md)\)/g)].map(([, link]) => link);
+  assert.ok(links.length >= 5, "index should link to all five passport files");
+  links.forEach((link) => assert.equal(existsSync(`docs/fleet/${link}`), true, `${link} must resolve`));
+});
