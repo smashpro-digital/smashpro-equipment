@@ -21,7 +21,7 @@ type EquipmentService = {
 const ATTRIBUTION_KEYS = ["utm_source", "utm_campaign", "utm_medium", "utm_content"];
 function track(event:string,detail:Record<string,unknown>={}){if(typeof window!=="undefined"){const target=window as unknown as {dataLayer?:Array<Record<string,unknown>>};target.dataLayer=target.dataLayer||[];target.dataLayer.push({event,...detail});}}
 
-function estimateUrl(service: EquipmentService, fleetId: string) {
+function estimateUrl(service: EquipmentService | null, fleetId: string) {
   const params = new URLSearchParams();
   if (typeof window !== "undefined") {
     const source = new URLSearchParams(window.location.search);
@@ -34,9 +34,8 @@ function estimateUrl(service: EquipmentService, fleetId: string) {
   }
   params.set("equipment_source", fleetId);
   params.set("equipment_required", fleetId);
-  params.set("selected_service", service.slug);
-  params.set("name", service.name);
-  return `smashpro-home://booking/${encodeURIComponent(service.slug)}?${params.toString()}`;
+  if (service?.slug) params.set("service", service.slug);
+  return `/book/?${params.toString()}`;
 }
 
 export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], attachmentIds = [] }: { fleetId: string; equipmentName: string; capabilityIds?: string[]; attachmentIds?: string[] }) {
@@ -62,7 +61,7 @@ export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], 
     () => services.some((service) => Number(service.prebooking_enabled) === 1),
     [services]
   );
-  const customerEstimateUrl = services[0] ? estimateUrl(services[0], fleetId) : "#projects";
+  const customerEstimateUrl = estimateUrl(services[0] ?? null, fleetId);
 
   return <section className="equipment-projects" id="projects"><div className="shell">
     <div className="section-heading"><div><p className="eyebrow">What {equipmentName} Can Help With</p><h2>Equipment-powered property projects.</h2></div><div className="project-availability"><span>{acceptingProjects ? "Now Accepting Upcoming Projects" : "Project availability by review"}</span><p>Project listings do not confirm availability. Scheduling follows deposit, transport, equipment, and attachment readiness.</p></div></div>
