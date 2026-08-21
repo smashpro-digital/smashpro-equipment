@@ -10,6 +10,7 @@ export function SeoSchema({ item }: { item: Equipment }) {
       "@context": "https://schema.org", "@type": "Product", name: item.fleetId, description: item.overview,
       image: `https://smashpro.app${item.heroImage}`, brand: { "@type": "Brand", name: "SmashPro" },
       model: item.specifications.find((spec) => spec.label === "Model reference")?.value,
+      additionalProperty: [{ "@type": "PropertyValue", name: "Current status", value: item.statusLabel }],
     });
     document.head.append(schema);
     return () => schema.remove();

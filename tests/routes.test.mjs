@@ -173,3 +173,19 @@ test("fleet passport index links resolve to existing files", () => {
   assert.ok(links.length >= 5, "index should link to all five passport files");
   links.forEach((link) => assert.equal(existsSync(`docs/fleet/${link}`), true, `${link} must resolve`));
 });
+
+test("SP-ARDHI-26 shipping phase is canonical and all three dated photos are deployable", () => {
+  const data = readFileSync("src/data/equipment.ts", "utf8");
+  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
+  assert.match(data, /status: "shipping", statusLabel: "Shipping Phase"/);
+  assert.match(data, /statusLabel: "Shipping Phase"/);
+  assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
+  assert.match(data, /outbound freight preparation/);
+  assert.match(detail, /<h3>Shipping Phase<\/h3>/);
+  for (const suffix of ["01", "02", "03"]) {
+    const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
+    assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
+    assert.equal(existsSync(`images/equipment/sp-ardhi-26/shipping/${filename}`), true, `${filename} must exist`);
+  }
+  assert.doesNotMatch(data, /vessel departure|freight pickup|tracking number|customs clearance|port arrival|delivery date|final ETA/i);
+});

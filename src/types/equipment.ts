@@ -1,9 +1,9 @@
-export type EquipmentStatus = "fleet-build" | "planned" | "request-only";
+export type EquipmentStatus = "fleet-build" | "shipping" | "planned" | "request-only";
 export type RecordVisibility = "public" | "private";
 export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade" | "maintenance" | "attachment" | "media" | "rental" | "revenue" | "hours" | "state" | "status";
 
 export interface EquipmentSpecification { label: string; value: string; confirmed: boolean; group?: string; source?: string; sortOrder?: number; }
-export interface GalleryImage { id?: string; src: string; alt: string; caption: string; kind?: "image" | "video"; capturedAt?: string; }
+export interface GalleryImage { id?: string; src: string; alt: string; caption: string; kind?: "image" | "video"; capturedAt?: string; width?: number; height?: number; group?: "shipping"; }
 export interface RentalRequirement { title: string; detail: string; }
 export interface FactoryFinish { paintColor: string; colorStandard: string; coatingProcess: string; factoryCure: string; summary: string; }
 export interface FactoryOption { id: string; name: string; description: string; publicDisplay: boolean; installationSource: "factory"; evidenceMediaId?: string; evidenceObjectPosition?: string; }
@@ -26,7 +26,7 @@ export interface EquipmentIdentity { passportId: string; model: string; edition:
 
 export interface Equipment {
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
-  overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; identity: EquipmentIdentity;
+  overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;

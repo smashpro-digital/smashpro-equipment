@@ -9,7 +9,8 @@ export const equipment: Equipment[] = [
     slug: "sp-ardhi-26", publicPath: "/sp-ardhi-26.html", fleetId: "SP-ARDHI-26", name: "Ardhi", category: "Compact Tracked Loader / Mini Skid Steer",
     pronunciation: "AHR-dhee", meaning: "“Ardhi” means earth in Swahili.", slogan: "Power. Precision. Purpose.",
     overview: "The flagship compact loader of the SmashPro Fleet, positioned for landscaping, grading, loading, excavation, pallet handling, and residential access.",
-    capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("ardhibanner.png"), status: "fleet-build", statusLabel: "Fleet build — availability not announced",
+    capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("ardhibanner.png"), status: "shipping", statusLabel: "Shipping Phase",
+    statusDetail: "SP-ARDHI-26 has entered the shipping phase. New manufacturer staging and shipping-preparation photos were received on August 21, 2026.",
     identity: { passportId: "SPP-2026-0001", model: "SP-ARDHI-26", edition: "Founder's Edition", finish: "SmashPro Green (RAL 6018)", assetClass: "Compact tracked loader", powertrain: "Internal combustion", modelYear: 2026 },
     specifications: specs([
       ["Fleet ID", "SP-ARDHI-26", "Identity"], ["Manufacturer model reference", "YF380", "Identity"], ["Machine type", "Compact mini skid loader", "Configuration"],
@@ -45,9 +46,10 @@ export const equipment: Equipment[] = [
     ],
     documents: [{ id: "ardhi-factory-specification-20260816", title: "YF380 Manufacturer Promotional Specification Sheet", description: "Manufacturer-supplied promotional and technical overview for the SP-ARDHI-26 base platform, including machine dimensions, operating information, engine data, and hydraulic specifications.", source: "Shandong Infront Machinery Group Co., Ltd.", downloadName: "SP-ARDHI-26-YF380-Manufacturer-Specification-Sheet.pdf", kind: "spec-sheet", url: "/equipment/documents/sp-ardhi-26/yf380-manufacturer-promo-spec-sheet.pdf", publicDisplay: true }], serviceHistory: [],
     timeline: [
+      { id: "ardhi-shipping-phase-started", occurredAt: "2026-08-21", kind: "status", title: "Shipping Phase Started", detail: "Manufacturer shipping-preparation photos received. The unit is now progressing through outbound freight preparation.", publicDisplay: true },
       { id: "ardhi-completed-build", occurredAt: "2026-08-18", kind: "factory-build", milestone: "completed-build", title: "Latest Factory Update · August 2026", detail: "Completed SP-ARDHI-26 build documented with finished RAL 6018 green and black paint, SmashPro branding, bucket, and branded pallet forks.", publicDisplay: true },
       { id: "ardhi-factory-build", kind: "factory-build", title: "Factory build documented", detail: "Assembly, powertrain, hydraulic, and factory test media recorded.", publicDisplay: true },
-      { id: "ardhi-current", kind: "status", title: "Current status", detail: "Fleet build — availability not announced.", publicDisplay: true },
+      { id: "ardhi-current", occurredAt: "2026-08-21", kind: "status", title: "Current status · Shipping Phase", detail: "SP-ARDHI-26 has entered the shipping phase. New manufacturer staging and shipping-preparation photos were received on August 21, 2026.", publicDisplay: true },
     ],
     media: [
       { id: "ardhi-pallet-fork-test", title: "Pallet fork testing", kind: "video", url: image("4235928499026.PNM.mp4"), description: "Production testing with the pallet fork attachment." },
@@ -59,6 +61,9 @@ export const equipment: Equipment[] = [
     idealUses: ["Landscape installation", "Property cleanup", "Residential access", "Material staging", "Site preparation"],
     restrictions: ["Rental availability has not been announced.", "Operator eligibility, transport, site access, and attachment approval must be confirmed before use."],
     gallery: [
+      { id: "ardhi-shipping-hydraulics", src: image("equipment/sp-ardhi-26/shipping/sp-ardhi-26-shipping-2026-08-21-01.png"), alt: "Front-left view of SP-ARDHI-26 on a wooden shipping pallet with its bucket, auxiliary hydraulic couplers, tracks, and a yellow tool case visible", caption: "SP-ARDHI-26 staged on its wooden pallet with the bucket and auxiliary hydraulic connections visible.", capturedAt: "2026-08-21", width: 1366, height: 1024, group: "shipping" },
+      { id: "ardhi-shipping-front", src: image("equipment/sp-ardhi-26/shipping/sp-ardhi-26-shipping-2026-08-21-02.png"), alt: "Front view of SP-ARDHI-26 positioned on a wooden pallet in the factory staging area beside shipping-crate panels", caption: "Front view of the machine positioned on its pallet in the factory staging area.", capturedAt: "2026-08-21", width: 1024, height: 1366, group: "shipping" },
+      { id: "ardhi-shipping-pallet-blocking", src: image("equipment/sp-ardhi-26/shipping/sp-ardhi-26-shipping-2026-08-21-03.png"), alt: "Close view beneath SP-ARDHI-26 showing the black steel undercarriage secured against wooden pallet blocking during shipping preparation", caption: "Undercarriage and wooden pallet blocking documented during shipping preparation.", capturedAt: "2026-08-21", width: 1366, height: 1024, group: "shipping" },
       { src: image("4252411788962.PNM.jpg"), alt: "SP-ARDHI-26 completed factory build with bucket and branded pallet forks", caption: "SP-ARDHI-26 completed factory build with bucket and branded pallet forks" },
       { id: "ardhi-finish-profile", src: image("4240844120787.PNM.jpg"), alt: "SP-ARDHI-26 factory body panels finished in high-gloss RAL 6018 green", caption: "SP-ARDHI-26 left-side profile in RAL 6018 green and black" },
       { id: "ardhi-branding-detail", src: image("4252403944587.PNM.jpg"), alt: "Factory-applied SmashPro and SP-ARDHI-26 branding on the completed machine", caption: "SP-ARDHI-26 rear factory detail with SmashPro branding and work lights" },
