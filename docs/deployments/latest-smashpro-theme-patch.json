@@ -1,0 +1,12 @@
+{
+  "workflow": "Deploy SmashPro Intake Theme Patch",
+  "run_id": 32518988777,
+  "run_number": 1,
+  "source_sha": "263b234d3b3bbf8b65a00c73d8022781f632671f",
+  "branch": "main",
+  "validation": "success",
+  "deployment": "failure",
+  "production_url": "https://smashpro.app/book/",
+  "completed_at": "2026-08-21T19:33:00.082Z",
+  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32518988777"
+}
