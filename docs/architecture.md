@@ -15,7 +15,7 @@ The showroom is a static React application built with Vite and TypeScript. React
 
 ## Build
 
-Vite emits `index.html`, `sp-ardhi-26.html`, and `sp-mzigo-26.html`. A small build plugin copies the equipment-scoped `images/` directory into `dist/images/` without changing its standardized paths. This keeps source and deployed media references identical while Vite's generated application assets remain hashed.
+Vite emits `index.html`, `sp-ardhi-26.html`, and `sp-mzigo-26.html`. A small build plugin copies the flat, fleet-prefixed files in `images/` into `dist/images/` without changing their standardized names. This keeps source and deployed media references identical while Vite's generated application assets remain hashed.
 
 ## Boundaries
 

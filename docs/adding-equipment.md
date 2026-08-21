@@ -1,6 +1,6 @@
 # Adding equipment
 
-1. Add approved media under `images/equipment/<fleet-id>/<role>/` using lowercase kebab-case names prefixed by the lowercase fleet ID. Prefer a landscape hero of at least 1600 px wide and optimized WebP/AVIF for new photography when source quality permits. Follow [media naming](media-naming.md).
+1. Add approved media directly under `images/` using lowercase kebab-case names prefixed by the lowercase fleet ID. Prefer a landscape hero of at least 1600 px wide and optimized WebP/AVIF for new photography when source quality permits. Follow [media naming](media-naming.md).
 2. Add a typed `Equipment` record in `src/data/equipment.ts`. Use confirmed specifications only; mark unknown values clearly instead of estimating.
 3. Add compatible records in `src/data/attachments.ts`.
 4. If a new indexed public path is required, add a physical HTML entry, a Vite Rollup input, and a React route. Do not rely on an unverified server fallback.

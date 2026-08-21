@@ -185,18 +185,18 @@ test("SP-ARDHI-26 shipping phase is canonical and all three dated photos are dep
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
-    assert.equal(existsSync(`images/equipment/sp-ardhi-26/shipping/${filename}`), true, `${filename} must exist`);
+    assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
   }
   assert.doesNotMatch(data, /vessel departure|freight pickup|tracking number|customs clearance|port arrival|delivery date|final ETA/i);
 });
 
-test("equipment media uses standardized equipment-scoped paths", () => {
+test("equipment media uses standardized fleet-prefixed filenames", () => {
   const mediaFiles = readdirSync("images", { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile())
     .map((entry) => `${entry.parentPath.replaceAll("\\", "/")}/${entry.name}`.replace(/^images\//, ""));
   assert.ok(mediaFiles.length >= 26, "the full equipment media set should remain present");
   mediaFiles.forEach((relativePath) => {
-    assert.match(relativePath, /^equipment\/[a-z0-9-]+\/[a-z0-9-]+\/(?:source\/)?[a-z0-9-]+\.(?:jpg|png|mp4)$/);
+    assert.match(relativePath, /^sp-[a-z0-9-]+\.(?:jpg|png|mp4)$/);
     assert.doesNotMatch(relativePath, /Alibaba|PNM|[ ()]|[A-Z]/);
   });
   const repoReferences = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "src/data/equipment.ts", "src/pages/HomePage.tsx"]

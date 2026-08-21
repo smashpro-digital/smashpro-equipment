@@ -34,7 +34,7 @@ docs/             Architecture, routes, content, deployment, and operations
 tests/            Node-based route and content safeguards
 ```
 
-The build intentionally emits physical `sp-ardhi-26.html` and `sp-mzigo-26.html` files and copies the standardized, equipment-scoped `images/` tree without changing paths during the build. See [route compatibility](docs/route-compatibility.md), [architecture](docs/architecture.md), and [media naming](docs/media-naming.md).
+The build intentionally emits physical `sp-ardhi-26.html` and `sp-mzigo-26.html` files and copies the standardized, fleet-prefixed files in `images/` without changing paths during the build. See [route compatibility](docs/route-compatibility.md), [architecture](docs/architecture.md), and [media naming](docs/media-naming.md).
 
 ## Deployment
 
