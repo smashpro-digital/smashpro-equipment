@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
 const entries = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "admin.html"];
@@ -188,4 +188,19 @@ test("SP-ARDHI-26 shipping phase is canonical and all three dated photos are dep
     assert.equal(existsSync(`images/equipment/sp-ardhi-26/shipping/${filename}`), true, `${filename} must exist`);
   }
   assert.doesNotMatch(data, /vessel departure|freight pickup|tracking number|customs clearance|port arrival|delivery date|final ETA/i);
+});
+
+test("equipment media uses standardized equipment-scoped paths", () => {
+  const mediaFiles = readdirSync("images", { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => `${entry.parentPath.replaceAll("\\", "/")}/${entry.name}`.replace(/^images\//, ""));
+  assert.ok(mediaFiles.length >= 26, "the full equipment media set should remain present");
+  mediaFiles.forEach((relativePath) => {
+    assert.match(relativePath, /^equipment\/[a-z0-9-]+\/[a-z0-9-]+\/(?:source\/)?[a-z0-9-]+\.(?:jpg|png|mp4)$/);
+    assert.doesNotMatch(relativePath, /Alibaba|PNM|[ ()]|[A-Z]/);
+  });
+  const repoReferences = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "src/data/equipment.ts", "src/pages/HomePage.tsx"]
+    .map((file) => readFileSync(file, "utf8"))
+    .join("\n");
+  assert.doesNotMatch(repoReferences, /ardhibanner|mzigobanner|sideProfile|Alibaba|\.PNM/);
 });

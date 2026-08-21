@@ -8,7 +8,7 @@ The repository used three hand-authored HTML files, one shared homepage styleshe
 
 The showroom now uses React, TypeScript, React Router, and Vite. Content is centralized, equipment pages share one reusable template, and multi-page build inputs preserve established `.html` routes without server rewrites.
 
-The original `images/` directory remains in place. Vite copies it to `dist/images/` during builds so image and video URLs remain stable.
+The `images/` directory remains the static-media source. Media now uses equipment-scoped, lowercase kebab-case paths, and Vite copies that hierarchy to `dist/images/` unchanged.
 
 ## Deliberate omissions
 

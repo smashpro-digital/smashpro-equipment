@@ -28,13 +28,13 @@ src/data/         Typed equipment and attachment content
 src/pages/        Homepage, equipment detail, and not-found pages
 src/styles/       Responsive visual system
 src/types/        Catalog interfaces
-images/           Preserved production equipment media
+images/           Equipment-scoped production media with standardized filenames
 public/           Robots and sitemap files
 docs/             Architecture, routes, content, deployment, and operations
 tests/            Node-based route and content safeguards
 ```
 
-The build intentionally emits physical `sp-ardhi-26.html` and `sp-mzigo-26.html` files and copies `images/` without renaming assets. See [route compatibility](docs/route-compatibility.md) and [architecture](docs/architecture.md).
+The build intentionally emits physical `sp-ardhi-26.html` and `sp-mzigo-26.html` files and copies the standardized, equipment-scoped `images/` tree without changing paths during the build. See [route compatibility](docs/route-compatibility.md), [architecture](docs/architecture.md), and [media naming](docs/media-naming.md).
 
 ## Deployment
 
