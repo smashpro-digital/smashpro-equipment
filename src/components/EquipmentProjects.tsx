@@ -61,11 +61,11 @@ export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], 
     () => services.some((service) => Number(service.prebooking_enabled) === 1),
     [services]
   );
-  const customerEstimateUrl = estimateUrl(services[0] ?? null, fleetId);
+  const customerEstimateUrl = estimateUrl(null, fleetId);
 
   return <section className="equipment-projects" id="projects"><div className="shell">
     <div className="section-heading"><div><p className="eyebrow">What {equipmentName} Can Help With</p><h2>Equipment-powered property projects.</h2></div><div className="project-availability"><span>{acceptingProjects ? "Now Accepting Upcoming Projects" : "Project availability by review"}</span><p>Project listings do not confirm availability. Scheduling follows deposit, transport, equipment, and attachment readiness.</p></div></div>
-    <div className="project-cta"><div><p className="eyebrow">Have a Property Project?</p><h2>Put {fleetId} to work on your property.</h2><p>Request an estimate so SmashPro can review access, scope, materials, configuration, and preferred timing.</p></div><ButtonLink href={customerEstimateUrl} onClick={()=>track("equipment_customer_estimate_clicked",{equipment_id:fleetId,service_slug:services[0]?.slug||""})}>Get a Project Estimate</ButtonLink></div>
+    <div className="project-cta"><div><p className="eyebrow">Have a Property Project?</p><h2>Put {fleetId} to work on your property.</h2><p>Request an estimate so SmashPro can review access, scope, materials, configuration, and preferred timing.</p></div><ButtonLink href={customerEstimateUrl} onClick={()=>track("equipment_customer_estimate_clicked",{equipment_id:fleetId,service_slug:""})}>Get a Project Estimate</ButtonLink></div>
     {services.length ? <div className="project-grid">{services.map((service) => <article key={`${service.id}-${service.slug}`}>
       <span>{service.attachment_required ? `${service.attachment_required} configuration` : "Configuration confirmed during review"}</span>
       <h3>{service.name}</h3><p>{service.tagline || service.description}</p>
