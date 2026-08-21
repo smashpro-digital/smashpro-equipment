@@ -68,6 +68,64 @@ function smashpro_widgets_init() {
 }
 add_action( 'widgets_init', 'smashpro_widgets_init' );
 
+/**
+ * Return a customer-safe, server-validated preview for a CTA-selected service.
+ *
+ * This does not replace the browser bootstrap or authenticated BFF checks. It
+ * lets the contact step render immediately while the canonical bootstrap
+ * finishes in the background, removing the visible Step 1 pause.
+ *
+ * @return array<string, mixed>
+ */
+function smashpro_intake_preselection_config() {
+	$empty = array(
+		'serviceSlug'  => '',
+		'serviceLabel' => '',
+		'facts'        => array(),
+	);
+	if ( ! function_exists( 'smashpro_resolve_estimate_context' ) || ! function_exists( 'smashpro_services_catalog' ) ) {
+		return $empty;
+	}
+
+	$context = smashpro_resolve_estimate_context();
+	$slug    = sanitize_title( (string) ( $context['service'] ?? '' ) );
+	if ( '' === $slug ) {
+		return $empty;
+	}
+
+	$catalog = smashpro_services_catalog();
+	if ( is_wp_error( $catalog ) ) {
+		return $empty;
+	}
+
+	$service = null;
+	foreach ( $catalog as $candidate ) {
+		if ( $slug === (string) ( $candidate['slug'] ?? '' ) ) {
+			$service = $candidate;
+			break;
+		}
+	}
+	if ( ! is_array( $service ) || empty( $service['name'] ) ) {
+		return $empty;
+	}
+
+	$facts     = array( __( 'Project based', 'smashpro' ) );
+	$equipment = strtoupper( sanitize_text_field( (string) ( $context['equipment'] ?? '' ) ) );
+	if ( '' !== $equipment ) {
+		$facts[] = sprintf( __( 'Equipment %s', 'smashpro' ), $equipment );
+	}
+	$attachment = sanitize_text_field( (string) ( $service['attachment_required'] ?? '' ) );
+	if ( '' !== $attachment ) {
+		$facts[] = sprintf( __( '%s configuration', 'smashpro' ), $attachment );
+	}
+
+	return array(
+		'serviceSlug'  => $slug,
+		'serviceLabel' => sanitize_text_field( (string) $service['name'] ),
+		'facts'        => array_values( array_unique( array_filter( $facts ) ) ),
+	);
+}
+
 function smashpro_assets() {
 	$version = wp_get_theme()->get( 'Version' );
 	$root    = get_template_directory();
@@ -106,6 +164,11 @@ function smashpro_assets() {
 				'resumeKey'   => 'smashpro-intake-v1',
 				'homeUrl'     => esc_url_raw( home_url( '/' ) ),
 			)
+		);
+		wp_localize_script(
+			'smashpro-intake-preselection',
+			'smashproIntakePreselection',
+			smashpro_intake_preselection_config()
 		);
 	}
 }

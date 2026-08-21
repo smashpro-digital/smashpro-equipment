@@ -44,9 +44,12 @@ jobs:
         run: |
           set -euo pipefail
           test -f deploy/smashpro-theme/assets/css/intake-preselection.css
-          grep -Fq 'Estimate for ${label}' deploy/smashpro-theme/assets/js/intake-preselection.js
+          grep -Fq 'showImmediatePreview' deploy/smashpro-theme/assets/js/intake-preselection.js
+          grep -Fq 'Preparing your ${serverLabel} estimate' deploy/smashpro-theme/assets/js/intake-preselection.js
+          grep -Fq 'preselectionSynced' deploy/smashpro-theme/assets/js/intake-preselection.js
           grep -Fq 'Change service' deploy/smashpro-theme/assets/js/intake-preselection.js
-          grep -Fq 'smashpro-intake-preselection' deploy/smashpro-theme/inc/setup.php
+          grep -Fq 'function smashpro_intake_preselection_config' deploy/smashpro-theme/inc/setup.php
+          grep -Fq 'smashproIntakePreselection' deploy/smashpro-theme/inc/setup.php
           grep -Fq 'sp-intake-selection--context' deploy/smashpro-theme/assets/css/intake-preselection.css
 
       - name: Upload validated theme patch
@@ -110,7 +113,8 @@ jobs:
           curl --fail --silent --show-error --location --retry 5 --retry-delay 5 \
             "https://smashpro.app/wp-content/themes/smashpro/assets/js/intake-preselection.js?deploy_check=${stamp}" \
             --output /tmp/intake-preselection.js
-          grep -Fq 'Estimate for ${label}' /tmp/intake-preselection.js
+          grep -Fq 'showImmediatePreview' /tmp/intake-preselection.js
+          grep -Fq 'preselectionSynced' /tmp/intake-preselection.js
 
           curl --fail --silent --show-error --location --retry 5 --retry-delay 5 \
             "https://smashpro.app/wp-content/themes/smashpro/assets/css/intake-preselection.css?deploy_check=${stamp}" \
@@ -123,6 +127,9 @@ jobs:
             --output /tmp/book.html
           grep -Fq 'intake-preselection.js' /tmp/book.html
           grep -Fq 'intake-preselection.css' /tmp/book.html
+          grep -Fq 'smashproIntakePreselection' /tmp/book.html
+          grep -Fq 'Driveway Gravel Refresh' /tmp/book.html
+          grep -Fq 'Equipment SP-ARDHI-26' /tmp/book.html
 
   report:
     name: Record patch deployment outcome
