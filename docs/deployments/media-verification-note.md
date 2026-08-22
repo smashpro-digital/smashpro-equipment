@@ -1,0 +1,1 @@
+Temporary release note: production media verification is being added to the existing theme patch workflow so deployments fail if /media/ does not render the expected partnership hub content.
