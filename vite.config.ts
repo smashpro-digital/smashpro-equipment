@@ -62,6 +62,7 @@ export default defineConfig({
         catalog: resolve(projectDirectory, "index.html"),
         ardhi: resolve(projectDirectory, "sp-ardhi-26.html"),
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
+        golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
         admin: resolve(projectDirectory, "admin.html"),
       },
     },
