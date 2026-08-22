@@ -19,4 +19,10 @@ These fleet IDs are reserved and approved but not yet purchased, owned, or in se
 | SP-INAMA-26 | Low-profile hydraulic tilt/lowering equipment trailer (planned) | [SP-INAMA-26-PASSPORT.md](SP-INAMA-26-PASSPORT.md) | [SP-INAMA-26-PROCUREMENT.md](SP-INAMA-26-PROCUREMENT.md) |
 | SP-NYASI-26 | Remote-controlled lawn mower (planned) | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | Not yet created |
 
+## Supporting Media Records
+
+| Fleet ID | Media and source register |
+|----------|---------------------------|
+| SP-INAMA-26 | [SP-INAMA-26-MEDIA.md](SP-INAMA-26-MEDIA.md) |
+
 Future Acquisition Passports use the same section structure, terminology, and source-verification model as the Owned Fleet Passports. See the "Specification Verification" section within each Passport for the shared provenance vocabulary.
