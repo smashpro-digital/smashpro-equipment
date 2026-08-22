@@ -1,0 +1,11 @@
+{
+  "workflow": "Verify SmashPro Media Production",
+  "run_id": 32573062417,
+  "run_number": 2,
+  "source_sha": "f952c25aa18e4b09b7a183a6a660838c5c6ad57a",
+  "branch": "main",
+  "verification": "success",
+  "production_url": "https://smashpro.app/media/",
+  "completed_at": "2026-08-22T12:28:14.667Z",
+  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32573062417"
+}
