@@ -1,0 +1,10 @@
+{
+  "workflow": "Purge SmashPro Media Cache",
+  "run_id": 32573212289,
+  "source_sha": "ea026e0661fa1cf0a813e1c8bfbf7e1eaa7cf8b7",
+  "branch": "main",
+  "purge": "success",
+  "production_url": "https://smashpro.app/media/",
+  "completed_at": "2026-08-22T12:31:31.479Z",
+  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32573212289"
+}
