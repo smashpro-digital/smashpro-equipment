@@ -17,7 +17,7 @@ jobs:
     environment:
       name: production
     steps:
-      - name: List cache and plugin directories over FTP
+      - name: Locate W3 Total Cache media entries over FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -28,19 +28,30 @@ jobs:
           import ftplib, os
           host=os.environ['FTP_SERVER']; user=os.environ['FTP_USERNAME']; password=os.environ['FTP_PASSWORD']; port=int(os.environ['FTP_PORT'])
           ftp=ftplib.FTP(); ftp.connect(host, port, timeout=20); ftp.login(user,password)
-          roots=[
-            '/public_html/smashpro.app/wp-content/cache',
-            '/public_html/smashpro.app/wp-content/plugins',
-            '/public_html/smashpro.app/wp-content/mu-plugins',
-          ]
-          for root in roots:
-              print(f'--- {root} ---')
+          root='/public_html/smashpro.app/wp-content/cache/page_enhanced'
+          print(f'--- recursive scan under {root} ---')
+
+          def walk(path, depth=0, max_depth=5):
+              if depth > max_depth:
+                  return
               try:
-                  ftp.cwd(root)
-                  for name in ftp.nlst():
-                      print(name.rsplit('/',1)[-1])
-              except Exception as exc:
-                  print(f'UNAVAILABLE: {type(exc).__name__}: {exc}')
+                  ftp.cwd(path)
+                  names=ftp.nlst()
+              except Exception:
+                  return
+              for entry in names:
+                  name=entry.rsplit('/',1)[-1]
+                  full=path.rstrip('/') + '/' + name
+                  if 'media' in full.lower() or 'smashpro.app' in full.lower():
+                      print(full)
+                  try:
+                      ftp.cwd(full)
+                      is_dir=True
+                  except Exception:
+                      is_dir=False
+                  if is_dir:
+                      walk(full, depth+1, max_depth)
+          walk(root)
           ftp.quit()
 
   report:
