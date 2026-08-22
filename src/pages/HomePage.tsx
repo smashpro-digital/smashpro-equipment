@@ -20,6 +20,20 @@ export function HomePage() {
       <div className="home-flow">
       <section className="section shell" id="fleet"><div className="section-heading"><div><p className="eyebrow">Featured fleet</p><h2>Equipment with a defined purpose.</h2></div><p>Every fleet asset is documented around the work it supports. Availability is published only when the operating program is ready.</p></div><div className="equipment-grid">{equipment.map((item) => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
 
+      <section className="section shell" aria-labelledby="dream-project-title">
+        <article style={{border:"1px solid rgba(141,255,56,.35)",borderRadius:24,padding:"clamp(24px,5vw,52px)",background:"radial-gradient(circle at 85% 20%,rgba(141,255,56,.13),transparent 28%),linear-gradient(135deg,#071009,#111713)",color:"#fff",boxShadow:"0 28px 70px rgba(0,0,0,.2)"}}>
+          <div style={{display:"grid",gridTemplateColumns:"minmax(0,1.3fr) minmax(260px,.7fr)",gap:32,alignItems:"center"}}>
+            <div>
+              <p className="eyebrow">Dream Project · Shop + Promo Vehicle</p>
+              <h2 id="dream-project-title" style={{fontSize:"clamp(2.2rem,5vw,4.6rem)",lineHeight:.92,margin:"10px 0 18px"}}>Old cart.<br/><span style={{color:"#8dff38"}}>New technology.</span></h2>
+              <p style={{maxWidth:760,color:"#c5cec7",fontSize:"1.05rem",lineHeight:1.65}}>We are hunting an inexpensive older electric golf cart and rebuilding it into a lithium-powered, connected SmashPro Garage EV. The project is designed around brand partnerships, YouTube chapters, real installation work and long-term shop utility.</p>
+              <div className="button-row" style={{marginTop:24}}><ButtonLink href="/equipment/golf-cart-tech-build.html">Explore the dream build</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partnerships</ButtonLink></div>
+            </div>
+            <div style={{border:"1px solid rgba(255,255,255,.12)",borderRadius:18,padding:22,background:"rgba(0,0,0,.24)"}}><p className="eyebrow">Current phase</p><h3 style={{margin:"8px 0"}}>Sponsor-first donor search</h3><p style={{color:"#aeb8b0",lineHeight:1.55}}>Target donor: roughly $500, electric, complete chassis, dead or missing batteries preferred. First-wave outreach is active across power, performance, smart lighting and audio.</p></div>
+          </div>
+        </article>
+      </section>
+
       <section className="capability-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Work capabilities</p><h2>Made for the places work gets difficult.</h2></div><p>Compact equipment expands what a prepared crew can move, handle, and finish.</p></div><div className="capability-grid">{capabilities.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3></div>)}</div></div></section>
 
       <section className="section shell split-section"><div><p className="eyebrow">Why SmashPro Fleet</p><h2>Readiness is part of the equipment.</h2><p>Rental access is more than a key handoff. It is a documented operating relationship built around people, machines, projects, and condition.</p></div><div className="standards-list">{standards.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3><p>{index === 0 ? "Fleet care and operating readiness are treated as core requirements." : index === 1 ? "Access may depend on approval, insurance, certification, and account standing." : "Clear steps support safer, more predictable equipment use."}</p></div>)}</div></section>
