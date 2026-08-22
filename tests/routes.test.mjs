@@ -136,7 +136,42 @@ test("public equipment fleet IDs and slugs are unique", () => {
 
 const futureAcquisitionFiles = ["docs/fleet/SP-BEBA-HD-26-PASSPORT.md", "docs/fleet/SP-INAMA-26-PASSPORT.md", "docs/fleet/SP-NYASI-26-PASSPORT.md"];
 const futureAcquisitionIds = ["SP-BEBA-HD-26", "SP-INAMA-26", "SP-NYASI-26"];
-const sharedPassportHeadings = ["# Identity", "# Mission", "# Specification Verification", "# Factory Model", "# Configuration Summary", "# Specifications", "# Included Equipment", "# Planned Options", "# Lighting", "# Branding", "# Color Scheme", "# Safety Systems", "# Security", "# Planned Fleet Pairing", "# Primary Services", "# Factory Documentation", "# Coupler, Hitch & Transport Requirements", "# Hydraulic System", "# Shipping", "# Registration, Title & Serial Information", "# Acquisition Timeline", "# Supplier and Procurement Status", "# Inspection and Commissioning", "# Maintenance Log", "# Parts and Consumables", "# Warranty and Support", "# Asset Status", "# Motto", "# Fleet Legacy", "# Media and Gallery", "# Supporting Documents", "# Valuation and Ownership", "# Open Information Requests", "# Revision History"];
+const sharedPassportSections = [
+  ["Identity", /^# Identity$/m],
+  ["Mission", /^# Mission$/m],
+  ["Specification Verification", /^# Specification Verification$/m],
+  ["Factory Model", /^# Factory Model$/m],
+  ["Configuration Summary", /^# Configuration Summary$/m],
+  ["Specifications", /^# Specifications$/m],
+  ["Included Equipment", /^# Included Equipment$/m],
+  ["planned options or explicit exclusions", /^# (?:Planned Options|Explicit Exclusions)$/m],
+  ["Lighting", /^# Lighting$/m],
+  ["Branding", /^# Branding$/m],
+  ["Color Scheme", /^# Color Scheme$/m],
+  ["Safety Systems", /^# Safety Systems$/m],
+  ["Security", /^# Security$/m],
+  ["Planned Fleet Pairing", /^# Planned Fleet Pairing$/m],
+  ["Primary Services", /^# Primary Services(?: and Intended Roles)?$/m],
+  ["Factory Documentation", /^# Factory Documentation$/m],
+  ["Coupler and transport requirements", /^#{1,2} Coupler, Hitch(?:, and Electrical| & Transport Requirements)$/m],
+  ["Hydraulic System", /^#{1,2} Hydraulic (?:Loading )?System$/m],
+  ["Shipping", /^# Shipping$/m],
+  ["Registration and serial information", /^# Registration, Title(?:, Compliance)?(?:, and| &)? Serial Information$/m],
+  ["Acquisition Timeline", /^# (?:Acquisition|Equipment) Timeline$/m],
+  ["Supplier and Procurement Status", /^# (?:Supplier and Procurement Status|Procurement Snapshot)$/m],
+  ["Inspection and Commissioning", /^# Inspection and Commissioning$/m],
+  ["Maintenance Log", /^# Maintenance Log$/m],
+  ["Parts and Consumables", /^# Parts and Consumables$/m],
+  ["Warranty and Support", /^# Warranty and Support$/m],
+  ["Asset Status", /^# Asset Status$/m],
+  ["Motto", /^# Motto$/m],
+  ["Fleet Legacy", /^# Fleet Legacy$/m],
+  ["Media and Gallery", /^# Media and Gallery$/m],
+  ["Supporting Documents", /^# Supporting Documents$/m],
+  ["Valuation and Ownership", /^# Valuation and Ownership$/m],
+  ["Open Information Requests", /^# Open Information Requests$/m],
+  ["Revision History", /^# Revision History$/m],
+];
 
 test("future acquisition passport files exist for BEBA-HD, INAMA, and NYASI", () => {
   futureAcquisitionFiles.forEach((file) => assert.equal(existsSync(file), true, `${file} must exist`));
@@ -146,7 +181,7 @@ test("future acquisition fleet IDs are not renamed and share the required passpo
   futureAcquisitionFiles.forEach((file, index) => {
     const content = readFileSync(file, "utf8");
     assert.match(content, new RegExp(`\\*\\*${futureAcquisitionIds[index]}\\*\\*`));
-    sharedPassportHeadings.forEach((heading) => assert.match(content, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${file} must contain heading ${heading}`));
+    sharedPassportSections.forEach(([section, pattern]) => assert.match(content, pattern, `${file} must contain the ${section} section`));
   });
 });
 
@@ -196,7 +231,7 @@ test("equipment media uses standardized fleet-prefixed filenames", () => {
     .map((entry) => `${entry.parentPath.replaceAll("\\", "/")}/${entry.name}`.replace(/^images\//, ""));
   assert.ok(mediaFiles.length >= 26, "the full equipment media set should remain present");
   mediaFiles.forEach((relativePath) => {
-    assert.match(relativePath, /^sp-[a-z0-9-]+\.(?:jpg|png|mp4)$/);
+    assert.match(relativePath, /^sp-[a-z0-9-]+\.(?:jpg|png|webp|mp4)$/);
     assert.doesNotMatch(relativePath, /Alibaba|PNM|[ ()]|[A-Z]/);
   });
   const repoReferences = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "src/data/equipment.ts", "src/pages/HomePage.tsx"]

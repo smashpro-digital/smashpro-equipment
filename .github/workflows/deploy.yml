@@ -3,6 +3,8 @@ name: Build and Deploy Equipment Showroom
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -62,6 +64,7 @@ jobs:
   deploy:
     name: Deploy static showroom to production
     needs: validate
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment:
       name: production
