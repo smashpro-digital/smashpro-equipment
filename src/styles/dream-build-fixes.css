@@ -1,0 +1,59 @@
+/* Golf cart dream-build responsive and concept artwork corrections */
+.section[aria-labelledby="dream-project-title"] > article > div {
+  grid-template-columns: minmax(0,1.3fr) minmax(260px,.7fr) !important;
+}
+
+.gc-concept {
+  min-height: 510px !important;
+  background:
+    linear-gradient(180deg,rgba(3,7,4,.02),rgba(3,7,4,.18)),
+    url('/equipment/images/golf-cart-tech-build-concept.svg') center center / cover no-repeat !important;
+  border-color: rgba(141,255,56,.52) !important;
+  box-shadow: 0 26px 80px rgba(0,0,0,.58), 0 0 45px rgba(141,255,56,.08) !important;
+}
+.gc-concept::before { display:none !important; }
+.gc-concept .gc-cart { display:none !important; }
+.gc-concept__badge {
+  background:rgba(3,8,4,.78) !important;
+  backdrop-filter:blur(8px);
+}
+.gc-concept__note {
+  left:24px !important;
+  right:24px !important;
+  bottom:18px !important;
+  padding:10px 12px;
+  border-radius:10px;
+  background:rgba(3,7,4,.72);
+  color:#c1cbc3 !important;
+  backdrop-filter:blur(8px);
+}
+
+@media (max-width: 860px) {
+  .section[aria-labelledby="dream-project-title"] > article > div {
+    grid-template-columns: 1fr !important;
+  }
+  .section[aria-labelledby="dream-project-title"] > article {
+    padding:28px 22px !important;
+  }
+  .section[aria-labelledby="dream-project-title"] #dream-project-title {
+    font-size:clamp(2.35rem,12vw,4rem) !important;
+    line-height:.95 !important;
+  }
+  .gc-hero__inner { grid-template-columns:1fr !important; }
+  .gc-hero__inner > div:first-child { min-width:0; }
+  .gc-hero .gc-kicker { max-width:100%; line-height:1.65; }
+  .gc-hero h1 { font-size:clamp(3rem,15vw,5.5rem) !important; line-height:.86 !important; }
+  .gc-lead { font-size:1.05rem !important; }
+  .gc-concept { min-height:430px !important; background-position:center !important; }
+}
+
+@media (max-width: 600px) {
+  .gc-shell { width:min(100% - 28px,1180px) !important; }
+  .gc-hero { padding:68px 0 52px !important; }
+  .gc-hero h1 { font-size:clamp(2.9rem,14vw,4.6rem) !important; }
+  .gc-concept { min-height:320px !important; border-radius:20px !important; }
+  .gc-concept__badge { left:14px !important; top:14px !important; font-size:.62rem !important; }
+  .gc-concept__note { left:14px !important; right:14px !important; bottom:12px !important; font-size:.7rem !important; }
+  .gc-stat-grid { grid-template-columns:1fr !important; }
+  .gc-stat { min-height:auto !important; }
+}
