@@ -86,7 +86,7 @@ The permanent operational fleet identity is:
 
 ---
 
-# Build Summary
+# Configuration Summary
 
 A custom configuration has been negotiated for SmashPro. The Alibaba Trade Assurance order has not yet been accepted, the reservation payment has not been made, and production has not started.
 
