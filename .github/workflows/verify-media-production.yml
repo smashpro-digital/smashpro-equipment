@@ -1,0 +1,76 @@
+name: Verify SmashPro Media Production
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deploy/smashpro-theme/page-media.php"
+      - "deploy/smashpro-theme/assets/css/media.css"
+      - ".github/workflows/verify-media-production.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify live media partnership hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployed media stylesheet
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp=$(date +%s)
+          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+            --header 'Cache-Control: no-cache' \
+            "https://smashpro.app/wp-content/themes/smashpro/assets/css/media.css?deploy_check=${stamp}" \
+            --output /tmp/media.css
+          grep -Fq '.sp-media-lane-grid' /tmp/media.css
+          grep -Fq '.sp-media-partner-cta' /tmp/media.css
+
+      - name: Diagnose normal and cache-busted media page
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp=$(date +%s)
+
+          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+            --dump-header /tmp/media-normal.headers \
+            'https://smashpro.app/media/' \
+            --output /tmp/media-normal.html
+
+          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+            --header 'Cache-Control: no-cache' \
+            --header 'Pragma: no-cache' \
+            --dump-header /tmp/media-busted.headers \
+            "https://smashpro.app/media/?deploy_check=${stamp}" \
+            --output /tmp/media-busted.html
+
+          echo '--- normal response cache headers ---'
+          grep -Ei '^(cache-control|age|etag|last-modified|server|x-cache|cf-cache-status|x-litespeed-cache):' /tmp/media-normal.headers || true
+          echo '--- cache-busted response cache headers ---'
+          grep -Ei '^(cache-control|age|etag|last-modified|server|x-cache|cf-cache-status|x-litespeed-cache):' /tmp/media-busted.headers || true
+
+          normal_new=0
+          busted_new=0
+          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-normal.html && normal_new=1 || true
+          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-busted.html && busted_new=1 || true
+
+          echo "normal_has_new_template=${normal_new}"
+          echo "cache_busted_has_new_template=${busted_new}"
+
+          if grep -Fq 'Real equipment. Real projects. Real repairs. Real results.' /tmp/media-normal.html; then
+            echo 'normal_has_old_template=1'
+          else
+            echo 'normal_has_old_template=0'
+          fi
+          if grep -Fq 'Real equipment. Real projects. Real repairs. Real results.' /tmp/media-busted.html; then
+            echo 'cache_busted_has_old_template=1'
+          else
+            echo 'cache_busted_has_old_template=0'
+          fi
+
+          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-busted.html
+          grep -Fq 'Put products to work.' /tmp/media-busted.html
+          grep -Fq 'SmashPro Garage Legacy Project' /tmp/media-busted.html
