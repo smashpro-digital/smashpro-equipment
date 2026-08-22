@@ -1,9 +1,9 @@
 {
   "workflow": "Diagnose WordPress Production Cache",
-  "run_id": 32573116052,
-  "source_sha": "cf544a96f5d21bfd76fe3246d687a6b1bd0e399c",
+  "run_id": 32573152756,
+  "source_sha": "27f06fa88dd2bff6da7b35e61773f5d98b3b7563",
   "branch": "main",
   "diagnosis": "success",
-  "completed_at": "2026-08-22T12:29:25.509Z",
-  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32573116052"
+  "completed_at": "2026-08-22T12:30:38.066Z",
+  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32573152756"
 }
