@@ -4,10 +4,11 @@
 }
 
 .gc-concept {
-  min-height: 510px !important;
+  min-height: 0 !important;
+  aspect-ratio: 3 / 2;
   background:
-    linear-gradient(180deg,rgba(3,7,4,.02),rgba(3,7,4,.18)),
-    url('/equipment/images/golf-cart-tech-build-concept.svg') center center / cover no-repeat !important;
+    linear-gradient(180deg,rgba(3,7,4,.02),rgba(3,7,4,.12)),
+    url('/equipment/images/golf-cart-dream-project-concept.jpg') center center / cover no-repeat !important;
   border-color: rgba(141,255,56,.52) !important;
   box-shadow: 0 26px 80px rgba(0,0,0,.58), 0 0 45px rgba(141,255,56,.08) !important;
 }
@@ -44,14 +45,14 @@
   .gc-hero .gc-kicker { max-width:100%; line-height:1.65; }
   .gc-hero h1 { font-size:clamp(3rem,15vw,5.5rem) !important; line-height:.86 !important; }
   .gc-lead { font-size:1.05rem !important; }
-  .gc-concept { min-height:430px !important; background-position:center !important; }
+  .gc-concept { width:100%; aspect-ratio:3 / 2; background-position:center !important; }
 }
 
 @media (max-width: 600px) {
   .gc-shell { width:min(100% - 28px,1180px) !important; }
   .gc-hero { padding:68px 0 52px !important; }
   .gc-hero h1 { font-size:clamp(2.9rem,14vw,4.6rem) !important; }
-  .gc-concept { min-height:320px !important; border-radius:20px !important; }
+  .gc-concept { aspect-ratio:3 / 2; border-radius:20px !important; }
   .gc-concept__badge { left:14px !important; top:14px !important; font-size:.62rem !important; }
   .gc-concept__note { left:14px !important; right:14px !important; bottom:12px !important; font-size:.7rem !important; }
   .gc-stat-grid { grid-template-columns:1fr !important; }
