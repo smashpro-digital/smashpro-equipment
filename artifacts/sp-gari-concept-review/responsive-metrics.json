@@ -1,0 +1,212 @@
+[
+  {
+    "page": "card",
+    "width": 320,
+    "viewportWidth": 320,
+    "scrollWidth": 320,
+    "image": {
+      "left": 30,
+      "right": 290,
+      "width": 260,
+      "height": 173.328125,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 320,
+    "viewportWidth": 320,
+    "scrollWidth": 320,
+    "image": {
+      "left": 15,
+      "right": 305,
+      "width": 290,
+      "height": 192.65625,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 360,
+    "viewportWidth": 360,
+    "scrollWidth": 360,
+    "image": {
+      "left": 30,
+      "right": 330,
+      "width": 300,
+      "height": 200,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 360,
+    "viewportWidth": 360,
+    "scrollWidth": 360,
+    "image": {
+      "left": 15,
+      "right": 345,
+      "width": 330,
+      "height": 219.328125,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 375,
+    "viewportWidth": 375,
+    "scrollWidth": 375,
+    "image": {
+      "left": 30,
+      "right": 345,
+      "width": 315,
+      "height": 210,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 375,
+    "viewportWidth": 375,
+    "scrollWidth": 375,
+    "image": {
+      "left": 15,
+      "right": 360,
+      "width": 345,
+      "height": 229.328125,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 390,
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "image": {
+      "left": 30,
+      "right": 360,
+      "width": 330,
+      "height": 220,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 390,
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "image": {
+      "left": 15,
+      "right": 375,
+      "width": 360,
+      "height": 239.328125,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 430,
+    "viewportWidth": 430,
+    "scrollWidth": 430,
+    "image": {
+      "left": 30,
+      "right": 400,
+      "width": 370,
+      "height": 246.65625,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 430,
+    "viewportWidth": 430,
+    "scrollWidth": 430,
+    "image": {
+      "left": 15,
+      "right": 415,
+      "width": 400,
+      "height": 266,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 768,
+    "viewportWidth": 768,
+    "scrollWidth": 768,
+    "image": {
+      "left": 405.28125,
+      "right": 723.28125,
+      "width": 318,
+      "height": 212,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 768,
+    "viewportWidth": 768,
+    "scrollWidth": 768,
+    "image": {
+      "left": 17,
+      "right": 751,
+      "width": 734,
+      "height": 488.65625,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 1440,
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "image": {
+      "left": 790.265625,
+      "right": 1286,
+      "width": 495.734375,
+      "height": 330.484375,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 1440,
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "image": {
+      "left": 894.28125,
+      "right": 1288.15625,
+      "width": 393.875,
+      "height": 261.90625,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  }
+]

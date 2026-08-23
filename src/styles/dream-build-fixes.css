@@ -54,6 +54,12 @@
 }
 
 @media (max-width: 600px) {
+  .home-hero .button-row,
+  .dream-project-card__actions,
+  .gc-actions { display:grid;grid-template-columns:minmax(0,1fr); }
+  .home-hero .button,
+  .dream-project-card__actions .button,
+  .gc-actions .button { width:100%; }
   .dream-project-card__layout { gap:24px;padding:24px 16px }
   .dream-project-card__content>p:last-of-type { font-size:.96rem;line-height:1.55 }
   .dream-project-card__actions { gap:10px;margin-top:20px }
@@ -62,7 +68,7 @@
   .dream-project-card__phase>p:last-child { font-size:.9rem }
   .gc-shell { width:min(100% - 28px,1180px) !important; }
   .gc-hero { padding:68px 0 52px !important; }
-  .gc-hero h1 { font-size:clamp(2.9rem,14vw,4.6rem) !important; }
+  .gc-hero h1 { font-size:clamp(2.35rem,12vw,4.6rem) !important; }
   .gc-concept { aspect-ratio:3 / 2; border-radius:20px !important; }
   .gc-concept__badge { left:14px !important; top:14px !important; font-size:.62rem !important; }
   .gc-concept__note { left:14px !important; right:14px !important; bottom:12px !important; font-size:.7rem !important; }

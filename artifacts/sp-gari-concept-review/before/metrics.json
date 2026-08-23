@@ -1,0 +1,62 @@
+[
+  {
+    "page": "card",
+    "width": 390,
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "image": {
+      "left": 30,
+      "right": 360,
+      "width": 330,
+      "height": 220,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 390,
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "image": {
+      "left": 15,
+      "right": 375,
+      "width": 360,
+      "height": 239.328125,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "card",
+    "width": 1440,
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "image": {
+      "left": 790.265625,
+      "right": 1286,
+      "width": 495.734375,
+      "height": 330.484375,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  },
+  {
+    "page": "project",
+    "width": 1440,
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "image": {
+      "left": 894.28125,
+      "right": 1288.15625,
+      "width": 393.875,
+      "height": 261.90625,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "complete": true
+    }
+  }
+]
