@@ -48,8 +48,8 @@ export function GolfCartTechBuildPage() {
               <p className="gc-lead">The donor does not exist yet. That is part of the story. We are hunting an inexpensive older electric cart and rebuilding it into a connected, lithium-powered SmashPro Garage EV that works as a showpiece, content platform and compact utility vehicle.</p>
               <div className="gc-actions"><ButtonLink href="#partnerships">Explore partner opportunities</ButtonLink><ButtonLink href="#timeline" variant="outline">Follow the build plan</ButtonLink></div>
             </div>
-            <div className="gc-concept" role="img" aria-label="Stylized concept rendering of the future SmashPro Garage electric golf cart">
-              <span className="gc-concept__badge">NORTH-STAR CONCEPT</span><div className="gc-cart"><div className="gc-roof"/><div className="gc-cabin"/><div className="gc-body"/><div className="gc-bed"/><div className="gc-light"/><div className="gc-under"/><div className="gc-wheel a"/><div className="gc-wheel b"/></div><span className="gc-concept__note">Final donor + package subject to partner fit and engineering.</span>
+            <div className="gc-concept">
+              <img src="/equipment/images/sp-gari-26e-concept.png" alt="SP-GARI-26E North-Star concept for the SmashPro Garage Golf Cart Tech Build" width="1536" height="1024" decoding="async" />
             </div>
           </div>
         </section>

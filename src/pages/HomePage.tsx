@@ -30,7 +30,7 @@ export function HomePage() {
               <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/golf-cart-tech-build.html">Explore the dream build</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partnerships</ButtonLink></div>
             </div>
             <div className="dream-project-card__visual">
-              <div className="dream-project-card__media"><img src="/equipment/images/sp-golf-cart-tech-build-concept.png" alt="SmashPro Garage green and black electric golf cart dream-build concept" width="1400" height="1000" loading="lazy" decoding="async" /><span>Dream-build concept</span></div>
+              <div className="dream-project-card__media"><img src="/equipment/images/sp-gari-26e-concept.png" alt="SmashPro Garage SP-GARI-26E green and black electric golf cart dream-build concept" width="1536" height="1024" loading="lazy" decoding="async" /><span>Dream-build concept</span></div>
               <div className="dream-project-card__phase"><p className="eyebrow">Current phase</p><h3>Sponsor-first donor search</h3><p>Target donor: roughly $500, electric, complete chassis, dead or missing batteries preferred. First-wave outreach is active across power, performance, smart lighting and audio.</p></div>
             </div>
           </div>

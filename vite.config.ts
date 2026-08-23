@@ -27,6 +27,10 @@ function preserveEquipmentMedia(): Plugin {
       const output = resolve(projectDirectory, "dist/images");
       mkdirSync(output, { recursive: true });
       cpSync(resolve(projectDirectory, "images"), output, { recursive: true });
+      cpSync(
+        resolve(projectDirectory, "public/equipment/images/sp-gari-26e-concept.png"),
+        resolve(output, "sp-gari-26e-concept.png"),
+      );
       const publicIndex = {
         version: 1,
         generated_at: new Date().toISOString(),

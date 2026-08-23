@@ -70,13 +70,16 @@ test("protected equipment routes are registered", () => {
 
 test("golf cart dream project uses one canonical concept image and route", () => {
   const home = readFileSync("src/pages/HomePage.tsx", "utf8");
+  const dreamPage = readFileSync("src/pages/GolfCartTechBuildPage.tsx", "utf8");
   const dreamPageStyles = readFileSync("src/styles/dream-build-fixes.css", "utf8");
-  const conceptPath = "images/sp-golf-cart-tech-build-concept.png";
+  const conceptPath = "public/equipment/images/sp-gari-26e-concept.png";
+  const publicPath = "/equipment/images/sp-gari-26e-concept.png";
   assert.equal(existsSync(conceptPath), true, `${conceptPath} must exist`);
-  assert.match(home, /src="\/equipment\/images\/sp-golf-cart-tech-build-concept\.png"/);
+  assert.equal(home.includes(`src="${publicPath}"`), true);
+  assert.equal(dreamPage.includes(`src="${publicPath}"`), true);
   assert.match(home, /href="\/equipment\/golf-cart-tech-build\.html"/);
-  assert.match(dreamPageStyles, /url\('\/equipment\/images\/sp-golf-cart-tech-build-concept\.png'\)/);
-  assert.doesNotMatch(`${home}\n${dreamPageStyles}`, /golf-cart-dream-project-concept\.jpg/);
+  assert.match(dreamPageStyles, /\.gc-concept img \{[^}]*object-fit:contain/);
+  assert.doesNotMatch(`${home}\n${dreamPage}\n${dreamPageStyles}`, /sp-golf-cart-tech-build-concept|golf-cart-dream-project-concept/);
 });
 
 test("equipment data does not claim public availability", () => {
