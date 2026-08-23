@@ -1,0 +1,516 @@
+{
+  "phase": "after",
+  "results": [
+    {
+      "width": 320,
+      "metrics": {
+        "viewport": {
+          "width": 320,
+          "height": 1000
+        },
+        "documentScrollWidth": 320,
+        "bodyScrollWidth": 320,
+        "horizontalOverflow": false,
+        "sectionWidth": 296,
+        "card": {
+          "x": 12,
+          "width": 296,
+          "height": 1014.84375,
+          "right": 308
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 260,
+          "renderedHeight": 185.703125,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 262,
+            "height": 52,
+            "right": 291
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 262,
+            "height": 52,
+            "right": 291
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 296,
+            "height": 642.5,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 296,
+            "height": 642.5,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 360,
+      "metrics": {
+        "viewport": {
+          "width": 360,
+          "height": 1000
+        },
+        "documentScrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "horizontalOverflow": false,
+        "sectionWidth": 336,
+        "card": {
+          "x": 12,
+          "width": 336,
+          "height": 981,
+          "right": 348
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 300,
+          "renderedHeight": 214.28125,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 302,
+            "height": 52,
+            "right": 331
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 302,
+            "height": 52,
+            "right": 331
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 336,
+            "height": 672.5,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 336,
+            "height": 672.5,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 375,
+      "metrics": {
+        "viewport": {
+          "width": 375,
+          "height": 1000
+        },
+        "documentScrollWidth": 375,
+        "bodyScrollWidth": 375,
+        "horizontalOverflow": false,
+        "sectionWidth": 351,
+        "card": {
+          "x": 12,
+          "width": 351,
+          "height": 996.875,
+          "right": 363
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 315,
+          "renderedHeight": 225,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 317,
+            "height": 52,
+            "right": 346
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 317,
+            "height": 52,
+            "right": 346
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 351,
+            "height": 683.75,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 351,
+            "height": 683.75,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 390,
+      "metrics": {
+        "viewport": {
+          "width": 390,
+          "height": 1000
+        },
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "horizontalOverflow": false,
+        "sectionWidth": 366,
+        "card": {
+          "x": 12,
+          "width": 366,
+          "height": 990.359375,
+          "right": 378
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 330,
+          "renderedHeight": 235.703125,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 332,
+            "height": 52,
+            "right": 361
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 332,
+            "height": 52,
+            "right": 361
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 366,
+            "height": 695,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 366,
+            "height": 695,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 430,
+      "metrics": {
+        "viewport": {
+          "width": 430,
+          "height": 1000
+        },
+        "documentScrollWidth": 430,
+        "bodyScrollWidth": 430,
+        "horizontalOverflow": false,
+        "sectionWidth": 406,
+        "card": {
+          "x": 12,
+          "width": 406,
+          "height": 1008.78125,
+          "right": 418
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 370,
+          "renderedHeight": 264.28125,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 372,
+            "height": 52,
+            "right": 401
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 372,
+            "height": 52,
+            "right": 401
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 406,
+            "height": 725,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 406,
+            "height": 725,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 768,
+      "metrics": {
+        "viewport": {
+          "width": 768,
+          "height": 1000
+        },
+        "documentScrollWidth": 768,
+        "bodyScrollWidth": 768,
+        "horizontalOverflow": false,
+        "sectionWidth": 744,
+        "card": {
+          "x": 12,
+          "width": 744,
+          "height": 555.71875,
+          "right": 756
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 318,
+          "renderedHeight": 227.140625,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 254.046875,
+            "height": 52,
+            "right": 297.765625
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 168.65625,
+            "height": 52,
+            "right": 212.375
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 362,
+            "height": 702,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 362,
+            "height": 702,
+            "imageLoaded": true,
+            "ctaHeight": 50
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 1024,
+      "metrics": {
+        "viewport": {
+          "width": 1024,
+          "height": 1000
+        },
+        "documentScrollWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "horizontalOverflow": false,
+        "sectionWidth": 984,
+        "card": {
+          "x": 20,
+          "width": 984,
+          "height": 580.3125,
+          "right": 1004
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 393.21875,
+          "renderedHeight": 280.859375,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 254.046875,
+            "height": 52,
+            "right": 316
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 168.65625,
+            "height": 52,
+            "right": 497.453125
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 482,
+            "height": 580,
+            "imageLoaded": true,
+            "ctaHeight": 16
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 482,
+            "height": 580,
+            "imageLoaded": true,
+            "ctaHeight": 16
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    },
+    {
+      "width": 1440,
+      "metrics": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "documentScrollWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "sectionWidth": 1240,
+        "card": {
+          "x": 100,
+          "width": 1240,
+          "height": 650.84375,
+          "right": 1340
+        },
+        "image": {
+          "src": "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png",
+          "naturalWidth": 1400,
+          "naturalHeight": 1000,
+          "renderedWidth": 495.734375,
+          "renderedHeight": 354.09375,
+          "objectFit": "contain",
+          "objectPosition": "50% 50%"
+        },
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 254.046875,
+            "height": 52,
+            "right": 407.046875
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 168.65625,
+            "height": 52,
+            "right": 588.5
+          }
+        ],
+        "equipmentCards": [
+          {
+            "fleetId": "SP-ARDHI-26",
+            "width": 610,
+            "height": 650,
+            "imageLoaded": true,
+            "ctaHeight": 16
+          },
+          {
+            "fleetId": "SP-MZIGO-26E",
+            "width": 610,
+            "height": 650,
+            "imageLoaded": true,
+            "ctaHeight": 16
+          }
+        ]
+      },
+      "responses": {
+        "http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png": 200
+      }
+    }
+  ],
+  "destination": {
+    "href": "/equipment/golf-cart-tech-build.html",
+    "url": "http://127.0.0.1:4173/equipment/golf-cart-tech-build.html",
+    "title": "OLD CART.\nNEW TECHNOLOGY.",
+    "horizontalOverflow": false,
+    "conceptBackground": "linear-gradient(rgba(3, 7, 4, 0.02), rgba(3, 7, 4, 0.12)), url(\"http://127.0.0.1:4173/equipment/images/sp-golf-cart-tech-build-concept.png\")"
+  }
+}

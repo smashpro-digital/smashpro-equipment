@@ -21,15 +21,18 @@ export function HomePage() {
       <section className="section shell" id="fleet"><div className="section-heading"><div><p className="eyebrow">Featured fleet</p><h2>Equipment with a defined purpose.</h2></div><p>Every fleet asset is documented around the work it supports. Availability is published only when the operating program is ready.</p></div><div className="equipment-grid">{equipment.map((item) => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
 
       <section className="section shell" aria-labelledby="dream-project-title">
-        <article style={{border:"1px solid rgba(141,255,56,.35)",borderRadius:24,padding:"clamp(24px,5vw,52px)",background:"radial-gradient(circle at 85% 20%,rgba(141,255,56,.13),transparent 28%),linear-gradient(135deg,#071009,#111713)",color:"#fff",boxShadow:"0 28px 70px rgba(0,0,0,.2)"}}>
-          <div style={{display:"grid",gridTemplateColumns:"minmax(0,1.3fr) minmax(260px,.7fr)",gap:32,alignItems:"center"}}>
-            <div>
+        <article className="dream-project-card">
+          <div className="dream-project-card__layout">
+            <div className="dream-project-card__content">
               <p className="eyebrow">Dream Project · Shop + Promo Vehicle</p>
-              <h2 id="dream-project-title" style={{fontSize:"clamp(2.2rem,5vw,4.6rem)",lineHeight:.92,margin:"10px 0 18px"}}>Old cart.<br/><span style={{color:"#8dff38"}}>New technology.</span></h2>
-              <p style={{maxWidth:760,color:"#c5cec7",fontSize:"1.05rem",lineHeight:1.65}}>We are hunting an inexpensive older electric golf cart and rebuilding it into a lithium-powered, connected SmashPro Garage EV. The project is designed around brand partnerships, YouTube chapters, real installation work and long-term shop utility.</p>
-              <div className="button-row" style={{marginTop:24}}><ButtonLink href="/equipment/golf-cart-tech-build.html">Explore the dream build</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partnerships</ButtonLink></div>
+              <h2 id="dream-project-title">Old cart.<br/><span>New technology.</span></h2>
+              <p>We are hunting an inexpensive older electric golf cart and rebuilding it into a lithium-powered, connected SmashPro Garage EV. The project is designed around brand partnerships, YouTube chapters, real installation work and long-term shop utility.</p>
+              <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/golf-cart-tech-build.html">Explore the dream build</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partnerships</ButtonLink></div>
             </div>
-            <div style={{border:"1px solid rgba(255,255,255,.12)",borderRadius:18,padding:22,background:"rgba(0,0,0,.24)"}}><p className="eyebrow">Current phase</p><h3 style={{margin:"8px 0"}}>Sponsor-first donor search</h3><p style={{color:"#aeb8b0",lineHeight:1.55}}>Target donor: roughly $500, electric, complete chassis, dead or missing batteries preferred. First-wave outreach is active across power, performance, smart lighting and audio.</p></div>
+            <div className="dream-project-card__visual">
+              <div className="dream-project-card__media"><img src="/equipment/images/sp-golf-cart-tech-build-concept.png" alt="SmashPro Garage green and black electric golf cart dream-build concept" width="1400" height="1000" loading="lazy" decoding="async" /><span>Dream-build concept</span></div>
+              <div className="dream-project-card__phase"><p className="eyebrow">Current phase</p><h3>Sponsor-first donor search</h3><p>Target donor: roughly $500, electric, complete chassis, dead or missing batteries preferred. First-wave outreach is active across power, performance, smart lighting and audio.</p></div>
+            </div>
           </div>
         </article>
       </section>

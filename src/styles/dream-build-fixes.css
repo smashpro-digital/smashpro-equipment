@@ -1,14 +1,25 @@
 /* Golf cart dream-build responsive and concept artwork corrections */
-.section[aria-labelledby="dream-project-title"] > article > div {
-  grid-template-columns: minmax(0,1.3fr) minmax(260px,.7fr) !important;
-}
+.dream-project-card { overflow:hidden;border:1px solid rgba(141,255,56,.35);border-radius:24px;background:radial-gradient(circle at 85% 20%,rgba(141,255,56,.13),transparent 28%),linear-gradient(135deg,#071009,#111713);box-shadow:0 28px 70px rgba(0,0,0,.2);color:#fff }
+.dream-project-card__layout { display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:clamp(24px,4vw,52px);align-items:center;padding:clamp(24px,4vw,52px) }
+.dream-project-card__content { min-width:0 }
+.dream-project-card__content h2 { margin:10px 0 18px;font-size:clamp(2.2rem,5vw,4.6rem);line-height:.92 }
+.dream-project-card__content h2 span { color:#8dff38 }
+.dream-project-card__content>p:last-of-type { max-width:760px;color:#c5cec7;font-size:1.05rem;line-height:1.65 }
+.dream-project-card__actions { margin-top:24px }
+.dream-project-card__visual { min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(0,0,0,.24) }
+.dream-project-card__media { position:relative;overflow:hidden;aspect-ratio:7/5;border-radius:17px 17px 0 0;background:#050806 }
+.dream-project-card__media img { display:block;width:100%;height:100%;object-fit:contain;object-position:center }
+.dream-project-card__media span { position:absolute;top:12px;left:12px;padding:.42rem .6rem;border:1px solid rgba(141,255,56,.58);background:rgba(5,9,6,.78);color:#a1df74;font-size:.58rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase;backdrop-filter:blur(4px) }
+.dream-project-card__phase { padding:20px 22px 22px }
+.dream-project-card__phase h3 { margin:8px 0 }
+.dream-project-card__phase>p:last-child { margin-bottom:0;color:#aeb8b0;line-height:1.55 }
 
 .gc-concept {
   min-height: 0 !important;
   aspect-ratio: 3 / 2;
   background:
     linear-gradient(180deg,rgba(3,7,4,.02),rgba(3,7,4,.12)),
-    url('/equipment/images/golf-cart-dream-project-concept.jpg') center center / cover no-repeat !important;
+    url('/equipment/images/sp-golf-cart-tech-build-concept.png') center center / contain no-repeat !important;
   border-color: rgba(141,255,56,.52) !important;
   box-shadow: 0 26px 80px rgba(0,0,0,.58), 0 0 45px rgba(141,255,56,.08) !important;
 }
@@ -30,16 +41,6 @@
 }
 
 @media (max-width: 860px) {
-  .section[aria-labelledby="dream-project-title"] > article > div {
-    grid-template-columns: 1fr !important;
-  }
-  .section[aria-labelledby="dream-project-title"] > article {
-    padding:28px 22px !important;
-  }
-  .section[aria-labelledby="dream-project-title"] #dream-project-title {
-    font-size:clamp(2.35rem,12vw,4rem) !important;
-    line-height:.95 !important;
-  }
   .gc-hero__inner { grid-template-columns:1fr !important; }
   .gc-hero__inner > div:first-child { min-width:0; }
   .gc-hero .gc-kicker { max-width:100%; line-height:1.65; }
@@ -48,7 +49,18 @@
   .gc-concept { width:100%; aspect-ratio:3 / 2; background-position:center !important; }
 }
 
+@media (max-width: 699px) {
+  .dream-project-card__layout { grid-template-columns:1fr;padding:28px 22px }
+  .dream-project-card__content h2 { font-size:clamp(2.35rem,12vw,4rem);line-height:.95 }
+}
+
 @media (max-width: 600px) {
+  .dream-project-card__layout { gap:24px;padding:24px 16px }
+  .dream-project-card__content>p:last-of-type { font-size:.96rem;line-height:1.55 }
+  .dream-project-card__actions { gap:10px;margin-top:20px }
+  .dream-project-card__actions .button { min-height:52px;white-space:normal }
+  .dream-project-card__phase { padding:17px 18px 19px }
+  .dream-project-card__phase>p:last-child { font-size:.9rem }
   .gc-shell { width:min(100% - 28px,1180px) !important; }
   .gc-hero { padding:68px 0 52px !important; }
   .gc-hero h1 { font-size:clamp(2.9rem,14vw,4.6rem) !important; }
