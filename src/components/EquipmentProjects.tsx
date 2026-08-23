@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ButtonLink } from "./ButtonLink";
 import { recommendedServices } from "../domain/recommendations";
+import { buildEstimateUrl } from "../domain/estimateUrl";
 
 type EquipmentService = {
   id: number;
@@ -18,24 +19,17 @@ type EquipmentService = {
   pricing_mode?: string | null;
 };
 
-const ATTRIBUTION_KEYS = ["utm_source", "utm_campaign", "utm_medium", "utm_content"];
 function track(event:string,detail:Record<string,unknown>={}){if(typeof window!=="undefined"){const target=window as unknown as {dataLayer?:Array<Record<string,unknown>>};target.dataLayer=target.dataLayer||[];target.dataLayer.push({event,...detail});}}
 
-function estimateUrl(service: EquipmentService | null, fleetId: string) {
-  const params = new URLSearchParams();
-  if (typeof window !== "undefined") {
-    const source = new URLSearchParams(window.location.search);
-    ATTRIBUTION_KEYS.forEach((key) => {
-      const value = source.get(key);
-      if (value) params.set(key, value.slice(0, 160));
-    });
-    params.set("landing_page", window.location.pathname);
-    if(document.referrer)params.set("referrer",document.referrer.slice(0,500));
-  }
-  params.set("equipment_source", fleetId);
-  params.set("equipment_required", fleetId);
-  if (service?.slug) params.set("service", service.slug);
-  return `/book/?${params.toString()}`;
+function estimateUrl(service: EquipmentService | undefined, fleetId: string, utmContentFallback: string) {
+  return buildEstimateUrl({
+    fleetId,
+    serviceSlug: service?.slug,
+    utmContentFallback,
+    search: typeof window !== "undefined" ? window.location.search : undefined,
+    landingPage: typeof window !== "undefined" ? window.location.pathname : undefined,
+    referrer: typeof document !== "undefined" && document.referrer ? document.referrer : undefined,
+  });
 }
 
 export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], attachmentIds = [] }: { fleetId: string; equipmentName: string; capabilityIds?: string[]; attachmentIds?: string[] }) {
@@ -61,7 +55,8 @@ export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], 
     () => services.some((service) => Number(service.prebooking_enabled) === 1),
     [services]
   );
-  const customerEstimateUrl = estimateUrl(null, fleetId);
+  const fleetSlug = fleetId.toLowerCase();
+  const customerEstimateUrl = estimateUrl(undefined, fleetId, `equipment-${fleetSlug}-hero-estimate`);
 
   return <section className="equipment-projects" id="projects"><div className="shell">
     <div className="section-heading"><div><p className="eyebrow">What {equipmentName} Can Help With</p><h2>Equipment-powered property projects.</h2></div><div className="project-availability"><span>{acceptingProjects ? "Now Accepting Upcoming Projects" : "Project availability by review"}</span><p>Project listings do not confirm availability. Scheduling follows deposit, transport, equipment, and attachment readiness.</p></div></div>
@@ -70,7 +65,7 @@ export function EquipmentProjects({ fleetId, equipmentName, capabilityIds = [], 
       <span>{service.attachment_required ? `${service.attachment_required} configuration` : "Configuration confirmed during review"}</span>
       <h3>{service.name}</h3><p>{service.tagline || service.description}</p>
       <strong>{service.quote_required ? "Custom Estimate" : "Estimate required"}</strong>
-      <ButtonLink href={estimateUrl(service, fleetId)} onClick={()=>track("equipment_service_selected",{equipment_id:fleetId,service_slug:service.slug})}>Get Estimate</ButtonLink>
+      <ButtonLink href={estimateUrl(service, fleetId, `equipment-${fleetSlug}-${service.slug}-estimate`)} aria-label={`Get an estimate for ${service.name} using ${fleetId}`} onClick={()=>track("equipment_service_selected",{equipment_id:fleetId,service_slug:service.slug})}>Get Estimate</ButtonLink>
     </article>)}</div> : failed ? <p className="empty-state">Project services are temporarily unavailable. The equipment passport remains available below.</p> : loaded ? <p className="empty-state">Project recommendations have not been published for this equipment yet. Explore SmashPro Services for other ways we can help.</p> : <p className="empty-state">Loading current project services…</p>}
     <div className="contractor-availability"><div><p className="eyebrow">Contractor workflow</p><h3>Need fleet access?</h3><p>Contractor availability remains subject to eligibility, readiness, insurance, and operating requirements.</p></div><ButtonLink href="https://smashpro.app/contact" variant="outline" onClick={()=>track("contractor_availability_clicked",{equipment_id:fleetId})}>Request Availability</ButtonLink></div>
   </div></section>;
