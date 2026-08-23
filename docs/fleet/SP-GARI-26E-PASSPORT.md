@@ -1,9 +1,9 @@
 # SP-GARI-26E Equipment Passport
 
-> **SmashPro Fleet Equipment Passport**  
-> Version: 1.0 (Planning Skeleton)  
-> Status: Planned Future Acquisition — Dream Project / Donor Search  
-> Last Updated: 2026-08-22  
+> **SmashPro Fleet Equipment Passport**<br>
+> Version: 1.0 (Planning Skeleton)<br>
+> Status: Planned Future Acquisition — Dream Project / Donor Search<br>
+> Last Updated: 2026-08-22<br>
 > Procurement Record: [SP-GARI-26E-PROCUREMENT.md](SP-GARI-26E-PROCUREMENT.md)
 
 ---
