@@ -213,6 +213,25 @@ test("future acquisitions are not published to the public catalog, sitemap, or e
   });
 });
 
+test("SP-GARI-26E is a canonical reserved future acquisition and not public fleet inventory", () => {
+  const passport = readFileSync("docs/fleet/SP-GARI-26E-PASSPORT.md", "utf8");
+  const procurement = readFileSync("docs/fleet/SP-GARI-26E-PROCUREMENT.md", "utf8");
+  const legacyPointer = readFileSync("docs/fleet/SMASHPRO-GOLF-CART-TECH-BUILD-PASSPORT.md", "utf8");
+  const equipmentData = readFileSync("src/data/equipment.ts", "utf8");
+  const sitemap = readFileSync("public/sitemap.xml", "utf8");
+
+  assert.match(passport, /\*\*SP-GARI-26E\*\*/);
+  assert.match(passport, /Status: Planned Future Acquisition/);
+  assert.match(passport, /DONOR SPECIFICATION/);
+  assert.match(passport, /SMASHPRO BUILD SPECIFICATION/);
+  assert.match(passport, /Not listed, rentable, bookable, or in service/);
+  assert.match(procurement, /No donor has been selected/);
+  assert.match(procurement, /Buy \/ Negotiate \/ Pass/);
+  assert.match(legacyPointer, /canonical records/);
+  assert.doesNotMatch(equipmentData, /SP-GARI-26E/);
+  assert.doesNotMatch(sitemap, /SP-GARI-26E/);
+});
+
 test("fleet passport index links resolve to existing files", () => {
   const index = readFileSync("docs/fleet/README.md", "utf8");
   const links = [...index.matchAll(/\]\(([^)]+\.md)\)/g)].map(([, link]) => link);

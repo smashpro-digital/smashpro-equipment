@@ -16,6 +16,7 @@ These fleet IDs are reserved and approved but not yet purchased, owned, or in se
 | Fleet ID | Equipment Type | Passport | Procurement Record |
 |----------|----------------|----------|--------------------|
 | SP-BEBA-HD-26 | Heavy-duty equipment trailer (planned) | [SP-BEBA-HD-26-PASSPORT.md](SP-BEBA-HD-26-PASSPORT.md) | Not yet created |
+| SP-GARI-26E | Electric utility / promotional golf-cart rebuild (planned) | [SP-GARI-26E-PASSPORT.md](SP-GARI-26E-PASSPORT.md) | [SP-GARI-26E-PROCUREMENT.md](SP-GARI-26E-PROCUREMENT.md) |
 | SP-INAMA-26 | Low-profile hydraulic tilt/lowering equipment trailer (planned) | [SP-INAMA-26-PASSPORT.md](SP-INAMA-26-PASSPORT.md) | [SP-INAMA-26-PROCUREMENT.md](SP-INAMA-26-PROCUREMENT.md) |
 | SP-NYASI-26 | Remote-controlled lawn mower (planned) | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | Not yet created |
 
