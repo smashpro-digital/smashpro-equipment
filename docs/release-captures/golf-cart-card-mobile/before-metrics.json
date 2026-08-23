@@ -1,0 +1,308 @@
+{
+  "phase": "before",
+  "results": [
+    {
+      "width": 320,
+      "metrics": {
+        "viewport": {
+          "width": 320,
+          "height": 1000
+        },
+        "documentScrollWidth": 320,
+        "bodyScrollWidth": 320,
+        "horizontalOverflow": false,
+        "sectionWidth": 296,
+        "card": {
+          "x": 12,
+          "width": 296,
+          "height": 998.296875,
+          "right": 308
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 250,
+            "height": 52,
+            "right": 285
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 250,
+            "height": 52,
+            "right": 285
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 360,
+      "metrics": {
+        "viewport": {
+          "width": 360,
+          "height": 1000
+        },
+        "documentScrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "horizontalOverflow": false,
+        "sectionWidth": 336,
+        "card": {
+          "x": 12,
+          "width": 336,
+          "height": 901.796875,
+          "right": 348
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 290,
+            "height": 52,
+            "right": 325
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 290,
+            "height": 52,
+            "right": 325
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 375,
+      "metrics": {
+        "viewport": {
+          "width": 375,
+          "height": 1000
+        },
+        "documentScrollWidth": 375,
+        "bodyScrollWidth": 375,
+        "horizontalOverflow": false,
+        "sectionWidth": 351,
+        "card": {
+          "x": 12,
+          "width": 351,
+          "height": 906.953125,
+          "right": 363
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 305,
+            "height": 52,
+            "right": 340
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 305,
+            "height": 52,
+            "right": 340
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 390,
+      "metrics": {
+        "viewport": {
+          "width": 390,
+          "height": 1000
+        },
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "horizontalOverflow": false,
+        "sectionWidth": 366,
+        "card": {
+          "x": 12,
+          "width": 366,
+          "height": 912.0625,
+          "right": 378
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 320,
+            "height": 52,
+            "right": 355
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 320,
+            "height": 52,
+            "right": 355
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 430,
+      "metrics": {
+        "viewport": {
+          "width": 430,
+          "height": 1000
+        },
+        "documentScrollWidth": 430,
+        "bodyScrollWidth": 430,
+        "horizontalOverflow": false,
+        "sectionWidth": 406,
+        "card": {
+          "x": 12,
+          "width": 406,
+          "height": 873.203125,
+          "right": 418
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 360,
+            "height": 52,
+            "right": 395
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 360,
+            "height": 52,
+            "right": 395
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 768,
+      "metrics": {
+        "viewport": {
+          "width": 768,
+          "height": 1000
+        },
+        "documentScrollWidth": 768,
+        "bodyScrollWidth": 768,
+        "horizontalOverflow": false,
+        "sectionWidth": 744,
+        "card": {
+          "x": 12,
+          "width": 744,
+          "height": 607.078125,
+          "right": 756
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 254.046875,
+            "height": 52,
+            "right": 289.046875
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 168.65625,
+            "height": 52,
+            "right": 470.5
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 1024,
+      "metrics": {
+        "viewport": {
+          "width": 1024,
+          "height": 1000
+        },
+        "documentScrollWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "horizontalOverflow": false,
+        "sectionWidth": 984,
+        "card": {
+          "x": 20,
+          "width": 984,
+          "height": 437.796875,
+          "right": 1004
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 254.046875,
+            "height": 52,
+            "right": 326.234375
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 168.65625,
+            "height": 52,
+            "right": 507.6875
+          }
+        ]
+      },
+      "responses": {}
+    },
+    {
+      "width": 1440,
+      "metrics": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "documentScrollWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "sectionWidth": 1240,
+        "card": {
+          "x": 100,
+          "width": 1240,
+          "height": 450,
+          "right": 1340
+        },
+        "image": null,
+        "buttons": [
+          {
+            "text": "Explore the dream build↗",
+            "href": "/equipment/golf-cart-tech-build.html",
+            "width": 254.046875,
+            "height": 52,
+            "right": 407.046875
+          },
+          {
+            "text": "Partnerships↗",
+            "href": "https://smashpro.app/media/",
+            "width": 168.65625,
+            "height": 52,
+            "right": 588.5
+          }
+        ]
+      },
+      "responses": {}
+    }
+  ],
+  "destination": {
+    "href": "/equipment/golf-cart-tech-build.html",
+    "url": "http://127.0.0.1:4173/equipment/golf-cart-tech-build.html",
+    "title": "OLD CART.\nNEW TECHNOLOGY.",
+    "horizontalOverflow": false,
+    "conceptBackground": "linear-gradient(rgba(3, 7, 4, 0.02), rgba(3, 7, 4, 0.12)), url(\"http://127.0.0.1:4173/equipment/equipment/images/golf-cart-dream-project-concept.jpg\")"
+  }
+}

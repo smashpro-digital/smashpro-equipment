@@ -68,6 +68,17 @@ test("protected equipment routes are registered", () => {
   assert.match(routes, /sp-mzigo-26\.html/);
 });
 
+test("golf cart dream project uses one canonical concept image and route", () => {
+  const home = readFileSync("src/pages/HomePage.tsx", "utf8");
+  const dreamPageStyles = readFileSync("src/styles/dream-build-fixes.css", "utf8");
+  const conceptPath = "images/sp-golf-cart-tech-build-concept.png";
+  assert.equal(existsSync(conceptPath), true, `${conceptPath} must exist`);
+  assert.match(home, /src="\/equipment\/images\/sp-golf-cart-tech-build-concept\.png"/);
+  assert.match(home, /href="\/equipment\/golf-cart-tech-build\.html"/);
+  assert.match(dreamPageStyles, /url\('\/equipment\/images\/sp-golf-cart-tech-build-concept\.png'\)/);
+  assert.doesNotMatch(`${home}\n${dreamPageStyles}`, /golf-cart-dream-project-concept\.jpg/);
+});
+
 test("equipment data does not claim public availability", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   assert.doesNotMatch(data, /available now|rent now|book now/i);
