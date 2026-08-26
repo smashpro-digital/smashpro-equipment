@@ -9,205 +9,73 @@ get_header();
 $channels = smashpro_media_channels();
 
 $partnership_lanes = array(
-	array(
-		'number'      => '01',
-		'title'       => __( 'Garage Legacy', 'smashpro' ),
-		'description' => __( 'Organization, workbenches, storage, lighting, HVAC, security, networking, cleaning, and shop infrastructure inside a real multi-generational working garage.', 'smashpro' ),
-		'examples'    => __( 'Storage · HVAC · Security · Networking · Shop equipment', 'smashpro' ),
-	),
-	array(
-		'number'      => '02',
-		'title'       => __( 'Rebirth F-150', 'smashpro' ),
-		'description' => __( 'Diagnostics, batteries, electrical, tools, parts, maintenance, detailing, and upgrades documented through an active rebuild.', 'smashpro' ),
-		'examples'    => __( 'Automotive · Batteries · Diagnostics · Tools · Detailing', 'smashpro' ),
-	),
-	array(
-		'number'      => '03',
-		'title'       => __( 'Fleet + Equipment', 'smashpro' ),
-		'description' => __( 'Compact equipment, attachments, trailers, transport, maintenance, lighting, recovery gear, and accessories used in real operations.', 'smashpro' ),
-		'examples'    => __( 'Equipment · Attachments · Transport · Recovery · Maintenance', 'smashpro' ),
-	),
-	array(
-		'number'      => '04',
-		'title'       => __( 'Field Projects', 'smashpro' ),
-		'description' => __( 'Landscaping and property projects where products can move beyond an unboxing and prove themselves on an actual jobsite.', 'smashpro' ),
-		'examples'    => __( 'Outdoor power · PPE · Material handling · Landscape tools', 'smashpro' ),
-	),
-	array(
-		'number'      => '05',
-		'title'       => __( 'Connected Garage', 'smashpro' ),
-		'description' => __( 'Bringing a previously disconnected shop online for cameras, digital inventory, diagnostics, smart controls, and content production.', 'smashpro' ),
-		'examples'    => __( 'Wi-Fi bridge · Fiber · Access points · Cameras · Smart controls', 'smashpro' ),
-	),
-	array(
-		'number'      => '06',
-		'title'       => __( 'Shop Consumables', 'smashpro' ),
-		'description' => __( 'High-repeat products that naturally stay visible across episodes because they are genuinely used while the work is happening.', 'smashpro' ),
-		'examples'    => __( 'Shop towels · Hand wipes · Cleaners · Lubricants · Zero-sugar beverages', 'smashpro' ),
-	),
+	array( 'number' => '01', 'title' => __( 'Garage Legacy', 'smashpro' ), 'description' => __( 'Organization, workbenches, storage, lighting, HVAC, security, networking, cleaning, and shop infrastructure inside a real multi-generational working garage.', 'smashpro' ), 'examples' => __( 'Storage · HVAC · Security · Networking · Shop equipment', 'smashpro' ) ),
+	array( 'number' => '02', 'title' => __( 'Rebirth F-150', 'smashpro' ), 'description' => __( 'Diagnostics, batteries, electrical, tools, parts, maintenance, detailing, and upgrades documented through an active rebuild.', 'smashpro' ), 'examples' => __( 'Automotive · Batteries · Diagnostics · Tools · Detailing', 'smashpro' ) ),
+	array( 'number' => '03', 'title' => __( 'Fleet + Equipment', 'smashpro' ), 'description' => __( 'Compact equipment, attachments, trailers, transport, maintenance, lighting, recovery gear, and accessories used in real operations.', 'smashpro' ), 'examples' => __( 'Equipment · Attachments · Transport · Recovery · Maintenance', 'smashpro' ) ),
+	array( 'number' => '04', 'title' => __( 'Field Projects', 'smashpro' ), 'description' => __( 'Landscaping and property projects where products can move beyond an unboxing and prove themselves on an actual jobsite.', 'smashpro' ), 'examples' => __( 'Outdoor power · PPE · Material handling · Landscape tools', 'smashpro' ) ),
+	array( 'number' => '05', 'title' => __( 'Connected Garage', 'smashpro' ), 'description' => __( 'Bringing a previously disconnected shop online for cameras, digital inventory, diagnostics, smart controls, and content production.', 'smashpro' ), 'examples' => __( 'Wi-Fi bridge · Fiber · Access points · Cameras · Smart controls', 'smashpro' ) ),
+	array( 'number' => '06', 'title' => __( 'Shop Consumables', 'smashpro' ), 'description' => __( 'High-repeat products that naturally stay visible across episodes because they are genuinely used while the work is happening.', 'smashpro' ), 'examples' => __( 'Shop towels · Hand wipes · Cleaners · Lubricants · Zero-sugar beverages', 'smashpro' ) ),
 );
 
 $collaboration_formats = array(
-	array(
-		'title'       => __( 'Product Seeding', 'smashpro' ),
-		'description' => __( 'Send a product that fits an active project. We evaluate whether it belongs naturally in upcoming content.', 'smashpro' ),
-	),
-	array(
-		'title'       => __( 'Field Test Partnership', 'smashpro' ),
-		'description' => __( 'Build the product into a real Garage, vehicle, fleet, or field project and document installation, use, and follow-up.', 'smashpro' ),
-	),
-	array(
-		'title'       => __( 'Affiliate Partnership', 'smashpro' ),
-		'description' => __( 'Pair useful products with trackable links or codes after they earn a place in the SmashPro workflow.', 'smashpro' ),
-	),
-	array(
-		'title'       => __( 'Sponsored Campaign', 'smashpro' ),
-		'description' => __( 'Scope dedicated integrations, Shorts, project photography, web placement, or multi-platform campaigns around clear deliverables.', 'smashpro' ),
-	),
+	array( 'title' => __( 'Product Seeding', 'smashpro' ), 'description' => __( 'Send a product that fits an active project. We evaluate whether it belongs naturally in upcoming content.', 'smashpro' ) ),
+	array( 'title' => __( 'Field Test Partnership', 'smashpro' ), 'description' => __( 'Build the product into a real Garage, vehicle, fleet, or field project and document installation, use, and follow-up.', 'smashpro' ) ),
+	array( 'title' => __( 'Affiliate Partnership', 'smashpro' ), 'description' => __( 'Pair useful products with trackable links or codes after they earn a place in the SmashPro workflow.', 'smashpro' ) ),
+	array( 'title' => __( 'Sponsored Campaign', 'smashpro' ), 'description' => __( 'Scope dedicated integrations, Shorts, project photography, web placement, or multi-platform campaigns around clear deliverables.', 'smashpro' ) ),
 );
 
 $legacy_needs = array(
-	__( 'Garage organization', 'smashpro' ),
-	__( 'Tool + parts storage', 'smashpro' ),
-	__( 'Heating + cooling', 'smashpro' ),
-	__( 'Security + cameras', 'smashpro' ),
-	__( 'Internet + networking', 'smashpro' ),
-	__( 'Automotive + electrical', 'smashpro' ),
-	__( 'Lighting + power', 'smashpro' ),
-	__( 'Cleaning + consumables', 'smashpro' ),
+	__( 'Garage organization', 'smashpro' ), __( 'Tool + parts storage', 'smashpro' ), __( 'Heating + cooling', 'smashpro' ), __( 'Security + cameras', 'smashpro' ), __( 'Internet + networking', 'smashpro' ), __( 'Automotive + electrical', 'smashpro' ), __( 'Lighting + power', 'smashpro' ), __( 'Cleaning + consumables', 'smashpro' ),
+);
+
+$rebirth_images = array(
+	array( 'src' => get_template_directory_uri() . '/assets/images/media/rebirth-work-haul.webp', 'alt' => __( '2018 Ford F-150 hauling furniture before Project Rebirth.', 'smashpro' ), 'label' => __( 'Real work', 'smashpro' ), 'caption' => __( 'Years before Rebirth, the truck was already documented hauling furniture, equipment, and everyday loads.', 'smashpro' ) ),
+	array( 'src' => get_template_directory_uri() . '/assets/images/media/rebirth-tire-evolution.webp', 'alt' => __( '2018 Ford F-150 before and after its previous tire and leveling setup.', 'smashpro' ), 'label' => __( 'Build history', 'smashpro' ), 'caption' => __( 'A previous 2-inch level and 33×12.5 setup became an early chapter in the truck’s evolving stance.', 'smashpro' ) ),
+	array( 'src' => get_template_directory_uri() . '/assets/images/media/rebirth-trailer-use.webp', 'alt' => __( '2018 Ford F-150 towing an enclosed trailer before Project Rebirth.', 'smashpro' ), 'label' => __( 'Towing + utility', 'smashpro' ), 'caption' => __( 'The end goal is not a parking-lot showpiece. Rebirth must still support real towing, road, and work-truck use.', 'smashpro' ) ),
 );
 ?>
 <main id="main-content" class="sp-media-page">
 	<section class="sp-media-hero">
 		<div class="sp-container sp-media-hero__content">
 			<p class="sp-eyebrow"><?php esc_html_e( 'SmashPro Media + Partnerships', 'smashpro' ); ?></p>
-			<h1>
-				<?php esc_html_e( 'Watch the work.', 'smashpro' ); ?>
-				<span class="sp-media-hero__accent"><?php esc_html_e( 'Put products to work.', 'smashpro' ); ?></span>
-			</h1>
+			<h1><?php esc_html_e( 'Watch the work.', 'smashpro' ); ?><span class="sp-media-hero__accent"><?php esc_html_e( 'Put products to work.', 'smashpro' ); ?></span></h1>
 			<p class="sp-lead sp-media-hero__lead"><?php esc_html_e( 'SmashPro documents a multi-generational Garage, the Rebirth F-150, fleet development, and real field projects. Brand integrations happen where products are actually installed, used, tested, and revisited.', 'smashpro' ); ?></p>
-			<div class="sp-media-hero__actions">
-				<a class="sp-button sp-button--primary" href="#partnerships"><?php esc_html_e( 'Explore partnership lanes', 'smashpro' ); ?> <span aria-hidden="true">↓</span></a>
-				<a class="sp-button" href="#latest-work"><?php esc_html_e( 'Watch the latest work', 'smashpro' ); ?> <span aria-hidden="true">→</span></a>
-			</div>
+			<div class="sp-media-hero__actions"><a class="sp-button sp-button--primary" href="#partnerships"><?php esc_html_e( 'Explore partnership lanes', 'smashpro' ); ?> <span aria-hidden="true">↓</span></a><a class="sp-button" href="#rebirth"><?php esc_html_e( 'Explore Project Rebirth', 'smashpro' ); ?> <span aria-hidden="true">→</span></a></div>
 			<div class="sp-media-proof-strip" aria-label="<?php esc_attr_e( 'SmashPro partnership strengths', 'smashpro' ); ?>">
-				<div><strong><?php esc_html_e( 'Garage', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Install + organize', 'smashpro' ); ?></span></div>
-				<div><strong><?php esc_html_e( 'Vehicle', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Repair + rebuild', 'smashpro' ); ?></span></div>
-				<div><strong><?php esc_html_e( 'Jobsite', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Use + field test', 'smashpro' ); ?></span></div>
-				<div><strong><?php esc_html_e( 'SmashPro.app', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Evergreen project visibility', 'smashpro' ); ?></span></div>
+				<div><strong><?php esc_html_e( 'Garage', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Install + organize', 'smashpro' ); ?></span></div><div><strong><?php esc_html_e( 'Vehicle', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Repair + rebuild', 'smashpro' ); ?></span></div><div><strong><?php esc_html_e( 'Jobsite', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Use + field test', 'smashpro' ); ?></span></div><div><strong><?php esc_html_e( 'SmashPro.app', 'smashpro' ); ?></strong><span><?php esc_html_e( 'Evergreen project visibility', 'smashpro' ); ?></span></div>
 			</div>
 		</div>
 	</section>
 
 	<section class="sp-section sp-media-legacy" id="partnerships">
+		<div class="sp-container"><div class="sp-media-legacy__grid">
+			<div><p class="sp-eyebrow"><?php esc_html_e( 'Current flagship campaign', 'smashpro' ); ?></p><h2><?php esc_html_e( 'SmashPro Garage Legacy Project', 'smashpro' ); ?></h2><p class="sp-lead"><?php esc_html_e( 'Three generations. One working shop. The project preserves hands-on knowledge while rebuilding the space for the next generation.', 'smashpro' ); ?></p><p><?php esc_html_e( 'The Garage is more than a cleanup. We are bridging analog and digital: identifying old tools before they become “junk,” capturing family know-how on video, building a searchable warehouse-style tool registry, restoring project vehicles, and teaching the next generation both shop skills and content creation.', 'smashpro' ); ?></p><div class="sp-media-legacy__actions"><a class="sp-button sp-button--primary" href="https://youtu.be/ivpnMadLrbI" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Watch Garage Cleanup Part 1', 'smashpro' ); ?> <span aria-hidden="true">↗</span></a><a class="sp-button" href="https://youtu.be/wKeITaw6Ens" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Watch Rebirth Episode 1', 'smashpro' ); ?> <span aria-hidden="true">↗</span></a></div></div>
+			<aside class="sp-media-legacy__panel"><span class="sp-card__badge"><?php esc_html_e( 'Open collaboration opportunities', 'smashpro' ); ?></span><h3><?php esc_html_e( 'Help build the next version of the shop.', 'smashpro' ); ?></h3><div class="sp-media-chip-list"><?php foreach ( $legacy_needs as $need ) : ?><span><?php echo esc_html( $need ); ?></span><?php endforeach; ?></div><div class="sp-media-legacy__signal"><div><strong>3</strong><span><?php esc_html_e( 'generations', 'smashpro' ); ?></span></div><div><strong>1</strong><span><?php esc_html_e( 'working shop', 'smashpro' ); ?></span></div><div><strong>∞</strong><span><?php esc_html_e( 'stories worth preserving', 'smashpro' ); ?></span></div></div></aside>
+		</div></div>
+	</section>
+
+	<section class="sp-section sp-media-rebirth" id="rebirth" aria-labelledby="rebirth-title">
+		<style>
+			.sp-media-rebirth{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(5,15,11,.98),rgba(8,18,14,.96));border-top:1px solid rgba(34,197,94,.2);border-bottom:1px solid rgba(34,197,94,.2)}.sp-media-rebirth::before{content:"REBIRTH";position:absolute;right:-.04em;top:.1em;font-size:clamp(6rem,18vw,15rem);font-weight:900;line-height:.8;letter-spacing:-.07em;color:rgba(255,255,255,.025);pointer-events:none}.sp-media-rebirth__intro{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(18rem,.85fr);gap:clamp(2rem,6vw,5rem);align-items:end}.sp-media-rebirth__intro h2{margin:.35rem 0 1rem;font-size:clamp(2.6rem,6vw,5.6rem);line-height:.92;letter-spacing:-.045em}.sp-media-rebirth__intro h2 span{display:block;color:var(--sp-color-primary)}.sp-media-rebirth__intro .sp-lead{max-width:52rem}.sp-media-rebirth__specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;overflow:hidden;border:1px solid var(--sp-color-border);border-radius:var(--sp-radius-lg);background:var(--sp-color-border)}.sp-media-rebirth__specs div{display:grid;gap:.25rem;padding:1rem;background:rgba(3,18,12,.88)}.sp-media-rebirth__specs strong{color:#fff;font-size:1rem}.sp-media-rebirth__specs span{color:var(--sp-color-text-muted);font-size:.82rem}.sp-media-rebirth__timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.75rem;margin:clamp(2rem,5vw,3.5rem) 0}.sp-media-rebirth__timeline div{padding:1rem;border:1px solid var(--sp-color-border);border-radius:var(--sp-radius-md);background:rgba(255,255,255,.025)}.sp-media-rebirth__timeline strong{display:block;margin-bottom:.35rem;color:var(--sp-color-primary)}.sp-media-rebirth__timeline span{font-size:.84rem;color:var(--sp-color-text-muted)}.sp-media-rebirth__gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-space-4);margin-top:var(--sp-space-4)}.sp-media-rebirth__photo{margin:0;overflow:hidden;border:1px solid var(--sp-color-border);border-radius:var(--sp-radius-lg);background:rgba(255,255,255,.025);box-shadow:var(--sp-shadow-lg)}.sp-media-rebirth__photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.sp-media-rebirth__photo-body{padding:1rem 1.1rem 1.2rem}.sp-media-rebirth__photo-body strong{display:block;color:#fff}.sp-media-rebirth__photo-body p{margin:.45rem 0 0;color:var(--sp-color-text-muted);font-size:.9rem;line-height:1.55}.sp-media-rebirth__partner{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(18rem,.8fr);gap:var(--sp-space-5);align-items:center;margin-top:var(--sp-space-6);padding:clamp(1.5rem,4vw,2.5rem);border:1px solid rgba(34,197,94,.32);border-radius:var(--sp-radius-lg);background:linear-gradient(145deg,rgba(34,197,94,.08),rgba(255,255,255,.02))}.sp-media-rebirth__partner h3{margin:.25rem 0 .75rem}.sp-media-rebirth__partner p{margin:0;color:var(--sp-color-text-muted)}.sp-media-rebirth__partner .sp-media-chip-list{margin-top:1rem}.sp-media-rebirth__actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:flex-end}@media(max-width:64rem){.sp-media-rebirth__intro,.sp-media-rebirth__partner{grid-template-columns:1fr}.sp-media-rebirth__timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-media-rebirth__gallery{grid-template-columns:1fr}.sp-media-rebirth__actions{justify-content:flex-start}}@media(max-width:44rem){.sp-media-rebirth__specs,.sp-media-rebirth__timeline{grid-template-columns:1fr}.sp-media-rebirth__actions .sp-button{width:100%;justify-content:center;text-align:center}}
+		</style>
 		<div class="sp-container">
-			<div class="sp-media-legacy__grid">
-				<div>
-					<p class="sp-eyebrow"><?php esc_html_e( 'Current flagship campaign', 'smashpro' ); ?></p>
-					<h2><?php esc_html_e( 'SmashPro Garage Legacy Project', 'smashpro' ); ?></h2>
-					<p class="sp-lead"><?php esc_html_e( 'Three generations. One working shop. The project preserves hands-on knowledge while rebuilding the space for the next generation.', 'smashpro' ); ?></p>
-					<p><?php esc_html_e( 'The Garage is more than a cleanup. We are bridging analog and digital: identifying old tools before they become “junk,” capturing family know-how on video, building a searchable warehouse-style tool registry, restoring project vehicles, and teaching the next generation both shop skills and content creation.', 'smashpro' ); ?></p>
-					<div class="sp-media-legacy__actions">
-						<a class="sp-button sp-button--primary" href="https://youtu.be/ivpnMadLrbI" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Watch Garage Cleanup Part 1', 'smashpro' ); ?> <span aria-hidden="true">↗</span></a>
-						<a class="sp-button" href="https://youtu.be/wKeITaw6Ens" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Watch Rebirth Episode 1', 'smashpro' ); ?> <span aria-hidden="true">↗</span></a>
-					</div>
-				</div>
-				<aside class="sp-media-legacy__panel">
-					<span class="sp-card__badge"><?php esc_html_e( 'Open collaboration opportunities', 'smashpro' ); ?></span>
-					<h3><?php esc_html_e( 'Help build the next version of the shop.', 'smashpro' ); ?></h3>
-					<div class="sp-media-chip-list">
-						<?php foreach ( $legacy_needs as $need ) : ?>
-							<span><?php echo esc_html( $need ); ?></span>
-						<?php endforeach; ?>
-					</div>
-					<div class="sp-media-legacy__signal">
-						<div><strong>3</strong><span><?php esc_html_e( 'generations', 'smashpro' ); ?></span></div>
-						<div><strong>1</strong><span><?php esc_html_e( 'working shop', 'smashpro' ); ?></span></div>
-						<div><strong>∞</strong><span><?php esc_html_e( 'stories worth preserving', 'smashpro' ); ?></span></div>
-					</div>
-				</aside>
-			</div>
+			<div class="sp-media-rebirth__intro"><div><p class="sp-eyebrow"><?php esc_html_e( 'Partner-ready project dossier', 'smashpro' ); ?></p><h2 id="rebirth-title"><?php esc_html_e( '2018 F-150.', 'smashpro' ); ?><span><?php esc_html_e( 'Project Rebirth.', 'smashpro' ); ?></span></h2><p class="sp-lead"><?php esc_html_e( 'The truck spent years hauling, towing, traveling, and evolving before a timing-related engine failure took it off the road. Rebirth documents the recovery from disabled truck to modernized working build, one system at a time.', 'smashpro' ); ?></p></div><div class="sp-media-rebirth__specs" aria-label="<?php esc_attr_e( 'Rebirth project facts', 'smashpro' ); ?>"><div><strong>2018 Ford F-150</strong><span><?php esc_html_e( 'Original truck · documented since 2019', 'smashpro' ); ?></span></div><div><strong>3.5L EcoBoost</strong><span><?php esc_html_e( 'V6 retained for the build', 'smashpro' ); ?></span></div><div><strong>2WD</strong><span><?php esc_html_e( 'Fitment engineered around the actual platform', 'smashpro' ); ?></span></div><div><strong>≈14.7K</strong><span><?php esc_html_e( 'Combined creator ecosystem', 'smashpro' ); ?></span></div></div></div>
+			<div class="sp-media-rebirth__timeline" aria-label="<?php esc_attr_e( 'Rebirth project timeline', 'smashpro' ); ?>"><div><strong>2019</strong><span><?php esc_html_e( 'New truck, accessories, hauling, towing, and early content.', 'smashpro' ); ?></span></div><div><strong>2020–21</strong><span><?php esc_html_e( 'Furniture, donation, trailer, family, and utility use continued.', 'smashpro' ); ?></span></div><div><strong>2023</strong><span><?php esc_html_e( '2-inch level and 33×12.5 tire chapter documented.', 'smashpro' ); ?></span></div><div><strong>2025</strong><span><?php esc_html_e( 'Timing-related engine failure put the truck off the road.', 'smashpro' ); ?></span></div><div><strong>2026</strong><span><?php esc_html_e( 'Battery, diagnostics, mechanical recovery, then suspension, wheels, tires, and utility upgrades.', 'smashpro' ); ?></span></div></div>
+			<div class="sp-media-rebirth__gallery"><?php foreach ( $rebirth_images as $image ) : ?><figure class="sp-media-rebirth__photo"><img src="<?php echo esc_url( $image['src'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" loading="lazy" decoding="async"><figcaption class="sp-media-rebirth__photo-body"><strong><?php echo esc_html( $image['label'] ); ?></strong><p><?php echo esc_html( $image['caption'] ); ?></p></figcaption></figure><?php endforeach; ?></div>
+			<div class="sp-media-rebirth__partner"><div><p class="sp-eyebrow"><?php esc_html_e( 'How a partner fits', 'smashpro' ); ?></p><h3><?php esc_html_e( 'Product → fitment → installation → real use → content → follow-up.', 'smashpro' ); ?></h3><p><?php esc_html_e( 'Products are selected around genuine build needs. Final suspension, wheel offset, and tire sizing remain open until the complete geometry is confirmed, and concept visuals are treated as concepts rather than promised fitment.', 'smashpro' ); ?></p><div class="sp-media-chip-list"><span><?php esc_html_e( 'Battery + electrical', 'smashpro' ); ?></span><span><?php esc_html_e( 'Mechanical recovery', 'smashpro' ); ?></span><span><?php esc_html_e( 'Suspension', 'smashpro' ); ?></span><span><?php esc_html_e( 'Wheels + tires', 'smashpro' ); ?></span><span><?php esc_html_e( 'Storage', 'smashpro' ); ?></span><span><?php esc_html_e( 'Lighting + recovery', 'smashpro' ); ?></span><span><?php esc_html_e( 'Towing + utility', 'smashpro' ); ?></span><span><?php esc_html_e( 'Technology + security', 'smashpro' ); ?></span></div></div><div class="sp-media-rebirth__actions"><a class="sp-button sp-button--primary" href="https://youtu.be/wKeITaw6Ens" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Watch Episode 1', 'smashpro' ); ?> <span aria-hidden="true">↗</span></a><a class="sp-button" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Discuss Rebirth', 'smashpro' ); ?></a></div></div>
 		</div>
 	</section>
 
-	<section class="sp-section sp-bg-soft">
-		<div class="sp-container">
-			<header class="sp-section-title sp-media-section-title">
-				<p class="sp-eyebrow"><?php esc_html_e( 'Where brands fit', 'smashpro' ); ?></p>
-				<h2><?php esc_html_e( 'Six lanes. Real integration opportunities.', 'smashpro' ); ?></h2>
-				<p class="sp-text-muted"><?php esc_html_e( 'We match products to projects instead of forcing every partner into the same generic review format.', 'smashpro' ); ?></p>
-			</header>
-			<div class="sp-media-lane-grid">
-				<?php foreach ( $partnership_lanes as $lane ) : ?>
-					<article class="sp-card sp-media-lane-card">
-						<div class="sp-card__body">
-							<div class="sp-media-lane-card__top"><span class="sp-media-lane-card__number"><?php echo esc_html( $lane['number'] ); ?></span><span class="sp-media-open-dot"><?php esc_html_e( 'Open', 'smashpro' ); ?></span></div>
-							<h3><?php echo esc_html( $lane['title'] ); ?></h3>
-							<p><?php echo esc_html( $lane['description'] ); ?></p>
-							<p class="sp-media-lane-card__examples"><?php echo esc_html( $lane['examples'] ); ?></p>
-						</div>
-					</article>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
+	<section class="sp-section sp-bg-soft"><div class="sp-container"><header class="sp-section-title sp-media-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Where brands fit', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Six lanes. Real integration opportunities.', 'smashpro' ); ?></h2><p class="sp-text-muted"><?php esc_html_e( 'We match products to projects instead of forcing every partner into the same generic review format.', 'smashpro' ); ?></p></header><div class="sp-media-lane-grid"><?php foreach ( $partnership_lanes as $lane ) : ?><article class="sp-card sp-media-lane-card"><div class="sp-card__body"><div class="sp-media-lane-card__top"><span class="sp-media-lane-card__number"><?php echo esc_html( $lane['number'] ); ?></span><span class="sp-media-open-dot"><?php esc_html_e( 'Open', 'smashpro' ); ?></span></div><h3><?php echo esc_html( $lane['title'] ); ?></h3><p><?php echo esc_html( $lane['description'] ); ?></p><p class="sp-media-lane-card__examples"><?php echo esc_html( $lane['examples'] ); ?></p></div></article><?php endforeach; ?></div></div></section>
 
-	<section class="sp-section"><div class="sp-container"><header class="sp-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Official channels', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Two channels. One connected platform.', 'smashpro' ); ?></h2></header><div class="sp-grid sp-grid--2 sp-channel-grid">
-		<?php foreach ( $channels as $key => $channel ) : ?>
-			<article class="sp-card sp-channel-card sp-channel-card--<?php echo esc_attr( $key ); ?>"><div class="sp-card__body"><span class="sp-card__badge"><?php echo esc_html( $channel['label'] ); ?></span><h2><?php echo esc_html( $channel['name'] ); ?></h2><p class="sp-lead sp-text-muted"><?php echo esc_html( $channel['description'] ); ?></p><a class="sp-button sp-button--primary" href="<?php echo esc_url( $channel['url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( sprintf( __( 'Visit %s', 'smashpro' ), $channel['name'] ) ); ?> <span aria-hidden="true">→</span></a></div></article>
-		<?php endforeach; ?>
-	</div></div></section>
+	<section class="sp-section"><div class="sp-container"><header class="sp-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Official channels', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Two channels. One connected platform.', 'smashpro' ); ?></h2></header><div class="sp-grid sp-grid--2 sp-channel-grid"><?php foreach ( $channels as $key => $channel ) : ?><article class="sp-card sp-channel-card sp-channel-card--<?php echo esc_attr( $key ); ?>"><div class="sp-card__body"><span class="sp-card__badge"><?php echo esc_html( $channel['label'] ); ?></span><h2><?php echo esc_html( $channel['name'] ); ?></h2><p class="sp-lead sp-text-muted"><?php echo esc_html( $channel['description'] ); ?></p><a class="sp-button sp-button--primary" href="<?php echo esc_url( $channel['url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( sprintf( __( 'Visit %s', 'smashpro' ), $channel['name'] ) ); ?> <span aria-hidden="true">→</span></a></div></article><?php endforeach; ?></div></div></section>
 
 	<section class="sp-section sp-bg-soft" id="latest-work"><div class="sp-container"><header class="sp-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Latest videos', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Proof of work, not studio demos.', 'smashpro' ); ?></h2><p class="sp-text-muted"><?php esc_html_e( 'Projects create the context. Products earn their place inside the work.', 'smashpro' ); ?></p></header><?php get_template_part( 'components/latest-videos' ); ?></div></section>
 
-	<section class="sp-section">
-		<div class="sp-container">
-			<header class="sp-section-title sp-media-section-title">
-				<p class="sp-eyebrow"><?php esc_html_e( 'Ways to collaborate', 'smashpro' ); ?></p>
-				<h2><?php esc_html_e( 'Start with the relationship that fits.', 'smashpro' ); ?></h2>
-			</header>
-			<div class="sp-grid sp-grid--2 sp-media-collab-grid">
-				<?php foreach ( $collaboration_formats as $format ) : ?>
-					<article class="sp-card sp-media-collab-card"><div class="sp-card__body"><h3><?php echo esc_html( $format['title'] ); ?></h3><p><?php echo esc_html( $format['description'] ); ?></p></div></article>
-				<?php endforeach; ?>
-			</div>
-			<div class="sp-media-deliverables">
-				<div>
-					<p class="sp-eyebrow"><?php esc_html_e( 'Potential deliverables', 'smashpro' ); ?></p>
-					<h3><?php esc_html_e( 'Content that keeps working after publish day.', 'smashpro' ); ?></h3>
-				</div>
-				<ul>
-					<li><?php esc_html_e( 'Long-form YouTube integration', 'smashpro' ); ?></li>
-					<li><?php esc_html_e( 'Short-form video', 'smashpro' ); ?></li>
-					<li><?php esc_html_e( 'Installation + real-use documentation', 'smashpro' ); ?></li>
-					<li><?php esc_html_e( 'SmashPro.app project visibility', 'smashpro' ); ?></li>
-					<li><?php esc_html_e( 'Project photography', 'smashpro' ); ?></li>
-					<li><?php esc_html_e( '30 / 90-day follow-up', 'smashpro' ); ?></li>
-				</ul>
-			</div>
-			<p class="sp-media-disclosure"><?php esc_html_e( 'Collaborations are scoped individually. Product consideration does not guarantee coverage, a positive review, or specific performance metrics.', 'smashpro' ); ?></p>
-		</div>
-	</section>
+	<section class="sp-section"><div class="sp-container"><header class="sp-section-title sp-media-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Ways to collaborate', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Start with the relationship that fits.', 'smashpro' ); ?></h2></header><div class="sp-grid sp-grid--2 sp-media-collab-grid"><?php foreach ( $collaboration_formats as $format ) : ?><article class="sp-card sp-media-collab-card"><div class="sp-card__body"><h3><?php echo esc_html( $format['title'] ); ?></h3><p><?php echo esc_html( $format['description'] ); ?></p></div></article><?php endforeach; ?></div><div class="sp-media-deliverables"><div><p class="sp-eyebrow"><?php esc_html_e( 'Potential deliverables', 'smashpro' ); ?></p><h3><?php esc_html_e( 'Content that keeps working after publish day.', 'smashpro' ); ?></h3></div><ul><li><?php esc_html_e( 'Long-form YouTube integration', 'smashpro' ); ?></li><li><?php esc_html_e( 'Short-form video', 'smashpro' ); ?></li><li><?php esc_html_e( 'Installation + real-use documentation', 'smashpro' ); ?></li><li><?php esc_html_e( 'SmashPro.app project visibility', 'smashpro' ); ?></li><li><?php esc_html_e( 'Project photography', 'smashpro' ); ?></li><li><?php esc_html_e( '30 / 90-day follow-up', 'smashpro' ); ?></li></ul></div><p class="sp-media-disclosure"><?php esc_html_e( 'Collaborations are scoped individually. Product consideration does not guarantee coverage, a positive review, or specific performance metrics.', 'smashpro' ); ?></p></div></section>
 
-	<section class="sp-section sp-bg-soft"><div class="sp-container"><header class="sp-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Explore by playlist', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Follow every project thread.', 'smashpro' ); ?></h2></header><div class="sp-grid sp-grid--2">
-		<article class="sp-card"><div class="sp-card__body"><h3>SmashProHQ</h3><ul class="sp-media-list"><li><?php esc_html_e( 'Fleet Equipment Reviews', 'smashpro' ); ?></li><li><?php esc_html_e( 'Home Services Projects', 'smashpro' ); ?></li><li><?php esc_html_e( 'Landscaping', 'smashpro' ); ?></li><li><?php esc_html_e( 'Customer Transformations', 'smashpro' ); ?></li><li><?php esc_html_e( 'Business Behind the Scenes', 'smashpro' ); ?></li><li><?php esc_html_e( 'Equipment Upgrades', 'smashpro' ); ?></li></ul></div></article>
-		<article class="sp-card"><div class="sp-card__body"><h3>Smash_F150XLT</h3><ul class="sp-media-list"><li><?php esc_html_e( 'Garage Legacy Project', 'smashpro' ); ?></li><li><?php esc_html_e( 'Project Rebirth', 'smashpro' ); ?></li><li><?php esc_html_e( 'Diagnostics', 'smashpro' ); ?></li><li><?php esc_html_e( 'Maintenance + Repairs', 'smashpro' ); ?></li><li><?php esc_html_e( 'Tool + Product Reviews', 'smashpro' ); ?></li><li><?php esc_html_e( 'Build Updates', 'smashpro' ); ?></li></ul></div></article>
-	</div></div></section>
+	<section class="sp-section sp-bg-soft"><div class="sp-container"><header class="sp-section-title"><p class="sp-eyebrow"><?php esc_html_e( 'Explore by playlist', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Follow every project thread.', 'smashpro' ); ?></h2></header><div class="sp-grid sp-grid--2"><article class="sp-card"><div class="sp-card__body"><h3>SmashProHQ</h3><ul class="sp-media-list"><li><?php esc_html_e( 'Fleet Equipment Reviews', 'smashpro' ); ?></li><li><?php esc_html_e( 'Home Services Projects', 'smashpro' ); ?></li><li><?php esc_html_e( 'Landscaping', 'smashpro' ); ?></li><li><?php esc_html_e( 'Customer Transformations', 'smashpro' ); ?></li><li><?php esc_html_e( 'Business Behind the Scenes', 'smashpro' ); ?></li><li><?php esc_html_e( 'Equipment Upgrades', 'smashpro' ); ?></li></ul></div></article><article class="sp-card"><div class="sp-card__body"><h3>Smash_F150XLT</h3><ul class="sp-media-list"><li><?php esc_html_e( 'Garage Legacy Project', 'smashpro' ); ?></li><li><?php esc_html_e( 'Project Rebirth', 'smashpro' ); ?></li><li><?php esc_html_e( 'Diagnostics', 'smashpro' ); ?></li><li><?php esc_html_e( 'Maintenance + Repairs', 'smashpro' ); ?></li><li><?php esc_html_e( 'Tool + Product Reviews', 'smashpro' ); ?></li><li><?php esc_html_e( 'Build Updates', 'smashpro' ); ?></li></ul></div></article></div></div></section>
 
-	<section class="sp-section sp-media-partner-cta">
-		<div class="sp-container">
-			<div class="sp-media-partner-cta__panel">
-				<div>
-					<p class="sp-eyebrow"><?php esc_html_e( 'Brand partnerships', 'smashpro' ); ?></p>
-					<h2><?php esc_html_e( 'Have a product that belongs in the story?', 'smashpro' ); ?></h2>
-					<p><?php esc_html_e( 'Tell us what you make and where you think it fits. If there is a genuine project match, we can build a collaboration around real use instead of a forced placement.', 'smashpro' ); ?></p>
-				</div>
-				<div class="sp-media-partner-cta__actions">
-					<a class="sp-button sp-button--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Start a partnership conversation', 'smashpro' ); ?> <span aria-hidden="true">→</span></a>
-					<a class="sp-button" href="#latest-work"><?php esc_html_e( 'See the work first', 'smashpro' ); ?></a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<section class="sp-section sp-media-partner-cta"><div class="sp-container"><div class="sp-media-partner-cta__panel"><div><p class="sp-eyebrow"><?php esc_html_e( 'Brand partnerships', 'smashpro' ); ?></p><h2><?php esc_html_e( 'Have a product that belongs in the story?', 'smashpro' ); ?></h2><p><?php esc_html_e( 'Tell us what you make and where you think it fits. If there is a genuine project match, we can build a collaboration around real use instead of a forced placement.', 'smashpro' ); ?></p></div><div class="sp-media-partner-cta__actions"><a class="sp-button sp-button--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Start a partnership conversation', 'smashpro' ); ?> <span aria-hidden="true">→</span></a><a class="sp-button" href="#latest-work"><?php esc_html_e( 'See the work first', 'smashpro' ); ?></a></div></div></div></section>
 </main>
 <?php get_footer(); ?>
