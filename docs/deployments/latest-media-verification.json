@@ -1,11 +1,11 @@
 {
   "workflow": "Verify SmashPro Media Production",
-  "run_id": 32914313574,
-  "run_number": 3,
-  "source_sha": "b35442b45232cb938afd1dad44ffc6fcc82ef4db",
+  "run_id": 32914928137,
+  "run_number": 4,
+  "source_sha": "2a606f9e7039b63868ad92a23fbf9e64a56dde13",
   "branch": "main",
-  "verification": "success",
-  "production_url": "https://smashpro.app/media/",
-  "completed_at": "2026-08-26T00:15:39.941Z",
-  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32914313574"
+  "verification": "failure",
+  "production_url": "https://smashpro.app/media/#rebirth",
+  "completed_at": "2026-08-26T00:24:17.339Z",
+  "run_url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/32914928137"
 }
