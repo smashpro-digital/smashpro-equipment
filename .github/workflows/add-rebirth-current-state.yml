@@ -1,0 +1,50 @@
+name: Add Rebirth Current State
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/add-rebirth-current-state.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add current-state story block
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('deploy/smashpro-theme/page-media.php')
+          s = p.read_text()
+          if 'rebirth-current-front.webp' not in s:
+              css_marker = '.sp-media-rebirth__vision{'
+              current_css = '.sp-media-rebirth__current{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(16rem,.65fr);gap:var(--sp-space-5);align-items:center;margin-top:clamp(2rem,5vw,3.5rem);padding:clamp(1rem,3vw,1.5rem);border:1px solid rgba(255,255,255,.1);border-radius:var(--sp-radius-lg);background:rgba(255,255,255,.025)}.sp-media-rebirth__current figure{margin:0;overflow:hidden;border-radius:calc(var(--sp-radius-lg) - .25rem)}.sp-media-rebirth__current img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.sp-media-rebirth__current-copy h3{margin:.25rem 0 .6rem;font-size:clamp(1.6rem,3vw,2.35rem)}.sp-media-rebirth__current-copy p{margin:0;color:var(--sp-color-text-muted);line-height:1.65}.sp-media-rebirth__current-copy strong{color:#fff}.sp-media-rebirth__current-tag{display:inline-block;margin-bottom:.35rem;color:var(--sp-color-primary);font-size:.76rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}'
+              s = s.replace(css_marker, current_css + css_marker, 1)
+              s = s.replace('@media(max-width:50rem){', '@media(max-width:58rem){.sp-media-rebirth__current{grid-template-columns:1fr}}@media(max-width:50rem){', 1)
+              marker = '\t\t\t<div class="sp-media-rebirth__vision"'
+              block = '''\t\t\t<div class="sp-media-rebirth__current" aria-labelledby="rebirth-current-title">\n\t\t\t\t<figure><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/media/rebirth-current-front.webp' ); ?>" alt="<?php esc_attr_e( 'Project Rebirth F-150 covered and waiting in the woods before mechanical recovery.', 'smashpro' ); ?>" loading="lazy"></figure>\n\t\t\t\t<div class="sp-media-rebirth__current-copy"><span class="sp-media-rebirth__current-tag"><?php esc_html_e( 'Current state · 2026', 'smashpro' ); ?></span><h3 id="rebirth-current-title"><?php esc_html_e( 'Covered. Down. Not done.', 'smashpro' ); ?></h3><p><?php esc_html_e( 'After the engine/timing failure, the F-150 spent months parked and protected while the recovery plan came together. Project Rebirth is the documented path from this moment back to a dependable working truck, then beyond it.', 'smashpro' ); ?></p></div>\n\t\t\t</div>\n\n'''
+              if marker not in s:
+                  raise SystemExit('Rebirth Vision marker not found')
+              s = s.replace(marker, block + marker, 1)
+              p.write_text(s)
+      - name: Validate and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -l deploy/smashpro-theme/page-media.php
+          test -f deploy/smashpro-theme/assets/images/media/rebirth-current-front.webp
+          grep -Fq 'Covered. Down. Not done.' deploy/smashpro-theme/page-media.php
+          grep -Fq 'rebirth-current-front.webp' deploy/smashpro-theme/page-media.php
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy/smashpro-theme/page-media.php
+          git rm -f .github/workflows/add-rebirth-current-state.yml
+          git commit -m "feat(media): show Rebirth current state"
+          git push origin HEAD:main
