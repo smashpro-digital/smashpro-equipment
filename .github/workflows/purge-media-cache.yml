@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
     paths:
+      - "deploy/smashpro-theme/page-media.php"
+      - "deploy/smashpro-theme/assets/css/media.css"
+      - "deploy/smashpro-theme/assets/images/media/**"
       - ".github/workflows/purge-media-cache.yml"
   workflow_dispatch:
 
@@ -16,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://smashpro.app/media/
+      url: https://smashpro.app/media/#rebirth
     steps:
       - name: Delete only cached media page files
         env:
@@ -43,25 +46,28 @@ jobs:
                       raise
           ftp.quit()
 
-      - name: Warm and verify normal media URL
+      - name: Warm and verify Rebirth media URL
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+          curl --fail --silent --show-error --location --retry 8 --retry-delay 5 \
             'https://smashpro.app/media/' --output /tmp/media-warm.html
           grep -Fq 'SmashPro Media + Partnerships' /tmp/media-warm.html
-          grep -Fq 'Put products to work.' /tmp/media-warm.html
-          grep -Fq 'SmashPro Garage Legacy Project' /tmp/media-warm.html
-          ! grep -Fq 'Real equipment. Real projects. Real repairs. Real results.' /tmp/media-warm.html
+          grep -Fq 'Project Rebirth' /tmp/media-warm.html
+          grep -Fq 'From working truck to Rebirth.' /tmp/media-warm.html
+          grep -Fq 'rebirth-work-haul.webp' /tmp/media-warm.html
+          grep -Fq 'rebirth-tire-evolution.webp' /tmp/media-warm.html
+          grep -Fq 'rebirth-trailer-use.webp' /tmp/media-warm.html
 
-          sleep 2
-          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+          sleep 3
+          curl --fail --silent --show-error --location --retry 8 --retry-delay 5 \
             --dump-header /tmp/media-normal.headers \
             'https://smashpro.app/media/' --output /tmp/media-normal.html
-          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-normal.html
-          grep -Fq 'Put products to work.' /tmp/media-normal.html
-          grep -Fq 'SmashPro Garage Legacy Project' /tmp/media-normal.html
-          ! grep -Fq 'Real equipment. Real projects. Real repairs. Real results.' /tmp/media-normal.html
+          grep -Fq 'id="rebirth"' /tmp/media-normal.html
+          grep -Fq 'From working truck to Rebirth.' /tmp/media-normal.html
+          grep -Fq 'Real work' /tmp/media-normal.html
+          grep -Fq 'Build history' /tmp/media-normal.html
+          grep -Fq 'Towing + utility' /tmp/media-normal.html
           echo '--- normal response cache headers after purge ---'
           grep -Ei '^(cache-control|age|etag|last-modified|server|x-cache|cf-cache-status|x-litespeed-cache):' /tmp/media-normal.headers || true
 
@@ -85,7 +91,7 @@ jobs:
               source_sha: context.sha,
               branch,
               purge: process.env.PURGE_RESULT,
-              production_url: 'https://smashpro.app/media/',
+              production_url: 'https://smashpro.app/media/#rebirth',
               completed_at: new Date().toISOString(),
               run_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
             };
