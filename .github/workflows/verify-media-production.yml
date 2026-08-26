@@ -6,6 +6,7 @@ on:
     paths:
       - "deploy/smashpro-theme/page-media.php"
       - "deploy/smashpro-theme/assets/css/media.css"
+      - "deploy/smashpro-theme/assets/images/media/**"
       - ".github/workflows/verify-media-production.yml"
   workflow_dispatch:
 
@@ -22,25 +23,39 @@ jobs:
         run: |
           set -euo pipefail
           stamp=$(date +%s)
-          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+          curl --fail --silent --show-error --location --retry 8 --retry-delay 5 \
             --header 'Cache-Control: no-cache' \
             "https://smashpro.app/wp-content/themes/smashpro/assets/css/media.css?deploy_check=${stamp}" \
             --output /tmp/media.css
-          grep -Fq '.sp-media-lane-grid' /tmp/media.css
-          grep -Fq '.sp-media-partner-cta' /tmp/media.css
+          grep -Fq '.sp-media-rebirth' /tmp/media.css
+          grep -Fq '.sp-media-rebirth__gallery' /tmp/media.css
+          grep -Fq '.sp-media-rebirth__timeline' /tmp/media.css
 
-      - name: Diagnose normal and cache-busted media page
+      - name: Verify Rebirth media assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp=$(date +%s)
+          for asset in rebirth-work-haul.webp rebirth-tire-evolution.webp rebirth-trailer-use.webp; do
+            curl --fail --silent --show-error --location --retry 8 --retry-delay 5 \
+              --header 'Cache-Control: no-cache' \
+              "https://smashpro.app/wp-content/themes/smashpro/assets/images/media/${asset}?deploy_check=${stamp}" \
+              --output "/tmp/${asset}"
+            test -s "/tmp/${asset}"
+          done
+
+      - name: Verify live Rebirth dossier
         shell: bash
         run: |
           set -euo pipefail
           stamp=$(date +%s)
 
-          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+          curl --fail --silent --show-error --location --retry 8 --retry-delay 5 \
             --dump-header /tmp/media-normal.headers \
             'https://smashpro.app/media/' \
             --output /tmp/media-normal.html
 
-          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+          curl --fail --silent --show-error --location --retry 8 --retry-delay 5 \
             --header 'Cache-Control: no-cache' \
             --header 'Pragma: no-cache' \
             --dump-header /tmp/media-busted.headers \
@@ -52,28 +67,15 @@ jobs:
           echo '--- cache-busted response cache headers ---'
           grep -Ei '^(cache-control|age|etag|last-modified|server|x-cache|cf-cache-status|x-litespeed-cache):' /tmp/media-busted.headers || true
 
-          normal_new=0
-          busted_new=0
-          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-normal.html && normal_new=1 || true
-          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-busted.html && busted_new=1 || true
-
-          echo "normal_has_new_template=${normal_new}"
-          echo "cache_busted_has_new_template=${busted_new}"
-
-          if grep -Fq 'Real equipment. Real projects. Real repairs. Real results.' /tmp/media-normal.html; then
-            echo 'normal_has_old_template=1'
-          else
-            echo 'normal_has_old_template=0'
-          fi
-          if grep -Fq 'Real equipment. Real projects. Real repairs. Real results.' /tmp/media-busted.html; then
-            echo 'cache_busted_has_old_template=1'
-          else
-            echo 'cache_busted_has_old_template=0'
-          fi
-
-          grep -Fq 'SmashPro Media + Partnerships' /tmp/media-busted.html
-          grep -Fq 'Put products to work.' /tmp/media-busted.html
-          grep -Fq 'SmashPro Garage Legacy Project' /tmp/media-busted.html
+          for page in /tmp/media-normal.html /tmp/media-busted.html; do
+            grep -Fq 'SmashPro Media + Partnerships' "$page"
+            grep -Fq 'id="rebirth"' "$page"
+            grep -Fq 'From working truck to Rebirth.' "$page"
+            grep -Fq 'rebirth-work-haul.webp' "$page"
+            grep -Fq 'rebirth-tire-evolution.webp' "$page"
+            grep -Fq 'rebirth-trailer-use.webp' "$page"
+            grep -Fq 'Watch Rebirth Episode 1' "$page"
+          done
 
   report:
     name: Record media verification outcome
@@ -96,7 +98,7 @@ jobs:
               source_sha: context.sha,
               branch,
               verification: process.env.VERIFY_RESULT,
-              production_url: 'https://smashpro.app/media/',
+              production_url: 'https://smashpro.app/media/#rebirth',
               completed_at: new Date().toISOString(),
               run_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
             };
