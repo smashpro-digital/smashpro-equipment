@@ -1,0 +1,56 @@
+name: Pull Production Quote Source
+
+on:
+  push:
+    branches: [quote-source-sync]
+    paths:
+      - '.github/workflows/pull-quote-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pull-quote-source:
+    name: Pull app/quote.php from production
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Verify required FTP settings
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_PORT; do
+            test -n "${!name:-}" || { echo "::error::Missing $name"; exit 1; }
+          done
+
+      - name: Download only app/quote.php
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p pulled/app
+          curl --fail --silent --show-error \
+            --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$FTP_SERVER:$FTP_PORT/public_html/smashpro.app/app/quote.php" \
+            --output pulled/app/quote.php
+          test -s pulled/app/quote.php
+          php -l pulled/app/quote.php
+
+      - name: Upload selective source artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-quote-source
+          path: pulled/app/quote.php
+          if-no-files-found: error
+          retention-days: 1
