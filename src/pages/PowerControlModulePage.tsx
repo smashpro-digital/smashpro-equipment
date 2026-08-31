@@ -2,10 +2,10 @@ import { ButtonLink } from "../components/ButtonLink";
 import { PageFrame } from "../components/PageFrame";
 
 const stages = [
-  ["01", "Problem", "Project Rebirth needed a cleaner way to isolate, monitor and distribute battery power without scattering high-current hardware around the engine bay."],
-  ["02", "Cardboard fitment", "A full-scale cardboard mockup established the available footprint, battery service clearance, cable approach and the first enclosure geometry."],
+  ["01", "Battery disconnect need", "Project Rebirth needed a reliable battery disconnect switch. That practical requirement became the starting point for the entire SP-PCM-001 system."],
+  ["02", "Custom battery box", "Packaging the disconnect cleanly around the F-150 battery led to a full-scale cardboard mockup and then a purpose-built enclosure with real service-clearance constraints."],
   ["03", "HDPE fabrication", "The enclosure moved into black HDPE with a removable top and deliberate terminal-side contours around the battery-post areas."],
-  ["04", "Electrical integration", "The ML-RBS remote battery switch, local voltage monitoring and high-current distribution architecture are packaged as one serviceable module."],
+  ["04", "PCM integration", "The battery box evolved into SP-PCM-001 as the ML-RBS remote battery switch, local voltage monitoring and high-current distribution architecture were packaged together."],
   ["05", "Vehicle proof", "Prototype P001 will be installed and tested on the 2018 F-150 before any production claim, compatibility promise or retail release."],
   ["06", "Catalog decision", "Field results, serviceability and repeatability will determine whether the prototype evolves into a future SmashPro product or vehicle-specific kit."],
 ];
@@ -40,13 +40,13 @@ export function PowerControlModulePage() {
           <div className="pcm-shell pcm-hero__inner">
             <div>
               <p className="pcm-kicker">SmashPro Garage · Project Rebirth · Product Development</p>
-              <h1>WE NEEDED A BATTERY BOX.<span>SO WE BUILT A POWER SYSTEM.</span></h1>
-              <p className="pcm-lead">SP-PCM-001 began as a packaging problem inside a 2018 Ford F-150. The answer is becoming a documented Power Control Module that brings battery isolation, voltage monitoring, high-current distribution and serviceability into one purpose-built enclosure.</p>
+              <h1>WE NEEDED A BATTERY DISCONNECT SWITCH.<span>SO WE BUILT A CUSTOM BATTERY BOX + PCM.</span></h1>
+              <p className="pcm-lead">Project Rebirth started with one practical need: a battery disconnect switch. Packaging that switch correctly led us to design a custom battery box, and that enclosure evolved into SP-PCM-001, a Power Control Module combining isolation, voltage monitoring, high-current distribution and serviceability in one purpose-built system.</p>
               <div className="pcm-actions"><ButtonLink href="#origin">Follow the prototype</ButtonLink><ButtonLink href="#partners" variant="outline">Explore partner lanes</ButtonLink></div>
             </div>
             <div className="pcm-module" role="img" aria-label="Conceptual front view of the SP-PCM-001 Rebirth Power Control Module">
               <span className="pcm-badge">PROTOTYPE P001</span>
-              <div className="pcm-nameplate">REBIRTH<small>POWER CONTROL MODULE</small></div>
+              <div className="pcm-nameplate">SP-PCM-001<small>POWER CONTROL MODULE</small></div>
               <div className="pcm-switch">ML-RBS 7700<div className="pcm-knob" /></div>
               <div className="pcm-meter">12.5</div>
               <span className="pcm-note">Concept visualization · final packaging subject to prototype verification</span>
@@ -56,7 +56,7 @@ export function PowerControlModulePage() {
 
         <section className="pcm-section"><div className="pcm-shell"><div className="pcm-stats"><div className="pcm-stat"><strong>SP-PCM-001</strong><span>Permanent product / engineering ID</span></div><div className="pcm-stat"><strong>REV A</strong><span>Current prototype development revision</span></div><div className="pcm-stat"><strong>12V</strong><span>Initial Rebirth vehicle electrical system</span></div><div className="pcm-stat"><strong>NOT FOR SALE</strong><span>Prototype / in construction</span></div></div></div></section>
 
-        <section className="pcm-section" id="origin"><div className="pcm-shell pcm-origin"><div><p className="pcm-kicker">The origin story</p><h2>Watch a product get invented.</h2><p className="pcm-lead">The cardboard is part of the product history. So are the measurements, awkward clearances, revised cuts and decisions that survive vehicle testing. SP-PCM-001 is being documented from prototype forward so a future buyer can trace the finished product back to the real problem that created it.</p><div className="pcm-flow"><span>Problem</span><i>→</i><span>Prototype</span><i>→</i><span>Field Test</span><i>→</i><span>Revision</span><i>→</i><span>Catalog Decision</span></div></div><div className="pcm-timeline">{stages.map(([number,title,detail])=><article className="pcm-step" key={number}><b>{number}</b><h3>{title}</h3><p>{detail}</p></article>)}</div></div></section>
+        <section className="pcm-section" id="origin"><div className="pcm-shell pcm-origin"><div><p className="pcm-kicker">The origin story</p><h2>A disconnect switch became a product-development project.</h2><p className="pcm-lead">We did not start out trying to invent a catalog product. We needed a better way to disconnect the Rebirth battery. Solving the placement, protection and serviceability problem pushed us toward a custom enclosure. Once monitoring and high-current distribution joined the switch, the battery box became SP-PCM-001. The cardboard, measurements, revised cuts and field decisions are all part of that origin story.</p><div className="pcm-flow"><span>Disconnect need</span><i>→</i><span>Battery box</span><i>→</i><span>PCM</span><i>→</i><span>Field Test</span><i>→</i><span>Catalog Decision</span></div></div><div className="pcm-timeline">{stages.map(([number,title,detail])=><article className="pcm-step" key={number}><b>{number}</b><h3>{title}</h3><p>{detail}</p></article>)}</div></div></section>
 
         <section className="pcm-section"><div className="pcm-shell"><div className="pcm-section__head"><p className="pcm-kicker">Rev A architecture</p><h2>Protection, monitoring and control in one serviceable package.</h2><p className="pcm-lead">The module is being engineered around the actual Rebirth installation. Cable bend radius, battery service access, terminal protection and manual switch access outrank visual symmetry.</p></div><div className="pcm-gridcards">{architecture.map(([title,detail])=><article className="pcm-card" key={title}><small>{title}</small><p>{detail}</p></article>)}</div><div className="pcm-warning"><strong>Engineering status:</strong> component ratings are not completed-module certifications. Final cable sizes, fuse strategy, control wiring, dimensions and vehicle compatibility remain subject to physical verification and documented revision.</div></div></section>
 
@@ -64,7 +64,7 @@ export function PowerControlModulePage() {
 
         <section className="pcm-section" id="partners"><div className="pcm-shell"><div className="pcm-section__head"><p className="pcm-kicker">Partner opportunities</p><h2>Help engineer a meaningful piece of the system.</h2><p className="pcm-lead">This is not a logo-wall build. A partner product should solve a real engineering, fabrication or validation problem and remain visible through installation, testing and long-term use.</p></div><div className="pcm-gridcards">{partnerLanes.map(([title,detail])=><article className="pcm-card" key={title}><small>{title}</small><p>{detail}</p><span className="pcm-status">Partner lane</span></article>)}</div><p className="pcm-disclosure">Product consideration does not guarantee coverage, positive review, production adoption, fixed views or audience performance. Any future retail product remains contingent on engineering validation, sourcing, compliance and production readiness.</p></div></section>
 
-        <section className="pcm-cta"><div className="pcm-shell pcm-cta__panel"><div><p className="pcm-kicker">Prototype → proof → product</p><h2>When the catalog entry arrives, the backstory is already here.</h2><p className="pcm-lead">This page is the permanent origin record for SP-PCM-001. If the module graduates into a sellable SmashPro product, the future catalog can point backward to the prototype, the truck, the revisions and the evidence that earned the release.</p></div><div className="pcm-actions"><ButtonLink href="https://smashpro.app/media/">Discuss a partnership</ButtonLink><ButtonLink href="/equipment/" variant="outline">Equipment showroom</ButtonLink></div></div></section>
+        <section className="pcm-cta"><div className="pcm-shell pcm-cta__panel"><div><p className="pcm-kicker">Prototype → proof → product</p><h2>When the catalog entry arrives, the backstory is already here.</h2><p className="pcm-lead">This page is the permanent origin record for SP-PCM-001. If the module graduates into a sellable SmashPro product, the future catalog can point backward to the disconnect-switch need, the custom battery box, the truck, the revisions and the evidence that earned the release.</p></div><div className="pcm-actions"><ButtonLink href="https://smashpro.app/media/">Discuss a partnership</ButtonLink><ButtonLink href="/equipment/" variant="outline">Equipment showroom</ButtonLink></div></div></section>
       </div>
     </PageFrame>
   );
