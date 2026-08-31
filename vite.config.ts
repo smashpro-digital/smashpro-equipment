@@ -67,6 +67,7 @@ export default defineConfig({
         ardhi: resolve(projectDirectory, "sp-ardhi-26.html"),
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
+        powerControlModule: resolve(projectDirectory, "sp-pcm-001.html"),
         admin: resolve(projectDirectory, "admin.html"),
       },
     },
