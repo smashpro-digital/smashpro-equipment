@@ -44,7 +44,7 @@ export function HomePage() {
               <p className="eyebrow">Product Development · Project Rebirth</p>
               <h2 id="pcm-project-title">From battery box.<br/><span>To power system.</span></h2>
               <p>SP-PCM-001 started as an F-150 packaging problem and is becoming a documented Power Control Module. Follow the cardboard fitment, HDPE fabrication, electrical integration, vehicle proof and the decision that determines whether the prototype earns a future SmashPro catalog release.</p>
-              <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/sp-pcm-001.html">Follow SP-PCM-001</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partner with the build</ButtonLink></div>
+              <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/catalog/sp-pcm-001/">Follow SP-PCM-001</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partner with the build</ButtonLink></div>
             </div>
             <div className="dream-project-card__visual">
               <div className="dream-project-card__phase"><p className="eyebrow">Current phase</p><h3>Prototype Rev A · In construction</h3><p>Black HDPE enclosure, ML-RBS 7700 isolation, digital voltage monitoring and high-current distribution are being packaged around the actual Project Rebirth engine bay.</p></div>
