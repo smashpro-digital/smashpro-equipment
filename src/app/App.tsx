@@ -3,6 +3,7 @@ import { EquipmentDetailPage } from "../pages/EquipmentDetailPage";
 import { GolfCartTechBuildPage } from "../pages/GolfCartTechBuildPage";
 import { HomePage } from "../pages/HomePage";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { PowerControlModulePage } from "../pages/PowerControlModulePage";
 
 export function App() {
   return (
@@ -12,6 +13,7 @@ export function App() {
       <Route exact path="/sp-ardhi-26.html" render={() => <EquipmentDetailPage slug="sp-ardhi-26" />} />
       <Route exact path="/sp-mzigo-26.html" render={() => <EquipmentDetailPage slug="sp-mzigo-26" />} />
       <Route exact path="/golf-cart-tech-build.html" component={GolfCartTechBuildPage} />
+      <Route exact path="/sp-pcm-001.html" component={PowerControlModulePage} />
       <Route component={NotFoundPage} />
     </Switch>
   );
