@@ -13,7 +13,8 @@ export function App() {
       <Route exact path="/sp-ardhi-26.html" render={() => <EquipmentDetailPage slug="sp-ardhi-26" />} />
       <Route exact path="/sp-mzigo-26.html" render={() => <EquipmentDetailPage slug="sp-mzigo-26" />} />
       <Route exact path="/golf-cart-tech-build.html" component={GolfCartTechBuildPage} />
-      <Route exact path="/sp-pcm-001.html" component={PowerControlModulePage} />
+      <Route exact path="/catalog/sp-pcm-001" component={PowerControlModulePage} />
+      <Route exact path="/catalog/sp-pcm-001/" component={PowerControlModulePage} />
       <Route component={NotFoundPage} />
     </Switch>
   );
