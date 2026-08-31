@@ -37,6 +37,23 @@ export function HomePage() {
         </article>
       </section>
 
+      <section className="section shell" aria-labelledby="pcm-project-title">
+        <article className="dream-project-card">
+          <div className="dream-project-card__layout">
+            <div className="dream-project-card__content">
+              <p className="eyebrow">Product Development · Project Rebirth</p>
+              <h2 id="pcm-project-title">From battery box.<br/><span>To power system.</span></h2>
+              <p>SP-PCM-001 started as an F-150 packaging problem and is becoming a documented Power Control Module. Follow the cardboard fitment, HDPE fabrication, electrical integration, vehicle proof and the decision that determines whether the prototype earns a future SmashPro catalog release.</p>
+              <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/sp-pcm-001.html">Follow SP-PCM-001</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partner with the build</ButtonLink></div>
+            </div>
+            <div className="dream-project-card__visual">
+              <div className="dream-project-card__phase"><p className="eyebrow">Current phase</p><h3>Prototype Rev A · In construction</h3><p>Black HDPE enclosure, ML-RBS 7700 isolation, digital voltage monitoring and high-current distribution are being packaged around the actual Project Rebirth engine bay.</p></div>
+              <div className="dream-project-card__phase"><p className="eyebrow">Product path</p><h3>Problem → Prototype → Proof → Catalog</h3><p>No retail or compatibility claims yet. The permanent origin story is being built before the future product card exists.</p></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
       <section className="capability-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Work capabilities</p><h2>Made for the places work gets difficult.</h2></div><p>Compact equipment expands what a prepared crew can move, handle, and finish.</p></div><div className="capability-grid">{capabilities.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3></div>)}</div></div></section>
 
       <section className="section shell split-section"><div><p className="eyebrow">Why SmashPro Fleet</p><h2>Readiness is part of the equipment.</h2><p>Rental access is more than a key handoff. It is a documented operating relationship built around people, machines, projects, and condition.</p></div><div className="standards-list">{standards.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3><p>{index === 0 ? "Fleet care and operating readiness are treated as core requirements." : index === 1 ? "Access may depend on approval, insurance, certification, and account standing." : "Clear steps support safer, more predictable equipment use."}</p></div>)}</div></section>
