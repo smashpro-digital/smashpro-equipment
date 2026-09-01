@@ -87,7 +87,7 @@ export const equipment: Equipment[] = [
     capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-hero.png"), status: "fleet-build", statusLabel: "Electric fleet build — availability not announced",
     identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026 },
     specifications: specs([
-      ["Fleet ID", "SP-MZIGO-26E", "Identity"], ["Manufacturer platform reference", "K600 — documented in SmashPro passport records; manufacturer specification sheet pending", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"],
+      ["Platform", "K600", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Fleet ID", "SP-MZIGO-26E", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co., Ltd.", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"],
       ["Drive configuration", "4WD electric", "Configuration", "SP-MZIGO-26E Equipment Passport"], ["Operation", "Remote control", "Controls", "SP-MZIGO-26E Equipment Passport"], ["Remote control range", "Up to 600 m", "Controls", "SP-MZIGO-26E Equipment Passport"],
       ["Battery", "48V 20Ah × 2 (lead-acid)", "Powertrain", "SP-MZIGO-26E Equipment Passport"], ["Motor", "Dual brushless motors", "Powertrain", "SP-MZIGO-26E Equipment Passport"], ["Motor output", "2 × 500 W", "Powertrain", "SP-MZIGO-26E Equipment Passport"], ["Charging", "Standard U.S. plug requested, confirmed by factory", "Powertrain", "SP-MZIGO-26E Equipment Passport"], ["Battery runtime", "Approximately 8–10 hours, terrain- and workload-dependent", "Powertrain", "SP-MZIGO-26E Equipment Passport"],
       ["Dump bed", "Hydraulic electric dump", "Hydraulic system", "SP-MZIGO-26E Equipment Passport"],
@@ -96,6 +96,24 @@ export const equipment: Equipment[] = [
       ["Ground clearance", "260 mm (10.24 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall length", "1,170 mm (46.06 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall width", "820 mm (32.28 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall height", "870 mm (34.25 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Cargo bed dimensions", "1,170 × 780 × 300 mm (46.06 × 30.71 × 11.81 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"],
       ["Factory finish", "SmashPro Custom Green", "Finish", "SP-MZIGO-26E Equipment Passport"],
     ]),
+    factoryUpdate: {
+      date: "2026-08-31",
+      heading: "Latest Factory Production Update",
+      description: [
+        "The SP-MZIGO-26E continues through production at the Kylin factory. The latest update shows the chassis assembly progressing before installation of the custom SmashPro green body panels and branding.",
+        "These updates are provided directly by the manufacturer and document the complete journey from factory floor to deployment within the SmashPro Fleet.",
+      ],
+      images: [
+        { id: "mzigo-chassis-side-20260831", src: image("sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg"), alt: "Side view of the SP-MZIGO-26E K600 chassis with electric drivetrain, axles, batteries, and frame exposed during factory assembly", caption: "Chassis and electric drivetrain assembly documented on the Kylin factory floor.", capturedAt: "2026-08-31", width: 1080, height: 810 },
+        { id: "mzigo-chassis-top-20260831", src: image("sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg"), alt: "Top view of a Kylin technician assembling the SP-MZIGO-26E battery, controller, wiring, and drivetrain components inside the chassis", caption: "Top view of the battery and electrical systems during chassis assembly.", capturedAt: "2026-08-31", width: 810, height: 1080 },
+      ],
+      video: { id: "mzigo-chassis-video-20260831", src: image("sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4"), alt: "Factory video of the SP-MZIGO-26E chassis assembly in progress", caption: "Factory assembly progress showing the SP-MZIGO-26E chassis before paint, custom decals, and final assembly.", kind: "video", capturedAt: "2026-08-31", width: 1280, height: 720 },
+      timeline: [
+        { label: "Deposit Paid", status: "completed" }, { label: "Production Started", status: "completed" }, { label: "Chassis Assembly", status: "completed" }, { label: "Factory Documentation Received", status: "completed" },
+        { label: "Body Assembly", status: "current" }, { label: "Paint Preparation", status: "current" },
+        { label: "SmashPro Green Paint", status: "upcoming" }, { label: "Custom Decals", status: "upcoming" }, { label: "Functional Testing", status: "upcoming" }, { label: "Final Inspection", status: "upcoming" }, { label: "Ocean Freight", status: "upcoming" }, { label: "U.S. Delivery", status: "upcoming" },
+      ],
+    },
     factoryOptions: [], upgrades: [
       { id: "mzigo-gps", name: "GPS Asset Tracking", category: "Command", description: "Planned location and fleet-security system.", imageUrls: [], status: "planned", tags: ["gps"] },
       { id: "mzigo-telemetry", name: "Fleet Telemetry", category: "Command", description: "Planned connected fleet telemetry system.", imageUrls: [], status: "planned", tags: ["fleet telemetry"] },

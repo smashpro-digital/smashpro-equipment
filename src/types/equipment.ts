@@ -4,6 +4,15 @@ export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade"
 
 export interface EquipmentSpecification { label: string; value: string; confirmed: boolean; group?: string; source?: string; sortOrder?: number; }
 export interface GalleryImage { id?: string; src: string; alt: string; caption: string; kind?: "image" | "video"; capturedAt?: string; width?: number; height?: number; group?: "shipping"; }
+export interface FactoryUpdateStep { label: string; status: "completed" | "current" | "upcoming"; }
+export interface FactoryUpdate {
+  date: string;
+  heading: string;
+  description: string[];
+  images: GalleryImage[];
+  video: GalleryImage;
+  timeline: FactoryUpdateStep[];
+}
 export interface RentalRequirement { title: string; detail: string; }
 export interface FactoryFinish { paintColor: string; colorStandard: string; coatingProcess: string; factoryCure: string; summary: string; }
 export interface FactoryOption { id: string; name: string; description: string; publicDisplay: boolean; installationSource: "factory"; evidenceMediaId?: string; evidenceObjectPosition?: string; }
@@ -27,7 +36,7 @@ export interface EquipmentIdentity { passportId: string; model: string; edition:
 export interface Equipment {
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
   overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
-  specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
+  specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;
   capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];

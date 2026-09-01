@@ -258,6 +258,29 @@ test("SP-ARDHI-26 shipping phase is canonical and all three dated photos are dep
   assert.doesNotMatch(data, /vessel departure|freight pickup|tracking number|customs clearance|port arrival|delivery date|final ETA/i);
 });
 
+test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manufacturing status in sync", () => {
+  const data = readFileSync("src/data/equipment.ts", "utf8");
+  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
+  assert.match(data, /\["Platform", "K600", "Identity"/);
+  assert.match(data, /\["Fleet ID", "SP-MZIGO-26E", "Identity"/);
+  assert.match(data, /\["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co\., Ltd\.", "Identity"/);
+  assert.match(data, /heading: "Latest Factory Production Update"/);
+  assert.match(data, /label: "Chassis Assembly", status: "completed"/);
+  assert.match(data, /label: "Body Assembly", status: "current"/);
+  assert.match(data, /label: "U\.S\. Delivery", status: "upcoming"/);
+  assert.match(detail, /className="factory-update"/);
+  assert.match(detail, /loading="lazy" decoding="async"/);
+  assert.match(detail, /<video controls preload="metadata"/);
+  for (const filename of [
+    "sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg",
+    "sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg",
+    "sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4",
+  ]) {
+    assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
+    assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
+  }
+});
+
 test("equipment media uses standardized fleet-prefixed filenames", () => {
   const mediaFiles = readdirSync("images", { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile())
