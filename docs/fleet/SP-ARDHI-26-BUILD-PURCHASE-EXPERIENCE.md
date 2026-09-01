@@ -223,6 +223,7 @@ For future custom equipment purchases, use a tighter gate-based process:
 6. **Pre-shipment document gate:** do not treat the build as documentation-complete until serial numbers, engine identification, manuals, EPA material, packing details, final weight, and shipping paperwork are captured where available.
 7. **Arrival inspection:** photograph the crate before opening and verify model, serial numbers, fluids, damage, loose hardware, attachments, controls, hydraulic functions, safety equipment, and branded graphics before field work.
 8. **Post-arrival reconciliation:** compare the physical machine against the final procurement record and record every variance.
+9. **Protection capture:** save screenshots of marketplace protection, warranty, and service-benefit pages before delivery so claim terms are not dependent on a later UI state.
 
 ## 15. Overall Purchase Assessment to Date
 
@@ -230,12 +231,33 @@ SP-ARDHI-26 demonstrates that a small business can use Alibaba to source a genui
 
 The strongest part of the experience has been the ability to communicate directly with the manufacturer, influence the build, receive production updates, include useful accessories, and create a machine that arrives with a distinct SmashPro identity.
 
-The main operational lesson is documentation discipline. The machine, invoice, marketplace order, receipts, production photos, supplier messages, and shipping records each tell a different part of the story. Keeping those layers separate but linked creates a trustworthy asset history and a much stronger template for the next imported fleet build.
+The main operational lesson is documentation discipline. The machine, invoice, marketplace order, receipts, production photos, supplier messages, shipping records, warranty terms, and marketplace protection records each tell a different part of the story. Keeping those layers separate but linked creates a trustworthy asset history and a much stronger template for the next imported fleet build.
 
 ## 16. Related Records
 
 - [SP-ARDHI-26 Equipment Passport](SP-ARDHI-26-PASSPORT.md)
 - [SP-ARDHI-26 Procurement Record](SP-ARDHI-26-PROCUREMENT.md)
 - [Alibaba Receipt Evidence Record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md)
+- [Alibaba On-Site Service Protection Evidence](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md)
+
+## 17. Warranty & Service-Protection Experience
+
+The order has two distinct protection layers in the current record and they should not be blended together.
+
+The manufacturer/vendor procurement terms document a **1-year or 1,000-operating-hour warranty, whichever occurs first**, with misuse and consumable damage excluded.
+
+Separately, the Alibaba order-detail interface shows **On-site service — Status: Covered**. The captured protection page states that the order has **1 year of on-site service and free replacement parts**, and that a service request can be started after the product has been delivered.
+
+The Alibaba page also states that if service fails, platform compensation may be available at **2% of the product amount, up to US $500**. The workflow shown is to apply through **My orders > Order details**; the seller then provides a solution or the buyer may become eligible for compensation under the displayed protection terms.
+
+### Why this matters operationally
+
+For an imported machine, the existence of a platform-backed service layer is meaningful because the practical risk is not only whether a warranty exists on paper, but whether there is a usable path to parts and resolution after the machine is thousands of miles from the factory.
+
+The service-protection screenshot gives the Ardhi purchase a clearer escalation path than relying solely on informal supplier messages. If a real service event occurs, the project should document the issue from the first symptom forward, open the Alibaba service request while the coverage window is active, preserve every seller response, and keep proof of any replacement parts or compensation.
+
+### Arrival follow-up
+
+Once the machine is physically delivered, verify that the Alibaba order still shows the protection as active and capture the post-delivery claim interface. That will turn the current pre-delivery protection screenshot into a complete service-readiness record.
 
 This document should be updated again after freight documentation, arrival, commissioning, and the first real field-use period so the record captures not only the buying experience but whether the delivered machine ultimately matched the promise.
