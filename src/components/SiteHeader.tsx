@@ -1,6 +1,6 @@
 import { useState } from "react";
 const links = [
-  ["SmashPro Home", "https://smashpro.app/"], ["Equipment", "/equipment/#fleet"], ["Attachments", "/equipment/#attachments"], ["Rental Process", "/equipment/#rental-process"],
+  ["SmashPro Home", "https://smashpro.app/"], ["Equipment", "/equipment/#fleet"], ["Product Catalog", "/equipment/catalog/"], ["Attachments", "/equipment/#attachments"], ["Rental Process", "/equipment/#rental-process"],
   ["For Contractors", "/equipment/#contractors"], ["Support", "https://smashpro.app/contact"],
 ];
 

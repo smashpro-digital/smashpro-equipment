@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
-const entries = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "admin.html"];
+const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "admin.html"];
 
 test("protected HTML entry files exist", () => {
   entries.forEach((entry) => assert.equal(existsSync(entry), true, `${entry} must exist`));
@@ -66,6 +66,27 @@ test("protected equipment routes are registered", () => {
   const routes = readFileSync("src/app/App.tsx", "utf8");
   assert.match(routes, /sp-ardhi-26\.html/);
   assert.match(routes, /sp-mzigo-26\.html/);
+});
+
+test("product catalog has a physical route, navigation, status model, and sitemap entry", () => {
+  const routes = readFileSync("src/app/App.tsx", "utf8");
+  const header = readFileSync("src/components/SiteHeader.tsx", "utf8");
+  const footer = readFileSync("src/components/SiteFooter.tsx", "utf8");
+  const catalogData = readFileSync("src/data/catalog.ts", "utf8");
+  const catalogTypes = readFileSync("src/types/catalog.ts", "utf8");
+  const catalogPage = readFileSync("src/pages/CatalogPage.tsx", "utf8");
+  const sitemap = readFileSync("public/sitemap.xml", "utf8");
+  assert.match(routes, /path="\/catalog"/);
+  assert.match(routes, /path="\/catalog\/"/);
+  assert.match(header, /Product Catalog/);
+  assert.match(footer, /Product Catalog/);
+  assert.match(sitemap, /\/equipment\/catalog\//);
+  assert.match(catalogData, /id: "SP-PCM-001"/);
+  assert.doesNotMatch(catalogData, /SP-ARDHI-26|SP-MZIGO-26E/);
+  ["concept", "in-development", "prototype", "field-testing", "production-candidate", "available", "archived"].forEach((status) => assert.match(catalogTypes, new RegExp(`"${status}"`)));
+  assert.match(catalogPage, /aria-pressed/);
+  assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
+  assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
 });
 
 test("golf cart dream project uses one canonical concept image and route", () => {

@@ -28,6 +28,10 @@ function preserveEquipmentMedia(): Plugin {
       mkdirSync(output, { recursive: true });
       cpSync(resolve(projectDirectory, "images"), output, { recursive: true });
       cpSync(
+        resolve(projectDirectory, "public/equipment/images/sp-pcm-001-feature.jpg"),
+        resolve(output, "sp-pcm-001-feature.jpg"),
+      );
+      cpSync(
         resolve(projectDirectory, "public/equipment/images/sp-gari-26e-concept.png"),
         resolve(output, "sp-gari-26e-concept.png"),
       );
@@ -67,6 +71,7 @@ export default defineConfig({
         ardhi: resolve(projectDirectory, "sp-ardhi-26.html"),
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
+        productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),
         powerControlModuleLegacyRedirect: resolve(projectDirectory, "sp-pcm-001.html"),
         admin: resolve(projectDirectory, "admin.html"),
