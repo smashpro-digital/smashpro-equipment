@@ -86,11 +86,20 @@ test("product catalog has a physical route, navigation, status model, and sitema
   ["concept", "in-development", "prototype", "field-testing", "production-candidate", "available", "archived"].forEach((status) => assert.match(catalogTypes, new RegExp(`"${status}"`)));
   assert.match(catalogPage, /aria-pressed/);
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
-  assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
-  assert.match(catalogData, /sp-pcm-001-project-rebirth-prototype\.jpg/);
-  const catalogImage = readFileSync("images/sp-pcm-001-project-rebirth-prototype.jpg");
-  assert.equal(catalogImage[0], 0xff, "catalog image must begin with a JPEG signature");
-  assert.equal(catalogImage[1], 0xd8, "catalog image must begin with a JPEG signature");
+  const pcmPage = readFileSync("src/pages/PowerControlModulePage.tsx", "utf8");
+  const pcmMetadata = readFileSync("catalog/sp-pcm-001/index.html", "utf8");
+  const pcmStyles = readFileSync("public/pcm-feature.css", "utf8");
+  const pcmContract = `${catalogData}\n${pcmPage}\n${pcmMetadata}\n${pcmStyles}`;
+  assert.match(pcmContract, /\/equipment\/images\/sp-pcm-001/);
+  for (const filename of [
+    "sp-pcm-001-feature-hero.jpg",
+    "sp-pcm-001-engine-bay-prototype.jpg",
+    "sp-pcm-001-cardboard-enclosure-fitment.jpg",
+    "sp-pcm-001-terminal-clearance-prototype.jpg",
+    "sp-pcm-001-ml-rbs-fitment.jpg",
+    "sp-pcm-001-remote-switch-control.jpg",
+  ]) assert.match(pcmContract, new RegExp(filename.replaceAll(".", "\\.")));
+  assert.doesNotMatch(pcmContract, /sp-pcm-001-feature\.jpg|sp-pcm-001-project-rebirth-prototype\.jpg|battery-layout\.webp|cardboard-truck\.webp|ml-rbs-closeup\.webp|\/equipment\/images\/sp-pcm-001\/[^"']+\?/);
 });
 
 test("golf cart dream project uses one canonical concept image and route", () => {
