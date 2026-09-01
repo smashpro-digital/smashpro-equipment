@@ -133,9 +133,27 @@ The captured Alibaba order page resolves the earlier apparent pricing discrepanc
 
 The approximately 30-day figure is a procurement estimate. The Alibaba interface later displayed a 50-day delivery indicator. Final logistics history should be based on the actual bill of lading, carrier/tracking information, arrival date, and delivery record once available.
 
-## 11. Warranty
+## 11. Warranty & Alibaba Service Protection
+
+### Vendor warranty
 
 Warranty coverage is **1 year or 1,000 operating hours, whichever occurs first**. Misuse and consumable damage are excluded.
+
+### Alibaba on-site service protection
+
+A captured Alibaba order-detail screen shows **On-site service — Status: Covered** for this order. Evidence is preserved at [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md).
+
+| Protection field | Alibaba order interface |
+| --- | --- |
+| Coverage period | 1 year |
+| On-site service | Covered |
+| Replacement parts | Free replacement parts |
+| When a request can be started | After product delivery |
+| Claim path shown | My orders > Order details |
+| Seller obligation shown | Seller provides a solution |
+| Failed-service platform compensation | 2% of product amount, up to US $500 |
+
+The Alibaba protection is recorded separately from the manufacturer/vendor warranty because the captured screen does not state that one replaces or modifies the other. If service is needed after delivery, preserve all claim identifiers, messages, diagnostic information, parts supplied, seller actions, service outcome, and any platform-compensation decision.
 
 ## 12. Bank Information
 
@@ -164,6 +182,7 @@ Banking instructions must be independently verified with the vendor through a tr
 | Alibaba payment 1 | Documented | August 6, 2026 — $1,029.90 on receipt #307512355501020107 |
 | Alibaba payment 2 | Documented | August 20, 2026 — $1,306.95 on receipt #307512355501020107 |
 | Alibaba receipt issued | Documented | August 31, 2026 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
+| Alibaba on-site service protection captured | Documented | August 31, 2026 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md) |
 | Production began | Recorded | Date not documented |
 | Factory production photos received | Recorded | Date not documented |
 | Possible Triple Pump upgrade observed | Pending confirmation | Vendor documentation pending |
@@ -175,6 +194,7 @@ Banking instructions must be independently verified with the vendor through a tr
 | --- | --- | --- |
 | Alibaba order summary | Received / captured | #307512355501020107 — total $3,990 |
 | Alibaba payment receipt | Received | #307512355501020107 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
+| Alibaba on-site service protection | Received / captured | 1-year on-site service + free replacement parts — [evidence record](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md) |
 | Complete payment reconciliation | Pending | Preserve remaining Alibaba receipts/payment evidence |
 | Shipping Documents | Pending | To be added |
 | Bill of Lading | Pending | To be added |
