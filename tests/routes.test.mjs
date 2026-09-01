@@ -91,6 +91,8 @@ test("product catalog has a physical route, navigation, status model, and sitema
   const pcmStyles = readFileSync("public/pcm-feature.css", "utf8");
   const pcmContract = `${catalogData}\n${pcmPage}\n${pcmMetadata}\n${pcmStyles}`;
   assert.match(pcmContract, /\/equipment\/images\/sp-pcm-001/);
+  assert.match(catalogData, /image: "\/equipment\/images\/sp-pcm-001\/sp-pcm-001-feature-hero\.png"/);
+  assert.match(pcmPage, /sp-pcm-001-feature-hero-focused\.png/);
   for (const filename of [
     "sp-pcm-001-feature-hero-focused.png",
     "sp-pcm-001-engine-bay-prototype.jpg",
