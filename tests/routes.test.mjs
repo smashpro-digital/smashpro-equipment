@@ -271,9 +271,11 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
   assert.match(detail, /className="factory-update"/);
   assert.match(detail, /loading="lazy" decoding="async"/);
   assert.match(detail, /<video controls preload="metadata"/);
+  assert.match(detail, /poster=\{item\.factoryUpdate\.video\.poster\}/);
   for (const filename of [
     "sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg",
     "sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg",
+    "sp-mzigo-26e-production-chassis-assembly-video-poster-2s-2026-08-31.jpg",
     "sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4",
   ]) {
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
