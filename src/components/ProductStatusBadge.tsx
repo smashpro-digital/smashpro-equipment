@@ -2,7 +2,7 @@ import type { CatalogStatus } from "../types/catalog";
 
 export const catalogStatusLabels: Record<CatalogStatus, string> = {
   concept: "Concept",
-  "in-development": "In Development",
+  "in-development": "In Progress",
   prototype: "Prototype",
   "field-testing": "Field Testing",
   "production-candidate": "Production Candidate",
