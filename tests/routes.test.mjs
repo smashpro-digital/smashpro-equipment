@@ -87,10 +87,34 @@ test("product catalog has a physical route, navigation, status model, and sitema
   assert.match(catalogPage, /aria-pressed/);
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
   assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
-  assert.match(catalogData, /sp-pcm-001-project-rebirth-prototype\.jpg/);
+  assert.match(catalogData, /image: "\/equipment\/images\/sp-pcm-001-feature\.jpg"/);
   const catalogImage = readFileSync("images/sp-pcm-001-project-rebirth-prototype.jpg");
   assert.equal(catalogImage[0], 0xff, "catalog image must begin with a JPEG signature");
   assert.equal(catalogImage[1], 0xd8, "catalog image must begin with a JPEG signature");
+});
+
+test("catalog product specifications and design packages are revision controlled", () => {
+  const catalogTypes = readFileSync("src/types/catalog.ts", "utf8");
+  const catalogData = readFileSync("src/data/catalog.ts", "utf8");
+  const pcmRecord = readFileSync("docs/catalog/electrical/SP-PCM-001/SP-PCM-001.md", "utf8");
+  const designManifest = readFileSync("docs/catalog/electrical/SP-PCM-001/drawings/nameplates/rev-a/README.md", "utf8");
+  const publicBase = "public/documents/catalog/sp-pcm-001/rev-a/nameplates";
+  assert.match(catalogTypes, /interface CatalogSpecification/);
+  assert.match(catalogTypes, /interface CatalogDesignPackage/);
+  assert.match(catalogTypes, /interface CatalogCustomizationOption/);
+  assert.match(catalogData, /verification: "tbd"/);
+  assert.match(catalogData, /status: "design-review"/);
+  assert.match(catalogData, /build-specific personalization component, not the canonical SP-PCM-001 product data plate/);
+  assert.doesNotMatch(catalogData, /\.ai"/);
+  assert.match(pcmRecord, /custom battery box plate for the 2018 F-150 Project Rebirth build/);
+  assert.match(catalogData, /Custom Battery Box Nameplate/);
+  assert.match(catalogData, /availability: "planned"/);
+  assert.match(catalogData, /required product identity, electrical, safety, and regulatory markings remain controlled/);
+  assert.match(designManifest, /Production data plate: Not released/);
+  ["pdf", "png", "svg"].forEach((extension) => assert.equal(existsSync(`${publicBase}/sp-pcm-001-2018-f150-custom-battery-box-plate-rev-a.${extension}`), true));
+  assert.equal(existsSync("docs/catalog/electrical/SP-PCM-001/drawings/nameplates/rev-a/source/sp-pcm-001-2018-f150-custom-battery-box-plate-rev-a.ai"), true);
+  const preview = readFileSync(`${publicBase}/sp-pcm-001-2018-f150-custom-battery-box-plate-rev-a.png`);
+  assert.deepEqual([...preview.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 });
 
 test("golf cart dream project uses one canonical concept image and route", () => {

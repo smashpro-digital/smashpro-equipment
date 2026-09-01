@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 811 165.16">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Alfarn, Alfarn;
+        font-size: 117.67px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #231f20;
+      }
+
+      .cls-4 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        fill: #39b54a;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 40.3px;
+      }
+
+      .cls-7 {
+        letter-spacing: -.09em;
+      }
+    </style>
+  </defs>
+  <rect class="cls-6" x=".5" y="4.46" width="810" height="160.2" rx="27" ry="27"/>
+  <text class="cls-3" transform="translate(33.8 150.42) scale(1.62 1)"><tspan x="0" y="0">POWER </tspan><tspan class="cls-4" x="133.35" y="0">C</tspan><tspan x="155.88" y="0">ONT</tspan><tspan class="cls-5" x="230.2" y="0">R</tspan><tspan x="252" y="0">OL MODULE</tspan></text>
+  <text class="cls-1" transform="translate(33.16 100.02) scale(.72 1)"><tspan x="0" y="0">SMASH_F150x</tspan><tspan class="cls-7" x="901.94" y="0">l</tspan><tspan x="961.36" y="0">t</tspan></text>
+  <circle class="cls-2" cx="15.99" cy="144.11" r="6.75"/>
+  <circle class="cls-2" cx="15.99" cy="23.22" r="6.75"/>
+  <circle class="cls-2" cx="791.67" cy="144.11" r="6.75"/>
+  <circle class="cls-2" cx="791.67" cy="23.22" r="6.75"/>
+</svg>
