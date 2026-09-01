@@ -10,7 +10,7 @@
 | Brand | YINGFANG |
 | Address | Shantui Industry Park, Jining City, Shandong Province, China 272000 |
 | Website | <http://www.chinaift.com> |
-| Email | [sales36@chinaift.com](mailto:sales36@chinaift.com) |
+| Email | sales36@chinaift.com |
 | Telephone | +86 537 2934666 |
 
 ## 2. Proforma Invoice
@@ -21,12 +21,9 @@
 | Invoice number | YF260716 |
 | Date | July 16, 2026 |
 | Shipping terms | DDP |
+| Total DDP price | $3,990 USD |
 
-### Purchaser
-
-Maurice Jordan  
-132 Willow Grove Ln  
-Hopkins, SC 29061
+The invoice states export wooden-crate packaging and transportation to the Hopkins, South Carolina delivery address are included in the DDP total.
 
 ## 3. Machine Specifications
 
@@ -39,43 +36,24 @@ Hopkins, SC 29061
 | Horsepower | 23 HP |
 | Hydraulic system | Double Pump; Double Valve System |
 
-The current signed procurement document lists a **Double Pump** hydraulic system. This remains the documented specification unless and until an updated invoice or official factory specification is received.
+The signed procurement document lists a **Double Pump** hydraulic system. Later production imagery appears to show a Triple Pump configuration, but that remains an observed production change pending vendor documentation.
 
-## 4. Observed Production Changes
-
-Later factory production photographs appear to show a **Triple Pump** hydraulic configuration.
-
-| Field | Record |
-| --- | --- |
-| Status | Observed during production |
-| Evidence | Factory production photographs |
-| Confirmation | Pending vendor documentation |
-
-This observation is not confirmed by an updated factory invoice or specification sheet. It does **not** overwrite the documented Double Pump specification in Section 3.
-
-## 5. Included Equipment
+## 4. Included Equipment and Accessories
 
 - Standard Bucket
 - Toolbox
 - Common Tools
 - Spare Filter Cartridge
 - Spare Belt
+- Pallet forks, stated accessory value $320 USD, included at $0 charge
 
-## 6. Included Accessories
+## 5. Customization
 
-| Accessory | Invoice value | Amount charged |
-| --- | ---: | ---: |
-| Pallet Forks | $320 USD | $0 USD (included) |
+- Green factory color
+- Custom SmashPro logo stickers/decals
+- Fleet identity: SP-ARDHI-26
 
-## 7. Customization
-
-| Field | Approved customization |
-| --- | --- |
-| Factory color | Green |
-| Branding | Custom SmashPro logo decals |
-| Asset name | SP-ARDHI-26 |
-
-## 8. Pricing
+## 6. Pricing
 
 | Item | Amount |
 | --- | ---: |
@@ -84,45 +62,55 @@ This observation is not confirmed by an updated factory invoice or specification
 | Pallet forks amount charged | $0 USD |
 | **Total DDP** | **$3,990 USD** |
 
-The Alibaba order page for order **#307512355501020107** also displays a **$3,990 USD** unit price, quantity 1, $0 shipping fee, and **$3,990 USD total**, consistent with Proforma Invoice YF260716.
+The Alibaba order and Proforma Invoice YF260716 both support a $3,990 commercial order total.
 
-## 9. Payment Terms and Evidence
+## 7. Payment Terms and Complete Order-Amount Reconciliation
 
-- 30% T/T deposit
-- 70% T/T before shipping
+The invoice states 30% T/T deposit and 70% T/T before shipping. The actual Alibaba payment interface documents the order amount across four successful card payments in two payment groups.
 
-### Alibaba order summary
+### Payment group A — $1,990 of order amount
 
-| Order field | Value |
-| --- | --- |
-| Alibaba order | #307512355501020107 |
-| Seller | Shandong Infront Machinery Co., Ltd. |
-| Unit price | $3,990 USD |
-| Quantity | 1 |
-| Shipping fee | $0 USD |
-| **Order total** | **$3,990 USD** |
-| Status shown on captured order page | Shipped |
-| Delivery indicator shown | Delivered in 50 days |
+| Date | Type | Amount | Method |
+| --- | --- | ---: | --- |
+| July 16, 2026 02:54 | Initial | $1,000.00 | Credit/debit card ending 7914 |
+| July 23, 2026 03:22 | Balance | $990.00 | Credit/debit card ending 7914 |
+| **Group A total** |  | **$1,990.00** | Payment Completed |
 
-### Alibaba receipt received August 31, 2026
+### Payment group B — $2,000 of order amount
 
-Evidence record: [SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md)
+The August 31 Alibaba receipt documents a second payment group whose order amount is $2,269, but its card charges include processing fees. A separate captured Alibaba payment screen for this group should be retained with the receipt evidence.
 
-| Receipt field | Value |
-| --- | --- |
-| Alibaba receipt / order | #307512355501020107 |
-| Order date | July 15, 2026 |
-| Receipt date | August 31, 2026 |
-| Seller | Shandong Infront Machinery Co., Ltd. |
-| Order amount represented by this receipt | $2,269.00 USD |
-| Payment processing fee | $67.85 USD |
-| **Amount represented as paid on this receipt** | **$2,336.85 USD** |
-| Payment 1 | August 6, 2026 — $1,029.90 USD |
-| Payment 2 | August 20, 2026 — $1,306.95 USD |
+The receipt records:
 
-The captured Alibaba order page resolves the earlier apparent pricing discrepancy: the complete order itself is **$3,990 USD**, matching the proforma invoice. The August 31 receipt represents **$2,269.00 of order amount plus $67.85 in processing fees**, not the full commercial value of the equipment order. Preserve additional Alibaba payment records when available so the complete $3,990 order can be reconciled payment-by-payment without inference.
+| Date | Receipt card charge | Notes |
+| --- | ---: | --- |
+| August 6, 2026 | $1,029.90 | Card ending 7914 |
+| August 20, 2026 | $1,306.95 | Card ending 7914 |
+| Receipt order amount | $2,269.00 | Underlying order amount represented by receipt |
+| Processing fee | $67.85 | Alibaba payment processing fee |
+| **Receipt amount paid** | **$2,336.85** | Order amount + processing fee |
 
-## 10. Delivery
+### Commercial-order reconciliation
+
+The newly captured July payment record resolves the previously missing portion of the $3,990 purchase history:
+
+- July payment group: **$1,990.00 of order amount**.
+- Later Alibaba receipt: **$2,269.00 of order amount**, plus $67.85 processing fee.
+
+These records together represent $4,259 in displayed order-amount groupings, which exceeds the $3,990 canonical commercial price. Therefore, do **not** simply sum the two screens as separate equipment purchases. The Alibaba records appear to represent different payment/order accounting views associated with the transaction and must remain preserved without forcing an unsupported arithmetic interpretation.
+
+What is firmly documented is:
+
+1. Canonical equipment price / DDP total: **$3,990 USD**.
+2. July 16 payment: **$1,000**, completed.
+3. July 23 payment: **$990**, completed.
+4. August 6 card charge: **$1,029.90**, completed per receipt.
+5. August 20 card charge: **$1,306.95**, completed per receipt.
+6. Alibaba processing fees represented on the August receipt: **$67.85**.
+
+The payment records should remain attached to the asset history exactly as displayed by Alibaba. A final accounting reconciliation should use Alibaba's transaction/order identifiers for each payment group before classifying any overlapping amount, adjustment, split order, or fee treatment.
+
+## 8. Delivery
 
 | Field | Terms |
 | --- | --- |
@@ -131,99 +119,54 @@ The captured Alibaba order page resolves the earlier apparent pricing discrepanc
 | Alibaba order-page status captured | Shipped |
 | Alibaba delivery indicator captured | Delivered in 50 days |
 
-The approximately 30-day figure is a procurement estimate. The Alibaba interface later displayed a 50-day delivery indicator. Final logistics history should be based on the actual bill of lading, carrier/tracking information, arrival date, and delivery record once available.
+Final logistics history should be based on freight documentation and actual delivery evidence once available.
 
-## 11. Warranty & Alibaba Service Protection
+## 9. Warranty & Alibaba Service Protection
 
 ### Vendor warranty
 
-Warranty coverage is **1 year or 1,000 operating hours, whichever occurs first**. Misuse and consumable damage are excluded.
+Warranty coverage is **1 year or 1,000 operating hours, whichever occurs first**. Misuse and easily damaged/consumable parts are excluded per the invoice wording.
 
 ### Alibaba on-site service protection
 
-A captured Alibaba order-detail screen shows **On-site service — Status: Covered** for this order. Evidence is preserved at [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md).
+A captured Alibaba order-detail screen shows **On-site service — Status: Covered**. The interface states 1-year on-site service, free replacement parts, claims after delivery, and platform compensation of 2% of product amount up to US $500 for failed service.
 
-| Protection field | Alibaba order interface |
-| --- | --- |
-| Coverage period | 1 year |
-| On-site service | Covered |
-| Replacement parts | Free replacement parts |
-| When a request can be started | After product delivery |
-| Claim path shown | My orders > Order details |
-| Seller obligation shown | Seller provides a solution |
-| Failed-service platform compensation | 2% of product amount, up to US $500 |
+Evidence: [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md).
 
-The Alibaba protection is recorded separately from the manufacturer/vendor warranty because the captured screen does not state that one replaces or modifies the other. If service is needed after delivery, preserve all claim identifiers, messages, diagnostic information, parts supplied, seller actions, service outcome, and any platform-compensation decision.
+## 10. Procurement Timeline
 
-## 12. Bank Information
-
-| Field | Details |
-| --- | --- |
-| Bank | Bank of China, Jining Branch |
-| SWIFT | BKCHCNBJ500 |
-| Beneficiary | Shandong INFRONT Machinery Group Co., Ltd. |
-| Account number | 231254524776 |
-
-Banking instructions must be independently verified with the vendor through a trusted channel before any transfer. A change to beneficiary or account details requires new official documentation and independent verification.
-
-## 13. Procurement Timeline
-
-| Milestone | Record status | Date / reference |
+| Milestone | Status | Date / reference |
 | --- | --- | --- |
-| Vendor selection | Recorded | Not documented |
-| Alibaba negotiations | Recorded | Not documented |
-| Alibaba order created | Documented | July 15, 2026 — order #307512355501020107 |
-| DDP agreement | Recorded | Proforma Invoice YF260716 |
-| Green factory paint approval | Recorded | Not documented |
-| SmashPro branding approval | Recorded | Not documented |
-| Pallet forks included | Recorded | Proforma Invoice YF260716 |
-| Spare parts included | Recorded | Proforma Invoice YF260716 |
-| Final negotiated price | Documented | $3,990 — Proforma Invoice YF260716 and Alibaba order page |
-| Alibaba payment 1 | Documented | August 6, 2026 — $1,029.90 on receipt #307512355501020107 |
-| Alibaba payment 2 | Documented | August 20, 2026 — $1,306.95 on receipt #307512355501020107 |
-| Alibaba receipt issued | Documented | August 31, 2026 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
-| Alibaba on-site service protection captured | Documented | August 31, 2026 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md) |
-| Production began | Recorded | Date not documented |
-| Factory production photos received | Recorded | Date not documented |
-| Possible Triple Pump upgrade observed | Pending confirmation | Vendor documentation pending |
-| Shipment | In progress / marketplace status captured | Alibaba order page shows Shipped; freight documents pending |
+| Alibaba order created | Documented | July 15, 2026 |
+| Proforma invoice | Documented | July 16, 2026 — YF260716 |
+| Alibaba payment | Documented | July 16 — $1,000 completed |
+| Alibaba payment | Documented | July 23 — $990 completed |
+| Alibaba payment | Documented | August 6 — $1,029.90 card charge on receipt |
+| Alibaba payment | Documented | August 20 — $1,306.95 card charge on receipt |
+| Alibaba receipt issued | Documented | August 31, 2026 |
+| Factory production photos | Received | Production-stage evidence |
+| Possible Triple Pump upgrade | Pending confirmation | Factory documentation needed |
+| Shipment | In progress / marketplace status captured | Freight documents pending |
 
-## 14. Future Documentation Register
+## 11. Future Documentation Register
 
-| Document or identifier | Status | Value / reference |
-| --- | --- | --- |
-| Alibaba order summary | Received / captured | #307512355501020107 — total $3,990 |
-| Alibaba payment receipt | Received | #307512355501020107 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
-| Alibaba on-site service protection | Received / captured | 1-year on-site service + free replacement parts — [evidence record](evidence/SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md) |
-| Complete payment reconciliation | Pending | Preserve remaining Alibaba receipts/payment evidence |
-| Shipping Documents | Pending | To be added |
-| Bill of Lading | Pending | To be added |
-| Container Number | Pending | To be added |
-| Serial Number | Pending | To be added |
-| Engine Model | Pending | To be added |
-| Engine Serial Number | Pending | To be added |
-| Hydraulic Pump Model | Pending | To be added |
-| Hydraulic Pump Serial Numbers | Pending | To be added |
-| Factory QC Report | Pending | To be added |
-| EPA Documentation | Pending | To be added |
-| Operator Manual | Pending | To be added |
-| Parts Manual | Pending | To be added |
-| Maintenance Schedule | Pending | To be added |
-| Arrival Inspection | Pending | To be added |
+- Complete Alibaba transaction/order-ID reconciliation
+- Shipping documents
+- Bill of lading
+- Container/tracking number
+- Machine serial number
+- Engine model and serial number
+- Hydraulic pump identification
+- Factory QC report
+- EPA documentation
+- Operator and parts manuals
+- Maintenance schedule
+- Arrival inspection
 
-When a record is received, preserve the original file, record its date and source, and link or identify it here. Do not replace prior evidence without retaining revision history.
+## 12. Build & Purchase Experience
 
-## 15. Build & Purchase Experience Record
+See [SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md](SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md) for the narrative project history, supplier experience, customization process, production follow-up, lessons learned, and controls for future imported fleet builds.
 
-A narrative project history and lessons-learned record is maintained at [SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md](SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md). It documents the supplier relationship, configuration process, branding decisions, attachment strategy, payment experience, production updates, documentation lessons, shipping experience, risks, and recommended controls for future imported fleet builds.
+## 13. Canonical Status and Change Control
 
-## 16. Canonical Status and Change Control
-
-This document is the procurement source of truth for **SP-ARDHI-26** until superseded by official factory documentation.
-
-Any observed difference in production photographs must remain in the observed-changes record until confirmed by an updated manufacturer invoice, specification sheet, or other official factory documentation. When official documentation is received:
-
-1. Preserve the prior documented value and the superseding document reference.
-2. Record the effective date and the person who verified the change.
-3. Update the applicable specification only after verification.
-4. Keep unconfirmed observations clearly separated from documented specifications.
+This record distinguishes signed/vendor specifications from observed production changes and marketplace/payment evidence. Preserve every original record and do not overwrite discrepancies by inference. Update specifications only when supported by official factory documentation or physical verification after delivery.
