@@ -60,55 +60,56 @@ The signed procurement document lists a **Double Pump** hydraulic system. Later 
 | Machine price | $3,990 USD |
 | Pallet forks accessory value | $320 USD |
 | Pallet forks amount charged | $0 USD |
-| **Total DDP** | **$3,990 USD** |
+| **Canonical DDP build price** | **$3,990 USD** |
 
-The Alibaba order and Proforma Invoice YF260716 both support a $3,990 commercial order total.
+The proforma invoice establishes the baseline negotiated DDP build price. Alibaba payment evidence was intentionally structured across **two separate Alibaba orders so the buyer could split the purchase into smaller payments**.
 
-## 7. Payment Terms and Complete Order-Amount Reconciliation
+## 7. Intentional Split-Order Payment Structure
 
-The invoice states 30% T/T deposit and 70% T/T before shipping. The actual Alibaba payment interface documents the order amount across four successful card payments in two payment groups.
+The seller created two Alibaba orders for the same SP-ARDHI-26 purchase specifically to enable staged/split payments. The two order numbers should therefore be treated as linked components of one equipment acquisition, not as duplicate equipment purchases.
 
-### Payment group A — $1,990 of order amount
+### Alibaba order A — #308705042001020107
 
-| Date | Type | Amount | Method |
-| --- | --- | ---: | --- |
-| July 16, 2026 02:54 | Initial | $1,000.00 | Credit/debit card ending 7914 |
-| July 23, 2026 03:22 | Balance | $990.00 | Credit/debit card ending 7914 |
-| **Group A total** |  | **$1,990.00** | Payment Completed |
+Captured July receipt/payment evidence shows:
 
-### Payment group B — $2,000 of order amount
+| Field | Value |
+| --- | --- |
+| Order number | #308705042001020107 |
+| Order date | July 15, 2026 |
+| Order amount | $1,990 USD |
+| July 16 initial payment | $1,000 USD — completed |
+| July 23 balance payment | $990 USD — completed |
+| Payment method | Credit/debit card ending 7914 |
 
-The August 31 Alibaba receipt documents a second payment group whose order amount is $2,269, but its card charges include processing fees. A separate captured Alibaba payment screen for this group should be retained with the receipt evidence.
+The receipt for this order displays the transaction in EUR as well as the USD contract amount and includes a payment-processing fee. Preserve the receipt rather than using currency-converted figures as the canonical equipment price.
 
-The receipt records:
+### Alibaba order B — #307512355501020107
 
-| Date | Receipt card charge | Notes |
-| --- | ---: | --- |
-| August 6, 2026 | $1,029.90 | Card ending 7914 |
-| August 20, 2026 | $1,306.95 | Card ending 7914 |
-| Receipt order amount | $2,269.00 | Underlying order amount represented by receipt |
-| Processing fee | $67.85 | Alibaba payment processing fee |
-| **Receipt amount paid** | **$2,336.85** | Order amount + processing fee |
+Captured August receipt/payment evidence shows:
 
-### Commercial-order reconciliation
+| Field | Value |
+| --- | --- |
+| Order number | #307512355501020107 |
+| Order date | July 15, 2026 |
+| Order amount represented by receipt | $2,269 USD |
+| August 6 card charge | $1,029.90 USD — completed |
+| August 20 card charge | $1,306.95 USD — completed |
+| Processing fee shown | $67.85 USD |
+| Amount paid shown on receipt | $2,336.85 USD |
+| Payment method | Credit/debit card ending 7914 |
 
-The newly captured July payment record resolves the previously missing portion of the $3,990 purchase history:
+### Interpretation
 
-- July payment group: **$1,990.00 of order amount**.
-- Later Alibaba receipt: **$2,269.00 of order amount**, plus $67.85 processing fee.
+The existence of two order numbers is **intentional** and reflects the agreed payment-splitting arrangement with the supplier. It should not be described as overlapping accounting or an unexplained duplicate-order condition.
 
-These records together represent $4,259 in displayed order-amount groupings, which exceeds the $3,990 canonical commercial price. Therefore, do **not** simply sum the two screens as separate equipment purchases. The Alibaba records appear to represent different payment/order accounting views associated with the transaction and must remain preserved without forcing an unsupported arithmetic interpretation.
+The currently preserved Alibaba order amounts are **$1,990 + $2,269 = $4,259**, while Proforma Invoice YF260716 documents a **$3,990 DDP baseline build price**. The additional **$269 difference is not assigned to a specific upgrade, fee, accessory, or change order unless supported by separate evidence**. Processing fees remain separate from equipment-order amounts.
 
-What is firmly documented is:
+This distinction preserves both facts without guessing:
 
-1. Canonical equipment price / DDP total: **$3,990 USD**.
-2. July 16 payment: **$1,000**, completed.
-3. July 23 payment: **$990**, completed.
-4. August 6 card charge: **$1,029.90**, completed per receipt.
-5. August 20 card charge: **$1,306.95**, completed per receipt.
-6. Alibaba processing fees represented on the August receipt: **$67.85**.
-
-The payment records should remain attached to the asset history exactly as displayed by Alibaba. A final accounting reconciliation should use Alibaba's transaction/order identifiers for each payment group before classifying any overlapping amount, adjustment, split order, or fee treatment.
+1. The supplier intentionally divided the acquisition into two Alibaba orders for payment flexibility.
+2. The signed proforma invoice documents a $3,990 baseline DDP build price.
+3. The two marketplace order amounts total $4,259 before separately shown processing fees.
+4. The reason for the $269 above the baseline invoice remains to be reconciled from supplier/order documentation.
 
 ## 8. Delivery
 
@@ -137,20 +138,21 @@ Evidence: [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-
 
 | Milestone | Status | Date / reference |
 | --- | --- | --- |
-| Alibaba order created | Documented | July 15, 2026 |
+| Split-order structure agreed | Confirmed by buyer | Two Alibaba orders created to enable split payments |
+| Alibaba orders created | Documented | July 15, 2026 — #308705042001020107 and #307512355501020107 |
 | Proforma invoice | Documented | July 16, 2026 — YF260716 |
-| Alibaba payment | Documented | July 16 — $1,000 completed |
-| Alibaba payment | Documented | July 23 — $990 completed |
-| Alibaba payment | Documented | August 6 — $1,029.90 card charge on receipt |
-| Alibaba payment | Documented | August 20 — $1,306.95 card charge on receipt |
-| Alibaba receipt issued | Documented | August 31, 2026 |
+| Alibaba payment | Documented | July 16 — $1,000 completed on order A |
+| Alibaba payment | Documented | July 23 — $990 completed on order A |
+| Alibaba payment | Documented | August 6 — $1,029.90 card charge on order B receipt |
+| Alibaba payment | Documented | August 20 — $1,306.95 card charge on order B receipt |
+| Alibaba receipts issued | Documented | August 31, 2026 |
 | Factory production photos | Received | Production-stage evidence |
 | Possible Triple Pump upgrade | Pending confirmation | Factory documentation needed |
 | Shipment | In progress / marketplace status captured | Freight documents pending |
 
 ## 11. Future Documentation Register
 
-- Complete Alibaba transaction/order-ID reconciliation
+- Evidence explaining the $269 difference between the $3,990 baseline invoice and $4,259 combined Alibaba order amounts
 - Shipping documents
 - Bill of lading
 - Container/tracking number
@@ -165,8 +167,8 @@ Evidence: [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-
 
 ## 12. Build & Purchase Experience
 
-See [SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md](SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md) for the narrative project history, supplier experience, customization process, production follow-up, lessons learned, and controls for future imported fleet builds.
+See [SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md](SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md) for the narrative project history, supplier experience, customization process, production follow-up, split-payment strategy, lessons learned, and controls for future imported fleet builds.
 
 ## 13. Canonical Status and Change Control
 
-This record distinguishes signed/vendor specifications from observed production changes and marketplace/payment evidence. Preserve every original record and do not overwrite discrepancies by inference. Update specifications only when supported by official factory documentation or physical verification after delivery.
+This record distinguishes signed/vendor specifications from observed production changes, marketplace/payment evidence, and buyer-confirmed transaction context. Preserve every original record and do not overwrite discrepancies by inference. Update specifications or cost classifications only when supported by official factory documentation, marketplace records, buyer-confirmed transaction context, or physical verification after delivery.
