@@ -11,7 +11,7 @@ export const equipment: Equipment[] = [
     overview: "The flagship compact loader of the SmashPro Fleet, positioned for landscaping, grading, loading, excavation, pallet handling, and residential access.",
     capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "shipping", statusLabel: "Shipping Phase",
     statusDetail: "SP-ARDHI-26 has entered the shipping phase. New manufacturer staging and shipping-preparation photos were received on August 21, 2026.",
-    identity: { passportId: "SPP-2026-0001", model: "SP-ARDHI-26", edition: "Founder's Edition", finish: "SmashPro Green (RAL 6018)", assetClass: "Compact tracked loader", powertrain: "Internal combustion", modelYear: 2026 },
+    identity: { passportId: "SPP-2026-0001", model: "SP-ARDHI-26", factoryModel: "YF380", edition: "Founder's Edition", finish: "SmashPro Green (RAL 6018)", assetClass: "Compact tracked loader", powertrain: "Internal combustion", modelYear: 2026 },
     specifications: specs([
       ["Fleet ID", "SP-ARDHI-26", "Identity"], ["Manufacturer model reference", "YF380", "Identity"], ["Machine type", "Compact mini skid loader", "Configuration"],
       ["Engine manufacturer", "Runtong", "Powertrain", "Procurement record"], ["Engine configuration", "Twin-cylinder gasoline engine", "Powertrain", "Procurement record"], ["Engine displacement", "739 cc", "Powertrain", "Procurement record"], ["EPA designation", "EPA Certified", "Powertrain", "Procurement record"], ["Engine output", "23 HP, manufacturer-stated", "Powertrain", "Manufacturer specification PDF · 2026-08-16"], ["Rated power", "18.2 kW, manufacturer-stated", "Powertrain", "Manufacturer specification PDF · 2026-08-16"], ["Rated engine speed", "3,600 rpm", "Powertrain", "Manufacturer specification PDF · 2026-08-16"], ["Noise", "≤95 dB", "Powertrain", "Manufacturer specification PDF · 2026-08-16"],
@@ -82,10 +82,10 @@ export const equipment: Equipment[] = [
     ], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Documentation", detail: "Insurance, certification, and rental terms may apply." }],
   },
   {
-    slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "Mzigo", category: "Electric Remote-Controlled Material Carrier",
+    slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
     meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: "SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.",
     capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-hero.png"), status: "fleet-build", statusLabel: "Electric fleet build — availability not announced",
-    identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026 },
+    identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026 },
     specifications: specs([
       ["Platform", "K600", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Fleet ID", "SP-MZIGO-26E", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co., Ltd.", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"],
       ["Drive configuration", "4WD electric", "Configuration", "SP-MZIGO-26E Equipment Passport"], ["Operation", "Remote control", "Controls", "SP-MZIGO-26E Equipment Passport"], ["Remote control range", "Up to 600 m", "Controls", "SP-MZIGO-26E Equipment Passport"],

@@ -31,7 +31,7 @@ export interface TimelineEvent { id: string; occurredAt?: string; kind: Timeline
 export interface MediaRecord { id: string; title: string; kind: "image" | "video" | "youtube"; role?: "installation" | "walkaround" | "review" | "maintenance" | "short" | "build"; url: string; publishedAt?: string; description?: string; upgradeId?: string; }
 export interface PassportScores { documentation: number; maintenance: number; }
 export interface PublicValuation { amount?: number; currency: "USD"; calculatedAt?: string; status: "current" | "pending"; }
-export interface EquipmentIdentity { passportId: string; model: string; edition: string; finish?: string; serialNumberPublic?: string; assetClass: string; powertrain?: string; modelYear?: number; fleetEntryDate?: string; operatingHours?: number; }
+export interface EquipmentIdentity { passportId: string; model: string; factoryModel?: string; edition: string; finish?: string; serialNumberPublic?: string; assetClass: string; powertrain?: string; modelYear?: number; fleetEntryDate?: string; operatingHours?: number; }
 
 export interface Equipment {
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;

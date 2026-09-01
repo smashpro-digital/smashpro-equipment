@@ -159,6 +159,12 @@ test("SP-MZIGO-26E is classified as electric with a correctly converted publishe
   assert.match(data, /fleetId: "SP-MZIGO-26E"/);
   assert.match(data, /powertrain: "Electric 4WD"/);
   assert.match(data, /\["Payload", "500 kg \(1,102 lb\)", "Capacity"\]/);
+  assert.match(data, /fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E"/);
+  assert.match(data, /model: "SP-MZIGO-26E", factoryModel: "K600"/);
+  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
+  assert.match(detail, /<h1>\{item\.fleetId\}<\/h1>/);
+  assert.match(detail, /Factory Model: \{item\.identity\.factoryModel/);
+  assert.match(detail, /<span>Fleet Name<\/span><strong>\{item\.fleetId\}<\/strong>/);
 });
 
 test("public equipment fleet IDs and slugs are unique", () => {
