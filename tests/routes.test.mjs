@@ -92,7 +92,7 @@ test("product catalog has a physical route, navigation, status model, and sitema
   const pcmContract = `${catalogData}\n${pcmPage}\n${pcmMetadata}\n${pcmStyles}`;
   assert.match(pcmContract, /\/equipment\/images\/sp-pcm-001/);
   for (const filename of [
-    "sp-pcm-001-feature-hero.jpg",
+    "sp-pcm-001-feature-hero.png",
     "sp-pcm-001-engine-bay-prototype.jpg",
     "sp-pcm-001-cardboard-enclosure-fitment.jpg",
     "sp-pcm-001-terminal-clearance-prototype.jpg",

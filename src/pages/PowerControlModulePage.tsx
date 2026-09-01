@@ -3,7 +3,7 @@ import { PageFrame } from "../components/PageFrame";
 import { ProductStatusBadge } from "../components/ProductStatusBadge";
 
 const mediaBase = "/equipment/images/sp-pcm-001";
-const featureHero = `${mediaBase}/sp-pcm-001-feature-hero.jpg`;
+const featureHero = `${mediaBase}/sp-pcm-001-feature-hero.png`;
 
 const stages = [
   ["01", "Battery disconnect need", "Project Rebirth needed a reliable way to isolate the battery during diagnosis, repair and long storage periods."],
