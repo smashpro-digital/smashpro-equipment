@@ -84,10 +84,25 @@ This observation is not confirmed by an updated factory invoice or specification
 | Pallet forks amount charged | $0 USD |
 | **Total DDP** | **$3,990 USD** |
 
+The Alibaba order page for order **#307512355501020107** also displays a **$3,990 USD** unit price, quantity 1, $0 shipping fee, and **$3,990 USD total**, consistent with Proforma Invoice YF260716.
+
 ## 9. Payment Terms and Evidence
 
 - 30% T/T deposit
 - 70% T/T before shipping
+
+### Alibaba order summary
+
+| Order field | Value |
+| --- | --- |
+| Alibaba order | #307512355501020107 |
+| Seller | Shandong Infront Machinery Co., Ltd. |
+| Unit price | $3,990 USD |
+| Quantity | 1 |
+| Shipping fee | $0 USD |
+| **Order total** | **$3,990 USD** |
+| Status shown on captured order page | Shipped |
+| Delivery indicator shown | Delivered in 50 days |
 
 ### Alibaba receipt received August 31, 2026
 
@@ -99,13 +114,13 @@ Evidence record: [SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md](evidence/SP-ARDHI-2
 | Order date | July 15, 2026 |
 | Receipt date | August 31, 2026 |
 | Seller | Shandong Infront Machinery Co., Ltd. |
-| Alibaba order total | $2,269.00 USD |
-| Processing fee | $67.85 USD |
-| **Amount paid** | **$2,336.85 USD** |
+| Order amount represented by this receipt | $2,269.00 USD |
+| Payment processing fee | $67.85 USD |
+| **Amount represented as paid on this receipt** | **$2,336.85 USD** |
 | Payment 1 | August 6, 2026 — $1,029.90 USD |
 | Payment 2 | August 20, 2026 — $1,306.95 USD |
 
-The Alibaba receipt is preserved as payment evidence for its referenced order. Its $2,269 order total does not by itself reconcile to the $3,990 DDP total on Proforma Invoice YF260716, so it does **not** supersede the canonical negotiated procurement price. Additional Alibaba/vendor documentation should be retained if it explains the remaining amount or separate order/payment structure.
+The captured Alibaba order page resolves the earlier apparent pricing discrepancy: the complete order itself is **$3,990 USD**, matching the proforma invoice. The August 31 receipt represents **$2,269.00 of order amount plus $67.85 in processing fees**, not the full commercial value of the equipment order. Preserve additional Alibaba payment records when available so the complete $3,990 order can be reconciled payment-by-payment without inference.
 
 ## 10. Delivery
 
@@ -113,8 +128,10 @@ The Alibaba receipt is preserved as payment evidence for its referenced order. I
 | --- | --- |
 | Packaging | Standard Export Wooden Crate |
 | Delivery estimate | Approximately 30 days after payment |
+| Alibaba order-page status captured | Shipped |
+| Alibaba delivery indicator captured | Delivered in 50 days |
 
-The estimate is a procurement term, not a confirmed arrival date.
+The approximately 30-day figure is a procurement estimate. The Alibaba interface later displayed a 50-day delivery indicator. Final logistics history should be based on the actual bill of lading, carrier/tracking information, arrival date, and delivery record once available.
 
 ## 11. Warranty
 
@@ -137,25 +154,28 @@ Banking instructions must be independently verified with the vendor through a tr
 | --- | --- | --- |
 | Vendor selection | Recorded | Not documented |
 | Alibaba negotiations | Recorded | Not documented |
+| Alibaba order created | Documented | July 15, 2026 — order #307512355501020107 |
 | DDP agreement | Recorded | Proforma Invoice YF260716 |
 | Green factory paint approval | Recorded | Not documented |
 | SmashPro branding approval | Recorded | Not documented |
 | Pallet forks included | Recorded | Proforma Invoice YF260716 |
 | Spare parts included | Recorded | Proforma Invoice YF260716 |
-| Final negotiated price | Recorded | Proforma Invoice YF260716 |
-| Alibaba payment 1 | Documented | August 6, 2026 — receipt #307512355501020107 |
-| Alibaba payment 2 | Documented | August 20, 2026 — receipt #307512355501020107 |
+| Final negotiated price | Documented | $3,990 — Proforma Invoice YF260716 and Alibaba order page |
+| Alibaba payment 1 | Documented | August 6, 2026 — $1,029.90 on receipt #307512355501020107 |
+| Alibaba payment 2 | Documented | August 20, 2026 — $1,306.95 on receipt #307512355501020107 |
 | Alibaba receipt issued | Documented | August 31, 2026 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
 | Production began | Recorded | Date not documented |
 | Factory production photos received | Recorded | Date not documented |
 | Possible Triple Pump upgrade observed | Pending confirmation | Vendor documentation pending |
-| Shipment | Pending | Shipping documents pending |
+| Shipment | In progress / marketplace status captured | Alibaba order page shows Shipped; freight documents pending |
 
 ## 14. Future Documentation Register
 
 | Document or identifier | Status | Value / reference |
 | --- | --- | --- |
+| Alibaba order summary | Received / captured | #307512355501020107 — total $3,990 |
 | Alibaba payment receipt | Received | #307512355501020107 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
+| Complete payment reconciliation | Pending | Preserve remaining Alibaba receipts/payment evidence |
 | Shipping Documents | Pending | To be added |
 | Bill of Lading | Pending | To be added |
 | Container Number | Pending | To be added |
@@ -173,7 +193,11 @@ Banking instructions must be independently verified with the vendor through a tr
 
 When a record is received, preserve the original file, record its date and source, and link or identify it here. Do not replace prior evidence without retaining revision history.
 
-## 15. Canonical Status and Change Control
+## 15. Build & Purchase Experience Record
+
+A narrative project history and lessons-learned record is maintained at [SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md](SP-ARDHI-26-BUILD-PURCHASE-EXPERIENCE.md). It documents the supplier relationship, configuration process, branding decisions, attachment strategy, payment experience, production updates, documentation lessons, shipping experience, risks, and recommended controls for future imported fleet builds.
+
+## 16. Canonical Status and Change Control
 
 This document is the procurement source of truth for **SP-ARDHI-26** until superseded by official factory documentation.
 
