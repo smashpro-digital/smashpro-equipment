@@ -84,10 +84,28 @@ This observation is not confirmed by an updated factory invoice or specification
 | Pallet forks amount charged | $0 USD |
 | **Total DDP** | **$3,990 USD** |
 
-## 9. Payment Terms
+## 9. Payment Terms and Evidence
 
 - 30% T/T deposit
 - 70% T/T before shipping
+
+### Alibaba receipt received August 31, 2026
+
+Evidence record: [SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md)
+
+| Receipt field | Value |
+| --- | --- |
+| Alibaba receipt / order | #307512355501020107 |
+| Order date | July 15, 2026 |
+| Receipt date | August 31, 2026 |
+| Seller | Shandong Infront Machinery Co., Ltd. |
+| Alibaba order total | $2,269.00 USD |
+| Processing fee | $67.85 USD |
+| **Amount paid** | **$2,336.85 USD** |
+| Payment 1 | August 6, 2026 — $1,029.90 USD |
+| Payment 2 | August 20, 2026 — $1,306.95 USD |
+
+The Alibaba receipt is preserved as payment evidence for its referenced order. Its $2,269 order total does not by itself reconcile to the $3,990 DDP total on Proforma Invoice YF260716, so it does **not** supersede the canonical negotiated procurement price. Additional Alibaba/vendor documentation should be retained if it explains the remaining amount or separate order/payment structure.
 
 ## 10. Delivery
 
@@ -115,8 +133,6 @@ Banking instructions must be independently verified with the vendor through a tr
 
 ## 13. Procurement Timeline
 
-Dates were not supplied for the following milestones. Add dates and supporting document references as they become available; do not infer them.
-
 | Milestone | Record status | Date / reference |
 | --- | --- | --- |
 | Vendor selection | Recorded | Not documented |
@@ -127,7 +143,9 @@ Dates were not supplied for the following milestones. Add dates and supporting d
 | Pallet forks included | Recorded | Proforma Invoice YF260716 |
 | Spare parts included | Recorded | Proforma Invoice YF260716 |
 | Final negotiated price | Recorded | Proforma Invoice YF260716 |
-| Deposit payments | Recorded | Payment references not documented |
+| Alibaba payment 1 | Documented | August 6, 2026 — receipt #307512355501020107 |
+| Alibaba payment 2 | Documented | August 20, 2026 — receipt #307512355501020107 |
+| Alibaba receipt issued | Documented | August 31, 2026 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
 | Production began | Recorded | Date not documented |
 | Factory production photos received | Recorded | Date not documented |
 | Possible Triple Pump upgrade observed | Pending confirmation | Vendor documentation pending |
@@ -137,6 +155,7 @@ Dates were not supplied for the following milestones. Add dates and supporting d
 
 | Document or identifier | Status | Value / reference |
 | --- | --- | --- |
+| Alibaba payment receipt | Received | #307512355501020107 — [evidence record](evidence/SP-ARDHI-26-ALIBABA-RECEIPT-2026-08-31.md) |
 | Shipping Documents | Pending | To be added |
 | Bill of Lading | Pending | To be added |
 | Container Number | Pending | To be added |
