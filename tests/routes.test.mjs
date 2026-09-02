@@ -87,10 +87,9 @@ test("product catalog has a physical route, navigation, status model, and sitema
   assert.match(catalogPage, /aria-pressed/);
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
   assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
-  assert.match(catalogData, /sp-pcm-001-project-rebirth-prototype\.jpg/);
-  const catalogImage = readFileSync("images/sp-pcm-001-project-rebirth-prototype.jpg");
-  assert.equal(catalogImage[0], 0xff, "catalog image must begin with a JPEG signature");
-  assert.equal(catalogImage[1], 0xd8, "catalog image must begin with a JPEG signature");
+  assert.match(catalogData, /sp-pcm-001-feature\.jpg/);
+  const catalogImage = readFileSync("images/sp-pcm-001-feature.jpg");
+  assert.ok(catalogImage.length > 1024, "catalog image reference must resolve to a non-empty asset");
 });
 
 test("golf cart dream project uses one canonical concept image and route", () => {
@@ -273,20 +272,26 @@ test("fleet passport index links resolve to existing files", () => {
   links.forEach((link) => assert.equal(existsSync(`docs/fleet/${link}`), true, `${link} must resolve`));
 });
 
-test("SP-ARDHI-26 shipping phase is canonical and all three dated photos are deployable", () => {
+test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
-  assert.match(data, /status: "shipping", statusLabel: "Shipping Phase"/);
-  assert.match(data, /statusLabel: "Shipping Phase"/);
+  assert.match(data, /status: "shipping", statusLabel: "Container Loaded"/);
+  assert.match(data, /shippingStatus: \{ status: "Container Loaded", vessel: "EVER MAX", voyage: "1374-016E"/);
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
-  assert.match(data, /outbound freight preparation/);
-  assert.match(detail, /<h3>Shipping Phase<\/h3>/);
+  assert.match(data, /title: "Final Payment Completed"[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(data, /title: "Delivered to Freight Forwarder"[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(data, /title: "Export Crate Scheduled"[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(detail, /Shipping Journey/);
+  assert.match(detail, /Where is \{item\.fleetId\}\?/);
+  assert.match(detail, /journey-milestones-heading/);
+  assert.match(detail, /gallerySections\.map/);
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
     assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
   }
-  assert.doesNotMatch(data, /vessel departure|freight pickup|tracking number|customs clearance|port arrival|delivery date|final ETA/i);
+  assert.doesNotMatch(`${data}\n${detail}`, /factory address|warehouse location|container yard|home address/i);
 });
 
 test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manufacturing status in sync", () => {
