@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { EquipmentPassportPage } from "./EquipmentDetailPage";
 import "../styles/ardhi-passport-compact-overrides.css";
+import "../styles/ardhi-manufacturer-pdf-compact.css";
 
 const PASSPORT_FIELDS_TO_HIDE = new Set([
   "Passport Number",
