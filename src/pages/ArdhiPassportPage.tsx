@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { EquipmentPassportPage } from "./EquipmentDetailPage";
+import "../styles/ardhi-passport-compact-overrides.css";
 
 const PASSPORT_FIELDS_TO_HIDE = new Set(["Hydraulics", "Operating Weight", "Fuel", "Engine", "Current Owner"]);
 
@@ -10,6 +11,8 @@ export function ArdhiPassportPage() {
       const label = row.querySelector("dt")?.textContent?.trim();
       if (label && PASSPORT_FIELDS_TO_HIDE.has(label)) row.hidden = true;
     });
+
+    document.querySelector<HTMLElement>(".ardhi-passport-ledger .document-card")?.classList.add("is-compact-manufacturer-card");
 
     const statsSection = document.querySelector<HTMLElement>(".ardhi-journey-stats");
     if (!statsSection) return;
