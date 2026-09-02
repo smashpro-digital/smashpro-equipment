@@ -26,5 +26,43 @@ export const catalogProducts: CatalogProduct[] = [
       "Documented installation and revision history",
       "Future platform-specific installation kits",
     ],
+    specifications: [
+      { id: "pcm-catalog-id", group: "Identity", label: "Catalog ID", value: "SP-PCM-001", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
+      { id: "pcm-revision", group: "Identity", label: "Current revision", value: "Rev A", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
+      { id: "pcm-lifecycle", group: "Development", label: "Lifecycle", value: "Prototype / In Construction", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
+      { id: "pcm-system", group: "Electrical", label: "System", value: "12V battery isolation and primary positive power distribution", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
+      { id: "pcm-prototype", group: "Identity", label: "Prototype serial", value: "SP-PCM-001-A-P001", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
+      { id: "pcm-application", group: "Application", label: "Initial application", value: "2018 Ford F-150 3.5L EcoBoost", verification: "documented", source: "Project Rebirth development record", revision: "Rev A" },
+      { id: "pcm-dimensions", group: "Mechanical", label: "As-built dimensions", value: "TBD after Prototype P001 fabrication", verification: "tbd", source: "SP-PCM-001 reproducibility record", revision: "Rev A" },
+    ],
+    designPackages: [
+      {
+        id: "pcm-2018-f150-custom-battery-box-plate-rev-a",
+        title: "2018 F-150 Custom Battery Box Plate",
+        kind: "nameplate",
+        revision: "Rev A",
+        status: "design-review",
+        scope: "2018 Ford F-150 / Project Rebirth battery box build",
+        description: "Custom acrylic plate designed specifically for the 2018 F-150 Project Rebirth battery box build. It is a build-specific personalization component, not the canonical SP-PCM-001 product data plate, and does not replace required product ID, revision, serial, voltage, builder, or safety markings.",
+        previewImage: "/equipment/documents/catalog/sp-pcm-001/rev-a/nameplates/sp-pcm-001-2018-f150-custom-battery-box-plate-rev-a.png",
+        previewAlt: "Green and black custom SMASH F150 XLT Power Control Module plate for the 2018 F-150 battery box build",
+        files: [
+          { format: "pdf", label: "Print PDF", url: "/equipment/documents/catalog/sp-pcm-001/rev-a/nameplates/sp-pcm-001-2018-f150-custom-battery-box-plate-rev-a.pdf", downloadName: "SP-PCM-001-2018-F150-Custom-Battery-Box-Plate-Rev-A.pdf" },
+          { format: "svg", label: "Vector SVG", url: "/equipment/documents/catalog/sp-pcm-001/rev-a/nameplates/sp-pcm-001-2018-f150-custom-battery-box-plate-rev-a.svg", downloadName: "SP-PCM-001-2018-F150-Custom-Battery-Box-Plate-Rev-A.svg" },
+        ],
+      },
+    ],
+    customizationOptions: [
+      {
+        id: "pcm-custom-nameplate",
+        title: "Custom Battery Box Nameplate",
+        category: "nameplate",
+        buildType: "battery-box",
+        availability: "planned",
+        description: "Planned personalization option for compatible battery box builds. Customer-facing text and application branding may be configured within an approved template; required product identity, electrical, safety, and regulatory markings remain controlled and cannot be replaced.",
+        configurableFields: ["Application or vehicle name", "Approved accent treatment", "Customer-facing branding text"],
+        designPackageIds: ["pcm-2018-f150-custom-battery-box-plate-rev-a"],
+      },
+    ],
   },
 ];

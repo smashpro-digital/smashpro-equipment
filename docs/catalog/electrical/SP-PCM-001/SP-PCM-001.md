@@ -324,6 +324,10 @@ BUILDER: SMASHPRO
 
 `2018 FORD F-150` may appear on an installation label or prototype plate, but the core product identity should remain portable to future validated applications.
 
+The Rev A `SMASH_F150xLT / POWER CONTROL MODULE` acrylic artwork is controlled as the **custom battery box plate for the 2018 F-150 Project Rebirth build** under `drawings/nameplates/rev-a/`. It remains in Design Review and is not the canonical SP-PCM-001 product data plate because it does not carry the required catalog ID, revision, serial, voltage, builder, and applicable safety markings.
+
+Custom plates are planned to become a configurable option for other compatible battery box builds. Personalization is limited to approved application text, branding text, and accent treatments; required product identity, electrical, safety, and regulatory markings remain controlled separately. The current F-150 XLT artwork belongs specifically to the 2018 F-150 build and is not a universal template.
+
 A future QR code may resolve to a stable SmashPro product/serial record.
 
 ## 13. Reproducibility record

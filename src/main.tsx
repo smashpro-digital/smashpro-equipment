@@ -5,6 +5,7 @@ import { App } from "./app/App";
 import "./styles/global.css";
 import "./styles/dream-build-fixes.css";
 import "./styles/catalog.css";
+import "./styles/product-engineering.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
