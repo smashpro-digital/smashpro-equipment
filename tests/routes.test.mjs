@@ -322,14 +322,16 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(detail, /ArdhiPassportJourney/);
   assert.match(passport, /Interactive Expedition Journey/);
   assert.match(passport, /ardhi-expandable-timeline/);
-  for (const chapter of ["Overview", "Factory Build", "Finished Machine", "Export Journey", "Delivery", "Operation", "Maintenance"]) {
+  for (const chapter of ["Factory Build", "Finished Machine", "Export Journey", "Delivery", "Operation", "Maintenance"]) {
     assert.match(passport, new RegExp(`label: "${chapter}"`), `${chapter} must remain a curated archive chapter`);
   }
+  assert.doesNotMatch(passport, /label: "Overview"/, "the merged passport replaces the duplicate archive overview");
   assert.match(passport, /WindowSticker/);
   assert.match(passport, /sp-ardhi-26-yf380-manufacturer-preview\.png/);
-  assert.match(passport, /PDF Preview/);
+  assert.match(passport, /Manufacturer PDF/);
   assert.doesNotMatch(passport, /\["all","All"\],\.\.\.groupLabels/);
-  assert.match(passport, /Engineering Decisions/);
+  assert.match(passport, /linkedDecisions/);
+  assert.doesNotMatch(passport, /Engineering Decisions/);
   assert.match(passport, /Payment History/);
   assert.match(passport, /Approximate Journey Distance/);
   assert.match(passport, /No live GPS location is claimed/);
@@ -344,8 +346,8 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   }
   assert.match(passport, /<strong>\$4,259<\/strong>/);
   assert.match(passport, /separate from the \$3,990 signed proforma baseline/);
-  assert.doesNotMatch(passport, /date: "Sep 2, 2026", title: "Final Payment"/);
-  assert.match(passport, /date: "Sep 2, 2026", title: "Factory Departure"/);
+  assert.doesNotMatch(passport, /date: "Sep 2, 2026"[\s\S]{0,160}title: "Final Payment"/);
+  assert.match(passport, /date: "Sep 2, 2026"[\s\S]{0,160}title: "Factory Departure"/);
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));

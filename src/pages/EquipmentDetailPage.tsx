@@ -24,7 +24,7 @@ const gallerySections = [
   ["commissioning", "Commissioning"],
 ] as const;
 
-export function EquipmentDetailPage({ slug }: { slug: string }) {
+export function EquipmentPassportPage({ slug }: { slug: string }) {
   const item = equipment.find((entry) => entry.slug === slug)!;
   const related = equipment.find((entry) => entry.slug !== slug)!;
   const packages = calculatePackages(item.upgrades, item.packageRules);
@@ -45,7 +45,6 @@ export function EquipmentDetailPage({ slug }: { slug: string }) {
   if (isArdhi) return <PageFrame><SeoSchema item={item} />
     <nav className="shell breadcrumbs" aria-label="Breadcrumb"><Link to="/">Equipment</Link><span>/</span><span aria-current="page">Passport {item.fleetId}</span></nav>
     <ArdhiPassportJourney item={item} />
-    <PartnerFieldSupport partners={item.partners} />
     <section className="related shell"><div><p className="eyebrow">Related equipment passport</p><h2>{related.fleetId}</h2><p>{related.capabilityStatement}</p></div><Link className="related-image" to={related.publicPath}><img src={related.heroImage} alt={related.fleetId} width="1536" height="1024" loading="lazy" /><span>Open passport →</span></Link></section>
   </PageFrame>;
 
