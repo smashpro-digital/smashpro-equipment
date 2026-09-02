@@ -8,7 +8,7 @@ export const catalogProducts: CatalogProduct[] = [
     category: "Power & Electrical",
     status: "in-development",
     description: "A documented 12V power-management prototype combining battery isolation, voltage monitoring, high-current distribution, and serviceable packaging.",
-    image: "/equipment/images/sp-pcm-001-feature.jpg",
+    image: "/equipment/images/sp-pcm-001-design-poster.png",
     imageAlt: "SP-PCM-001 Power Control Module concept installed in the Project Rebirth F-150",
     href: "/equipment/catalog/sp-pcm-001/",
     productKind: "module",

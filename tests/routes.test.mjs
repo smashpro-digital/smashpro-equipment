@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
@@ -86,11 +87,21 @@ test("product catalog has a physical route, navigation, status model, and sitema
   ["concept", "in-development", "prototype", "field-testing", "production-candidate", "available", "archived"].forEach((status) => assert.match(catalogTypes, new RegExp(`"${status}"`)));
   assert.match(catalogPage, /aria-pressed/);
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
-  assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
-  assert.match(catalogData, /sp-pcm-001-feature\.jpg/);
-  const catalogImage = readFileSync("public/equipment/images/sp-pcm-001-feature.jpg");
-  assert.equal(catalogImage[0], 0xff, "deployed catalog image must begin with a JPEG signature");
-  assert.equal(catalogImage[1], 0xd8, "deployed catalog image must begin with a JPEG signature");
+  const pcmPage = readFileSync("src/pages/PowerControlModulePage.tsx", "utf8");
+  assert.match(catalogData, /sp-pcm-001-design-poster\.png/);
+  assert.doesNotMatch(catalogData, /sp-pcm-001-detail-closeup\.png/);
+  assert.match(pcmPage, /sp-pcm-001-detail-closeup\.png/);
+  assert.doesNotMatch(pcmPage, /sp-pcm-001-design-poster\.png/);
+
+  const approvedMedia = [
+    ["images/sp-pcm-001-design-poster.png", "57e327b4e30ba8af26239511ebf8bf5c0a9a2c5c2d20b0fa779c5a3d3b5efb92"],
+    ["images/sp-pcm-001-detail-closeup.png", "25db25d3959a73b3986fb5c10c80c7431b8f2a363853cf976b9d99439be12cdd"],
+  ];
+  approvedMedia.forEach(([path, expectedHash]) => {
+    const image = readFileSync(path);
+    assert.deepEqual([...image.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], `${path} must have a valid PNG signature`);
+    assert.equal(createHash("sha256").update(image).digest("hex"), expectedHash, `${path} must remain the approved artwork`);
+  });
 });
 
 test("catalog product specifications and design packages are revision controlled", () => {
