@@ -13,13 +13,27 @@ const PASSPORT_FIELDS_TO_HIDE = new Set([
   "Current Owner",
 ]);
 
+const PASSPORT_FIELD_ICONS: Record<string, string> = {
+  "Factory Model": "▱",
+  Status: "✓",
+  "Service Hours": "◷",
+};
+
 export function ArdhiPassportPage() {
   useEffect(() => {
     const passportRows = Array.from(document.querySelectorAll<HTMLElement>(".ardhi-passport-ledger > dl > div"));
     passportRows.forEach((row) => {
       const label = row.querySelector("dt")?.textContent?.trim();
-      if (label && PASSPORT_FIELDS_TO_HIDE.has(label)) row.hidden = true;
+      if (label && PASSPORT_FIELDS_TO_HIDE.has(label)) {
+        row.hidden = true;
+        return;
+      }
+      if (label && PASSPORT_FIELD_ICONS[label]) {
+        row.classList.add("passport-summary-item");
+        row.dataset.icon = PASSPORT_FIELD_ICONS[label];
+      }
     });
+    document.querySelector<HTMLElement>(".ardhi-passport-ledger > dl")?.classList.add("passport-summary-row");
 
     document.querySelector<HTMLElement>(".ardhi-passport-ledger .document-card")?.classList.add("is-compact-manufacturer-card");
 
