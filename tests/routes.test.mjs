@@ -300,42 +300,36 @@ test("fleet passport index links resolve to existing files", () => {
 test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
+  const passport = readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8");
   assert.match(data, /status: "shipping", statusLabel: "Container Loaded"/);
   assert.match(data, /shippingStatus: \{ status: "Container Loaded", vessel: "EVER MAX", voyage: "1374-016E"/);
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
   assert.match(data, /title: "Final Payment Completed"[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Delivered to Freight Forwarder"[\s\S]*photos: \[\], videos: \[\]/);
-  assert.match(data, /title: "Export Crate Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-export-crate-documentation-2026-09-02\.mp4"\)\]/);
+  assert.match(data, /title: "Factory Departure Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
-  assert.match(detail, /Shipping Journey/);
-  assert.match(detail, /Tracking Visuals/);
-  assert.match(detail, /logistics-visual-card/);
-  assert.match(detail, /Where is \{item\.fleetId\}\?/);
-  assert.match(detail, /journey-milestones-heading/);
-  assert.match(detail, /gallerySections\.map/);
+  assert.match(detail, /ArdhiPassportJourney/);
+  assert.match(passport, /Interactive World Journey/);
+  assert.match(passport, /ardhi-expandable-timeline/);
+  assert.match(passport, /Search SP-ARDHI-26 media/);
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
     assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
   }
-  for (const filename of [
-    "sp-ardhi-26-logistics-infront-factory-facility.png",
-    "sp-ardhi-26-logistics-ever-max-vessel.png",
-    "sp-ardhi-26-logistics-route-geography.png",
-  ]) {
-    assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
-    assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
-  }
+  assert.doesNotMatch(data, /sp-ardhi-26-logistics-(?:infront|ever|max|route)/);
   assert.doesNotMatch(`${data}\n${detail}`, /factory address|warehouse location|container yard|home address/i);
 });
 
 test("SP-ARDHI-26 export crate video uses a semantic name and advances the verified story", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
-  const filename = "sp-ardhi-26-export-crate-documentation-2026-09-02.mp4";
+  const filename = "sp-ardhi-26-factory-departure-2026-09-02.mp4";
   assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
-  assert.match(data, /title: "Export Crate Documented"[\s\S]*videos: \[image\("sp-ardhi-26-export-crate-documentation-2026-09-02\.mp4"\)\]/);
+  assert.match(data, /title: "Factory Departure Documented"[\s\S]*videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
   assert.match(data, /group: "export"/);
   assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
+  assert.equal(existsSync("images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"), true, "departure poster must exist");
+  assert.equal(existsSync("images/sp-ardhi-26-export-crate-documentation-2026-09-02.mp4"), false, "tracking-focused source must not remain public");
   assert.equal(existsSync("images/4280678537767.PNM.mp4"), false, "raw phone filename must not remain in source media");
 });
 

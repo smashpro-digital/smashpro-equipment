@@ -47,6 +47,12 @@ jobs:
               missing=1
             fi
           done
+          for path in dist/images/sp-ardhi-26-factory-departure-2026-09-02.mp4 dist/images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg; do
+            if [ ! -f "$path" ]; then
+              echo "::error title=Missing authentic departure media::$path was not generated."
+              missing=1
+            fi
+          done
           video_size=$(wc -c < dist/images/sp-ardhi-26-pallet-fork-test.mp4)
           if [ "$video_size" -lt 1000000 ]; then
             echo "::error title=Invalid video artifact::Pallet fork video is only $video_size bytes; Git LFS content was not resolved."
