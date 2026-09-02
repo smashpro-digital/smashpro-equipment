@@ -363,6 +363,20 @@ test("SP-ARDHI-26 export crate video uses a semantic name and advances the verif
   assert.equal(existsSync("images/4280678537767.PNM.mp4"), false, "raw phone filename must not remain in source media");
 });
 
+test("equipment partners render only public relationship statuses", () => {
+  const data = readFileSync("src/data/equipment.ts", "utf8");
+  const component = readFileSync("src/components/PartnerFieldSupport.tsx", "utf8");
+  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
+  assert.match(component, /\["confirmed", "active", "completed"\]/);
+  assert.match(component, /if \(!visiblePartners\.length\) return null/);
+  assert.match(detail, /<PartnerFieldSupport partners=\{item\.partners\} \/>/);
+  assert.match(data, /brand: "Shandong Infront Machinery Group Co\., Ltd\."[\s\S]*status: "completed"/);
+  for (const outreachOnlyBrand of ["Blue Diamond Attachments", "Skid Steer Solutions", "Eterra Attachments", "Ergodyne", "Radians", "Mechanix Wear", "Pyramex", "Strapinno", "Spytec", "Hapn"]) {
+    assert.doesNotMatch(data, new RegExp(outreachOnlyBrand), `${outreachOnlyBrand} must not be published without a confirmed relationship`);
+  }
+  assert.doesNotMatch(component, /email|phone|pricing negotiation/i);
+});
+
 test("SP-PCM-001 prototype story images are deployable originals", () => {
   const page = readFileSync("src/pages/PowerControlModulePage.tsx", "utf8");
   const vite = readFileSync("vite.config.ts", "utf8");

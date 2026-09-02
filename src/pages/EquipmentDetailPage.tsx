@@ -8,6 +8,7 @@ import { WindowSticker } from "../components/WindowSticker";
 import { EquipmentProjects } from "../components/EquipmentProjects";
 import { CanonicalPublicDocuments } from "../components/CanonicalPublicDocuments";
 import { ArdhiPassportJourney } from "../components/ArdhiPassportJourney";
+import { PartnerFieldSupport } from "../components/PartnerFieldSupport";
 
 const dateLabel = (value?: string) => value ? new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)) : "Date documented privately";
 const detailParagraphs = (detail: string) => detail.split("\n").map((line) => <p key={line}>{line}</p>);
@@ -44,6 +45,7 @@ export function EquipmentDetailPage({ slug }: { slug: string }) {
   if (isArdhi) return <PageFrame><SeoSchema item={item} />
     <nav className="shell breadcrumbs" aria-label="Breadcrumb"><Link to="/">Equipment</Link><span>/</span><span aria-current="page">Passport {item.fleetId}</span></nav>
     <ArdhiPassportJourney item={item} />
+    <PartnerFieldSupport partners={item.partners} />
     <section className="related shell"><div><p className="eyebrow">Related equipment passport</p><h2>{related.fleetId}</h2><p>{related.capabilityStatement}</p></div><Link className="related-image" to={related.publicPath}><img src={related.heroImage} alt={related.fleetId} width="1536" height="1024" loading="lazy" /><span>Open passport →</span></Link></section>
   </PageFrame>;
 
@@ -99,6 +101,7 @@ export function EquipmentDetailPage({ slug }: { slug: string }) {
     <section className="youtube-hub"><div className="shell"><div className="section-heading"><div><p className="eyebrow">SmashPro Garage</p><h2>Every episode. One machine.</h2></div><p>Installation, walkaround, review, maintenance, and Shorts records can link directly to the upgrade that created them.</p></div>{item.media.filter(({ kind }) => kind === "youtube").length ? <div className="youtube-grid">{item.media.filter(({ kind }) => kind === "youtube").map((media) => <a href={media.url} key={media.id}><span>{media.role ?? "episode"}</span><h3>{media.title}</h3><p>{media.description}</p></a>)}</div> : <p className="empty-state">No YouTube episodes have been published for this passport yet.</p>}</div></section>
 
     <section className="downloads-section"><div className="shell"><div><p className="eyebrow">Downloads & related episodes</p><h2>Documents that travel with the asset.</h2></div><CanonicalPublicDocuments assetCode={item.fleetId} />{downloads.length ? <div className="public-document-list">{downloads.map((document) => <article className="public-document-card" key={document.id}><div className="public-document-card__icon" aria-hidden="true">PDF</div><div><span>Manufacturer document</span><h3>{document.title}</h3>{document.description ? <p>{document.description}</p> : null}<small>{document.kind.replace("-", " ")} · {document.source ?? "Public document"}</small></div><div className="public-document-card__actions"><a href={document.url} target="_blank" rel="noopener noreferrer" aria-label={`View ${document.title} PDF`}>View PDF</a><a href={document.url} download={document.downloadName} aria-label={`Download ${document.title} PDF`}>Download PDF</a></div></article>)}</div> : <p className="empty-state">No public manuals, brochures, or specification sheets are currently attached.</p>}{item.media.filter(({ kind }) => kind === "youtube").map((media) => <a className="youtube-link" key={media.id} href={media.url}>{media.title} →</a>)}</div></section>
+    <PartnerFieldSupport partners={item.partners} />
 
     <section className="safety-section"><div className="shell two-columns"><div><p className="eyebrow">Safety and access</p><h2>Readiness before operation.</h2>{item.restrictions.map((value) => <p key={value}>{value}</p>)}</div><div className="requirements">{item.requirements.map((requirement) => <article key={requirement.title}><h3>{requirement.title}</h3><p>{requirement.detail}</p></article>)}</div></div></section>
     <section className="related shell"><div><p className="eyebrow">Related equipment passport</p><h2>{related.fleetId}</h2><p>{related.capabilityStatement}</p></div><Link className="related-image" to={related.publicPath}><img src={related.heroImage} alt={related.fleetId} width="1536" height="1024" loading="lazy" /><span>Open passport →</span></Link></section>

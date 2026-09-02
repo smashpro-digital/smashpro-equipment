@@ -38,6 +38,11 @@ export interface EquipmentShippingRouteStep { label: string; status: "completed"
 export interface EquipmentLifecycleMilestone { id: string; label: string; status: "completed" | "current" | "upcoming"; date?: string; photos: string[]; videos: string[]; notes?: string; }
 export interface EquipmentFleetStat { label: string; value: string; detail?: string; }
 export interface EquipmentLogisticsGraphic { id: string; title: string; eyebrow: string; description: string; src: string; alt: string; caption: string; width: number; height: number; sourceNote?: string; }
+export type EquipmentPartnerStatus = "prospect" | "contacted" | "discussing" | "confirmed" | "active" | "completed" | "declined";
+export interface EquipmentPartner {
+  id: string; brand: string; category: string; relationship: string; description: string; status: EquipmentPartnerStatus;
+  logo?: string; website?: string; storyUrl?: string;
+}
 
 export interface Equipment {
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
@@ -45,7 +50,7 @@ export interface Equipment {
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;
-  shippingStatus?: EquipmentShippingStatus; shippingRoute?: EquipmentShippingRouteStep[]; lifecycleMilestones?: EquipmentLifecycleMilestone[]; fleetStats?: EquipmentFleetStat[]; logisticsGraphics?: EquipmentLogisticsGraphic[]; passportExplanation?: string;
+  shippingStatus?: EquipmentShippingStatus; shippingRoute?: EquipmentShippingRouteStep[]; lifecycleMilestones?: EquipmentLifecycleMilestone[]; fleetStats?: EquipmentFleetStat[]; logisticsGraphics?: EquipmentLogisticsGraphic[]; passportExplanation?: string; partners?: EquipmentPartner[];
   capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];
 }
 

@@ -23,6 +23,7 @@ export const equipment: Equipment[] = [
     ]),
     factoryFinish: { paintColor: "Green High Gloss", colorStandard: "RAL 6018", coatingProcess: "Industrial powder-coated finish", factoryCure: "195°C (383°F) for 15 minutes", summary: "Finished in a high-gloss RAL 6018 industrial coating and factory-cured for long-term durability and professional appearance." },
     passportExplanation: "YF380 is retained as the manufacturer's model designation for service parts and documentation. SP-ARDHI-26 is the permanent SmashPro fleet identity.",
+    partners: [{ id: "ardhi-infront-factory-build", brand: "Shandong Infront Machinery Group Co., Ltd.", category: "Factory / Build", relationship: "Factory / Build Partner", description: "Original manufacturer and factory-build support for the YF380 platform configured as SP-ARDHI-26.", status: "completed", storyUrl: "#history-production-complete" }],
     shippingStatus: { status: "Container Loaded", vessel: "EVER MAX", voyage: "1374-016E", nextMilestone: "Ocean Departure", estimatedArrival: "October 5 2026", trackingReference: "YFC260717B==BZHYF0822BMT1" },
     shippingRoute: [
       { label: "Factory", status: "completed" },
