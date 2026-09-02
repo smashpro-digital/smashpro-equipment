@@ -1,0 +1,100 @@
+name: Deploy Quote UI Cache Bust
+
+on:
+  push:
+    branches: [quote-source-sync]
+    paths:
+      - '.github/workflows/deploy-quote-cache-bust.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Update production quote stylesheet version
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://smashpro.app/app/quote.php
+    steps:
+      - name: Verify required FTP settings
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_PORT; do
+            test -n "${!name:-}" || { echo "::error::Missing $name"; exit 1; }
+          done
+
+      - name: Pull and patch only app/quote.php
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error \
+            --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$FTP_SERVER:$FTP_PORT/public_html/smashpro.app/app/quote.php" \
+            --output quote.php
+          cp quote.php quote.php.before
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('quote.php')
+          s = p.read_text()
+          old = '/wp-content/themes/smashpro/assets/css/quote.css?v=20260826'
+          new = '/wp-content/themes/smashpro/assets/css/quote.css?v=20260828-2'
+          if new in s:
+              print('Quote stylesheet cache key already current.')
+          elif old in s:
+              p.write_text(s.replace(old, new, 1))
+              print('Updated quote stylesheet cache key.')
+          else:
+              raise SystemExit('Expected quote stylesheet link was not found; refusing to alter production source.')
+          PY
+          php -l quote.php
+          diff -u quote.php.before quote.php || true
+
+      - name: Preserve pre-change source as short-lived artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: quote-php-before-cache-bust
+          path: quote.php.before
+          retention-days: 1
+
+      - name: Upload patched quote.php
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error \
+            --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            --upload-file quote.php \
+            "ftp://$FTP_SERVER:$FTP_PORT/public_html/smashpro.app/app/quote.php"
+
+      - name: Verify remote quote.php references refreshed CSS
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error \
+            --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$FTP_SERVER:$FTP_PORT/public_html/smashpro.app/app/quote.php" \
+            --output quote.php.verify
+          grep -Fq '/wp-content/themes/smashpro/assets/css/quote.css?v=20260828-2' quote.php.verify
+          php -l quote.php.verify
