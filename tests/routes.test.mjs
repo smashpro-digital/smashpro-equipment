@@ -320,9 +320,22 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(data, /title: "Factory Departure Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(detail, /ArdhiPassportJourney/);
-  assert.match(passport, /Interactive World Journey/);
+  assert.match(passport, /Interactive Expedition Journey/);
   assert.match(passport, /ardhi-expandable-timeline/);
   assert.match(passport, /Search SP-ARDHI-26 media/);
+  assert.match(passport, /Engineering Decisions/);
+  assert.match(passport, /Payment History/);
+  assert.match(passport, /Approximate Journey Distance/);
+  assert.match(passport, /No live GPS location is claimed/);
+  assert.match(passport, /IntersectionObserver/);
+  assert.match(passport, /scrollIntoView/);
+  assert.match(passport, /open=\{expandedRecord === record\.id\}/);
+  for (const milestone of ["Fleet Vision Created", "Manufacturer Selected", "Hydraulic Upgrade Approved", "Factory Departure", "Container Loaded", "First Job", "Annual Inspection"]) {
+    assert.match(passport, new RegExp(milestone), `${milestone} must remain in the permanent history`);
+  }
+  assert.match(passport, /\["Deposit", "\$1,000", "Completed"\]/);
+  assert.match(passport, /\["Final Balance", "\$1,269", "Completed"\]/);
+  assert.match(passport, /<strong>\$2,269<\/strong>/);
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
