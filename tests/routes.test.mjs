@@ -341,6 +341,8 @@ test("SP-ARDHI-26 export crate video uses a semantic name and advances the verif
 
 test("SP-PCM-001 prototype story images are deployable originals", () => {
   const page = readFileSync("src/pages/PowerControlModulePage.tsx", "utf8");
+  const vite = readFileSync("vite.config.ts", "utf8");
+  const workflow = readFileSync(".github/workflows/deploy.yml", "utf8");
   const filenames = [
     "sp-pcm-001-engine-bay-prototype.jpg",
     "sp-pcm-001-cardboard-enclosure-fitment.jpg",
@@ -353,32 +355,9 @@ test("SP-PCM-001 prototype story images are deployable originals", () => {
     const bytes = readFileSync(`public/equipment/images/sp-pcm-001/${filename}`);
     assert.equal(bytes[0], 0xff, `${filename} must begin with a JPEG signature`);
     assert.equal(bytes[1], 0xd8, `${filename} must begin with a JPEG signature`);
+    assert.match(workflow, new RegExp(`dist/images/sp-pcm-001/${filename.replaceAll(".", "\\.")}`));
   });
-});
-
-test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manufacturing status in sync", () => {
-  const data = readFileSync("src/data/equipment.ts", "utf8");
-  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
-  assert.match(data, /\["Platform", "K600", "Identity"/);
-  assert.match(data, /\["Fleet ID", "SP-MZIGO-26E", "Identity"/);
-  assert.match(data, /\["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co\., Ltd\.", "Identity"/);
-  assert.match(data, /heading: "Latest Factory Production Update"/);
-  assert.match(data, /label: "Chassis Assembly", status: "completed"/);
-  assert.match(data, /label: "Body Assembly", status: "current"/);
-  assert.match(data, /label: "U\.S\. Delivery", status: "upcoming"/);
-  assert.match(detail, /className="factory-update"/);
-  assert.match(detail, /loading="lazy" decoding="async"/);
-  assert.match(detail, /<video controls preload="metadata"/);
-  assert.match(detail, /poster=\{item\.factoryUpdate\.video\.poster\}/);
-  for (const filename of [
-    "sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg",
-    "sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg",
-    "sp-mzigo-26e-production-chassis-assembly-video-poster-2s-2026-08-31.jpg",
-    "sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4",
-  ]) {
-    assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
-    assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
-  }
+  assert.match(vite, /public\/equipment\/images\/sp-pcm-001"\),[\s\S]*resolve\(output, "sp-pcm-001"\),[\s\S]*recursive: true/);
 });
 
 test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manufacturing status in sync", () => {

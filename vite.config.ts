@@ -32,6 +32,11 @@ function preserveEquipmentMedia(): Plugin {
         resolve(output, "sp-pcm-001-feature.jpg"),
       );
       cpSync(
+        resolve(projectDirectory, "public/equipment/images/sp-pcm-001"),
+        resolve(output, "sp-pcm-001"),
+        { recursive: true },
+      );
+      cpSync(
         resolve(projectDirectory, "public/equipment/images/sp-gari-26e-concept.png"),
         resolve(output, "sp-gari-26e-concept.png"),
       );
