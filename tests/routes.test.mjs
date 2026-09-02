@@ -88,8 +88,9 @@ test("product catalog has a physical route, navigation, status model, and sitema
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
   assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
   assert.match(catalogData, /sp-pcm-001-feature\.jpg/);
-  const catalogImage = readFileSync("images/sp-pcm-001-feature.jpg");
-  assert.ok(catalogImage.length > 1024, "catalog image reference must resolve to a non-empty asset");
+  const catalogImage = readFileSync("public/equipment/images/sp-pcm-001-feature.jpg");
+  assert.equal(catalogImage[0], 0xff, "deployed catalog image must begin with a JPEG signature");
+  assert.equal(catalogImage[1], 0xd8, "deployed catalog image must begin with a JPEG signature");
 });
 
 test("golf cart dream project uses one canonical concept image and route", () => {
