@@ -320,7 +320,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(data, /title: "Factory Departure Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(detail, /ArdhiPassportJourney/);
-  assert.match(passport, /Interactive Expedition Journey/);
+  assert.match(passport, /Asset Journey/);
   assert.match(passport, /ardhi-expandable-timeline/);
   for (const chapter of ["Factory Build", "Finished Machine", "Export Journey", "Delivery", "Operation", "Maintenance"]) {
     assert.match(passport, new RegExp(`label: "${chapter}"`), `${chapter} must remain a curated archive chapter`);
