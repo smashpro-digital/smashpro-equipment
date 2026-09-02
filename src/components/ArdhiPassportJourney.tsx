@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { toPng } from "html-to-image";
 import type { Equipment, GalleryGroup, GalleryImage } from "../types/equipment";
 import { calculatePackages, calculatePassportScores } from "../domain/passport";
 import { WindowSticker } from "./WindowSticker";
@@ -440,9 +441,13 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const [query, setQuery] = useState("");
   const [chapter, setChapter] = useState<ArchiveChapter>("factory-build");
   const [lightbox, setLightbox] = useState<GalleryImage>();
+  const [stickerOpen, setStickerOpen] = useState(false);
+  const [stickerZoom, setStickerZoom] = useState(1);
+  const [pendingStickerAction, setPendingStickerAction] = useState<"png" | "pdf">();
   const [pageProgress, setPageProgress] = useState(0);
   const [nowViewing, setNowViewing] = useState(["Passport", "Identity", "SP-ARDHI-26"]);
   const historyRefs = useRef<Record<string, HTMLLIElement | null>>({});
+  const stickerModalRef = useRef<HTMLDivElement>(null);
   const today = new Date();
   const daysSinceBuild = daysBetween("2026-08-18", today);
   const daysUntilArrival = Math.max(0, Math.ceil((new Date("2026-10-05T00:00:00Z").getTime() - today.getTime()) / 86_400_000));
@@ -484,6 +489,33 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     document.addEventListener("keydown", close);
     return () => document.removeEventListener("keydown", close);
   }, [lightbox]);
+  useEffect(() => {
+    if (!stickerOpen) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const modal = stickerModalRef.current;
+    requestAnimationFrame(() => modal?.querySelector<HTMLElement>("button")?.focus());
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setStickerOpen(false); return; }
+      if (event.key !== "Tab" || !modal) return;
+      const controls = Array.from(modal.querySelectorAll<HTMLElement>('button, a[href], [tabindex]:not([tabindex="-1"])')).filter((control) => !control.hasAttribute("disabled"));
+      if (!controls.length) return;
+      const first = controls[0]; const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => { document.removeEventListener("keydown", handleKey); previousFocus?.focus(); };
+  }, [stickerOpen]);
+  useEffect(() => {
+    if (!stickerOpen || !pendingStickerAction) return;
+    const frame = requestAnimationFrame(() => {
+      const sticker = stickerModalRef.current?.querySelector<HTMLElement>("[data-window-sticker-certificate]");
+      if (pendingStickerAction === "png" && sticker) void toPng(sticker, { cacheBust: true, pixelRatio: 2, backgroundColor: "#ffffff" }).then((dataUrl) => { const link = document.createElement("a"); link.download = `${item.fleetId}-window-sticker.png`; link.href = dataUrl; link.click(); });
+      if (pendingStickerAction === "pdf") window.print();
+      setPendingStickerAction(undefined);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [item.fleetId, pendingStickerAction, stickerOpen]);
   useEffect(() => {
     const update = () => {
       const total = document.documentElement.scrollHeight - innerHeight;
@@ -549,6 +581,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     if (record) investigateRecord(record);
     requestAnimationFrame(() => scrollToRecord("evidence", ["Evidence", activeStop.label, activeStop.title]));
   };
+  const openSticker = (action?: "png" | "pdf") => { setStickerZoom(1); setStickerOpen(true); setPendingStickerAction(action); };
   const passport = [
     ["Passport Number", "SP-ARDHI-26"],
     ["Factory Model", "YF380"],
@@ -618,7 +651,10 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             </div>
           ))}
         </dl>
-        <WindowSticker item={item} packages={packages} scores={scores} compact />
+        <section className="sticker-document-reference" aria-labelledby="window-sticker-card-title">
+          <div><span aria-hidden="true">🏷</span><p className="eyebrow">Official Equipment Window Sticker</p><h3 id="window-sticker-card-title">SP-ARDHI-26</h3><p>Fleet Asset #001 · Official configuration record</p><dl><div><dt>Current Status</dt><dd>{item.statusLabel}</dd></div><div><dt>Last Updated</dt><dd>September 2026</dd></div></dl></div>
+          <div className="sticker-document-actions"><button type="button" onClick={() => openSticker()}>View Full Sticker</button><button type="button" onClick={() => openSticker("png")}>Download PNG</button><button type="button" onClick={() => openSticker("pdf")}>Download PDF</button></div>
+        </section>
         <div className="ardhi-overview-grid" id="overview-title">
           <article className="document-card">
             <img src={image("sp-ardhi-26-yf380-manufacturer-preview.png")} alt="First-page preview of the YF380 manufacturer specification PDF" loading="lazy" decoding="async" />
@@ -670,6 +706,9 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             <p>Permanent identity, configuration, journey, service, work, and maintenance history.</p>
             <small>Updated Sep 2, 2026 · Web passport</small>
             <a href="#passport-ledger-title">Open Passport</a>
+          </article>
+          <article className="is-available window-sticker-library-card">
+            <div aria-hidden="true"><span>🏷</span> Official certificate</div><span className="document-status is-verified">Verified</span><h3>Equipment Window Sticker</h3><p>Permanent configuration and identity certificate for SP-ARDHI-26.</p><small>Updated September 2026 · PNG / PDF / Print</small><button type="button" onClick={() => openSticker()}>View Full Sticker</button>
           </article>
           {["Operator Manual", "Maintenance Manual", "Parts Manual", "Bill of Lading", "Packing List", "Inspection Sheet"].map((title, index) => (
             <article className="is-reserved" key={title}>
@@ -1077,6 +1116,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <small>0.0 verified service hours</small>
         </div>
       </section>
+      {stickerOpen ? <div className="sticker-viewer-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setStickerOpen(false); }}><div className="sticker-viewer" id="window-sticker-viewer" ref={stickerModalRef} role="dialog" aria-modal="true" aria-labelledby="sticker-viewer-title"><header><div><p className="eyebrow">Official equipment certificate</p><h2 id="sticker-viewer-title">Equipment Window Sticker</h2></div><div className="sticker-viewer__tools"><button type="button" onClick={() => setStickerZoom((zoom) => Math.max(.75, zoom - .25))} aria-label="Zoom out">−</button><output aria-label="Current zoom">{Math.round(stickerZoom * 100)}%</output><button type="button" onClick={() => setStickerZoom((zoom) => Math.min(2, zoom + .25))} aria-label="Zoom in">+</button><button type="button" onClick={() => setPendingStickerAction("png")}>Download PNG</button><button type="button" onClick={() => setPendingStickerAction("pdf")}>Download PDF</button><button type="button" onClick={() => window.print()}>Print</button><button type="button" onClick={() => setStickerOpen(false)}>Close</button></div></header><div className="sticker-viewer__viewport" aria-label="Zoomable and pannable window sticker"><div className="sticker-viewer__stage" style={{ width: `${stickerZoom * 100}%` }}><div style={{ transform: `scale(${stickerZoom})` }}><WindowSticker item={item} packages={packages} scores={scores} compact showActions={false}/></div></div></div></div></div> : null}
       {lightbox ? (
         <div className="media-lightbox" role="dialog" aria-modal="true" aria-label={lightbox.alt} onClick={() => setLightbox(undefined)}>
           <button type="button" onClick={() => setLightbox(undefined)} aria-label="Close media lightbox">

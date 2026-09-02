@@ -327,6 +327,13 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   }
   assert.doesNotMatch(passport, /label: "Overview"/, "the merged passport replaces the duplicate archive overview");
   assert.match(passport, /WindowSticker/);
+  assert.match(passport, /Official Equipment Window Sticker/);
+  assert.match(passport, /sticker-viewer-backdrop/);
+  assert.match(passport, /aria-modal="true"/);
+  assert.match(passport, /event\.key === "Escape"/);
+  assert.match(passport, /event\.key !== "Tab"/);
+  assert.match(passport, /Download PNG/);
+  assert.match(passport, /Download PDF/);
   assert.match(passport, /sp-ardhi-26-yf380-manufacturer-preview\.png/);
   assert.match(passport, /Manufacturer PDF/);
   assert.doesNotMatch(passport, /\["all","All"\],\.\.\.groupLabels/);
