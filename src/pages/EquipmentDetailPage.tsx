@@ -44,7 +44,6 @@ export function EquipmentDetailPage({ slug }: { slug: string }) {
   if (isArdhi) return <PageFrame><SeoSchema item={item} />
     <nav className="shell breadcrumbs" aria-label="Breadcrumb"><Link to="/">Equipment</Link><span>/</span><span aria-current="page">Passport {item.fleetId}</span></nav>
     <ArdhiPassportJourney item={item} />
-    <section className="downloads-section"><div className="shell"><div><p className="eyebrow">Documents</p><h2>Records that travel with the asset.</h2></div><CanonicalPublicDocuments assetCode={item.fleetId} />{downloads.map((document) => <article className="public-document-card" key={document.id}><div className="public-document-card__icon" aria-hidden="true">PDF</div><div><span>Manufacturer document</span><h3>{document.title}</h3><p>{document.description}</p></div><div className="public-document-card__actions"><a href={document.url} target="_blank" rel="noopener noreferrer">View PDF</a><a href={document.url} download={document.downloadName}>Download PDF</a></div></article>)}</div></section>
     <section className="related shell"><div><p className="eyebrow">Related equipment passport</p><h2>{related.fleetId}</h2><p>{related.capabilityStatement}</p></div><Link className="related-image" to={related.publicPath}><img src={related.heroImage} alt={related.fleetId} width="1536" height="1024" loading="lazy" /><span>Open passport →</span></Link></section>
   </PageFrame>;
 
