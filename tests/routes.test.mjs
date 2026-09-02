@@ -281,7 +281,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
   assert.match(data, /title: "Final Payment Completed"[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Delivered to Freight Forwarder"[\s\S]*photos: \[\], videos: \[\]/);
-  assert.match(data, /title: "Export Crate Scheduled"[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(data, /title: "Export Crate Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-export-crate-documentation-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(detail, /Shipping Journey/);
   assert.match(detail, /Where is \{item\.fleetId\}\?/);
@@ -293,6 +293,33 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
     assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
   }
   assert.doesNotMatch(`${data}\n${detail}`, /factory address|warehouse location|container yard|home address/i);
+});
+
+test("SP-ARDHI-26 export crate video uses a semantic name and advances the verified story", () => {
+  const data = readFileSync("src/data/equipment.ts", "utf8");
+  const filename = "sp-ardhi-26-export-crate-documentation-2026-09-02.mp4";
+  assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
+  assert.match(data, /title: "Export Crate Documented"[\s\S]*videos: \[image\("sp-ardhi-26-export-crate-documentation-2026-09-02\.mp4"\)\]/);
+  assert.match(data, /group: "export"/);
+  assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
+  assert.equal(existsSync("images/4280678537767.PNM.mp4"), false, "raw phone filename must not remain in source media");
+});
+
+test("SP-PCM-001 prototype story images are deployable originals", () => {
+  const page = readFileSync("src/pages/PowerControlModulePage.tsx", "utf8");
+  const filenames = [
+    "sp-pcm-001-engine-bay-prototype.jpg",
+    "sp-pcm-001-cardboard-enclosure-fitment.jpg",
+    "sp-pcm-001-terminal-clearance-prototype.jpg",
+    "sp-pcm-001-ml-rbs-fitment.jpg",
+    "sp-pcm-001-remote-switch-control.jpg",
+  ];
+  filenames.forEach((filename) => {
+    assert.match(page, new RegExp(filename.replaceAll(".", "\\.")));
+    const bytes = readFileSync(`public/equipment/images/sp-pcm-001/${filename}`);
+    assert.equal(bytes[0], 0xff, `${filename} must begin with a JPEG signature`);
+    assert.equal(bytes[1], 0xd8, `${filename} must begin with a JPEG signature`);
+  });
 });
 
 test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manufacturing status in sync", () => {
