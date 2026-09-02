@@ -308,11 +308,21 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(data, /title: "Export Crate Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-export-crate-documentation-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(detail, /Shipping Journey/);
+  assert.match(detail, /Tracking Visuals/);
+  assert.match(detail, /logistics-visual-card/);
   assert.match(detail, /Where is \{item\.fleetId\}\?/);
   assert.match(detail, /journey-milestones-heading/);
   assert.match(detail, /gallerySections\.map/);
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
+    assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
+    assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
+  }
+  for (const filename of [
+    "sp-ardhi-26-logistics-infront-factory-facility.png",
+    "sp-ardhi-26-logistics-ever-max-vessel.png",
+    "sp-ardhi-26-logistics-route-geography.png",
+  ]) {
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
     assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);
   }
