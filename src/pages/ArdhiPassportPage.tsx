@@ -2,7 +2,16 @@ import { useEffect } from "react";
 import { EquipmentPassportPage } from "./EquipmentDetailPage";
 import "../styles/ardhi-passport-compact-overrides.css";
 
-const PASSPORT_FIELDS_TO_HIDE = new Set(["Hydraulics", "Operating Weight", "Fuel", "Engine", "Current Owner"]);
+const PASSPORT_FIELDS_TO_HIDE = new Set([
+  "Passport Number",
+  "Fleet Class",
+  "Hydraulics",
+  "Operating Weight",
+  "Fuel",
+  "Engine",
+  "Commissioning",
+  "Current Owner",
+]);
 
 export function ArdhiPassportPage() {
   useEffect(() => {
