@@ -345,6 +345,10 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(passport, /IntersectionObserver/);
   assert.match(passport, /scrollIntoView/);
   assert.match(passport, /open=\{expandedRecord === record\.id\}/);
+  assert.doesNotMatch(passport, /<summary onClick=/);
+  assert.match(passport, /onToggle=\{\(event\) =>/);
+  assert.match(passport, /aria-expanded=\{!collapsedHistoryPhases\.has/);
+  assert.match(passport, /window\.location\.hash\.match\(\/\^#history-/);
   for (const milestone of ["Fleet Vision Created", "Manufacturer Selected", "Hydraulic Upgrade Approved", "Factory Departure", "Container Loaded", "First Job", "Annual Inspection"]) {
     assert.match(passport, new RegExp(milestone), `${milestone} must remain in the permanent history`);
   }

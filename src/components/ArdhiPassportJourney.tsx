@@ -288,6 +288,12 @@ const historyPhaseStarts: Record<string, string> = {
   "future-10": "Operation",
   "future-14": "Maintenance",
 };
+const historyPhaseByRecord = history.reduce<Record<string, string>>((phases, record) => {
+  const phase = historyPhaseStarts[record.id] ?? phases.__current;
+  phases[record.id] = phase;
+  phases.__current = phase;
+  return phases;
+}, {});
 
 const linkedDecisions: Record<string, string> = {
   "identity-approved": "Keep the YF380 factory model for manufacturer traceability while giving the machine the permanent SP-ARDHI-26 fleet identity.",
@@ -438,6 +444,7 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
 export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const [activeStop, setActiveStop] = useState<MapStop>(mapStops[0]);
   const [expandedRecord, setExpandedRecord] = useState<string>();
+  const [collapsedHistoryPhases, setCollapsedHistoryPhases] = useState<Set<string>>(() => new Set());
   const [query, setQuery] = useState("");
   const [chapter, setChapter] = useState<ArchiveChapter>("factory-build");
   const [lightbox, setLightbox] = useState<GalleryImage>();
@@ -570,6 +577,41 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     else if (futureIndex >= 14) nextChapter = "maintenance";
     if (nextChapter) setChapter(nextChapter);
   };
+  const toggleHistoryPhase = (phase: string) => {
+    setCollapsedHistoryPhases((current) => {
+      const next = new Set(current);
+      if (next.has(phase)) next.delete(phase);
+      else next.add(phase);
+      return next;
+    });
+  };
+  useEffect(() => {
+    const openLinkedRecord = () => {
+      const match = window.location.hash.match(/^#history-(.+)$/);
+      if (!match) return;
+      const record = history.find(({ id }) => id === match[1]);
+      if (!record) return;
+      const phase = historyPhaseByRecord[record.id];
+      setCollapsedHistoryPhases((current) => {
+        if (!current.has(phase)) return current;
+        const next = new Set(current);
+        next.delete(phase);
+        return next;
+      });
+      investigateRecord(record);
+      requestAnimationFrame(() => historyRefs.current[record.id]?.scrollIntoView({ behavior: "smooth", block: "center" }));
+    };
+    const collapseExpandedRecord = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setExpandedRecord(undefined);
+    };
+    openLinkedRecord();
+    window.addEventListener("hashchange", openLinkedRecord);
+    document.addEventListener("keydown", collapseExpandedRecord);
+    return () => {
+      window.removeEventListener("hashchange", openLinkedRecord);
+      document.removeEventListener("keydown", collapseExpandedRecord);
+    };
+  }, []);
   const packages = calculatePackages(item.upgrades, item.packageRules);
   const scores = calculatePassportScores(item);
   const scrollToRecord = (id: string, viewing: string[]) => {
@@ -911,8 +953,14 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               <Fragment key={record.id}>
                 {historyPhaseStarts[record.id] ? (
                   <li className="history-phase">
-                    <span>{historyPhaseStarts[record.id]}</span>
+                    <button
+                      type="button"
+                      aria-expanded={!collapsedHistoryPhases.has(historyPhaseStarts[record.id])}
+                      onClick={() => toggleHistoryPhase(historyPhaseStarts[record.id])}
+                    >
+                      <span>{historyPhaseStarts[record.id]}</span>
                     <i aria-hidden="true">↓</i>
+                    </button>
                   </li>
                 ) : null}
                 <li
@@ -921,15 +969,16 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
                   }}
                   id={`history-${record.id}`}
                   className={`is-${record.status} ${expandedRecord === record.id ? "is-highlighted" : ""}`}
+                  hidden={collapsedHistoryPhases.has(historyPhaseByRecord[record.id])}
                 >
                   <details
                     open={expandedRecord === record.id}
                     onToggle={(event) => {
-                      if (event.currentTarget.open) setExpandedRecord(record.id);
-                      else if (expandedRecord === record.id) setExpandedRecord(undefined);
+                      if (event.currentTarget.open) investigateRecord(record);
+                      else setExpandedRecord((current) => current === record.id ? undefined : current);
                     }}
                   >
-                    <summary onClick={() => investigateRecord(record)}>
+                    <summary>
                       <span>{record.date}</span>
                       <strong>{record.title}</strong>
                       <em>
