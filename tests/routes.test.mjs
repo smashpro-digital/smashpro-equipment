@@ -86,11 +86,10 @@ test("product catalog has a physical route, navigation, status model, and sitema
   ["concept", "in-development", "prototype", "field-testing", "production-candidate", "available", "archived"].forEach((status) => assert.match(catalogTypes, new RegExp(`"${status}"`)));
   assert.match(catalogPage, /aria-pressed/);
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
-  assert.match(readFileSync("vite.config.ts", "utf8"), /public\/equipment\/images\/sp-pcm-001-feature\.jpg/);
-  assert.match(catalogData, /sp-pcm-001-feature\.jpg/);
-  const catalogImage = readFileSync("public/equipment/images/sp-pcm-001-feature.jpg");
-  assert.equal(catalogImage[0], 0xff, "deployed catalog image must begin with a JPEG signature");
-  assert.equal(catalogImage[1], 0xd8, "deployed catalog image must begin with a JPEG signature");
+  assert.match(catalogData, /sp-pcm-001-poster\.png/);
+  assert.match(readFileSync("src/pages/PowerControlModulePage.tsx", "utf8"), /sp-pcm-001-poster\.png/);
+  const catalogImage = readFileSync("images/sp-pcm-001-poster.png");
+  assert.deepEqual([...catalogImage.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], "deployed catalog poster must have a valid PNG signature");
 });
 
 test("catalog product specifications and design packages are revision controlled", () => {

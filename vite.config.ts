@@ -28,10 +28,6 @@ function preserveEquipmentMedia(): Plugin {
       mkdirSync(output, { recursive: true });
       cpSync(resolve(projectDirectory, "images"), output, { recursive: true });
       cpSync(
-        resolve(projectDirectory, "public/equipment/images/sp-pcm-001-feature.jpg"),
-        resolve(output, "sp-pcm-001-feature.jpg"),
-      );
-      cpSync(
         resolve(projectDirectory, "public/equipment/images/sp-pcm-001"),
         resolve(output, "sp-pcm-001"),
         { recursive: true },
