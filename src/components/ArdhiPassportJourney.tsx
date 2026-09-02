@@ -624,19 +624,21 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     requestAnimationFrame(() => scrollToRecord("evidence", ["Evidence", activeStop.label, activeStop.title]));
   };
   const openSticker = (action?: "png" | "pdf") => { setStickerZoom(1); setStickerOpen(true); setPendingStickerAction(action); };
-  const passport = [
-    ["Passport Number", "SP-ARDHI-26"],
-    ["Factory Model", "YF380"],
-    ["Fleet Class", "Mini Skid Loader"],
-    ["Status", "Ocean Export"],
-    ["Hydraulics", "3 Pump · 3 Valve"],
-    ["Operating Weight", "880 kg"],
-    ["Fuel", "30 L"],
-    ["Engine", "23 HP"],
-    ["Commissioning", "Pending"],
+  const assetStatus = [
+    ["Passport", item.identity.model],
+    ["Factory Model", item.identity.factoryModel],
     ["Service Hours", "0.0"],
-    ["Current Owner", "SmashPro Fleet"],
+    ["Status", "Ocean Export"],
+    ["Vessel", item.shippingStatus?.vessel ?? "Pending"],
+    ["ETA", "October 5, 2026"],
+    ["Fleet Asset", "#001"],
   ];
+  const specificationGroups = Object.entries(
+    item.specifications.reduce<Record<string, typeof item.specifications>>((groups, specification) => {
+      (groups[specification.group ?? "General"] ??= []).push(specification);
+      return groups;
+    }, {}),
+  );
   return (
     <main className="ardhi-documentary">
       <section className="ardhi-v2-hero" aria-labelledby="ardhi-v2-title">
@@ -681,13 +683,13 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Equipment Passport</p>
-            <h2 id="passport-ledger-title">Identity, specifications, and official records.</h2>
+            <h2 id="passport-ledger-title">Identity and current operating status.</h2>
           </div>
           <p>Everything needed to identify and verify SP-ARDHI-26 in the first two minutes.</p>
         </div>
-        <dl>
-          {passport.map(([label, value]) => (
-            <div key={label}>
+        <dl className="asset-status-ribbon" aria-label="Asset status ribbon">
+          {assetStatus.map(([label, value]) => (
+            <div className={label === "Status" ? "is-active" : undefined} key={label}>
               <dt>{label}</dt>
               <dd>{value}</dd>
             </div>
@@ -731,6 +733,29 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             </div>
           </article>
         </div>
+        <details className="passport-specifications" id="specifications">
+          <summary><span>Specifications</span><strong>{item.specifications.length + 3} verified asset fields</strong></summary>
+          <div className="passport-specifications__groups">
+            <section>
+              <h3>Operational Record</h3>
+              <dl>
+                <div><dt>Current owner</dt><dd>SmashPro Fleet</dd></div>
+                <div><dt>Commissioning</dt><dd>Pending</dd></div>
+                <div><dt>Service hours</dt><dd>0.0 verified hours</dd></div>
+              </dl>
+            </section>
+            {specificationGroups.map(([group, specifications]) => (
+              <section key={group}>
+                <h3>{group}</h3>
+                <dl>
+                  {specifications.map((specification) => (
+                    <div key={`${group}-${specification.label}`}><dt>{specification.label}</dt><dd>{specification.value}</dd></div>
+                  ))}
+                </dl>
+              </section>
+            ))}
+          </div>
+        </details>
       </section>
       <section className={`section shell ardhi-document-library passport-reveal ${history.find(({ id }) => id === expandedRecord)?.documents ? "is-linked" : ""}`} id="documents" data-passport-reveal data-view="Documents|Library|Verification records" aria-labelledby="document-library-title">
         <div className="section-heading">
