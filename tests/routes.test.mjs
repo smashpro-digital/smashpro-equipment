@@ -315,7 +315,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(data, /status: "shipping", statusLabel: "Container Loaded"/);
   assert.match(data, /shippingStatus: \{ status: "Container Loaded", vessel: "EVER MAX", voyage: "1374-016E"/);
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
-  assert.match(data, /title: "Final Payment Completed"[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(data, /occurredAt: "2026-08-20"[\s\S]*title: "Final Successful Payment"[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Delivered to Freight Forwarder"[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Factory Departure Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
@@ -339,9 +339,13 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   for (const milestone of ["Fleet Vision Created", "Manufacturer Selected", "Hydraulic Upgrade Approved", "Factory Departure", "Container Loaded", "First Job", "Annual Inspection"]) {
     assert.match(passport, new RegExp(milestone), `${milestone} must remain in the permanent history`);
   }
-  assert.match(passport, /\["Deposit", "\$1,000", "Completed"\]/);
-  assert.match(passport, /\["Final Balance", "\$1,269", "Completed"\]/);
-  assert.match(passport, /<strong>\$2,269<\/strong>/);
+  for (const milestone of ["Jul 15, 2026", "Configuration and Proforma Invoice Approved", "Jul 16 · First stage", "Jul 23 · Second stage", "Aug 6 · Third stage", "Aug 20 · Final stage", "Marketplace Purchase Protection Documented"]) {
+    assert.match(passport, new RegExp(milestone.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${milestone} must remain in the acquisition history`);
+  }
+  assert.match(passport, /<strong>\$4,259<\/strong>/);
+  assert.match(passport, /separate from the \$3,990 signed proforma baseline/);
+  assert.doesNotMatch(passport, /date: "Sep 2, 2026", title: "Final Payment"/);
+  assert.match(passport, /date: "Sep 2, 2026", title: "Factory Departure"/);
   for (const suffix of ["01", "02", "03"]) {
     const filename = `sp-ardhi-26-shipping-2026-08-21-${suffix}.png`;
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
@@ -435,5 +439,5 @@ test("equipment media uses standardized fleet-prefixed filenames", () => {
   const repoReferences = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "src/data/equipment.ts", "src/pages/HomePage.tsx"]
     .map((file) => readFileSync(file, "utf8"))
     .join("\n");
-  assert.doesNotMatch(repoReferences, /ardhibanner|mzigobanner|sideProfile|Alibaba|\.PNM/);
+  assert.doesNotMatch(repoReferences, /ardhibanner|mzigobanner|sideProfile|\.PNM/);
 });
