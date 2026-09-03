@@ -3,11 +3,11 @@ import { ManufacturerProfile, type ManufacturerProfileData } from "../components
 
 const infrontProfile: ManufacturerProfileData = {
   displayName: "Shandong Infront Machinery Co., Ltd.",
-  brand: "Infront",
-  model: "YF380",
-  location: "Jining, Shandong, China",
+  location: "Jining City, Shandong, China",
+  address: "No. 52, Jinyu Road, Jining City, Shandong, China 272000",
   website: "https://www.chinaiift.com",
-  representative: { name: "Hailey Li", title: "Sales Manager" },
+  email: "sales36@chinaiift.com",
+  logoSrc: "/equipment/images/infront-official-logo.svg",
   marketplaceRating: {
     platform: "Alibaba",
     score: 4.9,
