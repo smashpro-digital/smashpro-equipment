@@ -34,14 +34,6 @@ export function ManufacturerProfile({ profile }: { profile: ManufacturerProfileD
             {profile.marketplaceRating.observedAt ? <small>Observed {profile.marketplaceRating.observedAt}</small> : null}
           </div>
         ) : null}
-        <dl>
-          {profile.brand ? <div><dt>Brand</dt><dd>{profile.brand}</dd></div> : null}
-          {profile.model ? <div><dt>Factory model</dt><dd>{profile.model}</dd></div> : null}
-          {profile.location ? <div><dt>Origin</dt><dd>{profile.location}</dd></div> : null}
-          {profile.legalSellerName && profile.legalSellerName !== profile.displayName ? <div><dt>Seller of record</dt><dd>{profile.legalSellerName}</dd></div> : null}
-          {profile.representative ? <div><dt>Supplier representative</dt><dd>{profile.representative.name}{profile.representative.title ? ` · ${profile.representative.title}` : ""}</dd></div> : null}
-        </dl>
-        {profile.website ? <a href={profile.website} target="_blank" rel="noopener noreferrer">Manufacturer website</a> : null}
       </div>
     </aside>
   );
