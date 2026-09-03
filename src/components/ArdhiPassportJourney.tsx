@@ -4,6 +4,7 @@ import type { Equipment, GalleryGroup, GalleryImage } from "../types/equipment";
 import { calculatePackages, calculatePassportScores } from "../domain/passport";
 import { WindowSticker } from "./WindowSticker";
 import { PartnerFieldSupport } from "./PartnerFieldSupport";
+import { FleetLifecycleProgress } from "./FleetLifecycleProgress";
 import "../styles/ardhi-passport-v2.css";
 
 const image = (name: string) => `/equipment/images/${name}`;
@@ -905,65 +906,23 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </div>
         </div>
       </section>
-      <section className="section shell ardhi-journey-stats passport-reveal" data-passport-reveal aria-labelledby="journey-stats-title">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Journey Statistics</p>
-            <h2 id="journey-stats-title">The record moves with the machine.</h2>
-          </div>
-          <p>Figures animate once when they enter view. Distance is approximate and does not represent live tracking.</p>
-        </div>
-        <div className="ardhi-counter-grid">
-          <article>
-            <span>Approximate distance</span>
-            <strong>
-              <AnimatedNumber value={7300} suffix=" mi" />
-            </strong>
-          </article>
-          <article>
-            <span>Operating weight</span>
-            <strong>
-              <AnimatedNumber value={880} suffix=" kg" />
-            </strong>
-          </article>
-          <article>
-            <span>Fuel capacity</span>
-            <strong>
-              <AnimatedNumber value={30} suffix=" L" />
-            </strong>
-          </article>
-          <article>
-            <span>Days since build</span>
-            <strong>
-              <AnimatedNumber value={daysSinceBuild} />
-            </strong>
-          </article>
-        </div>
-        <div className="journey-progress" aria-label="Factory and export complete; ocean current; United States and delivery pending">
-          {[
-            ["Factory", 100],
-            ["Export", 100],
-            ["Ocean", 12],
-            ["USA", 0],
-            ["Delivery", 0],
-          ].map(([label, value], index) => (
-            <div
-              style={
-                {
-                  "--progress-delay": `${index * 100}ms`,
-                } as React.CSSProperties
-              }
-              key={String(label)}
-            >
-              <span>{label}</span>
-              <i>
-                <b style={{ width: `${value}%` }} />
-              </i>
-              <small>{Number(value) === 100 ? "complete" : Number(value) ? "current" : "pending"}</small>
-            </div>
-          ))}
-        </div>
-      </section>
+      <FleetLifecycleProgress
+        currentStage="🚢 Ocean Transit"
+        nextStage="🇺🇸 U.S. Port Arrival"
+        metrics={[
+          { id: "distance", label: "Approximate Distance", value: 7300, suffix: " mi" },
+          { id: "weight", label: "Operating Weight", value: 880, suffix: " kg" },
+          { id: "fuel", label: "Fuel Capacity", value: 30, suffix: " L" },
+          { id: "build-age", label: "Days Since Build", value: daysSinceBuild },
+        ]}
+        stages={[
+          { id: "factory", label: "Factory", status: "complete", progress: 100 },
+          { id: "export", label: "Export", status: "complete", progress: 100 },
+          { id: "ocean", label: "Ocean", status: "current", progress: 12 },
+          { id: "usa", label: "USA", status: "pending", progress: 0 },
+          { id: "delivery", label: "Delivery", status: "pending", progress: 0 },
+        ]}
+      />
       <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Container Loaded" aria-labelledby="ardhi-history-title">
         <div className="shell">
           <div className="section-heading">

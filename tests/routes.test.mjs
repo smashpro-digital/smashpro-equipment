@@ -322,6 +322,9 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(detail, /ArdhiPassportJourney/);
   assert.match(passport, /Asset Journey/);
   assert.match(passport, /ardhi-expandable-timeline/);
+  assert.match(passport, /<FleetLifecycleProgress/);
+  assert.match(passport, /currentStage="🚢 Ocean Transit"/);
+  assert.match(passport, /nextStage="🇺🇸 U\.S\. Port Arrival"/);
   assert.match(passport, /asset-status-ribbon/);
   assert.match(passport, /\["Fleet Asset", "#001"\]/);
   assert.match(passport, /passport-specifications/);
@@ -383,6 +386,20 @@ test("SP-ARDHI-26 export crate video uses a semantic name and advances the verif
   assert.equal(existsSync("images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"), true, "departure poster must exist");
   assert.equal(existsSync("images/sp-ardhi-26-export-crate-documentation-2026-09-02.mp4"), false, "tracking-focused source must not remain public");
   assert.equal(existsSync("images/4280678537767.PNM.mp4"), false, "raw phone filename must not remain in source media");
+});
+
+test("fleet lifecycle progress initializes once and uses transform-only staged progress", () => {
+  const component = readFileSync("src/components/FleetLifecycleProgress.tsx", "utf8");
+  const styles = readFileSync("src/styles/ardhi-passport-v2.css", "utf8");
+  assert.match(component, /new IntersectionObserver/);
+  assert.match(component, /observer\.disconnect\(\)/);
+  assert.match(component, /requestAnimationFrame/);
+  assert.match(component, /"✓ Complete"/);
+  assert.match(component, /"● Current"/);
+  assert.match(component, /"○ Pending"/);
+  assert.match(styles, /transform:scaleX\(var\(--lifecycle-progress\)\)/);
+  assert.match(styles, /--lifecycle-delay/);
+  assert.match(styles, /fleet-current-pulse/);
 });
 
 test("equipment partners render only public relationship statuses", () => {
