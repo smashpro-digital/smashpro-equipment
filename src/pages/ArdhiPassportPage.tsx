@@ -65,6 +65,62 @@ const DRIVE_EVIDENCE_HISTORY: EvidenceHistoryEntry[] = [
       "Treat free accessories and spares as secondary to machine configuration, transport certainty, supplier credibility, and long-term support.",
   },
   {
+    id: "drive-ddp-benchmark-negotiation",
+    date: "Jul 15, 2026 · 6:20–7:10 PM",
+    title: "$3,990 DDP Became the Negotiating Benchmark",
+    narrative:
+      "During supplier negotiations, SmashPro disclosed that the best door-to-door DDP quotation received was $3,990 including shipping, customs, taxes, and delivery. Competing suppliers were invited to match the delivered price or create additional value through attachments, spare parts, or upgraded hydraulics.",
+    evidence:
+      "Archived Alibaba conversation screenshots · Screenshot_20260715_062045_Alibabacom.jpg · Screenshot_20260715_071029_Alibabacom.jpg",
+    supplier: "Competing Alibaba suppliers",
+    decision:
+      "Evaluate offers as complete delivered operating packages rather than comparing sticker price alone; hydraulics, attachments, spares, and long-term supplier support were explicit negotiation variables.",
+  },
+  {
+    id: "drive-competing-final-package",
+    date: "Jul 15, 2026 · 7:16 PM",
+    title: "Competing $3,990 Package Added Spares and Fork Option",
+    narrative:
+      "One competing supplier returned with a $3,990 offer that added extra filter elements and a belt. The supplier also offered to replace a tiller with a fork, while noting that both accessories could not be included at that price.",
+    evidence: "Archived Alibaba conversation screenshot · Screenshot_20260715_073532_Alibabacom.jpg",
+    supplier: "Competing Alibaba supplier",
+    decision:
+      "Continue comparing total machine utility and support at the same delivered-price benchmark instead of treating a matched price as an automatic selection.",
+  },
+  {
+    id: "drive-technical-support-comparison",
+    date: "Jul 15, 2026 · 9:25–9:39 PM",
+    title: "Hydraulics and After-Sales Support Compared",
+    narrative:
+      "A competing 23 hp, 380 kg rated-load machine was described with a standard dual-pump, dual-valve hydraulic system, one year of free maintenance service, 24-hour online technical guidance, and accessory-shipping support.",
+    evidence: "Archived Alibaba conversation screenshot · Screenshot_20260715_093941_Alibabacom.jpg",
+    supplier: "Competing Alibaba supplier",
+    decision:
+      "Use hydraulic architecture and after-sales capability as technical selection criteria, helping explain why the final three-pump, three-valve upgrade became strategically important.",
+  },
+  {
+    id: "drive-configuration-branding-confirmed",
+    date: "Jul 15, 2026 · 10:01 PM",
+    title: "Configuration and Branding Workflow Confirmed",
+    narrative:
+      "The selected supplier confirmed agreement on the discussed machine information and committed to issue a detailed invoice covering the agreed configuration. The factory also agreed to prepare the SmashPro sticker design from the supplied artwork, send it for final approval, and only then print and apply it.",
+    evidence: "Archived Alibaba conversation screenshot · Screenshot_20260715_102857_Alibabacom.jpg",
+    supplier: "Selected supplier conversation",
+    decision:
+      "Require written configuration detail and an approval checkpoint for factory branding before production application.",
+  },
+  {
+    id: "drive-four-payment-structure",
+    date: "Jul 15, 2026 · 10:39 PM",
+    title: "Four-Payment Structure Mapped to Two Protected Orders",
+    narrative:
+      "The supplier explained that Alibaba allowed only two installments per order, so the requested four-payment plan would be implemented through two linked orders: two prepayments and two balance payments. The supplier stated the two orders would later be combined and shipped together as one machine acquisition.",
+    evidence: "Archived Alibaba conversation screenshot · Screenshot_20260715_103946_Alibabacom.jpg",
+    supplier: "Selected supplier conversation",
+    decision:
+      "Use two linked marketplace orders to achieve four staged payments while preserving platform-compliant order protection and a single combined shipment.",
+  },
+  {
     id: "drive-factory-branding-evidence",
     date: "Aug 11, 2026 · archive timestamp",
     title: "Branded Factory Machine Evidence Archived",
