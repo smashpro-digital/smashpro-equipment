@@ -77,23 +77,41 @@ function attachNegotiationMedia() {
   });
 }
 
-function replaceFactoryEvidenceFilenames() {
+function reconcileFactoryEvidence() {
   document.querySelectorAll<HTMLElement>(".drive-evidence-record .history-detail").forEach((detail) => {
     const evidenceArchive = findEvidenceArchive(detail);
-    if (!evidenceArchive || evidenceArchive.querySelector(".evidence-archive-thumbnail")) return;
+    if (!evidenceArchive) return;
 
-    const sourceImage = detail.querySelector<HTMLImageElement>(".history-media img");
-    if (!sourceImage) return;
+    const sourceMedia = detail.querySelector<HTMLElement>(".history-media");
+    const sourceImages = sourceMedia ? Array.from(sourceMedia.querySelectorAll<HTMLImageElement>("img")) : [];
 
-    evidenceArchive.querySelector("p")?.remove();
-    const title = detail.closest("li")?.querySelector("summary strong")?.textContent ?? "Archived evidence";
-    evidenceArchive.appendChild(buildThumbnail(sourceImage.src, sourceImage.alt || title, "Factory / conversation evidence"));
+    if (sourceImages.length) {
+      evidenceArchive.querySelector("p")?.remove();
+      sourceImages.forEach((sourceImage, index) => {
+        const marker = `factory-${index}-${sourceImage.src}`;
+        if (evidenceArchive.querySelector(`[data-evidence-source="${CSS.escape(marker)}"]`)) return;
+        const thumb = buildThumbnail(
+          sourceImage.src,
+          sourceImage.alt || "Archived factory evidence",
+          sourceImages.length > 1 ? `Factory evidence ${index + 1}` : "Factory / conversation evidence",
+        );
+        thumb.dataset.evidenceSource = marker;
+        evidenceArchive.appendChild(thumb);
+      });
+      sourceMedia?.remove();
+      return;
+    }
+
+    const rawEvidence = evidenceArchive.querySelector<HTMLParagraphElement>("p");
+    if (rawEvidence && /\.(?:jpe?g|png|webp|pnm)\b/i.test(rawEvidence.textContent ?? "")) {
+      rawEvidence.textContent = "Archived conversation evidence";
+    }
   });
 }
 
 function updateEvidencePresentation() {
   attachNegotiationMedia();
-  replaceFactoryEvidenceFilenames();
+  reconcileFactoryEvidence();
 }
 
 export function installNegotiationEvidenceMedia() {
