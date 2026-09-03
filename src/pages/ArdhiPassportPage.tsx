@@ -283,7 +283,8 @@ function injectDriveEvidenceHistory() {
     const evidenceLabel = document.createElement("b");
     evidenceLabel.textContent = "Evidence archive";
     const evidenceText = document.createElement("p");
-    evidenceText.textContent = entry.evidence;
+    evidenceText.textContent = "Archived conversation evidence";
+    evidenceText.dataset.sourceReference = entry.evidence;
     evidence.append(evidenceLabel, evidenceText);
     detail.appendChild(evidence);
 

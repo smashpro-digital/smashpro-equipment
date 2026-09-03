@@ -23,12 +23,12 @@ let profileRoot: Root | undefined;
 function mountManufacturerProfile() {
   if (document.querySelector("[data-manufacturer-profile-mount]")) return;
   const passport = document.querySelector<HTMLElement>(".ardhi-passport-ledger");
-  const manufacturerDocument = passport?.querySelector<HTMLElement>(".document-card");
-  if (!passport || !manufacturerDocument) return;
+  const specifications = passport?.querySelector<HTMLElement>("#specifications");
+  if (!passport || !specifications) return;
 
   const mount = document.createElement("div");
   mount.dataset.manufacturerProfileMount = "infront";
-  manufacturerDocument.insertAdjacentElement("afterend", mount);
+  specifications.insertAdjacentElement("afterend", mount);
   profileRoot = createRoot(mount);
   profileRoot.render(<ManufacturerProfile profile={infrontProfile} />);
 }
