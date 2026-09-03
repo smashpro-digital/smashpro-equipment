@@ -37,40 +37,68 @@ const negotiationMedia: NegotiationMedia[] = [
   },
 ];
 
+function findEvidenceArchive(detail: HTMLElement) {
+  return Array.from(detail.querySelectorAll<HTMLElement>("aside")).find((node) =>
+    node.querySelector("b")?.textContent?.includes("Evidence archive"),
+  );
+}
+
+function buildThumbnail(src: string, alt: string, label: string) {
+  const thumb = document.createElement("figure");
+  thumb.className = "evidence-archive-thumbnail";
+
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alt;
+  image.loading = "lazy";
+  image.decoding = "async";
+
+  const caption = document.createElement("figcaption");
+  caption.textContent = label;
+  thumb.append(image, caption);
+  return thumb;
+}
+
 function attachNegotiationMedia() {
   negotiationMedia.forEach((media) => {
     const record = document.getElementById(media.recordId);
     const detail = record?.querySelector<HTMLElement>(".history-detail");
-    if (!detail || detail.querySelector(`[data-negotiation-media="${media.recordId}"]`)) return;
+    if (!detail) return;
 
-    const figure = document.createElement("figure");
-    figure.className = "negotiation-evidence-media";
-    figure.dataset.negotiationMedia = media.recordId;
+    const evidenceArchive = findEvidenceArchive(detail);
+    if (!evidenceArchive) return;
 
-    const image = document.createElement("img");
-    image.src = media.src;
-    image.alt = media.alt;
-    image.loading = "lazy";
-    image.decoding = "async";
-
-    const figcaption = document.createElement("figcaption");
-    const label = document.createElement("strong");
-    const caption = document.createElement("span");
-    label.textContent = media.label;
-    caption.textContent = media.caption;
-    figcaption.append(label, caption);
-    figure.append(image, figcaption);
-
-    const evidenceArchive = Array.from(detail.querySelectorAll("aside")).find((node) =>
-      node.querySelector("b")?.textContent?.includes("Evidence archive"),
-    );
-    detail.insertBefore(figure, evidenceArchive ?? null);
+    evidenceArchive.querySelector("p")?.remove();
+    if (!evidenceArchive.querySelector(`[data-evidence-thumb="${media.recordId}"]`)) {
+      const thumb = buildThumbnail(media.src, media.alt, media.label);
+      thumb.dataset.evidenceThumb = media.recordId;
+      evidenceArchive.appendChild(thumb);
+    }
   });
 }
 
-export function installNegotiationEvidenceMedia() {
+function replaceFactoryEvidenceFilenames() {
+  document.querySelectorAll<HTMLElement>(".drive-evidence-record .history-detail").forEach((detail) => {
+    const evidenceArchive = findEvidenceArchive(detail);
+    if (!evidenceArchive || evidenceArchive.querySelector(".evidence-archive-thumbnail")) return;
+
+    const sourceImage = detail.querySelector<HTMLImageElement>(".history-media img");
+    if (!sourceImage) return;
+
+    evidenceArchive.querySelector("p")?.remove();
+    const title = detail.closest("li")?.querySelector("summary strong")?.textContent ?? "Archived evidence";
+    evidenceArchive.appendChild(buildThumbnail(sourceImage.src, sourceImage.alt || title, "Factory / conversation evidence"));
+  });
+}
+
+function updateEvidencePresentation() {
   attachNegotiationMedia();
-  const observer = new MutationObserver(() => attachNegotiationMedia());
+  replaceFactoryEvidenceFilenames();
+}
+
+export function installNegotiationEvidenceMedia() {
+  updateEvidencePresentation();
+  const observer = new MutationObserver(() => updateEvidencePresentation());
   observer.observe(document.body, { childList: true, subtree: true });
   window.addEventListener("pagehide", () => observer.disconnect(), { once: true });
 }
