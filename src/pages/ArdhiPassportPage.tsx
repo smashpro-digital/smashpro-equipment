@@ -3,6 +3,8 @@ import { EquipmentPassportPage } from "./EquipmentDetailPage";
 import "../styles/ardhi-passport-compact-overrides.css";
 import "../styles/ardhi-manufacturer-pdf-compact.css";
 
+const image = (name: string) => `/equipment/images/${name}`;
+
 const PASSPORT_FIELDS_TO_HIDE = new Set([
   "Passport Number",
   "Fleet Class",
@@ -28,6 +30,7 @@ type EvidenceHistoryEntry = {
   evidence: string;
   decision?: string;
   supplier?: string;
+  photos?: string[];
 };
 
 // Evidence below is sourced only from the Drive folder named "Chat hiatory".
@@ -170,6 +173,7 @@ const DRIVE_EVIDENCE_HISTORY: EvidenceHistoryEntry[] = [
     supplier: "Selected supplier conversation",
     decision:
       "Track production by physical manufacturing stage so later factory photos can be tied to an explainable build sequence.",
+    photos: [image("sp-ardhi-26-assembly-in-progress.jpg"), image("sp-ardhi-26-factory-assembly-floor.jpg")],
   },
   {
     id: "drive-attachment-expansion-priced",
@@ -181,6 +185,7 @@ const DRIVE_EVIDENCE_HISTORY: EvidenceHistoryEntry[] = [
     supplier: "Selected supplier conversation",
     decision:
       "Keep the first-machine package focused while documenting a future powered-attachment roadmap for expansion after commissioning.",
+    photos: [image("sp-ardhi-26-hydraulic-system-installation.jpg")],
   },
   {
     id: "drive-factory-operation-proof",
@@ -191,6 +196,7 @@ const DRIVE_EVIDENCE_HISTORY: EvidenceHistoryEntry[] = [
     evidence: "Chat history · Screenshot_20260803_223648_Alibabacom.jpg",
     decision:
       "Retain in-process operating media as production evidence rather than relying only on finished-machine photographs.",
+    photos: [image("sp-ardhi-26-factory-assembly-floor.jpg")],
   },
   {
     id: "drive-branded-machine-chat-evidence",
@@ -202,6 +208,11 @@ const DRIVE_EVIDENCE_HISTORY: EvidenceHistoryEntry[] = [
       "Chat history · Alibabaac0a62b90a607c0c281399e09b737f3d_original.png · Alibaba50007cc3b4166a5ad8ece411fbbc3ad0_original.png · 4242703936515.PNM image series",
     decision:
       "Use original conversation media as supporting build evidence while keeping marketing composites separate from manufacturing proof.",
+    photos: [
+      image("sp-ardhi-26-control-panel.jpg"),
+      image("sp-ardhi-26-bucket-branding.png"),
+      image("sp-ardhi-26-completed-build-attachments.jpg"),
+    ],
   },
 ];
 
@@ -225,7 +236,7 @@ function injectDriveEvidenceHistory() {
 
     date.textContent = entry.date;
     title.textContent = entry.title;
-    meta.textContent = "documented · archived evidence";
+    meta.textContent = `documented · ${entry.photos?.length ?? 0} media · archived evidence`;
     summary.append(date, title, meta);
 
     const detail = document.createElement("div");
@@ -238,7 +249,7 @@ function injectDriveEvidenceHistory() {
       const decision = document.createElement("aside");
       const label = document.createElement("b");
       label.textContent = "Decision context";
-      const text = document.createElement("span");
+      const text = document.createElement("p");
       text.textContent = entry.decision;
       decision.append(label, text);
       detail.appendChild(decision);
@@ -248,19 +259,43 @@ function injectDriveEvidenceHistory() {
       const supplier = document.createElement("aside");
       const label = document.createElement("b");
       label.textContent = "Supplier comparison";
-      const text = document.createElement("span");
+      const text = document.createElement("p");
       text.textContent = entry.supplier;
       supplier.append(label, text);
       detail.appendChild(supplier);
     }
 
+    if (entry.photos?.length) {
+      const media = document.createElement("div");
+      media.className = "history-media";
+      entry.photos.forEach((src) => {
+        const photo = document.createElement("img");
+        photo.src = src;
+        photo.alt = `Factory evidence supporting ${entry.title}`;
+        photo.loading = "lazy";
+        photo.decoding = "async";
+        media.appendChild(photo);
+      });
+      detail.appendChild(media);
+    }
+
     const evidence = document.createElement("aside");
     const evidenceLabel = document.createElement("b");
     evidenceLabel.textContent = "Evidence archive";
-    const evidenceText = document.createElement("span");
+    const evidenceText = document.createElement("p");
     evidenceText.textContent = entry.evidence;
     evidence.append(evidenceLabel, evidenceText);
     detail.appendChild(evidence);
+
+    const counts = document.createElement("dl");
+    const mediaCount = document.createElement("div");
+    const mediaLabel = document.createElement("dt");
+    const mediaValue = document.createElement("dd");
+    mediaLabel.textContent = "Media";
+    mediaValue.textContent = String(entry.photos?.length ?? 0);
+    mediaCount.append(mediaLabel, mediaValue);
+    counts.appendChild(mediaCount);
+    detail.appendChild(counts);
 
     details.append(summary, detail);
     item.appendChild(details);
