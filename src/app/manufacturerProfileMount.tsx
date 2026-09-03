@@ -8,7 +8,7 @@ const infrontProfile: ManufacturerProfileData = {
   location: "Jining, Shandong, China",
   website: "https://www.chinaiift.com",
   representative: { name: "Hailey Li", title: "Sales Manager" },
-  logoSrc: "/equipment/images/infront-official-logo.svg",
+  logoSrc: "/equipment/images/infront-official-logo.jpg",
   marketplaceRating: {
     platform: "Alibaba",
     score: 4.9,
