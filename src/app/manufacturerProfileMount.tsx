@@ -7,7 +7,7 @@ const infrontProfile: ManufacturerProfileData = {
   address: "No. 52, Jinyu Road, Jining City, Shandong, China 272000",
   website: "https://www.chinaiift.com",
   email: "sales36@chinaiift.com",
-  logoSrc: "/equipment/images/infront-official-logo.svg",
+  logoSrc: "/equipment/images/infront-official-logo-pure.svg",
   marketplaceRating: {
     platform: "Alibaba",
     score: 4.9,
