@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { buildTransitMetrics } from "../domain/equipmentJobLifecycle";
 import { EquipmentPassportPage } from "./EquipmentDetailPage";
 import "../styles/ardhi-passport-compact-overrides.css";
 import "../styles/ardhi-manufacturer-pdf-compact.css";
@@ -41,20 +42,26 @@ export function ArdhiPassportPage() {
     const statsSection = document.querySelector<HTMLElement>(".ardhi-journey-stats");
     if (!statsSection) return;
 
+    statsSection.classList.add("lifecycle-metrics-section");
     const description = statsSection.querySelector<HTMLElement>(".section-heading > p");
-    if (description) description.textContent = "Journey-only metrics. Distance is approximate and does not represent live GPS tracking.";
+    if (description) description.textContent = "Lifecycle metrics follow the machine from transit into active jobs.";
 
+    const metrics = buildTransitMetrics({
+      approximateDistanceMiles: 7300,
+      journeyStage: 2,
+      journeyStageCount: 7,
+      journeyStageLabel: "Ocean export",
+      arrivalDate: "2026-10-05T00:00:00Z",
+      productionCompleteDate: "2026-08-18T00:00:00Z",
+    });
     const cards = Array.from(statsSection.querySelectorAll<HTMLElement>(".ardhi-counter-grid > article"));
-    const arrival = new Date("2026-10-05T00:00:00Z");
-    const daysRemaining = Math.max(0, Math.ceil((arrival.getTime() - Date.now()) / 86_400_000));
 
-    if (cards[1]) cards[1].innerHTML = `<span>Journey stage</span><strong>2 / 7</strong><small>Ocean export</small>`;
-    if (cards[2]) cards[2].innerHTML = `<span>Estimated days remaining</span><strong>${daysRemaining}</strong><small>To Oct 5 arrival estimate</small>`;
-
-    const distanceLabel = cards[0]?.querySelector("span");
-    if (distanceLabel) distanceLabel.textContent = "Approximate journey distance";
-    const ageLabel = cards[3]?.querySelector("span");
-    if (ageLabel) ageLabel.textContent = "Days since production complete";
+    metrics.forEach((metric, index) => {
+      const card = cards[index];
+      if (!card) return;
+      card.dataset.metricId = metric.id;
+      card.innerHTML = `<span>${metric.label}</span><strong>${metric.value}</strong>${metric.detail ? `<small>${metric.detail}</small>` : ""}`;
+    });
   }, []);
 
   return <EquipmentPassportPage slug="sp-ardhi-26" />;
