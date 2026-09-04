@@ -781,7 +781,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </article>
           {item.documents.filter(({ kind, publicDisplay, url }) => kind === "manual" && publicDisplay && url).map((document) => (
             <article className="is-available operator-manual-library-card" key={document.id}>
-              <img src={image("sp-ardhi-26-yfe380-operator-manual-preview.png")} alt="Table of contents preview from the verified YFE380 operator manual" loading="lazy" decoding="async" />
+              <img src={image("sp-ardhi-26-operator-manual-loader-preview.png")} alt="Side-view line illustration of the mini loader from the verified operator manual" loading="lazy" decoding="async" />
               <span className="document-status is-verified">Verified</span>
               <h3>{document.title}</h3>
               <p>{document.description}</p>
