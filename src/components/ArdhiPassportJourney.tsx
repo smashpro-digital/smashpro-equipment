@@ -786,7 +786,10 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               <h3>{document.title}</h3>
               <p>{document.description}</p>
               <small>Revision: {document.revision} · Source: {document.source} · Received: {document.dateReceived}</small>
-              <a href={document.url} target="_blank" rel="noopener noreferrer" download={document.downloadName}>View / Download PDF</a>
+              <div className="document-library-actions">
+                <a href={document.url} target="_blank" rel="noopener noreferrer">View PDF</a>
+                <a href={document.url} download={document.downloadName}>Download PDF</a>
+              </div>
             </article>
           ))}
           {["Maintenance Manual", "Parts Manual", "Bill of Lading", "Packing List", "Inspection Sheet"].map((title, index) => (
