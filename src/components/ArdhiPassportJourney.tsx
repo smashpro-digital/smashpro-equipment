@@ -780,8 +780,8 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             <span className="document-status is-verified">Verified</span><h3>Equipment Window Sticker</h3><p>Permanent configuration and identity certificate for SP-ARDHI-26.</p><small>Updated September 2026 · PNG / PDF / Print</small><button type="button" onClick={() => openSticker()}>View Full Sticker</button>
           </article>
           {item.documents.filter(({ kind, publicDisplay, url }) => kind === "manual" && publicDisplay && url).map((document) => (
-            <article className="is-available" key={document.id}>
-              <div aria-hidden="true"><span>PDF</span> Manufacturer document</div>
+            <article className="is-available operator-manual-library-card" key={document.id}>
+              <img src={image("sp-ardhi-26-yfe380-operator-manual-preview.png")} alt="Table of contents preview from the verified YFE380 operator manual" loading="lazy" decoding="async" />
               <span className="document-status is-verified">Verified</span>
               <h3>{document.title}</h3>
               <p>{document.description}</p>
