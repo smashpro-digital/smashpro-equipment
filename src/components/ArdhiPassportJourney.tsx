@@ -776,14 +776,25 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             <a href="#passport-ledger-title">Open Passport</a>
           </article>
           <article className="is-available window-sticker-library-card">
-            <div aria-hidden="true"><span>🏷</span> Official certificate</div><span className="document-status is-verified">Verified</span><h3>Equipment Window Sticker</h3><p>Permanent configuration and identity certificate for SP-ARDHI-26.</p><small>Updated September 2026 · PNG / PDF / Print</small><button type="button" onClick={() => openSticker()}>View Full Sticker</button>
+            <img src={image("sp-ardhi-26-window-sticker-preview.png")} alt="Preview of the official SP-ARDHI-26 equipment window sticker" loading="lazy" decoding="async" />
+            <span className="document-status is-verified">Verified</span><h3>Equipment Window Sticker</h3><p>Permanent configuration and identity certificate for SP-ARDHI-26.</p><small>Updated September 2026 · PNG / PDF / Print</small><button type="button" onClick={() => openSticker()}>View Full Sticker</button>
           </article>
-          {["Operator Manual", "Maintenance Manual", "Parts Manual", "Bill of Lading", "Packing List", "Inspection Sheet"].map((title, index) => (
+          {item.documents.filter(({ kind, publicDisplay, url }) => kind === "manual" && publicDisplay && url).map((document) => (
+            <article className="is-available" key={document.id}>
+              <div aria-hidden="true"><span>PDF</span> Manufacturer document</div>
+              <span className="document-status is-verified">Verified</span>
+              <h3>{document.title}</h3>
+              <p>{document.description}</p>
+              <small>Revision: {document.revision} · Source: {document.source} · Received: {document.dateReceived}</small>
+              <a href={document.url} target="_blank" rel="noopener noreferrer" download={document.downloadName}>View / Download PDF</a>
+            </article>
+          ))}
+          {["Maintenance Manual", "Parts Manual", "Bill of Lading", "Packing List", "Inspection Sheet"].map((title, index) => (
             <article className="is-reserved" key={title}>
               <div aria-hidden="true">
                 <span>⌁</span> Blueprint record
               </div>
-              <span className="document-status is-pending">{index < 3 ? "Pending Arrival" : "Awaiting Verification"}</span>
+              <span className="document-status is-pending">{index < 2 ? "Pending Arrival" : "Awaiting Verification"}</span>
               <h3>{title}</h3>
               <p>This slot activates when a verified public file enters the equipment record.</p>
               <small>Upon arrival · Status pending</small>
