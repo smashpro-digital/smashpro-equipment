@@ -309,7 +309,7 @@ SP-NYASI-26
 
 ---
 
-# Customer Project Scope
+# Primary Services
 
 Initial customer-facing project families are governed by the canonical SmashPro service catalog and Digital HQ compliance/readiness state. The intended ARDHI launch scopes include:
 
