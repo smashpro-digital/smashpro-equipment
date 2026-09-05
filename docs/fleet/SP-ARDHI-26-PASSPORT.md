@@ -1,9 +1,11 @@
 # SP-ARDHI-26 Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**  
-> Version: 1.0  
-> Status: Active Fleet Asset  
-> Last Updated: 2026-08-20
+> Version: 1.1  
+> Status: In Transit / Pre-Deployment  
+> Last Updated: 2026-09-05
+
+> **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics with an expected-arrival target of **October 5, 2026**. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
 
 ---
 
@@ -27,9 +29,9 @@
 
 # Mission
 
-SP-ARDHI-26 is the flagship earthmoving machine of the SmashPro Fleet.
+SP-ARDHI-26 is the flagship compact material-handling and property-work machine of the SmashPro Fleet.
 
-Designed to provide professional landscaping, grading, material handling, debris removal, and future land clearing services while serving as the cornerstone of the SmashPro technology-first equipment lineup.
+It is intended for approved landscaping, light grading, material handling, debris movement, and pallet-placement work. Future attachment-supported capabilities remain future capabilities until the attachment, service definition, insurance/compliance profile, and operating workflow are separately approved.
 
 ---
 
@@ -118,6 +120,8 @@ Supports future powered attachments including:
 - Auger
 - Future hydraulic attachments
 
+Future attachment compatibility does **not** mean the corresponding customer service is active or approved.
+
 ---
 
 ## Dimensions
@@ -125,11 +129,13 @@ Supports future powered attachments including:
 | Item | Value |
 |------|-------|
 | Overall Length | 2285 mm |
-| Width | 810 mm |
+| Machine / Chassis Width | 810 mm (31.89 in) |
 | Height | 1270 mm |
-| Bucket Width | 1090 mm |
+| Bucket Width | 1090 mm (42.91 in) |
 | Wheelbase | 760 mm |
 | Ground Clearance | 110 mm |
+
+> **Access note:** Machine width and attachment width are different. Customer access must be reviewed using the actual installed configuration and route, not the chassis-width number alone.
 
 ---
 
@@ -196,6 +202,8 @@ Custom SmashPro Branded Forks
 | Trencher | Future |
 | Auger | Future |
 | Stump Grinder | Future |
+
+These are roadmap items, not current customer-service promises.
 
 ---
 
@@ -301,29 +309,23 @@ SP-NYASI-26
 
 ---
 
-# Primary Services
+# Customer Project Scope
 
-Earthmoving
+Initial customer-facing project families are governed by the canonical SmashPro service catalog and Digital HQ compliance/readiness state. The intended ARDHI launch scopes include:
 
-Material Handling
+- Mulch & Material Moving
+- Gravel & Rock Placement
+- Topsoil Moving
+- Landscape Preparation
+- Driveway Gravel Refresh
+- Yard Debris Cleanup
+- Pallet Material Placement
+- Light Grading
+- Backfill placement
 
-Landscape Installation
+A catalog listing or machine capability does not by itself confirm availability, price, insurance eligibility, attachment readiness, or a scheduled date.
 
-Mulch
-
-Stone
-
-Gravel
-
-Debris Removal
-
-Pallet Moving
-
-Property Cleanup
-
-Brush Clearing (Future)
-
-Trenching (Future)
+Future attachment-supported scopes such as brush cutting, trenching, auger work, and stump grinding are **not launch services** unless separately activated through the canonical service/compliance process.
 
 ---
 
@@ -361,19 +363,19 @@ Destination
 
 South Carolina, USA
 
-Status
+Current Lifecycle
 
-Production Complete
+In Transit / Pre-Deployment
 
-Awaiting
+Expected Arrival Target
 
-- Final Build Summary
-- Wooden Crate
-- Packaging Photos
-- Shipping Photos
-- Bill of Lading
-- Container Information
-- Vessel Information
+October 5, 2026
+
+Operational Availability
+
+Not yet commissioned; not available for scheduled field work solely because an arrival target exists.
+
+The live Equipment Passport shipping data remains the customer-facing projection for verified logistics milestones. This Markdown record must not guess a milestone that has not been confirmed.
 
 ---
 
@@ -389,11 +391,14 @@ Awaiting
 - Bucket Completed
 - Pallet Forks Completed
 - Final Payment Completed
-- Awaiting Packaging
-- Awaiting Shipment
-- Ocean Transit (Pending)
+- Production / Factory Build Complete
+- International Delivery Logistics In Progress
 - U.S. Arrival (Pending)
+- Delivery to SmashPro (Pending)
+- Receipt Inspection (Pending)
 - Fleet Commissioning (Pending)
+- Operational / Compliance Release (Pending)
+- First Approved Job (Pending)
 
 ---
 
@@ -401,7 +406,7 @@ Awaiting
 
 | Hours | Service |
 |--------|----------|
-| 0 | Factory Commissioning |
+| 0 | Receipt / commissioning service record pending arrival |
 
 ---
 
@@ -409,11 +414,15 @@ Awaiting
 
 Fleet Status
 
-🟢 Active
+🟡 In Transit / Pre-Deployment
 
 Operational Status
 
-Awaiting Shipment
+Not Commissioned / Not Released for Field Work
+
+Expected Arrival Target
+
+October 5, 2026
 
 Fleet Classification
 
@@ -433,4 +442,4 @@ Tier 1
 
 # Fleet Legacy
 
-SP-ARDHI-26 is the first flagship heavy equipment asset of the SmashPro Fleet and marks the beginning of SmashPro's technology-forward equipment ecosystem, combining intelligent software, modern branding, specialized equipment, and digital customer experiences into a unified field operations platform.
+SP-ARDHI-26 is the first flagship heavy equipment acquisition of the SmashPro Fleet and marks the beginning of SmashPro's technology-forward equipment ecosystem, combining intelligent software, modern branding, specialized equipment, and digital customer experiences into a unified field operations platform.
