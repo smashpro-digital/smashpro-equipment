@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
+import { BuildConnections } from "./BuildConnections";
 
 export function PageFrame({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -35,5 +36,5 @@ export function PageFrame({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /></>;
+  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main"><BuildConnections />{children}</main><SiteFooter /></>;
 }

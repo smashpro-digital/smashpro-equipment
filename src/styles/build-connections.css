@@ -1,0 +1,7 @@
+.build-connections{background:#0d1710;border-bottom:1px solid rgba(142,255,56,.22);color:#d2dbd4;padding:1rem 0}
+.build-connections__inner{width:min(1180px,calc(100% - 32px));margin-inline:auto}
+.build-connections nav{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:center;line-height:1.5}
+.build-connections a{color:#adf779;text-decoration:underline;text-underline-offset:.2em;overflow-wrap:anywhere}
+.build-connections a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.build-connections p{margin:.55rem 0 0;font-size:.85rem;color:#c2cfc5}
+@media(max-width:560px){.build-connections nav{align-items:flex-start;flex-direction:column}}
