@@ -51,10 +51,22 @@ export interface Equipment {
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;
   shippingStatus?: EquipmentShippingStatus; shippingRoute?: EquipmentShippingRouteStep[]; lifecycleMilestones?: EquipmentLifecycleMilestone[]; fleetStats?: EquipmentFleetStat[]; logisticsGraphics?: EquipmentLogisticsGraphic[]; passportExplanation?: string; partners?: EquipmentPartner[];
-  capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];
+  capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; attachmentPlateStandards?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];
 }
 
 export type AttachmentPassportStatus = "documented" | "selected" | "ordered" | "in-transit" | "commissioning" | "active" | "retired" | "planned";
+export interface AttachmentPlateRequirement {
+  standard: string;
+  label: string;
+  notes?: string;
+}
+export interface AttachmentHydraulicRequirement {
+  circuit?: string;
+  couplers?: string;
+  pressure?: string;
+  flow?: string;
+  notes?: string;
+}
 export interface AttachmentPassport {
   passportId: string;
   assetTag: string;
@@ -65,14 +77,15 @@ export interface AttachmentPassport {
   name: string;
   category: string;
   status: AttachmentPassportStatus;
-  compatibleFleetIds: string[];
+  plateRequirement?: AttachmentPlateRequirement;
+  hydraulicRequirement?: AttachmentHydraulicRequirement;
+  verifiedFleetIds?: string[];
   manufacturer?: string;
   model?: string;
   description: string;
   capabilities: string[];
   width?: string;
   weight?: string;
-  mount?: string;
   image?: string;
   imageAlt?: string;
   serviceUrl?: string;
