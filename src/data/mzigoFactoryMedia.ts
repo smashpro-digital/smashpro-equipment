@@ -43,13 +43,18 @@ export const mzigoFactoryUpdate: FactoryUpdate = {
 
 export const mzigoBuildChapters = [
   { number: "01", title: "Factory Identity", image: mzigoFactoryPhotos.identity, supporting: [],
+    scene: "Meet SP-MZIGO-26E", takeaway: "One K600 factory platform, now carrying its permanent SmashPro fleet identity.",
     copy: "The K600 platform takes on its SmashPro fleet identity through the finished green body, SP-MZIGO-26E graphics and QR treatment. The side view records those details on the actual factory build." },
   { number: "02", title: "SmashPro Branding", image: mzigoFactoryPhotos.controls, supporting: [mzigoFactoryPhotos.rear],
+    scene: "Move closer to the controls", takeaway: "The fleet identity continues from the operator controls to the rear of the machine.",
     copy: "The identity continues across the control face, dump body and rear structure. The factory plate, switches and branded surfaces document a coordinated machine finish rather than a single decal." },
   { number: "03", title: "Electric Drive Architecture", image: mzigoFactoryPhotos.drive, supporting: [],
+    scene: "Look beneath the body", takeaway: "The controller and cabling reveal the hardware behind the electric drive.",
     copy: "The exposed chassis shows electric drive hardware, controller modules, high-current cabling and battery enclosures. These close-ups document component placement and wiring around the frame without deriving electrical ratings from appearance." },
   { number: "04", title: "Hydraulic Dump System", image: mzigoFactoryPhotos.raised, supporting: [mzigoFactoryPhotos.pump, mzigoFactoryPhotos.cylinder],
+    scene: "Follow the lift system", takeaway: "The raised body connects the full-machine view to the pump, reservoir and cylinder details.",
     copy: "A central hydraulic lift cylinder supports the raised dump body. The supporting views record its mounting, the pump and reservoir, and nearby electrical hardware. Illuminated work lights are visible in the raised-bed photograph." },
   { number: "05", title: "Factory-Complete Machine", image: mzigoFactoryPhotos.complete, supporting: [mzigoFactoryPhotos.right], video: mzigoFactoryWalkaround,
+    scene: "Step back. See it together.", takeaway: "The factory build is complete. Inspection and transport remain the next stages.",
     copy: "The completed machine brings together a compact four-wheel stance, jobsite tires, electric propulsion hardware, hydraulic dumping and finished SmashPro bodywork. The factory walkaround closes this assembly chapter; pre-shipment verification remains the current stage." },
 ];
