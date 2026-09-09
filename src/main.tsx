@@ -12,6 +12,7 @@ import "./styles/product-engineering.css";
 import "./styles/manufacturer-profile.css";
 import "./styles/negotiation-evidence-media.css";
 import "./styles/attachment-showroom.css";
+import "./styles/attachment-passport-mobile.css";
 
 installJourneyCalendarMetricCorrection();
 installNegotiationEvidenceMedia();
