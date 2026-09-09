@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./app/App";
+import { installAttachmentPassportMedia } from "./app/attachmentPassportMedia";
 import { installManufacturerProfileMount } from "./app/manufacturerProfileMount";
 import { installNegotiationEvidenceMedia } from "./app/negotiationEvidenceMedia";
 import { installJourneyCalendarMetricCorrection } from "./domain/calendarMetrics";
@@ -17,6 +18,7 @@ import "./styles/attachment-passport-mobile.css";
 installJourneyCalendarMetricCorrection();
 installNegotiationEvidenceMedia();
 installManufacturerProfileMount();
+installAttachmentPassportMedia();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
