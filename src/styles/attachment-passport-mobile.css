@@ -1,0 +1,62 @@
+@media(max-width:760px){
+  .attachment-passport-hero{padding:54px 0 56px}
+  .attachment-passport-hero__grid{gap:1rem}
+  .attachment-passport-hero__visual{min-height:250px}
+  .attachment-passport-hero h1{font-size:clamp(2.55rem,12vw,4rem);line-height:.92}
+  .attachment-passport-hero__lede{font-size:.98rem;line-height:1.5}
+  .attachment-passport-hero~.section{padding:58px 0}
+  .attachment-passport-hero~.section .section-heading,
+  .attachment-passport-hero~.attachment-detail .section-heading{margin-bottom:1.35rem}
+  .attachment-passport-hero~.section .section-heading h2,
+  .attachment-passport-hero~.attachment-detail .section-heading h2{font-size:clamp(1.95rem,8vw,3rem)}
+  .attachment-passport-hero~.section .spec-grid,
+  .attachment-passport-hero~.attachment-detail .spec-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    border:1px solid var(--line);
+    border-right:0;
+    border-bottom:0;
+  }
+  .attachment-passport-hero~.section .spec-grid>div,
+  .attachment-passport-hero~.attachment-detail .spec-grid>div{
+    min-height:96px;
+    padding:.8rem .72rem;
+    border:0;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .attachment-passport-hero~.section .spec-grid dt,
+  .attachment-passport-hero~.attachment-detail .spec-grid dt{
+    font-size:.57rem;
+    line-height:1.25;
+    letter-spacing:.075em;
+    color:#8c968e;
+  }
+  .attachment-passport-hero~.section .spec-grid dd,
+  .attachment-passport-hero~.attachment-detail .spec-grid dd{
+    margin:.42rem 0 0;
+    font-size:clamp(.9rem,3.7vw,1.08rem);
+    line-height:1.22;
+    overflow-wrap:anywhere;
+  }
+  .attachment-passport-hosts{margin-top:1rem;gap:.45rem}
+  .attachment-passport-hosts a,.attachment-passport-hosts span,.attachment-passport-hosts strong{padding:.72rem .78rem;font-size:.74rem}
+  .attachment-checklist{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+  .attachment-check{min-height:150px;padding:.82rem}
+  .attachment-check__top{align-items:flex-start;gap:.45rem;margin-bottom:.6rem;flex-direction:column}
+  .attachment-check__top span{font-size:.55rem}
+  .attachment-check__top small{font-size:.58rem;line-height:1.25}
+  .attachment-check h3{font-size:.82rem;line-height:1.27;margin-bottom:.45rem}
+  .attachment-check p{font-size:.75rem;line-height:1.35}
+}
+@media(max-width:430px){
+  .attachment-passport-hero~.section .spec-grid>div,
+  .attachment-passport-hero~.attachment-detail .spec-grid>div{min-height:88px;padding:.7rem .6rem}
+  .attachment-passport-hero~.section .spec-grid dd,
+  .attachment-passport-hero~.attachment-detail .spec-grid dd{font-size:.9rem}
+  .attachment-check{min-height:142px;padding:.7rem}
+  .attachment-check h3{font-size:.76rem}
+  .attachment-check p{font-size:.7rem}
+}
