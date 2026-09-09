@@ -36,12 +36,13 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
 
         {featured && (
           <article className="attachment-feature">
-            <div className="attachment-feature__visual">
+            <div className={`attachment-feature__visual${featured.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}`}>
               {featured.image ? (
                 <img src={featured.image} alt={featured.imageAlt ?? featured.name} loading="lazy" decoding="async" />
               ) : (
                 <div className="attachment-feature__monogram"><span>{featured.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>{featured.width ? "IN" : "ATT"}</small></div>
               )}
+              {featured.image && featured.passportId === "SP-ATT-GRP-001" && <div className="attachment-feature__monogram"><span>42</span><small>IN</small></div>}
               <span className="attachment-feature__fleet">{featured.plateRequirement?.label ?? "Plate requirement pending"}</span>
             </div>
             <div className="attachment-feature__body">

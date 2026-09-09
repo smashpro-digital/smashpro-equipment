@@ -1,5 +1,15 @@
 .attachment-media-credit{position:absolute;left:.75rem;right:.75rem;bottom:.75rem;padding:.55rem .7rem;border:1px solid rgba(255,255,255,.18);background:rgba(5,8,5,.82);color:#d9e0da;font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;backdrop-filter:blur(5px)}
 .attachment-passport-hero__visual{position:relative}
+.attachment-visual--loflin{isolation:isolate;overflow:hidden}
+.attachment-visual--loflin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% center;z-index:-2}
+.attachment-visual--loflin::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,25,16,.08) 35%,rgba(7,16,10,.72) 100%)}
+.attachment-visual--loflin .attachment-feature__monogram{position:absolute;left:1.25rem;bottom:4.5rem;text-shadow:0 2px 12px #050805}
+.attachment-visual--loflin .attachment-feature__monogram span{font-size:clamp(4rem,7vw,6rem)}
+@media(max-width:768px){
+  .attachment-visual--loflin img{object-position:72% center}
+  .attachment-visual--loflin .attachment-feature__monogram{left:1rem;bottom:4rem}
+  .attachment-visual--loflin .attachment-feature__fleet{right:1rem;letter-spacing:.07em}
+}
 @media(max-width:760px){
   .attachment-passport-hero{padding:54px 0 56px}
   .attachment-passport-hero__grid{gap:1rem}

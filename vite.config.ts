@@ -19,7 +19,7 @@ function preserveEquipmentMedia(): Plugin {
         const imagesDirectory = resolve(projectDirectory, "images");
         const candidate = resolve(imagesDirectory, filename);
         if (dirname(candidate) !== imagesDirectory || !existsSync(candidate)) return next();
-        const contentTypes: Record<string, string> = { ".jpg": "image/jpeg", ".png": "image/png", ".mp4": "video/mp4" };
+        const contentTypes: Record<string, string> = { ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".mp4": "video/mp4" };
         response.setHeader("Content-Type", contentTypes[extname(candidate).toLowerCase()] ?? "application/octet-stream");
         createReadStream(candidate).pipe(response);
       });

@@ -18,8 +18,12 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
             <p className="attachment-passport-hero__lede">{item.description}</p>
             <div className="button-row"><ButtonLink href="/equipment/#attachments" variant="outline">Back to attachment library</ButtonLink>{item.serviceUrl && <ButtonLink href={item.serviceUrl}>Explore supported work</ButtonLink>}</div>
           </div>
-          <div className="attachment-passport-hero__visual">
+          <div className={`attachment-passport-hero__visual${item.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}`}>
             {item.image ? <img src={item.image} alt={item.imageAlt ?? item.name} /> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
+            {item.passportId === "SP-ATT-GRP-001" && <>
+              <div className="attachment-feature__monogram"><span>42</span><small>IN</small></div>
+              <span className="attachment-feature__fleet">{item.plateRequirement?.label}</span>
+            </>}
           </div>
         </div>
       </section>

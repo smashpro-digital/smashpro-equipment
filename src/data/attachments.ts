@@ -114,6 +114,10 @@ export const attachments: AttachmentPassport[] = [
     verifiedFleetIds: ["SP-ARDHI-26"],
     manufacturer: "Loflin Fabrication",
     model: "Mini Root Grapple",
+    // Official manufacturer photo, served locally without alteration.
+    // https://www.loflinfabrication.com/wp-content/uploads/2026/04/mini-root-grapple-single-tine.webp
+    image: "/equipment/images/sp-att-grp-001-loflin-42-inch-mini-root-grapple.webp",
+    imageAlt: "Loflin Mini Root Grapple carrying a large log",
     description: "Selected 42-inch black Mini Root Grapple. Planned for brush and vegetation cleanup, landscape tear-out cleanup, storm debris handling, and limb/small-log handling after commissioning.",
     capabilities: ["Brush cleanup", "Vegetation handling", "Storm debris", "Limb and small-log handling"],
     width: "42 in",
