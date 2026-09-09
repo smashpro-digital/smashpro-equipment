@@ -1,3 +1,5 @@
+.attachment-media-credit{position:absolute;left:.75rem;right:.75rem;bottom:.75rem;padding:.55rem .7rem;border:1px solid rgba(255,255,255,.18);background:rgba(5,8,5,.82);color:#d9e0da;font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;backdrop-filter:blur(5px)}
+.attachment-passport-hero__visual{position:relative}
 @media(max-width:760px){
   .attachment-passport-hero{padding:54px 0 56px}
   .attachment-passport-hero__grid{gap:1rem}
@@ -50,6 +52,7 @@
   .attachment-check__top small{font-size:.58rem;line-height:1.25}
   .attachment-check h3{font-size:.82rem;line-height:1.27;margin-bottom:.45rem}
   .attachment-check p{font-size:.75rem;line-height:1.35}
+  .attachment-media-credit{left:.5rem;right:.5rem;bottom:.5rem;font-size:.54rem;padding:.45rem .55rem}
 }
 @media(max-width:430px){
   .attachment-passport-hero~.section .spec-grid>div,
