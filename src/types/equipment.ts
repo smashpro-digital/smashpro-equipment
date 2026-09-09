@@ -58,14 +58,53 @@ export type AttachmentPassportStatus = "documented" | "selected" | "ordered" | "
 export interface AttachmentPlateRequirement {
   standard: string;
   label: string;
+  geometryNotes?: string;
+  latchNotes?: string;
   notes?: string;
 }
 export interface AttachmentHydraulicRequirement {
   circuit?: string;
   couplers?: string;
+  couplerSize?: string;
+  hoseSpec?: string;
   pressure?: string;
   flow?: string;
+  cylinder?: string;
   notes?: string;
+}
+export interface AttachmentConstructionProfile {
+  overallWidth?: string;
+  finishedWeight?: string;
+  jawOpening?: string;
+  tineConstruction?: string;
+  steelThickness?: string;
+  cylinderProtection?: string;
+  hingeServiceability?: string;
+  visibilityNotes?: string;
+}
+export interface AttachmentProcurementProfile {
+  unitPrice?: string;
+  freight?: string;
+  deliveredSubtotal?: string;
+  taxOrFees?: string;
+  stockStatus?: string;
+  leadTime?: string;
+  paymentStructure?: string;
+  paymentMethods?: string[];
+  warranty?: string;
+  replacementParts?: string;
+  serviceability?: string;
+  finish?: string;
+  branding?: string;
+  pickupOption?: string;
+  partnershipValue?: string;
+}
+export interface AttachmentFitmentChecklistItem {
+  key: string;
+  question: string;
+  answer?: string;
+  status: "confirmed" | "pending" | "not-applicable";
+  source?: string;
 }
 export interface AttachmentPassport {
   passportId: string;
@@ -79,6 +118,9 @@ export interface AttachmentPassport {
   status: AttachmentPassportStatus;
   plateRequirement?: AttachmentPlateRequirement;
   hydraulicRequirement?: AttachmentHydraulicRequirement;
+  construction?: AttachmentConstructionProfile;
+  procurement?: AttachmentProcurementProfile;
+  fitmentChecklist?: AttachmentFitmentChecklistItem[];
   verifiedFleetIds?: string[];
   manufacturer?: string;
   model?: string;
