@@ -270,6 +270,18 @@ const history: HistoryRecord[] = [
     narrative: "The shipping record names the planned vessel and voyage. This is logistics documentation, not live GPS tracking.",
     technical: "EVER MAX · Voyage 1374-016E",
   },
+  {
+    id: "grapple-ordered",
+    date: "Sep 9, 2026",
+    title: "Loflin Root Grapple Build Ordered",
+    status: "current",
+    narrative: "SmashPro placed the order for the 42-inch Loflin Mini Root Grapple through HighWay Attachments. The attachment is in the vendor build cycle and is not yet installed or available for customer work.",
+    decision: "Advance the selected U.S.-built grapple into production while preserving delivery, physical fitment, hydraulic commissioning, and service-release gates.",
+    supplier: "Loflin Fabrication · retail order through HighWay Attachments, Denton, NC",
+    payment: "$297 deposit completed · $2,000 balance due on build completion",
+    documents: 1,
+    outcome: "Quoted lead time is 4–6 weeks, producing an approximate October 7–21 build-completion planning window. Fabrication and completion photos have been requested.",
+  },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -285,6 +297,7 @@ const historyPhaseStarts: Record<string, string> = {
   "procurement-opened": "Procurement",
   "production-started": "Production",
   "freight-forwarder": "Export",
+  "grapple-ordered": "Attachment Build",
   "future-6": "Commissioning",
   "future-10": "Operation",
   "future-14": "Maintenance",
