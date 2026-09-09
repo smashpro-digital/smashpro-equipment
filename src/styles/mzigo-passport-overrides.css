@@ -1,0 +1,84 @@
+.mzigo-passport-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(117, 196, 65, 0.42);
+  background: rgba(117, 196, 65, 0.16);
+}
+
+.mzigo-passport-summary > div {
+  min-width: 0;
+  padding: 1rem;
+  background: #0a0e0b;
+}
+
+.mzigo-passport-summary .passport-summary-item::before {
+  content: attr(data-icon);
+  display: block;
+  margin-bottom: .45rem;
+  color: #78c844;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.mzigo-passport-summary span {
+  display: block;
+  color: rgba(255,255,255,.64);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mzigo-passport-summary strong {
+  display: block;
+  margin-top: .32rem;
+  color: #fff;
+  font-size: clamp(.9rem, 2.6vw, 1.1rem);
+  line-height: 1.15;
+}
+
+.mzigo-drive-evidence-note {
+  display: grid;
+  gap: .35rem;
+  margin: 1.25rem 0;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid #78c844;
+  background: rgba(117, 196, 65, .08);
+}
+
+.mzigo-drive-evidence-note strong {
+  color: #fff;
+  font-size: .82rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mzigo-drive-evidence-note span {
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
+}
+
+.mzigo-factory-update .factory-update__intro {
+  border-top-color: #78c844;
+}
+
+@media (max-width: 720px) {
+  .mzigo-passport-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .mzigo-passport-summary > div {
+    padding: .78rem .58rem;
+  }
+
+  .mzigo-passport-summary span {
+    font-size: .56rem;
+    letter-spacing: .07em;
+  }
+
+  .mzigo-passport-summary strong {
+    font-size: .78rem;
+  }
+}
