@@ -9,7 +9,7 @@
     "preview": "vite preview --configLoader runner",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
-    "validate:index": "node scripts/validate-public-index.mjs",
+    "validate:index": "node scripts/validate-public-index.mjs && node scripts/validate-mzigo-media.mjs",
     "validate": "npm run typecheck && npm test && npm run build && npm run validate:index"
   },
   "dependencies": {

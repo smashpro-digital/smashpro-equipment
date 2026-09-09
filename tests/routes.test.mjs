@@ -183,14 +183,17 @@ test("Ardhi public factory document has a deployable URL and cannot render as an
   assert.match(detail, /downloads\.length \? <div className="public-document-list">/);
 });
 
-test("both fleet equipment passport markdown files exist with matching identity sections", () => {
+test("both fleet passports retain identity sections and the current Mzigo evidence structure", () => {
   ["docs/fleet/SP-ARDHI-26-PASSPORT.md", "docs/fleet/SP-MZIGO-26E-PASSPORT.md"].forEach((file) => assert.equal(existsSync(file), true, `${file} must exist`));
   const ardhiPassport = readFileSync("docs/fleet/SP-ARDHI-26-PASSPORT.md", "utf8");
   const mzigoPassport = readFileSync("docs/fleet/SP-MZIGO-26E-PASSPORT.md", "utf8");
   ["# Identity", "# Mission", "# Factory Model", "# Build Summary", "# Specifications", "# Included Attachments", "# Future Attachments", "# Lighting", "# Branding", "# Color Scheme", "# Security", "# Planned Fleet Pairing", "# Primary Services", "# Factory Documentation", "# Shipping", "# Equipment Timeline", "# Maintenance Log", "# Asset Status", "# Motto", "# Fleet Legacy"]
-    .forEach((heading) => { assert.match(ardhiPassport, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))); assert.match(mzigoPassport, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))); });
+    .forEach((heading) => { assert.match(ardhiPassport, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))); });
+  ["Identity", "Mission", "Factory Model", "Build Summary", "Specifications", "Included Equipment", "Planned Fleet Enhancements", "Fleet Pairing", "Primary Services", "Shipping / Readiness", "Equipment Timeline", "Maintenance Log", "Asset Status", "Motto", "Fleet Legacy", "September 9, 2026 Factory Update"]
+    .forEach(heading => assert.ok(mzigoPassport.includes(`# ${heading}`), heading));
   assert.match(mzigoPassport, /\*\*SP-MZIGO-26E\*\*/);
-  assert.match(mzigoPassport, /pending manufacturer specification sheet/);
+  assert.match(mzigoPassport, /do \*\*not\*\* by themselves prove/);
+  assert.match(mzigoPassport, /Final Inspection Confirmation/);
 });
 
 test("SP-MZIGO-26E is classified as electric with a correctly converted published payload", () => {

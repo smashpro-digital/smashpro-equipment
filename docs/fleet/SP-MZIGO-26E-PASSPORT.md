@@ -94,6 +94,30 @@ Representative verified files reviewed for this update:
 
 # Specifications
 
+## September 9 website media mapping
+
+The public passport uses the original files in `images/`, served under
+`/equipment/images/`. No files are renamed or replaced with placeholders.
+
+| Build Story chapter | Original factory media |
+|---|---|
+| 01 — Factory Identity | `sp-mzigo-26e-factory-complete-left-profile-2026-09-09.jpg` |
+| 02 — SmashPro Branding | `sp-mzigo-26e-control-panel-2026-09-09.jpg`; `sp-mzigo-26e-rear-branding-2026-09-09.jpg` |
+| 03 — Electric Drive Architecture | `sp-mzigo-26e-motor-controller-detail-2026-09-09.jpg` |
+| 04 — Hydraulic Dump System | `sp-mzigo-26e-hydraulic-dump-raised-lights-2026-09-09.jpg`; `sp-mzigo-26e-hydraulic-pump-reservoir-2026-09-09.jpg`; `sp-mzigo-26e-hydraulic-cylinder-electrical-2026-09-09.jpg` |
+| 05 — Factory-Complete Machine | `sp-mzigo-26e-factory-complete-three-quarter-2026-09-09.jpg`; `sp-mzigo-26e-factory-complete-right-profile-2026-09-09.jpg`; `sp-mzigo-26e-factory-complete-walkaround-2026-09-09.mp4` |
+
+The three-quarter photograph is also the passport hero and walkaround poster.
+Catalog artwork remains unchanged. The Latest Factory Update shows the September 9
+three-quarter and control-panel views; August 31 assembly photographs and video
+remain in Media History. The Build Story renders through React using the existing
+`GalleryImage` and `FactoryUpdate` contracts. Video uses native inline controls,
+metadata preload and a direct-file fallback; it does not autoplay.
+
+Build validation verifies all ten September 9 files reach `dist/images/` unchanged,
+including a binary MP4 rather than a Git LFS pointer. Final inspection and shipment
+remain upcoming; this media update adds no new electrical ratings.
+
 ## Powertrain
 
 | Item | Specification |

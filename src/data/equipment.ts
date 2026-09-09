@@ -1,8 +1,29 @@
-import type { Equipment, EquipmentSpecification } from "../types/equipment";
+import type { Equipment, EquipmentSpecification, FactoryUpdate } from "../types/equipment";
+import { mzigoFactoryUpdate } from "./mzigoFactoryMedia";
 import { standardPackageRules } from "./packageRules";
 
 const image = (name: string) => `/equipment/images/${name}`;
 const specs = (values: Array<[string, string, string?, string?]>): EquipmentSpecification[] => values.map(([label, value, group, source], sortOrder) => ({ label, value, group: group ?? "General", source, confirmed: true, sortOrder }));
+
+// Preserve the earlier assembly evidence as history when the latest update advances.
+const mzigoAugustFactoryUpdate: FactoryUpdate = {
+      date: "2026-08-31",
+      heading: "Latest Factory Production Update",
+      description: [
+        "The SP-MZIGO-26E continues through production at the Kylin factory. The latest update shows the chassis assembly progressing before installation of the custom SmashPro green body panels and branding.",
+        "These updates are provided directly by the manufacturer and document the complete journey from factory floor to deployment within the SmashPro Fleet.",
+      ],
+      images: [
+        { id: "mzigo-chassis-side-20260831", src: image("sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg"), alt: "Side view of the SP-MZIGO-26E K600 chassis with electric drivetrain, axles, batteries, and frame exposed during factory assembly", caption: "Chassis and electric drivetrain assembly documented on the Kylin factory floor.", capturedAt: "2026-08-31", width: 1080, height: 810 },
+        { id: "mzigo-chassis-top-20260831", src: image("sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg"), alt: "Top view of a Kylin technician assembling the SP-MZIGO-26E battery, controller, wiring, and drivetrain components inside the chassis", caption: "Top view of the battery and electrical systems during chassis assembly.", capturedAt: "2026-08-31", width: 810, height: 1080 },
+      ],
+      video: { id: "mzigo-chassis-video-20260831", src: image("sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4"), poster: image("sp-mzigo-26e-production-chassis-assembly-video-poster-2s-2026-08-31.jpg"), alt: "Factory video of the SP-MZIGO-26E chassis assembly in progress", caption: "Factory assembly progress showing the SP-MZIGO-26E chassis before paint, custom decals, and final assembly.", kind: "video", capturedAt: "2026-08-31", width: 1280, height: 720 },
+      timeline: [
+        { label: "Deposit Paid", status: "completed" }, { label: "Production Started", status: "completed" }, { label: "Chassis Assembly", status: "completed" }, { label: "Factory Documentation Received", status: "completed" },
+        { label: "Body Assembly", status: "current" }, { label: "Paint Preparation", status: "current" },
+        { label: "SmashPro Green Paint", status: "upcoming" }, { label: "Custom Decals", status: "upcoming" }, { label: "Functional Testing", status: "upcoming" }, { label: "Final Inspection", status: "upcoming" }, { label: "Ocean Freight", status: "upcoming" }, { label: "U.S. Delivery", status: "upcoming" },
+      ],
+    };
 
 export const equipment: Equipment[] = [
   {
@@ -139,8 +160,8 @@ export const equipment: Equipment[] = [
   {
     slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
     meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: "SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.",
-    capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-hero.png"), status: "fleet-build", statusLabel: "Electric fleet build — availability not announced",
-    identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026 },
+    capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-hero.png"), status: "fleet-build", statusLabel: "Factory build complete · pre-shipment verification", statusDetail: "Rental availability not announced.",
+    identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026, operatingHours: 0 },
     specifications: specs([
       ["Platform", "K600", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Fleet ID", "SP-MZIGO-26E", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co., Ltd.", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"],
       ["Drive configuration", "4WD electric", "Configuration", "SP-MZIGO-26E Equipment Passport"], ["Operation", "Remote control", "Controls", "SP-MZIGO-26E Equipment Passport"], ["Remote control range", "Up to 600 m", "Controls", "SP-MZIGO-26E Equipment Passport"],
@@ -151,24 +172,7 @@ export const equipment: Equipment[] = [
       ["Ground clearance", "260 mm (10.24 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall length", "1,170 mm (46.06 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall width", "820 mm (32.28 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall height", "870 mm (34.25 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Cargo bed dimensions", "1,170 × 780 × 300 mm (46.06 × 30.71 × 11.81 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"],
       ["Factory finish", "SmashPro Custom Green", "Finish", "SP-MZIGO-26E Equipment Passport"],
     ]),
-    factoryUpdate: {
-      date: "2026-08-31",
-      heading: "Latest Factory Production Update",
-      description: [
-        "The SP-MZIGO-26E continues through production at the Kylin factory. The latest update shows the chassis assembly progressing before installation of the custom SmashPro green body panels and branding.",
-        "These updates are provided directly by the manufacturer and document the complete journey from factory floor to deployment within the SmashPro Fleet.",
-      ],
-      images: [
-        { id: "mzigo-chassis-side-20260831", src: image("sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg"), alt: "Side view of the SP-MZIGO-26E K600 chassis with electric drivetrain, axles, batteries, and frame exposed during factory assembly", caption: "Chassis and electric drivetrain assembly documented on the Kylin factory floor.", capturedAt: "2026-08-31", width: 1080, height: 810 },
-        { id: "mzigo-chassis-top-20260831", src: image("sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg"), alt: "Top view of a Kylin technician assembling the SP-MZIGO-26E battery, controller, wiring, and drivetrain components inside the chassis", caption: "Top view of the battery and electrical systems during chassis assembly.", capturedAt: "2026-08-31", width: 810, height: 1080 },
-      ],
-      video: { id: "mzigo-chassis-video-20260831", src: image("sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4"), poster: image("sp-mzigo-26e-production-chassis-assembly-video-poster-2s-2026-08-31.jpg"), alt: "Factory video of the SP-MZIGO-26E chassis assembly in progress", caption: "Factory assembly progress showing the SP-MZIGO-26E chassis before paint, custom decals, and final assembly.", kind: "video", capturedAt: "2026-08-31", width: 1280, height: 720 },
-      timeline: [
-        { label: "Deposit Paid", status: "completed" }, { label: "Production Started", status: "completed" }, { label: "Chassis Assembly", status: "completed" }, { label: "Factory Documentation Received", status: "completed" },
-        { label: "Body Assembly", status: "current" }, { label: "Paint Preparation", status: "current" },
-        { label: "SmashPro Green Paint", status: "upcoming" }, { label: "Custom Decals", status: "upcoming" }, { label: "Functional Testing", status: "upcoming" }, { label: "Final Inspection", status: "upcoming" }, { label: "Ocean Freight", status: "upcoming" }, { label: "U.S. Delivery", status: "upcoming" },
-      ],
-    },
+    factoryUpdate: mzigoFactoryUpdate,
     factoryOptions: [], upgrades: [
       { id: "mzigo-gps", name: "GPS Asset Tracking", category: "Command", description: "Planned location and fleet-security system.", imageUrls: [], status: "planned", tags: ["gps"] },
       { id: "mzigo-telemetry", name: "Fleet Telemetry", category: "Command", description: "Planned connected fleet telemetry system.", imageUrls: [], status: "planned", tags: ["fleet telemetry"] },
@@ -184,13 +188,14 @@ export const equipment: Equipment[] = [
     ],
     documents: [], serviceHistory: [], timeline: [
       { id: "mzigo-factory-build", kind: "factory-build", title: "Factory build in progress", detail: "Deposit paid, production started, and SmashPro custom green finish and branding approved for SP-MZIGO-26E.", publicDisplay: true },
-      { id: "mzigo-current", kind: "status", title: "Current status", detail: "Electric fleet build — availability not announced.", publicDisplay: true },
+      { id: "mzigo-factory-complete", occurredAt: "2026-09-09", kind: "factory-build", title: "Factory build complete", detail: "SmashPro green finish, branding, raised hydraulic bed and powered work lights documented. Pre-shipment verification is current; final inspection and shipment remain upcoming.", publicDisplay: true },
+      { id: "mzigo-current", occurredAt: "2026-09-09", kind: "status", title: "Current status", detail: "Factory build complete · pre-shipment verification. Rental availability has not been announced.", publicDisplay: true },
     ], media: [],
     scores: { documentation: 0, maintenance: 0 }, valuation: { currency: "USD", status: "pending" },
     capabilities: ["Fully Electric", "Zero Tailpipe Emissions", "Quiet Operation", "Remote Controlled", "Built for Job Sites", "Ideal Around Homes"], idealUses: ["Landscape materials", "Property cleanup", "Construction support", "Residential-friendly hauling", "Material staging", "Indoor-capable work where site rules permit"],
     capabilityIds: ["material_handling", "landscape", "cleanup"], attachmentIds: ["dump_bed"],
     restrictions: ["Rental availability has not been announced.", "Documented specifications are recorded in the SmashPro Equipment Passport; manufacturer specification sheet confirmation is pending for the platform model designation and performance figures.", "Indoor operation requires site-specific approval and compliance with all applicable safety, access, and ventilation requirements."],
-    gallery: [{ src: image("sp-mzigo-26e-hero.png"), alt: "SP-MZIGO-26E electric remote-controlled material carrier", caption: "SmashPro electric fleet build" }], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Inspection", detail: "Checkout and return inspections will apply when rental access launches." }],
+    gallery: [{ src: image("sp-mzigo-26e-hero.png"), alt: "SP-MZIGO-26E electric remote-controlled material carrier", caption: "Earlier SmashPro electric fleet concept" }, ...mzigoAugustFactoryUpdate.images.map(media => ({ ...media, group: "assembly" as const })), { ...mzigoAugustFactoryUpdate.video, kind: "video", group: "assembly", capturedAt: "2026-08-31" }], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Inspection", detail: "Checkout and return inspections will apply when rental access launches." }],
   },
 ];
 
