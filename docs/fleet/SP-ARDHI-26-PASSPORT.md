@@ -1,9 +1,9 @@
 # SP-ARDHI-26 Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**  
-> Version: 1.1  
+> Version: 1.2  
 > Status: In Transit / Pre-Deployment  
-> Last Updated: 2026-09-05
+> Last Updated: 2026-09-09
 
 > **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics with an expected-arrival target of **October 5, 2026**. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
 
@@ -196,14 +196,14 @@ Custom SmashPro Branded Forks
 
 | Attachment | Status |
 |------------|--------|
-| Grapple Bucket | Planned |
+| Loflin 42 in Mini Root Grapple | Ordered / Building — $297 deposit paid; $2,000 balance |
 | Landscape Rake | Planned |
 | Brush Cutter | Planned |
 | Trencher | Future |
 | Auger | Future |
 | Stump Grinder | Future |
 
-These are roadmap items, not current customer-service promises.
+The ordered grapple remains a roadmap capability, not a current customer-service promise. It must be received, fitted, hydraulically tested, commissioned, and explicitly released before customer use.
 
 ---
 
@@ -393,6 +393,10 @@ The live Equipment Passport shipping data remains the customer-facing projection
 - Final Payment Completed
 - Production / Factory Build Complete
 - International Delivery Logistics In Progress
+- Loflin 42 in Mini Root Grapple Ordered — $297 Deposit Paid (Sep 9, 2026)
+- Grapple Build Documentation Requested (Pending Vendor Response)
+- Grapple Estimated Build Completion (Planning Window: Oct 7–21, 2026)
+- Grapple $2,000 Balance / Shipment (Pending Completion)
 - U.S. Arrival (Pending)
 - Delivery to SmashPro (Pending)
 - Receipt Inspection (Pending)
