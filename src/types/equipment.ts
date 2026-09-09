@@ -51,7 +51,87 @@ export interface Equipment {
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;
   shippingStatus?: EquipmentShippingStatus; shippingRoute?: EquipmentShippingRouteStep[]; lifecycleMilestones?: EquipmentLifecycleMilestone[]; fleetStats?: EquipmentFleetStat[]; logisticsGraphics?: EquipmentLogisticsGraphic[]; passportExplanation?: string; partners?: EquipmentPartner[];
-  capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];
+  capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; attachmentPlateStandards?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];
 }
 
-export interface Attachment { name: string; category: string; status: "included" | "planned"; compatibleFleetIds: string[]; }
+export type AttachmentPassportStatus = "documented" | "selected" | "ordered" | "in-transit" | "commissioning" | "active" | "retired" | "planned";
+export interface AttachmentPlateRequirement {
+  standard: string;
+  label: string;
+  geometryNotes?: string;
+  latchNotes?: string;
+  notes?: string;
+}
+export interface AttachmentHydraulicRequirement {
+  circuit?: string;
+  couplers?: string;
+  couplerSize?: string;
+  hoseSpec?: string;
+  pressure?: string;
+  flow?: string;
+  cylinder?: string;
+  notes?: string;
+}
+export interface AttachmentConstructionProfile {
+  overallWidth?: string;
+  finishedWeight?: string;
+  jawOpening?: string;
+  tineConstruction?: string;
+  steelThickness?: string;
+  cylinderProtection?: string;
+  hingeServiceability?: string;
+  visibilityNotes?: string;
+}
+export interface AttachmentProcurementProfile {
+  unitPrice?: string;
+  freight?: string;
+  deliveredSubtotal?: string;
+  taxOrFees?: string;
+  stockStatus?: string;
+  leadTime?: string;
+  paymentStructure?: string;
+  paymentMethods?: string[];
+  warranty?: string;
+  replacementParts?: string;
+  serviceability?: string;
+  finish?: string;
+  branding?: string;
+  pickupOption?: string;
+  partnershipValue?: string;
+}
+export interface AttachmentFitmentChecklistItem {
+  key: string;
+  question: string;
+  answer?: string;
+  status: "confirmed" | "pending" | "not-applicable";
+  source?: string;
+}
+export interface AttachmentPassport {
+  passportId: string;
+  assetTag: string;
+  slug: string;
+  publicPath: string;
+  type: string;
+  typeLabel: string;
+  name: string;
+  category: string;
+  status: AttachmentPassportStatus;
+  plateRequirement?: AttachmentPlateRequirement;
+  hydraulicRequirement?: AttachmentHydraulicRequirement;
+  construction?: AttachmentConstructionProfile;
+  procurement?: AttachmentProcurementProfile;
+  fitmentChecklist?: AttachmentFitmentChecklistItem[];
+  verifiedFleetIds?: string[];
+  manufacturer?: string;
+  model?: string;
+  description: string;
+  capabilities: string[];
+  width?: string;
+  weight?: string;
+  image?: string;
+  imageAlt?: string;
+  serviceUrl?: string;
+  featured?: boolean;
+  acquiredAt?: string;
+  commissionedAt?: string;
+}

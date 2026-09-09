@@ -3,6 +3,7 @@ import { equipment } from "../data/equipment";
 import { ButtonLink } from "../components/ButtonLink";
 import { EquipmentCard } from "../components/EquipmentCard";
 import { PageFrame } from "../components/PageFrame";
+import { AttachmentShowroom } from "../components/AttachmentShowroom";
 
 const capabilities = ["Landscaping", "Material transport", "Property cleanup", "Loading and unloading", "Tight-access work", "Contractor rentals"];
 const standards = ["Maintained equipment", "Contractor eligibility", "Inspection process", "Clear rental terms", "Equipment support", "Growing attachment library"];
@@ -56,11 +57,11 @@ export function HomePage() {
 
       <section className="capability-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Work capabilities</p><h2>Made for the places work gets difficult.</h2></div><p>Compact equipment expands what a prepared crew can move, handle, and finish.</p></div><div className="capability-grid">{capabilities.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3></div>)}</div></div></section>
 
+      <AttachmentShowroom attachments={attachments} />
+
       <section className="section shell split-section"><div><p className="eyebrow">Why SmashPro Fleet</p><h2>Readiness is part of the equipment.</h2><p>Rental access is more than a key handoff. It is a documented operating relationship built around people, machines, projects, and condition.</p></div><div className="standards-list">{standards.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3><p>{index === 0 ? "Fleet care and operating readiness are treated as core requirements." : index === 1 ? "Access may depend on approval, insurance, certification, and account standing." : "Clear steps support safer, more predictable equipment use."}</p></div>)}</div></section>
 
       <section className="process-section" id="rental-process"><div className="shell"><p className="eyebrow">Rental process</p><div className="section-heading"><h2>From request to closeout.</h2><p>This is the intended rental journey. Public availability and launch timing have not been announced.</p></div><ol className="process-grid">{rentalSteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step}</h3></li>)}</ol></div></section>
-
-      <section className="section shell" id="attachments"><div className="section-heading"><div><p className="eyebrow">Attachment library</p><h2>One fleet. More ways to work.</h2></div><p>Only the bucket and pallet forks are documented with the initial Ardhi fleet record. Remaining attachments are planned, not offered.</p></div><div className="attachment-grid">{attachments.map((item) => <article key={item.name}><span className={item.status === "included" ? "badge badge--live" : "badge"}>{item.status === "included" ? "Documented" : "Future"}</span><h3>{item.name}</h3><p>{item.category}</p></article>)}</div></section>
 
       <section className="contractor-cta" id="contractors"><div className="shell"><p className="eyebrow">For independent contractors</p><h2>Fleet access begins with readiness.</h2><p>SP Fleet rental access may require account approval, equipment-specific qualification, insurance, certification, and agreement to inspection and rental terms. A public SPgO network URL has not yet been approved.</p><div className="button-row"><ButtonLink href="https://smashpro.app/contact" variant="primary">Request SPgO Network Access</ButtonLink><ButtonLink href="https://smashpro.app/contact" variant="outline">Ask About Eligibility</ButtonLink></div></div></section>
       </div>
