@@ -54,4 +54,29 @@ export interface Equipment {
   capabilities: string[]; capabilityIds?: string[]; attachmentIds?: string[]; idealUses: string[]; restrictions: string[]; gallery: GalleryImage[]; requirements: RentalRequirement[];
 }
 
-export interface Attachment { name: string; category: string; status: "included" | "planned"; compatibleFleetIds: string[]; }
+export type AttachmentPassportStatus = "documented" | "selected" | "ordered" | "in-transit" | "commissioning" | "active" | "retired" | "planned";
+export interface AttachmentPassport {
+  passportId: string;
+  assetTag: string;
+  slug: string;
+  publicPath: string;
+  type: string;
+  typeLabel: string;
+  name: string;
+  category: string;
+  status: AttachmentPassportStatus;
+  compatibleFleetIds: string[];
+  manufacturer?: string;
+  model?: string;
+  description: string;
+  capabilities: string[];
+  width?: string;
+  weight?: string;
+  mount?: string;
+  image?: string;
+  imageAlt?: string;
+  serviceUrl?: string;
+  featured?: boolean;
+  acquiredAt?: string;
+  commissionedAt?: string;
+}
