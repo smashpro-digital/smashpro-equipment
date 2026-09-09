@@ -6,6 +6,7 @@ import { HomePage } from "../pages/HomePage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import { PowerControlModulePage } from "../pages/PowerControlModulePage";
 import { CatalogPage } from "../pages/CatalogPage";
+import { AttachmentPassportPage } from "../pages/AttachmentPassportPage";
 
 export function App() {
   return (
@@ -19,6 +20,8 @@ export function App() {
       <Route exact path="/catalog/" component={CatalogPage} />
       <Route exact path="/catalog/sp-pcm-001" component={PowerControlModulePage} />
       <Route exact path="/catalog/sp-pcm-001/" component={PowerControlModulePage} />
+      <Route exact path="/attachments/:slug" render={({ match }) => <AttachmentPassportPage slug={match.params.slug} />} />
+      <Route exact path="/attachments/:slug/" render={({ match }) => <AttachmentPassportPage slug={match.params.slug} />} />
       <Route component={NotFoundPage} />
     </Switch>
   );
