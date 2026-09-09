@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { equipment } from "./src/data/equipment";
+import { attachments } from "./src/data/attachments";
 
 const projectDirectory = dirname(fileURLToPath(import.meta.url));
 
@@ -36,6 +37,19 @@ function preserveEquipmentMedia(): Plugin {
         resolve(projectDirectory, "public/equipment/images/sp-gari-26e-concept.png"),
         resolve(output, "sp-gari-26e-concept.png"),
       );
+
+      // Production is a static Apache host without an SPA catch-all. Emit a
+      // physical index for every public attachment passport URL so direct loads,
+      // refreshes, QR scans, and crawlers reach React before route matching.
+      const shellIndex = resolve(projectDirectory, "dist/index.html");
+      if (existsSync(shellIndex)) {
+        for (const attachment of attachments) {
+          const attachmentRoute = resolve(projectDirectory, "dist/attachments", attachment.slug);
+          mkdirSync(attachmentRoute, { recursive: true });
+          cpSync(shellIndex, resolve(attachmentRoute, "index.html"));
+        }
+      }
+
       const publicIndex = {
         version: 1,
         generated_at: new Date().toISOString(),
