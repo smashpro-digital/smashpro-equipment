@@ -76,10 +76,12 @@ test('Mzigo shares the documentary hero and keeps four asset destinations and th
   assert.ok(html.indexOf('class="ardhi-v2-hero mzigo-passport-hero"') < html.indexOf('id="identity"'));
   assert.equal((html.match(/class="passport-summary-item"/g) || []).length, 3);
   assert.doesNotMatch(html, /Passport Number|Fleet Class|Current Owner/);
-  assert.ok(html.includes(mzigoFactoryPhotos.complete.src));
+  assert.match(html, /src="\/equipment\/images\/sp-mzigo-26e-hero-artwork-2026-09-09\.png"/);
+  assert.match(html, /alt="SP-MZIGO-26E brand illustration/);
+  assert.ok(!html.includes(mzigoFactoryPhotos.complete.src));
   assert.match(html, /SmashPro<br\/>Electric Material<br\/>/);
   for (const anchor of ['passport', 'journey', 'history', 'service']) assert.ok(html.includes(`href="#${anchor}"`));
-  assert.doesNotMatch(html, /Flagship|Asset #001|hero-artwork/);
+  assert.doesNotMatch(html, /Asset #001/);
 });
 
 test('shared hero preserves the ARDHI wrapper structure', () => {

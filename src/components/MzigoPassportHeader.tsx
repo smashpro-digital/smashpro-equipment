@@ -1,9 +1,11 @@
 ﻿import type { Equipment } from "../types/equipment";
-import { mzigoFactoryPhotos } from "../data/mzigoFactoryMedia";
 import { PassportHero } from "./PassportHero";
 
 export function MzigoPassportHeader({ item }: { item: Equipment }) {
-  const media = mzigoFactoryPhotos.complete;
+  const media = {
+    src: "/equipment/images/sp-mzigo-26e-hero-artwork-2026-09-09.png",
+    alt: "SP-MZIGO-26E brand illustration with a raised green dump body and remote controller in a SmashPro workshop",
+  };
   return <>
     <PassportHero titleId="mzigo-passport-title" image={media.src} alt={media.alt} className="mzigo-passport-hero">
       <p className="eyebrow">{item.fleetId}</p>
