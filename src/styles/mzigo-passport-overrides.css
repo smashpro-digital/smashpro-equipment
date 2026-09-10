@@ -110,3 +110,37 @@
  .mzigo-passport-hero .ardhi-v2-hero__actions a { min-height:48px; flex-direction:column; font-size:.68rem; gap:.2rem; }
 }
 @media print { .mzigo-passport-hero { display:none!important; } }
+
+/* The same chapter navigation and media cards as the ARDHI historical archive. */
+.mzigo-media-archive .archive-chapters { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); }
+.mzigo-media-archive .archive-chapters button { min-width:0; cursor:pointer; }
+.mzigo-media-archive .archive-chapters small { display:block; margin-top:.5rem; font-size:.58rem; font-weight:400; }
+.mzigo-media-archive .archive-chapters button:focus-visible,.mzigo-media-archive a:focus-visible,.mzigo-media-archive button:focus-visible,.mzigo-media-archive input:focus-visible { outline:2px solid #c6a96b; outline-offset:3px; }
+.mzigo-archive-intro { margin:0 0 1rem; }
+.mzigo-archive-intro h3 { margin:0 0 .5rem; font-size:1.25rem; scroll-margin-top:2rem; }
+.mzigo-archive-intro p,.mzigo-media-archive .archive-tools p { color:var(--muted); font-size:.85rem; line-height:1.6; margin:.35rem 0; }
+.mzigo-media-archive .archive-tools { gap:.3rem; }
+.mzigo-media-archive .archive-tools input { min-width:0; width:100%; }
+.mzigo-media-archive .archive-grid { align-items:start; }
+.mzigo-media-archive .archive-grid article { min-width:0; scroll-margin-top:2rem; }
+.mzigo-media-archive .archive-grid article:target { border-color:#c6a96b; outline:2px solid #c6a96b; }
+.mzigo-media-archive .archive-grid img,.mzigo-media-archive .archive-grid video { display:block; height:300px; object-fit:contain; background:#050806; }
+.mzigo-media-archive .archive-grid article:hover img { transform:none; }
+.mzigo-media-archive .archive-caption { transform:none; }
+.mzigo-media-archive .archive-caption a { display:inline-block; padding:0 .8rem 1rem; color:var(--green); font-size:.75rem; }
+.mzigo-media-archive .archive-video>p { padding:.8rem; color:var(--muted); font-size:.8rem; }
+.mzigo-media-archive .empty-state button,.mzigo-archive-lightbox button { padding:.7rem 1rem; border:1px solid var(--green); background:#101611; color:#fff; font:inherit; cursor:pointer; }
+.mzigo-archive-concepts { margin-top:1.5rem; border-top:1px solid var(--line); padding-top:1rem; color:var(--muted); font-size:.8rem; }
+.mzigo-archive-concepts a,.mzigo-record-media-links a { color:var(--green); text-underline-offset:.2rem; }
+.mzigo-record-media-links { display:grid; gap:.65rem; padding-left:1rem; font-size:.85rem; line-height:1.5; }
+.mzigo-archive-lightbox { width:min(1000px,calc(100vw - 2rem)); max-height:calc(100dvh - 2rem); padding:1rem; border:1px solid var(--line); background:#101611; color:#fff; }
+.mzigo-archive-lightbox::backdrop { background:#000d; }
+.mzigo-archive-lightbox img { display:block; margin:1rem auto; width:100%; max-height:70dvh; object-fit:contain; }
+.mzigo-archive-lightbox p { font-size:.9rem; line-height:1.5; }
+.mzigo-archive-lightbox a { color:var(--green); }
+@media(max-width:900px) { .mzigo-media-archive .archive-chapters { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:600px) {
+ .mzigo-media-archive .archive-chapters button { min-height:90px; padding:.65rem .35rem; font-size:.65rem; }
+ .mzigo-media-archive .archive-grid img,.mzigo-media-archive .archive-grid video { height:280px; }
+}
+@media print { .mzigo-media-archive,.mzigo-archive-lightbox { display:none!important; } }

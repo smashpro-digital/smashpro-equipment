@@ -26,6 +26,8 @@ const { MzigoBuildStory } = load('src/components/MzigoBuildStory.tsx');
 const { MzigoPassportHeader } = load('src/components/MzigoPassportHeader.tsx');
 const { equipment } = load('src/data/equipment.ts');
 const mzigo = equipment.find(item => item.fleetId === 'SP-MZIGO-26E');
+const { mzigoArchiveChapters, mzigoArchiveSelection, mzigoArchiveTarget, mzigoMediaAnchor } = load('src/domain/mzigoArchive.ts');
+const { MzigoMediaArchive } = load('src/components/MzigoMediaArchive.tsx');
 
 test('the five chapters map to the specified September 9 evidence', () => {
   assert.deepEqual(mzigoBuildChapters.map(c => c.title), ['Factory Identity', 'SmashPro Branding', 'Electric Drive Architecture', 'Hydraulic Dump System', 'Factory-Complete Machine']);
@@ -49,15 +51,66 @@ test('all September photographs are real JPEGs and the MP4 is not an LFS pointer
   }
 });
 
-test('React output has five chapters, no placeholders, and one controlled inline video', () => {
+test('five build records link to canonical archive media without duplicate players or full photographs', () => {
   const html = renderToStaticMarkup(React.createElement(MzigoBuildStory));
   assert.equal((html.match(/<article /g) || []).length, 5);
-  assert.equal((html.match(/<video /g) || []).length, 1);
-  assert.match(html, /controls=""/); assert.match(html, /playsinline=""/);
-  assert.match(html, /preload="metadata"/); assert.ok(html.includes(`poster="${mzigoFactoryPhotos.complete.src}"`));
+  assert.equal((html.match(/<video /g) || []).length, 0);
+  assert.equal((html.match(/<img /g) || []).length, 5, 'Only compact record thumbnails remain');
   assert.doesNotMatch(html, /autoplay|placeholder|server promotion/i);
-  assert.match(html, /Your browser cannot play this video/);
-  Object.values(mzigoFactoryPhotos).forEach(media => assert.ok(html.includes(media.src), media.src));
+  for (const chapter of mzigoBuildChapters) for (const media of [chapter.image, ...chapter.supporting, ...(chapter.video ? [chapter.video] : [])]) {
+    const anchor = mzigoMediaAnchor(media);
+    assert.ok(html.includes(`href="#${anchor}"`));
+    assert.ok(mzigoArchiveTarget(mzigo.gallery, `#${anchor}`), anchor);
+  }
+});
+
+test('archive has one canonical home for all 18 authentic records, including both videos', () => {
+  const records = mzigoArchiveChapters.flatMap(chapter => mzigoArchiveSelection(mzigo.gallery, chapter.id));
+  assert.equal(records.length, 18);
+  assert.equal(new Set(records.map(media => media.src)).size, records.length);
+  assert.equal(new Set(records.map(mzigoMediaAnchor)).size, records.length);
+  assert.equal(records.filter(media => media.kind === 'video').length, 2);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build').length, 10);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine').length, 8);
+  for (const media of [...Object.values(mzigoFactoryPhotos), mzigoFactoryWalkaround]) assert.equal(records.filter(record => record.src === media.src).length, 1);
+  for (const media of records) {
+    assert.ok(existsSync(media.src.replace('/equipment/', '')));
+    assert.match(media.capturedAt, /^2026-(08-31|09-09)$/);
+    if (media.kind === 'video') assert.ok(existsSync(media.poster.replace('/equipment/', '')));
+  }
+  assert.ok(!records.some(media => /hero/.test(media.src)), 'Concept artwork is separate from factory evidence');
+  for (const id of ['export-journey', 'delivery', 'operation', 'maintenance']) assert.equal(mzigoArchiveSelection(mzigo.gallery, id).length, 0);
+});
+
+test('archive searches by subject, media type and date without mixing chapters', () => {
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build', '  2026-08-31  ').length, 3);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine', 'REMOTE CONTROLLER').length, 1);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build', 'remote controller').length, 0);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build', 'video').length, 1);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine', 'video').length, 1);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine', 'no-such-record').length, 0);
+});
+
+test('media deep links select their own chapter and preserve legacy August anchors', () => {
+  assert.deepEqual(mzigoArchiveTarget(mzigo.gallery, '#media-mzigo-chassis-side-20260831'), {chapterId:'factory-build',anchor:'media-mzigo-chassis-side-20260831'});
+  assert.equal(mzigoArchiveTarget(mzigo.gallery, `#${mzigoMediaAnchor(mzigoFactoryWalkaround)}`).chapterId, 'finished-machine');
+  assert.equal(mzigoArchiveTarget(mzigo.gallery, '#mzigo-archive-finished-machine').chapterId, 'finished-machine');
+  assert.equal(mzigoArchiveTarget(mzigo.gallery, '#history'), undefined);
+  assert.equal(mzigoArchiveTarget(mzigo.gallery, '#media-unknown'), undefined);
+});
+
+test('archive renders chapter controls, search, enlargement, inline video and separate design history', () => {
+  const html = renderToStaticMarkup(React.createElement(MzigoMediaArchive, {item:mzigo}));
+  assert.match(html, /Follow the machine&#x27;s story/);
+  assert.equal((html.match(/aria-pressed=/g) || []).length, 6);
+  assert.equal((html.match(/aria-pressed="true"/g) || []).length, 1);
+  assert.equal((html.match(/<article /g) || []).length, 10);
+  assert.equal((html.match(/<video /g) || []).length, 1);
+  assert.match(html, /controls=""/); assert.match(html, /playsinline=""/); assert.match(html, /preload="metadata"/);
+  assert.match(html, /Search Factory Build media/); assert.match(html, /aria-label="Enlarge /);
+  assert.match(html, /Open original video/); assert.match(html, /Factory photograph viewer/);
+  assert.match(html, /Concept artwork, separate from factory evidence/);
+  assert.doesNotMatch(html, /No branding media|No hydraulics media|No completed machine media/);
 });
 
 test('current canonical state keeps inspection and transport uncompleted', () => {

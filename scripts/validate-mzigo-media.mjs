@@ -3,8 +3,12 @@ import assert from 'node:assert/strict';
 
 // Validate the exact original names referenced by the media data before deployment.
 const data = readFileSync('src/data/mzigoFactoryMedia.ts', 'utf8');
-const files = [...new Set([...data.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-09-09\.(?:jpg|mp4)/g)].map(m => m[0]))];
-assert.equal(files.length, 10, 'Nine photos and one walkaround are required');
+const septemberFiles = [...new Set([...data.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-09-09\.(?:jpg|mp4)/g)].map(m => m[0]))];
+assert.equal(septemberFiles.length, 15, 'Fourteen September photos and one walkaround are required');
+const equipmentData = readFileSync('src/data/equipment.ts', 'utf8');
+const augustFiles = [...new Set([...equipmentData.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-08-31\.(?:jpg|mp4)/g)].map(m => m[0]))];
+assert.equal(augustFiles.length, 4, 'Two August photos, the assembly video and its poster are required');
+const files = [...augustFiles, ...septemberFiles];
 for (const name of files) {
   const source = readFileSync(`images/${name}`);
   const built = readFileSync(`dist/images/${name}`);
@@ -17,4 +21,4 @@ for (const name of files) {
   }
 }
 assert.ok(statSync('dist/sp-mzigo-26.html').size > 0);
-console.log(`MZIGO media validation passed (${files.length} original September 9 files).`);
+console.log(`MZIGO media validation passed (${files.length} original factory files, including both videos).`);

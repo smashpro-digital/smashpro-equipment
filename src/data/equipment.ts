@@ -1,5 +1,5 @@
 import type { Equipment, EquipmentSpecification, FactoryUpdate } from "../types/equipment";
-import { mzigoFactoryUpdate } from "./mzigoFactoryMedia";
+import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
 import { standardPackageRules } from "./packageRules";
 
 const image = (name: string) => `/equipment/images/${name}`;
@@ -195,7 +195,7 @@ export const equipment: Equipment[] = [
     capabilities: ["Fully Electric", "Zero Tailpipe Emissions", "Quiet Operation", "Remote Controlled", "Built for Job Sites", "Ideal Around Homes"], idealUses: ["Landscape materials", "Property cleanup", "Construction support", "Residential-friendly hauling", "Material staging", "Indoor-capable work where site rules permit"],
     capabilityIds: ["material_handling", "landscape", "cleanup"], attachmentIds: ["dump_bed"],
     restrictions: ["Rental availability has not been announced.", "Documented specifications are recorded in the SmashPro Equipment Passport; manufacturer specification sheet confirmation is pending for the platform model designation and performance figures.", "Indoor operation requires site-specific approval and compliance with all applicable safety, access, and ventilation requirements."],
-    gallery: [{ src: image("sp-mzigo-26e-hero.png"), alt: "SP-MZIGO-26E electric remote-controlled material carrier", caption: "Earlier SmashPro electric fleet concept" }, ...mzigoAugustFactoryUpdate.images.map(media => ({ ...media, group: "assembly" as const })), { ...mzigoAugustFactoryUpdate.video, kind: "video", group: "assembly", capturedAt: "2026-08-31" }], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Inspection", detail: "Checkout and return inspections will apply when rental access launches." }],
+    gallery: [{ src: image("sp-mzigo-26e-hero.png"), alt: "SP-MZIGO-26E electric remote-controlled material carrier", caption: "Earlier SmashPro electric fleet concept" }, ...mzigoAugustFactoryUpdate.images.map(media => ({ ...media, group: "assembly" as const })), { ...mzigoAugustFactoryUpdate.video, kind: "video", group: "assembly", capturedAt: "2026-08-31" }, ...mzigoFactoryGallery], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Inspection", detail: "Checkout and return inspections will apply when rental access launches." }],
   },
 ];
 

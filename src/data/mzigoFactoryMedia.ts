@@ -2,7 +2,7 @@ import type { FactoryUpdate, GalleryImage } from "../types/equipment";
 
 // Original September 9 factory files; names and bytes are preserved in images/.
 const photo = (filename: string, alt: string, caption: string, width = 1536, height = 1152): GalleryImage => ({
-  src: `/equipment/images/${filename}`, alt, caption, capturedAt: "2026-09-09", width, height,
+  id: filename.replace(/\.jpg$/, ""), src: `/equipment/images/${filename}`, alt, caption, capturedAt: "2026-09-09", width, height,
 });
 
 export const mzigoFactoryPhotos = {
@@ -15,14 +15,28 @@ export const mzigoFactoryPhotos = {
   pump: photo("sp-mzigo-26e-hydraulic-pump-reservoir-2026-09-09.jpg", "SP-MZIGO-26E hydraulic pump and black reservoir with electrical connections inside the chassis", "Pump, reservoir and electrical connections beneath the dump body.", 1152, 1536),
   complete: photo("sp-mzigo-26e-factory-complete-three-quarter-2026-09-09.jpg", "Completed SP-MZIGO-26E in SmashPro green showing the dump body, four-wheel stance and fleet graphics", "Factory-complete machine awaiting pre-shipment verification.", 1536, 864),
   right: photo("sp-mzigo-26e-factory-complete-right-profile-2026-09-09.jpg", "SP-MZIGO-26E right-side profile showing finished fleet graphics, jobsite tires and electric drive hardware", "Finished side profile with electric drive hardware visible below the body."),
+  bedInterior: photo("sp-mzigo-26e-cargo-bed-interior-2026-09-09.jpg", "SP-MZIGO-26E empty green cargo bed viewed from above at the factory", "Inside the finished cargo bed, before the machine enters service.", 960, 1280),
+  raisedLeft: photo("sp-mzigo-26e-raised-bed-left-profile-2026-09-09.jpg", "SP-MZIGO-26E left-side factory view with the dump body raised above the chassis", "Raised-bed side view connecting the body, lift cylinder and four-wheel chassis.", 1280, 960),
+  raisedRight: photo("sp-mzigo-26e-raised-bed-right-profile-2026-09-09.jpg", "SP-MZIGO-26E opposite-side factory view of the raised dump body and exposed lift system", "The opposite raised-bed profile shows the lift geometry and chassis packaging.", 1280, 960),
+  batteries: photo("sp-mzigo-26e-battery-enclosures-2026-09-09.jpg", "SP-MZIGO-26E blue battery enclosures and hydraulic reservoir inside the completed chassis", "Battery enclosures and hydraulic hardware packaged beneath the dump body.", 960, 1280),
+  remote: photo("sp-mzigo-26e-remote-controller-2026-09-09.jpg", "Handheld remote controller supplied with SP-MZIGO-26E, showing joysticks, switches and display", "The supplied remote controller: joysticks, switches and display photographed at the factory.", 960, 1280),
 } satisfies Record<string, GalleryImage>;
 
 export const mzigoFactoryWalkaround: GalleryImage = {
+  id: "sp-mzigo-26e-factory-complete-walkaround-2026-09-09",
   kind: "video", src: "/equipment/images/sp-mzigo-26e-factory-complete-walkaround-2026-09-09.mp4",
   poster: mzigoFactoryPhotos.complete.src, capturedAt: "2026-09-09", width: 640, height: 360,
-  alt: "September 9 factory walkaround of the completed SP-MZIGO-26E",
-  caption: "Factory walkaround · September 9, 2026. Final inspection and shipment remain upcoming.",
+  alt: "September 9 factory walkaround of the completed SP-MZIGO-26E with the hydraulic dump body raising and lowering",
+  caption: "Factory walkaround and hydraulic dump cycle · September 9, 2026. The body raises and lowers in the second half; final inspection and shipment remain upcoming.",
 };
+
+// One canonical gallery entry for each reviewed photograph or video.
+export const mzigoFactoryGallery: GalleryImage[] = [
+  ...[mzigoFactoryPhotos.drive, mzigoFactoryPhotos.batteries].map(media => ({ ...media, group: "assembly" as const })),
+  ...[mzigoFactoryPhotos.raised, mzigoFactoryPhotos.pump, mzigoFactoryPhotos.cylinder, mzigoFactoryPhotos.raisedLeft, mzigoFactoryPhotos.raisedRight].map(media => ({ ...media, group: "hydraulics" as const })),
+  ...[mzigoFactoryPhotos.identity, mzigoFactoryPhotos.controls, mzigoFactoryPhotos.rear].map(media => ({ ...media, group: "branding" as const })),
+  ...[mzigoFactoryPhotos.complete, mzigoFactoryPhotos.right, mzigoFactoryPhotos.bedInterior, mzigoFactoryPhotos.remote, mzigoFactoryWalkaround].map(media => ({ ...media, group: "completed-machine" as const })),
+];
 
 export const mzigoFactoryUpdate: FactoryUpdate = {
   date: "2026-09-09", heading: "Factory build complete",
