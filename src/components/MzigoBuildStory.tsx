@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { GalleryImage } from "../types/equipment";
 import { mzigoBuildChapters } from "../data/mzigoFactoryMedia";
+import { PassportEvidenceRecord } from "./PassportEvidenceRecord";
 
 function EvidencePhoto({ media }: { media: GalleryImage }) {
   return <figure>
@@ -24,19 +25,22 @@ function Walkaround({ media }: { media: GalleryImage }) {
 }
 
 export function MzigoBuildStory() {
-  return <section className="section shell mzigo-build-story" aria-labelledby="mzigo-build-story-title">
+  return <section className="section shell mzigo-build-story" id="mzigo-build-story" aria-labelledby="mzigo-build-story-title">
     <header className="mzigo-build-story__intro">
       <p className="eyebrow">Build Story · September 9, 2026</p>
       <h2 id="mzigo-build-story-title">From factory platform to SmashPro fleet machine.</h2>
-      <p className="large-copy">First, meet the machine. Then follow its identity into the controls, look beneath the body, and see the finished build in motion. These five chapters explore one September 9 factory update.</p>
+      <p>Five documented views from September 9. Open a record for photographs, verified observations and operational context. These are phases of one factory update, not separate completion dates.</p>
     </header>
     <div className="mzigo-build-story__chapters">{mzigoBuildChapters.map(chapter => <article className={`mzigo-build-chapter mzigo-build-chapter--${chapter.number}`} key={chapter.number} aria-labelledby={`mzigo-chapter-${chapter.number}`}>
-      <div className="mzigo-build-chapter__copy"><span className="mzigo-build-chapter__marker">{chapter.number}</span><p className="eyebrow">{chapter.scene}</p><h3 id={`mzigo-chapter-${chapter.number}`}>{chapter.title}</h3><p>{chapter.copy}</p><p className="mzigo-build-chapter__takeaway"><strong>What this shows</strong>{chapter.takeaway}</p></div>
+      <PassportEvidenceRecord id={`mzigo-record-${chapter.number}`} date="Sep 9, 2026" phase={`Factory build · ${chapter.number}`} title={chapter.title} preview={chapter.image} label={`Documented · ${1 + chapter.supporting.length} ${chapter.supporting.length ? "photos" : "photo"}${chapter.video ? " + walkaround" : ""} · Open evidence`}>
+      <div className="mzigo-build-chapter__copy"><h3 id={`mzigo-chapter-${chapter.number}`}>{chapter.title}</h3><p>{chapter.narrative}</p></div>
       <div className="mzigo-build-chapter__evidence">
         <div className="mzigo-build-chapter__lead"><EvidencePhoto media={chapter.image} /></div>
         {!!chapter.supporting.length && <div className="mzigo-build-chapter__details">{chapter.supporting.map(media => <EvidencePhoto media={media} key={media.src} />)}</div>}
       </div>
       {chapter.video && <Walkaround media={chapter.video} />}
+      <div className="mzigo-evidence-context"><div><strong>Verified in the media</strong><ul>{chapter.verified.map(fact => <li key={fact}>{fact}</li>)}</ul></div><div><strong>Operational meaning</strong><p>{chapter.takeaway}</p><small>Visual evidence documents configuration; it does not establish engineering ratings, inspection approval or readiness for service.</small></div></div>
+      </PassportEvidenceRecord>
     </article>)}</div>
     <footer className="mzigo-build-story__next"><p className="eyebrow">The next chapter</p><h3>From factory completion to the journey home.</h3><p>Pre-shipment verification is current. Final inspection, ocean freight and U.S. delivery are still ahead; their evidence will join the passport as those stages happen.</p></footer>
   </section>;

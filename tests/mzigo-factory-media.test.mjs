@@ -23,6 +23,7 @@ function load(relative) {
 }
 const { mzigoBuildChapters, mzigoFactoryPhotos, mzigoFactoryWalkaround } = load('src/data/mzigoFactoryMedia.ts');
 const { MzigoBuildStory } = load('src/components/MzigoBuildStory.tsx');
+const { MzigoPassportHeader } = load('src/components/MzigoPassportHeader.tsx');
 const { equipment } = load('src/data/equipment.ts');
 const mzigo = equipment.find(item => item.fleetId === 'SP-MZIGO-26E');
 
@@ -67,6 +68,28 @@ test('current canonical state keeps inspection and transport uncompleted', () =>
   assert.deepEqual(mzigo.factoryUpdate.timeline.map(s => s.status), [...Array(8).fill('completed'), 'current', ...Array(3).fill('upcoming')]);
   assert.deepEqual(mzigo.factoryUpdate.timeline.slice(8).map(s => s.label), ['Pre-Shipment Verification','Final Inspection','Ocean Freight','U.S. Delivery']);
   assert.ok(mzigo.factoryUpdate.images.every(m => m.src.includes('2026-09-09')));
+});
+
+test('passport identity and status precede completed-machine evidence', () => {
+  const html = renderToStaticMarkup(React.createElement(MzigoPassportHeader, { item: mzigo }));
+  assert.ok(html.indexOf('id="identity"') < html.indexOf('class="status-panel"'));
+  assert.ok(html.indexOf('class="status-panel"') < html.indexOf('<figure>'));
+  assert.equal((html.match(/class="passport-summary-item"/g) || []).length, 3);
+  assert.doesNotMatch(html, /Passport Number|Fleet Class|Current Owner/);
+  assert.ok(html.includes(mzigoFactoryPhotos.complete.src));
+});
+
+test('build chapters are compact dated records with observations separate from meaning', () => {
+  const html = renderToStaticMarkup(React.createElement(MzigoBuildStory));
+  assert.equal((html.match(/<details /g) || []).length, 5);
+  assert.equal((html.match(/<summary>/g) || []).length, 5);
+  assert.doesNotMatch(html, /<details[^>]* open/);
+  for (const chapter of mzigoBuildChapters) {
+    assert.ok(html.includes(`id="mzigo-record-${chapter.number}"`));
+    chapter.verified.forEach(fact => assert.ok(html.includes(fact)));
+  }
+  assert.equal((html.match(/Verified in the media/g) || []).length, 5);
+  assert.equal((html.match(/Operational meaning/g) || []).length, 5);
 });
 
 test('August evidence and existing equipment identities remain available', () => {
