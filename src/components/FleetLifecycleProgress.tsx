@@ -5,6 +5,7 @@ export type FleetLifecycleStage = {
   label: string;
   status: "complete" | "current" | "pending";
   progress: number;
+  href?: string;
 };
 
 export type FleetLifecycleMetric = {
@@ -19,6 +20,7 @@ type FleetLifecycleProgressProps = {
   metrics: FleetLifecycleMetric[];
   currentStage: string;
   nextStage: string;
+  description?: string;
 };
 
 function LifecycleCounter({ active, value, suffix = "" }: { active: boolean; value: number; suffix?: string }) {
@@ -44,7 +46,7 @@ function LifecycleCounter({ active, value, suffix = "" }: { active: boolean; val
   return <>{shown.toLocaleString()}{suffix}</>;
 }
 
-export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStage }: FleetLifecycleProgressProps) {
+export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStage, description = "Distance is approximate and does not represent live tracking." }: FleetLifecycleProgressProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
 
@@ -64,7 +66,7 @@ export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStag
     <section ref={sectionRef} className={`section shell fleet-lifecycle-progress${started ? " is-started" : ""}`} aria-labelledby="fleet-lifecycle-title">
       <div className="section-heading">
         <div><p className="eyebrow">Fleet Journey Progress</p><h2 id="fleet-lifecycle-title">The record moves with the machine.</h2></div>
-        <p>Distance is approximate and does not represent live tracking.</p>
+        <p>{description}</p>
       </div>
       <div className="fleet-lifecycle-state" aria-label={`Current stage ${currentStage}. Next stage ${nextStage}.`}>
         <div><span>Current Stage</span><strong>{currentStage}</strong></div>
@@ -76,7 +78,7 @@ export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStag
       <ol className="fleet-lifecycle-stages" aria-label="Fleet lifecycle stages">
         {stages.map((stage, index) => (
           <li className={`is-${stage.status}`} key={stage.id}>
-            <div><strong>{stage.label}</strong><span>{stage.status === "complete" ? "✓ Complete" : stage.status === "current" ? "● Current" : "○ Pending"}</span></div>
+            <div><strong>{stage.href ? <a href={stage.href}>{stage.label}</a> : stage.label}</strong><span>{stage.status === "complete" ? "✓ Complete" : stage.status === "current" ? "● Current" : "○ Pending"}</span></div>
             <i aria-hidden="true"><b style={{ "--lifecycle-progress": stage.progress / 100, "--lifecycle-delay": `${index * 180}ms` } as CSSProperties} /></i>
           </li>
         ))}

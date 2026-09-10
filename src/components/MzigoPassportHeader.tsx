@@ -11,6 +11,7 @@ export function MzigoPassportHeader({ item }: { item: Equipment }) {
       <p className="eyebrow">{item.fleetId}</p>
       <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br />Carrier <span>{item.identity.factoryModel}</span></h1>
       <p>Factory complete <b>·</b> Pre-shipment verification</p>
+      <small className="mzigo-artwork-label">Brand illustration · See the actual machine in the factory archive</small>
       <nav className="ardhi-v2-hero__actions" aria-label="MZIGO equipment passport chapters">
         <a href="#passport"><span aria-hidden="true">📘</span> Passport</a>
         <a href="#journey"><span aria-hidden="true">🌎</span> Journey</a>
@@ -25,6 +26,7 @@ export function MzigoPassportHeader({ item }: { item: Equipment }) {
         <div className="passport-summary-item" data-icon="✓"><span>Status</span><strong>Factory build complete</strong></div>
         <div className="passport-summary-item" data-icon="◷"><span>Service Hours</span><strong>0 · pre-commissioning</strong></div>
       </div>
+      <p className="mzigo-model-note">K600 is the platform recorded in SmashPro's passport. Manufacturer specification-sheet confirmation remains pending. SP-MZIGO-26E is the permanent fleet identity.</p>
       <div className="status-panel"><span className="status-light" /><div><small>Current public status</small><strong>{item.statusLabel}</strong><p>Final inspection, ocean freight and U.S. delivery remain upcoming.</p></div></div>
       <div className="mzigo-passport-utilities"><a href="#specifications">Factory specifications</a><a href="#mzigo-build-story">Build evidence</a></div>
     </section>

@@ -144,3 +144,64 @@
  .mzigo-media-archive .archive-grid img,.mzigo-media-archive .archive-grid video { height:280px; }
 }
 @media print { .mzigo-media-archive,.mzigo-archive-lightbox { display:none!important; } }
+
+/* Lean passport sections retain the shared flagship spacing and material language. */
+.mzigo-passport>section.section,.mzigo-passport>section.timeline-section,.mzigo-passport>.spec-section { padding-block:clamp(2.5rem,6vw,5rem); }
+.mzigo-passport .section-heading { align-items:end; }
+.mzigo-passport .section-heading h2,.mzigo-purpose h2 { font-size:clamp(1.9rem,4.5vw,3.8rem); text-transform:uppercase; line-height:1; }
+.mzigo-purpose { display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(1.5rem,5vw,4rem); align-items:center; }
+.mzigo-purpose p,.mzigo-confirmed-grid p,.mzigo-verification p,.mzigo-readiness { color:var(--muted); line-height:1.7; }
+.mzigo-purpose h3 { font-size:1.3rem; }
+.mzigo-passport .fleet-lifecycle-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.mzigo-passport .fleet-lifecycle-stages a { color:inherit; text-underline-offset:.25rem; }
+.mzigo-confirmed-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.mzigo-confirmed-grid article { padding:1.4rem; border:1px solid var(--line); background:#101611; }
+.mzigo-confirmed-grid span,.mzigo-confirmed-grid a { color:var(--green); font-size:.75rem; }
+.mzigo-confirmed-grid h3 { font-size:1.2rem; }
+.mzigo-verification { margin-top:1.5rem; padding:1.5rem; background:#101611; border:1px solid var(--line); border-left:3px solid #c6a96b; scroll-margin-top:1rem; }
+.mzigo-verification dl { margin:1rem 0 0; }
+.mzigo-verification dl>div { display:grid; grid-template-columns:minmax(180px,1fr) 2fr; gap:1.5rem; padding:1rem 0; border-top:1px solid var(--line); }
+.mzigo-verification dt { font-weight:800; }.mzigo-verification small { display:block; margin-top:.35rem; color:#c6a96b; font-size:.72rem; font-weight:400; }
+.mzigo-verification dd { margin:0; color:var(--muted); line-height:1.6; }
+.mzigo-passport .passport-evidence-record { margin-top:1rem; }
+.mzigo-passport .passport-evidence-record summary small { display:block; margin-top:.5rem; color:var(--muted); }
+.mzigo-pending-specs dd small { display:block; margin-top:.5rem; color:#c6a96b; font-size:.65rem; }
+.mzigo-model-note { max-width:800px; color:var(--muted); font-size:.8rem; line-height:1.6; }
+.mzigo-artwork-label { display:block; color:#cad2ca; font-size:.7rem; margin-top:.75rem; }
+.mzigo-readiness { max-width:750px; margin-top:1.5rem; }
+.passport-document-status { padding:1rem; border:1px solid var(--line); color:var(--muted); }
+.passport-generated-record { display:grid; grid-template-columns:1fr auto; gap:1.5rem; align-items:center; margin:1rem 0; padding:1.5rem; background:#101611; border:1px solid var(--line); }
+.passport-generated-record h3 { font-size:1.4rem; }.passport-generated-record p { max-width:660px; color:var(--muted); line-height:1.6; }
+.passport-generated-record button,.passport-document-status button { padding:.8rem 1rem; background:#101611; color:#fff; border:1px solid var(--green); font:inherit; cursor:pointer; }
+.passport-document-dialog { width:min(1100px,calc(100vw - 2rem)); max-height:calc(100dvh - 2rem); padding:0; border:1px solid var(--line); background:#101611; color:#fff; overflow:auto; }
+.passport-document-dialog::backdrop { background:#000d; }.passport-document-dialog>header { display:flex; justify-content:space-between; gap:1rem; align-items:center; padding:1rem; position:sticky; top:0; z-index:2; background:#101611; }
+.passport-document-scroll { overflow:auto; max-height:calc(100dvh - 8rem); padding:1rem; }.passport-document-scroll .window-sticker { min-width:760px; }.passport-document-scroll .sticker-actions { min-width:0; flex-wrap:wrap; gap:1rem; }.passport-document-scroll .sticker-actions h2 { font-size:1.5rem; }
+.mzigo-passport :is(button,a,input):focus-visible { outline:2px solid #c6a96b; outline-offset:3px; }
+.passport-document-scroll .window-sticker { min-width:0; }
+.passport-document-scroll .window-sticker p { color:#425348; }
+.passport-document-scroll .window-sticker footer { display:block; }
+.passport-document-scroll .window-sticker footer p { color:#fff; text-align:left; }
+.passport-document-scroll .sticker-actions a { display:none; }
+.passport-document-scroll .sticker-body dl { grid-template-columns:1fr; }
+@media(max-width:720px) {
+ .mzigo-purpose,.mzigo-confirmed-grid,.passport-generated-record { grid-template-columns:1fr; }
+ .mzigo-verification { padding:1rem; }.mzigo-verification dl>div { grid-template-columns:1fr; gap:.6rem; }
+ .mzigo-passport .spec-grid { grid-template-columns:1fr; }.mzigo-passport .spec-grid dd { overflow-wrap:anywhere; }
+ .passport-document-dialog>header { align-items:flex-start; font-size:.8rem; }.passport-document-dialog>header button { flex:none; }
+ .passport-document-scroll .window-sticker header { grid-template-columns:1fr; gap:1rem; padding:1rem; }
+ .passport-document-scroll .window-sticker header h2 { font-size:1.5rem; overflow-wrap:anywhere; }
+ .passport-document-scroll .window-sticker header img { justify-self:center; }
+ .passport-document-scroll .sticker-body { grid-template-columns:1fr; }
+ .passport-document-scroll .sticker-body>section,.passport-document-scroll .sticker-body>aside { padding:1rem; border-left:0; }
+ .passport-document-scroll .sticker-body dl div { display:block; }
+ .passport-document-scroll .sticker-body dd { text-align:left; margin-top:.3rem; overflow-wrap:anywhere; }
+ .passport-document-scroll .sticker-actions h2 { font-size:1.2rem; }
+ .passport-document-scroll .sticker-actions>div:last-child { justify-content:flex-start; }
+}
+@media print {
+ body:has(.passport-document-dialog[open]) .site-header,body:has(.passport-document-dialog[open]) .site-footer,body:has(.passport-document-dialog[open]) .breadcrumbs,body:has(.passport-document-dialog[open]) .related { display:none!important; }
+ .mzigo-passport>section:not(.mzigo-documents),.mzigo-passport>#journey { display:none!important; }
+ .mzigo-documents>*:not(.passport-generated-record),.passport-generated-record>div,.passport-generated-record>button,.passport-document-dialog>header { display:none!important; }
+ .mzigo-documents,.passport-generated-record,.passport-document-dialog[open],.passport-document-scroll { position:static; display:block; width:100%; max-height:none; margin:0; padding:0; overflow:visible; border:0; }
+ .passport-document-scroll .window-sticker { min-width:0; }.passport-document-scroll .window-sticker header { display:grid!important; }.passport-document-scroll .window-sticker footer { display:block!important; }
+}

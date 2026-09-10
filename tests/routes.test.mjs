@@ -180,7 +180,7 @@ test("Ardhi public factory document has a deployable URL and cannot render as an
   const data = readFileSync("src/data/equipment.ts", "utf8");
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   assert.match(data, /ardhi-factory-specification-20260816[\s\S]*url: "\/equipment\/documents\/sp-ardhi-26\/yf380-manufacturer-promo-spec-sheet\.pdf"/);
-  assert.match(detail, /downloads\.length \? <div className="public-document-list">/);
+  assert.match(readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8"), /item\.documents/);
 });
 
 test("both fleet passports retain identity sections and the current Mzigo evidence structure", () => {
@@ -203,10 +203,9 @@ test("SP-MZIGO-26E is classified as electric with a correctly converted publishe
   assert.match(data, /\["Payload", "500 kg \(1,102 lb\)", "Capacity"\]/);
   assert.match(data, /fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E"/);
   assert.match(data, /model: "SP-MZIGO-26E", factoryModel: "K600"/);
-  const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
-  assert.match(detail, /<h1>\{item\.fleetId\}<\/h1>/);
-  assert.match(detail, /Factory Model: \{item\.identity\.factoryModel/);
-  assert.match(detail, /<span>Fleet Name<\/span><strong>\{item\.fleetId\}<\/strong>/);
+  const header = readFileSync("src/components/MzigoPassportHeader.tsx", "utf8");
+  assert.match(header, /item\.fleetId/);
+  assert.match(header, /item\.identity\.factoryModel/);
 });
 
 test("public equipment fleet IDs and slugs are unique", () => {
@@ -411,7 +410,7 @@ test("equipment partners render only public relationship statuses", () => {
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   assert.match(component, /\["confirmed", "active", "completed"\]/);
   assert.match(component, /if \(!visiblePartners\.length\) return null/);
-  assert.match(detail, /<PartnerFieldSupport partners=\{item\.partners\} \/>/);
+  assert.match(readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8"), /<PartnerFieldSupport partners=\{item\.partners\} \/>/);
   assert.match(data, /brand: "Shandong Infront Machinery Group Co\., Ltd\."[\s\S]*status: "completed"/);
   for (const outreachOnlyBrand of ["Blue Diamond Attachments", "Skid Steer Solutions", "Eterra Attachments", "Ergodyne", "Radians", "Mechanix Wear", "Pyramex", "Strapinno", "Spytec", "Hapn"]) {
     assert.doesNotMatch(data, new RegExp(outreachOnlyBrand), `${outreachOnlyBrand} must not be published without a confirmed relationship`);
@@ -450,10 +449,12 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
   assert.match(data, /label: "Chassis Assembly", status: "completed"/);
   assert.match(data, /label: "Body Assembly", status: "current"/);
   assert.match(data, /label: "U\.S\. Delivery", status: "upcoming"/);
-  assert.match(detail, /className="factory-update"/);
-  assert.match(detail, /loading="lazy" decoding="async"/);
-  assert.match(detail, /<video controls preload="metadata"/);
-  assert.match(detail, /poster=\{item\.factoryUpdate\.video\.poster\}/);
+  const passport = readFileSync("src/components/MzigoPassport.tsx", "utf8");
+  const archive = readFileSync("src/components/MzigoMediaArchive.tsx", "utf8");
+  assert.match(passport, /<MzigoBuildStory/);
+  assert.match(passport, /<FleetLifecycleProgress/);
+  assert.match(archive, /<video/);
+  assert.match(archive, /poster=/);
   for (const filename of [
     "sp-mzigo-26e-production-chassis-drivetrain-assembly-2026-08-31.jpg",
     "sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg",

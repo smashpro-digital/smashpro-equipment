@@ -9,10 +9,11 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 function load(relative) {
   const filename = resolve(relative), module = { exports: {} }, require = createRequire(filename);
-  const code = ts.transpileModule(readFileSync(filename, 'utf8'), {
+  const code = ts.transpileModule(readFileSync(filename, 'utf8').replaceAll('import.meta.env', '({})'), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true }, fileName: filename,
   }).outputText;
   new Function('require', 'module', 'exports', code)((name) => {
+    if (name.endsWith('.css')) return {};
     if (name.startsWith('.')) for (const suffix of ['.ts', '.tsx']) {
       const candidate = resolve(dirname(filename), name) + suffix;
       if (existsSync(candidate)) return load(candidate);
@@ -179,9 +180,42 @@ test('August evidence and existing equipment identities remain available', () =>
   assert.ok(mzigo.timeline.some(e => e.id === 'mzigo-factory-build'));
 });
 
-test('page uses one native Factory Update and no Mzigo DOM replacement', () => {
-  const page = readFileSync('src/pages/EquipmentDetailPage.tsx','utf8');
-  assert.equal((page.match(/className="factory-update"/g) || []).length, 1);
+test('page uses shared lifecycle and retains one build story without DOM replacement', () => {
+  const page = readFileSync('src/components/MzigoPassport.tsx','utf8');
+  assert.equal((page.match(/<FleetLifecycleProgress /g) || []).length, 1);
   assert.equal((page.match(/<MzigoBuildStory \/>/g) || []).length, 1);
   assert.doesNotMatch(readFileSync('src/pages/MzigoPassportPage.tsx','utf8'), /innerHTML|querySelector|useEffect|createElement/);
+});
+
+test('lean passport preserves its destinations and separates requests from confirmed configuration', () => {
+  const { MzigoPassport } = load('src/components/MzigoPassport.tsx');
+  const html = renderToStaticMarkup(React.createElement(MzigoPassport, {item:mzigo}));
+  for (const id of ['passport','identity','journey','history','service','projects','configuration','verification','specifications','documents','evidence','mzigo-build-story','mzigo-configuration-document']) assert.ok(html.includes(`id="${id}"`), id);
+  assert.match(html, /Configured for SmashPro/);
+  assert.match(html, /QR graphics remain visible in the September 9/);
+  assert.match(html, /black box was requested/);
+  assert.match(html, /Neither is recorded as installed/);
+  assert.match(html, /Manufacturer verification pending/);
+  assert.match(html, /Loading public documents/);
+  assert.doesNotMatch(html, /Maintenance Score|Estimated Fleet Value|Nothing disappears|No package|No YouTube|No SmashPro-installed upgrades/);
+  assert.ok(html.indexOf('Deposit recorded') < html.indexOf('Chassis assembly documented'));
+  assert.equal((html.match(/id="journey"/g) || []).length, 1);
+});
+
+test('manufacturer-unverified ratings remain recorded but are not marked confirmed', () => {
+  for (const label of ['Platform','Payload','Battery','Battery runtime','Maximum speed','Maximum climbing grade','Remote control range']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, false, label);
+  for (const label of ['Fleet ID','Manufacturer','Operation','Dump bed','Factory finish']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, true, label);
+  const deposit = mzigo.timeline.find(event => event.id === 'mzigo-deposit');
+  assert.equal(deposit.occurredAt, undefined);
+  assert.doesNotMatch(deposit.detail, /\$\d/);
+});
+
+test('generated MZIGO record qualifies ratings while the shared ARDHI sticker retains its standard', () => {
+  const { WindowSticker } = load('src/components/WindowSticker.tsx');
+  const render = (item, evidenceMode) => renderToStaticMarkup(React.createElement(WindowSticker, {item, evidenceMode, packages:[], scores:{documentation:0,maintenance:0}}));
+  const html = render(mzigo, true);
+  assert.match(html, /not an OEM certificate/);
+  assert.match(html, /K600 - verification pending/);
+  assert.doesNotMatch(html, /Maintenance Score|No package currently qualified|Estimated Fleet Value/);
+  assert.match(render(equipment[0], false), /Factory Specifications/);
 });

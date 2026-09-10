@@ -1,5 +1,6 @@
 import type { Equipment, EquipmentSpecification, FactoryUpdate } from "../types/equipment";
 import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
+import { mzigoObservedSpecLabels } from "./mzigoPassport";
 import { standardPackageRules } from "./packageRules";
 
 const image = (name: string) => `/equipment/images/${name}`;
@@ -171,7 +172,7 @@ export const equipment: Equipment[] = [
       ["Maximum speed", "0–10 km/h (6.2 mph), adjustable", "Performance", "SP-MZIGO-26E Equipment Passport"], ["Maximum climbing grade", "30°", "Performance", "SP-MZIGO-26E Equipment Passport"],
       ["Ground clearance", "260 mm (10.24 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall length", "1,170 mm (46.06 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall width", "820 mm (32.28 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Overall height", "870 mm (34.25 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"], ["Cargo bed dimensions", "1,170 × 780 × 300 mm (46.06 × 30.71 × 11.81 in)", "Dimensions", "SP-MZIGO-26E Equipment Passport"],
       ["Factory finish", "SmashPro Custom Green", "Finish", "SP-MZIGO-26E Equipment Passport"],
-    ]),
+    ]).map(spec => ({ ...spec, confirmed: mzigoObservedSpecLabels.has(spec.label) })),
     factoryUpdate: mzigoFactoryUpdate,
     factoryOptions: [], upgrades: [
       { id: "mzigo-gps", name: "GPS Asset Tracking", category: "Command", description: "Planned location and fleet-security system.", imageUrls: [], status: "planned", tags: ["gps"] },
@@ -187,6 +188,9 @@ export const equipment: Equipment[] = [
       { id: "mzigo-drive-shaft", name: "Spare drive shaft", category: "spare-part" }, { id: "mzigo-spare-tire", name: "Spare tire", category: "spare-part" },
     ],
     documents: [], serviceHistory: [], timeline: [
+      { id: "mzigo-deposit", kind: "purchase", title: "Deposit recorded", detail: "The procurement record confirms a deposit was paid. Its amount and date, the machine price and remaining payment terms are not documented publicly.", publicDisplay: true },
+      { id: "mzigo-passport-published", occurredAt: "2026-08-20", kind: "status", title: "Equipment passport published", detail: "A permanent public record connects the recorded K600 platform with the SP-MZIGO-26E fleet identity.", publicDisplay: true },
+      { id: "mzigo-assembly-evidence", occurredAt: "2026-08-31", kind: "media", title: "Chassis assembly documented", detail: "Two factory photographs and an assembly video record the chassis, electric drive hardware and battery packaging before final body assembly.", publicDisplay: true },
       { id: "mzigo-factory-build", kind: "factory-build", title: "Factory build in progress", detail: "Deposit paid, production started, and SmashPro custom green finish and branding approved for SP-MZIGO-26E.", publicDisplay: true },
       { id: "mzigo-factory-complete", occurredAt: "2026-09-09", kind: "factory-build", title: "Factory build complete", detail: "SmashPro green finish, branding, raised hydraulic bed and powered work lights documented. Pre-shipment verification is current; final inspection and shipment remain upcoming.", publicDisplay: true },
       { id: "mzigo-current", occurredAt: "2026-09-09", kind: "status", title: "Current status", detail: "Factory build complete · pre-shipment verification. Rental availability has not been announced.", publicDisplay: true },
