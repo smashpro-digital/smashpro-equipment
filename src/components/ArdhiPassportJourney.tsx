@@ -5,6 +5,7 @@ import { calculatePackages, calculatePassportScores } from "../domain/passport";
 import { WindowSticker } from "./WindowSticker";
 import { PartnerFieldSupport } from "./PartnerFieldSupport";
 import { FleetLifecycleProgress } from "./FleetLifecycleProgress";
+import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
 
 const image = (name: string) => `/equipment/images/${name}`;
@@ -655,10 +656,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   );
   return (
     <main className="ardhi-documentary">
-      <section className="ardhi-v2-hero" aria-labelledby="ardhi-v2-title">
-        <img src={item.heroImage} alt="SP-ARDHI-26 completed flagship fleet machine" />
-        <div className="ardhi-v2-hero__shade" />
-        <div className="shell ardhi-v2-hero__copy">
+      <PassportHero titleId="ardhi-v2-title" image={item.heroImage} alt="SP-ARDHI-26 completed flagship fleet machine">
           <p className="eyebrow">SP-ARDHI-26</p>
           <h1 id="ardhi-v2-title">
             SmashPro Flagship
@@ -674,8 +672,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             <a href="#history" onClick={() => setNowViewing(["History", "Export", "Container Loaded"])}>📜 History</a>
             <a href="#service" onClick={() => setNowViewing(["Service", "Future Record", "Awaiting commissioning"])}>🛠 Service</a>
           </div>
-        </div>
-      </section>
+      </PassportHero>
       <nav className="passport-rail" aria-label="Equipment passport chapters">
         <div className="shell">
           <a href="#passport" onClick={() => setNowViewing(["Passport", "Identity", "SP-ARDHI-26"])}>Passport</a>

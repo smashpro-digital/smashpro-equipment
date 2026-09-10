@@ -70,14 +70,36 @@ test('current canonical state keeps inspection and transport uncompleted', () =>
   assert.ok(mzigo.factoryUpdate.images.every(m => m.src.includes('2026-09-09')));
 });
 
-test('passport identity and status precede labeled hero artwork', () => {
+test('Mzigo shares the documentary hero and keeps four asset destinations and three summary fields', () => {
   const html = renderToStaticMarkup(React.createElement(MzigoPassportHeader, { item: mzigo }));
   assert.ok(html.indexOf('id="identity"') < html.indexOf('class="status-panel"'));
-  assert.ok(html.indexOf('class="status-panel"') < html.indexOf('<figure>'));
+  assert.ok(html.indexOf('class="ardhi-v2-hero mzigo-passport-hero"') < html.indexOf('id="identity"'));
   assert.equal((html.match(/class="passport-summary-item"/g) || []).length, 3);
   assert.doesNotMatch(html, /Passport Number|Fleet Class|Current Owner/);
-  assert.ok(html.includes("sp-mzigo-26e-hero-artwork-2026-09-09.png"));
-  assert.ok(html.includes("Brand illustration"));
+  assert.ok(html.includes(mzigoFactoryPhotos.complete.src));
+  assert.match(html, /SmashPro<br\/>Electric Material<br\/>/);
+  for (const anchor of ['passport', 'journey', 'history', 'service']) assert.ok(html.includes(`href="#${anchor}"`));
+  assert.doesNotMatch(html, /Flagship|Asset #001|hero-artwork/);
+});
+
+test('shared hero preserves the ARDHI wrapper structure', () => {
+  const { PassportHero } = load('src/components/PassportHero.tsx');
+  const html = renderToStaticMarkup(React.createElement(PassportHero, {titleId:'test-title',image:'/test.jpg',alt:'Machine'}, React.createElement('h1',{id:'test-title'},'Machine')));
+  assert.match(html, /class="ardhi-v2-hero"/);
+  assert.match(html, /class="ardhi-v2-hero__shade"/);
+  assert.match(html, /class="shell ardhi-v2-hero__copy"/);
+  const ardhi = readFileSync('src/components/ArdhiPassportJourney.tsx','utf8');
+  assert.match(ardhi, /<PassportHero titleId="ardhi-v2-title"/);
+});
+
+test('service destination reflects canonical events and preserves pre-commissioning empty state', () => {
+  const { MzigoServiceRecord } = load('src/components/MzigoServiceRecord.tsx');
+  const html = renderToStaticMarkup(React.createElement(MzigoServiceRecord, {item:{...mzigo,serviceHistory:[]}}));
+  assert.match(html, /id="service"/); assert.match(html, /Awaiting commissioning/);
+  const record = {id:'test',performedAt:'2026-09-10',serviceType:'Inspection',summary:'Documented check',status:'completed',operatingHours:0};
+  const populated = renderToStaticMarkup(React.createElement(MzigoServiceRecord, {item:{...mzigo,serviceHistory:[record]}}));
+  assert.match(populated, /Documented check/); assert.match(populated, /Service hours: 0/);
+  assert.doesNotMatch(populated, /No completed service events/);
 });
 
 test('build chapters are compact dated records with observations separate from meaning', () => {
