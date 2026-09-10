@@ -98,3 +98,5 @@
  .mzigo-configuration-document>details>summary { display:none; }
  .mzigo-configuration-document,.mzigo-configuration-document .passport-evidence-record,.mzigo-configuration-document .passport-evidence-record__body { padding:0; border:0; width:100%; overflow:visible; }
 }
+.factory-update[data-equipment="SP-MZIGO-26E"] .factory-update__gallery { grid-template-columns:1fr; margin-bottom:1rem; }
+.factory-update[data-equipment="SP-MZIGO-26E"] .factory-update__gallery img { width:100%; height:auto; max-height:420px; object-fit:contain; background:#080b09; }

@@ -70,13 +70,14 @@ test('current canonical state keeps inspection and transport uncompleted', () =>
   assert.ok(mzigo.factoryUpdate.images.every(m => m.src.includes('2026-09-09')));
 });
 
-test('passport identity and status precede completed-machine evidence', () => {
+test('passport identity and status precede labeled hero artwork', () => {
   const html = renderToStaticMarkup(React.createElement(MzigoPassportHeader, { item: mzigo }));
   assert.ok(html.indexOf('id="identity"') < html.indexOf('class="status-panel"'));
   assert.ok(html.indexOf('class="status-panel"') < html.indexOf('<figure>'));
   assert.equal((html.match(/class="passport-summary-item"/g) || []).length, 3);
   assert.doesNotMatch(html, /Passport Number|Fleet Class|Current Owner/);
-  assert.ok(html.includes(mzigoFactoryPhotos.complete.src));
+  assert.ok(html.includes("sp-mzigo-26e-hero-artwork-2026-09-09.png"));
+  assert.ok(html.includes("Brand illustration"));
 });
 
 test('build chapters are compact dated records with observations separate from meaning', () => {
