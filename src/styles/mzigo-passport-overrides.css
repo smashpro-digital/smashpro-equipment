@@ -90,17 +90,11 @@
 }
 .factory-update[data-equipment="SP-MZIGO-26E"] .factory-update__gallery { grid-template-columns:1fr; margin-bottom:1rem; }
 .factory-update[data-equipment="SP-MZIGO-26E"] .factory-update__gallery img { width:100%; height:auto; max-height:420px; object-fit:contain; background:#080b09; }
-/* Shared ARDHI hero rules provide the shell; only MZIGO's image/copy composition differs. */
-.mzigo-passport-hero { min-height:720px; }
-.mzigo-passport-hero .ardhi-v2-hero__copy { padding-block:3rem; }
-.mzigo-passport-hero .ardhi-v2-hero__copy h1 { font-size:clamp(3rem,5.8vw,6rem); max-width:900px; line-height:.97; text-transform:uppercase; }
-.mzigo-passport-hero .ardhi-v2-hero__copy h1 span { color:var(--green); }
-.mzigo-passport-hero .ardhi-v2-hero__shade { background:linear-gradient(90deg,#050806ed 0%,#050806ab 34%,#05080618 72%),linear-gradient(0deg,#050806e6,transparent 65%); }
-.mzigo-passport-hero .ardhi-v2-hero__copy .mzigo-hero-model { color:var(--muted); font-size:.85rem; margin-bottom:0; }
-.mzigo-asset-nav { border-block:1px solid var(--line); background:#080d0a; }
-.mzigo-asset-nav .ardhi-v2-hero__actions { margin:0 auto!important; gap:1px!important; }
-.mzigo-asset-nav a { min-height:52px; border:0; border-inline:1px solid var(--line); background:#101611; }
-.mzigo-asset-nav a:hover,.mzigo-asset-nav a:focus-visible { background:#20301f; color:var(--green); }
+/* Inherit ARDHI's headline scale, gold accent, overlay, and outlined hero links. */
+.mzigo-passport-hero .ardhi-v2-hero__copy { padding-top:3rem; }
+.mzigo-passport-hero .ardhi-v2-hero__copy h1 { text-transform:uppercase; }
+.mzigo-passport-hero .ardhi-v2-hero__actions a { gap:.35rem; }
+.mzigo-passport-hero .ardhi-v2-hero__actions a:hover,.mzigo-passport-hero .ardhi-v2-hero__actions a:focus-visible { background:#20301f; border-color:#c6a96b; }
 .mzigo-passport-header .section-heading { margin-bottom:1rem; }
 .mzigo-passport-header h2 { font-size:clamp(1.7rem,3.5vw,3rem); max-width:800px; text-transform:uppercase; }
 .mzigo-passport-utilities { display:flex; flex-wrap:wrap; gap:1rem; }
@@ -113,6 +107,6 @@
  .mzigo-passport-hero .ardhi-v2-hero__copy { padding-top:270px; padding-bottom:1.5rem; }
  .mzigo-passport-hero .ardhi-v2-hero__copy h1 { font-size:clamp(2.25rem,10vw,3rem); letter-spacing:-.025em; }
  .mzigo-passport-hero .ardhi-v2-hero__copy>p:not(.eyebrow) { font-size:.82rem; }
- .mzigo-asset-nav .ardhi-v2-hero__actions a { min-height:48px; font-size:.68rem; }
+ .mzigo-passport-hero .ardhi-v2-hero__actions a { min-height:48px; flex-direction:column; font-size:.68rem; gap:.2rem; }
 }
-@media print { .mzigo-passport-hero,.mzigo-asset-nav { display:none!important; } }
+@media print { .mzigo-passport-hero { display:none!important; } }

@@ -9,13 +9,15 @@ export function MzigoPassportHeader({ item }: { item: Equipment }) {
   return <>
     <PassportHero titleId="mzigo-passport-title" image={media.src} alt={media.alt} className="mzigo-passport-hero">
       <p className="eyebrow">{item.fleetId}</p>
-      <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br /><span>Carrier</span></h1>
+      <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br />Carrier <span>{item.identity.factoryModel}</span></h1>
       <p>Factory complete <b>·</b> Pre-shipment verification</p>
-      <p className="mzigo-hero-model">Factory model {item.identity.factoryModel}</p>
+      <nav className="ardhi-v2-hero__actions" aria-label="MZIGO equipment passport chapters">
+        <a href="#passport"><span aria-hidden="true">📘</span> Passport</a>
+        <a href="#journey"><span aria-hidden="true">🌎</span> Journey</a>
+        <a href="#history"><span aria-hidden="true">📜</span> History</a>
+        <a href="#service"><span aria-hidden="true">🛠</span> Service</a>
+      </nav>
     </PassportHero>
-    <nav className="mzigo-asset-nav" aria-label="MZIGO equipment passport chapters"><div className="shell ardhi-v2-hero__actions">
-      <a href="#passport">Passport</a><a href="#journey">Journey</a><a href="#history">History</a><a href="#service">Service</a>
-    </div></nav>
     <section className="section shell mzigo-passport-header" id="passport" aria-labelledby="mzigo-identity-title">
       <div className="section-heading"><div><p className="eyebrow">Equipment Passport</p><h2 id="mzigo-identity-title">Identity and current operating status.</h2></div></div>
       <div id="identity" className="passport-identity passport-summary-row mzigo-passport-summary">
