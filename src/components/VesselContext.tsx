@@ -2,46 +2,82 @@ import type { Shipment } from '../domain/shipment';
 import { formatTime } from '../domain/shipment';
 import '../styles/vessel-context.css';
 
-export function VesselContext({data}: {data: Shipment}) {
- const c=data.vesselContext;if(!c)return null;
- const v=c.vessel,o=c.observation;
- return <div className="vessel-context">
-  <article className="vessel-identity" aria-labelledby="monitored-vessel-title">
-   <div className="vessel-card-heading"><div><p className="eyebrow">Vessel being monitored</p><h3 id="monitored-vessel-title">{v.name}</h3><p>{v.flag} · {v.type} · approx. {v.lengthMetres} m × {v.beamMetres} m</p></div>
-   <svg className="context-ship-art" viewBox="0 0 240 100" aria-hidden="true"><path d="M12 64H226L203 88H49Z"/><path d="M28 45H160V64H28ZM44 26H176V45H44ZM179 34H207V64H179ZM188 20H207V34H188"/><path className="ship-water" d="M8 95H231M65 27V63M92 27V63M119 27V63M146 27V63"/></svg></div>
-   <p className="vessel-context-warning">This does not yet confirm SP-ARDHI-26 is aboard.</p>
-   <dl className="vessel-identifiers"><div><dt>IMO</dt><dd>{v.imo}</dd></div><div><dt>MMSI</dt><dd>{v.mmsi}</dd></div><div><dt>Call sign</dt><dd>{v.callSign}</dd></div><div><dt>Factory model</dt><dd>{data.pendingReferences?.factoryModel ?? 'See factory record'}</dd></div></dl>
-   <p className="context-classification">Publicly corroborated vessel metadata · independent of cargo verification</p>
-   <p className="context-voyage">Voyage <strong>{c.voyage.reference}</strong> · reported public schedule reference</p>
-   <div className="context-sources">{c.identitySources.map(s=><p key={s.url}><a href={s.url} target="_blank" rel="noreferrer">Open public vessel tracker ↗ — {s.attribution}</a><small>Checked {formatTime(s.checkedAt)} · external contextual source</small></p>)}<p><a href={c.voyage.source.url} target="_blank" rel="noreferrer">Open public schedule ↗ — {c.voyage.source.attribution}</a><small>Checked {formatTime(c.voyage.source.checkedAt)} · not cargo evidence</small></p></div>
-  </article>
-  <section className="context-corridor" aria-labelledby="corridor-title">
-   <p className="eyebrow">Projected shipment corridor</p><h3 id="corridor-title">From factory history to the next confirmed chapter.</h3>
-   <p>Illustrative corridor · not a vessel position or booked port sequence</p>
-   <svg viewBox="0 0 800 200" role="img" aria-label="Dashed projected ocean corridor from documented factory export history to destination and inland stages awaiting evidence" className="corridor-art">
-    <defs><linearGradient id="corridor-glow"><stop stopColor="#86bd42" stopOpacity=".16"/><stop offset="1" stopColor="#d8bb73" stopOpacity=".04"/></linearGradient></defs>
-    <path d="M25 145Q150 20 260 95T520 80T775 140V195H25Z" fill="url(#corridor-glow)"/>
-    <path className="corridor-projected" d="M70 130C210 130 195 40 340 65S510 140 605 90L740 125"/>
-    <circle cx="70" cy="130" r="15" className="corridor-documented"/><circle cx="340" cy="65" r="11" className="corridor-pending"/><circle cx="605" cy="90" r="11" className="corridor-pending"/><circle cx="740" cy="125" r="11" className="corridor-pending"/>
-    <text x="70" y="173" textAnchor="middle">FACTORY</text><text x="340" y="35" textAnchor="middle">PROJECTED OCEAN</text><text x="605" y="55" textAnchor="middle">PORT PENDING</text><text x="740" y="165" textAnchor="middle">INLAND</text>
-   </svg>
-   <ol className="corridor-stages">{c.corridor.stages.map((stage,i)=><li key={stage}><span>{String(i+1).padStart(2,'0')}</span>{stage}</li>)}</ol>
-   <p className="context-route-summary">{c.corridor.summary}</p>
-   <div className="context-legend"><span>● Documented factory/export history</span><span>┄ Projected, never completed</span><span>○ Destination awaiting evidence</span></div>
-   <p className="context-marker-label">Vessel context: {v.name} · monitoring reference only, not located on this corridor.</p>
-  </section>
-  <section className="context-monitoring" aria-labelledby="monitoring-title"><h3 id="monitoring-title">What we’re monitoring</h3><ul>
-   <li><a href="#history-factory-departure">Factory production and loading history documented</a><span>Factory / export archive</span></li>
-   <li>EVER MAX identity publicly corroborated<span>Vessel metadata</span></li>
-   <li>Voyage {c.voyage.reference} reported in public schedule records<span>Reported reference</span></li>
-   <li>Cargo-to-vessel association awaiting carrier evidence<span>Unconfirmed</span></li>
-   <li>{data.shipmentStatus}<span>{data.stageVerification === 'confirmed' ? 'Evidence reviewed' : 'Awaiting evidence'}</span></li>
-   <li>{data.currentPosition ? 'Approved AIS observation available' : 'Live AIS provider not yet connected'}<span>Vessel only</span></li>
-   <li>{data.satelliteImagery.length ? 'Approved contextual imagery available' : 'Satellite observation not yet approved'}<span>Separate review</span></li>
-   <li>Destination-port confirmation pending<span>Awaiting evidence</span></li>
-  </ul></section>
-  <section className="context-latest"><h3>Latest public vessel context</h3>{o ? <><p>Source observation: {formatTime(o.observedAt)} · historical unless freshly observed. This does not establish that ARDHI is aboard.</p><dl className="vessel-identifiers"><div><dt>Speed</dt><dd>{o.speedKnots===null?'Not supplied':`${o.speedKnots} kn`}</dd></div><div><dt>Heading</dt><dd>{o.heading===null?'Not supplied':`${o.heading}°`}</dd></div><div><dt>Reported destination</dt><dd>{o.destination??'Not supplied'}</dd></div></dl><a href={o.source.url} target="_blank" rel="noreferrer">Open observation source ↗ — {o.source.attribution}</a><p>Checked {formatTime(o.source.checkedAt)} · Reuse: {o.license}</p></> : <><p>No timestamped observation is approved for reuse here. View the external tracker for its own current information; it cannot confirm ARDHI’s cargo association.</p><a href={c.identitySources[0].url} target="_blank" rel="noreferrer">Open public vessel tracker ↗</a></>}
-   <details className="context-unavailable"><summary>Tracking availability and evidence boundaries</summary><p>No licensed AIS position or approved satellite observation is stored. Speed, heading, live destination, arrival estimate and route completion are not inferred. Cargo association remains unconfirmed. Factory loading is not ocean-vessel loading.</p><p>Last verified shipment update: {formatTime(data.lastUpdated)}. Context-source check times above are separate from shipment verification.</p></details>
-  </section>
- </div>;
+const factoryHero = '/equipment/images/sp-ardhi-26-completed-build-attachments.jpg';
+
+export function VesselContext({ data }: { data: Shipment }) {
+  const context = data.vesselContext;
+  if (!context) return null;
+
+  const vessel = context.vessel;
+  const observation = context.observation;
+  const journey = [
+    { number: '01', label: 'Built', detail: 'Factory complete', state: 'complete' },
+    { number: '02', label: 'Released', detail: 'Export chapter', state: 'complete' },
+    { number: '03', label: 'Ocean', detail: 'Awaiting confirmation', state: 'active' },
+    { number: '04', label: 'Home', detail: 'Arrival & commissioning', state: 'future' },
+  ] as const;
+
+  return <div className="vessel-context">
+    <article className="journey-cinematic" aria-labelledby="monitored-vessel-title">
+      <img className="journey-cinematic-image" src={factoryHero} alt="SP-ARDHI-26 completed at the factory with its attachments" />
+      <div className="journey-cinematic-shade" />
+      <div className="journey-cinematic-copy">
+        <p className="eyebrow">The road home · Chapter three</p>
+        <p className="journey-kicker">Built in China. Bound for South Carolina.</p>
+        <h3 id="monitored-vessel-title">ARDHI is coming home.</h3>
+        <p className="journey-lede">The machine is complete. The factory chapter is preserved. We are now watching the ocean leg and waiting for the carrier record that confirms the next move.</p>
+        <div className="journey-hero-status">
+          <span aria-hidden="true" />
+          <div><small>Current chapter</small><strong>{data.shipmentStatus}</strong></div>
+        </div>
+      </div>
+    </article>
+
+    <ol className="journey-rail" aria-label="SP-ARDHI-26 journey chapters">
+      {journey.map((stage) => <li key={stage.number} className={`is-${stage.state}`}>
+        <span className="journey-node">{stage.number}</span>
+        <div><strong>{stage.label}</strong><small>{stage.detail}</small></div>
+      </li>)}
+    </ol>
+
+    <section className="journey-now" aria-labelledby="journey-now-title">
+      <div className="journey-now-heading">
+        <div><p className="eyebrow">The vessel we’re watching</p><h3 id="journey-now-title">{vessel.name}</h3></div>
+        <svg className="context-ship-art" viewBox="0 0 240 100" aria-hidden="true"><path d="M12 64H226L203 88H49Z"/><path d="M28 45H160V64H28ZM44 26H176V45H44ZM179 34H207V64H179ZM188 20H207V34H188"/><path className="ship-water" d="M8 95H231M65 27V63M92 27V63M119 27V63M146 27V63"/></svg>
+      </div>
+      <p className="journey-vessel-summary">{vessel.flag}-flagged {vessel.type} · {vessel.lengthMetres} m long · voyage reference {context.voyage.reference}</p>
+      <dl className="journey-vitals">
+        <div><dt>IMO</dt><dd>{vessel.imo}</dd></div>
+        <div><dt>MMSI</dt><dd>{vessel.mmsi}</dd></div>
+        <div><dt>Call sign</dt><dd>{vessel.callSign}</dd></div>
+        <div><dt>Machine</dt><dd>{data.pendingReferences?.factoryModel ?? 'YF380'}</dd></div>
+      </dl>
+      <div className="journey-truth"><span>!</span><p><strong>One link is still missing.</strong> EVER MAX is the monitored vessel reference; the carrier has not yet confirmed that SP-ARDHI-26 is aboard.</p></div>
+    </section>
+
+    <section className="journey-corridor" aria-labelledby="corridor-title">
+      <div className="journey-corridor-copy"><p className="eyebrow">The next horizon</p><h3 id="corridor-title">Factory floor to first job.</h3><p>The route is intentionally shown as a story of chapters—not simulated live movement. Confirmed progress will illuminate each stage as evidence arrives.</p></div>
+      <svg viewBox="0 0 820 230" role="img" aria-label="Journey chapters from factory release through projected ocean transport, arrival, commissioning and first job" className="corridor-art">
+        <defs><linearGradient id="routeGlow" x1="0" x2="1"><stop stopColor="#9ade61"/><stop offset=".42" stopColor="#9ade61"/><stop offset=".48" stopColor="#d5b871"/><stop offset="1" stopColor="#d5b871" stopOpacity=".35"/></linearGradient></defs>
+        <path className="corridor-horizon" d="M20 174C115 126 184 151 254 105S407 54 493 99s127 78 307 5"/>
+        <path className="corridor-route" d="M54 164C175 154 197 81 322 88s143 91 259 47 121-47 183-34"/>
+        <circle cx="54" cy="164" r="14" className="route-complete"/><circle cx="322" cy="88" r="13" className="route-active"/><circle cx="581" cy="135" r="11" className="route-future"/><circle cx="764" cy="101" r="11" className="route-future"/>
+        <text x="54" y="207" textAnchor="middle">FACTORY</text><text x="322" y="52" textAnchor="middle">OCEAN</text><text x="581" y="177" textAnchor="middle">ARRIVAL</text><text x="764" y="66" textAnchor="middle">FIRST JOB</text>
+      </svg>
+    </section>
+
+    <details className="journey-intelligence">
+      <summary><span><small>Source record</small><strong>Journey intelligence & verification</strong></span><em>Open details</em></summary>
+      <div className="journey-intelligence-grid">
+        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>{vessel.name} identity publicly corroborated</li><li>Voyage {context.voyage.reference} appears in a public schedule</li><li>{data.shipmentStatus}</li></ul></section>
+        <section><h4>What comes next</h4><ul><li>Carrier-to-cargo association</li><li>Confirmed ocean departure</li><li>Destination port and inland handoff</li><li>Receipt inspection and commissioning</li></ul></section>
+      </div>
+      {observation ? <div className="journey-observation"><strong>Latest approved observation</strong><p>{formatTime(observation.observedAt)} · {observation.destination ?? 'Destination not supplied'} · {observation.speedKnots === null ? 'Speed not supplied' : `${observation.speedKnots} kn`}</p><a href={observation.source.url} target="_blank" rel="noreferrer">Open observation source ↗</a></div> : <p className="journey-observation">No timestamped AIS observation is approved for reuse on this page yet.</p>}
+      <div className="context-sources">
+        {context.identitySources.map((source) => <p key={source.url}><a href={source.url} target="_blank" rel="noreferrer">Open vessel tracker ↗</a><small>{source.attribution} · checked {formatTime(source.checkedAt)}</small></p>)}
+        <p><a href={context.voyage.source.url} target="_blank" rel="noreferrer">Open voyage schedule ↗</a><small>{context.voyage.source.attribution} · checked {formatTime(context.voyage.source.checkedAt)}</small></p>
+      </div>
+      <p className="journey-boundary">Vessel context does not prove cargo association. The projected corridor is not a live position, sailed distance, booked port sequence, or arrival promise. Last verified shipment update: {formatTime(data.lastUpdated)}.</p>
+    </details>
+  </div>;
 }
