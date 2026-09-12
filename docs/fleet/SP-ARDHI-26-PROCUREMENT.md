@@ -180,6 +180,14 @@ These media files are supporting evidence only. They do not override the signed 
 
 Final logistics history should be based on freight documentation and actual delivery evidence once available.
 
+### Crate and freight-warehouse evidence
+
+A supplier-provided September 2026 video shows the closed wooden crate labeled with freight references `YFC260717B` and `BZHYF0822BMTI`, alongside a warehouse-entry notice for Shenzhen Baozhihang Supply Chain Management Co., Ltd., and being transported by truck. This supports **crated and transferred to freight warehouse** as a supplier-provided milestone.
+
+The observed references are recorded as crate/freight-warehouse identifiers only. They do not match the standard ISO container-number format and do not establish a booking, bill of lading, ocean-container identity, vessel loading, cargo association with EVER MAX, or ocean departure.
+
+Evidence: [SP-ARDHI-26 Crate and Freight-Warehouse Video Evidence](evidence/SP-ARDHI-26-CRATE-FREIGHT-WAREHOUSE-VIDEO-2026-09.md).
+
 ## 11. Warranty & Alibaba Service Protection
 
 ### Vendor warranty
@@ -216,11 +224,13 @@ Evidence: [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-
 | Alibaba receipts issued | Documented | Aug 31 |
 | Factory production media | Received | Assembly, hydraulics, branding, completed machine and test evidence |
 | Three-pump / three-valve production configuration | Supported by conversation/media; invoice mismatch retained | Replacement factory documentation or physical verification still needed |
-| Shipment | In progress / marketplace status captured | Freight documents pending |
+| Crated / transferred to freight warehouse | Supplier-provided video evidence | September 2026 — references `YFC260717B` and `BZHYF0822BMTI` observed |
+| Shipment | In progress / marketplace status captured | Freight documents pending; ocean departure awaiting confirmation |
 
 ## 13. Future Documentation Register
 
 - Evidence explaining the $269 difference between the $3,990 baseline invoice and $4,259 combined Alibaba order amounts
+- Reconciliation of crate/freight references `YFC260717B` and `BZHYF0822BMTI` to authoritative carrier records
 - Shipping documents
 - Bill of lading
 - Container/tracking number
