@@ -2,7 +2,7 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "tests/browser",
-  testMatch: "shipment.spec.mjs",
+  testMatch: process.env.SHIPMENT_LIVE_ENDPOINT ? "shipment.live.spec.mjs" : "shipment.spec.mjs",
   workers: 1,
   timeout: 45000,
   use: {
@@ -14,7 +14,7 @@ export default defineConfig({
   },
   outputDir: "tmp/shipment-browser-results",
   webServer: {
-    command: `${process.platform === "win32" ? "npm.cmd" : "npm"} run preview -- --host 127.0.0.1 --port 4175 --strictPort`,
+    command: `${process.platform === "win32" ? "npm.cmd" : "npm"} run preview -- ${process.env.SHIPMENT_LIVE_ENDPOINT ? "--mode shipment-preview" : ""} --host 127.0.0.1 --port 4175 --strictPort`,
     url: "http://127.0.0.1:4175/equipment/sp-ardhi-26.html",
     reuseExistingServer: false,
     timeout: 60000,

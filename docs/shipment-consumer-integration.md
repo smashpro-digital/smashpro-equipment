@@ -1,18 +1,23 @@
 # ARDHI public shipment consumer
 
 The SP-ARDHI-26 passport consumes Digital HQ PublicShipment schema 2. Digital HQ
-PR [111](https://github.com/smashpro-digital/digital-hq/pull/111), commit
-`b097664520df0df678d62e8111358df90b998295`, owns evidence, publication approval,
+PR [111](https://github.com/smashpro-digital/digital-hq/pull/111) owns evidence, publication approval,
 provider polling and shipment stage. Neither PR is authorization to deploy.
 
 ## Configuration and behavior
 
-Default request: `GET /api/fleet/shipment/SP-ARDHI-26` on the public page origin.
-Set the public build variable `VITE_SHIPMENT_ENDPOINT` only if a different public
-endpoint is needed. Configure HTTPS and CORS for the Equipment origin when using
-a separate host. Never supply provider credentials or administrative endpoints.
+The intended production endpoint is `https://api.smashpro.app/api/fleet/shipment/SP-ARDHI-26`.
+The hook default, `.env.example` and production CI build agree on this value.
+Override only with public `VITE_SHIPMENT_ENDPOINT`; never include credentials.
+Because Equipment and API use different origins, HQ must permit the Equipment
+origin using CORS (or an approved same-origin reverse proxy must be configured).
 Requests omit credentials, time out after eight seconds, and refresh every six
 hours or when the visitor presses Refresh update.
+
+Pending references use a separate allowlist and a clearly labeled panel. Operator
+reference timestamps never replace the verified shipment-update timestamp. Pending
+references cannot populate verified vessel/voyage fields or survive a confirmed
+record, and unverified records are not cached.
 
 The consumer validates the response and selects public fields before rendering
 or writing session storage. Only confirmed public records are cached; a successful
@@ -59,13 +64,7 @@ failed imagery. Fixtures are synthetic, never imported by the application.
 Screenshots are generated under `tmp/shipment-captures`; fixture screenshots are
 visibly labeled and are not shipment evidence.
 
-Final local results: all 70 unit tests and all 6 Chromium browser scenarios passed.
-TypeScript, the production build, whitespace checks, public-index validation and
-the 19-file MZIGO original-media validation passed. Desktop (1440px) and narrow
-mobile (390px) captures were visually inspected. Section captures hide fixed page
-chrome only; interaction checks use the normal page. The in-app browser was not
-available, so these checks used the installed headless Chromium executable.
-The existing React test warning concerning `fetchPriority` remains unrelated.
+Current preview procedures and results are in [shipment-preview-validation.md](shipment-preview-validation.md).
 
 ## Deployment and rollback
 
@@ -80,9 +79,9 @@ performed as part of this integration.
 
 Production preparation (September 12): the deploy job now requires manual dispatch
 on main; a merge only validates. The production build explicitly receives the
-same-origin shipment URL. Before FTP activation, an HTTP prerequisite check requires
-the conservative unverified HQ record. This gate intentionally blocks if the record
-later changes; review the gate against new evidence before a later release.
-HQ production currently returns HTML 404. Do not merge/deploy Equipment until HQ's
-production smoke tests pass and the user approves those actions. Full release and
-rollback gates are recorded in HQ `docs/shipment-production-preflight.md`.
+intended `api.smashpro.app` shipment URL. Before FTP activation, an HTTP prerequisite
+check requires the conservative unverified HQ record and CORS permission for
+`https://smashpro.app`. The generated Railway service is healthy but currently
+lacks CORS headers; local proxy rendering does not clear this production gate.
+Do not merge/deploy until production endpoint smoke tests pass and the user approves.
+Full release and rollback gates are recorded in HQ `docs/shipment-production-preflight.md`.

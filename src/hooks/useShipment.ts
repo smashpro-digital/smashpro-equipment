@@ -8,7 +8,7 @@ export function useShipment() {
     let active = true;
     let storage: Storage | undefined;
     try { storage = window.sessionStorage; } catch { /* Optional cache. */ }
-    const endpoint = import.meta.env.VITE_SHIPMENT_ENDPOINT || "/api/fleet/shipment/SP-ARDHI-26";
+    const endpoint = import.meta.env.VITE_SHIPMENT_ENDPOINT || "https://api.smashpro.app/api/fleet/shipment/SP-ARDHI-26";
     void loadShipment(endpoint, storage).then(value => { if (active) setResult(value); });
     const timer = setInterval(() => setRefresh(n => n + 1), 6 * 3600000);
     return () => { active = false; clearInterval(timer); };

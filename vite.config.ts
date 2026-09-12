@@ -1,7 +1,7 @@
 import { cpSync, createReadStream, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { defineConfig, type Plugin } from "vite";
+import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { equipment } from "./src/data/equipment";
 import { attachments } from "./src/data/attachments";
@@ -74,7 +74,15 @@ function preserveEquipmentMedia(): Plugin {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  // Opt-in local preview: only the public shipment route is proxied.
+  const env = loadEnv(mode, projectDirectory, "");
+  const upstream = mode === "shipment-preview" ? env.SHIPMENT_PREVIEW_UPSTREAM : undefined;
+  if (upstream && (new URL(upstream).protocol !== "https:" || new URL(upstream).origin !== upstream)) throw Error("Preview upstream must be an HTTPS origin");
+  const proxy = upstream ? { "^/api/fleet/shipment/SP-ARDHI-26$": { target: upstream, changeOrigin: true } } : undefined;
+  return {
+  server: { proxy },
+  preview: { proxy },
   base: "/equipment/",
   plugins: [react(), preserveEquipmentMedia()],
   build: {
@@ -93,4 +101,5 @@ export default defineConfig({
       },
     },
   },
+};
 });

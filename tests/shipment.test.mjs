@@ -7,6 +7,24 @@ const code = ts.transpileModule(readFileSync('src/domain/shipment.ts', 'utf8'), 
 const { parseShipment, loadShipment, cacheWire, readCache, CACHE_KEY, stageText, positionStale, safePublicUrl } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 const storage = () => { const rows = new Map(); return { getItem: key => rows.get(key) ?? null, setItem: (k, v) => rows.set(k, v), removeItem: k => rows.delete(k) }; };
 const response = d => async () => new Response(JSON.stringify(d), { status: 200 });
+const pending = () => ({ factoryModel: 'YF380', vesselDisplayReference: 'EVER MAX', voyageDisplayReference: '1374-016E', vesselIdentityVerification: 'pending', voyageVerification: 'pending', cargoAssociation: 'unconfirmed', recordedAt: '2026-09-12T06:10:49.225Z', source: 'operator-supplied reference' });
+
+test('pending references are selected separately, never cached or promoted into evidence', async () => {
+  const d = shipmentFixture({ unverified: true }); d.pendingReferences = { ...pending(), notes: 'PRIVATE', auditActor: 'PRIVATE', rawPayload: 'PRIVATE' };
+  const s = storage(), r = await loadShipment('/api/test', s, response(d));
+  assert.deepEqual(r.data.pendingReferences, pending());
+  assert.equal(r.data.vessel, null); assert.equal(r.data.voyage, null); assert.equal(r.data.currentPosition, null);
+  assert.equal(r.data.stageVerification, 'unverified'); assert.deepEqual(r.data.timeline, []);
+  assert.equal(JSON.stringify(r).includes('PRIVATE'), false); assert.equal(s.getItem(CACHE_KEY), null);
+});
+
+test('pending verification states fail closed and cannot follow a confirmed record', () => {
+  for (const key of ['vesselIdentityVerification', 'voyageVerification', 'cargoAssociation']) {
+    const d = shipmentFixture({ unverified: true }); d.pendingReferences = { ...pending(), [key]: 'confirmed' };
+    assert.throws(() => parseShipment(d));
+  }
+  const d = shipmentFixture(); d.pendingReferences = pending(); assert.equal(parseShipment(d).pendingReferences, null);
+});
 test('no API or valid cache means explicit unavailable without static shipment truth', async () => {
   const r = await loadShipment('/api/test', storage(), async () => new Response('', { status: 503 }));
   assert.equal(stageText(r), 'Shipment update unavailable.'); assert.equal(r.data, null);

@@ -7,6 +7,7 @@ export type JourneyEvent = { id: string; timestamp: string; summary: string; eve
 export type JourneyImage = { id: string; eventId: string; url: string; sourceUrl: string; provider: string; captureTime: string; center: Point; resolutionMetres: number; cloudCover: number | null; license: string; attribution: string; vesselIdentified: boolean; verificationStatus: "context-verified" | "vessel-identified" };
 export type JourneyMedia = { id: string; eventId: string; url: string; title: string; kind: "photo" | "video" | "tracking-record"; sourceUrl: string; license: string; attribution: string };
 export type Shipment = {
+  pendingReferences: { factoryModel: string; vesselDisplayReference: string; voyageDisplayReference: string; vesselIdentityVerification: "pending"; voyageVerification: "pending"; cargoAssociation: "unconfirmed"; recordedAt: string; source: "operator-supplied reference" } | null;
   schemaVersion: 2; assetId: string; stageVerification: "confirmed" | "unverified"; lifecycleState: string; shipmentStatus: string;
   vessel: { name: string; source: Source } | null; voyage: string | null; eta: string | null; etaState: string;
   lastUpdated: string; lastChecked: string | null;
@@ -67,7 +68,14 @@ export function parseShipment(raw: unknown, assetId = "SP-ARDHI-26"): Shipment {
   const origin = m.originFacility == null ? null : object(m.originFacility), destination = m.inlandDestination == null ? null : object(m.inlandDestination);
   const destinationPoint = destination ? point(destination.coordinates) : null;
   if (destination && (destination.precision !== "whole-degree" || !Number.isInteger(destinationPoint!.latitude) || !Number.isInteger(destinationPoint!.longitude))) throw Error("Private destination precision");
+  let pendingReferences: Shipment["pendingReferences"] = null;
+  if (d.stageVerification === "unverified" && d.pendingReferences != null) {
+    const p = object(d.pendingReferences);
+    if (p.vesselIdentityVerification !== "pending" || p.voyageVerification !== "pending" || p.cargoAssociation !== "unconfirmed" || p.source !== "operator-supplied reference") throw Error("Invalid pending reference state");
+    pendingReferences = { factoryModel: text(p.factoryModel, 100), vesselDisplayReference: text(p.vesselDisplayReference, 100), voyageDisplayReference: text(p.voyageDisplayReference, 100), vesselIdentityVerification: "pending", voyageVerification: "pending", cargoAssociation: "unconfirmed", recordedAt: time(p.recordedAt), source: "operator-supplied reference" };
+  }
   return {
+    pendingReferences,
     schemaVersion: 2, assetId, stageVerification: d.stageVerification as Shipment["stageVerification"], lifecycleState: text(d.lifecycleState), shipmentStatus: text(d.shipmentStatus),
     vessel: vessel ? { name: text(vessel.name), source: source(vessel.source) } : null, voyage: maybeText(d.voyage), eta: maybeText(d.eta), etaState: text(d.etaState),
     lastUpdated: d.lastUpdated === "" ? "" : time(d.lastUpdated), lastChecked: d.lastChecked == null ? null : time(d.lastChecked),

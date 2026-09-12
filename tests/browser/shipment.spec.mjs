@@ -70,13 +70,24 @@ test('satellite panel separates capture time from AIS and never identifies regio
   await capture(page, 'mobile-contextual-metadata-fixture', true);
 });
 test('verified public fallback survives an outage and hides cached imagery', async ({ page }) => {
-  await open(page, shipmentFixture({ satellite: true }));
+  await open(page, shipmentFixture({ satellite: true, stale: true }));
   await page.unroute(endpoint); await page.route(endpoint, route => route.fulfill({ status: 503 }));
   await page.getByRole('button', { name: 'Refresh update' }).click();
   await expect(page.locator('.shipment-status-line')).toContainText('Last known record');
   await expect(page.locator('.shipment-status-line')).toContainText('Departed Origin Port');
   await expect(page.locator('.shipment-notice')).toContainText('Shipment update unavailable.');
   await expect(page.locator('.shipment-satellite')).toHaveCount(0);
+  await expect(page.locator('.shipment-map-summary')).toContainText('Last known vessel position');
+});
+
+test('API timeout with no cache leaves an honest unavailable state', async ({ page }) => {
+  await open(page, null);
+  await page.unroute(endpoint);
+  await page.route(endpoint, () => {});
+  await page.getByRole('button', { name: 'Refresh update' }).click();
+  await page.waitForTimeout(8500);
+  await expect(page.locator('.shipment-status-line')).toContainText('Shipment update unavailable.');
+  await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);
 });
 test('invalid response and satellite failures cannot crash the passport', async ({ page }) => {
   await open(page, { schemaVersion: 99, rawPayload: 'PRIVATE' });
