@@ -94,8 +94,13 @@ jobs:
           const p = await r.json();
           assert.equal(p.schemaVersion, 2);
           assert.equal(p.assetId, 'SP-ARDHI-26');
-          assert.equal(p.stageVerification, 'unverified');
-          assert.equal(p.shipmentStatus, 'Ocean departure awaiting confirmation');
+          assert.equal(p.stageVerification, 'confirmed');
+          assert.equal(p.lifecycleState, 'ocean-transit');
+          assert.equal(p.shipmentStatus, 'Departed Origin Port');
+          assert.equal(p.eta, '2026-10-05');
+          assert.equal(p.etaState, 'estimated');
+          assert.equal(p.map.cargoAssociationConfirmed, true);
+          assert.deepEqual(p.timeline.map(event => event.milestone), ['container-loaded', 'export-cleared', 'origin-departure']);
           assert.equal(p.currentPosition, null);
           assert.equal(p.progressPercent, null);
           assert.deepEqual(p.satelliteImagery, []);
