@@ -77,3 +77,12 @@ Retain the previous release artifact; rollback uses the normal reviewed deployme
 workflow with that artifact. Reverting source alone does not change the served site.
 No merge, deployment, provider activation or real shipment evidence update was
 performed as part of this integration.
+
+Production preparation (September 12): the deploy job now requires manual dispatch
+on main; a merge only validates. The production build explicitly receives the
+same-origin shipment URL. Before FTP activation, an HTTP prerequisite check requires
+the conservative unverified HQ record. This gate intentionally blocks if the record
+later changes; review the gate against new evidence before a later release.
+HQ production currently returns HTML 404. Do not merge/deploy Equipment until HQ's
+production smoke tests pass and the user approves those actions. Full release and
+rollback gates are recorded in HQ `docs/shipment-production-preflight.md`.
