@@ -35,6 +35,8 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Build static showroom
+        env:
+          VITE_SHIPMENT_ENDPOINT: https://api.smashpro.app/api/fleet/shipment/SP-ARDHI-26
         run: npm run build
       - name: Validate customer-safe Equipment Passport index
         run: npm run validate:index
@@ -70,7 +72,7 @@ jobs:
   deploy:
     name: Deploy static showroom to production
     needs: validate
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -81,6 +83,24 @@ jobs:
         with:
           name: equipment-showroom-dist
           path: dist
+      - name: Require healthy conservative HQ shipment endpoint
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          const r = await fetch('https://api.smashpro.app/api/fleet/shipment/SP-ARDHI-26', { headers: { Origin: 'https://smashpro.app' }, redirect: 'error', signal: AbortSignal.timeout(20000) });
+          assert.equal(r.status, 200);
+          assert.equal(r.headers.get('access-control-allow-origin'), 'https://smashpro.app', 'Equipment origin must be explicitly allowed');
+          assert.match(r.headers.get('content-type') ?? '', /^application\/json/);
+          const p = await r.json();
+          assert.equal(p.schemaVersion, 2);
+          assert.equal(p.assetId, 'SP-ARDHI-26');
+          assert.equal(p.stageVerification, 'unverified');
+          assert.equal(p.shipmentStatus, 'Ocean departure awaiting confirmation');
+          assert.equal(p.currentPosition, null);
+          assert.equal(p.progressPercent, null);
+          assert.deepEqual(p.satelliteImagery, []);
+          console.log('HQ shipment prerequisite passed.');
+          NODE
       - name: Verify required deployment settings
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
