@@ -83,7 +83,7 @@ jobs:
         with:
           name: equipment-showroom-dist
           path: dist
-      - name: Require healthy conservative HQ shipment endpoint
+      - name: Require confirmed HQ ocean-transit evidence
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
