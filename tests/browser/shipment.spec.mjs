@@ -34,6 +34,16 @@ test('desktop API unavailable preserves archive and shows no fabricated route', 
   await capture(page, 'desktop-unavailable'); assertNoErrors(errors);
 });
 function assertNoErrors(errors) { expect(errors).toEqual([]); }
+test('an already-open unavailable passport recovers on its automatic retry', async ({ page }) => {
+  await page.clock.install();
+  await open(page, null);
+  await expect(page.locator('.shipment-status-line')).toContainText('Shipment update unavailable.');
+  await page.unroute(endpoint);
+  await page.route(endpoint, route => route.fulfill({ json: shipmentFixture({ unverified: true }) }));
+  await page.clock.fastForward(60001);
+  await expect(page.locator('.shipment-status-line')).toContainText('Ocean departure awaiting confirmation');
+  await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);
+});
 test('narrow mobile unverified record has no overflow and keyboard can refresh', async ({ page }) => {
   await open(page, shipmentFixture({ unverified: true }), 390);
   await expect(page.locator('.shipment-status-line')).toContainText('Ocean departure awaiting confirmation');

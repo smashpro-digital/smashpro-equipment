@@ -7,8 +7,8 @@ The generated Railway hostname belongs only in ignored local configuration, neve
 in application source or the production build. No deployment is part of this change.
 
 The live Railway endpoint returns JSON 200 with schema 2 and pending references.
-It currently omits `Access-Control-Allow-Origin`, including for the Equipment
-origin. A direct browser fetch is blocked by CORS. Local preview uses an opt-in
+The initial integration lacked CORS. HQ now permits `https://smashpro.app`
+explicitly; localhost remains excluded by the strict production policy. Local preview uses an opt-in
 Vite proxy to the real service; this validates rendering, not production CORS.
 The proxy exists only in `shipment-preview` mode and matches only the exact public
 ARDHI route. It does not expose an administrative route or accept a caller-supplied
@@ -66,8 +66,8 @@ Remove-Item Env:SHIPMENT_LIVE_ENDPOINT
 Use `PLAYWRIGHT_CHROMIUM_EXECUTABLE` only if selecting an existing Chromium binary.
 The live suite checks real response rendering at 1440px and 390px, public response
 keys, empty positions/imagery, pending labels, absence of a shipment cache, keyboard
-refresh and horizontal overflow. A separate test explicitly reproduces the current
-direct-browser CORS failure; update that assertion when HQ enables CORS.
+refresh and horizontal overflow. A separate test confirms direct localhost browser requests remain denied;
+production CORS is validated from the Equipment origin.
 Captures: `tmp/shipment-captures/live-1440.png`, `live-390.png`, and matching
 `-viewport.png` files. Section captures hide fixed chrome; viewport captures do not.
 
@@ -83,9 +83,9 @@ Both successful live section captures were visually inspected with no text or
 map-marker overlap. The in-app browser was unavailable; installed Chromium was
 used. Existing React `fetchPriority` and runner color warnings are unrelated.
 
-The transient live timeout and missing CORS are distinct findings. Investigate
-service startup/latency before production acceptance; a successful rerun does not
-prove sustained endpoint availability.
+The initial transient timeout and then-missing CORS were distinct findings. The
+release preflight subsequently found both production hosts healthy and exact
+Equipment CORS permission present. This does not prove global DNS propagation.
 
 Configure and verify production API DNS/routing and CORS for `https://smashpro.app`
 through a separately approved HQ release, or approve an Equipment same-origin

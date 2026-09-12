@@ -40,9 +40,9 @@ for (const width of [1440, 390]) test(`live API through local preview proxy at $
   await page.screenshot({ path: `tmp/shipment-captures/live-${width}-viewport.png` });
 });
 
-test('direct cross-origin request records the current CORS blocker', async ({ page }) => {
+test('direct localhost request is denied by the production origin allowlist', async ({ page }) => {
   await page.goto('/equipment/sp-ardhi-26.html');
   const result = await page.evaluate(async url => { try { const r = await fetch(url, { credentials: 'omit' }); return { readable: true, status: r.status }; } catch { return { readable: false }; } }, endpoint);
-  // Change this acceptance assertion when HQ explicitly permits the Equipment origin.
+  // Localhost is deliberately absent from the production origin allowlist.
   expect(result).toEqual({ readable: false });
 });

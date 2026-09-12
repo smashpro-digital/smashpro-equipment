@@ -12,7 +12,11 @@ Override only with public `VITE_SHIPMENT_ENDPOINT`; never include credentials.
 Because Equipment and API use different origins, HQ must permit the Equipment
 origin using CORS (or an approved same-origin reverse proxy must be configured).
 Requests omit credentials, time out after eight seconds, and refresh every six
-hours or when the visitor presses Refresh update.
+hours or when the visitor presses Refresh update. Unavailable/cached responses
+retry after 60 seconds; an online event also triggers a retry. An already-open
+passport therefore recovers after DNS/TLS becomes reachable without a new release.
+Browsers may throttle timers in background tabs. TLS and public schema validation
+remain required on every retry.
 
 Pending references use a separate allowlist and a clearly labeled panel. Operator
 reference timestamps never replace the verified shipment-update timestamp. Pending
@@ -81,7 +85,7 @@ Production preparation (September 12): the deploy job now requires manual dispat
 on main; a merge only validates. The production build explicitly receives the
 intended `api.smashpro.app` shipment URL. Before FTP activation, an HTTP prerequisite
 check requires the conservative unverified HQ record and CORS permission for
-`https://smashpro.app`. The generated Railway service is healthy but currently
-lacks CORS headers; local proxy rendering does not clear this production gate.
+`https://smashpro.app`. HQ now grants exact CORS permission to the production Equipment origin. Local
+preview proxy rendering still does not substitute for production browser acceptance.
 Do not merge/deploy until production endpoint smoke tests pass and the user approves.
 Full release and rollback gates are recorded in HQ `docs/shipment-production-preflight.md`.
