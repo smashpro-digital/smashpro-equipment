@@ -13,7 +13,7 @@ export function VesselContext({ data }: { data: Shipment }) {
   const journey = [
     { number: '01', label: 'Built', detail: 'Factory complete', state: 'complete' },
     { number: '02', label: 'Released', detail: 'Export chapter', state: 'complete' },
-    { number: '03', label: 'Ocean', detail: 'Awaiting confirmation', state: 'active' },
+    { number: '03', label: 'Ocean', detail: 'Forwarder-reported transit', state: 'active' },
     { number: '04', label: 'Home', detail: 'Arrival & commissioning', state: 'future' },
   ] as const;
 
@@ -25,7 +25,7 @@ export function VesselContext({ data }: { data: Shipment }) {
         <p className="eyebrow">The road home · Chapter three</p>
         <p className="journey-kicker">Built in China. Bound for South Carolina.</p>
         <h3 id="monitored-vessel-title">ARDHI is coming home.</h3>
-        <p className="journey-lede">The machine is complete. The factory chapter is preserved. We are now watching the ocean leg and waiting for the carrier record that confirms the next move.</p>
+        <p className="journey-lede">The machine is complete. The freight forwarder reports departure aboard EVER MAX voyage 1374-016E. We are documenting the ocean leg while awaiting the container and bill-of-lading records.</p>
         <div className="journey-hero-status">
           <span aria-hidden="true" />
           <div><small>Current chapter</small><strong>{data.shipmentStatus}</strong></div>
@@ -52,7 +52,7 @@ export function VesselContext({ data }: { data: Shipment }) {
         <div><dt>Call sign</dt><dd>{vessel.callSign}</dd></div>
         <div><dt>Machine</dt><dd>{data.pendingReferences?.factoryModel ?? 'YF380'}</dd></div>
       </dl>
-      <div className="journey-truth"><span>!</span><p><strong>One link is still missing.</strong> EVER MAX is the monitored vessel reference; the carrier has not yet confirmed that SP-ARDHI-26 is aboard.</p></div>
+      <div className="journey-truth"><span>!</span><p><strong>The voyage is forwarder-reported.</strong> The supplier's logistics record links ARDHI's tracking reference to EVER MAX voyage 1374-016E. The ISO container number and bill of lading remain pending.</p></div>
     </section>
 
     <section className="journey-corridor" aria-labelledby="corridor-title">
@@ -69,8 +69,8 @@ export function VesselContext({ data }: { data: Shipment }) {
     <details className="journey-intelligence">
       <summary><span><small>Source record</small><strong>Journey intelligence & verification</strong></span><em>Open details</em></summary>
       <div className="journey-intelligence-grid">
-        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>{vessel.name} identity publicly corroborated</li><li>Voyage {context.voyage.reference} appears in a public schedule</li><li>{data.shipmentStatus}</li></ul></section>
-        <section><h4>What comes next</h4><ul><li>Carrier-to-cargo association</li><li>Confirmed ocean departure</li><li>Destination port and inland handoff</li><li>Receipt inspection and commissioning</li></ul></section>
+        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>Supplier reconciled ARDHI references YFC260717B and BZHYF0822BMT1</li><li>Freight forwarder reports EVER MAX voyage 1374-016E departed September 7</li><li>Estimated port arrival is October 5 local time</li></ul></section>
+        <section><h4>What comes next</h4><ul><li>ISO container and bill-of-lading records</li><li>Independent carrier confirmation</li><li>Destination port and inland handoff</li><li>Receipt inspection and commissioning</li></ul></section>
       </div>
       {observation ? <div className="journey-observation"><strong>Latest approved observation</strong><p>{formatTime(observation.observedAt)} · {observation.destination ?? 'Destination not supplied'} · {observation.speedKnots === null ? 'Speed not supplied' : `${observation.speedKnots} kn`}</p><a href={observation.source.url} target="_blank" rel="noreferrer">Open observation source ↗</a></div> : <p className="journey-observation">No timestamped AIS observation is approved for reuse on this page yet.</p>}
       <div className="context-sources">
