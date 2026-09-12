@@ -224,13 +224,16 @@ Evidence: [SP-ARDHI-26-ALIBABA-ON-SITE-SERVICE-2026-08-31.md](evidence/SP-ARDHI-
 | Alibaba receipts issued | Documented | Aug 31 |
 | Factory production media | Received | Assembly, hydraulics, branding, completed machine and test evidence |
 | Three-pump / three-valve production configuration | Supported by conversation/media; invoice mismatch retained | Replacement factory documentation or physical verification still needed |
-| Crated / transferred to freight warehouse | Supplier-provided video evidence | September 2026 — references `YFC260717B` and `BZHYF0822BMTI` observed |
-| Shipment | In progress / marketplace status captured | Freight documents pending; ocean departure awaiting confirmation |
+| Crated / transferred to freight warehouse | Supplier-provided video evidence | Aug 27–Sep 1, 2026 — references `YFC260717B` and `BZHYF0822BMT1` reconciled by supplier |
+| Consolidated-container loading | Freight-forwarder tracking reported through supplier | Sep 2, 2026 · 09:42:48 |
+| Chinese export-customs release | Freight-forwarder tracking reported through supplier | Sep 2, 2026 · 18:07:41 |
+| Ocean departure | Freight-forwarder tracking reported through supplier | Sep 7, 2026 · EVER MAX voyage 1374-016E · estimated port arrival Oct 5 local time |
+| Shipment | Ocean transit — forwarder-reported | ISO container number, booking number, bill of lading and independent carrier confirmation remain pending |
 
 ## 13. Future Documentation Register
 
 - Evidence explaining the $269 difference between the $3,990 baseline invoice and $4,259 combined Alibaba order amounts
-- Reconciliation of crate/freight references `YFC260717B` and `BZHYF0822BMTI` to authoritative carrier records
+- Reconciliation of crate/freight references `YFC260717B` and `BZHYF0822BMT1` to authoritative carrier records
 - Shipping documents
 - Bill of lading
 - Container/tracking number
