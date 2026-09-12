@@ -314,19 +314,19 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   const data = readFileSync("src/data/equipment.ts", "utf8");
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   const passport = readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8");
-  assert.match(data, /status: "shipping", statusLabel: "Container Loaded"/);
-  assert.match(data, /shippingStatus: \{ status: "Container Loaded", vessel: "EVER MAX", voyage: "1374-016E"/);
+  assert.match(data, /statusLabel: "Shipment updates via Digital HQ"/);
+  assert.doesNotMatch(data, /shippingStatus: \{ status: "Container Loaded"/);
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
   assert.match(data, /occurredAt: "2026-08-20"[\s\S]*title: "Final Successful Payment"[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Delivered to Freight Forwarder"[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Factory Departure Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
-  assert.match(data, /title: "Export Container Loaded"[\s\S]*Tracking Reference: YFC260717B==BZHYF0822BMT1[\s\S]*photos: \[\], videos: \[\]/);
+  assert.match(data, /title: "Export Container Loaded"[\s\S]*Container loading and ocean departure await evidence confirmation[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(detail, /ArdhiPassportJourney/);
-  assert.match(passport, /Asset Journey/);
+  assert.match(passport, /ShipmentJourney/);
   assert.match(passport, /ardhi-expandable-timeline/);
-  assert.match(passport, /<FleetLifecycleProgress/);
-  assert.match(passport, /currentStage="🚢 Ocean Transit"/);
-  assert.match(passport, /nextStage="🇺🇸 U\.S\. Port Arrival"/);
+  assert.match(passport, /<ShipmentJourney result=\{shipment\}/);
+  assert.doesNotMatch(passport, /currentStage=".*Ocean Transit"/);
+  assert.match(passport, /useShipment/);
   assert.match(passport, /asset-status-ribbon/);
   assert.match(passport, /\["Fleet Asset", "#001"\]/);
   assert.match(passport, /passport-specifications/);
@@ -350,8 +350,8 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(passport, /linkedDecisions/);
   assert.doesNotMatch(passport, /Engineering Decisions/);
   assert.match(passport, /Payment History/);
-  assert.match(passport, /Approximate Journey Distance/);
-  assert.match(passport, /No live GPS location is claimed/);
+  assert.doesNotMatch(passport, /Approximate Journey Distance|daysUntilArrival|7300/);
+  assert.match(passport, /stageText\(shipment\)/);
   assert.match(passport, /IntersectionObserver/);
   assert.match(passport, /scrollIntoView/);
   assert.match(passport, /open=\{expandedRecord === record\.id\}/);
@@ -359,7 +359,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(passport, /onToggle=\{\(event\) =>/);
   assert.match(passport, /aria-expanded=\{!collapsedHistoryPhases\.has/);
   assert.match(passport, /window\.location\.hash\.match\(\/\^#history-/);
-  for (const milestone of ["Fleet Vision Created", "Manufacturer Selected", "Hydraulic Upgrade Approved", "Factory Departure", "Container Loaded", "First Job", "Annual Inspection"]) {
+  for (const milestone of ["Fleet Vision Created", "Manufacturer Selected", "Hydraulic Upgrade Approved", "Factory Departure", "Export Crate", "First Job", "Annual Inspection"]) {
     assert.match(passport, new RegExp(milestone), `${milestone} must remain in the permanent history`);
   }
   for (const milestone of ["Jul 15, 2026", "Configuration and Proforma Invoice Approved", "Jul 16 · First stage", "Jul 23 · Second stage", "Aug 6 · Third stage", "Aug 20 · Final stage", "Marketplace Purchase Protection Documented"]) {

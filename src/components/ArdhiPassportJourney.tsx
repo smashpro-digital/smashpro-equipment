@@ -4,7 +4,9 @@ import type { Equipment, GalleryGroup, GalleryImage } from "../types/equipment";
 import { calculatePackages, calculatePassportScores } from "../domain/passport";
 import { WindowSticker } from "./WindowSticker";
 import { PartnerFieldSupport } from "./PartnerFieldSupport";
-import { FleetLifecycleProgress } from "./FleetLifecycleProgress";
+import { ShipmentJourney } from "./ShipmentJourney";
+import { useShipment } from "../hooks/useShipment";
+import { stageText } from "../domain/shipment";
 import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
 
@@ -256,22 +258,6 @@ const history: HistoryRecord[] = [
     videos: [image("sp-ardhi-26-factory-departure-2026-09-02.mp4")],
   },
   {
-    id: "container-loaded",
-    date: "Sep 2, 2026",
-    title: "Container Loaded",
-    status: "current",
-    narrative: "SP-ARDHI-26 entered the ocean-export stage aboard EVER MAX, voyage 1374-016E.",
-    technical: "Estimated departure: September 6, 2026. Estimated arrival: October 5, 2026.",
-  },
-  {
-    id: "ocean-voyage",
-    date: "Current stage",
-    title: "Ocean Voyage",
-    status: "current",
-    narrative: "The shipping record names the planned vessel and voyage. This is logistics documentation, not live GPS tracking.",
-    technical: "EVER MAX · Voyage 1374-016E",
-  },
-  {
     id: "grapple-ordered",
     date: "Sep 9, 2026",
     title: "Loflin Root Grapple Build Ordered",
@@ -291,7 +277,7 @@ const history: HistoryRecord[] = [
       status: "future",
       narrative: "This permanent slot is reserved for verified evidence when the milestone occurs.",
     }),
-  ),
+  ).filter((_, index) => index >= 6),
 ];
 const historyPhaseStarts: Record<string, string> = {
   "fleet-vision": "Planning",
@@ -324,140 +310,8 @@ const payments = [
   ["Aug 6 · Third stage", "$1,000", "Completed"],
   ["Aug 20 · Final stage", "$1,269", "Completed"],
 ];
-type MapStop = {
-  id: string;
-  label: string;
-  marker: string;
-  x: number;
-  y: number;
-  timelineId: string;
-  title: string;
-  status: "complete" | "current" | "future";
-  image?: string;
-  lines: readonly string[];
-  highlights: readonly string[];
-};
-const mapStops: readonly MapStop[] = [
-  {
-    id: "china",
-    label: "China",
-    marker: "CN",
-    x: 82,
-    y: 25,
-    timelineId: "production-complete",
-    title: "Factory origin",
-    status: "complete",
-    image: image("sp-ardhi-26-factory-assembly-floor.jpg"),
-    lines: ["Shandong Infront Machinery Group", "Factory model · YF380", "Fleet identity · SP-ARDHI-26", "Production complete"],
-    highlights: ["RAL 6018 finish", "SmashPro branding", "3 Pump / 3 Valve", "Bucket and branded pallet forks", "Inspection documented"],
-  },
-  {
-    id: "forwarder",
-    label: "Freight Forwarder",
-    marker: "BOX",
-    x: 72,
-    y: 42,
-    timelineId: "freight-forwarder",
-    title: "Export transfer",
-    status: "complete",
-    image: image("sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"),
-    lines: ["Transfer completed", "Export crate prepared", "Container loading documented", "Facility details withheld"],
-    highlights: ["Departure video", "Pallet documentation", "Export record"],
-  },
-  {
-    id: "pacific",
-    label: "Pacific Ocean",
-    marker: "SEA",
-    x: 49,
-    y: 40,
-    timelineId: "ocean-voyage",
-    title: "Ocean export",
-    status: "current",
-    lines: ["Vessel · EVER MAX", "Voyage · 1374-016E", "Estimated departure · Sep 6, 2026", "Estimated arrival · Oct 5, 2026"],
-    highlights: ["Current documented stage", "Not live GPS"],
-  },
-  {
-    id: "usa",
-    label: "United States",
-    marker: "US",
-    x: 24,
-    y: 31,
-    timelineId: "future-2",
-    title: "United States entry",
-    status: "future",
-    lines: ["Future · Port arrival", "Future · Customs", "Future · Release"],
-    highlights: ["Exact port pending verified record"],
-  },
-  {
-    id: "south-carolina",
-    label: "South Carolina",
-    marker: "SC",
-    x: 29,
-    y: 49,
-    timelineId: "future-5",
-    title: "Regional destination",
-    status: "future",
-    lines: ["Future · Delivery", "Future · Commissioning", "Future · First startup", "Future · First job"],
-    highlights: ["Approximate region only", "Private address withheld"],
-  },
-  {
-    id: "fleet",
-    label: "SmashPro Fleet",
-    marker: "HQ",
-    x: 34,
-    y: 57,
-    timelineId: "future-6",
-    title: "Lifetime fleet record",
-    status: "future",
-    lines: ["Commissioning", "Service hours", "Jobs", "Maintenance", "Retirement"],
-    highlights: ["Permanent passport destination"],
-  },
-  { id: "customer-job", label: "Customer Job", marker: "JOB", x: 39, y: 52, timelineId: "future-10", title: "Verified work location", status: "future", lines: ["Future job record", "Public location only with approval"], highlights: ["Hours", "Attachments", "Outcome"] },
-  { id: "service-center", label: "Service Center", marker: "SVC", x: 25, y: 53, timelineId: "future-14", title: "Maintenance destination", status: "future", lines: ["Future inspection and repair record"], highlights: ["Parts", "Labor", "Service evidence"] },
-  { id: "storage", label: "Storage", marker: "STO", x: 22, y: 58, timelineId: "future-14", title: "Documented storage stage", status: "future", lines: ["Approximate public region only"], highlights: ["Status history"] },
-  { id: "event", label: "Event", marker: "EVT", x: 31, y: 44, timelineId: "future-10", title: "Public event appearance", status: "future", lines: ["Future demonstration or community event"], highlights: ["Media", "Event record"] },
-];
-
-function daysBetween(from: string, to: Date) {
-  return Math.max(0, Math.ceil((to.getTime() - new Date(`${from}T00:00:00Z`).getTime()) / 86_400_000));
-}
-function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const [shown, setShown] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    let frame = 0;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        const started = performance.now();
-        const tick = (now: number) => {
-          const progress = Math.min(1, (now - started) / 900);
-          setShown(Math.round(value * (1 - Math.pow(1 - progress, 3))));
-          if (progress < 1) frame = requestAnimationFrame(tick);
-        };
-        frame = requestAnimationFrame(tick);
-        observer.disconnect();
-      },
-      { threshold: 0.4 },
-    );
-    observer.observe(node);
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(frame);
-    };
-  }, [value]);
-  return (
-    <span ref={ref}>
-      {shown.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
 export function ArdhiPassportJourney({ item }: { item: Equipment }) {
-  const [activeStop, setActiveStop] = useState<MapStop>(mapStops[0]);
+  const shipment = useShipment();
   const [expandedRecord, setExpandedRecord] = useState<string>();
   const [collapsedHistoryPhases, setCollapsedHistoryPhases] = useState<Set<string>>(() => new Set());
   const [query, setQuery] = useState("");
@@ -470,9 +324,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const [nowViewing, setNowViewing] = useState(["Passport", "Identity", "SP-ARDHI-26"]);
   const historyRefs = useRef<Record<string, HTMLLIElement | null>>({});
   const stickerModalRef = useRef<HTMLDivElement>(null);
-  const today = new Date();
-  const daysSinceBuild = daysBetween("2026-08-18", today);
-  const daysUntilArrival = Math.max(0, Math.ceil((new Date("2026-10-05T00:00:00Z").getTime() - today.getTime()) / 86_400_000));
   const selectedChapter = chapters.find(({ id }) => id === chapter) ?? chapters[0];
   const filteredMedia = useMemo(
     () =>
@@ -557,19 +408,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-  const activateStop = (stop: MapStop, synchronize = false) => {
-    setActiveStop(stop);
-    setNowViewing(["Journey", stop.label, stop.title]);
-    if (!synchronize) return;
-    const record = history.find(({ id }) => id === stop.timelineId);
-    if (record) investigateRecord(record);
-    requestAnimationFrame(() =>
-      historyRefs.current[stop.timelineId]?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      }),
-    );
-  };
   const selectChapter = (next: ArchiveChapter) => {
     const selected = chapters.find(({ id }) => id === next) ?? chapters[0];
     setChapter(next);
@@ -580,8 +418,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     const recordIndex = history.findIndex(({ id }) => id === record.id);
     const phaseEntry = history.slice(0, recordIndex + 1).reverse().find(({ id }) => historyPhaseStarts[id]);
     setNowViewing(["History", phaseEntry ? historyPhaseStarts[phaseEntry.id] : "Record", record.title]);
-    const stop = mapStops.find(({ timelineId }) => timelineId === record.id);
-    if (stop) setActiveStop(stop);
     const futureIndex = record.id.startsWith("future-") ? Number(record.id.slice(7)) : -1;
     let nextChapter: ArchiveChapter | undefined;
     if (["production-started", "hydraulics-installed"].includes(record.id)) nextChapter = "factory-build";
@@ -633,19 +469,14 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     setNowViewing(viewing);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const viewStopMedia = () => {
-    const record = history.find(({ id }) => id === activeStop.timelineId);
-    if (record) investigateRecord(record);
-    requestAnimationFrame(() => scrollToRecord("evidence", ["Evidence", activeStop.label, activeStop.title]));
-  };
   const openSticker = (action?: "png" | "pdf") => { setStickerZoom(1); setStickerOpen(true); setPendingStickerAction(action); };
   const assetStatus = [
     ["Passport", item.identity.model],
     ["Factory Model", item.identity.factoryModel],
     ["Service Hours", "0.0"],
-    ["Status", "Ocean Export"],
-    ["Vessel", item.shippingStatus?.vessel ?? "Pending"],
-    ["ETA", "October 5, 2026"],
+    ["Status", stageText(shipment)],
+    ["Vessel", shipment.data?.vessel?.name ?? "Awaiting verification"],
+    ["ETA", shipment.data?.eta ?? "Awaiting confirmation"],
     ["Fleet Asset", "#001"],
   ];
   const specificationGroups = Object.entries(
@@ -655,7 +486,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     }, {}),
   );
   return (
-    <main className="ardhi-documentary">
+    <div className="ardhi-documentary">
       <PassportHero titleId="ardhi-v2-title" image={item.heroImage} alt="SP-ARDHI-26 completed flagship fleet machine">
           <p className="eyebrow">SP-ARDHI-26</p>
           <h1 id="ardhi-v2-title">
@@ -664,27 +495,27 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Fleet Asset <span>#001</span>
           </h1>
           <p>
-            Factory Complete <b>·</b> Ocean Export <b>·</b> Current Vessel: EVER MAX
+            Factory Complete <b>·</b> {stageText(shipment)}
           </p>
           <div className="ardhi-v2-hero__actions">
             <a href="#passport" onClick={() => setNowViewing(["Passport", "Identity", "SP-ARDHI-26"])}>📘 Passport</a>
-            <a href="#journey" onClick={() => setNowViewing(["Journey", "Ocean Transit", "EVER MAX"])}>🌎 Journey</a>
-            <a href="#history" onClick={() => setNowViewing(["History", "Export", "Container Loaded"])}>📜 History</a>
+            <a href="#journey" onClick={() => setNowViewing(["Journey", "Shipment record", stageText(shipment)])}>🌎 Journey</a>
+            <a href="#history" onClick={() => setNowViewing(["History", "Export", "Factory departure"])}>📜 History</a>
             <a href="#service" onClick={() => setNowViewing(["Service", "Future Record", "Awaiting commissioning"])}>🛠 Service</a>
           </div>
       </PassportHero>
       <nav className="passport-rail" aria-label="Equipment passport chapters">
         <div className="shell">
           <a href="#passport" onClick={() => setNowViewing(["Passport", "Identity", "SP-ARDHI-26"])}>Passport</a>
-          <a href="#journey" onClick={() => setNowViewing(["Journey", "Ocean Transit", "EVER MAX"])}>Journey</a>
-          <a href="#history" onClick={() => setNowViewing(["History", "Export", "Container Loaded"])}>History</a>
+          <a href="#journey" onClick={() => setNowViewing(["Journey", "Shipment record", stageText(shipment)])}>Journey</a>
+          <a href="#history" onClick={() => setNowViewing(["History", "Export", "Factory departure"])}>History</a>
           <a href="#service" onClick={() => setNowViewing(["Service", "Future Record", "Awaiting commissioning"])}>Service</a>
         </div>
       </nav>
       <aside className="mini-passport" aria-label={`SP-ARDHI-26 reading progress ${pageProgress}%`}>
         <div>
           <strong>SP-ARDHI-26</strong>
-          <span>Ocean Transit · EVER MAX</span>
+          <span>{stageText(shipment)}</span>
         </div>
         <b>2 / 7</b>
         <i style={{ width: `${pageProgress}%` }} />
@@ -815,139 +646,8 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           ))}
         </div>
       </section>
-      <section className="section shell ardhi-live-status passport-reveal" data-passport-reveal aria-labelledby="live-status-title">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Live Equipment Status</p>
-            <h2 id="live-status-title">Documented position in the journey.</h2>
-          </div>
-          <p>Logistics status only. No live GPS location is claimed or displayed.</p>
-        </div>
-        <div className="ardhi-status-grid">
-          <article className="is-current">
-            <span>Current Status</span>
-            <strong>Container Loaded</strong>
-            <small>Journey stage 2 of 7</small>
-          </article>
-          <article>
-            <span>Current Vessel</span>
-            <strong>EVER MAX</strong>
-            <small>Voyage 1374-016E</small>
-          </article>
-          <article>
-            <span>Estimated Arrival</span>
-            <strong>October 5</strong>
-            <small>2026 estimate</small>
-          </article>
-          <article>
-            <span>Days Since Production</span>
-            <strong>
-              <AnimatedNumber value={daysSinceBuild} />
-            </strong>
-            <small>Since Aug 18, 2026</small>
-          </article>
-          <article>
-            <span>Estimated Days Remaining</span>
-            <strong>
-              <AnimatedNumber value={daysUntilArrival} />
-            </strong>
-            <small>Schedule estimate</small>
-          </article>
-          <article>
-            <span>Approximate Journey Distance</span>
-            <strong>
-              <AnimatedNumber value={7300} suffix=" mi" />
-            </strong>
-            <small>Regional route estimate · not GPS</small>
-          </article>
-        </div>
-      </section>
-      <section className="ardhi-map-section passport-reveal" id="journey" data-passport-reveal data-view="Journey|Export Logistics|Container Loaded" aria-labelledby="journey-map-title">
-        <div className="shell">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Asset Journey</p>
-              <h2 id="journey-map-title">From factory floor to fleet.</h2>
-            </div>
-            <p>A living location history that begins with export and can grow into jobs, events, storage, and service records.</p>
-          </div>
-          <div className="ardhi-map-layout">
-            <div className="ardhi-map" role="group" aria-label="Approximate journey map from China across the Pacific to South Carolina">
-              <svg viewBox="0 0 100 64" role="img" aria-label="Regional route only; no private coordinates">
-                <path className="ardhi-map__land" d="M7 10l22-6 18 9-7 13-14 1-7 13-12-6zm52-5 15-4 21 10-4 16-16 7-8 19-11-11 7-16z" />
-                <path className="ardhi-map__route" d="M82 25 C75 32 67 38 49 40 S31 33 24 31 L29 49 L34 57" />
-                <g className="ardhi-map__ship" aria-hidden="true">
-                  <circle r="2.2" />
-                  <text y="-3">EVER MAX</text>
-                </g>
-                {mapStops.map((stop) => (
-                  <g
-                    key={stop.id}
-                    className={`${activeStop.id === stop.id ? "is-active" : ""} is-${stop.status}`}
-                    transform={`translate(${stop.x} ${stop.y})`}
-                    onMouseEnter={() => activateStop(stop)}
-                    onFocus={() => activateStop(stop)}
-                    onClick={() => activateStop(stop, true)}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter" || event.key === " ") {
-                        event.preventDefault();
-                        activateStop(stop, true);
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Open and synchronize ${stop.label} journey details`}
-                  >
-                    <circle r="3.7" />
-                    <text y="1.2">{stop.marker}</text>
-                    <text className="ardhi-map__label" y="7">
-                      {stop.label}
-                    </text>
-                  </g>
-                ))}
-              </svg>
-            </div>
-            <aside className="ardhi-map-card" aria-live="polite">
-              <p className="eyebrow">{activeStop.label}</p>
-              <h3>{activeStop.title}</h3>
-              <strong className={`map-status is-${activeStop.status}`}>{activeStop.status}</strong>
-              <ul>
-                {activeStop.lines.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-              <div className="map-highlights">
-                {activeStop.highlights.map((line) => (
-                  <span key={line}>{line}</span>
-                ))}
-              </div>
-              <div className="map-actions">
-                <button type="button" onClick={() => activateStop(activeStop, true)}>View Timeline Event</button>
-                <button type="button" onClick={viewStopMedia}>View Media</button>
-                <button type="button" onClick={() => scrollToRecord("documents", ["Documents", activeStop.label, activeStop.title])}>View Documents</button>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-      <FleetLifecycleProgress
-        currentStage="🚢 Ocean Transit"
-        nextStage="🇺🇸 U.S. Port Arrival"
-        metrics={[
-          { id: "distance", label: "Approximate Distance", value: 7300, suffix: " mi" },
-          { id: "weight", label: "Operating Weight", value: 880, suffix: " kg" },
-          { id: "fuel", label: "Fuel Capacity", value: 30, suffix: " L" },
-          { id: "build-age", label: "Days Since Build", value: daysSinceBuild },
-        ]}
-        stages={[
-          { id: "factory", label: "Factory", status: "complete", progress: 100 },
-          { id: "export", label: "Export", status: "complete", progress: 100 },
-          { id: "ocean", label: "Ocean", status: "current", progress: 12 },
-          { id: "usa", label: "USA", status: "pending", progress: 0 },
-          { id: "delivery", label: "Delivery", status: "pending", progress: 0 },
-        ]}
-      />
-      <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Container Loaded" aria-labelledby="ardhi-history-title">
+      <ShipmentJourney result={shipment} refresh={shipment.refresh} />
+      <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Documented archive" aria-labelledby="ardhi-history-title">
         <div className="shell">
           <div className="section-heading">
             <div>
@@ -990,7 +690,9 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
                       <span>{record.date}</span>
                       <strong>{record.title}</strong>
                       <em>
-                        {record.status} · {(record.photos?.length ?? 0) + (record.videos?.length ?? 0)} media · {record.documents ?? 0} documents
+                        {record.status} · {historyPhaseByRecord[record.id] === "Production" ? "Factory" : "Archive"}
+                        {(record.photos?.length ?? 0) + (record.videos?.length ?? 0) > 0 && ` · ${(record.photos?.length ?? 0) + (record.videos?.length ?? 0)} media`}
+                        {!!record.documents && ` · ${record.documents} documents`}
                       </em>
                     </summary>
                     <div className="history-detail">
@@ -1183,6 +885,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <p>{lightbox.caption}</p>
         </div>
       ) : null}
-    </main>
+    </div>
   );
 }
