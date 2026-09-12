@@ -1,6 +1,7 @@
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { eventAnchor, formatTime, positionStale, stageText, type JourneyImage, type ShipmentResult } from "../domain/shipment";
 import "../styles/shipment-journey.css";
+import { VesselContext } from './VesselContext';
 
 const ShipmentMap = lazy(() => import("./ShipmentMap"));
 class MapBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -43,12 +44,14 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
       <div className="shipment-heading"><div><p className="eyebrow">SP-ARDHI-26 · Asset journey</p><h2 id="shipment-journey-title">The journey, documented.</h2><p>From factory release to fleet arrival. Every update follows the evidence.</p></div><a className="shipment-archive-link" href="#history-factory-departure">Factory departure record ↗</a></div>
       <div className="shipment-status-line" role="status"><span className={`shipment-badge is-${data?.stageVerification ?? "unavailable"}`}>{status === "cached" ? "Last known record" : data?.stageVerification === "confirmed" ? "Verified shipment record" : "Awaiting confirmation"}</span><strong>{stageText(result)}</strong><button type="button" onClick={refresh}>Refresh update</button></div>
       {status === "cached" && <p className="shipment-notice">Shipment update unavailable. Showing the last verified public record; this is not a live position. Imagery awaits a fresh approval check.</p>}
-      {data?.pendingReferences && <section className="shipment-pending" aria-labelledby="shipment-pending-title">
+      {data?.vesselContext && <VesselContext data={data} />}
+      {data?.pendingReferences && <section className={`shipment-pending ${data.vesselContext ? 'has-context' : ''}`} aria-labelledby="shipment-pending-title">
         <h3 id="shipment-pending-title">Pending references</h3>
         <p>Operator-supplied references awaiting verification. These do not confirm vessel identity, cargo loading or ocean departure.</p>
         <ul><li>Factory model {data.pendingReferences.factoryModel}</li><li>{data.pendingReferences.vesselDisplayReference} — identity verification pending</li><li>Voyage {data.pendingReferences.voyageDisplayReference} — verification pending</li><li>Cargo association not yet confirmed</li></ul>
         <p className="shipment-small">Source: {data.pendingReferences.source} · Reference recorded {formatTime(data.pendingReferences.recordedAt)}. This is not a verified shipment-update timestamp.</p>
       </section>}
+      {(!data?.vesselContext || data.currentPosition || data.timeline.length > 0) && <>
       <h3 className="shipment-verified-title">Verified shipment facts</h3>
       <div className="shipment-facts"><div><span>Verified vessel</span><strong>{data?.vessel?.name ?? "Awaiting verification"}</strong><small>{data?.voyage ? `Voyage ${data.voyage}` : "Voyage not confirmed"}</small></div><div><span>Arrival</span><strong>{data?.eta ?? "Awaiting confirmation"}</strong><small>{data?.eta ? `${data.etaState} · not a delivery promise` : "No verified arrival estimate"}</small></div><div><span>Last shipment update</span><strong>{formatTime(data?.lastUpdated)}</strong><small>{data?.lastChecked ? `Source checked ${formatTime(data.lastChecked)}` : "No source check available"}</small></div></div>
       <div className="shipment-map-layout"><MapBoundary><Suspense fallback={<p className="shipment-map-loading">Loading reference map…</p>}><ShipmentMap data={data} /></Suspense></MapBoundary>
@@ -60,12 +63,15 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
           <p className="shipment-small">{data?.route.planned.length ? "Dashed line: projected / reported route, not proof of distance completed." : "No verified public sea route is available."} Jobs, storage and service records are kept separately.</p>
         </aside>
       </div>
+      </>}
+      {(!data?.vesselContext || data.timeline.length > 0) && <>
       <div className="shipment-events-heading"><div><p className="eyebrow">Shipment evidence</p><h3>Updates & observations</h3></div><span>{data?.timeline.length ?? 0} public updates · {images.length} approved satellite observations</span></div>
       {!images.length && <div className="shipment-imagery-empty"><span aria-hidden="true">◉</span><div><strong>No approved satellite observation available</strong><p>Satellite observations require capture metadata, licensing and review. The reference map is cartography, not an image of the vessel.</p></div></div>}
       {!data?.timeline.length ? <p className="shipment-empty-events">Carrier, port and vessel observations will appear here when approved. <a href="#history-factory-departure">Explore the documented factory and export history.</a></p> : <ol className="shipment-events">{data.timeline.map(event => {
         const eventImages = images.filter(i => i.eventId === event.id), eventMedia = media.filter(i => i.eventId === event.id);
         return <li key={event.id} id={eventAnchor(event.id)}><details open={openEvent === event.id} onToggle={e => { if (e.currentTarget.open) setOpenEvent(event.id); else setOpenEvent(id => id === event.id ? undefined : id); }} onKeyDown={e => { if (e.key === "Escape") { setOpenEvent(undefined); e.currentTarget.querySelector("summary")?.focus(); } }}><summary><time dateTime={event.timestamp}>{formatTime(event.timestamp)}</time><strong>{event.summary}</strong><span><span className={`shipment-badge is-${event.eventState}`}>{event.eventState === "confirmed" ? "Verified" : event.eventState}</span> <span className="shipment-source-badge">{badge(event.eventType)}</span>{eventImages.length + eventMedia.length > 0 && <small>{eventImages.length + eventMedia.length} approved media</small>}</span></summary><div className="shipment-event-detail"><p>{event.eventType === "ais-observation" ? "Vessel observation — location evidence only; no shipment stage is inferred." : event.eventType === "satellite-observation" ? "Contextual imagery observation — separate from cargo evidence." : "Operational shipment record published by Digital HQ."}</p><a href={event.source.url} target="_blank" rel="noreferrer">{event.source.provider} · source observed {formatTime(event.source.observedAt)}</a>{eventImages.length + eventMedia.length === 0 && <p className="shipment-small">Source-linked update. No public media attachment accompanies this record.</p>}{eventMedia.map(m => <figure key={m.id}>{m.kind === "video" ? <video controls preload="none" src={m.url} aria-label={m.title} /> : <img loading="lazy" src={m.url} alt={m.title} />}<figcaption>{m.title} · {m.attribution} · {m.license}</figcaption></figure>)}{eventImages.length > 0 && <h4>Contextual satellite media</h4>}{eventImages.map(image => <SatelliteObservation key={image.id} image={image} aisTime={data.currentPosition?.timestamp} />)}</div></details></li>;
       })}</ol>}
+      </>}
     </div>
   </section>;
 }

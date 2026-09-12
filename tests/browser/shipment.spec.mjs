@@ -1,7 +1,23 @@
 import { test, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { shipmentFixture } from '../fixtures/shipment.mjs';
 const endpoint = '**/api/fleet/shipment/SP-ARDHI-26';
+for(const width of [1440,390]) test(`public context is distinct from cargo and projected completion at ${width}px`,async({page})=>{
+ const fixture=shipmentFixture({unverified:true});fixture.vesselContext=JSON.parse(readFileSync('tests/fixtures/vessel-context.json','utf8'));
+ fixture.pendingReferences={factoryModel:'YF380',vesselDisplayReference:'EVER MAX',voyageDisplayReference:'1374-016E',vesselIdentityVerification:'pending',voyageVerification:'pending',cargoAssociation:'unconfirmed',recordedAt:'2026-09-12T06:10:49.225Z',source:'operator-supplied reference'};
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,fixture,width);
+ await expect(page.locator('.vessel-identity')).toContainText('9935208');await expect(page.locator('.vessel-identity')).toContainText('563190500');await expect(page.locator('.vessel-identity')).toContainText('YF380');
+ await expect(page.locator('.vessel-context-warning')).toHaveText('This does not yet confirm SP-ARDHI-26 is aboard.');
+ await expect(page.locator('.context-voyage')).toContainText('reported public schedule reference');
+ await expect(page.locator('.corridor-projected')).toHaveCSS('stroke-dasharray','9px, 9px');
+ await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
+ await expect(page.locator('.context-latest')).toContainText('No timestamped observation is approved');
+ const link=page.getByRole('link',{name:'Open public vessel tracker ↗',exact:true});await expect(link).toHaveAttribute('target','_blank');await link.focus();await expect(link).toBeFocused();
+ await page.locator('.context-unavailable summary').focus();await page.keyboard.press('Enter');await expect(page.locator('.context-unavailable')).toHaveAttribute('open','');
+ await expect(page.locator('.shipment-status-line')).toContainText('Ocean departure awaiting confirmation');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await capture(page,`context-${width}`,true);expect(errors).toEqual([]);
+});
 async function open(page, fixture, width = 1440) {
   await page.setViewportSize({ width, height: 1000 });
   await page.route('**/tech_companion.php*', route => route.fulfill({ json: { ok: true, documents: [] } }));

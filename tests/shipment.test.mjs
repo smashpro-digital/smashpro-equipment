@@ -3,11 +3,23 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { shipmentFixture } from './fixtures/shipment.mjs';
-const code = ts.transpileModule(readFileSync('src/domain/shipment.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const contextCode = ts.transpileModule(readFileSync('src/domain/vesselContext.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const contextUrl = 'data:text/javascript;base64,' + Buffer.from(contextCode).toString('base64');
+const code = ts.transpileModule(readFileSync('src/domain/shipment.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText.replace("'./vesselContext'", JSON.stringify(contextUrl));
 const { parseShipment, loadShipment, cacheWire, readCache, CACHE_KEY, stageText, positionStale, safePublicUrl } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 const storage = () => { const rows = new Map(); return { getItem: key => rows.get(key) ?? null, setItem: (k, v) => rows.set(k, v), removeItem: k => rows.delete(k) }; };
 const response = d => async () => new Response(JSON.stringify(d), { status: 200 });
 const pending = () => ({ factoryModel: 'YF380', vesselDisplayReference: 'EVER MAX', voyageDisplayReference: '1374-016E', vesselIdentityVerification: 'pending', voyageVerification: 'pending', cargoAssociation: 'unconfirmed', recordedAt: '2026-09-12T06:10:49.225Z', source: 'operator-supplied reference' });
+
+test('context renders as an allowlisted subset without promoting cargo or caching unverified facts',async()=>{
+ const d=shipmentFixture({unverified:true});d.vesselContext=JSON.parse(readFileSync('tests/fixtures/vessel-context.json','utf8'));
+ d.vesselContext.notes='PRIVATE';d.vesselContext.vessel.secret='PRIVATE';d.vesselContext.corridor.completed=[1];
+ const s=storage(),r=await loadShipment('/api/test',s,response(d));
+ assert.equal(r.data.vesselContext.vessel.imo,'9935208');assert.equal(r.data.map.cargoAssociationConfirmed,false);
+ assert.equal(stageText(r),'Ocean departure awaiting confirmation');assert.equal(r.data.currentPosition,null);assert.equal(r.data.vessel,null);
+ assert.equal(r.data.vesselContext.observation,null);assert(!JSON.stringify(r).includes('PRIVATE'));assert(!('completed' in r.data.vesselContext.corridor));assert.equal(s.getItem(CACHE_KEY),null);
+ d.vesselContext.publicVisible=false;assert.equal(parseShipment(d).vesselContext,null);
+});
 
 test('pending references are selected separately, never cached or promoted into evidence', async () => {
   const d = shipmentFixture({ unverified: true }); d.pendingReferences = { ...pending(), notes: 'PRIVATE', auditActor: 'PRIVATE', rawPayload: 'PRIVATE' };
