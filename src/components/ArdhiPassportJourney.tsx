@@ -347,7 +347,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             observer.unobserve(entry.target);
           }
         }),
-      { threshold: 0.14 },
+      { threshold: 0.01, rootMargin: "0px 0px -5% 0px" },
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
