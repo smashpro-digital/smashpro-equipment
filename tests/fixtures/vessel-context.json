@@ -1,0 +1,52 @@
+{
+  "classification": "context-only",
+  "publicVisible": true,
+  "cargoAssociation": "unconfirmed",
+  "vessel": {
+    "name": "EVER MAX",
+    "imo": "9935208",
+    "mmsi": "563190500",
+    "callSign": "9V7625",
+    "flag": "Singapore",
+    "type": "Container ship",
+    "lengthMetres": 366,
+    "beamMetres": 51
+  },
+  "identitySources": [
+    {
+      "url": "https://www.vesselfinder.com/vessels/details/9935208",
+      "attribution": "VesselFinder · public vessel particulars",
+      "checkedAt": "2026-09-12T12:48:42Z",
+      "classification": "publicly-corroborated",
+      "publicVisible": true
+    },
+    {
+      "url": "https://www.myshiptracking.com/vessels/ever-max-mmsi-563190500-imo-0",
+      "attribution": "MyShipTracking · public vessel particulars",
+      "checkedAt": "2026-09-12T12:48:42Z",
+      "classification": "publicly-corroborated",
+      "publicVisible": true
+    }
+  ],
+  "voyage": {
+    "reference": "1374-016E",
+    "source": {
+      "url": "https://www.coscotw.com.tw/cht/asp/i-8.asp",
+      "attribution": "COSCO Shipping Taiwan · indexed public schedule; schedule subject to change",
+      "checkedAt": "2026-09-12T12:48:42Z",
+      "classification": "reported-schedule",
+      "publicVisible": true
+    }
+  },
+  "corridor": {
+    "classification": "illustrative-projection",
+    "summary": "Factory / export history in China → projected ocean corridor → destination port and inland delivery awaiting evidence. Schematic only: no booked port sequence, vessel location, sailed distance or arrival date is implied.",
+    "stages": [
+      "Factory / export history",
+      "Ocean corridor · projected",
+      "Destination port · pending",
+      "Inland delivery · pending"
+    ]
+  },
+  "observation": null
+}

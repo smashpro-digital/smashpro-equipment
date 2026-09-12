@@ -1,5 +1,6 @@
 // Consumer subset of Digital HQ PublicShipment schema 2 (HQ PR #111).
 // This module validates/project-selects public fields. It never creates shipment facts.
+import { parseVesselContext, type VesselContext } from './vesselContext';
 export type EventState = "planned" | "estimated" | "observed" | "confirmed" | "delayed" | "completed";
 export type Point = { latitude: number; longitude: number };
 export type Source = { provider: string; url: string; observedAt: string };
@@ -7,6 +8,7 @@ export type JourneyEvent = { id: string; timestamp: string; summary: string; eve
 export type JourneyImage = { id: string; eventId: string; url: string; sourceUrl: string; provider: string; captureTime: string; center: Point; resolutionMetres: number; cloudCover: number | null; license: string; attribution: string; vesselIdentified: boolean; verificationStatus: "context-verified" | "vessel-identified" };
 export type JourneyMedia = { id: string; eventId: string; url: string; title: string; kind: "photo" | "video" | "tracking-record"; sourceUrl: string; license: string; attribution: string };
 export type Shipment = {
+  vesselContext: VesselContext | null;
   pendingReferences: { factoryModel: string; vesselDisplayReference: string; voyageDisplayReference: string; vesselIdentityVerification: "pending"; voyageVerification: "pending"; cargoAssociation: "unconfirmed"; recordedAt: string; source: "operator-supplied reference" } | null;
   schemaVersion: 2; assetId: string; stageVerification: "confirmed" | "unverified"; lifecycleState: string; shipmentStatus: string;
   vessel: { name: string; source: Source } | null; voyage: string | null; eta: string | null; etaState: string;
@@ -75,6 +77,7 @@ export function parseShipment(raw: unknown, assetId = "SP-ARDHI-26"): Shipment {
     pendingReferences = { factoryModel: text(p.factoryModel, 100), vesselDisplayReference: text(p.vesselDisplayReference, 100), voyageDisplayReference: text(p.voyageDisplayReference, 100), vesselIdentityVerification: "pending", voyageVerification: "pending", cargoAssociation: "unconfirmed", recordedAt: time(p.recordedAt), source: "operator-supplied reference" };
   }
   return {
+    vesselContext: parseVesselContext(d.vesselContext),
     pendingReferences,
     schemaVersion: 2, assetId, stageVerification: d.stageVerification as Shipment["stageVerification"], lifecycleState: text(d.lifecycleState), shipmentStatus: text(d.shipmentStatus),
     vessel: vessel ? { name: text(vessel.name), source: source(vessel.source) } : null, voyage: maybeText(d.voyage), eta: maybeText(d.eta), etaState: text(d.etaState),
