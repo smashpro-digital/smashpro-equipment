@@ -1,5 +1,5 @@
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from "react";
-import { eventAnchor, formatTime, positionStale, stageText, type JourneyImage, type ShipmentResult } from "../domain/shipment";
+import { eventAnchor, formatTime, positionStale, selectForwarderReportedVesselVoyage, stageText, type JourneyImage, type ShipmentResult } from "../domain/shipment";
 import "../styles/shipment-journey.css";
 import { VesselContext } from './VesselContext';
 
@@ -39,6 +39,7 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
   const images = status === "current" ? data?.satelliteImagery ?? [] : [];
   const media = status === "current" ? data?.imagery ?? [] : [];
   const aisObservations = data?.timeline.filter(event => event.eventType === "ais-observation").length ?? 0;
+  const forwarderFacts = selectForwarderReportedVesselVoyage(data);
   return <section id="journey" className="shipment-journey" aria-labelledby="shipment-journey-title">
     <div className="shell">
       <span id="history-container-loaded" /><span id="history-ocean-voyage" />
@@ -54,7 +55,7 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
       </section>}
       {(!data?.vesselContext || data.currentPosition || data.timeline.length > 0) && <>
       <h3 className="shipment-verified-title">Confirmed shipment facts</h3>
-      <div className="shipment-facts"><div><span>Forwarder-reported vessel</span><strong>{data?.vessel?.name ?? "No forwarder-confirmed vessel"}</strong><small>{data?.voyage ? `Forwarder-reported voyage ${data.voyage}` : "No forwarder-confirmed voyage"}</small></div><div><span>Arrival estimate</span><strong>{data?.eta ?? "No confirmed estimate"}</strong><small>{data?.eta ? `${data.etaState} · not a delivery promise` : "No confirmed arrival estimate"}</small></div><div><span>Last shipment update</span><strong>{formatTime(data?.lastUpdated)}</strong><small>{data?.lastChecked ? `Source checked ${formatTime(data.lastChecked)}` : "No source check available"}</small></div></div>
+      <div className="shipment-facts"><div><span>Forwarder-reported vessel</span><strong>{forwarderFacts.vesselName ?? "No forwarder-reported vessel"}</strong><small>{forwarderFacts.voyageReference ? `Forwarder-reported voyage ${forwarderFacts.voyageReference}` : "No forwarder-reported voyage"}</small></div><div><span>Arrival estimate</span><strong>{data?.eta ?? "No confirmed estimate"}</strong><small>{data?.eta ? `${data.etaState} · not a delivery promise` : "No confirmed arrival estimate"}</small></div><div><span>Last shipment update</span><strong>{formatTime(data?.lastUpdated)}</strong><small>{data?.lastChecked ? `Source checked ${formatTime(data.lastChecked)}` : "No source check available"}</small></div></div>
       <div className="shipment-map-layout"><MapBoundary><Suspense fallback={<p className="shipment-map-loading">Loading reference map…</p>}><ShipmentMap data={data} /></Suspense></MapBoundary>
         <aside id="shipment-map-summary" className="shipment-map-summary" aria-label="Accessible shipment map summary"><p className="eyebrow">Location record</p><h3>{data?.currentPosition ? stale || status === "cached" ? "Last known vessel position" : "Reported vessel position" : "Position awaiting evidence"}</h3>
           <p>{data?.currentPosition ? `${data.currentPosition.latitude.toFixed(1)}°, ${data.currentPosition.longitude.toFixed(1)}° · vessel only` : "No public vessel-position observation is available. The map does not simulate movement."}</p>

@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
-import { shipmentFixture } from './fixtures/shipment.mjs';
+import { forwarderContextProjectionFixture, shipmentFixture } from './fixtures/shipment.mjs';
 const contextCode = ts.transpileModule(readFileSync('src/domain/vesselContext.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const contextUrl = 'data:text/javascript;base64,' + Buffer.from(contextCode).toString('base64');
 const code = ts.transpileModule(readFileSync('src/domain/shipment.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText.replace("'./vesselContext'", JSON.stringify(contextUrl));
-const { parseShipment, loadShipment, cacheWire, readCache, CACHE_KEY, stageText, shipmentLifecycleProgress, lifecycleProgressText, positionStale, safePublicUrl } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
+const { parseShipment, loadShipment, cacheWire, readCache, CACHE_KEY, stageText, selectForwarderReportedVesselVoyage, shipmentLifecycleProgress, lifecycleProgressText, positionStale, safePublicUrl } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 const storage = () => { const rows = new Map(); return { getItem: key => rows.get(key) ?? null, setItem: (k, v) => rows.set(k, v), removeItem: k => rows.delete(k) }; };
 const response = d => async () => new Response(JSON.stringify(d), { status: 200 });
 const pending = () => ({ factoryModel: 'YF380', vesselDisplayReference: 'EVER MAX', voyageDisplayReference: '1374-016E', vesselIdentityVerification: 'pending', voyageVerification: 'pending', cargoAssociation: 'unconfirmed', recordedAt: '2026-09-12T06:10:49.225Z', source: 'operator-supplied reference' });
@@ -64,6 +64,18 @@ test('confirmed forwarder ocean transit preserves vessel and voyage while derivi
   assert.equal(progress.current.label, 'Ocean transit');
   assert.deepEqual(progress.pending.map(phase => phase.label), ['Destination-port arrival', 'Customs / import release', 'Final delivery', 'Commissioning']);
   assert.equal(lifecycleProgressText(result), 'Ocean transit confirmed · 4 phases pending');
+});
+test('forwarder display facts prefer canonical fields, fall back to approved public context, and otherwise stay empty', () => {
+  const context = JSON.parse(readFileSync('tests/fixtures/vessel-context.json', 'utf8'));
+  const fallbackFixture = forwarderContextProjectionFixture(context);
+  assert.deepEqual(selectForwarderReportedVesselVoyage(parseShipment(fallbackFixture)), { vesselName: 'EVER MAX', voyageReference: '1374-016E' });
+
+  const canonicalFixture = shipmentFixture();
+  canonicalFixture.vesselContext = context;
+  assert.deepEqual(selectForwarderReportedVesselVoyage(parseShipment(canonicalFixture)), { vesselName: 'Example vessel (fixture)', voyageReference: 'TEST-001' });
+
+  const emptyFixture = shipmentFixture({ unverified: true });
+  assert.deepEqual(selectForwarderReportedVesselVoyage(parseShipment(emptyFixture)), { vesselName: null, voyageReference: null });
 });
 test('unavailable API preserves only last verified public state', async () => {
   const s = storage(); await loadShipment('/api/test', s, response(shipmentFixture()));

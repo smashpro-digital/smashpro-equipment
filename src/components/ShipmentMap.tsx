@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { GeoJsonObject } from "geojson";
 import type { Point, Shipment } from "../domain/shipment";
-import { eventAnchor, formatTime, positionStale } from "../domain/shipment";
+import { eventAnchor, formatTime, positionStale, selectForwarderReportedVesselVoyage } from "../domain/shipment";
 import "leaflet/dist/leaflet.css";
 
 export default function ShipmentMap({ data }: { data: Shipment | null }) {
@@ -9,6 +9,7 @@ export default function ShipmentMap({ data }: { data: Shipment | null }) {
   const [failed, setFailed] = useState(false);
   const hasPosition = !!data?.currentPosition;
   const hasLocations = hasPosition || !!data?.ports.length || !!data?.map.originFacility || !!data?.map.inlandDestination;
+  const vesselName = selectForwarderReportedVesselVoyage(data).vesselName;
   useEffect(() => {
     if (!root.current) return;
     let disposed = false, cleanup = () => {};
@@ -37,7 +38,7 @@ export default function ShipmentMap({ data }: { data: Shipment | null }) {
         data?.ports.forEach((p, i) => marker(p.coordinates, p.name, String(i + 1), "port", data.timeline.find(e => e.portId === p.id)?.id));
         if (data?.map.originFacility) marker(data.map.originFacility.coordinates, data.map.originFacility.label, "F", "facility");
         if (data?.map.inlandDestination) marker(data.map.inlandDestination.coordinates, `${data.map.inlandDestination.region} · coarse destination`, "R", "region");
-        if (data?.currentPosition) marker(data.currentPosition, `${data.vessel?.name ?? "Vessel"} · ${positionStale(data) ? "last known" : "observed"} ${formatTime(data.currentPosition.timestamp)}`, "▲", "vessel", data.timeline.find(e => e.eventType === "ais-observation" && e.timestamp === data.currentPosition!.timestamp)?.id);
+        if (data?.currentPosition) marker(data.currentPosition, `${vesselName ?? "Vessel"} · ${positionStale(data) ? "last known" : "observed"} ${formatTime(data.currentPosition.timestamp)}`, "▲", "vessel", data.timeline.find(e => e.eventType === "ais-observation" && e.timestamp === data.currentPosition!.timestamp)?.id);
         if (points.length) map.fitBounds(L.latLngBounds(points.map(coord)), { padding: [42, 42], maxZoom: 4, animate: false });
         try {
           const response = await fetch(`${import.meta.env.BASE_URL}maps/ne_110m_land.geojson`, { signal: controller.signal });
@@ -51,7 +52,7 @@ export default function ShipmentMap({ data }: { data: Shipment | null }) {
     }, { rootMargin: "160px" });
     observer.observe(root.current);
     return () => { disposed = true; controller.abort(); observer.disconnect(); cleanup(); };
-  }, [data, hasLocations]);
+  }, [data, hasLocations, vesselName]);
   return <div className="shipment-map-frame">
     <div ref={root} className="shipment-map" role="region" aria-label="Shipment reference map" aria-describedby="shipment-map-summary" />
     {!hasLocations && <div className="shipment-map-empty"><span aria-hidden="true">◎</span><strong>Awaiting a verified location</strong><p>Ports and a vessel position will appear when public evidence is available.</p></div>}
