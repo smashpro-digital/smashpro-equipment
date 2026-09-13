@@ -6,7 +6,7 @@ import { WindowSticker } from "./WindowSticker";
 import { PartnerFieldSupport } from "./PartnerFieldSupport";
 import { ShipmentJourney } from "./ShipmentJourney";
 import { useShipment } from "../hooks/useShipment";
-import { stageText } from "../domain/shipment";
+import { lifecycleProgressText, stageText } from "../domain/shipment";
 import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
 
@@ -475,7 +475,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     ["Factory Model", item.identity.factoryModel],
     ["Service Hours", "0.0"],
     ["Status", stageText(shipment)],
-    ["Vessel", shipment.data?.vessel?.name ?? "Awaiting verification"],
+    ["Vessel", shipment.data?.vessel?.name ?? "Shipment record unavailable"],
     ["ETA", shipment.data?.eta ?? "Awaiting confirmation"],
     ["Fleet Asset", "#001"],
   ];
@@ -517,7 +517,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <strong>SP-ARDHI-26</strong>
           <span>{stageText(shipment)}</span>
         </div>
-        <b>2 / 7</b>
+        <b>{lifecycleProgressText(shipment)}</b>
         <i style={{ width: `${pageProgress}%` }} />
       </aside>
       <div className="now-viewing" aria-live="polite"><span>Now Viewing</span><strong>SP-ARDHI-26</strong>{nowViewing.map((part) => <span key={part}>→ {part}</span>)}</div>
