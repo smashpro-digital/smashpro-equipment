@@ -91,6 +91,26 @@ export function parseShipment(raw: unknown, assetId = "SP-ARDHI-26"): Shipment {
 }
 export const CACHE_KEY = "smashpro.public-shipment.v2.SP-ARDHI-26";
 export type ShipmentResult = { data: Shipment | null; status: "loading" | "current" | "cached" | "unavailable" };
+export const shipmentLifecyclePhases = [
+  { id: "ocean-transit", label: "Ocean transit" },
+  { id: "destination-port-arrival", label: "Destination-port arrival" },
+  { id: "customs-import-release", label: "Customs / import release" },
+  { id: "final-delivery", label: "Final delivery" },
+  { id: "commissioning", label: "Commissioning" },
+] as const;
+export function shipmentLifecycleProgress(result: ShipmentResult) {
+  const currentIndex = shipmentLifecyclePhases.findIndex(phase => phase.id === result.data?.lifecycleState);
+  const confirmed = result.data?.stageVerification === "confirmed" && currentIndex >= 0;
+  return {
+    current: confirmed ? shipmentLifecyclePhases[currentIndex] : null,
+    pending: confirmed ? shipmentLifecyclePhases.slice(currentIndex + 1) : shipmentLifecyclePhases,
+  };
+}
+export function lifecycleProgressText(result: ShipmentResult) {
+  const progress = shipmentLifecycleProgress(result);
+  if (progress.current) return `${progress.current.label} confirmed · ${progress.pending.length} phases pending`;
+  return result.status === "loading" ? "Checking lifecycle record…" : "Lifecycle phase awaiting confirmed evidence";
+}
 // Cache a public wire projection, not provider/administrative payloads. Reparse on read.
 export function cacheWire(d: Shipment): unknown {
   return { ...d, timeline: d.timeline.map(e => ({ ...e, publicApproved: true })), ports: d.ports.map(p => ({ ...p, publicApproved: true })), satelliteImagery: d.satelliteImagery.map(i => ({ ...i, role: "contextual-media" })), imagery: d.imagery.map(i => ({ ...i, publicApproved: true })), map: { ...d.map, simulated: false, positionRepresents: "vessel-only" } };

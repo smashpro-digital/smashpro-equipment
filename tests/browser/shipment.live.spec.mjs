@@ -26,7 +26,7 @@ for (const width of [1440, 390]) test(`live API through local preview proxy at $
   await expect(page.locator('.shipment-facts')).not.toContainText('EVER MAX');
   await expect(page.locator('.shipment-map-empty')).toBeVisible();
   await expect(page.locator('.shipment-marker')).toHaveCount(0);
-  await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved satellite observation available');
+  await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved vessel-position observation available');
   await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
   for (const id of ['history-factory-departure', 'history-export-crate', 'history-freight-forwarder']) await expect(page.locator(`#${id}`)).toBeAttached();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

@@ -354,6 +354,9 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(passport, /Payment History/);
   assert.doesNotMatch(passport, /Approximate Journey Distance|daysUntilArrival|7300/);
   assert.match(passport, /stageText\(shipment\)/);
+  assert.match(passport, /lifecycleProgressText\(shipment\)/);
+  assert.doesNotMatch(passport, /2 \/ 7|Stage 2/);
+  assert.doesNotMatch(readFileSync("src/pages/ArdhiPassportPage.tsx", "utf8"), /2 \/ 7|Stage 2/);
   assert.match(passport, /IntersectionObserver/);
   assert.match(passport, /scrollIntoView/);
   assert.match(passport, /open=\{expandedRecord === record\.id\}/);
