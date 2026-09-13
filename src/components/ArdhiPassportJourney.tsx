@@ -6,7 +6,7 @@ import { WindowSticker } from "./WindowSticker";
 import { PartnerFieldSupport } from "./PartnerFieldSupport";
 import { ShipmentJourney } from "./ShipmentJourney";
 import { useShipment } from "../hooks/useShipment";
-import { lifecycleProgressText, stageText } from "../domain/shipment";
+import { lifecycleProgressText, selectForwarderReportedVesselVoyage, stageText } from "../domain/shipment";
 import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
 
@@ -470,12 +470,13 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const openSticker = (action?: "png" | "pdf") => { setStickerZoom(1); setStickerOpen(true); setPendingStickerAction(action); };
+  const forwarderFacts = selectForwarderReportedVesselVoyage(shipment.data);
   const assetStatus = [
     ["Passport", item.identity.model],
     ["Factory Model", item.identity.factoryModel],
     ["Service Hours", "0.0"],
     ["Status", stageText(shipment)],
-    ["Vessel", shipment.data?.vessel?.name ?? "Shipment record unavailable"],
+    ["Vessel", forwarderFacts.vesselName ?? "Shipment record unavailable"],
     ["ETA", shipment.data?.eta ?? "Awaiting confirmation"],
     ["Fleet Asset", "#001"],
   ];

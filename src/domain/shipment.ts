@@ -91,6 +91,12 @@ export function parseShipment(raw: unknown, assetId = "SP-ARDHI-26"): Shipment {
 }
 export const CACHE_KEY = "smashpro.public-shipment.v2.SP-ARDHI-26";
 export type ShipmentResult = { data: Shipment | null; status: "loading" | "current" | "cached" | "unavailable" };
+export function selectForwarderReportedVesselVoyage(data: Shipment | null | undefined) {
+  return {
+    vesselName: data?.vessel?.name ?? data?.vesselContext?.vessel.name ?? null,
+    voyageReference: data?.voyage ?? data?.vesselContext?.voyage.reference ?? null,
+  };
+}
 export const shipmentLifecyclePhases = [
   { id: "ocean-transit", label: "Ocean transit" },
   { id: "destination-port-arrival", label: "Destination-port arrival" },

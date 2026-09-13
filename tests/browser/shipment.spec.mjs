@@ -1,25 +1,18 @@
 import { test, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
-import { shipmentFixture } from '../fixtures/shipment.mjs';
+import { forwarderContextProjectionFixture, shipmentFixture } from '../fixtures/shipment.mjs';
 const endpoint = '**/api/fleet/shipment/SP-ARDHI-26';
 function forwarderOceanFixture() {
-  const fixture = shipmentFixture();
-  fixture.vessel = { ...fixture.vessel, name: 'EVER MAX' };
-  fixture.voyage = '1374-016E';
-  fixture.currentPosition = null;
-  fixture.positionState = 'unavailable';
-  fixture.ports = [];
-  fixture.route = { planned: [], completed: [], remaining: [], source: null, estimated: false };
-  fixture.map = { ...fixture.map, trackSegments: [], originFacility: null, inlandDestination: null, routeState: 'unavailable' };
-  fixture.timeline = fixture.timeline.filter(event => event.eventType === 'carrier-update');
-  return fixture;
+  return forwarderContextProjectionFixture(JSON.parse(readFileSync('tests/fixtures/vessel-context.json', 'utf8')));
 }
 for (const width of [1440, 390]) test(`confirmed forwarder context and derived lifecycle stay honest at ${width}px`, async ({ page }) => {
   await open(page, forwarderOceanFixture(), width);
   await expect(page.locator('.shipment-facts')).toContainText('Forwarder-reported vessel');
   await expect(page.locator('.shipment-facts')).toContainText('EVER MAX');
   await expect(page.locator('.shipment-facts')).toContainText('Forwarder-reported voyage 1374-016E');
+  await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
+  await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
   await expect(page.locator('.mini-passport')).toContainText('Ocean transit confirmed · 4 phases pending');
   await expect(page.locator('.shipment-map-empty')).toContainText('Awaiting a verified location');
   await expect(page.locator('.shipment-map-summary')).toContainText('No public vessel-position observation is available');
@@ -35,7 +28,7 @@ for(const width of [1440,390]) test(`public context is distinct from cargo and p
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,fixture,width);
  await expect(page.locator('.journey-now')).toContainText('9935208');await expect(page.locator('.journey-now')).toContainText('563190500');await expect(page.locator('.journey-now')).toContainText('YF380');
  await expect(page.locator('.journey-truth')).toContainText('The voyage is forwarder-reported.');
- await expect(page.locator('.journey-vessel-summary')).toContainText('voyage reference 1374-016E');
+ await expect(page.locator('.journey-vessel-summary')).toContainText('Forwarder-reported voyage 1374-016E');
  await expect(page.locator('.corridor-route')).toHaveCSS('stroke-dasharray','12px, 10px');
  await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
  await expect(page.locator('.journey-observation')).toContainText('No timestamped AIS observation is approved');

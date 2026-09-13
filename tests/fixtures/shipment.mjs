@@ -14,3 +14,17 @@ export function shipmentFixture({ stale = false, satellite = false, unverified =
     map: { positionRepresents: 'vessel-only', simulated: false, cargoAssociationConfirmed: !unverified, originFacility: null, inlandDestination: null, trackSegments: unverified ? [] : [[{ latitude: 31, longitude: 122 }, { latitude: 28, longitude: 134 }, { latitude: 26, longitude: 146 }]], routeState: unverified ? 'unavailable' : 'reported' },
   };
 }
+
+export function forwarderContextProjectionFixture(vesselContext) {
+  const fixture = shipmentFixture();
+  fixture.vessel = null;
+  fixture.voyage = null;
+  fixture.vesselContext = vesselContext;
+  fixture.currentPosition = null;
+  fixture.positionState = 'unavailable';
+  fixture.ports = [];
+  fixture.route = { planned: [], completed: [], remaining: [], source: null, estimated: false };
+  fixture.map = { ...fixture.map, trackSegments: [], originFacility: null, inlandDestination: null, routeState: 'unavailable' };
+  fixture.timeline = fixture.timeline.filter(event => event.eventType === 'carrier-update');
+  return fixture;
+}
