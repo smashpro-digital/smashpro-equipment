@@ -96,6 +96,7 @@ export default defineConfig(({ mode }) => {
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
         productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),
+        mzigo27eCatalog: resolve(projectDirectory, "catalog/sp-mzigo-27e/index.html"),
         powerControlModuleLegacyRedirect: resolve(projectDirectory, "sp-pcm-001.html"),
         admin: resolve(projectDirectory, "admin.html"),
       },

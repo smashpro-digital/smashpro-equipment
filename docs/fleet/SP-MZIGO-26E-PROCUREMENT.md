@@ -39,13 +39,15 @@ The **K600** platform designation is recorded from SmashPro's own equipment pass
 
 ## 4. Observed Production Changes
 
-No production deviations have been observed or recorded for SP-MZIGO-26E.
-
 | Field | Record |
 | --- | --- |
-| Status | None recorded |
-| Evidence | Not applicable |
-| Confirmation | Not applicable |
+| Black wheel finish | Installed; photographed September 14–15, 2026 |
+| Black battery boxes | Installed; photographed September 14, 2026 |
+| Tie-down anchors | Installed; dedicated factory detail received September 14, 2026 |
+| Custom branding and decals | Installed and retained in September 15 completed profile |
+| Equipment Passport QR panel | Installed and retained in September 15 completed profile |
+| Quality inspection | Passed, per supplied production status |
+| SmashPro build approval | Approved, per supplied production status |
 
 ## 5. Included Equipment
 
@@ -78,7 +80,7 @@ Pricing has not been documented in the repository for SP-MZIGO-26E. Machine pric
 
 ## 9. Payment Terms
 
-Deposit paid, confirmed by the SmashPro Equipment Passport build status. Remaining payment terms and schedule are not documented.
+Deposit paid, confirmed by the SmashPro Equipment Passport build status. Final payment is reported pending in the September 15 production status. Amounts, exact due date and remaining terms are not documented publicly.
 
 ## 10. Delivery
 
@@ -107,10 +109,16 @@ Not documented. Banking instructions must be independently verified with the ven
 | Production started | Recorded | Not documented |
 | Equipment Passport published | Recorded | 2026-08-20 |
 | Product website published | Recorded | Not documented |
-| Powder coating | Pending | Not documented |
-| Decal installation | Pending | Not documented |
-| Factory testing | Pending | Not documented |
-| Final inspection | Pending | Not documented |
+| Powder coating / green finish | Recorded | Factory media through 2026-09-15 |
+| Decal and QR installation | Recorded | Factory media through 2026-09-15 |
+| Black wheel and battery-box revisions | Recorded | 2026-09-14 factory evidence |
+| Tie-down anchors | Recorded | 2026-09-14 factory evidence |
+| Quality inspection | Passed | Supplied 2026-09-15 production status |
+| SmashPro build approval | Approved | Supplied 2026-09-15 production status |
+| Final payment | Pending | Amount, due date and terms not published |
+| Export crating | Pending | Not documented |
+| Port delivery | Pending | Not documented |
+| Vessel booking / ocean departure | Pending | Not documented |
 | Ocean freight | Pending | Not documented |
 | U.S. delivery | Pending | Not documented |
 

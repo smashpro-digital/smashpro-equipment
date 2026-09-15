@@ -21,6 +21,8 @@ type FleetLifecycleProgressProps = {
   currentStage: string;
   nextStage: string;
   description?: string;
+  eyebrow?: string;
+  title?: string;
 };
 
 function LifecycleCounter({ active, value, suffix = "" }: { active: boolean; value: number; suffix?: string }) {
@@ -46,7 +48,7 @@ function LifecycleCounter({ active, value, suffix = "" }: { active: boolean; val
   return <>{shown.toLocaleString()}{suffix}</>;
 }
 
-export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStage, description = "Distance is approximate and does not represent live tracking." }: FleetLifecycleProgressProps) {
+export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStage, description = "Distance is approximate and does not represent live tracking.", eyebrow = "Fleet Journey Progress", title = "The record moves with the machine." }: FleetLifecycleProgressProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
 
@@ -65,7 +67,7 @@ export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStag
   return (
     <section ref={sectionRef} className={`section shell fleet-lifecycle-progress${started ? " is-started" : ""}`} aria-labelledby="fleet-lifecycle-title">
       <div className="section-heading">
-        <div><p className="eyebrow">Fleet Journey Progress</p><h2 id="fleet-lifecycle-title">The record moves with the machine.</h2></div>
+        <div><p className="eyebrow">{eyebrow}</p><h2 id="fleet-lifecycle-title">{title}</h2></div>
         <p>{description}</p>
       </div>
       <div className="fleet-lifecycle-state" aria-label={`Current stage ${currentStage}. Next stage ${nextStage}.`}>

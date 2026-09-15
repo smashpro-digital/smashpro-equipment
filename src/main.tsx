@@ -8,6 +8,7 @@ import { installJourneyCalendarMetricCorrection } from "./domain/calendarMetrics
 import "./styles/global.css";
 import "./styles/dream-build-fixes.css";
 import "./styles/catalog.css";
+import "./styles/mzigo27e-catalog.css";
 import "./styles/product-engineering.css";
 import "./styles/manufacturer-profile.css";
 import "./styles/negotiation-evidence-media.css";
