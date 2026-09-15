@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 // Validate the exact original names referenced by the media data before deployment.
 const data = readFileSync('src/data/mzigoFactoryMedia.ts', 'utf8');
 const septemberFiles = [...new Set([...data.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-09-(?:09|14|15)\.(?:jpg|mp4)/g)].map(m => m[0]))];
-assert.equal(septemberFiles.length, 20, 'Nineteen September photos and one walkaround are required');
+assert.equal(septemberFiles.length, 21, 'Twenty September photos and one walkaround are required');
 const equipmentData = readFileSync('src/data/equipment.ts', 'utf8');
 const augustFiles = [...new Set([...equipmentData.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-08-31\.(?:jpg|mp4)/g)].map(m => m[0]))];
 assert.equal(augustFiles.length, 4, 'Two August photos, the assembly video and its poster are required');

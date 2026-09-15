@@ -36,6 +36,7 @@ const { approvedMzigoMedia, mzigoEvidenceCategories, mzigoMarketSegments, mzigoO
 test('six build chapters preserve the original build and approved revisions', () => {
   assert.deepEqual(mzigoBuildChapters.map(c => c.title), ['Factory Identity', 'SmashPro Branding', 'Electric Drive Architecture', 'Hydraulic Dump System', 'Approved Revisions', 'Build-Approved Machine']);
   assert.equal(mzigoBuildChapters[3].image.src, mzigoFactoryPhotos.approvedRaised.src);
+  assert.equal(mzigoBuildChapters[3].supporting[0].src, mzigoFactoryPhotos.raisedDriveOverview.src);
   assert.deepEqual(mzigoBuildChapters[4].supporting.map(m => m.src), ['blackWheelDrive','tieDown'].map(k => mzigoFactoryPhotos[k].src));
   assert.equal(mzigoBuildChapters[5].image.src, mzigoFactoryPhotos.approvedProfile.src);
 });
@@ -68,14 +69,14 @@ test('six build records link to canonical archive media without duplicate player
   }
 });
 
-test('archive has one canonical home for all 23 authentic records, including both videos', () => {
+test('archive has one canonical home for all 24 authentic records, including both videos', () => {
   const records = mzigoArchiveChapters.flatMap(chapter => mzigoArchiveSelection(mzigo.gallery, chapter.id));
-  assert.equal(records.length, 23);
+  assert.equal(records.length, 24);
   assert.equal(new Set(records.map(media => media.src)).size, records.length);
   assert.equal(new Set(records.map(mzigoMediaAnchor)).size, records.length);
   assert.equal(records.filter(media => media.kind === 'video').length, 2);
   assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build').length, 10);
-  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine').length, 13);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine').length, 14);
   for (const media of [...Object.values(mzigoFactoryPhotos), mzigoFactoryWalkaround]) assert.equal(records.filter(record => record.src === media.src).length, 1);
   for (const media of records) {
     assert.ok(existsSync(media.src.replace('/equipment/', '')));
@@ -214,6 +215,7 @@ test('September 14 and 15 evidence is copied byte-for-byte under descriptive nam
     ['sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg', '231d13423a9afe4fe977c64c3e31c02524aa430f0f4d0cca4367b7b9bf8b2305'],
     ['sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg', '8aebcea915ae65f51fb6550b1771a12549c4ce391d87aec9c1218191a6d605b1'],
     ['sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg', '6e696b762abf600e2221f4c076f398e20a980a40dad2bff80b6bd201cbabc492'],
+    ['sp-mzigo-26e-raised-bed-drive-system-overview-2026-09-14.jpg', '6012d753689d33b9983fa9327a35008095423c15378b5a1cce1164d930130dd6'],
     ['sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg', '0d519da580fba50704d0b7198b956c105f4514adebb0a939bcc466e45a076e6f'],
   ]);
   for (const [filename, hash] of expected) {

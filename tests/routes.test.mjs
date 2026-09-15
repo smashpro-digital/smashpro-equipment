@@ -472,6 +472,7 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
     "sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg",
     "sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg",
     "sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg",
+    "sp-mzigo-26e-raised-bed-drive-system-overview-2026-09-14.jpg",
     "sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg",
   ]) {
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));

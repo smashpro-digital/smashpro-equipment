@@ -123,7 +123,7 @@ The public passport uses the original files in `images/`, served under
 | 01 — Factory Identity | `sp-mzigo-26e-factory-complete-left-profile-2026-09-09.jpg` |
 | 02 — SmashPro Branding | `sp-mzigo-26e-control-panel-2026-09-09.jpg`; `sp-mzigo-26e-rear-branding-2026-09-09.jpg` |
 | 03 — Electric Drive Architecture | `sp-mzigo-26e-motor-controller-detail-2026-09-09.jpg` |
-| 04 — Hydraulic Dump System | `sp-mzigo-26e-raised-bed-engineering-overview-2026-09-14.jpg`; `sp-mzigo-26e-hydraulic-pump-reservoir-2026-09-09.jpg`; `sp-mzigo-26e-hydraulic-cylinder-electrical-2026-09-09.jpg` |
+| 04 — Hydraulic Dump System | `sp-mzigo-26e-raised-bed-engineering-overview-2026-09-14.jpg`; `sp-mzigo-26e-raised-bed-drive-system-overview-2026-09-14.jpg`; `sp-mzigo-26e-hydraulic-pump-reservoir-2026-09-09.jpg`; `sp-mzigo-26e-hydraulic-cylinder-electrical-2026-09-09.jpg` |
 | 05 — Approved Revisions | `sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg`; `sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg`; `sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg` |
 | 06 — Build-Approved Machine | `sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg` |
 
@@ -133,7 +133,7 @@ remain in Media History. The Build Story renders through React using the existin
 `GalleryImage` and `FactoryUpdate` contracts. Video uses native inline controls,
 metadata preload and a direct-file fallback; it does not autoplay.
 
-Build validation verifies all 24 curated factory files reach `dist/images/` unchanged,
+Build validation verifies all 25 curated factory files reach `dist/images/` unchanged,
 including two binary MP4 files rather than Git LFS pointers. The supplied production
 status records quality inspection passed; shipment remains upcoming. This update adds
 no new electrical ratings.
