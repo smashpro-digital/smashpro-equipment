@@ -111,6 +111,7 @@ Initial family:
 | Code | Family | Example |
 | --- | --- | --- |
 | PCM | Power Control Module | SP-PCM-001 |
+| MTC | Material Transport Carrier | SP-MTC-001 |
 
 New family codes should be added here before first use to prevent collisions and naming drift.
 

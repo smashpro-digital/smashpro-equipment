@@ -27,8 +27,8 @@ export interface CatalogDesignPackage {
 }
 
 export interface CatalogCustomizationOption {
-  id: string; title: string; category: "nameplate" | "finish" | "labeling" | "hardware";
-  buildType: "battery-box"; availability: "planned" | "design-review" | "available";
+  id: string; title: string; category: "nameplate" | "finish" | "labeling" | "hardware" | "exterior" | "recovery" | "protection" | "wheels-tires" | "electrical" | "fleet-technology";
+  buildType: string; availability: "planned" | "design-review" | "available";
   description: string; configurableFields: string[]; designPackageIds?: string[];
 }
 
@@ -48,6 +48,8 @@ export interface CatalogProduct {
   platform?: string;
   application?: string;
   developmentProject?: string;
+  sourceFleetId?: string;
+  marketSegments?: Array<"standard" | "commercial" | "fleet" | "government" | "municipal" | "dealer" | "rental" | "prototype">;
   availability?: "not-for-sale" | "request-quote" | "available";
   capabilities: string[];
   specifications?: CatalogSpecification[];

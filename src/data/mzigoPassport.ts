@@ -4,23 +4,29 @@ export const mzigoObservedSpecLabels = new Set(["Fleet ID", "Manufacturer", "Mac
 
 export const mzigoCustomizations = [
   { title: "Electric configuration", status: "Documented", detail: "Electric drive hardware and the supplied remote are recorded in the factory photographs and passport.", anchor: "#media-sp-mzigo-26e-motor-controller-detail-2026-09-09" },
-  { title: "SmashPro green finish", status: "Photographed", detail: "The green cargo body and control face are visible in the September 9 factory evidence. A coating process or exact color standard is not inferred.", anchor: "#media-sp-mzigo-26e-factory-complete-three-quarter-2026-09-09" },
-  { title: "Supplied logos and fleet name", status: "Photographed", detail: "SmashPro graphics and SP-MZIGO-26E identify the actual machine. Brand artwork is design input, not proof of installed options.", anchor: "#media-sp-mzigo-26e-factory-complete-left-profile-2026-09-09" },
+  { title: "SmashPro green finish and identity", status: "Installed", detail: "The green cargo body, SmashPro graphics, SP-MZIGO-26E fleet decal and QR panel remain installed in the September 15 build-approved profile.", anchor: "#media-sp-mzigo-26e-build-approved-left-profile-2026-09-15" },
+  { title: "Black wheels and battery boxes", status: "Installed", detail: "The September 14 evidence records both requested black finishes on the completed machine.", anchor: "#media-sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14" },
+  { title: "Tie-down anchors", status: "Installed", detail: "Added anchor hardware is recorded in a dedicated factory close-up. No recovery-load rating is inferred.", anchor: "#media-sp-mzigo-26e-tie-down-anchor-detail-2026-09-14" },
 ];
 
 export const mzigoRequests = [
-  { title: "QR removal", status: "Awaiting revised evidence", detail: "Removal is a buyer-directed change. QR graphics remain visible in the September 9 photographs; no later factory confirmation is on file." },
-  { title: "Red component / plate to green", status: "Change recorded; verification open", detail: "The buyer records a red-to-green change. The exact component and completed revision still need matching factory evidence." },
-  { title: "Black battery box", status: "Requested", detail: "A black box was requested. The available factory views show blue battery enclosures; the final color is unconfirmed." },
-  { title: "Fenders", status: "Explored / requested", detail: "Fender options were discussed. Installation is not confirmed by the available factory record." },
-  { title: "Wider tires and hitch", status: "Future configuration ideas", detail: "Options were explored for a possible future configuration. Neither is recorded as installed; rendered underglow is also not production evidence." },
+  { title: "Bolt-on fenders and mud guards", status: "Future wishlist", detail: "No fender or mud-guard installation is documented on the Founders Edition." },
+  { title: "Tow hitch and rated recovery hooks", status: "Future engineering", detail: "Installed tie-down anchors are not represented as rated recovery points. Hitch and recovery hardware require a controlled design and rating." },
+  { title: "Lighting and underglow packages", status: "Future wishlist", detail: "Existing work lights are documented; expanded lighting packages remain future options." },
+  { title: "Wheel, tire and accessory packages", status: "Future catalog", detail: "Wider tires and repeatable accessory packages remain unbuilt roadmap items." },
 ];
 
 export const mzigoLifecycle: FleetLifecycleStage[] = [
-  { id: "build", label: "Factory build", status: "complete", progress: 100, href: "#history-mzigo-factory-complete" },
-  { id: "verification", label: "Pre-shipment verification", status: "current", progress: 0, href: "#verification" },
-  { id: "inspection", label: "Final inspection", status: "pending", progress: 0, href: "#documents" },
-  { id: "shipping", label: "Ocean freight", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
-  { id: "delivery", label: "U.S. delivery", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
+  { id: "build-approved", label: "Build Approved", status: "complete", progress: 100, href: "#history-mzigo-build-approved" },
+  { id: "final-payment", label: "Final Payment", status: "current", progress: 0, href: "#history-mzigo-current" },
+  { id: "wooden-crate", label: "Wooden Crate", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
+  { id: "export-inspection", label: "Export Inspection", status: "pending", progress: 0, href: "#documents" },
+  { id: "container-loading", label: "Container Loading", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
+  { id: "port-arrival", label: "Port Arrival", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
+  { id: "ocean-departure", label: "Ocean Departure", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
+  { id: "ocean-tracking", label: "Ocean Tracking", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
+  { id: "us-arrival", label: "U.S. Arrival", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
+  { id: "customs", label: "Customs", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
+  { id: "delivery", label: "Delivery", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "commissioning", label: "Commissioning", status: "pending", progress: 0, href: "#service" },
 ];

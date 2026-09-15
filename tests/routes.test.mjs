@@ -83,7 +83,9 @@ test("product catalog has a physical route, navigation, status model, and sitema
   assert.match(footer, /Product Catalog/);
   assert.match(sitemap, /\/equipment\/catalog\//);
   assert.match(catalogData, /id: "SP-PCM-001"/);
-  assert.doesNotMatch(catalogData, /SP-ARDHI-26|SP-MZIGO-26E/);
+  assert.match(catalogData, /id: "SP-MTC-001"/);
+  assert.match(catalogData, /sourceFleetId: "SP-MZIGO-26E"/);
+  assert.doesNotMatch(catalogData, /id: "SP-(?:ARDHI|MZIGO)-26E?"/);
   ["concept", "in-development", "prototype", "field-testing", "production-candidate", "available", "archived"].forEach((status) => assert.match(catalogTypes, new RegExp(`"${status}"`)));
   assert.match(catalogPage, /aria-pressed/);
   assert.match(catalogPage, /Product IDs are distinct from SmashPro Fleet asset IDs/);
@@ -189,11 +191,11 @@ test("both fleet passports retain identity sections and the current Mzigo eviden
   const mzigoPassport = readFileSync("docs/fleet/SP-MZIGO-26E-PASSPORT.md", "utf8");
   ["# Identity", "# Mission", "# Factory Model", "# Build Summary", "# Specifications", "# Included Attachments", "# Future Attachments", "# Lighting", "# Branding", "# Color Scheme", "# Security", "# Planned Fleet Pairing", "# Primary Services", "# Factory Documentation", "# Shipping", "# Equipment Timeline", "# Maintenance Log", "# Asset Status", "# Motto", "# Fleet Legacy"]
     .forEach((heading) => { assert.match(ardhiPassport, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))); });
-  ["Identity", "Mission", "Factory Model", "Build Summary", "Specifications", "Included Equipment", "Planned Fleet Enhancements", "Fleet Pairing", "Primary Services", "Shipping / Readiness", "Equipment Timeline", "Maintenance Log", "Asset Status", "Motto", "Fleet Legacy", "September 9, 2026 Factory Update"]
+  ["Identity", "Mission", "Factory Model", "Build Summary", "Specifications", "Included Equipment", "Planned Fleet Enhancements", "Engineering", "OEM Product Platform", "OEM Collaboration", "Fleet Pairing", "Primary Services", "Shipping / Readiness", "Equipment Timeline", "Maintenance Log", "Asset Status", "Motto", "Fleet Legacy", "September 9, 2026 Factory Update", "September 14–15, 2026 Approval Update", "Media and System Integration", "SP-MZIGO Roadmap"]
     .forEach(heading => assert.ok(mzigoPassport.includes(`# ${heading}`), heading));
   assert.match(mzigoPassport, /\*\*SP-MZIGO-26E\*\*/);
   assert.match(mzigoPassport, /do \*\*not\*\* by themselves prove/);
-  assert.match(mzigoPassport, /Final Inspection Confirmation/);
+  assert.match(mzigoPassport, /Final Payment Pending/);
 });
 
 test("SP-MZIGO-26E is classified as electric with a correctly converted published payload", () => {
@@ -450,10 +452,11 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
   assert.match(data, /\["Platform", "K600", "Identity"/);
   assert.match(data, /\["Fleet ID", "SP-MZIGO-26E", "Identity"/);
   assert.match(data, /\["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co\., Ltd\.", "Identity"/);
-  assert.match(data, /heading: "Latest Factory Production Update"/);
-  assert.match(data, /label: "Chassis Assembly", status: "completed"/);
-  assert.match(data, /label: "Body Assembly", status: "current"/);
-  assert.match(data, /label: "U\.S\. Delivery", status: "upcoming"/);
+  assert.match(data, /statusLabel: "Build approved · final payment pending"/);
+  assert.match(data, /mzigo-black-wheels/);
+  assert.match(data, /mzigo-black-battery-boxes/);
+  assert.match(data, /mzigo-tie-down-anchors/);
+  assert.match(data, /title: "Quality inspection passed and build approved"/);
   const passport = readFileSync("src/components/MzigoPassport.tsx", "utf8");
   const archive = readFileSync("src/components/MzigoMediaArchive.tsx", "utf8");
   assert.match(passport, /<MzigoBuildStory/);
@@ -465,6 +468,11 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
     "sp-mzigo-26e-production-battery-electrical-assembly-top-view-2026-08-31.jpg",
     "sp-mzigo-26e-production-chassis-assembly-video-poster-2s-2026-08-31.jpg",
     "sp-mzigo-26e-production-chassis-assembly-video-2026-08-31.mp4",
+    "sp-mzigo-26e-raised-bed-engineering-overview-2026-09-14.jpg",
+    "sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg",
+    "sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg",
+    "sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg",
+    "sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg",
   ]) {
     assert.match(data, new RegExp(filename.replaceAll(".", "\\.")));
     assert.equal(existsSync(`images/${filename}`), true, `${filename} must exist`);

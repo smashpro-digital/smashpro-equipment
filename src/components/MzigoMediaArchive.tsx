@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { Equipment, GalleryImage } from "../types/equipment";
+import type { Equipment, EvidenceCategory, GalleryImage } from "../types/equipment";
 import { mzigoArchiveChapters, mzigoArchiveSelection, mzigoArchiveTarget, mzigoMediaAnchor } from "../domain/mzigoArchive";
+import { mzigoEvidenceCategories } from "../data/mzigoPlatform";
 
 function ArchiveVideo({ media }: { media: GalleryImage }) {
   const [failed, setFailed] = useState(false);
@@ -16,12 +17,13 @@ function ArchiveVideo({ media }: { media: GalleryImage }) {
 export function MzigoMediaArchive({ item }: { item: Equipment }) {
   const [chapterId, setChapterId] = useState("factory-build");
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<"all" | EvidenceCategory>("all");
   const [target, setTarget] = useState<string>();
   const [lightbox, setLightbox] = useState<GalleryImage>();
   const dialog = useRef<HTMLDialogElement>(null);
   const chapter = mzigoArchiveChapters.find(entry => entry.id === chapterId)!;
   const chapterMedia = mzigoArchiveSelection(item.gallery, chapterId);
-  const filteredMedia = mzigoArchiveSelection(item.gallery, chapterId, query);
+  const filteredMedia = mzigoArchiveSelection(item.gallery, chapterId, query, category === "all" ? undefined : category);
   const concepts = item.gallery.filter(media => !media.group);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export function MzigoMediaArchive({ item }: { item: Equipment }) {
       if (!destination) return;
       setChapterId(destination.chapterId);
       setQuery("");
+      setCategory("all");
       setTarget(destination.anchor);
     };
     followHash();
@@ -55,6 +58,7 @@ export function MzigoMediaArchive({ item }: { item: Equipment }) {
   const selectChapter = (id: string) => {
     setChapterId(id);
     setQuery("");
+    setCategory("all");
     setTarget(undefined);
     window.history.replaceState(window.history.state, "", `#mzigo-archive-${id}`);
   };
@@ -74,11 +78,11 @@ export function MzigoMediaArchive({ item }: { item: Equipment }) {
       {!!chapterMedia.length && <div className="archive-tools"><input type="search" value={query} onChange={event => {
         setQuery(event.target.value);
         window.history.replaceState(window.history.state, "", `#mzigo-archive-${chapterId}`);
-      }} placeholder={`Search ${chapter.label}`} aria-label={`Search ${chapter.label} media`} /><p role="status">{filteredMedia.length} of {chapterMedia.length} records · {chapterMedia.filter(media => media.kind === "video").length} video</p></div>}
+      }} placeholder={`Search ${chapter.label}`} aria-label={`Search ${chapter.label} media`} /><label>Evidence category<select value={category} onChange={event => setCategory(event.target.value as "all" | EvidenceCategory)}><option value="all">All categories</option>{mzigoEvidenceCategories.map(entry => <option value={entry.id} key={entry.id}>{entry.label}</option>)}</select></label><p role="status">{filteredMedia.length} of {chapterMedia.length} records · {chapterMedia.filter(media => media.kind === "video").length} video</p></div>}
       <div className="archive-grid">
         {filteredMedia.map(media => <article key={media.src} id={mzigoMediaAnchor(media)} tabIndex={-1} className={media.kind === "video" ? "is-video" : undefined}>
           {media.kind === "video" ? <ArchiveVideo media={media} /> : <button type="button" onClick={() => setLightbox(media)} aria-label={`Enlarge ${media.alt}`}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></button>}
-          <div className="archive-caption"><span>{media.group?.replaceAll("-", " ")}</span><p>{media.caption}</p><small><time dateTime={media.capturedAt}>{media.capturedAt}</time> · {media.kind === "video" ? "Video" : "Photograph"}</small><a href={media.src} target="_blank" rel="noopener noreferrer">{media.kind === "video" ? "Open original video" : "Open original photo"}</a></div>
+          <div className="archive-caption"><span>{media.evidenceCategory?.replaceAll("-", " ") ?? media.group?.replaceAll("-", " ")}</span><p>{media.caption}</p><small><time dateTime={media.capturedAt}>{media.capturedAt}</time> · {media.kind === "video" ? "Video" : "Photograph"}</small><a href={media.src} target="_blank" rel="noopener noreferrer">{media.kind === "video" ? "Open original video" : "Open original photo"}</a></div>
         </article>)}
       </div>
       {!filteredMedia.length && <div className="empty-state"><p>{chapterMedia.length ? `No records match “${query}” in ${chapter.label}.` : chapter.empty}</p>{!!chapterMedia.length && <button type="button" onClick={() => setQuery("")}>Clear search</button>}</div>}
