@@ -1,9 +1,9 @@
 import type { Equipment, EquipmentSpecification, FactoryUpdate, GalleryImage } from "../types/equipment";
+import { equipmentImage as image } from "../lib/equipmentAssets";
 import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
 import { mzigoObservedSpecLabels } from "./mzigoPassport";
 import { standardPackageRules } from "./packageRules";
 
-const image = (name: string) => `/equipment/images/${name}`;
 const specs = (values: Array<[string, string, string?, string?]>): EquipmentSpecification[] => values.map(([label, value, group, source], sortOrder) => ({ label, value, group: group ?? "General", source, confirmed: true, sortOrder }));
 
 // Preserve the earlier assembly evidence as history when the latest update advances.
