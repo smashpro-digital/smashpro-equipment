@@ -61,8 +61,12 @@ for (const slug of (process.env.PASSPORT_SLUG ? [process.env.PASSPORT_SLUG] : ['
       await evaluate(`location.hash='history-mzigo-factory-complete'`);
       await waitFor(client,`document.querySelector('#history-mzigo-factory-complete')?.open === true`);
       await evaluate(`document.querySelector('#journey').scrollIntoView()`); await capture('journey');
-      await evaluate(`document.querySelector('#verification').scrollIntoView()`); await capture('requests');
+      await evaluate(`document.querySelector('#configuration').scrollIntoView()`); await capture('configuration');
+      await evaluate(`document.querySelector('#engineering').scrollIntoView()`); await capture('engineering');
+      await evaluate(`document.querySelector('#build-acceptance').scrollIntoView()`); await capture('build-acceptance');
+      await evaluate(`document.querySelector('#shipping-evidence').scrollIntoView()`); await capture('shipping-evidence');
       await evaluate(`document.querySelector('#evidence').scrollIntoView()`); await capture('archive');
+      metrics.mzigoTruth=await evaluate(`(()=>{const text=document.body.textContent;return {hero:document.querySelector('.mzigo-passport-hero>img')?.getAttribute('src'),finalConfiguration:!!document.querySelector('#configuration'),tieDown:document.querySelector('#tie-down-system')?.textContent.includes('no recovery or load rating is claimed'),pendingEvidenceSlots:[...document.querySelectorAll('.mzigo-evidence-slots details')].filter(d=>d.textContent.includes('Pending')).length,heldConceptLeak:/Pre-order now|Coming 2027/i.test(text),staleCurrent:/Pre-shipment verification is current|Factory build complete · pre-shipment verification/i.test(text)};})()`);
       const playback=[];
       for(const phase of ['factory-build','finished-machine']) {
         await evaluate(`location.hash='mzigo-archive-${phase}'`);
@@ -76,7 +80,7 @@ for (const slug of (process.env.PASSPORT_SLUG ? [process.env.PASSPORT_SLUG] : ['
       await waitFor(client,`document.querySelectorAll('.archive-grid article').length===1`);
       metrics.search=true;
       await evaluate(`(()=>{const input=document.querySelector('.archive-tools input');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'');input.dispatchEvent(new Event('input',{bubbles:true}));})()`);
-      await waitFor(client,`document.querySelectorAll('.archive-grid article').length===8`);
+      await waitFor(client,`document.querySelectorAll('.archive-grid article').length===14`);
       await evaluate(`document.querySelector('.archive-grid button').focus();document.querySelector('.archive-grid button').click()`);
       await waitFor(client,`document.querySelector('.mzigo-archive-lightbox').open`); await capture('photo');
       await client.send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
@@ -126,4 +130,4 @@ for (const slug of (process.env.PASSPORT_SLUG ? [process.env.PASSPORT_SLUG] : ['
 }
 } finally { await new Promise(resolve=>server.close(resolve)); }
 fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2));
-if(results.some(r=>r.scrollWidth>r.width||r.brokenImages.length||r.missingAlt||r.duplicates.length||r.errors.length||r.navigation.some(n=>!n.exists)||(r.slug==='sp-mzigo-26'&&(!r.search||!r.photoFocusRestored||!r.documentFocusRestored||!r.document.pending||r.document.printCalls!==1||(r.width===390&&(!r.documentError||!r.documentRetry||!r.pngExport)))))) process.exitCode=1;
+if(results.some(r=>r.scrollWidth>r.width||r.brokenImages.length||r.missingAlt||r.duplicates.length||r.errors.length||r.navigation.some(n=>!n.exists)||(r.slug==='sp-mzigo-26'&&(!r.search||!r.photoFocusRestored||!r.documentFocusRestored||!r.document.pending||r.document.printCalls!==1||!r.mzigoTruth.hero?.endsWith('sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg')||!r.mzigoTruth.finalConfiguration||!r.mzigoTruth.tieDown||r.mzigoTruth.pendingEvidenceSlots!==10||r.mzigoTruth.heldConceptLeak||r.mzigoTruth.staleCurrent||(r.width===390&&(!r.documentError||!r.documentRetry||!r.pngExport)))))) process.exitCode=1;

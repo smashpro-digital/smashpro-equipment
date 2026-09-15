@@ -37,6 +37,35 @@ export const mzigoConfirmedProduction = [
   "Build approved by SmashPro",
 ];
 
+export const mzigoFinalConfiguration = [
+  { label: "Fleet identity", value: "SP-MZIGO-26E", evidence: "Permanent Equipment Passport identity" },
+  { label: "OEM platform", value: "K600", evidence: "Recorded platform; manufacturer specification sheet pending" },
+  { label: "Machine type", value: "Electric remote-controlled material carrier", evidence: "Passport and factory record" },
+  { label: "Payload", value: "1,100 lb stated payload", evidence: "Supplier-stated; manufacturer engineering confirmation pending" },
+  { label: "Body", value: "SmashPro green cargo body", evidence: "Photographed" },
+  { label: "Chassis", value: "Black chassis", evidence: "Photographed" },
+  { label: "Wheels", value: "Black wheels and rims", evidence: "Photographed September 14–15" },
+  { label: "Battery enclosures", value: "Black battery boxes", evidence: "Photographed September 14" },
+  { label: "Material handling", value: "Hydraulic dump body", evidence: "Function photographed and filmed" },
+  { label: "Controls", value: "Remote control", evidence: "Supplied controller photographed" },
+  { label: "Lighting", value: "Factory work lighting", evidence: "Powered lights photographed" },
+  { label: "Identity graphics", value: "SmashPro graphics and Passport QR panel", evidence: "Photographed September 15" },
+  { label: "Securement hardware", value: "Bilateral tie-down / rope anchors", evidence: "Factory-installed transport hardware; no recovery rating claimed" },
+];
+
+export const mzigoShippingEvidenceSlots = [
+  { id: "final-payment", title: "Final payment evidence", status: "Pending", evidence: "Payment receipt or reconciled commercial record", advance: "Closes Final Payment only after evidence is recorded." },
+  { id: "commercial-invoice", title: "Final commercial invoice", status: "Pending", evidence: "Final supplier invoice suitable for the private procurement record", advance: "Supports export documentation without publishing confidential terms." },
+  { id: "packing-crating", title: "Packing and wooden crate", status: "Pending", evidence: "Packing list plus dated crate photographs", advance: "Advances Wooden Crate only when the unit is identifiable." },
+  { id: "factory-departure", title: "Factory departure", status: "Pending", evidence: "Dated handoff or transport record", advance: "Records physical departure from the factory." },
+  { id: "freight-booking", title: "Freight booking", status: "Pending", evidence: "Forwarder or carrier booking record", advance: "Records booking without implying loading or departure." },
+  { id: "carrier-container", title: "Carrier and container identifiers", status: "Pending", evidence: "Public-safe carrier, booking, container or bill-of-lading references", advance: "Identifiers remain empty until verified and approved for display." },
+  { id: "port-milestones", title: "Port milestones", status: "Pending", evidence: "Cargo-specific terminal or port records", advance: "Advances only the milestone supported by the record." },
+  { id: "vessel-ocean", title: "Vessel and ocean transit", status: "Pending", evidence: "Cargo-linked vessel/voyage evidence and documented departure", advance: "Vessel context alone does not prove cargo loading or departure." },
+  { id: "customs-delivery", title: "Customs and delivery", status: "Pending", evidence: "Import release, inland handoff and signed delivery evidence", advance: "Keeps customs and delivery as separate evidence gates." },
+  { id: "commissioning", title: "Commissioning and field validation", status: "Pending", evidence: "Arrival inspection, commissioning checklist and later field records", advance: "No operational readiness or field performance is claimed before completion." },
+];
+
 export const mzigoOptionGroups = [
   { title: "Exterior", options: ["Paint", "Wheel color", "Battery box", "Lighting", "Reflective decals", "Branding"] },
   { title: "Recovery", options: ["Tow hooks", "Tow hitch", "Tie-down packages"] },

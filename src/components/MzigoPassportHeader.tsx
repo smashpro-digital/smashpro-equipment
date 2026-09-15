@@ -3,15 +3,15 @@ import { PassportHero } from "./PassportHero";
 
 export function MzigoPassportHeader({ item }: { item: Equipment }) {
   const media = {
-    src: "/equipment/images/sp-mzigo-26e-hero-artwork-2026-09-09.png",
-    alt: "SP-MZIGO-26E brand illustration with a raised green dump body and remote controller in a SmashPro workshop",
+    src: item.heroImage,
+    alt: "Build-approved SP-MZIGO-26E factory profile with green cargo body, black wheels, SmashPro graphics and Equipment Passport QR panel",
   };
   return <>
     <PassportHero titleId="mzigo-passport-title" image={media.src} alt={media.alt} className="mzigo-passport-hero">
       <p className="eyebrow">{item.fleetId}</p>
       <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br />Carrier <span>{item.identity.factoryModel}</span></h1>
       <p>Build approved <b>·</b> Final payment pending</p>
-      <small className="mzigo-artwork-label">Brand illustration · See the actual machine in the factory archive</small>
+      <small className="mzigo-artwork-label">September 15 factory-completion evidence · Original available in Media History</small>
       <nav className="ardhi-v2-hero__actions" aria-label="MZIGO equipment passport chapters">
         <a href="#passport"><span aria-hidden="true">📘</span> Passport</a>
         <a href="#journey"><span aria-hidden="true">🌎</span> Journey</a>

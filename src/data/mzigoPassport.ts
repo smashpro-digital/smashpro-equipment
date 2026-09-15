@@ -2,13 +2,6 @@ import type { FleetLifecycleStage } from "../components/FleetLifecycleProgress";
 
 export const mzigoObservedSpecLabels = new Set(["Fleet ID", "Manufacturer", "Machine type", "Drive configuration", "Operation", "Dump bed", "Factory finish"]);
 
-export const mzigoCustomizations = [
-  { title: "Electric configuration", status: "Documented", detail: "Electric drive hardware and the supplied remote are recorded in the factory photographs and passport.", anchor: "#media-sp-mzigo-26e-motor-controller-detail-2026-09-09" },
-  { title: "SmashPro green finish and identity", status: "Installed", detail: "The green cargo body, SmashPro graphics, SP-MZIGO-26E fleet decal and QR panel remain installed in the September 15 build-approved profile.", anchor: "#media-sp-mzigo-26e-build-approved-left-profile-2026-09-15" },
-  { title: "Black wheels and battery boxes", status: "Installed", detail: "The September 14 evidence records both requested black finishes on the completed machine.", anchor: "#media-sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14" },
-  { title: "Tie-down anchors", status: "Installed", detail: "Added anchor hardware is recorded in a dedicated factory close-up. No recovery-load rating is inferred.", anchor: "#media-sp-mzigo-26e-tie-down-anchor-detail-2026-09-14" },
-];
-
 export const mzigoRequests = [
   { title: "Bolt-on fenders and mud guards", status: "Future wishlist", detail: "No fender or mud-guard installation is documented on the Founders Edition." },
   { title: "Tow hitch and rated recovery hooks", status: "Future engineering", detail: "Installed tie-down anchors are not represented as rated recovery points. Hitch and recovery hardware require a controlled design and rating." },

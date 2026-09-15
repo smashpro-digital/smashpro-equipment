@@ -5,7 +5,7 @@ import { PassportEvidenceRecord } from "./PassportEvidenceRecord";
 export function MzigoBuildStory() {
   return <section className="section shell mzigo-build-story" id="mzigo-build-story" aria-labelledby="mzigo-build-story-title">
     <header className="mzigo-build-story__intro">
-      <p className="eyebrow">Build Story · August 31–September 15, 2026</p>
+      <p className="eyebrow">Factory Build Journey · August 31–September 15, 2026</p>
       <h2 id="mzigo-build-story-title">From factory platform to SmashPro fleet machine.</h2>
       <p>Six evidence chapters preserve the original assembly record, completed configuration and approved revisions. Open a record for dated observations and operational context, then follow its links to the original media in the archive.</p>
     </header>

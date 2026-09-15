@@ -6,20 +6,24 @@ The generic lower gallery read only the August assembly entries in `equipment.ga
 
 MZIGO now uses the ARDHI archive's chapter-navigation and card styles. The canonical equipment gallery contains 24 authentic records: 22 photographs and two videos. Factory Build contains 10 records; Finished Machine contains 14. Export Journey, Delivery, Operation and Maintenance remain awaiting evidence, without implying those stages have happened.
 
-Six build chapters retain the original narrative and extend it with the September 14 revisions and September 15 build-approved profile. Their media links and the equipment timeline select the corresponding archive chapter and record. Full photographs and video players live in the archive. The previous concept artwork remains available through a separately labeled design-history link. The flagship hero is unchanged.
+Six build chapters retain the original narrative and extend it with the September 14 revisions and September 15 build-approved profile. Their media links and the equipment timeline select the corresponding archive chapter and record. Full photographs and video players live in the archive. The previous concept artwork remains available through a separately labeled, Passport-approved design-history link. The September 15 build-approved profile is now the Passport and public-index hero.
 
 ## Added September 14–15 production evidence
 
-| Original | Production filename | Dimensions | Category |
-| --- | --- | --- | --- |
-| IMG-20260915-WA0005.jpg | sp-mzigo-26e-raised-bed-engineering-overview-2026-09-14.jpg | 1280 x 960 | Hydraulics |
-| IMG-20260915-WA0004.jpg | sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg | 211 x 105 | Exterior |
-| IMG-20260915-WA0003.jpg | sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg | 960 x 1280 | Electrical |
-| IMG-20260915-WA0002.jpg | sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg | 1280 x 960 | Electrical |
-| IMG-20260915-WA0001.jpg | sp-mzigo-26e-raised-bed-drive-system-overview-2026-09-14.jpg | 1280 x 960 | Hydraulics |
-| IMG-20260915-WA0000.jpg | sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg | 1280 x 960 | QC |
+| Original | Production filename | Dimensions | Category | SHA-256 |
+| --- | --- | --- | --- | --- |
+| IMG-20260915-WA0005.jpg | sp-mzigo-26e-raised-bed-engineering-overview-2026-09-14.jpg | 1280 x 960 | Hydraulics | `a08978f6e04845d4e87ac64f9907809505df5d660c1400fef02526a081053cfd` |
+| IMG-20260915-WA0004.jpg | sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg | 211 x 105 | Exterior | `231d13423a9afe4fe977c64c3e31c02524aa430f0f4d0cca4367b7b9bf8b2305` |
+| IMG-20260915-WA0003.jpg | sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg | 960 x 1280 | Electrical | `8aebcea915ae65f51fb6550b1771a12549c4ce391d87aec9c1218191a6d605b1` |
+| IMG-20260915-WA0002.jpg | sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg | 1280 x 960 | Electrical | `6e696b762abf600e2221f4c076f398e20a980a40dad2bff80b6bd201cbabc492` |
+| IMG-20260915-WA0001.jpg | sp-mzigo-26e-raised-bed-drive-system-overview-2026-09-14.jpg | 1280 x 960 | Hydraulics | `6012d753689d33b9983fa9327a35008095423c15378b5a1cce1164d930130dd6` |
+| IMG-20260915-WA0000.jpg | sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg | 1280 x 960 | QC | `0d519da580fba50704d0b7198b956c105f4514adebb0a939bcc466e45a076e6f` |
 
 All six production files are byte-for-byte copies of the supplied JPEGs. Their category and approved-channel metadata is explicit. Shipping remains an empty evidence category until export media exists.
+
+## Held concept sources
+
+Three supplied PNG concepts are preserved byte-for-byte under `project_sources/sp-mzigo-26e/concepts/` with their hashes and review status. They are excluded from `images/`, the production build and every public-media channel. The 27E artwork contains unapproved “Coming 2027” and “Pre-order now” copy; the two 26E renderings depict future options that are not the as-built machine. See the adjacent source manifest for the complete record.
 
 ## Media reviewed on September 10, 2026
 

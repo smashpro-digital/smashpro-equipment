@@ -1,4 +1,4 @@
-import { readFileSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
 // Validate the exact original names referenced by the media data before deployment.
@@ -21,4 +21,9 @@ for (const name of files) {
   }
 }
 assert.ok(statSync('dist/sp-mzigo-26.html').size > 0);
+for (const heldConcept of [
+  'sp-mzigo-27e-2027-market-direction-concept.png',
+  'sp-mzigo-26e-green-option-study.png',
+  'sp-mzigo-26e-red-option-study.png',
+]) assert.equal(existsSync(`dist/images/${heldConcept}`), false, `${heldConcept}: held concept must not enter the public build`);
 console.log(`MZIGO media validation passed (${files.length} original factory files, including both videos).`);

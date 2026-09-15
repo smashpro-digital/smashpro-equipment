@@ -76,13 +76,15 @@ Visible evidence includes:
 - Front work lights powered
 - Completed wheels/tires and exterior body panels installed
 
-This evidence moves the public build state from **chassis/body assembly** to **Factory Build Complete / Pre-Shipment Verification**.
+At the time it was received, this evidence moved the record from **chassis/body assembly** to an interim **Factory Build Complete / Pre-Shipment Verification** state. The September 15 approval record below supersedes that state.
 
-The images demonstrate assembly completion and selected powered functions. They do **not** by themselves prove that the supplier's complete final inspection or full functional test protocol has been completed, so those milestones remain open until separately documented.
+The September 9 images demonstrate assembly completion and selected powered functions. They do **not** by themselves establish QC completion; the later supplier status records quality inspection complete and SmashPro build approval while the formal QC report remains pending.
 
 # September 14–15, 2026 Approval Update
 
 Four September 14 factory photographs document the requested black wheel finish, two black battery boxes, installed tie-down hardware, raised-bed maintenance access, electric drive hardware and hydraulic power unit. A September 15 completed profile preserves the final green body, SmashPro logo, SP-MZIGO-26E decal and QR panel.
+
+These photographs document visible configuration and condition; they do **not** by themselves prove payload, electrical, hydraulic, securement or recovery ratings.
 
 The supplied production status separately records **quality inspection passed** and **build approved by SmashPro**. Those confirmations advance the unit beyond pre-shipment verification. They do not establish payment, crating, export, port, vessel, departure, delivery or commissioning.
 
@@ -118,7 +120,7 @@ Representative verified files reviewed for this update:
 The public passport uses the original files in `images/`, served under
 `/equipment/images/`. No files are renamed or replaced with placeholders.
 
-| Build Story chapter | Original factory media |
+| Factory Build Journey chapter | Original factory media |
 |---|---|
 | 01 — Factory Identity | `sp-mzigo-26e-factory-complete-left-profile-2026-09-09.jpg` |
 | 02 — SmashPro Branding | `sp-mzigo-26e-control-panel-2026-09-09.jpg`; `sp-mzigo-26e-rear-branding-2026-09-09.jpg` |
@@ -127,9 +129,9 @@ The public passport uses the original files in `images/`, served under
 | 05 — Approved Revisions | `sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg`; `sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg`; `sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg` |
 | 06 — Build-Approved Machine | `sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg` |
 
-The brand illustration remains the Passport hero; the September 9 three-quarter
-photograph remains the walkaround poster. August 31 assembly photographs and video
-remain in Media History. The Build Story renders through React using the existing
+The September 15 build-approved profile is the Passport and public-index hero; the September 9 three-quarter
+photograph remains the walkaround poster. The earlier brand illustration remains in the explicitly allowlisted design history. August 31 assembly photographs and video
+remain in Media History. The Factory Build Journey renders through React using the existing
 `GalleryImage` and `FactoryUpdate` contracts. Video uses native inline controls,
 metadata preload and a direct-file fallback; it does not autoplay.
 
@@ -137,6 +139,21 @@ Build validation verifies all 25 curated factory files reach `dist/images/` unch
 including two binary MP4 files rather than Git LFS pointers. The supplied production
 status records quality inspection passed; shipment remains upcoming. This update adds
 no new electrical ratings.
+
+# Final Configuration
+
+| Field | Founders Edition record | Evidence status |
+| --- | --- | --- |
+| Fleet identity | SP-MZIGO-26E | Permanent Passport identity |
+| OEM platform | K600 | Recorded; manufacturer specification sheet pending |
+| Machine type | Electric remote-controlled material carrier | Passport and factory record |
+| Payload | 1,100 lb stated payload | Supplier-stated; manufacturer engineering confirmation pending |
+| Exterior | Green body, black chassis, black wheels and rims, black battery boxes | Photographed September 14–15 |
+| Material handling | Hydraulic dump body | Function photographed and filmed |
+| Controls | Remote control | Supplied controller photographed; range and operating limits pending documentation |
+| Lighting | Factory work lighting | Powered lights photographed |
+| Identity | SmashPro graphics and Equipment Passport QR panel | Photographed September 15 |
+| Securement | Bilateral tie-down / rope anchors | Factory-installed transport hardware; no recovery or load rating claimed |
 
 ## Powertrain
 
@@ -199,10 +216,13 @@ Primary intended material roles include mulch, pine straw, gravel, decorative ro
 
 - GPS Asset Tracking
 - Fleet Telemetry
-- Equipment QR Identification
+- NFC identity integration
 - Enhanced battery options
-- Additional fleet lighting where field use demonstrates a need
-- Recovery and towing accessories
+- Controller and accessory-power options
+- Fenders and mud guards
+- Wider tire and wheel packages
+- Upgraded lighting and underglow packages
+- Engineered tow and recovery hardware
 
 # Engineering
 
@@ -273,6 +293,8 @@ Open milestones requiring separate confirmation:
 - U.S. delivery
 - Customs release
 - Fleet commissioning
+
+Prepared evidence slots retain separate gates for final-payment evidence, the final commercial invoice, packing and crating photographs, factory departure, freight booking, carrier and container identifiers, port milestones, cargo-linked vessel information, ocean transit, customs release, delivery, commissioning and field validation. The September 15 supplier update says final payment is planned this week; no payment completion is published until its record exists.
 
 ---
 

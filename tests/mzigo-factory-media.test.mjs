@@ -31,7 +31,7 @@ const mzigo = equipment.find(item => item.fleetId === 'SP-MZIGO-26E');
 const { mzigoArchiveChapters, mzigoArchiveSelection, mzigoArchiveTarget, mzigoMediaAnchor } = load('src/domain/mzigoArchive.ts');
 const { MzigoMediaArchive } = load('src/components/MzigoMediaArchive.tsx');
 const { MzigoOemPlatform } = load('src/components/MzigoOemPlatform.tsx');
-const { approvedMzigoMedia, mzigoEvidenceCategories, mzigoMarketSegments, mzigoOptionGroups } = load('src/data/mzigoPlatform.ts');
+const { approvedMzigoMedia, mzigoEvidenceCategories, mzigoFinalConfiguration, mzigoMarketSegments, mzigoOptionGroups, mzigoShippingEvidenceSlots } = load('src/data/mzigoPlatform.ts');
 
 test('six build chapters preserve the original build and approved revisions', () => {
   assert.deepEqual(mzigoBuildChapters.map(c => c.title), ['Factory Identity', 'SmashPro Branding', 'Electric Drive Architecture', 'Hydraulic Dump System', 'Approved Revisions', 'Build-Approved Machine']);
@@ -131,15 +131,16 @@ test('current canonical state records build approval while payment and transport
   assert.ok(mzigo.factoryUpdate.images.every(m => /2026-09-(14|15)/.test(m.src)));
 });
 
-test('Mzigo shares the documentary hero and keeps four asset destinations and three summary fields', () => {
+test('Mzigo uses the build-approved factory photograph as its documentary hero', () => {
   const html = renderToStaticMarkup(React.createElement(MzigoPassportHeader, { item: mzigo }));
   assert.ok(html.indexOf('id="identity"') < html.indexOf('class="status-panel"'));
   assert.ok(html.indexOf('class="ardhi-v2-hero mzigo-passport-hero"') < html.indexOf('id="identity"'));
   assert.equal((html.match(/class="passport-summary-item"/g) || []).length, 3);
   assert.doesNotMatch(html, /Passport Number|Fleet Class|Current Owner/);
-  assert.match(html, /src="\/equipment\/images\/sp-mzigo-26e-hero-artwork-2026-09-09\.png"/);
-  assert.match(html, /alt="SP-MZIGO-26E brand illustration/);
-  assert.ok(!html.includes(mzigoFactoryPhotos.complete.src));
+  assert.match(html, /src="\/equipment\/images\/sp-mzigo-26e-build-approved-left-profile-2026-09-15\.jpg"/);
+  assert.match(html, /alt="Build-approved SP-MZIGO-26E factory profile/);
+  assert.match(html, /September 15 factory-completion evidence/);
+  assert.equal(mzigo.heroImage, mzigoFactoryPhotos.approvedProfile.src);
   assert.match(html, /SmashPro<br\/>Electric Material<br\/>/);
   for (const anchor of ['passport', 'journey', 'history', 'service']) assert.ok(html.includes(`href="#${anchor}"`));
   assert.doesNotMatch(html, /Asset #001/);
@@ -198,8 +199,9 @@ test('lean passport preserves its destinations and separates requests from confi
   const { MzigoPassport } = load('src/components/MzigoPassport.tsx');
   const html = renderToStaticMarkup(React.createElement(MzigoPassport, {item:mzigo}));
   for (const id of ['passport','identity','journey','history','service','projects','configuration','verification','specifications','documents','evidence','mzigo-build-story','mzigo-configuration-document']) assert.ok(html.includes(`id="${id}"`), id);
-  assert.match(html, /Configured for SmashPro/);
-  assert.match(html, /Black wheels and battery boxes/);
+  assert.match(html, /Final Configuration/);
+  assert.match(html, /Black wheels and rims/);
+  assert.match(html, /Black battery boxes/);
   assert.match(html, /Tie-down anchors/);
   assert.match(html, /Future engineering/);
   assert.match(html, /Manufacturer verification pending/);
@@ -238,10 +240,21 @@ test('OEM platform keeps catalog identity separate and covers requested segments
 
 test('platform presentation includes engineering, collaboration, media, systems and roadmap without inventing availability', () => {
   const html = renderToStaticMarkup(React.createElement(MzigoOemPlatform, { item: mzigo }));
-  for (const id of ['engineering','production-notes','oem-collaboration','product-platform','platform-options','media-pipeline','fleet-integration','product-roadmap','passport-record']) assert.ok(html.includes(`id="${id}"`), id);
-  for (const text of ['Battery boxes','Dual drive motors','Hydraulic power unit','Tie-down anchors','SP-MTC-001','Shandong Kylin Heavy Industry Machinery Co., Ltd.','SP-MZIGO-27E']) assert.ok(html.includes(text), text);
+  for (const id of ['engineering','build-acceptance','tie-down-system','remote-control','qc-build-approval','production-notes','oem-collaboration','product-platform','platform-options','media-pipeline','fleet-integration','shipping-evidence','product-roadmap','passport-record']) assert.ok(html.includes(`id="${id}"`), id);
+  for (const text of ['Battery boxes','Dual drive motors','Hydraulic power unit','Tie-Down System','Remote Control','QC / Build Approval','SP-MTC-001','Shandong Kylin Heavy Industry Machinery Co., Ltd.','SP-MZIGO-27E']) assert.ok(html.includes(text), text);
   assert.match(html, /No rated recovery point is documented/);
   assert.match(html, /no build, specification or availability is claimed/i);
+  assert.match(html, /recorded only as transport securement hardware/i);
+  assert.match(html, /final payment is planned this week/i);
+  assert.equal((html.match(/<details/g) || []).length, mzigoOptionGroups.length + mzigoShippingEvidenceSlots.length + 11);
+});
+
+test('final configuration distinguishes photographed facts from supplier-stated payload', () => {
+  assert.equal(mzigoFinalConfiguration.length, 13);
+  assert.deepEqual(mzigoFinalConfiguration.find(fact => fact.label === 'Payload'), {
+    label: 'Payload', value: '1,100 lb stated payload', evidence: 'Supplier-stated; manufacturer engineering confirmation pending',
+  });
+  assert.match(mzigoFinalConfiguration.find(fact => fact.label === 'Securement hardware').evidence, /no recovery rating claimed/i);
 });
 
 test('media categories and explicit channel allowlists preserve empty shipping evidence', () => {
@@ -250,7 +263,25 @@ test('media categories and explicit channel allowlists preserve empty shipping e
   assert.equal(mzigo.gallery.some(media => media.evidenceCategory === 'shipping'), false);
   assert.equal(approvedMzigoMedia(mzigo.gallery, 'social-media').length, 4);
   assert.ok(approvedMzigoMedia(mzigo.gallery, 'qr-pages').some(media => media.id === 'sp-mzigo-26e-build-approved-left-profile-2026-09-15'));
-  assert.ok(mzigo.gallery.filter(media => media.approvedChannels).every(media => media.approvedChannels.includes('passport') && media.approvedChannels.includes('equipment-gallery')));
+  assert.ok(mzigo.gallery.filter(media => media.group && media.approvedChannels).every(media => media.approvedChannels.includes('passport') && media.approvedChannels.includes('equipment-gallery')));
+  const concept = mzigo.gallery.find(media => media.id === 'sp-mzigo-26e-earlier-concept');
+  assert.deepEqual(concept.approvedChannels, ['passport']);
+});
+
+test('new marketing concepts are preserved as held source files and excluded from public data', () => {
+  const held = new Map([
+    ['project_sources/sp-mzigo-26e/concepts/sp-mzigo-27e-2027-market-direction-concept.png', '5da1d47f0ea1a51ab6ae25aa5d3ad5747549315186008f2fd8de390d7c272b7c'],
+    ['project_sources/sp-mzigo-26e/concepts/sp-mzigo-26e-green-option-study.png', 'bc59b780deac84604ede3c4f97384e8b6419a991107cd122db70c32698f0a1c7'],
+    ['project_sources/sp-mzigo-26e/concepts/sp-mzigo-26e-red-option-study.png', 'dccbb76dc17bfc35a014d292f68956297113f837d09f51f8a5ce7596012185b3'],
+  ]);
+  const publicData = `${readFileSync('src/data/equipment.ts','utf8')}\n${readFileSync('src/data/mzigoPlatform.ts','utf8')}`;
+  for (const [path, hash] of held) {
+    const bytes = readFileSync(path);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), hash);
+    assert.equal(bytes.subarray(1, 4).toString(), 'PNG');
+    assert.ok(!publicData.includes(path.split('/').pop()));
+  }
+  assert.match(readFileSync('project_sources/sp-mzigo-26e/concepts/README.md','utf8'), /production build does not copy this directory/i);
 });
 
 test('manufacturer-unverified ratings remain recorded but are not marked confirmed', () => {

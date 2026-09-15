@@ -24,7 +24,7 @@ export function MzigoMediaArchive({ item }: { item: Equipment }) {
   const chapter = mzigoArchiveChapters.find(entry => entry.id === chapterId)!;
   const chapterMedia = mzigoArchiveSelection(item.gallery, chapterId);
   const filteredMedia = mzigoArchiveSelection(item.gallery, chapterId, query, category === "all" ? undefined : category);
-  const concepts = item.gallery.filter(media => !media.group);
+  const concepts = item.gallery.filter(media => !media.group && media.approvedChannels?.includes("passport"));
 
   useEffect(() => {
     const followHash = () => {
