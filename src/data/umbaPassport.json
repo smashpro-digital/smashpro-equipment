@@ -52,5 +52,14 @@
             "purpose": "remote_print_monitoring",
             "qc_evidence": false
         }
-    ]
+    ],
+    "runtime": {
+        "label": "Break-in runtime",
+        "verified_baseline_minutes": 203,
+        "verified_baseline_hours": 3.38,
+        "verified_baseline_source": "MANUAL_CONFIRMED",
+        "verified_baseline_recorded_at": "2026-09-17T15:08:28-04:00",
+        "additional_runtime_status": "pending_backfill",
+        "tracking_status": "edge_commissioning_required"
+    }
 }
