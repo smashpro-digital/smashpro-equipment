@@ -37,9 +37,16 @@ test("direct-load shell and router resolve the permanent public URL", () => {
 
 test("approved projection contains only public facts and does not advance validation", () => {
   const publicRecord = JSON.parse(readFileSync("src/data/umbaPassport.json", "utf8"));
-  assert.deepEqual(Object.keys(publicRecord).sort(), ["asset_id", "fleet_id", "passport_id", "public_equipment_url", "manufacturer", "factory_model", "asset_class", "division", "model_year", "lifecycle_state", "configuration", "capabilities", "material_authorizations"].sort());
+  assert.deepEqual(Object.keys(publicRecord).sort(), ["asset_id", "fleet_id", "passport_id", "public_equipment_url", "manufacturer", "factory_model", "asset_class", "division", "model_year", "lifecycle_state", "configuration", "capabilities", "material_authorizations", "modifications"].sort());
   assert.deepEqual(Object.keys(publicRecord.configuration).sort(), ["multi_color", "filament_system", "enclosure_state"].sort());
   for (const row of publicRecord.material_authorizations) assert.deepEqual(Object.keys(row).sort(), ["material", "status"]);
+  assert.equal(publicRecord.modifications.length, 1);
+  assert.equal(publicRecord.modifications[0].id, "flashforge-ad5x-camera-kit");
+  assert.equal(publicRecord.modifications[0].acquisition_status, "purchased");
+  assert.equal(publicRecord.modifications[0].installation_status, "pending_verification");
+  assert.equal(publicRecord.modifications[0].operational_status, "not_commissioned");
+  assert.equal(publicRecord.modifications[0].qc_evidence, false);
+  assert.equal(item.upgrades.find(row => row.id === "flashforge-ad5x-camera-kit").status, "ordered");
   assert.doesNotMatch(JSON.stringify(item), /camera_url|machine_credentials|exact_location|api_key|internal_cost|operator_private_data|network_details|serial_number/);
   assert.equal(publicRecord.configuration.enclosure_state, "not_verified");
   assert.equal(item.commissioning.materials.find(row => row.material === "PETG").status, "planned_validation");
