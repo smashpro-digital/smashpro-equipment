@@ -32,7 +32,7 @@ export const umbaEquipment: Equipment = {
     verifiedBaselineRecordedAt: passport.runtime.verified_baseline_recorded_at,
     additionalRuntimeStatus: passport.runtime.additional_runtime_status,
     trackingStatus: passport.runtime.tracking_status,
-    endpoint: "/dashboard/api/microfab_public_runtime.php?fleet_id=SP-UMBA-26",
+    endpoint: "/api/microfab_public_runtime.php?fleet_id=SP-UMBA-26",
   },
   factoryOptions: [], upgrades: [
     {
