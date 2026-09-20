@@ -54,12 +54,18 @@
         }
     ],
     "runtime": {
-        "label": "Break-in runtime",
+        "label": "Lifetime machine runtime",
         "verified_baseline_minutes": 203,
         "verified_baseline_hours": 3.38,
         "verified_baseline_source": "MANUAL_CONFIRMED",
         "verified_baseline_recorded_at": "2026-09-17T15:08:28-04:00",
         "additional_runtime_status": "pending_backfill",
-        "tracking_status": "edge_commissioning_required"
+        "tracking_status": "edge_commissioning_required",
+        "verified_runtime_minutes": 563,
+        "verified_runtime_hours": 9.38,
+        "verified_runtime_source": "MANUAL_CONFIRMED",
+        "verified_runtime_recorded_at": "2026-09-20T00:14:00-04:00",
+        "known_completed_runs": 6,
+        "pending_runtime_runs": 4
     }
 }

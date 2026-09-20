@@ -24,3 +24,14 @@
 .commissioning-stages li[data-state="current"] { border-color: var(--passport-accent); }
 .commissioning-stages span { display: block; color: #aeb9aa; margin-top: 8px; }
 @media (max-width: 700px) { .commissioning-hero { grid-template-columns: 1fr; padding-top: 28px; } .commissioning-materials { grid-template-columns: 1fr; } .commissioning-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } .commissioning-passport .spec-grid { grid-template-columns: 1fr; } }
+
+.commissioning-run-log { margin-top: 24px; border: 1px solid #30382e; border-radius: 12px; padding: 24px; background: #0d130c; }
+.commissioning-run-log h3 { margin-top: 0; }
+.commissioning-run-log ol { list-style: none; margin: 0; padding: 0; }
+.commissioning-run-log li { display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid #273024; }
+.commissioning-run-log li:first-child { border-top: 0; }
+.commissioning-run-log li > div { min-width: 0; }
+.commissioning-run-log code { display: block; color: #d9efd0; overflow-wrap: anywhere; }
+.commissioning-run-log span { display: block; margin-top: 6px; color: #98a794; font-size: .84rem; }
+.commissioning-run-log strong { white-space: nowrap; color: #b7e685; }
+@media (max-width: 700px) { .commissioning-run-log li { display: block; } .commissioning-run-log strong { display: block; margin-top: 8px; } }
