@@ -1,3 +1,4 @@
+import { umbaEquipment } from "./umbaEquipment";
 import type { Equipment, EquipmentSpecification, FactoryUpdate, GalleryImage } from "../types/equipment";
 import { equipmentImage as image } from "../lib/equipmentAssets";
 import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
@@ -192,6 +193,7 @@ export const equipment: Equipment[] = [
     partners: [{ id: "mzigo-kylin-factory-collaboration", brand: "Shandong Kylin Heavy Industry Machinery Co., Ltd.", category: "Factory / OEM", relationship: "Founders Edition build collaborator", description: "Factory partner for the K600 platform, SmashPro finish, branding, wheel, battery-box and tie-down revisions documented for SP-MZIGO-26E.", status: "completed", storyUrl: "#oem-collaboration" }],
     gallery: [{ id: "sp-mzigo-26e-earlier-concept", src: image("sp-mzigo-26e-hero.png"), alt: "Earlier SP-MZIGO-26E electric material carrier concept artwork", caption: "Earlier SmashPro electric fleet concept · not factory evidence", approvedChannels: ["passport"] }, ...mzigoAugustFactoryUpdate.images.map(media => ({ ...media, group: "assembly" as const, evidenceCategory: "factory-progress" as const, approvedChannels: ["passport", "equipment-gallery"] as GalleryImage["approvedChannels"] })), { ...mzigoAugustFactoryUpdate.video, kind: "video", group: "assembly", capturedAt: "2026-08-31", evidenceCategory: "factory-progress", approvedChannels: ["passport", "equipment-gallery"] as GalleryImage["approvedChannels"] }, ...mzigoFactoryGallery], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Inspection", detail: "Checkout and return inspections will apply when rental access launches." }],
   },
+  umbaEquipment,
 ];
 
 export const equipmentByPath = new Map(equipment.map((item) => [item.publicPath, item]));

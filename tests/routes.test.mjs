@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
-const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "admin.html"];
+const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "sp-umba-26.html", "admin.html"];
 
 test("protected HTML entry files exist", () => {
   entries.forEach((entry) => assert.equal(existsSync(entry), true, `${entry} must exist`));
@@ -486,7 +486,7 @@ test("equipment media uses standardized fleet-prefixed filenames", () => {
     .map((entry) => `${entry.parentPath.replaceAll("\\", "/")}/${entry.name}`.replace(/^images\//, ""));
   assert.ok(mediaFiles.length >= 26, "the full equipment media set should remain present");
   mediaFiles.forEach((relativePath) => {
-    assert.match(relativePath, /^sp-[a-z0-9-]+\.(?:jpg|png|webp|mp4)$/);
+    assert.match(relativePath, /^sp-[a-z0-9-]+\.(?:jpg|png|webp|mp4|svg)$/);
     assert.doesNotMatch(relativePath, /Alibaba|PNM|[ ()]|[A-Z]/);
   });
   const repoReferences = ["index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "src/data/equipment.ts", "src/pages/HomePage.tsx"]

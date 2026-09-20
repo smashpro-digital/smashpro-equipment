@@ -180,7 +180,7 @@ test('build chapters are compact dated records with observations separate from m
 });
 
 test('August evidence and existing equipment identities remain available', () => {
-  assert.deepEqual(equipment.map(e => e.fleetId), ['SP-ARDHI-26','SP-MZIGO-26E']);
+  assert.deepEqual(equipment.map(e => e.fleetId), ['SP-ARDHI-26','SP-MZIGO-26E','SP-UMBA-26']);
   const earlier = mzigo.gallery.filter(m => m.src.includes('2026-08-31'));
   assert.equal(earlier.length, 3);
   earlier.forEach(m => assert.ok(existsSync(m.src.replace('/equipment/', ''))));

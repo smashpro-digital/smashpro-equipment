@@ -1,0 +1,44 @@
+import type { Equipment } from "../types/equipment";
+import passport from "./umbaPassport.json";
+
+// Approved projection of Digital HQ SP-3DP-001, not another operational asset.
+export const umbaEquipment: Equipment = {
+  slug: "sp-umba-26", publicPath: "/sp-umba-26.html", fleetId: passport.fleet_id,
+  name: "Umba", category: "FDM 3D Printer / MicroFab additive manufacturing",
+  manufacturer: passport.manufacturer, operationalAssetId: passport.asset_id, division: passport.division,
+  meaning: "", slogan: "From idea to physical form.",
+  overview: "SP-UMBA-26 is SmashPro MicroFab's FlashForge AD5X multicolor FDM printer. Its existing operational identity is SP-3DP-001. Commissioning and material validation remain in progress.",
+  capabilityStatement: "Multicolor FDM fabrication for prototypes, fixtures, adapters and small-batch development, subject to process validation.",
+  heroImage: "/equipment/images/sp-umba-26-identity.svg", status: "commissioning", statusLabel: "Commissioning",
+  statusDetail: "Machine identity is documented. Production readiness and material approvals require separate validation.",
+  identity: { passportId: passport.passport_id, model: passport.fleet_id, factoryModel: passport.factory_model, edition: "MicroFab", assetClass: "FDM 3D Printer", modelYear: passport.model_year },
+  specifications: [
+    { label: "OEM model", value: `${passport.manufacturer} ${passport.factory_model}`, confirmed: true },
+    { label: "Machine type", value: "FDM 3D Printer", confirmed: true },
+    { label: "Filament system", value: passport.configuration.filament_system, confirmed: true },
+    { label: "Multicolor", value: passport.configuration.multi_color ? "Configured for multicolor FDM" : "Not verified", confirmed: true },
+  ],
+  commissioning: {
+    materials: passport.material_authorizations.map(row => ({ material: row.material, status: row.status })),
+    enclosureStatus: "Enclosure project: installation and ventilation not verified. Engineering-material use remains blocked pending enclosure, ventilation and process validation.",
+    modificationStatus: "No completed modifications are documented in the approved public record. The enclosure project has not been verified as installed.",
+    maintenanceStatus: "No approved service entries have been published. This does not establish that no service has occurred. Future entries record date, service performed, evidence and verified runtime when available.",
+  },
+  factoryOptions: [], upgrades: [], packageRules: [], attachments: [], includedItems: [], documents: [], serviceHistory: [],
+  timeline: [
+    { id: "operational-asset", kind: "state", title: "Operational asset registered", detail: "The existing SP-3DP-001 record identifies the FlashForge AD5X. Registration date is not published.", publicDisplay: true },
+    { id: "commissioning", kind: "status", title: "Commissioning in progress", detail: "Multicolor FDM and the IFS filament system are recorded. Material validation and production release remain separate milestones.", publicDisplay: true },
+    { id: "fleet-name", kind: "state", occurredAt: "2026-09-19", title: "SP-UMBA-26 identity assigned", detail: "The machine gains a SmashPro fleet name and permanent passport while retaining SP-3DP-001 as its operational ID.", publicDisplay: true },
+  ],
+  lifecycleMilestones: [
+    { id: "record", label: "Identity documented", status: "completed", photos: [], videos: [] },
+    { id: "commissioning", label: "Commissioning", status: "current", photos: [], videos: [] },
+    { id: "validation", label: "Process validation", status: "upcoming", photos: [], videos: [] },
+    { id: "release", label: "Production release", status: "upcoming", photos: [], videos: [] },
+  ],
+  media: [], scores: { documentation: 0, maintenance: 0 }, valuation: { currency: "USD", status: "pending" },
+  capabilities: ["Multicolor FDM", "Functional prototypes", "Fixture and adapter development", "Small-batch development"],
+  idealUses: ["Prototype development", "Fixture and adapter research"],
+  restrictions: ["Commissioning is not a production approval.", "Material suitability and finished-part QC require job-specific validation."],
+  gallery: [], requirements: [],
+};

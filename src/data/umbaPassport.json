@@ -1,0 +1,42 @@
+{
+    "asset_id": "SP-3DP-001",
+    "fleet_id": "SP-UMBA-26",
+    "passport_id": "SPP-2026-0003",
+    "public_equipment_url": "https://smashpro.app/equipment/sp-umba-26.html",
+    "manufacturer": "FlashForge",
+    "factory_model": "AD5X",
+    "asset_class": "fdm_3d_printer",
+    "division": "SmashPro MicroFab",
+    "model_year": 2026,
+    "lifecycle_state": "commissioning",
+    "configuration": {
+        "multi_color": true,
+        "filament_system": "IFS",
+        "enclosure_state": "not_verified"
+    },
+    "capabilities": [
+        "FDM_PRINT",
+        "MULTICOLOR_FDM",
+        "FUNCTIONAL_PROTOTYPE",
+        "SMALL_BATCH_PRODUCTION",
+        "FIXTURE_AND_ADAPTER_RND"
+    ],
+    "material_authorizations": [
+        {
+            "material": "PLA",
+            "status": "commissioning"
+        },
+        {
+            "material": "PETG",
+            "status": "planned_validation"
+        },
+        {
+            "material": "TPU",
+            "status": "planned_validation"
+        },
+        {
+            "material": "ABS_ASA_OR_ENGINEERING",
+            "status": "blocked_pending_enclosure_ventilation_and_process_validation"
+        }
+    ]
+}
