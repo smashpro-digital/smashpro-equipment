@@ -24,6 +24,16 @@ export const umbaEquipment: Equipment = {
     modificationStatus: "FlashForge Camera Kit purchased for remote print monitoring. Installation and operational commissioning remain pending verification; camera monitoring does not by itself constitute QC evidence. The enclosure project has not been verified as installed.",
     maintenanceStatus: "No approved service entries have been published. This does not establish that no service has occurred. Future entries record date, service performed, evidence and verified runtime when available.",
   },
+  publicRuntime: {
+    label: passport.runtime.label,
+    verifiedBaselineMinutes: passport.runtime.verified_baseline_minutes,
+    verifiedBaselineHours: passport.runtime.verified_baseline_hours,
+    verifiedBaselineSource: passport.runtime.verified_baseline_source,
+    verifiedBaselineRecordedAt: passport.runtime.verified_baseline_recorded_at,
+    additionalRuntimeStatus: passport.runtime.additional_runtime_status,
+    trackingStatus: passport.runtime.tracking_status,
+    endpoint: "/dashboard/api/microfab_public_runtime.php?fleet_id=SP-UMBA-26",
+  },
   factoryOptions: [], upgrades: [
     {
       id: "flashforge-ad5x-camera-kit",
@@ -41,6 +51,7 @@ export const umbaEquipment: Equipment = {
     { id: "operational-asset", kind: "state", title: "Operational asset registered", detail: "The existing SP-3DP-001 record identifies the FlashForge AD5X. Registration date is not published.", publicDisplay: true },
     { id: "commissioning", kind: "status", title: "Commissioning in progress", detail: "Multicolor FDM and the IFS filament system are recorded. Material validation and production release remain separate milestones.", publicDisplay: true },
     { id: "fleet-name", kind: "state", occurredAt: "2026-09-19", title: "SP-UMBA-26 identity assigned", detail: "The machine gains a SmashPro fleet name and permanent passport while retaining SP-3DP-001 as its operational ID.", publicDisplay: true },
+    { id: "breakin-runtime-baseline", kind: "hours", occurredAt: "2026-09-17", title: "Break-in runtime baseline recorded", detail: "The first verified commissioning run records 203 machine minutes (3.38 hours). Additional successful jobs remain pending runtime backfill until their durations are available.", publicDisplay: true },
     { id: "camera-kit-purchased", kind: "purchase", title: "FlashForge camera kit purchased", detail: "Official FlashForge camera kit acquired for remote print monitoring. Installation and commissioning remain pending verification, and monitoring footage is not treated as QC evidence by itself.", publicDisplay: true },
   ],
   lifecycleMilestones: [
