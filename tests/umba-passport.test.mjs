@@ -52,7 +52,7 @@ test("approved projection contains only public facts and does not advance valida
   assert.equal(publicRecord.runtime.additional_runtime_status, "pending_backfill");
   assert.equal(publicRecord.runtime.tracking_status, "edge_commissioning_required");
   assert.equal(item.publicRuntime.verifiedBaselineMinutes, 203);
-  assert.equal(item.publicRuntime.endpoint, "/dashboard/api/microfab_public_runtime.php?fleet_id=SP-UMBA-26");
+  assert.equal(item.publicRuntime.endpoint, "/api/microfab_public_runtime.php?fleet_id=SP-UMBA-26");
   assert.ok(item.timeline.some(row => row.id === "breakin-runtime-baseline" && row.kind === "hours"));
   assert.equal(item.upgrades.find(row => row.id === "flashforge-ad5x-camera-kit").status, "ordered");
   assert.doesNotMatch(JSON.stringify(item), /camera_url|machine_credentials|exact_location|api_key|internal_cost|operator_private_data|network_details|serial_number/);
