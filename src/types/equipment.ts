@@ -51,8 +51,19 @@ export interface CommissioningRecord {
   enclosureStatus: string; modificationStatus: string; maintenanceStatus: string;
 }
 
+export interface EquipmentPublicRuntime {
+  label: string;
+  verifiedBaselineMinutes: number;
+  verifiedBaselineHours: number;
+  verifiedBaselineSource: string;
+  verifiedBaselineRecordedAt?: string;
+  additionalRuntimeStatus: string;
+  trackingStatus: string;
+  endpoint?: string;
+}
+
 export interface Equipment {
-  manufacturer?: string; operationalAssetId?: string; division?: string; commissioning?: CommissioningRecord;
+  manufacturer?: string; operationalAssetId?: string; division?: string; commissioning?: CommissioningRecord; publicRuntime?: EquipmentPublicRuntime;
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
   overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
