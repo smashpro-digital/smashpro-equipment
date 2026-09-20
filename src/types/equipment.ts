@@ -53,6 +53,10 @@ export interface CommissioningRecord {
 
 export interface EquipmentPublicRuntime {
   label: string;
+  verifiedRuntimeMinutes?: number;
+  verifiedRuntimeHours?: number;
+  verifiedRuntimeSource?: string;
+  verifiedRuntimeRecordedAt?: string;
   verifiedBaselineMinutes: number;
   verifiedBaselineHours: number;
   verifiedBaselineSource: string;
