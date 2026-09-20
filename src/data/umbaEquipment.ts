@@ -26,6 +26,10 @@ export const umbaEquipment: Equipment = {
   },
   publicRuntime: {
     label: passport.runtime.label,
+    verifiedRuntimeMinutes: passport.runtime.verified_runtime_minutes,
+    verifiedRuntimeHours: passport.runtime.verified_runtime_hours,
+    verifiedRuntimeSource: passport.runtime.verified_runtime_source,
+    verifiedRuntimeRecordedAt: passport.runtime.verified_runtime_recorded_at,
     verifiedBaselineMinutes: passport.runtime.verified_baseline_minutes,
     verifiedBaselineHours: passport.runtime.verified_baseline_hours,
     verifiedBaselineSource: passport.runtime.verified_baseline_source,
@@ -51,7 +55,8 @@ export const umbaEquipment: Equipment = {
     { id: "operational-asset", kind: "state", title: "Operational asset registered", detail: "The existing SP-3DP-001 record identifies the FlashForge AD5X. Registration date is not published.", publicDisplay: true },
     { id: "commissioning", kind: "status", title: "Commissioning in progress", detail: "Multicolor FDM and the IFS filament system are recorded. Material validation and production release remain separate milestones.", publicDisplay: true },
     { id: "fleet-name", kind: "state", occurredAt: "2026-09-19", title: "SP-UMBA-26 identity assigned", detail: "The machine gains a SmashPro fleet name and permanent passport while retaining SP-3DP-001 as its operational ID.", publicDisplay: true },
-    { id: "breakin-runtime-baseline", kind: "hours", occurredAt: "2026-09-17", title: "Break-in runtime baseline recorded", detail: "The first verified commissioning run records 203 machine minutes (3.38 hours). Additional successful jobs remain pending runtime backfill until their durations are available.", publicDisplay: true },
+    { id: "breakin-runtime-baseline", kind: "hours", occurredAt: "2026-09-17", title: "Initial commissioning runtime recorded", detail: "The first verified commissioning run records 203 machine minutes (3.38 hours). It remains preserved as the initial baseline inside the lifetime ledger.", publicDisplay: true },
+    { id: "runtime-history-backfill", kind: "hours", occurredAt: "2026-09-20", title: "Completed print history reconciled", detail: "Six completed runs are recorded from FlashForge history. Verified lifetime runtime is at least 563 minutes (9.38 hours); four completed runs still await duration backfill.", publicDisplay: true },
     { id: "camera-kit-purchased", kind: "purchase", title: "FlashForge camera kit purchased", detail: "Official FlashForge camera kit acquired for remote print monitoring. Installation and commissioning remain pending verification, and monitoring footage is not treated as QC evidence by itself.", publicDisplay: true },
   ],
   lifecycleMilestones: [
