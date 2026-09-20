@@ -38,5 +38,19 @@
             "material": "ABS_ASA_OR_ENGINEERING",
             "status": "blocked_pending_enclosure_ventilation_and_process_validation"
         }
+    ],
+    "modifications": [
+        {
+            "id": "flashforge-ad5x-camera-kit",
+            "name": "FlashForge Camera Kit",
+            "category": "monitoring",
+            "manufacturer": "FlashForge",
+            "compatibility": "AD5X / AD5M",
+            "acquisition_status": "purchased",
+            "installation_status": "pending_verification",
+            "operational_status": "not_commissioned",
+            "purpose": "remote_print_monitoring",
+            "qc_evidence": false
+        }
     ]
 }
