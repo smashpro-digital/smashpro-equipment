@@ -1,3 +1,4 @@
+import { EquipmentPassportPage } from "../pages/EquipmentDetailPage";
 import { Route, Switch } from "react-router-dom";
 import { ArdhiPassportPage } from "../pages/ArdhiPassportPage";
 import { MzigoPassportPage } from "../pages/MzigoPassportPage";
@@ -16,6 +17,7 @@ export function App() {
       <Route exact path="/index.html" component={HomePage} />
       <Route exact path="/sp-ardhi-26.html" component={ArdhiPassportPage} />
       <Route exact path="/sp-mzigo-26.html" component={MzigoPassportPage} />
+      <Route exact path="/sp-umba-26.html" render={() => <EquipmentPassportPage slug="sp-umba-26" />} />
       <Route exact path="/golf-cart-tech-build.html" component={GolfCartTechBuildPage} />
       <Route exact path="/catalog" component={CatalogPage} />
       <Route exact path="/catalog/" component={CatalogPage} />

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { Equipment } from "../types/equipment";
 
 export function EquipmentCard({ item }: { item: Equipment }) {
-  const preferredSpecs = item.slug === "sp-mzigo-26"
+  const preferredSpecs = item.commissioning ? ["OEM model", "Machine type", "Filament system", "Multicolor"] : item.slug === "sp-mzigo-26"
     ? ["Machine type", "Payload", "Power source", "Electric drive system"]
     : ["Model reference", "Machine type", "Drive", "Hydraulics"];
   const quickSpecs = preferredSpecs.map((label) => item.specifications.find((spec) => spec.label === label)).filter((spec): spec is NonNullable<typeof spec> => Boolean(spec));

@@ -1,0 +1,33 @@
+import type { Equipment } from "../types/equipment";
+import { PassportEvidenceRecord } from "./PassportEvidenceRecord";
+import "../styles/commissioning-passport.css";
+
+const materialLabels: Record<string, string> = {
+  commissioning: "Commissioning",
+  planned_validation: "Validation planned",
+  blocked_pending_enclosure_ventilation_and_process_validation: "Blocked — enclosure, ventilation and process validation required",
+};
+
+/** Reusable passport layout for assets that have not reached production release. */
+export function CommissioningPassport({ item }: { item: Equipment }) {
+  const record = item.commissioning!;
+  const identities = [
+    ["SmashPro machine identity", item.fleetId], ["OEM identity", `${item.manufacturer} ${item.identity.factoryModel}`],
+    ["Operational MicroFab ID", item.operationalAssetId], ["Permanent passport ID", item.identity.passportId],
+    ["Division", item.division], ["Asset class", item.identity.assetClass],
+    ["Model / fleet entry year", String(item.identity.modelYear)], ["Lifecycle", item.statusLabel],
+  ];
+  return <div className="commissioning-passport">
+    <header className="shell commissioning-hero">
+      <div><p className="eyebrow">{item.division} · Equipment Passport</p><h1>{item.fleetId}</h1><p className="commissioning-tagline">{item.slogan}</p><p>{item.overview}</p><span className="commissioning-status">{item.statusLabel}</span><p className="commissioning-note">{item.statusDetail}</p></div>
+      <figure><img src={item.heroImage} alt={`${item.fleetId} passport identity graphic; not a machine photograph`} width="1200" height="900" /><figcaption>Identity graphic · approved machine photographs pending</figcaption></figure>
+    </header>
+    <nav className="shell commissioning-nav" aria-label="Passport sections">{["identity", "capabilities", "materials", "history", "service", "media"].map(id => <a key={id} href={`#${id}`}>{id}</a>)}</nav>
+    <section className="section shell" id="identity"><p className="eyebrow">One physical machine</p><h2>Four identities. One record.</h2><p>FlashForge AD5X is the OEM product. {item.fleetId} is its SmashPro machine name. The operational ID connects production, runtime and maintenance; the permanent passport follows the machine.</p><dl className="spec-grid passport-spec-grid">{identities.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></section>
+    <section className="spec-section" id="capabilities"><div className="shell"><p className="eyebrow">Configured capability</p><h2>Built around fabrication.</h2><p>{item.capabilityStatement}</p><dl className="spec-grid">{item.specifications.filter(spec => spec.confirmed).map(spec => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl><ul className="commissioning-capabilities">{item.capabilities.map(capability => <li key={capability}>{capability}</li>)}</ul></div></section>
+    <section className="section shell" id="materials"><p className="eyebrow">Validation before production</p><h2>Material readiness.</h2><p>These are the current recorded authorization states, not blanket material or product approvals.</p><dl className="commissioning-materials">{record.materials.map(material => <div key={material.material}><dt>{material.material === "ABS_ASA_OR_ENGINEERING" ? "ABS / ASA / engineering materials" : material.material}</dt><dd>{materialLabels[material.status] ?? "Not verified"}</dd></div>)}</dl><div className="commissioning-callout"><h3>Enclosure and modifications</h3><p>{record.enclosureStatus}</p><p>{record.modificationStatus}</p></div></section>
+    <section className="timeline-section" id="history"><div className="shell"><p className="eyebrow">Commissioning timeline</p><h2>A record that grows with the machine.</h2><ol className="commissioning-stages">{item.lifecycleMilestones?.map(stage => <li key={stage.id} data-state={stage.status}><strong>{stage.label}</strong><span>{stage.status === "upcoming" ? "Pending" : stage.status === "current" ? "In progress" : "Recorded"}</span></li>)}</ol><ol className="passport-timeline">{item.timeline.filter(event => event.publicDisplay).map(event => <li key={event.id}><PassportEvidenceRecord id={`history-${event.id}`} date={event.occurredAt ?? "Date not published"} phase={event.kind} title={event.title} label="Open record"><p>{event.detail}</p></PassportEvidenceRecord></li>)}</ol></div></section>
+    <section className="section shell" id="service"><p className="eyebrow">Care and continuity</p><h2>Maintenance &amp; service.</h2><p>{record.maintenanceStatus}</p><p>Commissioning checks cover the build plate, nozzle and hotend, filament path, material condition and appropriate ventilation. Service intervals will follow verified OEM guidance; no schedule or completed service is inferred.</p></section>
+    <section className="section shell" id="media"><p className="eyebrow">Public evidence</p><h2>Media archive.</h2><p>No approved machine photographs or videos are published in this first passport. The identity graphic is not evidence of the physical machine or its enclosure.</p><p className="commissioning-note">This public record contains approved equipment facts only. Operational records remain in Digital HQ under {item.operationalAssetId}.</p></section>
+  </div>;
+}

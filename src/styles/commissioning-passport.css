@@ -1,0 +1,26 @@
+.commissioning-passport { --passport-accent: #91ca46; }
+.commissioning-hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; padding-block: 52px 64px; }
+.commissioning-hero > *, .commissioning-passport .spec-grid > * { min-width: 0; }
+.commissioning-hero h1 { font-size: clamp(2.2rem, 5.5vw, 5.6rem); line-height: 1.08; overflow-wrap: anywhere; margin: 20px 0; }
+.commissioning-tagline { font-size: clamp(1.3rem, 2.3vw, 2rem); color: #fff; }
+.commissioning-hero figure { margin: 0; }
+.commissioning-hero img { width: 100%; height: auto; border: 1px solid #30382e; border-radius: 16px; }
+.commissioning-hero figcaption, .commissioning-note { color: #aeb9aa; font-size: .88rem; line-height: 1.65; }
+.commissioning-status { display: inline-block; padding: 8px 16px; border: 1px solid #668b36; border-radius: 100px; color: #b7e685; margin-top: 18px; }
+.commissioning-nav { display: flex; flex-wrap: wrap; gap: 10px 24px; padding-block: 18px; border-block: 1px solid #30382e; }
+.commissioning-nav a { text-transform: capitalize; padding: 10px 0; }
+.commissioning-passport section { scroll-margin-top: 100px; }
+.commissioning-passport h2 { font-size: clamp(1.9rem, 4vw, 3.4rem); max-width: 850px; }
+.commissioning-passport p { max-width: 840px; }
+.commissioning-passport dd { overflow-wrap: anywhere; }
+.commissioning-capabilities { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 0 0; list-style: none; }
+.commissioning-capabilities li { padding: 12px 16px; border: 1px solid #38432f; border-radius: 8px; }
+.commissioning-materials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 32px 0; }
+.commissioning-materials > div, .commissioning-callout { border: 1px solid #30382e; border-radius: 12px; padding: 24px; background: #11180f; }
+.commissioning-materials dt { font-size: 1.2rem; font-weight: 700; }
+.commissioning-materials dd { margin: 12px 0 0; color: #b7c5b1; line-height: 1.6; }
+.commissioning-stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 24px 0; list-style: none; }
+.commissioning-stages li { border-top: 2px solid #475043; padding-top: 16px; }
+.commissioning-stages li[data-state="current"] { border-color: var(--passport-accent); }
+.commissioning-stages span { display: block; color: #aeb9aa; margin-top: 8px; }
+@media (max-width: 700px) { .commissioning-hero { grid-template-columns: 1fr; padding-top: 28px; } .commissioning-materials { grid-template-columns: 1fr; } .commissioning-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } .commissioning-passport .spec-grid { grid-template-columns: 1fr; } }

@@ -1,4 +1,4 @@
-export type EquipmentStatus = "fleet-build" | "shipping" | "planned" | "request-only";
+export type EquipmentStatus = "commissioning" | "fleet-build" | "shipping" | "planned" | "request-only";
 export type RecordVisibility = "public" | "private";
 export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade" | "maintenance" | "attachment" | "media" | "rental" | "revenue" | "hours" | "state" | "status";
 
@@ -46,7 +46,13 @@ export interface EquipmentPartner {
   logo?: string; website?: string; storyUrl?: string;
 }
 
+export interface CommissioningRecord {
+  materials: { material: string; status: string }[];
+  enclosureStatus: string; modificationStatus: string; maintenanceStatus: string;
+}
+
 export interface Equipment {
+  manufacturer?: string; operationalAssetId?: string; division?: string; commissioning?: CommissioningRecord;
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
   overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];

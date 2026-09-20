@@ -33,3 +33,13 @@ Operating hours influence market value/depreciation. The maintenance and documen
 ## Storage
 
 Uploaded files belong in private object storage. Public documents should use short-lived or deliberately public delivery URLs; private receipts/invoices use opaque storage keys and authorization checks. Validate MIME type, size, and malware status server-side, and store SHA-256 for receipts.
+
+## SP-UMBA-26 allocation and source
+
+The public Equipment catalog allocates `SPP-2026-0003` to fleet name `SP-UMBA-26` and existing Digital HQ operational asset `SP-3DP-001`. OEM identity remains FlashForge AD5X. This entry is a public projection, not a new operational asset. Passport IDs 0001 and 0002 remain unchanged. The build rejects duplicate passport, fleet, operational asset IDs and routes; tests lock these three assignments.
+
+An organization search and current catalog inspection on 2026-09-19 found no prior use of 0003. The repository includes a future SQL schema with unique/immutable identity constraints, but no active passport allocator was found. Merging this catalog entry reserves 0003 in the repository's canonical public catalog; no database allocation or new inventory row is claimed. Never reassign it.
+
+`src/data/umbaPassport.json` is generated from Digital HQ's existing asset with `php scripts/export-microfab-equipment-passport.php`. Source revision: `ceb9ca1461c16b4ac04b33b5dff13c679ec863b1`. Copy only the export, never the operational JSON. Its explicit allowlist and passport-only OEM authorization preserve the existing client projection restrictions. Public readiness remains commissioning; PETG and TPU validation are planned and engineering materials remain blocked. The identity graphic is labeled and is not a photograph.
+
+The permanent route is `/equipment/sp-umba-26.html`, with a physical HTML entry, canonical and OpenGraph URL, sitemap entry, catalog card and generated public index. The reusable CommissioningPassport layout uses the existing site frame and evidence components. Do not generate the physical QR badge until production returns HTTP 200.

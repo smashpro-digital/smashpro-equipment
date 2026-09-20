@@ -1,3 +1,4 @@
+import { validatePassportIdentities } from "./src/domain/passportIdentity";
 import { cpSync, createReadStream, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -5,6 +6,8 @@ import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { equipment } from "./src/data/equipment";
 import { attachments } from "./src/data/attachments";
+
+validatePassportIdentities(equipment);
 
 const projectDirectory = dirname(fileURLToPath(import.meta.url));
 
@@ -19,7 +22,7 @@ function preserveEquipmentMedia(): Plugin {
         const imagesDirectory = resolve(projectDirectory, "images");
         const candidate = resolve(imagesDirectory, filename);
         if (dirname(candidate) !== imagesDirectory || !existsSync(candidate)) return next();
-        const contentTypes: Record<string, string> = { ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".mp4": "video/mp4" };
+        const contentTypes: Record<string, string> = { ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".mp4": "video/mp4" };
         response.setHeader("Content-Type", contentTypes[extname(candidate).toLowerCase()] ?? "application/octet-stream");
         createReadStream(candidate).pipe(response);
       });
@@ -93,6 +96,7 @@ export default defineConfig(({ mode }) => {
         catalog: resolve(projectDirectory, "index.html"),
         ardhi: resolve(projectDirectory, "sp-ardhi-26.html"),
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
+        umba: resolve(projectDirectory, "sp-umba-26.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
         productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),
