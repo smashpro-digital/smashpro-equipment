@@ -21,14 +21,27 @@ export const umbaEquipment: Equipment = {
   commissioning: {
     materials: passport.material_authorizations.map(row => ({ material: row.material, status: row.status })),
     enclosureStatus: "Enclosure project: installation and ventilation not verified. Engineering-material use remains blocked pending enclosure, ventilation and process validation.",
-    modificationStatus: "No completed modifications are documented in the approved public record. The enclosure project has not been verified as installed.",
+    modificationStatus: "FlashForge Camera Kit purchased for remote print monitoring. Installation and operational commissioning remain pending verification; camera monitoring does not by itself constitute QC evidence. The enclosure project has not been verified as installed.",
     maintenanceStatus: "No approved service entries have been published. This does not establish that no service has occurred. Future entries record date, service performed, evidence and verified runtime when available.",
   },
-  factoryOptions: [], upgrades: [], packageRules: [], attachments: [], includedItems: [], documents: [], serviceHistory: [],
+  factoryOptions: [], upgrades: [
+    {
+      id: "flashforge-ad5x-camera-kit",
+      name: "FlashForge Camera Kit",
+      category: "Monitoring",
+      description: "Official FlashForge camera kit purchased for SP-UMBA-26 remote print monitoring. Installation and operational commissioning remain pending verification.",
+      vendor: "FlashForge",
+      imageUrls: [],
+      status: "ordered",
+      notes: "Purchased. Not yet represented as installed or commissioned. Monitoring footage does not by itself constitute QC evidence.",
+      tags: ["camera", "monitoring"],
+    },
+  ], packageRules: [], attachments: [], includedItems: [], documents: [], serviceHistory: [],
   timeline: [
     { id: "operational-asset", kind: "state", title: "Operational asset registered", detail: "The existing SP-3DP-001 record identifies the FlashForge AD5X. Registration date is not published.", publicDisplay: true },
     { id: "commissioning", kind: "status", title: "Commissioning in progress", detail: "Multicolor FDM and the IFS filament system are recorded. Material validation and production release remain separate milestones.", publicDisplay: true },
     { id: "fleet-name", kind: "state", occurredAt: "2026-09-19", title: "SP-UMBA-26 identity assigned", detail: "The machine gains a SmashPro fleet name and permanent passport while retaining SP-3DP-001 as its operational ID.", publicDisplay: true },
+    { id: "camera-kit-purchased", kind: "purchase", title: "FlashForge camera kit purchased", detail: "Official FlashForge camera kit acquired for remote print monitoring. Installation and commissioning remain pending verification, and monitoring footage is not treated as QC evidence by itself.", publicDisplay: true },
   ],
   lifecycleMilestones: [
     { id: "record", label: "Identity documented", status: "completed", photos: [], videos: [] },
