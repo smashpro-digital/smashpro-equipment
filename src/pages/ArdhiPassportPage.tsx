@@ -332,10 +332,7 @@ export function ArdhiPassportPage() {
     if (description) description.textContent = "Journey-only metrics. Distance is approximate and does not represent live GPS tracking.";
 
     const cards = Array.from(statsSection.querySelectorAll<HTMLElement>(".ardhi-counter-grid > article"));
-    const arrival = new Date("2026-10-05T00:00:00Z");
-    const daysRemaining = Math.max(0, Math.ceil((arrival.getTime() - Date.now()) / 86_400_000));
-
-    if (cards[2]) cards[2].innerHTML = `<span>Estimated days remaining</span><strong>${daysRemaining}</strong><small>To Oct 5 arrival estimate</small>`;
+    if (cards[2]) cards[2].innerHTML = `<span>Forwarder arrival target</span><strong>Oct 5</strong><small>Estimate · live shipment truth comes from Digital HQ</small>`;
 
     const distanceLabel = cards[0]?.querySelector("span");
     if (distanceLabel) distanceLabel.textContent = "Approximate journey distance";
