@@ -3,9 +3,9 @@
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.2  
 > Status: In Transit / Pre-Deployment  
-> Last Updated: 2026-09-09
+> Last Updated: 2026-09-26
 
-> **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics with an expected-arrival target of **October 5, 2026**. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
+> **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record reports an **October 5, 2026** port-arrival target. Public vessel context now corroborates EVER MAX voyage 1374-016E, its September 7 Yantian departure, a Panama Canal next-stop window around September 28–29, and Savannah later in the vessel rotation. Independent carrier/BOL/container confirmation tying the cargo to the vessel and confirming the actual discharge port remains pending. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
 
 ---
 
