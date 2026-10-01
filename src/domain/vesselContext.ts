@@ -16,7 +16,7 @@ export function parseVesselContext(input: unknown): VesselContext | null {
   try {
     const c=obj(input),v=obj(c.vessel),voyage=obj(c.voyage),route=obj(c.corridor);
     if(c.classification!=='context-only'||c.publicVisible!==true||c.cargoAssociation!=='unconfirmed'||route.classification!=='illustrative-projection')return null;
-    if(!/^\d{7}$/.test(str(v.imo))||!/^\d{9}$/.test(str(v.mmsi))||!Array.isArray(c.identitySources)||!c.identitySources.length||c.identitySources.length>5||!Array.isArray(route.stages)||route.stages.length<2||route.stages.length>6)return null;
+    if(!/^\d{7}$/.test(str(v.imo))||!/^\d{9}$/.test(str(v.mmsi))||!Array.isArray(c.identitySources)||!c.identitySources.length||c.identitySources.length>5||!Array.isArray(route.stages)||route.stages.length<2||route.stages.length>8)return null;
     const identitySources=c.identitySources.map(source);if(identitySources.some(s=>s.classification!=='publicly-corroborated'))return null;
     const voyageSource=source(voyage.source);if(voyageSource.classification!=='reported-schedule')return null;
     let observation: VesselContext['observation']=null;
