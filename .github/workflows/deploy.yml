@@ -99,7 +99,7 @@ jobs:
           assert.equal(p.shipmentStatus, 'Departed Origin Port');
           assert.equal(p.eta, '2026-10-05');
           assert.equal(p.etaState, 'estimated');
-          assert.equal(p.map.cargoAssociationConfirmed, true);
+          assert.equal(p.map.cargoAssociationConfirmed, false);
           assert.deepEqual(p.timeline.map(event => event.milestone), ['container-loaded', 'export-cleared', 'origin-departure']);
           assert.equal(p.currentPosition, null);
           assert.equal(p.progressPercent, null);
