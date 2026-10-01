@@ -324,7 +324,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(data, /title: "Factory Departure Documented"[\s\S]*photos: \[\], videos: \[image\("sp-ardhi-26-factory-departure-2026-09-02\.mp4"\)\]/);
   assert.match(data, /title: "Consolidated Container Loading Reported"[\s\S]*ISO container and bill-of-lading identifiers remain pending[\s\S]*photos: \[\], videos: \[\]/);
   assert.match(data, /title: "Chinese Export Customs Released"[\s\S]*freight-forwarder record reports domestic export-customs release/);
-  assert.match(data, /title: "Ocean Departure Reported"[\s\S]*EVER MAX voyage 1374-016E[\s\S]*Independent carrier\/BOL confirmation remains pending/);
+  assert.match(data, /title: "Ocean Departure Reported"[\s\S]*EVER MAX voyage 1374-016E[\s\S]*carrier\/BOL\/container confirmation[\s\S]*pending/);
   assert.match(detail, /ArdhiPassportJourney/);
   assert.match(passport, /ShipmentJourney/);
   assert.match(passport, /ardhi-expandable-timeline/);
