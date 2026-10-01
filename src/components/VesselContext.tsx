@@ -1,6 +1,7 @@
 import type { Shipment } from '../domain/shipment';
 import { formatTime, selectForwarderReportedVesselVoyage } from '../domain/shipment';
 import '../styles/vessel-context.css';
+import { ardhiVerifiedVoyage } from '../data/ardhiVerifiedVoyage';
 
 const factoryHero = '/equipment/images/sp-ardhi-26-completed-build-attachments.jpg';
 
@@ -11,7 +12,7 @@ export function VesselContext({ data }: { data: Shipment }) {
   const vessel = context.vessel;
   const forwarderFacts = selectForwarderReportedVesselVoyage(data);
   const observation = context.observation;
-  const corridorStages = context.corridor.stages;
+  const corridorStages = [...ardhiVerifiedVoyage.stages];
   const verifiedStageIndexes = corridorStages
     .map((stage, index) => ({ index, stage: stage.toLowerCase() }))
     .filter(({ stage }) => /(observed|departed|completed|complete)/.test(stage) && !/(scheduled|pending)/.test(stage))
@@ -102,7 +103,7 @@ export function VesselContext({ data }: { data: Shipment }) {
         {context.identitySources.map((source) => <p key={source.url}><a href={source.url} target="_blank" rel="noreferrer">Open vessel tracker ↗</a><small>{source.attribution} · checked {formatTime(source.checkedAt)}</small></p>)}
         <p><a href={context.voyage.source.url} target="_blank" rel="noreferrer">Open voyage schedule ↗</a><small>{context.voyage.source.attribution} · checked {formatTime(context.voyage.source.checkedAt)}</small></p>
       </div>
-      <p className="journey-boundary">Vessel context does not prove cargo association. The projected corridor is not a live position, sailed distance, booked port sequence, or arrival promise. Last verified shipment update: {formatTime(data.lastUpdated)}.</p>
+      <p className="journey-boundary">Voyage visual last reviewed {formatTime(ardhiVerifiedVoyage.checkedAt)}. Vessel context does not prove cargo association. The projected corridor is not live GPS, sailed distance, cargo discharge, customs clearance, release, or a delivery promise. Last verified shipment update: {formatTime(data.lastUpdated)}.</p>
     </details>
   </div>;
 }
