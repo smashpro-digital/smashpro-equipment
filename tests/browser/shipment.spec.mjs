@@ -30,6 +30,7 @@ for(const width of [1440,390]) test(`public context is distinct from cargo and p
  await expect(page.locator('.journey-truth')).toContainText('The voyage is forwarder-reported.');
  await expect(page.locator('.journey-vessel-summary')).toContainText('Forwarder-reported voyage 1374-016E');
  await expect(page.locator('.corridor-route')).toHaveCSS('stroke-dasharray','12px, 10px');
+ await expect(page.locator('.corridor-vessel-marker')).toHaveCount(1);await expect(page.locator('.journey-corridor')).toContainText('Colón, Panama');await expect(page.locator('.journey-corridor')).toContainText('Savannah call');
  await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
  await expect(page.locator('.journey-observation')).toContainText('No timestamped AIS observation is approved');
  await page.locator('.journey-intelligence summary').focus();await page.keyboard.press('Enter');await expect(page.locator('.journey-intelligence')).toHaveAttribute('open','');
