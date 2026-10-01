@@ -11,6 +11,19 @@ export function VesselContext({ data }: { data: Shipment }) {
   const vessel = context.vessel;
   const forwarderFacts = selectForwarderReportedVesselVoyage(data);
   const observation = context.observation;
+  const corridorStages = context.corridor.stages;
+  const verifiedStageIndexes = corridorStages
+    .map((stage, index) => ({ index, stage: stage.toLowerCase() }))
+    .filter(({ stage }) => /(observed|departed|completed|complete)/.test(stage) && !/(scheduled|pending)/.test(stage))
+    .map(({ index }) => index);
+  const currentCorridorIndex = verifiedStageIndexes.at(-1) ?? 0;
+  const currentCorridorStage = corridorStages[currentCorridorIndex] ?? corridorStages[0];
+  const checkpointLabel = currentCorridorStage.split('·')[0]?.trim() || currentCorridorStage;
+  const routePoints = [
+    [54,164],[205,126],[340,88],[455,110],[575,135],[685,114],[764,101],[790,98]
+  ] as const;
+  const shipPoint = routePoints[Math.min(currentCorridorIndex, routePoints.length - 1)];
+  const progressPercent = corridorStages.length > 1 ? Math.round((currentCorridorIndex / (corridorStages.length - 1)) * 100) : 0;
   const journey = [
     { number: '01', label: 'Built', detail: 'Factory complete', state: 'complete' },
     { number: '02', label: 'Released', detail: 'Export chapter', state: 'complete' },
@@ -29,7 +42,7 @@ export function VesselContext({ data }: { data: Shipment }) {
         <p className="journey-lede">The machine is complete. The freight forwarder reports departure aboard {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference}. We are documenting the ocean leg while awaiting the container and bill-of-lading records.</p>
         <div className="journey-hero-status">
           <span aria-hidden="true" />
-          <div><small>Current chapter</small><strong>{data.shipmentStatus}</strong></div>
+          <div><small>Current vessel checkpoint</small><strong>{checkpointLabel}</strong></div>
         </div>
       </div>
     </article>
@@ -57,20 +70,31 @@ export function VesselContext({ data }: { data: Shipment }) {
     </section>
 
     <section className="journey-corridor" aria-labelledby="corridor-title">
-      <div className="journey-corridor-copy"><p className="eyebrow">The next horizon</p><h3 id="corridor-title">Factory floor to first job.</h3><p>The route is intentionally shown as a story of chapters—not simulated live movement. Confirmed progress will illuminate each stage as evidence arrives.</p></div>
-      <svg viewBox="0 0 820 230" role="img" aria-label="Journey chapters from factory release through projected ocean transport, arrival, commissioning and first job" className="corridor-art">
-        <defs><linearGradient id="routeGlow" x1="0" x2="1"><stop stopColor="#9ade61"/><stop offset=".42" stopColor="#9ade61"/><stop offset=".48" stopColor="#d5b871"/><stop offset="1" stopColor="#d5b871" stopOpacity=".35"/></linearGradient></defs>
-        <path className="corridor-horizon" d="M20 174C115 126 184 151 254 105S407 54 493 99s127 78 307 5"/>
-        <path className="corridor-route" d="M54 164C175 154 197 81 322 88s143 91 259 47 121-47 183-34"/>
-        <circle cx="54" cy="164" r="14" className="route-complete"/><circle cx="322" cy="88" r="13" className="route-active"/><circle cx="581" cy="135" r="11" className="route-future"/><circle cx="764" cy="101" r="11" className="route-future"/>
-        <text x="54" y="207" textAnchor="middle">FACTORY</text><text x="322" y="52" textAnchor="middle">OCEAN</text><text x="581" y="177" textAnchor="middle">ARRIVAL</text><text x="764" y="66" textAnchor="middle">FIRST JOB</text>
-      </svg>
+      <div className="journey-corridor-copy"><p className="eyebrow">Verified voyage progress</p><h3 id="corridor-title">Factory floor to South Carolina.</h3><p>The ship marker advances only when a vessel checkpoint is verified. It shows voyage progress, not live GPS or proof of cargo discharge.</p><p className="corridor-current"><strong>Current checkpoint:</strong> {checkpointLabel}</p></div>
+      <div className="corridor-visual">
+        <svg viewBox="0 0 820 230" role="img" aria-label={`Verified vessel voyage progress through ${checkpointLabel}; this is not live GPS tracking`} className="corridor-art">
+          <defs><linearGradient id="routeGlow" x1="0" x2="1"><stop stopColor="#9ade61"/><stop offset=".55" stopColor="#9ade61"/><stop offset=".72" stopColor="#d5b871"/><stop offset="1" stopColor="#d5b871" stopOpacity=".35"/></linearGradient></defs>
+          <path className="corridor-horizon" d="M20 174C115 126 184 151 254 105S407 54 493 99s127 78 307 5"/>
+          <path className="corridor-route" pathLength="100" d="M54 164C175 154 197 81 322 88s143 91 259 47 121-47 183-34"/>
+          <path className="corridor-route-progress" pathLength="100" strokeDasharray={`${progressPercent} ${100-progressPercent}`} d="M54 164C175 154 197 81 322 88s143 91 259 47 121-47 183-34"/>
+          <circle cx="54" cy="164" r="12" className="route-complete"/>
+          <circle cx="764" cy="101" r="10" className="route-future"/>
+          <g className="corridor-vessel-marker" transform={`translate(${shipPoint[0]} ${shipPoint[1]})`}>
+            <circle r="18"/>
+            <path d="M-11 3H10L6 9H-6Z M-5-7H5V3H-5Z"/>
+          </g>
+          <text x="54" y="207" textAnchor="middle">YANTIAN</text><text x="455" y="66" textAnchor="middle">PANAMA</text><text x="575" y="177" textAnchor="middle">COLÓN</text><text x="685" y="81" textAnchor="middle">SAVANNAH</text><text x="764" y="66" textAnchor="middle">SC</text>
+        </svg>
+        <ol className="corridor-checkpoints" aria-label="Verified and upcoming vessel checkpoints">
+          {corridorStages.map((stage, index) => <li key={stage} className={index < currentCorridorIndex ? 'is-complete' : index === currentCorridorIndex ? 'is-current' : 'is-future'}><span>{index + 1}</span><strong>{stage}</strong></li>)}
+        </ol>
+      </div>
     </section>
 
     <details className="journey-intelligence">
       <summary><span><small>Source record</small><strong>Journey intelligence & verification</strong></span><em>Open details</em></summary>
       <div className="journey-intelligence-grid">
-        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>Supplier reconciled ARDHI references YFC260717B and BZHYF0822BMT1</li><li>Freight forwarder reports {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference} departed September 7</li><li>Estimated port arrival is October 5 local time</li></ul></section>
+        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>Supplier reconciled ARDHI references YFC260717B and BZHYF0822BMT1</li><li>Freight forwarder reports {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference} departed September 7</li><li>Latest verified vessel checkpoint: {checkpointLabel}</li><li>Estimated port arrival remains October 5 local time</li></ul></section>
         <section><h4>What comes next</h4><ul><li>ISO container and bill-of-lading records</li><li>Independent carrier confirmation</li><li>Destination port and inland handoff</li><li>Receipt inspection and commissioning</li></ul></section>
       </div>
       {observation ? <div className="journey-observation"><strong>Latest approved observation</strong><p>{formatTime(observation.observedAt)} · {observation.destination ?? 'Destination not supplied'} · {observation.speedKnots === null ? 'Speed not supplied' : `${observation.speedKnots} kn`}</p><a href={observation.source.url} target="_blank" rel="noreferrer">Open observation source ↗</a></div> : <p className="journey-observation">No timestamped AIS observation is approved for reuse on this page yet.</p>}
