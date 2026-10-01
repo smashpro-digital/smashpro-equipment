@@ -16,14 +16,14 @@
     {
       "url": "https://www.vesselfinder.com/vessels/details/9935208",
       "attribution": "VesselFinder · public vessel particulars",
-      "checkedAt": "2026-09-12T12:48:42Z",
+      "checkedAt": "2026-10-01T14:19:00Z",
       "classification": "publicly-corroborated",
       "publicVisible": true
     },
     {
-      "url": "https://www.myshiptracking.com/vessels/ever-max-mmsi-563190500-imo-0",
+      "url": "https://www.myshiptracking.com/vessels/ever-max-mmsi-563190500-imo-9935208",
       "attribution": "MyShipTracking · public vessel particulars",
-      "checkedAt": "2026-09-12T12:48:42Z",
+      "checkedAt": "2026-10-01T14:19:00Z",
       "classification": "publicly-corroborated",
       "publicVisible": true
     }
@@ -31,21 +31,24 @@
   "voyage": {
     "reference": "1374-016E",
     "source": {
-      "url": "https://www.coscotw.com.tw/cht/asp/i-8.asp",
-      "attribution": "COSCO Shipping Taiwan · indexed public schedule; schedule subject to change",
-      "checkedAt": "2026-09-12T12:48:42Z",
+      "url": "https://atlas.flexport.com/vessel/imo%3A9935208/mmsi%3A563190500/name%3Aever-max",
+      "attribution": "Flexport Atlas · public multi-carrier schedule context; schedule subject to change",
+      "checkedAt": "2026-10-01T14:19:00Z",
       "classification": "reported-schedule",
       "publicVisible": true
     }
   },
   "corridor": {
     "classification": "illustrative-projection",
-    "summary": "Factory / export history in China → projected ocean corridor → destination port and inland delivery awaiting evidence. Schematic only: no booked port sequence, vessel location, sailed distance or arrival date is implied.",
+    "summary": "Public vessel data reviewed October 1 shows EVER MAX completed the trans-Pacific leg, departed the Panama Canal Pacific anchorage September 30 at 10:11 UTC, and arrived Colón, Panama at 23:42 UTC on the Atlantic/Caribbean side. Savannah remains later in the vessel rotation. This is vessel context only.",
     "stages": [
       "Factory / export history",
-      "Ocean corridor · projected",
-      "Destination port · pending",
-      "Inland delivery · pending"
+      "Yantian departure · vessel observed",
+      "Trans-Pacific leg · completed",
+      "Panama Pacific anchorage · departed",
+      "Colón, Panama · vessel arrival observed",
+      "Savannah call · vessel schedule context",
+      "Inland delivery · cargo status pending"
     ]
   },
   "observation": null
