@@ -142,7 +142,7 @@ export const equipment: Equipment[] = [
   },
   {
     slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
-    meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: "SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.",
+    meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: `${mzigoStatusLabel}. SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.`,
     capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg"), status: "fleet-build", statusLabel: mzigoStatusLabel, statusDetail: mzigoStatusDetail,
     identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026, operatingHours: 0 },
     specifications: specs([

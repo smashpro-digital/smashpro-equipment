@@ -129,6 +129,7 @@ test('paid-in-full lifecycle has one current stage and does not advance shipping
   assert.equal(mzigo.statusLabel, 'Paid in full · shipping preparation');
   assert.equal(mzigo.statusLabel, mzigoStatusLabel);
   assert.equal(mzigo.factoryUpdate.heading, mzigoStatusLabel);
+  assert.ok(mzigo.overview.startsWith(mzigoStatusLabel), "Client metadata must retain the canonical payment status");
   assert.equal(mzigo.factoryUpdate.date, '2026-10-01');
   assert.equal(mzigoCurrentStage, 'Shipping Preparation');
   assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'complete').map(s => s.id), ['build-approved', 'final-payment']);
