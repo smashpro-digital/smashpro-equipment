@@ -76,7 +76,7 @@ test("enclosure build files are public without claiming installation or validati
     assert.equal(document.kind, "other");
     assert.equal(document.publicDisplay, true);
     assert.equal(document.verificationStatus, "pending");
-    assert.match(document.url, /^\/equipment\/documents\/sp-umba-26\/.*\.3mf$/);
+    assert.match(document.url, /^\/equipment\/documents\/sp-umba-26\/.*\.zip$/);
     assert.ok(existsSync(`public${document.url.replace(/^\/equipment/, "")}`));
   }
   const rendered = readFileSync("src/components/CommissioningPassport.tsx", "utf8");
