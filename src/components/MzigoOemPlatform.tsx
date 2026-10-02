@@ -1,3 +1,4 @@
+import { mzigoFinalPayment, mzigoStatusDetail } from "../data/mzigoPassport";
 import type { Equipment } from "../types/equipment";
 import {
   approvedMzigoMedia,
@@ -44,9 +45,9 @@ export function MzigoOemPlatform({ item }: { item: Equipment }) {
     <section className="section shell mzigo-build-acceptance" id="build-acceptance" aria-labelledby="mzigo-build-acceptance-title">
       <div className="section-heading"><div><p className="eyebrow">Build acceptance</p><h2 id="mzigo-build-acceptance-title">Securement, controls and approval.</h2></div><p>Each record keeps the supplied fact, visible evidence and remaining limitation together.</p></div>
       <div className="mzigo-acceptance-grid">
-        <article id="tie-down-system"><span>Factory-installed</span><h3>Tie-Down System</h3>{tieDown && <img src={tieDown.src} alt={tieDown.alt} width={tieDown.width} height={tieDown.height} loading="lazy" decoding="async" />}<p>The supplier reports bilateral tie-down / rope anchor hardware. It is recorded only as transport securement hardware; no recovery or load rating is claimed.</p>{tieDown && <a href={`#${mzigoMediaAnchor(tieDown)}`}>Open tie-down evidence →</a>}</article>
+        <article id="tie-down-system"><span>Factory-installed</span><h3>Tie-Down System</h3>{tieDown && <img src={tieDown.src} alt={tieDown.alt} width={tieDown.width} height={tieDown.height} loading="lazy" decoding="async" />}<p>The supplier reports bilateral tie-down / rope anchor hardware. It is recorded only as transport securement hardware; no recovery or load rating is claimed. Final tie-down hardware installation/evidence for shipping remains pending.</p>{tieDown && <a href={`#${mzigoMediaAnchor(tieDown)}`}>Open tie-down evidence →</a>}</article>
         <article id="remote-control"><span>Supplied controller</span><h3>Remote Control</h3>{remote && <img src={remote.src} alt={remote.alt} width={remote.width} height={remote.height} loading="lazy" decoding="async" />}<p>The handheld controller is photographed as a supplied item. Range, ingress protection and operating limits remain subject to manufacturer documentation.</p>{remote && <a href={`#${mzigoMediaAnchor(remote)}`}>Open controller evidence →</a>}</article>
-        <article id="qc-build-approval"><span>Supplier-reported / SmashPro-approved</span><h3>QC / Build Approval</h3>{approved && <img src={approved.src} alt={approved.alt} width={approved.width} height={approved.height} loading="lazy" decoding="async" />}<p>The September 15 status records quality inspection complete and physical-build approval by SmashPro. The formal QC report, payment, export and commissioning evidence remain pending.</p>{approved && <a href={`#${mzigoMediaAnchor(approved)}`}>Open completed-machine evidence →</a>}</article>
+        <article id="qc-build-approval"><span>Supplier-reported / SmashPro-approved</span><h3>QC / Build Approval</h3>{approved && <img src={approved.src} alt={approved.alt} width={approved.width} height={approved.height} loading="lazy" decoding="async" />}<p>The September 15 status records quality inspection complete and physical-build approval by SmashPro. Final payment is complete. The formal QC report, final shipping-preparation inspection, export and commissioning evidence remain pending.</p>{approved && <a href={`#${mzigoMediaAnchor(approved)}`}>Open completed-machine evidence →</a>}</article>
       </div>
     </section>
 
@@ -78,8 +79,8 @@ export function MzigoOemPlatform({ item }: { item: Equipment }) {
     </section>
 
     <section className="section shell mzigo-shipping-evidence" id="shipping-evidence" aria-labelledby="mzigo-shipping-evidence-title">
-      <div className="section-heading"><div><p className="eyebrow">Next evidence cycle</p><h2 id="mzigo-shipping-evidence-title">Shipping evidence queue.</h2></div><p>The September 15 update says final payment is planned this week. It remains pending until a payment record exists. Every later milestone advances independently from its own evidence.</p></div>
-      <div className="mzigo-evidence-slots">{mzigoShippingEvidenceSlots.map(slot => <details key={slot.id}><summary><span><strong>{slot.title}</strong><small>{slot.status}</small></span><span aria-hidden="true">+</span></summary><div><p><b>Required evidence:</b> {slot.evidence}</p><p>{slot.advance}</p></div></details>)}</div>
+      <div className="section-heading"><div><p className="eyebrow">Next evidence cycle</p><h2 id="mzigo-shipping-evidence-title">Shipping evidence queue.</h2></div><p>{mzigoFinalPayment.summary} {mzigoStatusDetail}</p></div>
+      <div className="mzigo-evidence-slots">{mzigoShippingEvidenceSlots.map(slot => <details key={slot.id}><summary><span><strong>{slot.title}</strong><small>{slot.status}</small></span><span aria-hidden="true">+</span></summary><div><p><b>{slot.status === "Complete" ? "Recorded evidence:" : "Required evidence:"}</b> {slot.evidence}</p><p>{slot.advance}</p></div></details>)}</div>
     </section>
 
     <section className="section shell mzigo-roadmap" id="product-roadmap" aria-labelledby="mzigo-roadmap-title">

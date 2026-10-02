@@ -1,3 +1,4 @@
+import { mzigoStatusDetail } from "../data/mzigoPassport";
 import { mzigoBuildChapters } from "../data/mzigoFactoryMedia";
 import { mzigoMediaAnchor } from "../domain/mzigoArchive";
 import { PassportEvidenceRecord } from "./PassportEvidenceRecord";
@@ -16,6 +17,6 @@ export function MzigoBuildStory() {
       <div className="mzigo-evidence-context"><div><strong>Verified in the media</strong><ul>{chapter.verified.map(fact => <li key={fact}>{fact}</li>)}</ul></div><div><strong>Operational meaning</strong><p>{chapter.takeaway}</p><small>Visual evidence documents configuration; it does not establish engineering ratings, inspection approval or readiness for service.</small></div></div>
       </PassportEvidenceRecord>
     </article>)}</div>
-    <footer className="mzigo-build-story__next"><p className="eyebrow">The next chapter</p><h3>From build approval to export preparation.</h3><p>Final payment is current. Crating, export inspection, container loading, port delivery, vessel booking and ocean departure remain pending until their evidence is received.</p></footer>
+    <footer className="mzigo-build-story__next"><p className="eyebrow">The next chapter</p><h3>Paid in full. Shipping preparation is current.</h3><p>{mzigoStatusDetail}</p></footer>
   </section>;
 }
