@@ -26,7 +26,7 @@ export interface EquipmentUpgrade {
 }
 export interface PackageRule { id: string; packageName: string; description: string; requiredTags: string[]; }
 export interface CalculatedPackage { id: string; name: string; description: string; qualifyingUpgradeIds: string[]; }
-export interface EquipmentAttachment { id: string; name: string; category: string; status: "installed" | "available" | "planned" | "removed"; addedAt?: string; description?: string; }
+export interface EquipmentAttachment { id: string; name: string; category: string; status: "installed" | "available" | "planned" | "ordered" | "removed"; addedAt?: string; description?: string; }
 export interface IncludedItem { id: string; name: string; category: "accessory" | "spare-part"; }
 export interface EquipmentDocument { id: string; title: string; kind: "manual" | "brochure" | "spec-sheet" | "warranty" | "invoice" | "receipt" | "other"; description?: string; source?: string; revision?: string; verificationStatus?: "verified" | "pending"; dateReceived?: string; downloadName?: string; url?: string; publicDisplay: boolean; }
 export interface ServiceRecord { id: string; performedAt: string; serviceType: string; summary: string; provider?: string; operatingHours?: number; status: "completed" | "scheduled"; }

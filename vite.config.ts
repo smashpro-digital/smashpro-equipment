@@ -97,6 +97,7 @@ export default defineConfig(({ mode }) => {
         ardhi: resolve(projectDirectory, "sp-ardhi-26.html"),
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
         umba: resolve(projectDirectory, "sp-umba-26.html"),
+        nyasi: resolve(projectDirectory, "sp-nyasi-26.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
         productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),

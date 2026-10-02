@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
-const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "sp-umba-26.html", "admin.html"];
+const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "sp-umba-26.html", "sp-nyasi-26.html", "admin.html"];
 
 test("protected HTML entry files exist", () => {
   entries.forEach((entry) => assert.equal(existsSync(entry), true, `${entry} must exist`));
@@ -218,8 +218,8 @@ test("public equipment fleet IDs and slugs are unique", () => {
   assert.equal(new Set(slugs).size, slugs.length, "slugs must be unique");
 });
 
-const futureAcquisitionFiles = ["docs/fleet/SP-BEBA-HD-26-PASSPORT.md", "docs/fleet/SP-INAMA-26-PASSPORT.md", "docs/fleet/SP-NYASI-26-PASSPORT.md"];
-const futureAcquisitionIds = ["SP-BEBA-HD-26", "SP-INAMA-26", "SP-NYASI-26"];
+const futureAcquisitionFiles = ["docs/fleet/SP-BEBA-HD-26-PASSPORT.md", "docs/fleet/SP-INAMA-26-PASSPORT.md"];
+const futureAcquisitionIds = ["SP-BEBA-HD-26", "SP-INAMA-26"];
 const sharedPassportSections = [
   ["Identity", /^# Identity$/m],
   ["Mission", /^# Mission$/m],
@@ -257,7 +257,7 @@ const sharedPassportSections = [
   ["Revision History", /^# Revision History$/m],
 ];
 
-test("future acquisition passport files exist for BEBA-HD, INAMA, and NYASI", () => {
+test("remaining future acquisition passport files exist for BEBA-HD and INAMA", () => {
   futureAcquisitionFiles.forEach((file) => assert.equal(existsSync(file), true, `${file} must exist`));
 });
 

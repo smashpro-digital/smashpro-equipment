@@ -1,4 +1,5 @@
 import { umbaEquipment } from "./umbaEquipment";
+import { nyasiEquipment } from "./nyasiEquipment";
 import type { Equipment, EquipmentSpecification, FactoryUpdate, GalleryImage } from "../types/equipment";
 import { equipmentImage as image } from "../lib/equipmentAssets";
 import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
@@ -28,6 +29,7 @@ const mzigoAugustFactoryUpdate: FactoryUpdate = {
     };
 
 export const equipment: Equipment[] = [
+  nyasiEquipment,
   {
     slug: "sp-ardhi-26", publicPath: "/sp-ardhi-26.html", fleetId: "SP-ARDHI-26", name: "Ardhi", category: "Compact Tracked Loader / Mini Skid Steer",
     pronunciation: "AHR-dhee", meaning: "“Ardhi” means earth in Swahili.", slogan: "Power. Precision. Purpose.",

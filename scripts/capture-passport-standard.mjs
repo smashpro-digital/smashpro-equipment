@@ -13,12 +13,13 @@ const services = [
 ].map(([slug, name, attachment_required], index) => ({ id: index + 1, slug, name, tagline: "Custom property project reviewed by SmashPro.", equipment_required: "SP-ARDHI-26", attachment_required, quote_required: 1, prebooking_enabled: 1 }));
 const server = createServer((request, response) => {
   if (request.url?.startsWith("/api/customer/catalog.php")) { response.setHeader("Content-Type", "application/json"); response.end(JSON.stringify({ ok: true, services })); return; }
+  if (request.url === "/favicon.ico") { response.statusCode = 204; response.end(); return; }
   const pathname = new URL(request.url || "/", `http://127.0.0.1:${appPort}`).pathname;
   const relative = pathname.startsWith("/equipment/") ? pathname.slice("/equipment/".length) : pathname.slice(1);
   const target = path.resolve("dist", relative || "index.html");
   const distRoot = `${path.resolve("dist")}${path.sep}`;
   if (!target.startsWith(distRoot) || !fs.existsSync(target) || !fs.statSync(target).isFile()) { response.statusCode = 404; response.end("Not found"); return; }
-  const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json" };
+  const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json" };
   response.setHeader("Content-Type", types[path.extname(target)] || "application/octet-stream"); const size=fs.statSync(target).size; response.setHeader("Accept-Ranges","bytes"); const range=request.headers.range?.match(/bytes=(\d+)-(\d*)/); if(range) { const start=Number(range[1]),end=range[2]?Math.min(Number(range[2]),size-1):size-1; response.writeHead(206,{"Content-Range":`bytes ${start}-${end}/${size}`,"Content-Length":end-start+1}); fs.createReadStream(target,{start,end}).pipe(response); } else { response.setHeader("Content-Length",size); fs.createReadStream(target).pipe(response); }
 });
 await new Promise((resolve) => server.listen(Number(appPort), "127.0.0.1", resolve));
@@ -101,6 +102,11 @@ for (const slug of (process.env.PASSPORT_SLUG ? [process.env.PASSPORT_SLUG] : ['
       await client.send('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
       await waitFor(client,`!document.querySelector('.passport-document-dialog').open`);
       metrics.documentFocusRestored=await evaluate(`document.activeElement===document.querySelector('.passport-generated-record>button')`);
+    } else if(slug==='sp-nyasi-26') {
+      await evaluate(`document.querySelector('#journey').scrollIntoView()`); await capture('journey');
+      await evaluate(`document.querySelector('#configuration').scrollIntoView()`); await capture('configuration');
+      await evaluate(`document.querySelector('#evidence').scrollIntoView()`); await capture('evidence');
+      metrics.nyasiTruth=await evaluate(`(()=>{const text=document.body.textContent;return {current:text.includes('Production pending'),payment:text.includes('Initial payment paid')&&text.includes('$600')&&text.includes('$1,565'),exclusions:text.includes('Top storage rack')&&text.includes('Side cutter'),falseShipping:/Current stage\s+Shipped/i.test(text),identityArtwork:document.querySelector('.nyasi-hero img')?.getAttribute('src')?.endsWith('sp-nyasi-26-identity.svg')};})()`);
     } else {
       await evaluate(`document.querySelector('#journey')?.scrollIntoView()`); await capture('journey');
       await evaluate(`document.querySelector('.ardhi-archive')?.scrollIntoView()`); await capture('archive');
@@ -130,4 +136,4 @@ for (const slug of (process.env.PASSPORT_SLUG ? [process.env.PASSPORT_SLUG] : ['
 }
 } finally { await new Promise(resolve=>server.close(resolve)); }
 fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2));
-if(results.some(r=>r.scrollWidth>r.width||r.brokenImages.length||r.missingAlt||r.duplicates.length||r.errors.length||r.navigation.some(n=>!n.exists)||(r.slug==='sp-mzigo-26'&&(!r.search||!r.photoFocusRestored||!r.documentFocusRestored||!r.document.pending||r.document.printCalls!==1||!r.mzigoTruth.hero?.endsWith('sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg')||!r.mzigoTruth.finalConfiguration||!r.mzigoTruth.tieDown||r.mzigoTruth.pendingEvidenceSlots!==10||r.mzigoTruth.heldConceptLeak||r.mzigoTruth.staleCurrent||(r.width===390&&(!r.documentError||!r.documentRetry||!r.pngExport)))))) process.exitCode=1;
+if(results.some(r=>r.scrollWidth>r.width||r.brokenImages.length||r.missingAlt||r.duplicates.length||r.errors.length||r.navigation.some(n=>!n.exists)||(r.slug==='sp-nyasi-26'&&(!r.nyasiTruth.current||!r.nyasiTruth.payment||!r.nyasiTruth.exclusions||r.nyasiTruth.falseShipping||!r.nyasiTruth.identityArtwork))||(r.slug==='sp-mzigo-26'&&(!r.search||!r.photoFocusRestored||!r.documentFocusRestored||!r.document.pending||r.document.printCalls!==1||!r.mzigoTruth.hero?.endsWith('sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg')||!r.mzigoTruth.finalConfiguration||!r.mzigoTruth.tieDown||r.mzigoTruth.pendingEvidenceSlots!==10||r.mzigoTruth.heldConceptLeak||r.mzigoTruth.staleCurrent||(r.width===390&&(!r.documentError||!r.documentRetry||!r.pngExport)))))) process.exitCode=1;
