@@ -41,6 +41,8 @@ export const nyasiEvidenceSlots = [
 ];
 
 export const nyasiEquipment: Equipment = {
+  showroomGroup: "field-fleet",
+  showroomOrder: 3,
   manufacturer: "Shandong Infront Machinery Co., Ltd. / Yingfang",
   slug: "sp-nyasi-26", publicPath: "/sp-nyasi-26.html", fleetId: "SP-NYASI-26", name: "Nyasi", category: "Remote-Control Tracked Mower",
   meaning: "Nyasi means grass in Swahili.", slogan: "Mow. Clear. Grade. Maintain.",

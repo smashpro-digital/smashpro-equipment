@@ -3,6 +3,8 @@ import passport from "./umbaPassport.json";
 
 // Approved projection of Digital HQ SP-3DP-001, not another operational asset.
 export const umbaEquipment: Equipment = {
+  showroomGroup: "fabrication",
+  showroomOrder: 1,
   slug: "sp-umba-26", publicPath: "/sp-umba-26.html", fleetId: passport.fleet_id,
   name: "Umba", category: "FDM 3D Printer / MicroFab additive manufacturing",
   manufacturer: passport.manufacturer, operationalAssetId: passport.asset_id, division: passport.division,

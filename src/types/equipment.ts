@@ -1,4 +1,5 @@
 export type EquipmentStatus = "commissioning" | "fleet-build" | "shipping" | "planned" | "request-only";
+export type EquipmentShowroomGroup = "field-fleet" | "fabrication";
 export type RecordVisibility = "public" | "private";
 export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade" | "maintenance" | "attachment" | "media" | "rental" | "revenue" | "hours" | "state" | "status";
 
@@ -67,7 +68,7 @@ export interface EquipmentPublicRuntime {
 }
 
 export interface Equipment {
-  manufacturer?: string; operationalAssetId?: string; division?: string; commissioning?: CommissioningRecord; publicRuntime?: EquipmentPublicRuntime;
+  manufacturer?: string; operationalAssetId?: string; division?: string; showroomGroup: EquipmentShowroomGroup; showroomOrder: number; commissioning?: CommissioningRecord; publicRuntime?: EquipmentPublicRuntime;
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
   overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];

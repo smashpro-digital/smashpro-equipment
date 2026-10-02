@@ -13,6 +13,7 @@ export function EquipmentCard({ item }: { item: Equipment }) {
       <div className="equipment-card__overlay" />
       <div className="equipment-card__content">
         <p className="card-fleet-id">{item.fleetId}</p><h3>{item.name}</h3><p className="category-label">{item.category}</p><p className="card-capability">{item.capabilityStatement}</p>
+        <div className="equipment-card__chips" aria-label={`${item.fleetId} configured capabilities`}>{item.capabilities.slice(0,4).map(capability => <span key={capability}>{capability}</span>)}</div>
         <dl className="mini-specs">{quickSpecs.map((spec) => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl>
         <Link className="card-cta" to={item.publicPath} aria-label={`View ${item.fleetId} equipment details`}>View Equipment <span aria-hidden="true">→</span></Link>
       </div>

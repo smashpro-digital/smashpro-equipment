@@ -32,7 +32,9 @@ test("direct-load shell and router resolve the permanent public URL", () => {
   assert.doesNotMatch(html, /build complete|pre-shipment|SP-MZIGO/);
   assert.match(readFileSync("vite.config.ts", "utf8"), /umba: resolve\(projectDirectory, "sp-umba-26.html"\)/);
   assert.match(readFileSync("src/app/App.tsx", "utf8"), /path="\/sp-umba-26.html".*slug="sp-umba-26"/);
-  assert.match(readFileSync("src/pages/HomePage.tsx", "utf8"), /equipment.map/);
+  const home = readFileSync("src/pages/HomePage.tsx", "utf8");
+  assert.match(home, /showroomGroup === "fabrication"/);
+  assert.match(home, /equipment-grid--fabrication/);
 });
 
 test("approved projection contains only public facts and does not advance validation", () => {

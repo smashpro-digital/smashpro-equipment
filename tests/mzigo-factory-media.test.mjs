@@ -171,15 +171,15 @@ test('procurement preserves the deposit and separates machine cost, processing f
   assert.match(evidence, /Source attachment SHA-256: `[a-f0-9]{64}`/);
 });
 
-test('Mzigo uses the build-approved factory photograph as its documentary hero', () => {
+test('Mzigo restores the polished poster hero while keeping factory evidence in the archive', () => {
   const html = renderToStaticMarkup(React.createElement(MzigoPassportHeader, { item: mzigo }));
   assert.ok(html.indexOf('id="identity"') < html.indexOf('class="status-panel"'));
   assert.ok(html.indexOf('class="ardhi-v2-hero mzigo-passport-hero"') < html.indexOf('id="identity"'));
   assert.equal((html.match(/class="passport-summary-item"/g) || []).length, 3);
   assert.doesNotMatch(html, /Passport Number|Fleet Class|Current Owner/);
-  assert.match(html, /src="\/equipment\/images\/sp-mzigo-26e-build-approved-left-profile-2026-09-15\.jpg"/);
-  assert.match(html, /alt="Build-approved SP-MZIGO-26E factory profile/);
-  assert.match(html, /September 15 factory-completion evidence/);
+  assert.match(html, /src="\/equipment\/images\/sp-mzigo-26e-hero-artwork-2026-09-09\.png"/);
+  assert.match(html, /alt="Polished SP-MZIGO-26E poster artwork/);
+  assert.match(html, /Brand poster · verified factory evidence remains available in Media History/);
   assert.equal(mzigo.heroImage, mzigoFactoryPhotos.approvedProfile.src);
   assert.match(html, /SmashPro<br\/>Electric Material<br\/>/);
   for (const anchor of ['passport', 'journey', 'history', 'service']) assert.ok(html.includes(`href="#${anchor}"`));

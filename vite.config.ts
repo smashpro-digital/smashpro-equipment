@@ -63,6 +63,8 @@ function preserveEquipmentMedia(): Plugin {
         equipment: equipment.map((item) => ({
           fleet_id: item.fleetId,
           name: item.name,
+          asset_group: item.showroomGroup,
+          showroom_order: item.showroomOrder,
           category: item.category,
           capability: item.capabilityStatement,
           capability_badges: item.capabilities.slice(0, 6),

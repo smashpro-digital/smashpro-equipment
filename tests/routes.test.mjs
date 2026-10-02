@@ -130,16 +130,18 @@ test("catalog product specifications and design packages are revision controlled
   assert.deepEqual([...preview.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 });
 
-test("golf cart dream project uses one canonical concept image and route", () => {
+test("golf cart concept remains canonical and is visually subordinate on the showroom", () => {
   const home = readFileSync("src/pages/HomePage.tsx", "utf8");
   const dreamPage = readFileSync("src/pages/GolfCartTechBuildPage.tsx", "utf8");
   const dreamPageStyles = readFileSync("src/styles/dream-build-fixes.css", "utf8");
   const conceptPath = "public/equipment/images/sp-gari-26e-concept.png";
   const publicPath = "/equipment/images/sp-gari-26e-concept.png";
   assert.equal(existsSync(conceptPath), true, `${conceptPath} must exist`);
-  assert.equal(home.includes(`src="${publicPath}"`), true);
+  assert.equal(home.includes(`src="${publicPath}"`), false);
   assert.equal(dreamPage.includes(`src="${publicPath}"`), true);
   assert.match(home, /href="\/equipment\/golf-cart-tech-build\.html"/);
+  assert.match(home, /id="development"/);
+  assert.match(home, /Dream-build concept/);
   assert.match(dreamPageStyles, /\.gc-concept img \{[^}]*object-fit:contain/);
   assert.doesNotMatch(`${home}\n${dreamPage}\n${dreamPageStyles}`, /sp-golf-cart-tech-build-concept|golf-cart-dream-project-concept/);
 });
