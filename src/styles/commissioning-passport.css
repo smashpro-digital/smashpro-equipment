@@ -35,3 +35,12 @@
 .commissioning-run-log span { display: block; margin-top: 6px; color: #98a794; font-size: .84rem; }
 .commissioning-run-log strong { white-space: nowrap; color: #b7e685; }
 @media (max-width: 700px) { .commissioning-run-log li { display: block; } .commissioning-run-log strong { display: block; margin-top: 8px; } }
+.commissioning-documents { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+.commissioning-documents article { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-width: 0; border: 1px solid #30382e; border-radius: 12px; padding: 24px; background: #11180f; }
+.commissioning-documents span { color: #91ca46; font-size: .76rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.commissioning-documents h3 { margin: 10px 0; }
+.commissioning-documents p { color: #b7c5b1; line-height: 1.65; }
+.commissioning-documents small { color: #98a794; }
+.commissioning-documents a { align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; border: 1px solid #668b36; border-radius: 999px; padding: 0 18px; color: #d9efd0; font-weight: 800; text-decoration: none; }
+.commissioning-documents a:hover, .commissioning-documents a:focus-visible { background: #20301f; border-color: #91ca46; }
+@media (max-width: 700px) { .commissioning-documents { grid-template-columns: 1fr; } }

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createServer } from "vite";
 
 const server = await createServer({ configFile: false, optimizeDeps: { noDiscovery: true, include: [] }, server: { middlewareMode: true }, appType: "custom" });
@@ -68,4 +68,18 @@ test("approved projection contains only public facts and does not advance valida
   assert.equal(item.commissioning.materials.find(row => row.material === "PETG").status, "planned_validation");
   assert.equal(item.serviceHistory.length, 0);
   assert.equal(item.gallery.length, 0);
+});
+
+test("enclosure build files are public without claiming installation or validation", () => {
+  assert.equal(item.documents.length, 2);
+  for (const document of item.documents) {
+    assert.equal(document.kind, "other");
+    assert.equal(document.publicDisplay, true);
+    assert.equal(document.verificationStatus, "pending");
+    assert.match(document.url, /^\/equipment\/documents\/sp-umba-26\/.*\.3mf$/);
+    assert.ok(existsSync(`public${document.url.replace(/^\/equipment/, "")}`));
+  }
+  const rendered = readFileSync("src/components/CommissioningPassport.tsx", "utf8");
+  assert.match(rendered, /Controlled build files/);
+  assert.match(rendered, /do not establish fabrication, installation, ventilation performance or production approval/i);
 });
