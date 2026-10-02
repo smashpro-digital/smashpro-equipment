@@ -23,8 +23,13 @@ test("NYASI public data preserves procurement truth and explicit exclusions", ()
 
 test("NYASI page distinguishes identity artwork from production evidence", () => {
   const page = read("src/components/NyasiPassport.tsx");
-  const image = read("images/sp-nyasi-26-identity.svg");
-  assert.match(page, /production photography is pending/i);
+  const data = read("src/data/nyasiEquipment.ts");
+  assert.match(page, /Identity \/ promotional artwork/i);
   assert.match(page, /No conceptual accessory is represented as purchased/);
-  assert.match(image, /IDENTITY ARTWORK · PRODUCTION MEDIA PENDING/);
+  assert.match(data, /sp-nyasi-26-showroom-hero-1672\.webp/);
+  assert.match(data, /mediaType: "promotional_artwork"/);
+  assert.match(data, /evidenceClass: "concept_or_identity_art"/);
+  assert.match(data, /productionEvidence: false/);
+  assert.match(data, /factoryEvidence: false/);
+  assert.match(data, /fieldEvidence: false/);
 });

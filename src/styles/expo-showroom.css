@@ -2,3 +2,5 @@
 @media(max-width:1050px){.equipment-grid--field{grid-template-columns:repeat(2,minmax(0,1fr))}.passport-pillar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:768px){.expo-showroom>*{order:initial!important}.showroom-jump{margin-inline:0;padding-inline:.75rem}.showroom-jump a{min-height:48px}.equipment-grid--field,.passport-pillar-grid,.development-grid{grid-template-columns:1fr}.showroom-group .section-heading{margin-bottom:1.6rem}.showroom-group .section-heading h2,.passport-system .section-heading h2{font-size:clamp(2rem,10vw,3rem)}.equipment-card__chips{margin:.65rem 0}.equipment-card__chips span{font-size:.58rem}.development-grid article{min-height:0}.fabrication-intro i{display:none}}
 @media(prefers-reduced-motion:reduce){.showroom-jump{scroll-behavior:auto}}
+
+.equipment-card--sp-nyasi-26 .equipment-card__media{background:#030504}.equipment-card--sp-nyasi-26 .equipment-card__media img{object-fit:contain;object-position:center;transform:none}.equipment-card--sp-nyasi-26:hover .equipment-card__media img{transform:scale(1.015)}

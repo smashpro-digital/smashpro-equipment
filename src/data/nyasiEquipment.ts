@@ -40,6 +40,19 @@ export const nyasiEvidenceSlots = [
   { id: "commissioning", title: "Commissioning evidence", status: "Pending", detail: "Startup, remote controls, mower, lights, blade lift and tow-hook checks remain pending." },
 ];
 
+export const nyasiPromotionalArtwork = {
+  src: image("sp-nyasi-26-showroom-hero-1672.webp"),
+  srcSet: [640, 960, 1280, 1672].map(width => `${image(`sp-nyasi-26-showroom-hero-${width}.webp`)} ${width}w`).join(", "),
+  width: 1672,
+  height: 941,
+  alt: "SP-NYASI-26 remote-control tracked mower in SmashPro green with remote-lift front blade",
+  mediaType: "promotional_artwork" as const,
+  evidenceClass: "concept_or_identity_art" as const,
+  productionEvidence: false,
+  factoryEvidence: false,
+  fieldEvidence: false,
+  public: true,
+};
 export const nyasiEquipment: Equipment = {
   showroomGroup: "field-fleet",
   showroomOrder: 3,
@@ -48,7 +61,7 @@ export const nyasiEquipment: Equipment = {
   meaning: "Nyasi means grass in Swahili.", slogan: "Mow. Clear. Grade. Maintain.",
   overview: "Initial payment paid · production pending. LM500 remote-control tracked mower configured for SmashPro; production has not been verified as started.",
   capabilityStatement: "Intended remote mowing, light clearing, grading support and property maintenance; field performance remains unvalidated.",
-  heroImage: image("sp-nyasi-26-identity.svg"), status: "fleet-build", statusLabel: "Initial payment paid · production pending",
+  heroImage: nyasiPromotionalArtwork.src, heroMedia: nyasiPromotionalArtwork, status: "fleet-build", statusLabel: "Initial payment paid · production pending",
   statusDetail: "The Alibaba order is active. Production is expected after the current Chinese holiday, but no production-start date or supplier production evidence is recorded.",
   identity: { passportId: "SPP-2026-0004", model: "SP-NYASI-26", factoryModel: "LM500", edition: "Incoming Fleet Asset", finish: "SmashPro green · ordered configuration", assetClass: "Remote-control tracked mower", powertrain: "RATO 225cc gasoline engine / brushless drive configuration", modelYear: 2026 },
   specifications: [
@@ -73,6 +86,7 @@ export const nyasiEquipment: Equipment = {
   ],
   includedItems: [], documents: [], serviceHistory: [],
   timeline: [
+    { id: "nyasi-identity-artwork", occurredAt: "2026-10-02", kind: "media", title: "Fleet identity artwork approved", detail: "Promotional artwork establishes the public SP-NYASI-26 visual identity from the ordered configuration. It is not factory, production, completed-machine, delivery, or field evidence.", publicDisplay: true },
     { id: "nyasi-configuration-approved", occurredAt: "2026-09-29", kind: "purchase", title: "LM500 configuration approved", detail: "SmashPro approved the LM500, RATO 225cc engine, brushless configuration, green finish, decals, lighting, tow hook and remote-lift front blade. The storage rack was removed from the final order.", publicDisplay: true },
     { id: "nyasi-order-created", occurredAt: "2026-09-29", kind: "purchase", title: "Alibaba order active", detail: "Proforma invoice YF260916 and the marketplace order record a sanitized $2,165 DDP commercial total.", publicDisplay: true },
     { id: "nyasi-initial-payment", occurredAt: "2026-09-29", kind: "purchase", title: "Initial payment paid", detail: "$600 initial payment recorded complete. The remaining balance is $1,565.", publicDisplay: true },

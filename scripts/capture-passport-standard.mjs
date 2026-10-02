@@ -106,7 +106,7 @@ for (const slug of (process.env.PASSPORT_SLUG ? [process.env.PASSPORT_SLUG] : ['
       await evaluate(`document.querySelector('#journey').scrollIntoView()`); await capture('journey');
       await evaluate(`document.querySelector('#configuration').scrollIntoView()`); await capture('configuration');
       await evaluate(`document.querySelector('#evidence').scrollIntoView()`); await capture('evidence');
-      metrics.nyasiTruth=await evaluate(`(()=>{const text=document.body.textContent;return {current:text.includes('Production pending'),payment:text.includes('Initial payment paid')&&text.includes('$600')&&text.includes('$1,565'),exclusions:text.includes('Top storage rack')&&text.includes('Side cutter'),falseShipping:/Current stage\s+Shipped/i.test(text),identityArtwork:document.querySelector('.nyasi-hero img')?.getAttribute('src')?.endsWith('sp-nyasi-26-identity.svg')};})()`);
+      metrics.nyasiTruth=await evaluate(`(()=>{const text=document.body.textContent;return {current:text.includes('Production pending'),payment:text.includes('Initial payment paid')&&text.includes('$600')&&text.includes('$1,565'),exclusions:text.includes('Top storage rack')&&text.includes('Side cutter'),falseShipping:/Current stage\s+Shipped/i.test(text),identityArtwork:document.querySelector('.nyasi-hero img')?.getAttribute('src')?.endsWith('sp-nyasi-26-showroom-hero-1672.webp')};})()`);
     } else {
       await evaluate(`document.querySelector('#journey')?.scrollIntoView()`); await capture('journey');
       await evaluate(`document.querySelector('.ardhi-archive')?.scrollIntoView()`); await capture('archive');

@@ -9,8 +9,8 @@ const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD
 
 export function NyasiPassport({ item }: { item: Equipment }) {
   return <main className="nyasi-passport" id="passport">
-    <PassportHero titleId="nyasi-title" image={item.heroImage} alt="Code-based identity illustration for SP-NYASI-26; production photography is pending" className="nyasi-hero">
-      <p className="eyebrow">Equipment Passport · Production record</p>
+    <PassportHero titleId="nyasi-title" image={item.heroImage} srcSet={item.heroMedia?.srcSet} sizes="100vw" width={item.heroMedia?.width} height={item.heroMedia?.height} alt={item.heroMedia?.alt ?? "SP-NYASI-26 identity artwork; production photography is pending"} className="nyasi-hero">
+      <p className="eyebrow">Identity / promotional artwork · Evidence-bound passport</p>
       <h1 id="nyasi-title">SP-NYASI-26 <span>Nyasi</span></h1>
       <p>{item.slogan}</p><p>{item.overview}</p>
       <div className="nyasi-status"><strong>Current stage</strong><span>Production pending</span><small>Initial payment paid. Production is expected after the current Chinese holiday; no production date is confirmed.</small></div>
