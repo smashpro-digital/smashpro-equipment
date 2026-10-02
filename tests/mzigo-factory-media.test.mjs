@@ -121,14 +121,53 @@ test('archive renders chapter controls, search, enlargement, inline video and se
   assert.doesNotMatch(html, /No branding media|No hydraulics media|No completed machine media/);
 });
 
-test('current canonical state records build approval while payment and transport remain incomplete', () => {
+test('paid-in-full lifecycle has one current stage and does not advance shipping without evidence', () => {
+  const { mzigoLifecycle, mzigoFinalPayment, mzigoStatusLabel, mzigoCurrentStage } = load('src/data/mzigoPassport.ts');
   assert.equal(mzigo.identity.factoryModel, 'K600');
   assert.equal(mzigo.identity.operatingHours, 0);
-  assert.equal(mzigo.statusLabel, 'Build approved · final payment pending');
-  assert.equal(mzigo.factoryUpdate.date, '2026-09-15');
-  assert.deepEqual(mzigo.factoryUpdate.timeline.map(s => s.status), [...Array(7).fill('completed'), 'current', ...Array(4).fill('upcoming')]);
-  assert.deepEqual(mzigo.factoryUpdate.timeline.slice(7).map(s => s.label), ['Final Payment','Export Crating','Port Delivery','Vessel Booking','Ocean Departure']);
+  assert.equal(mzigoFinalPayment.status, 'complete');
+  assert.equal(mzigo.statusLabel, 'Paid in full · shipping preparation');
+  assert.equal(mzigo.statusLabel, mzigoStatusLabel);
+  assert.equal(mzigo.factoryUpdate.heading, mzigoStatusLabel);
+  assert.equal(mzigo.factoryUpdate.date, '2026-10-01');
+  assert.equal(mzigoCurrentStage, 'Shipping Preparation');
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'complete').map(s => s.id), ['build-approved', 'final-payment']);
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'current').map(s => s.id), ['shipping-preparation']);
+  assert.ok(mzigoLifecycle.slice(3).every(s => s.status === 'pending' && s.progress === 0));
+  assert.ok(mzigoLifecycle.filter(s => s.status !== 'complete').every(s => s.progress === 0));
+  assert.deepEqual(mzigo.factoryUpdate.timeline.slice(6), mzigoLifecycle.map(s => ({label:s.label,status:s.status === 'complete' ? 'completed' : s.status === 'current' ? 'current' : 'upcoming'})));
+  assert.equal(mzigoShippingEvidenceSlots.find(s => s.id === 'final-payment').status, 'Complete');
+  assert.ok(mzigoShippingEvidenceSlots.filter(s => s.id !== 'final-payment').every(s => s.status === 'Pending'));
+  for (const id of ['commercial-invoice','packing-crating','factory-departure','freight-booking','carrier-container','port-milestones','vessel-ocean','customs-delivery','commissioning','final-tie-down','shipping-inspection']) assert.ok(mzigoShippingEvidenceSlots.some(s => s.id === id));
   assert.ok(mzigo.factoryUpdate.images.every(m => /2026-09-(14|15)/.test(m.src)));
+});
+
+test('complete payment cannot coexist with stale payment copy in rendered or exported Passport data', () => {
+  const { MzigoPassport } = load('src/components/MzigoPassport.tsx');
+  const html = renderToStaticMarkup(React.createElement(MzigoPassport, {item:mzigo}));
+  const data = JSON.stringify(mzigo);
+  for (const text of [html, data, readFileSync('docs/fleet/SP-MZIGO-26E-PASSPORT.md','utf8')]) {
+    assert.doesNotMatch(text, /final payment pending|payment pending|final payment is current|final payment is planned|payment, export, transport/i);
+    assert.doesNotMatch(text, /I020261001784090010205|880\.57|855\.00|25\.57/);
+  }
+  assert.match(html, /Paid in full/);
+  assert.match(html, /Current stage Shipping Preparation/);
+  assert.match(html, /is-complete[^]*?Final Payment/);
+  assert.equal(mzigo.timeline.filter(e => e.id === 'mzigo-final-payment').length, 1);
+  assert.equal(mzigo.timeline.find(e => e.id === 'mzigo-final-payment').occurredAt, '2026-10-01');
+  assert.ok(mzigo.timeline.some(e => e.id === 'mzigo-deposit'));
+  assert.ok(mzigo.timeline.some(e => e.id === 'mzigo-build-approved' && e.occurredAt === '2026-09-15'));
+});
+
+test('procurement preserves the deposit and separates machine cost, processing fee and evidence source', () => {
+  const procurement = readFileSync('docs/fleet/SP-MZIGO-26E-PROCUREMENT.md','utf8');
+  const evidence = readFileSync('docs/fleet/evidence/SP-MZIGO-26E-ALIBABA-PAYMENT-2026-10-01.md','utf8');
+  assert.match(procurement, /Prior deposit/);
+  assert.match(procurement, /USD 855\.00 \| USD 25\.57 \| USD 880\.57/);
+  assert.match(evidence, /#I020261001784090010205/);
+  assert.match(evidence, /2026-10-01 07:53 PST/);
+  assert.match(evidence, /No original invoice\/receipt binary was attached/);
+  assert.match(evidence, /Source attachment SHA-256: `[a-f0-9]{64}`/);
 });
 
 test('Mzigo uses the build-approved factory photograph as its documentary hero', () => {
@@ -245,7 +284,7 @@ test('platform presentation includes engineering, collaboration, media, systems 
   assert.match(html, /No rated recovery point is documented/);
   assert.match(html, /no build, specification or availability is claimed/i);
   assert.match(html, /recorded only as transport securement hardware/i);
-  assert.match(html, /final payment is planned this week/i);
+  assert.match(html, /Final payment completed on October 1, 2026/i);
   assert.equal((html.match(/<details/g) || []).length, mzigoOptionGroups.length + mzigoShippingEvidenceSlots.length + 11);
 });
 
@@ -297,6 +336,7 @@ test('generated MZIGO record qualifies ratings while the shared ARDHI sticker re
   const render = (item, evidenceMode) => renderToStaticMarkup(React.createElement(WindowSticker, {item, evidenceMode, packages:[], scores:{documentation:0,maintenance:0}}));
   const html = render(mzigo, true);
   assert.match(html, /not an OEM certificate/);
+  assert.match(html, /Paid in full · shipping preparation/);
   assert.match(html, /K600 - verification pending/);
   assert.doesNotMatch(html, /Maintenance Score|No package currently qualified|Estimated Fleet Value/);
   assert.match(render(equipment[0], false), /Factory Specifications/);

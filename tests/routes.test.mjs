@@ -147,7 +147,7 @@ test("golf cart dream project uses one canonical concept image and route", () =>
 test("equipment data does not claim public availability", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   assert.doesNotMatch(data, /available now|rent now|book now/i);
-  assert.match(data, /availability not announced/);
+  assert.match(readFileSync("src/data/mzigoPassport.ts", "utf8"), /Rental availability has not been announced/);
 });
 
 test("shared navigation provides an obvious route to the main SmashPro site", () => {
@@ -195,7 +195,7 @@ test("both fleet passports retain identity sections and the current Mzigo eviden
     .forEach(heading => assert.ok(mzigoPassport.includes(`# ${heading}`), heading));
   assert.match(mzigoPassport, /\*\*SP-MZIGO-26E\*\*/);
   assert.match(mzigoPassport, /do \*\*not\*\* by themselves prove/);
-  assert.match(mzigoPassport, /Final Payment Pending/);
+  assert.match(mzigoPassport, /Paid in Full \/ Shipping Preparation/);
 });
 
 test("SP-MZIGO-26E is classified as electric with a correctly converted published payload", () => {
@@ -452,7 +452,7 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
   assert.match(data, /\["Platform", "K600", "Identity"/);
   assert.match(data, /\["Fleet ID", "SP-MZIGO-26E", "Identity"/);
   assert.match(data, /\["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co\., Ltd\.", "Identity"/);
-  assert.match(data, /statusLabel: "Build approved · final payment pending"/);
+  assert.match(data, /statusLabel: mzigoStatusLabel/);
   assert.match(data, /mzigo-black-wheels/);
   assert.match(data, /mzigo-black-battery-boxes/);
   assert.match(data, /mzigo-tie-down-anchors/);

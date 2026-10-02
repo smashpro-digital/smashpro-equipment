@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { equipment } from "./src/data/equipment";
+import { mzigoStatusLabel, mzigoStatusDetail } from "./src/data/mzigoPassport";
 import { attachments } from "./src/data/attachments";
 
 const projectDirectory = dirname(fileURLToPath(import.meta.url));
@@ -11,6 +12,9 @@ const projectDirectory = dirname(fileURLToPath(import.meta.url));
 function preserveEquipmentMedia(): Plugin {
   return {
     name: "preserve-equipment-media",
+    transformIndexHtml(html) {
+      return html.replaceAll("__MZIGO_STATUS_DESCRIPTION__", `${mzigoStatusLabel}. ${mzigoStatusDetail}`);
+    },
     configureServer(server) {
       server.middlewares.use((request, response, next) => {
         const prefix = "/equipment/images/";

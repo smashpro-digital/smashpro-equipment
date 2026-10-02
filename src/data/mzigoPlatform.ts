@@ -1,3 +1,4 @@
+import { mzigoFinalPayment } from "./mzigoPassport";
 import type { EvidenceCategory, GalleryImage, MediaPublicationChannel } from "../types/equipment";
 
 export const mzigoEvidenceCategories: Array<{ id: EvidenceCategory; label: string }> = [
@@ -54,7 +55,9 @@ export const mzigoFinalConfiguration = [
 ];
 
 export const mzigoShippingEvidenceSlots = [
-  { id: "final-payment", title: "Final payment evidence", status: "Pending", evidence: "Payment receipt or reconciled commercial record", advance: "Closes Final Payment only after evidence is recorded." },
+  { id: "final-payment", title: "Final payment evidence", status: mzigoFinalPayment.status === "complete" ? "Complete" : "Pending", evidence: mzigoFinalPayment.summary, advance: "Closes Final Payment only; no shipping milestone is completed by payment." },
+  { id: "final-tie-down", title: "Final tie-down hardware installation/evidence", status: "Pending", evidence: "Final installation confirmation and dated shipping securement photographs", advance: "Earlier anchor photographs do not complete final shipping securement verification." },
+  { id: "shipping-inspection", title: "Final shipping-preparation inspection", status: "Pending", evidence: "Dated final inspection record", advance: "Build approval does not complete the shipping-preparation inspection." },
   { id: "commercial-invoice", title: "Final commercial invoice", status: "Pending", evidence: "Final supplier invoice suitable for the private procurement record", advance: "Supports export documentation without publishing confidential terms." },
   { id: "packing-crating", title: "Packing and wooden crate", status: "Pending", evidence: "Packing list plus dated crate photographs", advance: "Advances Wooden Crate only when the unit is identifiable." },
   { id: "factory-departure", title: "Factory departure", status: "Pending", evidence: "Dated handoff or transport record", advance: "Records physical departure from the factory." },
