@@ -180,7 +180,10 @@ test('Mzigo restores the polished poster hero while keeping factory evidence in 
   assert.match(html, /src="\/equipment\/images\/sp-mzigo-26e-hero-artwork-2026-09-09\.png"/);
   assert.match(html, /alt="Polished SP-MZIGO-26E poster artwork/);
   assert.match(html, /Brand poster · verified factory evidence remains available in Media History/);
-  assert.equal(mzigo.heroImage, mzigoFactoryPhotos.approvedProfile.src);
+  assert.equal(mzigo.heroImage, '/equipment/images/sp-mzigo-26e-hero-artwork-2026-09-09.png');
+  assert.equal(mzigo.heroMedia?.evidenceClass, 'concept_or_identity_art');
+  assert.equal(mzigo.heroMedia?.factoryEvidence, false);
+  assert.ok(mzigo.gallery.some(media => media.src === mzigoFactoryPhotos.approvedProfile.src), 'Factory profile remains in the evidence archive');
   assert.match(html, /SmashPro<br\/>Electric Material<br\/>/);
   for (const anchor of ['passport', 'journey', 'history', 'service']) assert.ok(html.includes(`href="#${anchor}"`));
   assert.doesNotMatch(html, /Asset #001/);

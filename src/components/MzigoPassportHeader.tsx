@@ -2,12 +2,8 @@
 import { PassportHero } from "./PassportHero";
 
 export function MzigoPassportHeader({ item }: { item: Equipment }) {
-  const media = {
-    src: "/equipment/images/sp-mzigo-26e-hero-artwork-2026-09-09.png",
-    alt: "Polished SP-MZIGO-26E poster artwork with raised green dump body and remote controller in a SmashPro workshop",
-  };
   return <>
-    <PassportHero titleId="mzigo-passport-title" image={media.src} alt={media.alt} className="mzigo-passport-hero">
+    <PassportHero titleId="mzigo-passport-title" image={item.heroImage} srcSet={item.heroMedia?.srcSet} sizes="100vw" width={item.heroMedia?.width} height={item.heroMedia?.height} alt={item.heroMedia?.alt ?? `${item.fleetId} equipment hero`} className="mzigo-passport-hero">
       <p className="eyebrow">{item.fleetId}</p>
       <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br />Carrier <span>{item.identity.factoryModel}</span></h1>
       <p>{item.statusLabel}</p>

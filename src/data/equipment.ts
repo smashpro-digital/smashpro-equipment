@@ -8,6 +8,19 @@ import { standardPackageRules } from "./packageRules";
 
 const specs = (values: Array<[string, string, string?, string?]>): EquipmentSpecification[] => values.map(([label, value, group, source], sortOrder) => ({ label, value, group: group ?? "General", source, confirmed: true, sortOrder }));
 
+export const mzigoPromotionalArtwork = {
+  src: image("sp-mzigo-26e-hero-artwork-2026-09-09.png"),
+  width: 1670,
+  height: 941,
+  alt: "Polished SP-MZIGO-26E poster artwork with raised green dump body and remote controller in a SmashPro workshop",
+  mediaType: "promotional_artwork" as const,
+  evidenceClass: "concept_or_identity_art" as const,
+  productionEvidence: false,
+  factoryEvidence: false,
+  fieldEvidence: false,
+  public: true,
+};
+
 // Preserve the earlier assembly evidence as history when the latest update advances.
 const mzigoAugustFactoryUpdate: FactoryUpdate = {
       date: "2026-08-31",
@@ -146,7 +159,7 @@ export const equipment: Equipment[] = [
   {
     showroomGroup: "field-fleet", showroomOrder: 2, slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
     meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: `${mzigoStatusLabel}. SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.`,
-    capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg"), status: "fleet-build", statusLabel: mzigoStatusLabel, statusDetail: mzigoStatusDetail,
+    capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: mzigoPromotionalArtwork.src, heroMedia: mzigoPromotionalArtwork, status: "fleet-build", statusLabel: mzigoStatusLabel, statusDetail: mzigoStatusDetail,
     identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026, operatingHours: 0 },
     specifications: specs([
       ["Platform", "K600", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Fleet ID", "SP-MZIGO-26E", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co., Ltd.", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"],

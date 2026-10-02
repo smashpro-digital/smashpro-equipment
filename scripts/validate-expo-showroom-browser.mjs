@@ -40,6 +40,7 @@ try {
         fabricationCards:document.querySelectorAll(".equipment-grid--fabrication .equipment-card").length,
         fieldText:document.querySelector(".equipment-grid--field")?.textContent || "",
         fabricationText:document.querySelector(".equipment-grid--fabrication")?.textContent || "",
+        mzigoCardImage:document.querySelector(".equipment-card--sp-mzigo-26 img")?.getAttribute("src") || "",
         brokenImages:[...document.images].filter(image=>image.complete&&!image.naturalWidth).map(image=>image.src),
         missingAlt:[...document.images].filter(image=>!image.hasAttribute("alt")).length,
         duplicateIds:ids.filter((id,index)=>ids.indexOf(id)!==index),
@@ -53,6 +54,7 @@ try {
     for(const id of ["SP-ARDHI-26","SP-MZIGO-26E","SP-NYASI-26"]) assert.match(metrics.fieldText,new RegExp(id));
     assert.doesNotMatch(metrics.fieldText,/SP-UMBA-26/);
     assert.match(metrics.fabricationText,/SP-UMBA-26/);
+    assert.equal(metrics.mzigoCardImage,"/equipment/images/sp-mzigo-26e-hero-artwork-2026-09-09.png");
     assert.equal(metrics.brokenImages.length,0);
     assert.equal(metrics.missingAlt,0);
     assert.equal(metrics.duplicateIds.length,0);
