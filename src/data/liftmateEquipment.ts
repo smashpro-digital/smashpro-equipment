@@ -1,0 +1,40 @@
+import type { Equipment } from "../types/equipment";
+
+export const liftmateEquipment: Equipment = {
+  slug: "sp-liftmate-27",
+  publicPath: "/sp-liftmate-27.html",
+  fleetId: "SP-LIFTMATE-27",
+  name: "LiftMate",
+  category: "Mobile Powered Lifting Platform",
+  manufacturer: "Pairon Tools",
+  meaning: "",
+  slogan: "Same Tough Jobs. Bigger Possibilities.",
+  overview: "SP-LIFTMATE-27 documents SmashPro's proposed Pairon Tools LiftMate Glide200 partner build. The public record separates the OEM platform from planned SmashPro field configuration and future validation.",
+  capabilityStatement: "Mobile powered lifting and truck-bed loading support for field workflows, subject to OEM limits and SmashPro commissioning.",
+  heroImage: "https://pairontools.com/cdn/shop/files/fced55a6-ac24-4c38-b8a3-330e1f2f82cd.png?v=1774223513&width=1200",
+  status: "planned",
+  statusLabel: "Partnership proposal · planned build",
+  statusDetail: "No partnership, acquisition, SmashPro modification, commissioning, or field validation is represented as complete.",
+  identity: { passportId: "SPP-2027-0001", model: "SP-LIFTMATE-27", factoryModel: "Glide200", edition: "Proposed Partner Build", assetClass: "Mobile powered lifting platform", powertrain: "48V electric", modelYear: 2027 },
+  specifications: [
+    { label: "Manufacturer", value: "Pairon Tools", confirmed: true, group: "Identity", source: "Digital HQ partnership proposal" },
+    { label: "Model reference", value: "Glide200", confirmed: true, group: "Identity", source: "Digital HQ partnership proposal" },
+    { label: "Machine type", value: "Mobile powered lifting platform", confirmed: true, group: "Configuration", source: "SmashPro proposed use classification" },
+    { label: "Power source", value: "48V electric", confirmed: true, group: "Power", source: "SmashPro project record" },
+    { label: "Rated capacity", value: "440 lb", confirmed: true, group: "Capacity", source: "SmashPro project artwork; OEM confirmation retained as commissioning gate" },
+  ],
+  factoryOptions: [],
+  upgrades: [
+    { id: "liftmate-lighting", name: "SmashPro visibility lighting package", category: "Lighting", description: "Proposed green chassis visibility lighting, white task lighting and corner markers for controlled field evaluation.", imageUrls: [], status: "planned", tags: ["lighting", "visibility"] },
+  ],
+  packageRules: [], attachments: [], includedItems: [], documents: [], serviceHistory: [],
+  timeline: [
+    { id: "liftmate-proposal", occurredAt: "2026-10-02", kind: "status", title: "Partner build concept documented", detail: "Digital HQ recorded the proposed five-video Pairon LiftMate Glide200 field partnership and public/private evidence boundaries.", publicDisplay: true },
+    { id: "liftmate-passport", occurredAt: "2026-10-02", kind: "status", title: "SP-LIFTMATE-27 passport identity established", detail: "The 2027 SmashPro identity is reserved for the proposed Glide200 partner build. Physical acquisition and commissioning remain future gates.", publicDisplay: true },
+  ],
+  media: [], scores: { documentation: 0, maintenance: 0 }, valuation: { currency: "USD", status: "pending" },
+  capabilities: ["Mobile lifting", "Truck-bed loading support", "Material staging", "Field workflow evaluation"],
+  idealUses: ["Loading and unloading approved materials", "Project Rebirth field workflow testing", "Controlled dusk visibility evaluation"],
+  restrictions: ["Follow Pairon Tools operating instructions and rated limits.", "SmashPro lighting and branding shown in concept artwork are proposed until physically installed and validated.", "Partnership status remains proposal-stage until confirmed in writing."],
+  gallery: [], requirements: [{ title: "Commissioning", detail: "Physical receipt, OEM documentation review, inspection and field validation are required before operational status." }],
+};
