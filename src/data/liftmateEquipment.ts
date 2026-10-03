@@ -11,7 +11,7 @@ export const liftmateEquipment: Equipment = {
   slogan: "Same Tough Jobs. Bigger Possibilities.",
   overview: "SP-LIFTMATE-27 documents SmashPro's proposed Pairon Tools LiftMate Glide200 partner build. The public record separates the OEM platform from planned SmashPro field configuration and future validation.",
   capabilityStatement: "Mobile powered lifting and truck-bed loading support for field workflows, subject to OEM limits and SmashPro commissioning.",
-  heroImage: "https://pairontools.com/cdn/shop/files/fced55a6-ac24-4c38-b8a3-330e1f2f82cd.png?v=1774223513&width=1200",
+  heroImage: "/equipment/images/sp-umba-26-identity.svg",
   status: "planned",
   statusLabel: "Partnership proposal · planned build",
   statusDetail: "No partnership, acquisition, SmashPro modification, commissioning, or field validation is represented as complete.",
