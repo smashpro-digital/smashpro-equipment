@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
-const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "sp-umba-26.html", "admin.html"];
+const entries = ["index.html", "catalog/index.html", "sp-ardhi-26.html", "sp-mzigo-26.html", "sp-umba-26.html", "sp-nyasi-26.html", "admin.html"];
 
 test("protected HTML entry files exist", () => {
   entries.forEach((entry) => assert.equal(existsSync(entry), true, `${entry} must exist`));
@@ -130,16 +130,18 @@ test("catalog product specifications and design packages are revision controlled
   assert.deepEqual([...preview.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 });
 
-test("golf cart dream project uses one canonical concept image and route", () => {
+test("golf cart concept remains canonical and is visually subordinate on the showroom", () => {
   const home = readFileSync("src/pages/HomePage.tsx", "utf8");
   const dreamPage = readFileSync("src/pages/GolfCartTechBuildPage.tsx", "utf8");
   const dreamPageStyles = readFileSync("src/styles/dream-build-fixes.css", "utf8");
   const conceptPath = "public/equipment/images/sp-gari-26e-concept.png";
   const publicPath = "/equipment/images/sp-gari-26e-concept.png";
   assert.equal(existsSync(conceptPath), true, `${conceptPath} must exist`);
-  assert.equal(home.includes(`src="${publicPath}"`), true);
+  assert.equal(home.includes(`src="${publicPath}"`), false);
   assert.equal(dreamPage.includes(`src="${publicPath}"`), true);
   assert.match(home, /href="\/equipment\/golf-cart-tech-build\.html"/);
+  assert.match(home, /id="development"/);
+  assert.match(home, /Dream-build concept/);
   assert.match(dreamPageStyles, /\.gc-concept img \{[^}]*object-fit:contain/);
   assert.doesNotMatch(`${home}\n${dreamPage}\n${dreamPageStyles}`, /sp-golf-cart-tech-build-concept|golf-cart-dream-project-concept/);
 });
@@ -147,7 +149,7 @@ test("golf cart dream project uses one canonical concept image and route", () =>
 test("equipment data does not claim public availability", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   assert.doesNotMatch(data, /available now|rent now|book now/i);
-  assert.match(data, /availability not announced/);
+  assert.match(readFileSync("src/data/mzigoPassport.ts", "utf8"), /Rental availability has not been announced/);
 });
 
 test("shared navigation provides an obvious route to the main SmashPro site", () => {
@@ -195,7 +197,7 @@ test("both fleet passports retain identity sections and the current Mzigo eviden
     .forEach(heading => assert.ok(mzigoPassport.includes(`# ${heading}`), heading));
   assert.match(mzigoPassport, /\*\*SP-MZIGO-26E\*\*/);
   assert.match(mzigoPassport, /do \*\*not\*\* by themselves prove/);
-  assert.match(mzigoPassport, /Final Payment Pending/);
+  assert.match(mzigoPassport, /Paid in Full \/ Shipping Preparation/);
 });
 
 test("SP-MZIGO-26E is classified as electric with a correctly converted published payload", () => {
@@ -218,8 +220,8 @@ test("public equipment fleet IDs and slugs are unique", () => {
   assert.equal(new Set(slugs).size, slugs.length, "slugs must be unique");
 });
 
-const futureAcquisitionFiles = ["docs/fleet/SP-BEBA-HD-26-PASSPORT.md", "docs/fleet/SP-INAMA-26-PASSPORT.md", "docs/fleet/SP-NYASI-26-PASSPORT.md"];
-const futureAcquisitionIds = ["SP-BEBA-HD-26", "SP-INAMA-26", "SP-NYASI-26"];
+const futureAcquisitionFiles = ["docs/fleet/SP-BEBA-HD-26-PASSPORT.md", "docs/fleet/SP-INAMA-26-PASSPORT.md"];
+const futureAcquisitionIds = ["SP-BEBA-HD-26", "SP-INAMA-26"];
 const sharedPassportSections = [
   ["Identity", /^# Identity$/m],
   ["Mission", /^# Mission$/m],
@@ -257,7 +259,7 @@ const sharedPassportSections = [
   ["Revision History", /^# Revision History$/m],
 ];
 
-test("future acquisition passport files exist for BEBA-HD, INAMA, and NYASI", () => {
+test("remaining future acquisition passport files exist for BEBA-HD and INAMA", () => {
   futureAcquisitionFiles.forEach((file) => assert.equal(existsSync(file), true, `${file} must exist`));
 });
 
@@ -452,7 +454,7 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
   assert.match(data, /\["Platform", "K600", "Identity"/);
   assert.match(data, /\["Fleet ID", "SP-MZIGO-26E", "Identity"/);
   assert.match(data, /\["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co\., Ltd\.", "Identity"/);
-  assert.match(data, /statusLabel: "Build approved · final payment pending"/);
+  assert.match(data, /statusLabel: mzigoStatusLabel/);
   assert.match(data, /mzigo-black-wheels/);
   assert.match(data, /mzigo-black-battery-boxes/);
   assert.match(data, /mzigo-tie-down-anchors/);

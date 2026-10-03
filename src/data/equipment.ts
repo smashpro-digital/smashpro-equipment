@@ -1,12 +1,26 @@
 import { umbaEquipment } from "./umbaEquipment";
 import { liftmateEquipment } from "./liftmateEquipment";
+import { nyasiEquipment } from "./nyasiEquipment";
 import type { Equipment, EquipmentSpecification, FactoryUpdate, GalleryImage } from "../types/equipment";
 import { equipmentImage as image } from "../lib/equipmentAssets";
 import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
-import { mzigoObservedSpecLabels } from "./mzigoPassport";
+import { mzigoObservedSpecLabels, mzigoFinalPayment, mzigoStatusLabel, mzigoStatusDetail } from "./mzigoPassport";
 import { standardPackageRules } from "./packageRules";
 
 const specs = (values: Array<[string, string, string?, string?]>): EquipmentSpecification[] => values.map(([label, value, group, source], sortOrder) => ({ label, value, group: group ?? "General", source, confirmed: true, sortOrder }));
+
+export const mzigoPromotionalArtwork = {
+  src: image("sp-mzigo-26e-hero-artwork-2026-09-09.png"),
+  width: 1670,
+  height: 941,
+  alt: "Polished SP-MZIGO-26E poster artwork with raised green dump body and remote controller in a SmashPro workshop",
+  mediaType: "promotional_artwork" as const,
+  evidenceClass: "concept_or_identity_art" as const,
+  productionEvidence: false,
+  factoryEvidence: false,
+  fieldEvidence: false,
+  public: true,
+};
 
 // Preserve the earlier assembly evidence as history when the latest update advances.
 const mzigoAugustFactoryUpdate: FactoryUpdate = {
@@ -29,8 +43,9 @@ const mzigoAugustFactoryUpdate: FactoryUpdate = {
     };
 
 export const equipment: Equipment[] = [
+  nyasiEquipment,
   {
-    slug: "sp-ardhi-26", publicPath: "/sp-ardhi-26.html", fleetId: "SP-ARDHI-26", name: "Ardhi", category: "Compact Tracked Loader / Mini Skid Steer",
+    showroomGroup: "field-fleet", showroomOrder: 1, slug: "sp-ardhi-26", publicPath: "/sp-ardhi-26.html", fleetId: "SP-ARDHI-26", name: "Ardhi", category: "Compact Tracked Loader / Mini Skid Steer",
     pronunciation: "AHR-dhee", meaning: "“Ardhi” means earth in Swahili.", slogan: "Power. Precision. Purpose.",
     overview: "The flagship compact loader of the SmashPro Fleet, positioned for landscaping, grading, loading, excavation, pallet handling, and residential access.",
     capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "shipping", statusLabel: "Shipment updates via Digital HQ",
@@ -143,9 +158,9 @@ export const equipment: Equipment[] = [
     ], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Documentation", detail: "Insurance, certification, and rental terms may apply." }],
   },
   {
-    slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
-    meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: "SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.",
-    capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: image("sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg"), status: "fleet-build", statusLabel: "Build approved · final payment pending", statusDetail: "Export preparation pending. Rental availability not announced.",
+    showroomGroup: "field-fleet", showroomOrder: 2, slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
+    meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: `${mzigoStatusLabel}. SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.`,
+    capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: mzigoPromotionalArtwork.src, heroMedia: mzigoPromotionalArtwork, status: "fleet-build", statusLabel: mzigoStatusLabel, statusDetail: mzigoStatusDetail,
     identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026, operatingHours: 0 },
     specifications: specs([
       ["Platform", "K600", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Fleet ID", "SP-MZIGO-26E", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Manufacturer", "Shandong Kylin Heavy Industry Machinery Co., Ltd.", "Identity", "SP-MZIGO-26E Equipment Passport"], ["Machine type", "Electric remote-controlled material carrier", "Configuration"],
@@ -184,8 +199,9 @@ export const equipment: Equipment[] = [
       { id: "mzigo-factory-build", kind: "factory-build", title: "Factory build in progress", detail: "Deposit paid, production started, and SmashPro custom green finish and branding approved for SP-MZIGO-26E.", publicDisplay: true },
       { id: "mzigo-factory-complete", occurredAt: "2026-09-09", kind: "factory-build", title: "Factory build complete", detail: "SmashPro green finish, branding, raised hydraulic bed and powered work lights were documented. At this dated update, pre-shipment verification was current; the September 15 approval record supersedes that status.", publicDisplay: true },
       { id: "mzigo-approved-revisions", occurredAt: "2026-09-14", kind: "factory-build", title: "Requested build revisions documented", detail: "Factory photographs record black wheels, black battery boxes, tie-down hardware and service access beneath the raised dump body.", publicDisplay: true, photos: [image("sp-mzigo-26e-raised-bed-engineering-overview-2026-09-14.jpg"), image("sp-mzigo-26e-raised-bed-drive-system-overview-2026-09-14.jpg"), image("sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg"), image("sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg"), image("sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg")] },
-      { id: "mzigo-build-approved", occurredAt: "2026-09-15", kind: "status", title: "Quality inspection passed and build approved", detail: "The supplied production status records quality inspection passed and SmashPro build approval. Final payment and every export and shipping stage remain pending.", publicDisplay: true, photos: [image("sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg")], milestone: "completed-build" },
-      { id: "mzigo-current", occurredAt: "2026-09-15", kind: "status", title: "Current status", detail: "Build approved · final payment pending. Export crating, port delivery, vessel booking and ocean departure have not been recorded complete.", publicDisplay: true },
+      { id: "mzigo-build-approved", occurredAt: "2026-09-15", kind: "status", title: "Quality inspection passed and build approved", detail: "The supplied production status records quality inspection passed and SmashPro build approval. This is the completed historical build milestone; shipping preparation requires separate evidence.", publicDisplay: true, photos: [image("sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg")], milestone: "completed-build" },
+      { id: "mzigo-final-payment", occurredAt: mzigoFinalPayment.completedAt, kind: "purchase", milestone: "final-payment", title: "Final payment completed", detail: mzigoFinalPayment.summary, publicDisplay: true },
+      { id: "mzigo-current", occurredAt: mzigoFinalPayment.completedAt, kind: "status", title: "Current status", detail: `${mzigoStatusLabel}. ${mzigoStatusDetail}`, publicDisplay: true },
     ], media: [],
     scores: { documentation: 0, maintenance: 0 }, valuation: { currency: "USD", status: "pending" },
     capabilities: ["Fully Electric", "Zero Tailpipe Emissions", "Quiet Operation", "Remote Controlled", "Built for Job Sites", "Ideal Around Homes"], idealUses: ["Landscape materials", "Property cleanup", "Construction support", "Residential-friendly hauling", "Material staging", "Indoor-capable work where site rules permit"],

@@ -1,4 +1,5 @@
 export type EquipmentStatus = "commissioning" | "fleet-build" | "shipping" | "planned" | "request-only";
+export type EquipmentShowroomGroup = "field-fleet" | "fabrication";
 export type RecordVisibility = "public" | "private";
 export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade" | "maintenance" | "attachment" | "media" | "rental" | "revenue" | "hours" | "state" | "status";
 
@@ -26,12 +27,18 @@ export interface EquipmentUpgrade {
 }
 export interface PackageRule { id: string; packageName: string; description: string; requiredTags: string[]; }
 export interface CalculatedPackage { id: string; name: string; description: string; qualifyingUpgradeIds: string[]; }
-export interface EquipmentAttachment { id: string; name: string; category: string; status: "installed" | "available" | "planned" | "removed"; addedAt?: string; description?: string; }
+export interface EquipmentAttachment { id: string; name: string; category: string; status: "installed" | "available" | "planned" | "ordered" | "removed"; addedAt?: string; description?: string; }
 export interface IncludedItem { id: string; name: string; category: "accessory" | "spare-part"; }
 export interface EquipmentDocument { id: string; title: string; kind: "manual" | "brochure" | "spec-sheet" | "warranty" | "invoice" | "receipt" | "other"; description?: string; source?: string; revision?: string; verificationStatus?: "verified" | "pending"; dateReceived?: string; downloadName?: string; url?: string; publicDisplay: boolean; }
 export interface ServiceRecord { id: string; performedAt: string; serviceType: string; summary: string; provider?: string; operatingHours?: number; status: "completed" | "scheduled"; }
 export interface TimelineEvent { id: string; occurredAt?: string; kind: TimelineKind; title: string; detail?: string; publicDisplay: boolean; photos?: string[]; videos?: string[]; notes?: string; milestone?: "first-machine" | "first-rental" | "first-100-hours" | "first-revenue" | "first-state" | "first-youtube" | "first-major-upgrade" | "completed-build" | "final-payment" | "freight-forwarder" | "export-crate" | "container-loaded" | "customs-released" | "ocean-transit" | "500-hours" | "1000-hours"; }
 export interface MediaRecord { id: string; title: string; kind: "image" | "video" | "youtube"; role?: "installation" | "walkaround" | "review" | "maintenance" | "short" | "build"; url: string; publishedAt?: string; description?: string; upgradeId?: string; }
+export interface EquipmentHeroMedia {
+  src: string; srcSet?: string; width: number; height: number; alt: string;
+  mediaType: "promotional_artwork" | "documentary_photo";
+  evidenceClass: "concept_or_identity_art" | "factory_evidence" | "production_evidence" | "field_evidence";
+  productionEvidence: boolean; factoryEvidence: boolean; fieldEvidence: boolean; public: boolean;
+}
 export interface PassportScores { documentation: number; maintenance: number; }
 export interface PublicValuation { amount?: number; currency: "USD"; calculatedAt?: string; status: "current" | "pending"; }
 export interface EquipmentIdentity { passportId: string; model: string; factoryModel?: string; edition: string; finish?: string; serialNumberPublic?: string; assetClass: string; powertrain?: string; modelYear?: number; fleetEntryDate?: string; operatingHours?: number; }
@@ -67,9 +74,9 @@ export interface EquipmentPublicRuntime {
 }
 
 export interface Equipment {
-  manufacturer?: string; operationalAssetId?: string; division?: string; commissioning?: CommissioningRecord; publicRuntime?: EquipmentPublicRuntime;
+  manufacturer?: string; operationalAssetId?: string; division?: string; showroomGroup: EquipmentShowroomGroup; showroomOrder: number; commissioning?: CommissioningRecord; publicRuntime?: EquipmentPublicRuntime;
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
-  overview: string; capabilityStatement: string; heroImage: string; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
+  overview: string; capabilityStatement: string; heroImage: string; heroMedia?: EquipmentHeroMedia; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;

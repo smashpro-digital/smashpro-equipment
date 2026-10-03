@@ -4,67 +4,47 @@ import { ButtonLink } from "../components/ButtonLink";
 import { EquipmentCard } from "../components/EquipmentCard";
 import { PageFrame } from "../components/PageFrame";
 import { AttachmentShowroom } from "../components/AttachmentShowroom";
+import type { Equipment } from "../types/equipment";
 
-const capabilities = ["Landscaping", "Material transport", "Property cleanup", "Loading and unloading", "Tight-access work", "Contractor rentals"];
 const standards = ["Maintained equipment", "Contractor eligibility", "Inspection process", "Clear rental terms", "Equipment support", "Growing attachment library"];
 const rentalSteps = ["Browse", "Verify eligibility", "Request dates", "Complete inspection", "Put it to work", "Return and close out"];
+const passportPillars = [
+  ["01", "Digital identity", "A permanent Passport connects the machine, factory model, evidence and future service record."],
+  ["02", "Factory-to-fleet history", "Lifecycle states advance only when payment, build, logistics, delivery or commissioning evidence supports them."],
+  ["03", "Attachment traceability", "Machine, implement, fitment, procurement state and field validation remain distinct records."],
+  ["04", "MicroFab support", "Fabrication equipment helps prototype and build tools for the field without being classified as Field Fleet."],
+];
 
 export function HomePage() {
-  return (
-    <PageFrame>
-      <section className="home-hero">
-        <img src="/equipment/images/sp-ardhi-26-hero.png" alt="SmashPro compact tracked loader prepared for project work" width="1536" height="1024" />
-        <div className="home-hero__shade" /><div className="ambient-light" aria-hidden="true" /><div className="shell home-hero__content"><p className="eyebrow">Official SmashPro Fleet Showroom</p><h1>Built to Move the Work Forward.</h1><p>Professional-grade compact equipment selected for capability, access, and project support—from moving earth to moving the load.</p><p className="motto">Power. Precision. Purpose.</p><div className="button-row"><ButtonLink href="#fleet">Explore Equipment</ButtonLink><ButtonLink href="https://smashpro.app/contact" variant="outline">Request Availability</ButtonLink></div></div>
-        <div className="hero-rail"><span>01</span><p>Compact capability.<br />Professional standards.</p></div>
-      </section>
+  const byShowroomOrder = (a: Equipment, b: Equipment) => a.showroomOrder - b.showroomOrder;
+  const fieldFleet = equipment.filter(item => item.showroomGroup === "field-fleet").sort(byShowroomOrder);
+  const fabrication = equipment.filter(item => item.showroomGroup === "fabrication").sort(byShowroomOrder);
+  return <PageFrame>
+    <section className="home-hero">
+      <img src="/equipment/images/sp-ardhi-26-hero.png" alt="SmashPro compact tracked loader prepared for project work" width="1536" height="1024" fetchPriority="high" />
+      <div className="home-hero__shade" /><div className="ambient-light" aria-hidden="true" /><div className="shell home-hero__content"><p className="eyebrow">Official SmashPro Equipment Showroom</p><h1>Built to Move the Work Forward.</h1><p>Connected equipment documented from procurement and factory evidence through field deployment.</p><p className="motto">Power. Precision. Purpose.</p><div className="button-row"><ButtonLink href="#fleet">Explore Field Fleet</ButtonLink><ButtonLink href="#passports" variant="outline">How Passports Work</ButtonLink></div></div>
+      <div className="hero-rail"><span>EXPO 26</span><p>Field Fleet.<br />Attachments.<br />MicroFab.</p></div>
+    </section>
 
-      <div className="home-flow">
-      <section className="section shell" id="fleet"><div className="section-heading"><div><p className="eyebrow">Featured fleet</p><h2>Equipment with a defined purpose.</h2></div><p>Every fleet asset is documented around the work it supports. Availability is published only when the operating program is ready.</p></div><div className="equipment-grid">{equipment.map((item) => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
+    <div className="home-flow expo-showroom">
+      <nav className="showroom-jump shell" aria-label="Equipment showroom sections"><a href="#fleet">Field Fleet</a><a href="#passports">Passports</a><a href="#attachments">Attachments</a><a href="#fabrication">Fabrication</a><a href="#development">Development</a></nav>
 
-      <section className="section shell" aria-labelledby="dream-project-title">
-        <article className="dream-project-card">
-          <div className="dream-project-card__layout">
-            <div className="dream-project-card__content">
-              <p className="eyebrow">Dream Project · Shop + Promo Vehicle</p>
-              <h2 id="dream-project-title">Old cart.<br/><span>New technology.</span></h2>
-              <p>We are hunting an inexpensive older electric golf cart and rebuilding it into a lithium-powered, connected SmashPro Garage EV. The project is designed around brand partnerships, YouTube chapters, real installation work and long-term shop utility.</p>
-              <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/golf-cart-tech-build.html">Explore the dream build</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partnerships</ButtonLink></div>
-            </div>
-            <div className="dream-project-card__visual">
-              <div className="dream-project-card__media"><img src="/equipment/images/sp-gari-26e-concept.png" alt="SmashPro Garage SP-GARI-26E green and black electric golf cart dream-build concept" width="1536" height="1024" loading="lazy" decoding="async" /><span>Dream-build concept</span></div>
-              <div className="dream-project-card__phase"><p className="eyebrow">Current phase</p><h3>Sponsor-first donor search</h3><p>Target donor: roughly $500, electric, complete chassis, dead or missing batteries preferred. First-wave outreach is active across power, performance, smart lighting and audio.</p></div>
-            </div>
-          </div>
-        </article>
-      </section>
+      <section className="section shell showroom-group showroom-group--field" id="fleet" aria-labelledby="field-fleet-title"><div className="section-heading"><div><p className="eyebrow">01 / Field Fleet</p><h2 id="field-fleet-title">Four machines. Complementary roles.</h2></div><p>ARDHI moves earth and handles material. MZIGO transports loads remotely. NYASI is configured for remote vegetation management. LIFTMATE is a proposal-stage lifting and truck-bed loading platform. Public status reflects evidence, not availability.</p></div><div className="showroom-role-strip" aria-label="Field Fleet roles"><span>Earthmoving</span><span>Material transport</span><span>Vegetation management</span><span>Powered lifting</span></div><div className="equipment-grid equipment-grid--field">{fieldFleet.map(item => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
 
-      <section className="section shell" aria-labelledby="pcm-project-title">
-        <article className="dream-project-card">
-          <div className="dream-project-card__layout">
-            <div className="dream-project-card__content">
-              <p className="eyebrow">Product Development · Project Rebirth</p>
-              <h2 id="pcm-project-title">From battery box.<br/><span>To power system.</span></h2>
-              <p>SP-PCM-001 started as an F-150 packaging problem and is becoming a documented Power Control Module. Follow the cardboard fitment, HDPE fabrication, electrical integration, vehicle proof and the decision that determines whether the prototype earns a future SmashPro catalog release.</p>
-              <div className="button-row dream-project-card__actions"><ButtonLink href="/equipment/catalog/sp-pcm-001/">Follow SP-PCM-001</ButtonLink><ButtonLink href="https://smashpro.app/media/" variant="outline">Partner with the build</ButtonLink></div>
-            </div>
-            <div className="dream-project-card__visual">
-              <div className="dream-project-card__phase"><p className="eyebrow">Current phase</p><h3>Prototype Rev A · In construction</h3><p>Black HDPE enclosure, ML-RBS 7700 isolation, digital voltage monitoring and high-current distribution are being packaged around the actual Project Rebirth engine bay.</p></div>
-              <div className="dream-project-card__phase"><p className="eyebrow">Product path</p><h3>Problem → Prototype → Proof → Catalog</h3><p>No retail or compatibility claims yet. The permanent origin story is being built before the future product card exists.</p></div>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section className="capability-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Work capabilities</p><h2>Made for the places work gets difficult.</h2></div><p>Compact equipment expands what a prepared crew can move, handle, and finish.</p></div><div className="capability-grid">{capabilities.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3></div>)}</div></div></section>
+      <section className="passport-system" id="passports" aria-labelledby="passport-system-title"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Connected Equipment</p><h2 id="passport-system-title">Every asset keeps its history.</h2></div><p>An Equipment Passport is the persistent public identity. It does not make every asset Field Fleet, and it never advances a milestone without evidence.</p></div><div className="passport-pillar-grid">{passportPillars.map(([number,title,copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
 
       <AttachmentShowroom attachments={attachments} />
 
-      <section className="section shell split-section"><div><p className="eyebrow">Why SmashPro Fleet</p><h2>Readiness is part of the equipment.</h2><p>Rental access is more than a key handoff. It is a documented operating relationship built around people, machines, projects, and condition.</p></div><div className="standards-list">{standards.map((item, index) => <div key={item}><span>0{index + 1}</span><h3>{item}</h3><p>{index === 0 ? "Fleet care and operating readiness are treated as core requirements." : index === 1 ? "Access may depend on approval, insurance, certification, and account standing." : "Clear steps support safer, more predictable equipment use."}</p></div>)}</div></section>
+      <section className="section shell showroom-group showroom-group--fabrication" id="fabrication" aria-labelledby="fabrication-title"><div className="section-heading"><div><p className="eyebrow">03 / Fabrication + MicroFab</p><h2 id="fabrication-title">Tools that build for the field.</h2></div><p>Fabrication assets support prototypes, fixtures, adapters and field-ready solutions. They keep their own Equipment Passports without entering the primary Field Fleet lineup.</p></div><div className="fabrication-intro"><strong>FIELD FLEET</strong><span>goes to the job</span><i aria-hidden="true">→</i><strong>MICROFAB</strong><span>helps build for the job</span></div><div className="equipment-grid equipment-grid--fabrication">{fabrication.map(item => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
 
-      <section className="process-section" id="rental-process"><div className="shell"><p className="eyebrow">Rental process</p><div className="section-heading"><h2>From request to closeout.</h2><p>This is the intended rental journey. Public availability and launch timing have not been announced.</p></div><ol className="process-grid">{rentalSteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step}</h3></li>)}</ol></div></section>
+      <section className="section shell development-lab" id="development" aria-labelledby="development-title"><div className="section-heading"><div><p className="eyebrow">04 / Development Lab</p><h2 id="development-title">Projects earning their next chapter.</h2></div><p>Concepts and prototypes remain discoverable while staying visually and semantically separate from acquired equipment.</p></div><div className="development-grid">
+        <article><div><p className="eyebrow">Dream-build concept</p><h3>SP-GARI-26E</h3><p>An older electric golf cart considered for a lithium-powered, connected shop and promotional build. No donor vehicle or production asset is claimed.</p></div><ButtonLink href="/equipment/golf-cart-tech-build.html" variant="outline">Explore concept</ButtonLink></article>
+        <article><div><p className="eyebrow">Product development</p><h3>Project Rebirth / SP-PCM-001</h3><p>A documented prototype path from an F-150 packaging problem toward a possible Power Control Module. No retail release or compatibility claim exists.</p></div><ButtonLink href="/equipment/catalog/sp-pcm-001/" variant="outline">Follow prototype</ButtonLink></article>
+      </div></section>
 
-      <section className="contractor-cta" id="contractors"><div className="shell"><p className="eyebrow">For independent contractors</p><h2>Fleet access begins with readiness.</h2><p>SP Fleet rental access may require account approval, equipment-specific qualification, insurance, certification, and agreement to inspection and rental terms. A public SPgO network URL has not yet been approved.</p><div className="button-row"><ButtonLink href="https://smashpro.app/contact" variant="primary">Request SPgO Network Access</ButtonLink><ButtonLink href="https://smashpro.app/contact" variant="outline">Ask About Eligibility</ButtonLink></div></div></section>
-      </div>
-    </PageFrame>
-  );
+      <section className="section shell split-section"><div><p className="eyebrow">Why SmashPro Fleet</p><h2>Readiness is part of the equipment.</h2><p>Rental access is a documented operating relationship built around people, machines, projects, attachments and condition.</p></div><div className="standards-list">{standards.map((item,index) => <div key={item}><span>0{index+1}</span><h3>{item}</h3><p>{index===0?"Fleet care and operating readiness are treated as core requirements.":index===1?"Access may depend on approval, insurance, certification and account standing.":"Clear steps support safer, more predictable equipment use."}</p></div>)}</div></section>
+      <section className="process-section" id="rental-process"><div className="shell"><p className="eyebrow">Rental process</p><div className="section-heading"><h2>From request to closeout.</h2><p>This is the intended rental journey. Public availability and launch timing have not been announced.</p></div><ol className="process-grid">{rentalSteps.map((step,index) => <li key={step}><span>{String(index+1).padStart(2,"0")}</span><h3>{step}</h3></li>)}</ol></div></section>
+      <section className="contractor-cta" id="contractors"><div className="shell"><p className="eyebrow">Equipment + project support</p><h2>Start with the right record.</h2><p>Ask about a machine, attachment, fabrication need or future project. Availability remains subject to readiness and review.</p><div className="button-row"><ButtonLink href="https://smashpro.app/contact" variant="primary">Contact SmashPro</ButtonLink><ButtonLink href="#fleet" variant="outline">Review Field Fleet</ButtonLink></div></div></section>
+    </div>
+  </PageFrame>;
 }

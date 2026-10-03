@@ -1,9 +1,9 @@
 # SP-MZIGO-26E Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**  
-> Version: 1.2<br>
-> Status: Build Approved / Final Payment Pending<br>
-> Last Updated: 2026-09-15
+> Version: 1.3<br>
+> Status: Paid in Full / Shipping Preparation<br>
+> Last Updated: 2026-10-01
 
 ---
 
@@ -270,7 +270,7 @@ SP-ARDHI-26 is intended for loading, digging, grading, and material placement. S
 
 # Shipping / Readiness
 
-Current public state: **Build Approved / Final Payment Pending**
+Current public state: **Paid in Full / Shipping Preparation**
 
 Completed or visually documented:
 
@@ -285,7 +285,11 @@ Completed or visually documented:
 
 Open milestones requiring separate confirmation:
 
-- Final payment
+- Final tie-down hardware installation/evidence
+- Final shipping-preparation inspection
+- Crate completion
+- Factory departure
+- Freight booking and freight/tracking identifiers
 - Export packing and loading
 - Export inspection
 - Port delivery and vessel booking
@@ -294,7 +298,7 @@ Open milestones requiring separate confirmation:
 - Customs release
 - Fleet commissioning
 
-Prepared evidence slots retain separate gates for final-payment evidence, the final commercial invoice, packing and crating photographs, factory departure, freight booking, carrier and container identifiers, port milestones, cargo-linked vessel information, ocean transit, customs release, delivery, commissioning and field validation. The September 15 supplier update says final payment is planned this week; no payment completion is published until its record exists.
+Prepared evidence slots retain separate gates for final-payment evidence, the final commercial invoice, packing and crating photographs, factory departure, freight booking, carrier and container identifiers, port milestones, cargo-linked vessel information, ocean transit, customs release, delivery, commissioning and field validation. The October 1 payment record completes Final Payment. Shipping Preparation is current; all downstream evidence slots remain pending.
 
 ---
 
@@ -315,9 +319,14 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 - ✅ Black Battery Box Completed
 - ✅ Tie-Down Anchors Installed
 - ✅ Build Approved by SmashPro
-- 🟢 Final Payment Pending
+- ✅ Final Payment Complete — October 1, 2026
+- 🟢 Shipping Preparation — Current
+- ⬜ Final Tie-Down Verification
+- ⬜ Final Shipping-Preparation Inspection
 - ⬜ Wooden Crate
 - ⬜ Export Inspection
+- ⬜ Factory Departure
+- ⬜ Freight Booking
 - ⬜ Container Loading
 - ⬜ Port Arrival
 - ⬜ Ocean Departure
@@ -326,6 +335,7 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 - ⬜ Customs
 - ⬜ Delivery
 - ⬜ Fleet Commissioning
+- ⬜ Field Validation
 
 ---
 
@@ -341,8 +351,8 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 
 | Field | Status |
 |------|--------|
-| Fleet Status | 🟢 Build Approved |
-| Operational Status | Final Payment Pending |
+| Fleet Status | 🟢 Paid in Full |
+| Operational Status | Shipping Preparation |
 | Service Hours | 0 / Pre-commissioning |
 | Fleet Classification | Founders Fleet Asset |
 | Fleet Priority | Tier 1 |
@@ -369,8 +379,14 @@ Digital HQ, Equipment Registry, Fleet Registry and SPGo must reference SP-MTC-00
 
 # SP-MZIGO Roadmap
 
-1. Complete final payment and preserve the payment evidence privately.
+1. Final payment completed October 1, 2026; preserve payment evidence in the procurement record. Shipping preparation is current.
 2. Record crating, export inspection, container loading, port delivery and ocean movement only as evidence arrives.
 3. Complete arrival inspection, commissioning and field validation.
 4. Use field results to engineer rated recovery, hitch, fender, lighting, wheel, tire, electrical and fleet-technology packages.
 5. Evaluate SP-MZIGO-27E as a future fleet asset informed by the Founders Edition. No future build is currently claimed.
+
+# October 1, 2026 Payment Update
+
+Final payment is complete and the remaining machine balance is paid in full. The public status is **Paid in full · shipping preparation**. Build Approved remains a completed historical milestone. The completed machine has not shipped: all packing, crating, factory departure, freight booking, export/port, vessel/ocean, arrival, customs, delivery, commissioning and field-validation gates remain pending. The existing September tie-down photographs do not establish final shipping hardware completion.
+
+The canonical [procurement record](SP-MZIGO-26E-PROCUREMENT.md) retains the prior deposit history and the October 1 evidence reference. Public lifecycle data is projected from `src/data/mzigoPassport.ts`; all pending/current stages have zero progress and only completed stages have 100%. No shipment percentage is inferred.

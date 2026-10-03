@@ -1,5 +1,7 @@
 import type { EvidenceCategory, FactoryUpdate, GalleryImage, MediaPublicationChannel } from "../types/equipment";
 
+import { mzigoLifecycle, mzigoFinalPayment, mzigoStatusLabel, mzigoStatusDetail } from "./mzigoPassport";
+
 const archiveChannels: MediaPublicationChannel[] = ["passport", "equipment-gallery"];
 const launchChannels: MediaPublicationChannel[] = ["passport", "equipment-gallery", "marketing-library", "product-brochure", "social-media", "launch-timeline", "qr-pages"];
 
@@ -45,19 +47,17 @@ export const mzigoFactoryGallery: GalleryImage[] = [
 ];
 
 export const mzigoFactoryUpdate: FactoryUpdate = {
-  date: "2026-09-15", heading: "Build approved · final payment pending",
+  date: mzigoFinalPayment.completedAt, heading: mzigoStatusLabel,
   description: [
     "The September 14 and 15 factory evidence records the requested black wheels and battery boxes, installed tie-down anchors, retained SmashPro branding and QR identity, and post-revision access to the electric and hydraulic systems.",
-    "The supplied production status records quality inspection passed and SmashPro build approval. Final payment, export crating, port delivery, vessel booking and ocean departure remain pending.",
+    mzigoFinalPayment.summary, mzigoStatusDetail,
   ],
   images: [mzigoFactoryPhotos.approvedProfile, mzigoFactoryPhotos.approvedRaised], video: mzigoFactoryWalkaround,
   timeline: [
     { label: "Design Approved", status: "completed" }, { label: "Custom Branding Installed", status: "completed" },
     { label: "Quality Inspection Passed", status: "completed" }, { label: "Black Wheel Upgrade", status: "completed" },
     { label: "Black Battery Box", status: "completed" }, { label: "Tie-Down Anchors", status: "completed" },
-    { label: "Build Approved by SmashPro", status: "completed" }, { label: "Final Payment", status: "current" },
-    { label: "Export Crating", status: "upcoming" }, { label: "Port Delivery", status: "upcoming" },
-    { label: "Vessel Booking", status: "upcoming" }, { label: "Ocean Departure", status: "upcoming" },
+    ...mzigoLifecycle.map(stage => ({ label: stage.label, status: stage.status === "complete" ? "completed" as const : stage.status === "current" ? "current" as const : "upcoming" as const })),
   ],
 };
 
@@ -72,5 +72,5 @@ export const mzigoBuildChapters: MzigoBuildChapter[] = [
   { number: "03", date: "Sep 9, 2026", title: "Electric Drive Architecture", image: mzigoFactoryPhotos.drive, supporting: [], narrative: "A close-up records the drive hardware and cabling within the chassis.", verified: ["Motor/controller hardware visible.", "Electrical connections and chassis cabling photographed."], takeaway: "The controller and cabling reveal the hardware behind the electric drive." },
   { number: "04", date: "Sep 9 and 14, 2026", title: "Hydraulic Dump System", image: mzigoFactoryPhotos.approvedRaised, supporting: [mzigoFactoryPhotos.raisedDriveOverview, mzigoFactoryPhotos.pump, mzigoFactoryPhotos.cylinder], narrative: "Raised-bed views connect the lift geometry to the hydraulic power unit and maintenance access.", verified: ["Hydraulic dump body photographed in raised position.", "Central lift cylinder and pump/reservoir assembly visible.", "Post-revision drive packaging and access arrangement documented."], takeaway: "The raised body connects the full-machine view to the pump, reservoir, cylinder and drive-system details." },
   { number: "05", date: "Sep 14, 2026", title: "Approved Revisions", image: mzigoFactoryPhotos.blackBoxes, supporting: [mzigoFactoryPhotos.blackWheelDrive, mzigoFactoryPhotos.tieDown], narrative: "Close-ups record the black battery boxes, black wheel finish and added tie-down hardware.", verified: ["Black battery boxes installed.", "Black wheel finish installed.", "Tie-down anchor hardware photographed."], takeaway: "The requested finish and securement changes are preserved as as-built evidence." },
-  { number: "06", date: "Sep 15, 2026", title: "Build-Approved Machine", image: mzigoFactoryPhotos.approvedProfile, supporting: [], narrative: "The latest profile records the Founders Edition after quality inspection and SmashPro build approval.", verified: ["Completed green body and black wheels photographed.", "SmashPro identity, fleet decal and QR panel remain installed.", "Build approval recorded in the supplied production status."], takeaway: "Factory production is approved; payment and export preparation are the next open stages." },
+  { number: "06", date: "Sep 15, 2026", title: "Build-Approved Machine", image: mzigoFactoryPhotos.approvedProfile, supporting: [], narrative: "The latest profile records the Founders Edition after quality inspection and SmashPro build approval.", verified: ["Completed green body and black wheels photographed.", "SmashPro identity, fleet decal and QR panel remain installed.", "Build approval recorded in the supplied production status."], takeaway: "Factory production approval remains complete. The October 1 payment record advances the machine to shipping preparation." },
 ];

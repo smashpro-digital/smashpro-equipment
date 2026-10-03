@@ -2,16 +2,18 @@ import { Link } from "react-router-dom";
 import type { Equipment } from "../types/equipment";
 
 export function EquipmentCard({ item }: { item: Equipment }) {
-  const preferredSpecs = item.slug === "sp-liftmate-27" ? ["OEM Model", "Rated Capacity", "Power", "Model Year"] : item.commissioning ? ["OEM model", "Machine type", "Filament system", "Multicolor"] : item.slug === "sp-mzigo-26"
+  const preferredSpecs = item.slug === "sp-liftmate-27" ? ["OEM Model", "Rated Capacity", "Power", "Model Year"] : item.commissioning ? ["OEM model", "Machine type", "Filament system", "Multicolor"] : item.slug === "sp-nyasi-26"
+    ? ["Factory model", "Machine type", "Engine", "Front equipment"] : item.slug === "sp-mzigo-26"
     ? ["Machine type", "Payload", "Power source", "Electric drive system"]
     : ["Model reference", "Machine type", "Drive", "Hydraulics"];
   const quickSpecs = preferredSpecs.map((label) => item.specifications.find((spec) => spec.label === label)).filter((spec): spec is NonNullable<typeof spec> => Boolean(spec));
   return (
     <article className={`equipment-card equipment-card--${item.slug}`}>
-      <div className="equipment-card__media"><img src={item.heroImage} alt={`${item.fleetId} ${item.category}`} width="1536" height="1024" loading="lazy" decoding="async" /><span className="card-status">{item.statusLabel}</span></div>
+      <div className="equipment-card__media"><img src={item.heroImage} srcSet={item.heroMedia?.srcSet} sizes={item.heroMedia?.srcSet ? "(max-width: 768px) calc(100vw - 24px), (max-width: 1050px) 50vw, 33vw" : undefined} alt={item.heroMedia?.alt ?? `${item.fleetId} ${item.category}`} width={item.heroMedia?.width ?? 1536} height={item.heroMedia?.height ?? 1024} loading="lazy" decoding="async" /><span className="card-status">{item.statusLabel}</span></div>
       <div className="equipment-card__overlay" />
       <div className="equipment-card__content">
         <p className="card-fleet-id">{item.fleetId}</p><h3>{item.name}</h3><p className="category-label">{item.category}</p><p className="card-capability">{item.capabilityStatement}</p>
+        <div className="equipment-card__chips" aria-label={`${item.fleetId} configured capabilities`}>{item.capabilities.slice(0,4).map(capability => <span key={capability}>{capability}</span>)}</div>
         <dl className="mini-specs">{quickSpecs.map((spec) => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl>
         <Link className="card-cta" to={item.publicPath} aria-label={`View ${item.fleetId} equipment details`}>View Equipment <span aria-hidden="true">→</span></Link>
       </div>

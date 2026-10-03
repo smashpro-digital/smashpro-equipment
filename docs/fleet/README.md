@@ -9,6 +9,12 @@ Index of all SmashPro Fleet Equipment Passport and procurement records. Every fl
 | SP-ARDHI-26 | [SP-ARDHI-26-PASSPORT.md](SP-ARDHI-26-PASSPORT.md) | [SP-ARDHI-26-PROCUREMENT.md](SP-ARDHI-26-PROCUREMENT.md) |
 | SP-MZIGO-26E | [SP-MZIGO-26E-PASSPORT.md](SP-MZIGO-26E-PASSPORT.md) | [SP-MZIGO-26E-PROCUREMENT.md](SP-MZIGO-26E-PROCUREMENT.md) |
 
+## Incoming Fleet
+
+| Fleet ID | Equipment Type | Passport | Procurement Record |
+|----------|----------------|----------|--------------------|
+| SP-NYASI-26 | Remote-control tracked mower · initial payment paid / production pending | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | Digital HQ canonical record |
+
 ## Future Acquisitions
 
 These fleet IDs are reserved and approved but not yet purchased, owned, or in service. None are exposed through the public catalog, sitemap, or any rentable/bookable interface.
@@ -18,7 +24,6 @@ These fleet IDs are reserved and approved but not yet purchased, owned, or in se
 | SP-BEBA-HD-26 | Heavy-duty equipment trailer (planned) | [SP-BEBA-HD-26-PASSPORT.md](SP-BEBA-HD-26-PASSPORT.md) | Not yet created |
 | SP-GARI-26E | Electric utility / promotional golf-cart rebuild (planned) | [SP-GARI-26E-PASSPORT.md](SP-GARI-26E-PASSPORT.md) | [SP-GARI-26E-PROCUREMENT.md](SP-GARI-26E-PROCUREMENT.md) |
 | SP-INAMA-26 | Low-profile hydraulic tilt/lowering equipment trailer (planned) | [SP-INAMA-26-PASSPORT.md](SP-INAMA-26-PASSPORT.md) | [SP-INAMA-26-PROCUREMENT.md](SP-INAMA-26-PROCUREMENT.md) |
-| SP-NYASI-26 | Remote-controlled lawn mower (planned) | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | Not yet created |
 
 ## Supporting Media Records
 

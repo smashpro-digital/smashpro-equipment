@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { equipment } from "./src/data/equipment";
+import { mzigoStatusLabel, mzigoStatusDetail } from "./src/data/mzigoPassport";
 import { attachments } from "./src/data/attachments";
 
 validatePassportIdentities(equipment);
@@ -14,6 +15,9 @@ const projectDirectory = dirname(fileURLToPath(import.meta.url));
 function preserveEquipmentMedia(): Plugin {
   return {
     name: "preserve-equipment-media",
+    transformIndexHtml(html) {
+      return html.replaceAll("__MZIGO_STATUS_DESCRIPTION__", `${mzigoStatusLabel}. ${mzigoStatusDetail}`);
+    },
     configureServer(server) {
       server.middlewares.use((request, response, next) => {
         const prefix = "/equipment/images/";
@@ -59,6 +63,8 @@ function preserveEquipmentMedia(): Plugin {
         equipment: equipment.map((item) => ({
           fleet_id: item.fleetId,
           name: item.name,
+          asset_group: item.showroomGroup,
+          showroom_order: item.showroomOrder,
           category: item.category,
           capability: item.capabilityStatement,
           capability_badges: item.capabilities.slice(0, 6),
@@ -98,6 +104,7 @@ export default defineConfig(({ mode }) => {
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
         umba: resolve(projectDirectory, "sp-umba-26.html"),
         liftmate: resolve(projectDirectory, "sp-liftmate-27.html"),
+        nyasi: resolve(projectDirectory, "sp-nyasi-26.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
         productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),

@@ -76,11 +76,20 @@ The **K600** platform designation is recorded from SmashPro's own equipment pass
 
 ## 8. Pricing
 
-Pricing has not been documented in the repository for SP-MZIGO-26E. Machine price, accessory value, and total DDP amount remain pending vendor documentation.
+The October 1 final machine installment is USD 855.00. The separate Alibaba processing fee is USD 25.57, making the card transaction USD 880.57. The fee is not part of the equipment purchase price. The complete historical machine price, accessory value and DDP breakdown remain undocumented; do not infer them from this final installment.
 
 ## 9. Payment Terms
 
-Deposit paid, confirmed by the SmashPro Equipment Passport build status. Final payment is reported pending in the September 15 production status. Amounts, exact due date and remaining terms are not documented publicly.
+Deposit paid, confirmed by the SmashPro Equipment Passport build status; its amount and date remain undocumented. Final payment completed October 1, 2026 and closes the remaining machine balance. The machine is paid in full and entering shipping preparation.
+
+### Payment history (append-only)
+
+| Payment | Machine amount | Processing fee | Transaction total | Date / evidence |
+| --- | ---: | ---: | ---: | --- |
+| Prior deposit | Not documented | Not documented | Not documented | Existing Passport deposit record; date not documented |
+| Final installment | USD 855.00 | USD 25.57 | USD 880.57 | 2026-10-01 07:53 PST, as displayed by Alibaba; invoice #I020261001784090010205 |
+
+Evidence: [October 1 payment transcription](evidence/SP-MZIGO-26E-ALIBABA-PAYMENT-2026-10-01.md). Source: verified payment facts supplied by the owner in the October 1 request. An original invoice/receipt binary was not attached. Retain the displayed PST label without silently converting it to PDT or inferring a UTC timestamp. Detailed payment facts stay in this repository evidence layer, outside public build inputs.
 
 ## 10. Delivery
 
@@ -115,7 +124,12 @@ Not documented. Banking instructions must be independently verified with the ven
 | Tie-down anchors | Recorded | 2026-09-14 factory evidence |
 | Quality inspection | Passed | Supplied 2026-09-15 production status |
 | SmashPro build approval | Approved | Supplied 2026-09-15 production status |
-| Final payment | Pending | Amount, due date and terms not published |
+| Final payment | Complete | 2026-10-01; invoice #I020261001784090010205 |
+| Shipping preparation | Current | Payment complete; no shipping completion inferred |
+| Final tie-down hardware installation/evidence | Pending | Earlier factory anchor detail does not close final shipping verification |
+| Final shipping-preparation inspection | Pending | Not documented |
+| Crate completion | Pending | Not documented |
+| Factory departure / freight booking | Pending | Not documented |
 | Export crating | Pending | Not documented |
 | Port delivery | Pending | Not documented |
 | Vessel booking / ocean departure | Pending | Not documented |

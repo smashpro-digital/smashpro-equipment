@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 
 const payload = JSON.parse(readFileSync(new URL("../dist/equipment-index.json", import.meta.url), "utf8"));
 const allowedKeys = new Set([
-  "fleet_id", "name", "category", "capability", "capability_badges", "capability_ids",
+  "fleet_id", "name", "asset_group", "showroom_order", "category", "capability", "capability_badges", "capability_ids",
   "attachment_ids", "discovery_state", "status_label", "public_path", "hero_image",
   "hero_alt", "quick_specs",
 ]);
@@ -23,6 +23,8 @@ for (const item of payload.equipment) {
   if (!/^SP-[A-Z0-9-]{2,80}$/.test(item.fleet_id || "")) throw new Error(`Invalid public fleet ID: ${item.fleet_id || "missing"}`);
   if (ids.has(item.fleet_id)) throw new Error(`Duplicate public fleet ID: ${item.fleet_id}`);
   ids.add(item.fleet_id);
+  if (!["field-fleet", "fabrication"].includes(item.asset_group)) throw new Error(`Invalid asset group for ${item.fleet_id}`);
+  if (!Number.isInteger(item.showroom_order) || item.showroom_order < 1) throw new Error(`Invalid showroom order for ${item.fleet_id}`);
   if (!safeEquipmentPath(item.public_path) || !safeEquipmentPath(item.hero_image)) throw new Error(`Unsafe public path for ${item.fleet_id}`);
   if (!Array.isArray(item.capability_badges) || !Array.isArray(item.capability_ids) || !Array.isArray(item.attachment_ids) || !Array.isArray(item.quick_specs)) throw new Error(`Invalid public arrays for ${item.fleet_id}`);
 }

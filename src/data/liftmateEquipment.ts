@@ -1,6 +1,8 @@
 import type { Equipment } from "../types/equipment";
 
 export const liftmateEquipment: Equipment = {
+  showroomGroup: "field-fleet",
+  showroomOrder: 4,
   slug: "sp-liftmate-27",
   publicPath: "/sp-liftmate-27.html",
   fleetId: "SP-LIFTMATE-27",

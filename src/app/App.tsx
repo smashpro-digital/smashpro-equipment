@@ -20,6 +20,7 @@ export function App() {
       <Route exact path="/sp-mzigo-26.html" component={MzigoPassportPage} />
       <Route exact path="/sp-umba-26.html" render={() => <EquipmentPassportPage slug="sp-umba-26" />} />
       <Route exact path="/sp-liftmate-27.html" component={LiftMatePassportPage} />
+      <Route exact path="/sp-nyasi-26.html" render={() => <EquipmentPassportPage slug="sp-nyasi-26" />} />
       <Route exact path="/golf-cart-tech-build.html" component={GolfCartTechBuildPage} />
       <Route exact path="/catalog" component={CatalogPage} />
       <Route exact path="/catalog/" component={CatalogPage} />

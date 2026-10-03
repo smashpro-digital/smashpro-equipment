@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 
 /** Shared documentary hero shell using ARDHI's established visual rules. */
-export function PassportHero({ titleId, image, alt, className = "", children }: {
-  titleId: string; image: string; alt: string; className?: string; children: ReactNode;
+export function PassportHero({ titleId, image, alt, srcSet, sizes, width, height, className = "", children }: {
+  titleId: string; image: string; alt: string; srcSet?: string; sizes?: string; width?: number; height?: number; className?: string; children: ReactNode;
 }) {
   return <section className={`ardhi-v2-hero${className ? ` ${className}` : ""}`} aria-labelledby={titleId}>
-    <img src={image} alt={alt} fetchPriority="high" />
+    <img src={image} srcSet={srcSet} sizes={sizes} alt={alt} width={width} height={height} fetchPriority="high" />
     <div className="ardhi-v2-hero__shade" />
     <div className="shell ardhi-v2-hero__copy">{children}</div>
   </section>;
