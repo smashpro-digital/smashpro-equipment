@@ -35,3 +35,13 @@ test("LiftMate card and Passport preserve proposal-stage truth and requested spe
   assert.match(item.statusDetail, /deposit, production, acquisition, modification, commissioning and field validation are not complete/);
   assert.match(readFileSync("sp-liftmate-27.html", "utf8"), /https:\/\/smashpro\.app\/equipment\/images\/sp-liftmate-27-hero\.png/);
 });
+
+test("LiftMate identifies the Pairon OEM platform with sourced local media", () => {
+  const passport = readFileSync("src/pages/LiftMatePassportPage.tsx", "utf8");
+  const thumbnail = "images/sp-liftmate-27-pairon-glide200-oem-thumbnail.jpg";
+  assert.ok(existsSync(thumbnail));
+  assert.equal(readFileSync(thumbnail).subarray(0, 3).toString("hex"), "ffd8ff");
+  assert.match(passport, /\/equipment\/images\/sp-liftmate-27-pairon-glide200-oem-thumbnail\.jpg/);
+  assert.match(passport, /https:\/\/pairontools\.com\/products\/lift-slide-cart/);
+  assert.match(passport, /Official Pairon product image/);
+});
