@@ -46,7 +46,8 @@ export const liftmateEquipment: Equipment = {
   showroomGroup: "field-fleet", showroomOrder: 4, slug: "sp-liftmate-27", publicPath: "/sp-liftmate-27.html", fleetId: "SP-LIFTMATE-27", name: "LiftMate",
   category: "Pairon Tools Glide200 · Mobile Powered Lifting Platform", manufacturer: "Pairon Tools", meaning: "", slogan: "Same Tough Jobs. Bigger Possibilities.",
   overview: "SP-LIFTMATE-27 is the permanent technical and lifecycle record for a proposed Pairon Tools Glide200 SmashPro Edition. It separates the OEM platform, planned configuration and future validation from completed physical evidence.",
-  capabilityStatement: "Proposed mobile powered lifting and truck-bed loading support for controlled SmashPro field evaluation.", heroImage: "/equipment/images/sp-liftmate-27-hero.png",
+  capabilityStatement: "Proposed mobile powered lifting and truck-bed loading support for controlled SmashPro field evaluation.", heroImage: "/equipment/images/sp-liftmate-27-official-concept.png",
+  heroMedia: { src: "/equipment/images/sp-liftmate-27-official-concept.png", width: 1536, height: 1024, alt: "Official SP-LIFTMATE-27 SmashPro Edition concept rendering of the Pairon Tools Glide200 truck-loading workflow", mediaType: "promotional_artwork", evidenceClass: "concept_or_identity_art", productionEvidence: false, factoryEvidence: false, fieldEvidence: false, public: true },
   status: "planned", statusLabel: "Custom build planning", statusDetail: "Proposal and configuration planning are documented. Partnership activation, deposit, production, acquisition, modification, commissioning and field validation are not complete.",
   identity: { passportId: "SPP-2027-0001", model: "SP-LIFTMATE-27", factoryModel: "Glide200", edition: "Proposed SmashPro Edition", assetClass: "Mobile powered lifting platform", powertrain: "48V LiFePO4 electric", modelYear: 2027 },
   specifications: [
