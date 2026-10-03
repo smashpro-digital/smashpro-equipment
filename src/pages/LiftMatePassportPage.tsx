@@ -8,7 +8,7 @@ export function LiftMatePassportPage() {
     <nav className="shell breadcrumbs" aria-label="Breadcrumb"><Link to="/">Equipment</Link><span>/</span><span aria-current="page">Passport {item.fleetId}</span></nav>
     <header className="shell passport-hero">
       <div className="passport-hero__copy"><p className="eyebrow">SmashPro Equipment Passport · Proposed Partner Build</p><h1>{item.fleetId}</h1><p className="lead">{item.manufacturer} {item.identity.factoryModel}</p><p>{item.overview}</p><span className="status-pill">{item.statusLabel}</span><p>{item.statusDetail}</p></div>
-      <figure className="passport-hero__media"><img src={item.heroImage} alt="Pairon Tools LiftMate Glide200 reference image" width="1200" height="900" /><figcaption>OEM reference image · SmashPro custom header artwork will replace this temporary source asset.</figcaption></figure>
+      <figure className="passport-hero__media"><img src={item.heroImage} alt="Proposed SP-LIFTMATE-27 SmashPro Edition concept based on the Pairon Tools Glide200" width="1536" height="1024" /><figcaption>Proposed SmashPro Edition concept · features shown are planned and remain subject to partnership and factory confirmation.</figcaption></figure>
     </header>
     <section className="section shell"><p className="eyebrow">Identity</p><h2>Glide200 platform. SmashPro 2027 identity.</h2><dl className="spec-grid">{item.specifications.map(spec => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl></section>
     <section className="spec-section"><div className="shell"><p className="eyebrow">Purpose</p><h2>Load smarter. Work safer. Go further.</h2><p>{item.capabilityStatement}</p><ul>{item.capabilities.map(value => <li key={value}>{value}</li>)}</ul></div></section>

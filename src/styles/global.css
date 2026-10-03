@@ -80,6 +80,9 @@
 .equipment-card__media{position:absolute;inset:0}
 .equipment-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
 .equipment-card:hover .equipment-card__media img{transform:scale(1.035)}
+.equipment-card--sp-liftmate-27 .equipment-card__media img{object-position:42% center;transform:none}
+.equipment-card--sp-liftmate-27:hover .equipment-card__media img{transform:scale(1.025)}
+@media(min-width:769px){.equipment-card--sp-liftmate-27 .equipment-card__media img{object-position:left center}}
 .card-status{display:none}
 .card-fleet-id{margin:0;color:var(--green);font-size:.68rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
 .card-capability{color:#c4cdc6}
