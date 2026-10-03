@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import type { Equipment } from "../types/equipment";
 
 export function EquipmentCard({ item }: { item: Equipment }) {
-  const preferredSpecs = item.commissioning ? ["OEM model", "Machine type", "Filament system", "Multicolor"] : item.slug === "sp-mzigo-26"
+  const preferredSpecs = item.slug === "sp-liftmate-27" ? ["OEM Model", "Rated Capacity", "Power", "Model Year"] : item.commissioning ? ["OEM model", "Machine type", "Filament system", "Multicolor"] : item.slug === "sp-mzigo-26"
     ? ["Machine type", "Payload", "Power source", "Electric drive system"]
     : ["Model reference", "Machine type", "Drive", "Hydraulics"];
   const quickSpecs = preferredSpecs.map((label) => item.specifications.find((spec) => spec.label === label)).filter((spec): spec is NonNullable<typeof spec> => Boolean(spec));
   return (
-    <article className="equipment-card">
+    <article className={`equipment-card equipment-card--${item.slug}`}>
       <div className="equipment-card__media"><img src={item.heroImage} alt={`${item.fleetId} ${item.category}`} width="1536" height="1024" loading="lazy" decoding="async" /><span className="card-status">{item.statusLabel}</span></div>
       <div className="equipment-card__overlay" />
       <div className="equipment-card__content">
