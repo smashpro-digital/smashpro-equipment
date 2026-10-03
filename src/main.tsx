@@ -15,6 +15,7 @@ import "./styles/negotiation-evidence-media.css";
 import "./styles/attachment-showroom.css";
 import "./styles/attachment-passport-mobile.css";
 import "./styles/expo-showroom.css";
+import "./styles/liftmate-passport.css";
 
 installJourneyCalendarMetricCorrection();
 installNegotiationEvidenceMedia();
