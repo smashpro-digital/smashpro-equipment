@@ -4,7 +4,7 @@ import type { Equipment } from "../types/equipment";
 export type LiftMateEvidenceState = "proposed" | "factory-review" | "approved" | "installed" | "validated";
 export interface LiftMateConfigurationItem { id: string; title: string; detail: string; state: LiftMateEvidenceState; }
 
-export const liftmateCaseStudyUrl = "https://smashpro.app/dashboard/pairon-partnership-case-study.html";
+export const liftmateCaseStudyUrl = "https://smashpro.app/pairon-tools-factory-to-field/";
 
 export const liftmateConfiguration: LiftMateConfigurationItem[] = [
   { id: "finish", title: "Green / black visual treatment", detail: "SmashPro color direction for partner and factory review.", state: "proposed" },
