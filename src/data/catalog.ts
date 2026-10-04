@@ -7,7 +7,7 @@ export const catalogProducts: CatalogProduct[] = [
     name: "Power Control Module",
     category: "Power & Electrical",
     status: "in-development",
-    description: "A documented 12V power-management prototype combining battery isolation, voltage monitoring, high-current distribution, and serviceable packaging.",
+    description: "Prototype P001: temporary vehicle installation operational; manual isolation verified. Packaging, protection, remote controls and full validation remain in progress.",
     image: "/equipment/images/sp-pcm-001-design-poster.png",
     imageAlt: "SP-PCM-001 Power Control Module concept installed in the Project Rebirth F-150",
     href: "/equipment/catalog/sp-pcm-001/",
@@ -21,7 +21,7 @@ export const catalogProducts: CatalogProduct[] = [
     capabilities: [
       "Master battery isolation",
       "Organized high-current distribution",
-      "Local voltage monitoring",
+      "Local voltage monitoring (planned)",
       "Serviceable electrical architecture",
       "Documented installation and revision history",
       "Future platform-specific installation kits",
@@ -33,7 +33,7 @@ export const catalogProducts: CatalogProduct[] = [
       { id: "pcm-system", group: "Electrical", label: "System", value: "12V battery isolation and primary positive power distribution", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
       { id: "pcm-prototype", group: "Identity", label: "Prototype serial", value: "SP-PCM-001-A-P001", verification: "documented", source: "SP-PCM-001 master product record", revision: "Rev A" },
       { id: "pcm-application", group: "Application", label: "Initial application", value: "2018 Ford F-150 3.5L EcoBoost", verification: "documented", source: "Project Rebirth development record", revision: "Rev A" },
-      { id: "pcm-dimensions", group: "Mechanical", label: "As-built dimensions", value: "TBD after Prototype P001 fabrication", verification: "tbd", source: "SP-PCM-001 reproducibility record", revision: "Rev A" },
+      { id: "pcm-dimensions", group: "Mechanical", label: "As-built dimensions", value: "TBD after Prototype P001 packaging redesign", verification: "tbd", source: "SP-PCM-001 reproducibility record", revision: "Rev A" },
     ],
     designPackages: [
       {

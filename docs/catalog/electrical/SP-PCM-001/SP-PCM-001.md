@@ -3,11 +3,11 @@
 **Catalog ID:** SP-PCM-001  
 **Part Name:** Power Control Module  
 **Builder / Integrator:** SmashPro  
-**Product Family:** PCM — Power Control Module  
+**Product Family:** PCM — Power Control Module\
 **Current Revision:** Rev A  
 **Lifecycle:** Prototype / In Construction  
 **Prototype Serial:** SP-PCM-001-A-P001  
-**Installed On:** 2018 Ford F-150 3.5L EcoBoost  
+**Installed On:** 2018 Ford F-150 XLT 3.5L EcoBoost, 2WD / 4x2\
 **Development Project:** The Rebirth  
 **System:** 12V battery isolation and primary positive power distribution  
 **Catalog Standard:** `docs/catalog/SMASHPRO-PRODUCT-CATALOG-STANDARD.md`
@@ -38,26 +38,21 @@ The initial prototype does **not** establish universal vehicle compatibility or 
 
 ## 3. Electrical architecture
 
-Planned Rev A high-current path:
+Verified temporary Rev A/P001 high-current path as of 2026-10-04 (component rating is not assembly certification):
 
 ```text
 12V BATTERY POSITIVE
         |
         v
-SAE POSITIVE TERMINAL ADAPTER
-        |
-        |  1/0 AWG OFC
-        v
 BLUE SEA ML-RBS 7700
 REMOTE BATTERY SWITCH
         |
-        |  1/0 AWG OFC
+        |  1/0 AWG (installed; final lengths pending)
         v
 600A POSITIVE BUS BAR
         |
-        +---- OEM positive feed(s)
-        +---- OEM main positive cable
-        +---- reserved/future approved feed
+        +---- OEM positive feeds / downstream distribution
+              (temporary VLinker/Vgate-style adapter)
 ```
 
 Battery negative remains part of the vehicle's OEM negative/ground architecture for the initial installation.
@@ -75,7 +70,7 @@ Future accessory circuits should not be casually stacked onto the primary bus. A
 **Cranking rating:** 2,500A for 10 seconds  
 **Main terminal studs:** 3/8-16  
 **Operation:** Magnetic-latching remote battery switch with manual control  
-**Prototype status:** In hand / planned for Rev A
+**Prototype status:** Installed in Prototype P001 / manual isolation verified 2026-10-04
 
 Manufacturer documentation remains authoritative for installation, terminal torque, control wiring, duty ratings, and operating limitations.
 
@@ -83,23 +78,23 @@ Manufacturer documentation remains authoritative for installation, terminal torq
 
 **Component:** AMOMD high-current bus bar, prototype sourcing  
 **Advertised continuous rating:** 600A  
-**Nominal system range:** 12–48V DC, supplier-stated  
+**Nominal system range:** 12–48V DC, supplier-stated\
 **Bus material:** Nickel-plated red copper, supplier-stated  
-**Terminals:** 4 × 3/8-inch studs, supplier-stated  
-**Cover:** Clear protective cover  
-**Approximate listed dimensions:** 4.02 × 1.97 in  
-**Prototype status:** Ordered for Rev A  
-**Verification required:** Confirm markings, stud diameter/thread, construction, dimensions, and fit on receipt.
+**Terminals:** 4 × 3/8-inch studs, supplier-stated\
+**Cover:** Clear protective cover listed; final installed positive protection remains pending\
+**Approximate listed dimensions:** 4.02 × 1.97 in\
+**Prototype status:** Received and installed in Prototype P001\
+**Verification required:** Confirm markings, stud diameter/thread, construction and as-built dimensions; installation alone does not verify supplier specifications.
 
 The 600A value is a component rating. It must not be represented as the completed module's certified current capacity.
 
 ### 4.3 Primary interconnect cable
 
-**Planned conductor:** 1/0 AWG OFC copper battery/welding cable  
+**Installed conductor:** 1/0 AWG high-current interconnect verified 2026-10-04; OFC copper remains the design specification, not a new material-verification claim\
 **Color:** Red preferred for positive conductors  
 **Prototype cable ends:** Pre-terminated 3/8-inch ring lugs on purchased interconnects  
 **Protection:** Heat shrink at terminations and protective loom where routing requires it  
-**Final lengths:** TBD after physical mock-up
+**Final lengths:** TBD; final as-built cable lengths have not been captured
 
 Any black-insulated conductor used in a positive circuit must be permanently identified as positive at both ends and at accessible intermediate points as appropriate.
 
@@ -109,13 +104,13 @@ Any black-insulated conductor used in a positive circuit must be permanently ide
 **Prototype source:** Recoil-style positive battery terminal adapter  
 **Cable capability:** Supplier listing supports 1/0-class cable connection  
 **Material:** Brass, supplier-stated  
-**Final connection method:** To verify during physical assembly.
+**Final connection method:** Original OEM distribution geometry required adaptation during physical installation. A VLinker/Vgate-style high-current distribution connector/block is used in the temporary downstream OEM-feed solution. OEM positive feeds and factory electrical power were restored through the switched path. Exact connector model, material, current rating and final terminal details remain to verify; no certification is inferred.
 
 ### 4.5 Mounting panel
 
-**Material:** Black HDPE  
+**Original planned material:** Black HDPE (packaging paused for redesign)\
 **Thickness:** 1/4 in  
-**Prototype blank:** 8 × 12 in  
+**Prototype blank:** 8 × 12 in\
 **Finished dimensions:** TBD after mock-up  
 **Purpose:** Electrically insulating, corrosion-resistant mounting substrate for module components.
 
@@ -143,7 +138,7 @@ Any black-insulated conductor used in a positive circuit must be permanently ide
 
 ## 5. Prototype Rev A physical layout
 
-Initial packaging concept:
+Historical packaging concept — removed/paused after engine-bay fitment conflicts; not the installed final enclosure:
 
 ```text
 +------------------------------------------------+
@@ -159,7 +154,9 @@ Initial packaging concept:
  vibration-isolated mounting points / standoffs
 ```
 
-Final component orientation must be established from the actual F-150 engine-bay mock-up. Cable bend radius and OEM harness reach take priority over visual symmetry.
+The high-current architecture is retained in a temporary arrangement so Project Rebirth engine repair can continue. Rev A/P001 packaging is entering redesign; no final enclosure design is complete. Evaluate modular removable covers/shields instead of forcing all components into an oversized generic enclosure. Priorities are ML-RBS manual access, bus/VLinker positive protection, cable bend radius, serviceability, battery removal, heat/environment suitability and strain relief.
+
+A revised cover/enclosure is a candidate SmashPro MicroFab / SP-UMBA-26 R&D item, potentially using 3D-printed components. No print, manufacturing job or permanent part/revision is assigned. Apply existing manufacturing traceability (for example SP-PCM-001-P###-R##) when CAD/part revision is actually created.
 
 The ML-RBS manual control must remain accessible after installation.
 
@@ -169,7 +166,7 @@ The ML-RBS manual control must remain accessible after installation.
 **Engine:** 3.5L EcoBoost  
 **Project:** The Rebirth
 
-Initial installation strategy:
+Original installation strategy (historical; enclosure mounting is now paused, pending redesign):
 
 1. Mount SP-PCM-001 adjacent to the battery on a removable HDPE panel.
 2. Use existing vehicle structural/threaded mounting points wherever practical.
@@ -182,6 +179,10 @@ Initial installation strategy:
 9. Preserve maximum OEM cable length when modification becomes necessary.
 
 No factory cable is to be cut until the module and bus are physically mocked in final position.
+
+### Verified installation — 2026-10-04
+
+Maurice's authoritative field update confirms the ML-RBS, 1/0 AWG interconnect and positive bus are installed. Manual isolation passed: left = OFF / OPEN; right = ON / CLOSED on the installed ML-RBS. Bus power and downstream factory electrical power disconnect/reconnect correctly. This removes the electrical-fitment blocker to engine repair, not the mechanical failure. The truck remains non-operational; crank/start through this path and roadworthiness are unvalidated. Successful energization is recorded separately from a formal meter-verified polarity check.
 
 ## 7. Control wiring
 
@@ -214,16 +215,18 @@ Rev A control documentation must eventually define:
 8. Protect wiring from heat, sharp edges, moving components, and abrasion.
 9. Do not publish an assembly-level amperage certification based only on individual component ratings.
 10. Manufacturer installation requirements supersede assumptions in prototype notes.
+11. The current temporary configuration requires protective covers/boots/shields over exposed positive studs and distribution hardware before final prototype acceptance.
+12. A printed shield may be prototyped, but its material and environmental suitability must be validated before acceptance as final underhood hardware. Ordinary PLA is not approved by this record.
 
 ## 9. Preliminary BOM
 
 | Item | Qty | Component | Key specification | Rev A status |
 | --- | ---: | --- | --- | --- |
-| 1 | 1 | Blue Sea ML-RBS 7700 | 12V, 500A continuous, manual + remote | In hand |
-| 2 | 1 | Positive bus bar | 600A advertised, 4 × 3/8 studs, covered | Ordered |
+| 1 | 1 | Blue Sea ML-RBS 7700 | 12V, 500A continuous, manual + remote | Installed in P001; manual isolation verified |
+| 2 | 1 | Positive bus bar | 600A supplier-stated; final protection pending | Received and installed in P001 |
 | 3 | 1 | Positive SAE battery terminal adapter | Brass, 1/0-capable | Ordered |
-| 4 | 2 | Primary battery cables | 1/0 AWG OFC, 3/8 ring terminals | Ordered |
-| 5 | 1 | HDPE mounting panel blank | Black, 1/4 in, 8 × 12 in | Ordered/planned |
+| 4 | To record | Primary battery interconnect | 1/0 AWG installed; OFC design specification, final lengths/lugs to record | Installed high-current interconnect |
+| 5 | 1 | Original HDPE mounting panel blank | Black, 1/4 in, 8 × 12 in original plan | Packaging paused/redesign |
 | 6 | TBD | Rubber vibration isolators | Stand-off mounting | Ordered/planned |
 | 7 | 1 | Digital voltmeter | Panel mount, DC | Ordered/planned |
 | 8 | 1 | Green status LED | Panel mount | Ordered/planned |
@@ -232,12 +235,15 @@ Rev A control documentation must eventually define:
 | 11 | AR | Adhesive-lined heat shrink | Sized to terminations | Planned |
 | 12 | AR | Stainless mounting hardware | Final sizes TBD | Planned |
 | 13 | TBD | Remote/control wiring hardware | Per final wiring design | TBD |
+| 14 | To record | VLinker/Vgate-style distribution connector/block | Exact model, material and rating to verify | Temporary downstream OEM-feed adaptation installed |
 
 `AR` = as required.
 
 A controlled BOM should be split into `BOM.md` after receipt inspection confirms manufacturer/model information and final quantities.
 
 ## 10. Fabrication plan — Prototype P001
+
+Current status (2026-10-04): temporary high-current assembly and manual switching are operational. The original enclosure fabrication plan below is historical and paused for redesign. Remote controls, indicators, protection and full test/acceptance are incomplete.
 
 ### Stage 1 — Bench mock-up
 
@@ -290,17 +296,18 @@ A controlled BOM should be split into `BOM.md` after receipt inspection confirms
 Prototype P001 should not advance beyond `Prototype / Testing` until the following are documented:
 
 - [ ] All received component identities/specs verified.
-- [ ] Final HDPE dimensions recorded.
+- [ ] Final redesigned enclosure dimensions recorded.
 - [ ] Mounting-hole pattern recorded.
 - [ ] Final cable lengths recorded.
 - [ ] OEM cable conductor size verified.
 - [ ] All lug sizes recorded.
-- [ ] Final wiring diagram completed.
+- [ ] Final wiring diagram and as-built drawings completed.
 - [ ] Control circuit protection documented.
-- [ ] Manual disconnect test passed.
+- [x] Manual disconnect test passed (2026-10-04: left OFF / OPEN; right ON / CLOSED).
+- [x] High-current switched output energizes/de-energizes correctly; downstream factory electrical power restored (2026-10-04).
 - [ ] Remote disconnect/connect test passed.
 - [ ] Voltage indication verified against a trusted meter.
-- [ ] Polarity verified.
+- [ ] Polarity verified with a trusted meter; functional energization alone is not formal polarity evidence.
 - [ ] Vehicle starting/current-path test completed when vehicle condition permits.
 - [ ] Voltage-drop test recorded.
 - [ ] Post-load thermal inspection completed.
@@ -309,6 +316,7 @@ Prototype P001 should not advance beyond `Prototype / Testing` until the followi
 - [ ] As-built photographs captured.
 - [ ] Physical data plate installed.
 - [ ] Prototype serial permanently associated with the unit.
+- [ ] Final prototype / production-ready acceptance documented (not established).
 
 ## 12. Physical identity / data plate
 
@@ -338,8 +346,8 @@ Before a second unit is built, record the following from P001:
 | --- | --- |
 | Panel overall length | TBD |
 | Panel overall width | TBD |
-| Panel thickness | 1/4 in |
-| Panel material | Black HDPE |
+| Panel thickness | TBD after redesign; original plan 1/4 in |
+| Panel material | TBD after redesign; original plan black HDPE |
 | ML-RBS mounting-hole coordinates | TBD |
 | Bus mounting-hole coordinates | TBD |
 | Voltmeter cutout | TBD |
