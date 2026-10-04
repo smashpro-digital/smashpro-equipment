@@ -1,9 +1,9 @@
-# SP-PCM-001 â€” Power Control Module
+# SP-PCM-001 — Power Control Module
 
 **Catalog ID:** SP-PCM-001  
 **Part Name:** Power Control Module  
 **Builder / Integrator:** SmashPro  
-**Product Family:** PCM â€” Power Control Module  
+**Product Family:** PCM — Power Control Module\
 **Current Revision:** Rev A  
 **Lifecycle:** Prototype / In Construction  
 **Prototype Serial:** SP-PCM-001-A-P001  
@@ -78,11 +78,11 @@ Manufacturer documentation remains authoritative for installation, terminal torq
 
 **Component:** AMOMD high-current bus bar, prototype sourcing  
 **Advertised continuous rating:** 600A  
-**Nominal system range:** 12â€“48V DC, supplier-stated  
+**Nominal system range:** 12–48V DC, supplier-stated\
 **Bus material:** Nickel-plated red copper, supplier-stated  
-**Terminals:** 4 Ã— 3/8-inch studs, supplier-stated  
+**Terminals:** 4 × 3/8-inch studs, supplier-stated\
 **Cover:** Clear protective cover listed; final installed positive protection remains pending\
-**Approximate listed dimensions:** 4.02 Ã— 1.97 in  
+**Approximate listed dimensions:** 4.02 × 1.97 in\
 **Prototype status:** Received and installed in Prototype P001\
 **Verification required:** Confirm markings, stud diameter/thread, construction and as-built dimensions; installation alone does not verify supplier specifications.
 
@@ -110,7 +110,7 @@ Any black-insulated conductor used in a positive circuit must be permanently ide
 
 **Original planned material:** Black HDPE (packaging paused for redesign)\
 **Thickness:** 1/4 in  
-**Prototype blank:** 8 Ã— 12 in  
+**Prototype blank:** 8 × 12 in\
 **Finished dimensions:** TBD after mock-up  
 **Purpose:** Electrically insulating, corrosion-resistant mounting substrate for module components.
 
@@ -138,7 +138,7 @@ Any black-insulated conductor used in a positive circuit must be permanently ide
 
 ## 5. Prototype Rev A physical layout
 
-Historical packaging concept â€” removed/paused after engine-bay fitment conflicts; not the installed final enclosure:
+Historical packaging concept — removed/paused after engine-bay fitment conflicts; not the installed final enclosure:
 
 ```text
 +------------------------------------------------+
@@ -180,7 +180,7 @@ Original installation strategy (historical; enclosure mounting is now paused, pe
 
 No factory cable is to be cut until the module and bus are physically mocked in final position.
 
-### Verified installation â€” 2026-10-04
+### Verified installation — 2026-10-04
 
 Maurice's authoritative field update confirms the ML-RBS, 1/0 AWG interconnect and positive bus are installed. Manual isolation passed: left = OFF / OPEN; right = ON / CLOSED on the installed ML-RBS. Bus power and downstream factory electrical power disconnect/reconnect correctly. This removes the electrical-fitment blocker to engine repair, not the mechanical failure. The truck remains non-operational; crank/start through this path and roadworthiness are unvalidated. Successful energization is recorded separately from a formal meter-verified polarity check.
 
@@ -226,12 +226,12 @@ Rev A control documentation must eventually define:
 | 2 | 1 | Positive bus bar | 600A supplier-stated; final protection pending | Received and installed in P001 |
 | 3 | 1 | Positive SAE battery terminal adapter | Brass, 1/0-capable | Ordered |
 | 4 | To record | Primary battery interconnect | 1/0 AWG installed; OFC design specification, final lengths/lugs to record | Installed high-current interconnect |
-| 5 | 1 | Original HDPE mounting panel blank | Black, 1/4 in, 8 Ã— 12 in original plan | Packaging paused/redesign |
+| 5 | 1 | Original HDPE mounting panel blank | Black, 1/4 in, 8 × 12 in original plan | Packaging paused/redesign |
 | 6 | TBD | Rubber vibration isolators | Stand-off mounting | Ordered/planned |
 | 7 | 1 | Digital voltmeter | Panel mount, DC | Ordered/planned |
 | 8 | 1 | Green status LED | Panel mount | Ordered/planned |
 | 9 | AR | Protective loom | Engine-bay wiring protection | Ordered/planned |
-| 10 | AR | 1/0 copper ring lugs | 1/0 Ã— 3/8 in | Planned/spares |
+| 10 | AR | 1/0 copper ring lugs | 1/0 × 3/8 in | Planned/spares |
 | 11 | AR | Adhesive-lined heat shrink | Sized to terminations | Planned |
 | 12 | AR | Stainless mounting hardware | Final sizes TBD | Planned |
 | 13 | TBD | Remote/control wiring hardware | Per final wiring design | TBD |
@@ -241,11 +241,11 @@ Rev A control documentation must eventually define:
 
 A controlled BOM should be split into `BOM.md` after receipt inspection confirms manufacturer/model information and final quantities.
 
-## 10. Fabrication plan â€” Prototype P001
+## 10. Fabrication plan — Prototype P001
 
 Current status (2026-10-04): temporary high-current assembly and manual switching are operational. The original enclosure fabrication plan below is historical and paused for redesign. Remote controls, indicators, protection and full test/acceptance are incomplete.
 
-### Stage 1 â€” Bench mock-up
+### Stage 1 — Bench mock-up
 
 - Receive and inspect all components.
 - Confirm dimensions and terminal sizes.
@@ -253,7 +253,7 @@ Current status (2026-10-04): temporary high-current assembly and manual switchin
 - Establish high-current cable routing and minimum practical bends.
 - Confirm service access to ML-RBS manual control, voltmeter, LED, and bus cover.
 
-### Stage 2 â€” Vehicle mock-up
+### Stage 2 — Vehicle mock-up
 
 - Place cardboard/uncut panel in proposed F-150 location.
 - Verify hood, battery, airbox/fuse-area, harness, and service clearances.
@@ -261,7 +261,7 @@ Current status (2026-10-04): temporary high-current assembly and manual switchin
 - Identify existing Ford mounting points.
 - Determine isolator/standoff locations.
 
-### Stage 3 â€” Panel fabrication
+### Stage 3 — Panel fabrication
 
 - Transfer approved template to 1/4-in HDPE.
 - Cut finished outline.
@@ -270,7 +270,7 @@ Current status (2026-10-04): temporary high-current assembly and manual switchin
 - Add cable pass-through protection where applicable.
 - Fit vibration isolators.
 
-### Stage 4 â€” Electrical assembly
+### Stage 4 — Electrical assembly
 
 - Mount ML-RBS and bus.
 - Install high-current interconnects.
@@ -278,7 +278,7 @@ Current status (2026-10-04): temporary high-current assembly and manual switchin
 - Modify the OEM cable only after its conductor size and final termination are confirmed.
 - Complete low-current control/indicator wiring to the verified diagram.
 
-### Stage 5 â€” Inspection and test
+### Stage 5 — Inspection and test
 
 - Perform continuity/polarity checks before battery connection.
 - Inspect all covers, terminations, cable routing, and fasteners.
@@ -324,7 +324,7 @@ Preferred prototype plate content:
 
 ```text
 POWER CONTROL MODULE
-SP-PCM-001 â€¢ REV A
+SP-PCM-001 • REV A
 SERIAL: SP-PCM-001-A-P001
 12V DC
 BUILDER: SMASHPRO
