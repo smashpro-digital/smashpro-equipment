@@ -1,0 +1,25 @@
+{
+  "base": "a190948",
+  "files": {
+    "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
+    "src/data/equipment.ts": "e67d92bcea4b6b61cc463afa615c173e0fb396ca94f38a4a0d259c3e7c8a6ed0",
+    "src/data/mzigoPassport.ts": "c2497071ab474d48b9a4586ef548edc57a123aee33de7c5f1ebc3c06ac86c1a4",
+    "src/data/mzigoFactoryMedia.ts": "979c839b104ab12a5e81673c6390cb622c054a98e0a9590945ac619c351dca20",
+    "src/data/mzigoPlatform.ts": "9099ce2007066b894ba9973663acde3d2b9ffbfb084f10dadd6ae6fa093497aa",
+    "src/domain/mzigoArchive.ts": "3768ea4bc963c0c8f62618cb98b8e7a1722d862f4115bf483ac8d25954c10e0a",
+    "src/styles/mzigo-passport-overrides.css": "de3c535ecde93f763210a7b041cff523343cb69ebfa24a4f615ca54e0c969bd1",
+    "src/styles/ardhi-passport-compact-overrides.css": "3c2fe1e13922c64d08175e5f92ae3fd111e04fb7e81ba369b0b57d9787a7d5a7",
+    "src/styles/ardhi-manufacturer-pdf-compact.css": "0aa0af89268a2fab5b529da2dc528f8c200a846b6bb76bcee27f975f06efd24b",
+    "src/components/CanonicalPublicDocuments.tsx": "69cfa2d299927bc742cbcb1d7bb97c7472f1e2f156e5b7db1c1841eb503fd334",
+    "src/components/PassportHero.tsx": "9eead6913290d9b6ac1137dd8358fa29896ee07af26d05dd6cb2c0d46169f990",
+    "src/components/PassportDocumentRecord.tsx": "6dc9eab984e26167873eebd7768d27f9fd09c1053d64288ec5af7ffe0c4bb912",
+    ".github/workflows/deploy.yml": "61aadd4c6a33f6281215f57571f0452f916cac4c194a3d62096ce4d112ffcd79",
+    "scripts/validate-mzigo-media.mjs": "0d187a8e515dc05962ea5623cf677918959295179337a450cd989ac30fb493a3",
+    "src/components/MzigoBuildStory.tsx": "8f45f668c268ac9dbf76e17ef241cef13d97393258c13ab4fb0b11e354f90258",
+    "src/components/MzigoMediaArchive.tsx": "cf236a0ec12edd82d90a20e421a4fc1f5509046ef4356bd291e4be1541e6afae",
+    "src/components/MzigoOemPlatform.tsx": "a09b3a8baeea567bfcc5ec5a2ad27f216697ba13ad983072aa5611fa6d20bbcc",
+    "src/components/MzigoPassport.tsx": "1bfb37304f349c4654eccb52a4d84ba15873e13bfce8cd137a476f6f284a584d",
+    "src/components/MzigoPassportHeader.tsx": "2fd07d35464d25f979d697074b523011fa34f3e323df67c16759ff0d7e839ae6",
+    "src/components/MzigoServiceRecord.tsx": "eaa99364413224619789faee9f454e47369c09195b54cde081dd1f0a8100c511"
+  }
+}

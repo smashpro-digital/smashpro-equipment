@@ -8,7 +8,7 @@ const data = readFileSync("src/data/equipment.ts", "utf8");
 const nyasi = readFileSync("src/data/nyasiEquipment.ts", "utf8");
 const liftmate = readFileSync("src/data/liftmateEquipment.ts", "utf8");
 const umba = readFileSync("src/data/umbaEquipment.ts", "utf8");
-const config = readFileSync("vite.config.ts", "utf8");
+const config = readFileSync("src/domain/publicEquipmentIndex.ts", "utf8");
 
 test("showroom taxonomy is data-driven and separates Field Fleet from fabrication", () => {
   assert.match(types, /EquipmentShowroomGroup = "field-fleet" \| "fabrication"/);
@@ -18,8 +18,8 @@ test("showroom taxonomy is data-driven and separates Field Fleet from fabricatio
   assert.match(umba, /showroomGroup: "fabrication"/);
   assert.match(home, /equipment\.filter\(item => item\.showroomGroup === "field-fleet"\)\.sort\(byShowroomOrder\)/);
   assert.match(home, /equipment\.filter\(item => item\.showroomGroup === "fabrication"\)/);
-  assert.match(config, /asset_group: item\.showroomGroup/);
-  assert.match(config, /showroom_order: item\.showroomOrder/);
+  assert.match(config, /asset_group:\s*item\.showroomGroup/);
+  assert.match(config, /showroom_order:\s*item\.showroomOrder/);
 });
 
 test("Expo showroom presents the required semantic hierarchy", () => {

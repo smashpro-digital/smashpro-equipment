@@ -9,10 +9,11 @@
     "preview": "vite preview --configLoader runner",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
-    "validate:index": "node scripts/validate-public-index.mjs && node scripts/validate-mzigo-media.mjs",
+    "validate:index": "node scripts/validate-public-index.mjs && node scripts/validate-mzigo-media.mjs && npm run validate:passports",
     "validate": "npm run typecheck && npm test && npm run build && npm run validate:index",
     "test:shipment:browser": "playwright test --config playwright.shipment.config.ts",
-    "check:format": "git diff --check"
+    "check:format": "git diff --check",
+    "validate:passports": "node scripts/check-passport-artifacts.mjs"
   },
   "dependencies": {
     "@types/qrcode": "^1.5.6",

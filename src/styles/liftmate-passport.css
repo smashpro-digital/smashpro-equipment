@@ -3,3 +3,8 @@
 @media(max-width:700px){.liftmate-hero{min-height:760px}.liftmate-hero>img{object-position:54% center}.liftmate-hero .ardhi-v2-hero__copy{padding-bottom:42px}.liftmate-hero .ardhi-v2-hero__actions{display:grid;grid-template-columns:1fr 1fr}.liftmate-rail strong{display:none}.liftmate-current-state,.liftmate-configuration,.liftmate-spec-groups,.liftmate-test-grid,.liftmate-media-archive,.liftmate-document-slots,.liftmate-identity{grid-template-columns:1fr}.liftmate-test-grid article:last-child,.liftmate-media-archive figure{grid-column:auto}.liftmate-current-state article,.liftmate-configuration article{min-height:0}.liftmate-evidence-list dl{grid-template-columns:1fr}}
 @media(max-width:390px){.liftmate-hero h1{font-size:2.85rem}.liftmate-hero .ardhi-v2-hero__actions{grid-template-columns:1fr}.liftmate-primary-link{width:100%;text-align:center}.liftmate-passport .section{padding-block:64px}}
 @media(prefers-reduced-motion:reduce){.liftmate-passport *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.liftmate-passport[data-passport-renderer="generic"] .liftmate-hero>img{object-fit:contain;object-position:center}
+.liftmate-passport[data-passport-renderer="generic"] .liftmate-state.is-requested{border-color:#55789a;color:#a8d4ff}
+.liftmate-passport[data-passport-renderer="generic"] .liftmate-state.is-review_pending{border-color:#8a7341;color:#e3c777}
+.liftmate-passport[data-passport-renderer="generic"] .passport-section-partners> .section-heading{margin-bottom:2rem}
+.liftmate-passport[data-passport-renderer="generic"] .liftmate-evidence-list img{max-width:100%;height:auto}
