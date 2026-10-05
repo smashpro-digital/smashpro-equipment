@@ -192,7 +192,7 @@ const safeUrl = (url?: string) => {
     if (url.startsWith("/") && !url.startsWith("/equipment/")) return undefined;
     if (!url.startsWith("/") && !url.startsWith("https://")) return undefined;
     if (
-      [...parsed.searchParams.keys()].some((key) =>
+      [...parsed.searchParams.keys(), ...new URLSearchParams(parsed.hash.slice(1)).keys()].some((key) =>
         /token|secret|signature|password|email|phone/i.test(key),
       )
     )
@@ -324,6 +324,11 @@ export function projectPassportPublicRecord(
         supplier: r.supplier,
       })),
   };
+  if (a.current_lifecycle_stage === "production" && !hasProductionEvidence(projection)) {
+    projection.asset.current_lifecycle_stage = "configuration";
+    projection.asset.status_label = "Awaiting production evidence";
+    projection.asset.status_detail = "Configuration planning; public factory or partner production-start evidence is required. Payment and proof approval do not establish production.";
+  }
   if (requiresMilestoneEvidence(a.current_lifecycle_stage) &&
       !hasMilestoneEvidence(projection, a.current_lifecycle_stage)) {
     projection.asset.current_lifecycle_stage = "shipping_preparation";

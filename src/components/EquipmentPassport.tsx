@@ -207,10 +207,17 @@ function Partners({ passport: p }: Props) {
   );
 }
 function Journey({ passport: p }: Props) {
+  const destinations = new Set(visiblePassportSections(p).map(s => s.id));
   const stages = passportTemplates[p.asset.build_type].lifecycleStages.map(
     (s) => {
       const status = lifecycleStageStatus(p, s.id);
-      return { ...s, status, progress: status === "complete" ? 100 : 0 };
+      let href = s.href && destinations.has(s.href.slice(1)) ? s.href : undefined;
+      if (href === "#history") {
+        const event = p.records.find(r => r.kind === "lifecycle_event" && r.stage_id === s.id);
+        const evidence = p.records.find(r => r.kind === "evidence" && event?.evidence_ids?.includes(r.id));
+        if (evidence) href = `#history-${evidence.id}`;
+      }
+      return { ...s, href, status, progress: status === "complete" ? 100 : 0 };
     },
   );
   const current = stages.findIndex((s) => s.status === "current"),
@@ -333,6 +340,7 @@ function Media({ passport: p }: Props) {
             {r.media_type === "video" ? (
               <video
                 src={r.url}
+                poster={r.poster}
                 controls
                 preload="metadata"
                 aria-label={r.alt}

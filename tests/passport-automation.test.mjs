@@ -60,6 +60,31 @@ test('public links reject authenticated, credential-bearing and script destinati
     const c=structuredClone(fixture.testPartner);c.records[0].url=url;assert.equal(project(c).records[0].url,undefined);
   }
 });
+
+test('credential fragments are excluded from public links, posters, photos and emitted output',()=>{
+  for(const url of ['https://example.invalid/callback#access_token=FRAGMENT-CANARY','https://example.invalid/#/callback?password=FRAGMENT-CANARY','/equipment/file#%73ecret=FRAGMENT-CANARY']){
+    const c=structuredClone(fixture.testPartner);Object.assign(c.records[0],{url,poster:url,photos:[url]});
+    const p=project(c);assert.equal(p.records[0].url,undefined);assert.equal(p.records[0].poster,undefined);assert.deepEqual(p.records[0].photos,[]);
+    for(const output of [JSON.stringify(p),render(p),passportPublicPlugin([c]).load('\0virtual:passport-public')])assert.ok(!output.includes('FRAGMENT-CANARY'));
+  }
+  for(const url of ['#history-test','https://example.invalid/manual#controller','/equipment/manual.pdf#page=2']){
+    const c=structuredClone(fixture.testPartner);c.records[0].url=url;assert.equal(project(c).records[0].url,url);
+  }
+});
+
+test('unsupported production is downgraded across projection, hero, index and virtual module',()=>{
+  for(const event_type of ['proof_received','proof_approved','deposit_paid','authorization']){
+    const c=structuredClone(fixture.testPartner);Object.assign(c.asset,{current_lifecycle_stage:'production',status_label:'UNSUPPORTED-PRODUCTION-CANARY',status_detail:'UNSUPPORTED-PRODUCTION-CANARY'});
+    c.records.push({...c.records[5],id:'unsupported-start',stage_id:'production',event_type,evidence_state:'approved',source_type:'partner'});
+    const p=project(c);assert.equal(p.asset.current_lifecycle_stage,'configuration');assert.equal(p.asset.status_label,'Awaiting production evidence');
+    for(const output of [JSON.stringify(p),render(p),JSON.stringify(index.publicEquipmentIndexRow(liftmateEquipment,p)),passportPublicPlugin([c]).load('\0virtual:passport-public')])assert.ok(!output.includes('UNSUPPORTED-PRODUCTION-CANARY'));
+  }
+  const c=structuredClone(fixture.testPartner);c.asset.current_lifecycle_stage='production';
+  Object.assign(c.records[4],{evidence_state:'in_production',source_type:'factory'});
+  c.records.push({...c.records[5],id:'supported-start',stage_id:'production',event_type:'production_started',evidence_state:'in_production',source_type:'factory'});
+  assert.equal(project(c).asset.current_lifecycle_stage,'production');
+  c.records[4].visibility='private';assert.equal(project(c).asset.current_lifecycle_stage,'configuration');
+});
 test('production completion cannot bypass start evidence and private record references are removed',()=>{
   const c=structuredClone(fixture.testPartner);
   c.records[5].stage_id='production';
@@ -96,6 +121,24 @@ test('index uses the same projected identity, status, hero and confirmed specifi
   const p=project(lift),row=index.publicEquipmentIndexRow(liftmateEquipment,p);
   assert.equal(row.fleet_id,p.asset.fleet_id);assert.equal(row.status_label,p.asset.status_label);assert.equal(row.hero_image,p.records.find(r=>r.id===p.asset.hero_media_id).url);
   assert.deepEqual(row.quick_specs,p.records.filter(r=>r.kind==='specification'&&r.evidence_state==='verified').slice(0,4).map(r=>`${r.title}: ${r.value}`));
+});
+
+test('generic lifecycle stages preserve contextual navigation without dead optional destinations',()=>{
+  const html=render(project(lift));
+  const journey=html.match(/<ol class="fleet-lifecycle-stages"[\s\S]*?<\/ol>/)[0];
+  for(const href of ['#history-liftmate-proposal','#smashpro-edition','#media','#field-tests'])assert.ok(journey.includes(`href="${href}"`),href);
+  const fixtureHtml=render(project(fixture.testPartner));
+  const fixtureJourney=fixtureHtml.match(/<ol class="fleet-lifecycle-stages"[\s\S]*?<\/ol>/)[0];
+  assert.ok(!fixtureJourney.includes('href="#field-tests"'));
+  for(const [,id] of fixtureJourney.matchAll(/href="#([^"]+)"/g))assert.ok(fixtureHtml.includes(`id="${id}"`),id);
+});
+
+test('generic videos render sanitized posters and exclude credential-bearing previews',()=>{
+  const c=structuredClone(fixture.testPartner);
+  c.records.push({...c.records[0],id:'fixture-video',media_type:'video',media_kind:'factory',url:'/equipment/images/fixture.mp4',poster:'/equipment/images/fixture-poster.jpg'});
+  assert.match(render(project(c)),/<video[^>]*poster="\/equipment\/images\/fixture-poster.jpg"/);
+  c.records.at(-1).poster='https://example.invalid/poster#access_token=VIDEO-PRIVATE-CANARY';
+  const html=render(project(c));assert.ok(!html.includes('VIDEO-PRIVATE-CANARY'));assert.doesNotMatch(html.match(/<video[^>]*>/)[0],/poster=/);
 });
 test('ARDHI renderer, CSS, deployment gates and index validator remain protected',()=>{
   const baseline=JSON.parse(readFileSync('tests/fixtures/passport/ardhi-protected.json'));

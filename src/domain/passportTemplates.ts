@@ -18,6 +18,7 @@ export interface PassportBuildTemplate {
   lifecycleStages: {
     id: string;
     label: string;
+    href?: string;
   }[];
   mediaDestinations: {
     id: MediaKind;
@@ -40,8 +41,8 @@ const section = (
   label: string,
   emptyStatePolicy: "omit" | "pending" = "omit",
 ) => ({ key, id, label, emptyStatePolicy, heroAction: heroActions[key] });
-const stages = (values: [string, string][]) =>
-  values.map(([id, label]) => ({ id, label }));
+const stages = (values: [string, string, string?][]) =>
+  values.map(([id, label, href]) => ({ id, label, href }));
 const mediaDestinations: PassportBuildTemplate["mediaDestinations"] = [
   { id: "factory", label: "Factory media" },
   { id: "shipping", label: "Shipping media" },
@@ -82,9 +83,9 @@ export const passportTemplates: Record<
       ...shared.slice(1),
     ],
     lifecycleStages: stages([
-      ["concept", "Concept / partner discussion"],
-      ["configuration", "Configuration planning"],
-      ["partner_proof", "Factory proof"],
+      ["concept", "Concept / partner discussion", "#history"],
+      ["configuration", "Configuration planning", "#smashpro-edition"],
+      ["partner_proof", "Factory proof", "#media"],
       ["build_authorization", "Build authorization"],
       ["production", "Production"],
       ["factory_qc", "Factory quality control"],
@@ -92,7 +93,7 @@ export const passportTemplates: Record<
       ["shipping", "International shipping"],
       ["arrival", "Arrival"],
       ["commissioning", "Commissioning"],
-      ["field_validation", "Field validation"],
+      ["field_validation", "Field validation", "#field-tests"],
       ["long_term_use", "Long-term use"],
     ]),
     mediaDestinations,

@@ -1,5 +1,7 @@
 # Passport Automation v1
 
+Release preparation, 2026-10-05: PR #68 review identified four bounded fixes before merge. Public URLs now reject credential-bearing fragments as well as query parameters; unsupported production claims are downgraded in public asset fields, including index/hero consumers; generic lifecycle stages retain contextual links without linking to omitted sections; and generic videos receive their sanitized poster URLs. Focused regression tests cover all four. These are release-safety and migration-parity corrections, not Phase 2 architecture work. Both mature renderers and the manual deployment workflow remain protected and unchanged. Fresh release evidence is retained outside the source checkout at `D:/SmashProWork/passport-release-20261005`.
+
 Base: `a190948` (current origin/main at audit, 2026-10-04). Work is isolated on `feat/passport-automation-v1`. The supplied sprint attachment ends at item 4 of the definition of done; the detailed preceding requirements govern this implementation.
 
 ## Release boundary
