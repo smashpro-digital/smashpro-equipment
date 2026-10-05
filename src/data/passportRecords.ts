@@ -7,6 +7,7 @@ import {
   liftmateCaseStudyUrl,
 } from "./liftmateEquipment";
 import { DRIVE_EVIDENCE_HISTORY } from "./ardhiEvidenceHistory";
+import { normalizeMzigo } from "./mzigoCanonicalPassport";
 import type { Equipment } from "../types/equipment";
 import type {
   CanonicalPassport,
@@ -484,4 +485,9 @@ ardhi.records.push({
 });
 // No new shipping completion is inferred here. HQ remains authoritative at runtime
 // on the protected renderer; the repository record only reports ocean transit.
-export const canonicalPassports: CanonicalPassport[] = [ardhi, liftmate];
+const reportedTransit = ardhi.records.find(r => r.id === "ardhi-ocean-departure-reported")!;
+reportedTransit.source_type = "supplier";
+reportedTransit.evidence_classification = "in_transit";
+const mzigoEquipment = equipment.find(e => e.fleetId === "SP-MZIGO-26E")!;
+const mzigo = normalizeMzigo(fromEquipment(mzigoEquipment, "factory_import"), mzigoEquipment);
+export const canonicalPassports: CanonicalPassport[] = [ardhi, liftmate, mzigo];

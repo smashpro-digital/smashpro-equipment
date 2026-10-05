@@ -317,6 +317,36 @@
     "Maintenance↓",
     "Reserved recordAnnual Inspectionfuture · ArchiveThis permanent slot is reserved for verified evidence when the milestone occurs.Media0Documents0StatusfutureSpecificationsPendingRelated recordsJourneyMediaDocuments"
   ],
+  "videos": [
+    {
+      "src": null,
+      "poster": "/equipment/images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"
+    },
+    {
+      "src": null,
+      "poster": "/equipment/images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"
+    },
+    {
+      "src": null,
+      "poster": "/equipment/images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"
+    },
+    {
+      "src": null,
+      "poster": "/equipment/images/sp-ardhi-26-factory-departure-poster-2026-09-02.jpg"
+    },
+    {
+      "src": null,
+      "poster": null
+    },
+    {
+      "src": null,
+      "poster": null
+    },
+    {
+      "src": null,
+      "poster": null
+    }
+  ],
   "errors": [],
   "networkMode": "controlled-shipment-outage"
 }

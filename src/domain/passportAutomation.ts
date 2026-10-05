@@ -88,6 +88,8 @@ export interface PassportRecord {
   media_kind?: MediaKind;
   document_kind?: DocumentKind;
   media_type?: "image" | "video";
+  poster?: string;
+  evidence_classification?: string;
   productionEvidence?: boolean;
   factoryEvidence?: boolean;
   fieldEvidence?: boolean;
@@ -227,7 +229,7 @@ export function projectPassportPublicRecord(
     "commissioning",
     "history",
   ];
-  return {
+  const projection: PassportPublicProjection = {
     asset: {
       id: a.id,
       slug: a.slug,
@@ -305,6 +307,8 @@ export function projectPassportPublicRecord(
         media_kind: r.media_kind,
         document_kind: r.document_kind,
         media_type: r.media_type,
+        poster: safeUrl(r.poster),
+        evidence_classification: r.evidence_classification,
         productionEvidence:
           r.media_kind !== "concept" && r.productionEvidence === true,
         factoryEvidence:
@@ -320,6 +324,30 @@ export function projectPassportPublicRecord(
         supplier: r.supplier,
       })),
   };
+  if (requiresMilestoneEvidence(a.current_lifecycle_stage) &&
+      !hasMilestoneEvidence(projection, a.current_lifecycle_stage)) {
+    projection.asset.current_lifecycle_stage = "shipping_preparation";
+    projection.asset.status_label = "Awaiting shipment evidence";
+    projection.asset.status_detail = "Shipping preparation; shipment, receipt and commissioning require separate evidence. Build completion, final payment and packing do not establish shipment.";
+  }
+  return projection;
+}
+const milestoneClasses: Record<string, string> = {
+  shipping: "shipped", shipped: "shipped", in_transit: "in_transit",
+  ocean_freight: "in_transit", arrival: "received", received: "received",
+  commissioning: "commissioned", commissioned: "commissioned",
+};
+function requiresMilestoneEvidence(stage: string) { return stage in milestoneClasses; }
+/** Evidence is cargo/asset-specific and classified by the event it establishes.
+ * Packing, payment, vessel context and build approval cannot satisfy this gate.
+ * Supplier reports can describe transit as reported, but cannot complete it. */
+export function hasMilestoneEvidence(p: PassportPublicProjection, stage: string, verifiedOnly = false): boolean {
+  const classification = milestoneClasses[stage];
+  return Boolean(classification) && p.records.some(r =>
+    r.kind === "evidence" && r.asset_id === p.asset.id && r.visibility === "public" && r.media_kind !== "concept" &&
+    r.evidence_classification === classification &&
+    (r.evidence_state === "verified" || (!verifiedOnly && classification === "in_transit" && r.evidence_state === "submitted")) &&
+    (classification === "commissioned" ? ["field", "smashpro"] : classification === "received" ? ["field", "smashpro", "carrier"] : ["supplier", "carrier"]).includes(r.source_type));
 }
 /** Never infer a production transition from money, proof receipt, or approval. */
 export function hasProductionEvidence(p: PassportPublicProjection): boolean {
@@ -345,6 +373,7 @@ export function lifecycleStageStatus(
   p: PassportPublicProjection,
   stageId: string,
 ): "complete" | "current" | "pending" {
+  if (requiresMilestoneEvidence(stageId) && !hasMilestoneEvidence(p, stageId)) return "pending";
   const supported = (event: PassportRecord) =>
     event.evidence_ids?.some((id) =>
       p.records.some(
@@ -381,6 +410,6 @@ export function lifecycleStageStatus(
       r.evidence_state === "verified" &&
       supported(r),
   );
-  if (completed) return "complete";
+  if (completed && (!requiresMilestoneEvidence(stageId) || hasMilestoneEvidence(p, stageId, true))) return "complete";
   return p.asset.current_lifecycle_stage === stageId ? "current" : "pending";
 }

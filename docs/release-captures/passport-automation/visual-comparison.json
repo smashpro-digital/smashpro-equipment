@@ -3,37 +3,86 @@
     "sameDimensions": true,
     "width": 390,
     "height": 25132,
-    "changedPixels": 0,
-    "changedFraction": 0,
-    "maxChannelDifference": 0,
-    "bands": []
+    "changedPixels": 6,
+    "changedFraction": 6.121524504462591e-7,
+    "maxChannelDifference": 19,
+    "bands": [],
+    "asset": "ardhi"
   },
   {
     "sameDimensions": true,
     "width": 768,
     "height": 18331,
-    "changedPixels": 199,
-    "changedFraction": 0.000014135321768225047,
+    "changedPixels": 595,
+    "changedFraction": 0.00004226390176931609,
     "maxChannelDifference": 96,
     "bands": [
       {
+        "y": 13312,
+        "changedPixels": 269
+      },
+      {
         "y": 13824,
-        "changedPixels": 122
+        "changedPixels": 326
       }
-    ]
+    ],
+    "asset": "ardhi"
   },
   {
     "sameDimensions": true,
     "width": 1440,
     "height": 17158,
-    "changedPixels": 462,
-    "changedFraction": 0.000018698760539301394,
+    "changedPixels": 1752,
+    "changedFraction": 0.00007090958542176633,
     "maxChannelDifference": 96,
     "bands": [
       {
-        "y": 16128,
-        "changedPixels": 299
+        "y": 12032,
+        "changedPixels": 152
+      },
+      {
+        "y": 12288,
+        "changedPixels": 600
+      },
+      {
+        "y": 12800,
+        "changedPixels": 241
+      },
+      {
+        "y": 13312,
+        "changedPixels": 750
       }
-    ]
+    ],
+    "asset": "ardhi"
+  },
+  {
+    "sameDimensions": true,
+    "width": 390,
+    "height": 32958,
+    "changedPixels": 0,
+    "changedFraction": 0,
+    "maxChannelDifference": 4,
+    "bands": [],
+    "asset": "mzigo"
+  },
+  {
+    "sameDimensions": true,
+    "width": 768,
+    "height": 23165,
+    "changedPixels": 97,
+    "changedFraction": 0.000005452280739621555,
+    "maxChannelDifference": 22,
+    "bands": [],
+    "asset": "mzigo"
+  },
+  {
+    "sameDimensions": true,
+    "width": 1440,
+    "height": 21531,
+    "changedPixels": 0,
+    "changedFraction": 0,
+    "maxChannelDifference": 4,
+    "bands": [],
+    "asset": "mzigo"
   }
 ]

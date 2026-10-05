@@ -6,8 +6,8 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 const results=[];
 try {
   const page=await browser.newPage();
-  for(const width of [390,768,1440]){
-    const files=['reference','after'].map(phase=>`data:image/png;base64,${readFileSync(`${root}/${phase}/ardhi-${width}.png`).toString('base64')}`);
+  for(const asset of ['ardhi','mzigo']) for(const width of [390,768,1440]){
+    const files=['reference','after'].map(phase=>`data:image/png;base64,${readFileSync(`${root}/${phase}/${asset}-${width}.png`).toString('base64')}`);
     const result=await page.evaluate(async urls=>{
       const [before,after]=await Promise.all(urls.map(async url=>createImageBitmap(await (await fetch(url)).blob())));
       if(before.width!==after.width||before.height!==after.height)return {sameDimensions:false};
@@ -23,9 +23,9 @@ try {
       }
       return {sameDimensions:true,width:before.width,height:before.height,changedPixels:changed,changedFraction:changed/(before.width*before.height),maxChannelDifference,bands};
     },files);
-    results.push(result);console.log(JSON.stringify(result));
+    result.asset=asset;results.push(result);console.log(JSON.stringify(result));
     assert.equal(result.sameDimensions,true);
   }
   writeFileSync(`${root}/visual-comparison.json`,JSON.stringify(results,null,2)+'\n');
-  assert.ok(results.every(result=>result.changedFraction<0.01),'ARDHI visual difference exceeds 1%; inspect before accepting');
+  assert.ok(results.every(result=>result.changedFraction<0.01),'Protected Passport visual difference exceeds 1%; inspect before accepting');
 } finally {await browser.close();}

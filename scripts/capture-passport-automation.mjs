@@ -7,7 +7,7 @@ const output = `docs/release-captures/passport-automation/${phase}`;
 mkdirSync(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
-  for (const asset of (onlyAsset ? [onlyAsset] : ['ardhi', 'liftmate'])) for (const width of [390, 768, 1440]) {
+  for (const asset of (onlyAsset ? [onlyAsset] : ['ardhi', 'mzigo', 'liftmate'])) for (const width of [390, 768, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 1000 }, reducedMotion: 'reduce' });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -15,16 +15,37 @@ try {
       // Deterministic outage parity; confirmed/unverified states are covered by
       // the existing shipment browser suite. Production captures remain live.
       await page.route('**/api/fleet/shipment/SP-ARDHI-26',route=>route.fulfill({status:503,contentType:'application/json',body:'{"error":"regression outage fixture"}'}));
+      if(asset==='mzigo') await page.route('**/tech_companion.php?resource=fleet_public_asset_passport&asset_code=SP-MZIGO-26E',route=>route.fulfill({status:503,contentType:'application/json',body:'{"error":"regression document outage fixture"}'}));
     }
-    await page.goto(`${base}/sp-${asset}-${asset === 'ardhi' ? '26' : '27'}.html`, { waitUntil: 'domcontentloaded', timeout: 120000 });
+    await page.goto(`${base}/sp-${asset}-${asset === 'liftmate' ? '27' : '26'}.html`, { waitUntil: 'domcontentloaded', timeout: 120000 });
     await page.locator('h1').waitFor();
     await page.waitForTimeout(2500);
     // Load lazy media and reveal each viewport before taking a full-page reference.
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 850) { scrollTo(0, y); await new Promise(r => setTimeout(r, 40)); } scrollTo(0, 0); });
     await page.waitForTimeout(1000);
     if (asset==='ardhi' && ['reference','after'].includes(phase)) await page.locator('.leaflet-container').waitFor({state:'attached',timeout:20000});
-    if (['reference','after'].includes(phase)) await page.evaluate(async()=>{
+    await page.evaluate(async()=>{
       await Promise.all([...document.images].map(async img=>{img.loading='eager';try{await img.decode();}catch{/* Report missing images below. */}}));
+    });
+    if (['reference','after'].includes(phase)) await page.evaluate(async()=>{
+      // Metadata alone can leave a black video surface under disk contention.
+      // Preserve poster presentation where supplied; otherwise decode a fixed
+      // first frame so an unloaded surface cannot pass the pixel tolerance.
+      await Promise.all([...document.querySelectorAll('video')].filter(video=>!video.poster).map(async video=>{
+        video.pause();video.preload='auto';
+        if(video.readyState<2) await new Promise((resolve,reject)=>{
+          const timer=setTimeout(()=>reject(Error(`Video frame unavailable: ${video.currentSrc||video.src}`)),60000);
+          video.addEventListener('loadeddata',()=>{clearTimeout(timer);resolve();},{once:true});
+          video.addEventListener('error',()=>{clearTimeout(timer);reject(Error('Video decode failed'));},{once:true});
+          video.load();
+        });
+        await new Promise((resolve,reject)=>{
+          const timer=setTimeout(()=>reject(Error('Video seek timed out')),20000);
+          video.addEventListener('seeked',()=>{clearTimeout(timer);resolve();},{once:true});
+          video.currentTime=0.01;
+        });
+      }));
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
     });
     const record = await page.evaluate(() => ({
       text: document.body.textContent,
@@ -33,15 +54,28 @@ try {
       links: [...document.querySelectorAll('main a[href]')].map(n => n.getAttribute('href')),
       overflow: document.documentElement.scrollWidth > innerWidth,
       images: [...document.images].map(n => ({ src: n.getAttribute('src'), loaded: n.complete && n.naturalWidth > 0 })),
-      history: [...document.querySelectorAll('.ardhi-expandable-timeline > li')].map(n => n.textContent),
+      history: [...document.querySelectorAll('.ardhi-expandable-timeline > li, .mzigo-history .passport-timeline > li')].map(n => n.textContent),
+      videos: [...document.querySelectorAll('video')].map(n => ({src:n.getAttribute('src'),poster:n.getAttribute('poster')})),
     }));
     record.errors = errors;
-    record.networkMode = ['reference','after'].includes(phase)?'controlled-shipment-outage':'live-dependencies';
+    record.networkMode = ['reference','after'].includes(phase)?(asset==='mzigo'?'controlled-document-outage':'controlled-shipment-outage'):'live-dependencies';
     if (['reference','after'].includes(phase)) for(const img of record.images.filter(i=>i.src?.startsWith('/equipment/images/'))) assert.ok(img.loaded,`Reference media did not decode: ${img.src}`);
     writeFileSync(`${output}/${asset}-${width}.json`, JSON.stringify(record, null, 2));
     await page.screenshot({ path: `${output}/${asset}-${width}.png`, fullPage: true });
     await page.screenshot({ path: `${output}/${asset}-${width}-hero.png` });
     assert.deepEqual(errors, [], `${asset} runtime errors`);
+    if (asset === 'mzigo') {
+      for (const value of ['SP-MZIGO-26E','K600','500 kg','Black wheels','Final payment completed','Shipping Preparation','It has not shipped.','controller']) assert.ok(record.text.includes(value),value);
+      if (phase === 'after') {
+        const before=JSON.parse(readFileSync(`docs/release-captures/passport-automation/reference/${asset}-${width}.json`));
+        for(const key of ['text','headings','ids','links','history','videos','overflow']) assert.deepEqual(record[key],before[key],`MZIGO ${key}`);
+        assert.deepEqual(record.images.map(i=>i.src),before.images.map(i=>i.src));
+        await page.evaluate(()=>{location.hash='history-mzigo-final-payment';});
+        await page.waitForTimeout(300);
+        assert.equal(await page.locator('#history-mzigo-final-payment').getAttribute('open'),'');
+        await page.locator('#documents').screenshot({path:`${output}/${asset}-${width}-documents.png`});
+      }
+    }
     if (asset === 'ardhi') {
       for (const value of ['SP-ARDHI-26', 'YF380', 'RAL 6018', 'Three-pump', 'Operator Manual']) assert.ok(record.text.includes(value), value);
       if (phase === 'after') {

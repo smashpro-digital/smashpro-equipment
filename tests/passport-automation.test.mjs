@@ -11,6 +11,7 @@ const [domain,templates,data,components,fixture,index]=await Promise.all([
   '/src/domain/passportAutomation.ts','/src/domain/passportTemplates.ts','/src/data/passportRecords.ts','/src/components/EquipmentPassport.tsx','/tests/fixtures/passport/testPartner.ts','/src/domain/publicEquipmentIndex.ts',
 ].map(p=>server.ssrLoadModule(p)));
 const {liftmateEquipment}=await server.ssrLoadModule('/src/data/liftmateEquipment.ts');
+const {equipment}=await server.ssrLoadModule('/src/data/equipment.ts');
 const {passportPublicPlugin}=await server.ssrLoadModule('/scripts/passport-public-plugin.ts');
 await server.close();
 const project=domain.projectPassportPublicRecord;
@@ -104,4 +105,73 @@ test('ARDHI renderer, CSS, deployment gates and index validator remain protected
   assert.equal(createHash('sha256').update(block.replaceAll('\r\n','\n')).digest('hex'),baseline.historyBlockHash);
   const p=project(data.canonicalPassports.find(p=>p.asset.id==='SP-ARDHI-26'));
   for(const value of ['SPP-2026-0001','YF380','RAL 6018','Three-Pump','yf380-manufacturer-promo-spec-sheet.pdf','yfe380-operator-instruction-manual.pdf'])assert.ok(JSON.stringify(p).includes(value),value);
+});
+
+test('MZIGO renderer, source evidence, status, shared styles and deployment stay protected',()=>{
+  const baseline=JSON.parse(readFileSync('tests/fixtures/passport/mzigo-protected.json'));
+  for(const [path,hash] of Object.entries(baseline.files))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replaceAll('\r\n','\n')).digest('hex'),hash,path);
+  const item=equipment.find(e=>e.fleetId==='SP-MZIGO-26E');
+  const p=project(data.canonicalPassports.find(p=>p.asset.id===item.fleetId));
+  assert.equal(p.build.renderer,'protected');
+  assert.equal(p.asset.public_path,'/sp-mzigo-26.html');
+  assert.equal(p.asset.status_label,item.statusLabel);
+  assert.equal(p.asset.current_lifecycle_stage,'shipping_preparation');
+  assert.equal(p.records.find(r=>r.id===p.asset.hero_media_id).url,item.heroImage);
+  for(const m of item.gallery){
+    const r=p.records.find(r=>r.id===m.id);assert.ok(r,m.id);
+    assert.equal(r.url,m.src);assert.equal(r.detail,m.caption);assert.equal(r.alt,m.alt);
+    assert.equal(r.occurred_at,m.capturedAt);assert.equal(r.poster,m.poster);
+    assert.equal(r.factoryEvidence,Boolean(m.group));assert.equal(r.fieldEvidence,false);
+    if(m.evidenceCategory)assert.equal(r.evidence_classification,m.evidenceCategory);
+  }
+  for(const e of item.timeline.filter(e=>e.publicDisplay)){
+    const r=p.records.find(r=>r.id===e.id);assert.ok(r,e.id);
+    assert.equal(r.title,e.title);assert.equal(r.detail,e.detail);assert.equal(r.occurred_at,e.occurredAt);
+  }
+  for(const s of item.specifications){const r=p.records.find(r=>r.kind==='specification'&&r.title===s.label);assert.equal(r.value,s.value);assert.equal(r.evidence_state==='verified',s.confirmed);}
+  assert.equal(p.records.filter(r=>r.media_type==='video').length,2);
+  assert.equal(p.records.find(r=>r.title==='Payload'&&r.kind==='specification').evidence_state,'review_pending');
+  assert.equal(domain.lifecycleStageStatus(p,'factory_completion'),'complete');
+  assert.equal(domain.lifecycleStageStatus(p,'final_payment'),'complete');
+  for(const stage of ['packing','shipped','ocean_freight','arrival','commissioning'])assert.equal(domain.lifecycleStageStatus(p,stage),'pending');
+  for(const value of ['K600','500 kg','Shandong Kylin','Black wheels','controller','2026-10-01'])assert.ok(JSON.stringify(p).includes(value),value);
+  // Protected cards still use the identical legacy allowlist and hero.
+  assert.equal(index.publicEquipmentIndexRow(item).hero_image,item.heroImage);
+});
+
+test('MZIGO build complete plus paid final payment and packing never imply shipment, receipt or commissioning',()=>{
+  const source=data.canonicalPassports.find(p=>p.asset.id==='SP-MZIGO-26E');
+  for(const stage of ['shipping','shipped','in_transit','ocean_freight','arrival','received','commissioning','commissioned']){
+    const c=structuredClone(source);c.asset.current_lifecycle_stage=stage;c.asset.status_label='Unsupported promotion';
+    // Even a completion event backed by authentic build/payment/packing is insufficient.
+    c.records.push({...c.records.find(r=>r.id==='mzigo-build-approved'),id:'packing-proof',evidence_classification:'packing'});
+    c.records.push({...c.records.find(r=>r.kind==='lifecycle_event'),id:'false-shipping',stage_id:stage,event_type:'completion',evidence_ids:['mzigo-final-payment','mzigo-build-approved','packing-proof']});
+    const p=project(c);assert.equal(p.asset.current_lifecycle_stage,'shipping_preparation');
+    assert.equal(p.asset.status_label,'Awaiting shipment evidence');
+    assert.equal(domain.lifecycleStageStatus(p,stage),'pending');
+  }
+  const c=structuredClone(source);c.asset.current_lifecycle_stage='shipped';
+  const proof={...c.records.find(r=>r.id==='mzigo-build-approved'),id:'cargo-handoff',source_type:'carrier',evidence_classification:'shipped',evidence_state:'verified'};
+  c.records.push(proof);assert.equal(project(c).asset.current_lifecycle_stage,'shipped');
+  for(const changes of [{visibility:'private'},{asset_id:'OTHER'},{source_type:'factory'},{evidence_state:'concept'},{media_kind:'concept'},{evidence_classification:'packing'}]){
+    const modified=structuredClone(c);Object.assign(modified.records.at(-1),changes);assert.equal(project(modified).asset.current_lifecycle_stage,'shipping_preparation');
+  }
+  assert.equal(domain.lifecycleStageStatus(project(c),'received'),'pending');
+  assert.equal(domain.lifecycleStageStatus(project(c),'commissioned'),'pending');
+});
+
+test('three-passport contract matrix preserves identity, state, supported sections and public privacy',()=>{
+  assert.deepEqual(data.canonicalPassports.map(p=>p.asset.id).sort(),['SP-ARDHI-26','SP-LIFTMATE-27','SP-MZIGO-26E']);
+  for(const source of data.canonicalPassports){
+    const c=structuredClone(source);c.procurement={internal_notes:'MATRIX_PRIVATE_CANARY'};
+    c.records.push({...c.records[0],id:'matrix-private',visibility:'private',detail:'MATRIX_PRIVATE_CANARY'});
+    const p=project(c),template=templates.passportTemplates[p.asset.build_type];
+    for(const field of ['id','passport_id','oem_model','current_lifecycle_stage','status_label','public_path'])assert.ok(p.asset[field],`${p.asset.id}: ${field}`);
+    for(const kind of ['specification','configuration','partner','evidence','media'])assert.ok(p.records.some(r=>r.kind===kind),`${p.asset.id}: ${kind}`);
+    for(const key of ['identity','configuration','partners','journey','specifications','media','documents','history'])assert.ok(template.sections.some(s=>s.key===key),key);
+    assert.ok(template.lifecycleStages.some(s=>s.id==='field_validation'));
+    assert.ok(template.documentDestinations.length>0);assert.ok(template.mediaDestinations.length>0);
+    assert.ok(!JSON.stringify(p).includes('MATRIX_PRIVATE_CANARY'));
+    assert.ok(!JSON.stringify(p).includes('matrix-private'));
+  }
 });
