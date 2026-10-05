@@ -13,7 +13,15 @@ Index of all SmashPro Fleet Equipment Passport and procurement records. Every fl
 
 | Fleet ID | Equipment Type | Passport | Procurement Record |
 |----------|----------------|----------|--------------------|
-| SP-NYASI-26 | Remote-control tracked mower · initial payment paid / production pending | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | Digital HQ canonical record |
+| SP-NYASI-26 | Remote-control tracked mower · initial payment paid / production pending | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | [SP-NYASI-26-PROCUREMENT.md](SP-NYASI-26-PROCUREMENT.md) — Digital HQ canonical reference |
+
+## Partner Builds
+
+These are proposal/design-stage projects, not owned or commissioned equipment.
+
+| Fleet ID | Equipment Type | Passport | Procurement Record |
+|----------|----------------|----------|--------------------|
+| SP-LIFTMATE-27 | Pairon Tools Glide200 / proposed SmashPro Edition; factory design review pending | [SP-LIFTMATE-27-PASSPORT.md](SP-LIFTMATE-27-PASSPORT.md) | [SP-LIFTMATE-27-PROCUREMENT.md](SP-LIFTMATE-27-PROCUREMENT.md) — Digital HQ canonical reference |
 
 ## Future Acquisitions
 
