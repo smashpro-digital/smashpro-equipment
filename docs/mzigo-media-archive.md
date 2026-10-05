@@ -35,7 +35,7 @@ Three supplied PNG concepts are preserved byte-for-byte under `project_sources/s
 
 ## Added original photographs
 
-Copies use semantic production filenames without modifying image bytes. Source files remain untouched in the original equipment checkout's `images/` directory.
+Copies use semantic production filenames without modifying image bytes. The local import cleanup below records the subsequent source-file naming changes.
 
 | Original | Production filename | Dimensions |
 | --- | --- | --- |
@@ -44,6 +44,31 @@ Copies use semantic production filenames without modifying image bytes. Source f
 | IMG-20260909-WA0003.jpg | sp-mzigo-26e-raised-bed-right-profile-2026-09-09.jpg | 1280 x 960 |
 | IMG-20260909-WA0004.jpg | sp-mzigo-26e-battery-enclosures-2026-09-09.jpg | 960 x 1280 |
 | IMG-20260909-WA0014.jpg | sp-mzigo-26e-remote-controller-2026-09-09.jpg | 960 x 1280 |
+
+## Local import naming cleanup — October 5, 2026
+
+Local `main` was fast-forwarded to `fb71fb0` before this cleanup. Factory image names follow `sp-mzigo-26e-<subject>-YYYY-MM-DD.jpg`; `original` distinguishes a source variant from an existing curated image with different bytes. The date preserves the September 9 source batch date, not a new lifecycle event.
+
+Five originals already match the canonical filenames in the table above byte-for-byte. With user approval, their redundant imports, all sixteen `(1)` copies, and the duplicate walkaround video were removed: 21 duplicate photographs and one duplicate video. Each duplicate and its retained canonical file were checked against the recorded SHA-256 before deletion. The private conversation screenshot remains under ignored `local-notes/mzigo-media-imports-2026-10-05/`, outside the published media directory. `rename-manifest.json` in that directory retains all 35 original paths, destinations, SHA-256 hashes and duplicate-removal dispositions.
+
+The remaining distinct images were renamed in `images/` without changing bytes:
+
+| Original | Standard filename |
+| --- | --- |
+| IMG-20260909-WA0000.jpg | sp-mzigo-26e-raised-bed-front-lights-original-2026-09-09.jpg |
+| IMG-20260909-WA0005.jpg | sp-mzigo-26e-raised-bed-chassis-overview-original-2026-09-09.jpg |
+| IMG-20260909-WA0006.jpg | sp-mzigo-26e-motor-controller-detail-original-01-2026-09-09.jpg |
+| IMG-20260909-WA0007.jpg | sp-mzigo-26e-motor-controller-detail-original-02-2026-09-09.jpg |
+| IMG-20260909-WA0008.jpg | sp-mzigo-26e-hydraulic-pump-reservoir-original-2026-09-09.jpg |
+| IMG-20260909-WA0009.jpg | sp-mzigo-26e-hydraulic-cylinder-electrical-original-2026-09-09.jpg |
+| IMG-20260909-WA0010.jpg | sp-mzigo-26e-raised-bed-front-lights-original-02-2026-09-09.jpg |
+| IMG-20260909-WA0011.jpg | sp-mzigo-26e-factory-complete-left-profile-original-2026-09-09.jpg |
+| IMG-20260909-WA0012.jpg | sp-mzigo-26e-control-panel-original-2026-09-09.jpg |
+| IMG-20260909-WA0013.jpg | sp-mzigo-26e-factory-complete-right-profile-original-2026-09-09.jpg |
+| IMG-20260909-WA0015.jpg | sp-mzigo-26e-rear-branding-original-2026-09-09.jpg |
+| d7dae32085ed4e8ba3008b5af86c02ed.jpg | sp-mzigo-26e-factory-walkaround-thumbnail-2026-09-09.jpg |
+
+No application references use the raw import names. Existing curated media URLs, gallery selection, renderer and public lifecycle remain unchanged. This is local file organization, not a deployment or new publication approval.
 
 ## Interaction and release checks
 
