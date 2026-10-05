@@ -2,7 +2,7 @@ import { EquipmentPassportPage } from "../pages/EquipmentDetailPage";
 import { Route, Switch } from "react-router-dom";
 import { ArdhiPassportPage } from "../pages/ArdhiPassportPage";
 import { MzigoPassportPage } from "../pages/MzigoPassportPage";
-import { LiftMatePassportPage } from "../pages/LiftMatePassportPage";
+import { GenericPassportRoute, genericPassportRoutes } from "../pages/GenericPassportRoute";
 import { GolfCartTechBuildPage } from "../pages/GolfCartTechBuildPage";
 import { HomePage } from "../pages/HomePage";
 import { NotFoundPage } from "../pages/NotFoundPage";
@@ -19,7 +19,7 @@ export function App() {
       <Route exact path="/sp-ardhi-26.html" component={ArdhiPassportPage} />
       <Route exact path="/sp-mzigo-26.html" component={MzigoPassportPage} />
       <Route exact path="/sp-umba-26.html" render={() => <EquipmentPassportPage slug="sp-umba-26" />} />
-      <Route exact path="/sp-liftmate-27.html" component={LiftMatePassportPage} />
+      {genericPassportRoutes.map(route => <Route exact key={route.path} path={route.path} render={() => <GenericPassportRoute assetId={route.assetId} />} />)}
       <Route exact path="/sp-nyasi-26.html" render={() => <EquipmentPassportPage slug="sp-nyasi-26" />} />
       <Route exact path="/golf-cart-tech-build.html" component={GolfCartTechBuildPage} />
       <Route exact path="/catalog" component={CatalogPage} />

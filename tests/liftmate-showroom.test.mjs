@@ -22,7 +22,7 @@ test("LiftMate is a public data-driven showroom entry with local concept artwork
 
 test("LiftMate card and Passport preserve proposal-stage truth and requested specs", () => {
   const card = readFileSync("src/components/EquipmentCard.tsx", "utf8");
-  const passport = readFileSync("src/pages/LiftMatePassportPage.tsx", "utf8");
+  const passport = readFileSync("src/components/EquipmentPassport.tsx", "utf8") + readFileSync("src/data/passportRecords.ts", "utf8");
   const publicRecord = JSON.stringify(item);
   for (const [label, value] of [["OEM Model", "Glide200"], ["Rated Capacity", "440.9 lb published lift capacity"], ["Power", "48V LiFePO4"], ["Model Year", "2027"]]) {
     assert.equal(item.specifications.find(spec => spec.label === label)?.value, value);
@@ -37,7 +37,7 @@ test("LiftMate card and Passport preserve proposal-stage truth and requested spe
 });
 
 test("LiftMate identifies the Pairon OEM platform with sourced local media", () => {
-  const passport = readFileSync("src/pages/LiftMatePassportPage.tsx", "utf8");
+  const passport = readFileSync("src/components/EquipmentPassport.tsx", "utf8") + readFileSync("src/data/passportRecords.ts", "utf8");
   const thumbnail = "images/sp-liftmate-27-pairon-glide200-oem-thumbnail.jpg";
   assert.ok(existsSync(thumbnail));
   assert.equal(readFileSync(thumbnail).subarray(0, 3).toString("hex"), "ffd8ff");

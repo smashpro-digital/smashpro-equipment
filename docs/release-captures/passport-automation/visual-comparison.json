@@ -1,0 +1,39 @@
+[
+  {
+    "sameDimensions": true,
+    "width": 390,
+    "height": 25132,
+    "changedPixels": 0,
+    "changedFraction": 0,
+    "maxChannelDifference": 0,
+    "bands": []
+  },
+  {
+    "sameDimensions": true,
+    "width": 768,
+    "height": 18331,
+    "changedPixels": 199,
+    "changedFraction": 0.000014135321768225047,
+    "maxChannelDifference": 96,
+    "bands": [
+      {
+        "y": 13824,
+        "changedPixels": 122
+      }
+    ]
+  },
+  {
+    "sameDimensions": true,
+    "width": 1440,
+    "height": 17158,
+    "changedPixels": 462,
+    "changedFraction": 0.000018698760539301394,
+    "maxChannelDifference": 96,
+    "bands": [
+      {
+        "y": 16128,
+        "changedPixels": 299
+      }
+    ]
+  }
+]

@@ -165,8 +165,10 @@ test("public index and recommendations are metadata driven", () => {
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   const recommendations = readFileSync("src/domain/recommendations.ts", "utf8");
   assert.match(config, /equipment-index\.json/);
-  assert.match(config, /capability_ids/);
-  assert.match(config, /attachment_ids/);
+  const indexProjection = readFileSync("src/domain/publicEquipmentIndex.ts", "utf8");
+  assert.match(config, /publicEquipmentIndexRow\(item/);
+  assert.match(indexProjection, /capability_ids/);
+  assert.match(indexProjection, /attachment_ids/);
   assert.doesNotMatch(detail, /fleetId\s*===\s*["']SP-ARDHI-26/);
   assert.match(recommendations, /required\.some/);
   assert.match(recommendations, /localeCompare/);
