@@ -3,9 +3,9 @@
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.2  
 > Status: In Transit / Pre-Deployment  
-> Last Updated: 2026-09-26
+> Last Updated: 2026-10-06
 
-> **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record reports an **October 5, 2026** port-arrival target. Public vessel context now corroborates EVER MAX voyage 1374-016E, its September 7 Yantian departure, a Panama Canal next-stop window around September 28–29, and Savannah later in the vessel rotation. Independent carrier/BOL/container confirmation tying the cargo to the vessel and confirming the actual discharge port remains pending. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
+> **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record carried an **October 5, 2026** planning target. Public vessel context now records EVER MAX voyage 1374-016E departing Colón on October 1 and reaching **Savannah anchorage on October 6 at 06:43 UTC**. This is a vessel-level checkpoint only. SP-ARDHI-26 cargo discharge, U.S. customs clearance, cargo release, final-mile delivery, receipt, and commissioning remain unconfirmed. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
 
 ---
 
@@ -367,9 +367,9 @@ Current Lifecycle
 
 In Transit / Pre-Deployment
 
-Expected Arrival Target
+Historical Forwarder Arrival Target
 
-October 5, 2026
+October 5, 2026 — superseded as vessel-progress context by the verified October 6 Savannah anchorage arrival
 
 Operational Availability
 
@@ -397,7 +397,9 @@ The live Equipment Passport shipping data remains the customer-facing projection
 - Grapple Build Documentation Requested (Pending Vendor Response)
 - Grapple Estimated Build Completion (Planning Window: Oct 7–21, 2026)
 - Grapple $2,000 Balance / Shipment (Pending Completion)
-- U.S. Arrival (Pending)
+- EVER MAX Savannah Anchorage Arrival — vessel-level checkpoint observed Oct 6, 2026 at 06:43 UTC
+- SP-ARDHI-26 Cargo Discharge (Pending)
+- U.S. Customs Clearance / Cargo Release (Pending)
 - Delivery to SmashPro (Pending)
 - Receipt Inspection (Pending)
 - Fleet Commissioning (Pending)
@@ -424,9 +426,9 @@ Operational Status
 
 Not Commissioned / Not Released for Field Work
 
-Expected Arrival Target
+Historical Forwarder Arrival Target
 
-October 5, 2026
+October 5, 2026 — superseded as vessel-progress context by the verified October 6 Savannah anchorage arrival
 
 Fleet Classification
 
