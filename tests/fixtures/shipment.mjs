@@ -11,7 +11,7 @@ export function shipmentFixture({ stale = false, satellite = false, unverified =
       context:{vessel:unverified?'EVER MAX':'Example vessel (fixture)',voyage:unverified?'1374-016E':'TEST-001',carrier:null,flight:null,jobId:null,vehicleId:null,trailerId:null},
       checkpoint:unverified?{label:'Savannah anchorage',observedAt:'2026-10-06T06:43:00Z'}:null,
       source:{provider:'Synthetic Atlas fixture',url:'https://example.com/public-record',confidence:0.9},
-      presentation:{profile:'ocean',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','route']},
+      presentation:{profile:'ocean',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','route','marine','weather','imagery','historical-ais']},
       history:{available:true,observationCount:unverified?1:3,earliestObservationAt:unverified?'2026-10-06T06:43:00Z':timestamp,latestObservationAt:unverified?'2026-10-06T06:43:00Z':timestamp},
       simulated:false
     },
