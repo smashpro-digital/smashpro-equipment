@@ -48,3 +48,17 @@ export function parseAtlasLocationContext(input:unknown,assetId:string):AtlasLoc
 
 export const atlasModeLabel=(mode:AtlasMode)=>({ocean:'Ocean',air:'Air',road:'Road',rail:'Rail',jobsite:'Jobsite',yard:'Yard',warehouse:'Warehouse',port:'Port',factory:'Factory',unknown:'Unknown'}[mode]);
 export const atlasFreshnessLabel=(state:AtlasFreshness)=>({recent:'Recent position',delayed:'Delayed position',stale:'Last known',checkpoint:'Verified checkpoint',unavailable:'Location unavailable'}[state]);
+
+
+export async function loadAtlasLocation(assetId:string, fetcher:typeof fetch=fetch, timeoutMs=8000):Promise<AtlasLocationContext|null> {
+  if(!/^SP-[A-Z0-9-]{2,64}$/.test(assetId)) return null;
+  const controller=new AbortController(); let timer:ReturnType<typeof setTimeout>|undefined;
+  try {
+    timer=setTimeout(()=>controller.abort(),timeoutMs);
+    const response=await fetcher(`https://api.smashpro.app/api/atlas/assets/${encodeURIComponent(assetId)}/location`,{signal:controller.signal,credentials:'omit',headers:{Accept:'application/json'}});
+    if(!response.ok) return null;
+    const raw=await response.json();
+    return parseAtlasLocationContext(raw,assetId);
+  } catch { return null; }
+  finally { if(timer) clearTimeout(timer); controller.abort(); }
+}
