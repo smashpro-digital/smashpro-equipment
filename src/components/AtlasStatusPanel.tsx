@@ -32,6 +32,10 @@ export function AtlasStatusPanel({ assetId, context }: { assetId: string; contex
       <p><span>Source</span><strong>{sourceLabel}</strong></p>
     </div>
     {atlas.position ? <p className="atlas-status__position">{atlas.position.latitude.toFixed(1)}°, {atlas.position.longitude.toFixed(1)}° · {atlas.position.precision} precision · observed {new Date(atlas.position.observedAt).toLocaleString("en-US",{timeZone:"UTC",dateStyle:"medium",timeStyle:"short"})} UTC</p> : <p className="atlas-status__position">No public coordinates are published for this location state.</p>}
+    <div className="atlas-status__layers" aria-label="Atlas enrichment layers">
+      <span>Context layers</span>
+      <div>{atlas.presentation.overlays.filter(layer => !["position","verified-checkpoints","history","route","geofence"].includes(layer)).slice(0,6).map(layer => <small key={layer}>{layer.replace(/-/g," ")}</small>)}</div>
+    </div>
     <p className="shipment-small">Atlas selects the best approved location signal for this asset. Location intelligence does not prove cargo discharge, customs clearance, delivery, custody, commissioning, or job completion.</p>
   </section>;
 }
