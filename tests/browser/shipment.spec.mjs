@@ -17,6 +17,8 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.atlas-status')).toContainText('SmashPro Atlas');
   await expect(page.locator('.atlas-status')).toContainText('Ocean context');
   await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
+  await expect(page.locator('.atlas-status__layers')).toContainText('marine');
+  await expect(page.locator('.atlas-status__layers')).toContainText('weather');
   await expect(page.locator('.shipment-map-empty')).toHaveCount(0);
   await expect(page.locator('.shipment-map-summary')).toContainText('Verified vessel checkpoint');
   await expect(page.locator('.shipment-map-summary')).toContainText('Savannah anchorage · coarse reference point only, not live GPS');
@@ -183,7 +185,7 @@ test('MZIGO Passport shows factory Atlas context without inventing coordinates o
     context:{vessel:null,voyage:null,carrier:null,flight:null,jobId:null,vehicleId:null,trailerId:null},
     checkpoint:{label:'Shandong Kylin factory · shipping preparation',observedAt:'2026-09-15T00:00:00Z'},
     source:{provider:'equipment-passport-record',url:'https://smashpro.app/equipment/sp-mzigo-26.html',confidence:0.95},
-    presentation:{profile:'factory',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','geofence']},
+    presentation:{profile:'factory',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','geofence','boundaries','imagery']},
     history:{available:true,observationCount:1,earliestObservationAt:'2026-09-15T00:00:00Z',latestObservationAt:'2026-09-15T00:00:00Z'},
     simulated:false
   }}));
@@ -193,6 +195,8 @@ test('MZIGO Passport shows factory Atlas context without inventing coordinates o
   await expect(atlas).toContainText('Factory context');
   await expect(atlas).toContainText('Shandong Kylin factory · shipping preparation');
   await expect(atlas).toContainText('No public coordinates are published');
+  await expect(atlas.locator('.atlas-status__layers')).toContainText('boundaries');
+  await expect(atlas.locator('.atlas-status__layers')).toContainText('imagery');
   await expect(page.locator('body')).toContainText('Shipping Preparation');
   await expect(page.locator('body')).not.toContainText('Ocean departure confirmed');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
