@@ -6,3 +6,8 @@
 @media(prefers-reduced-motion:reduce){.shipment-journey *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 .shipment-pending{margin:24px 0;padding:22px;border:1px solid #9a8556;border-radius:10px;background:#1c2015;overflow-wrap:anywhere}.shipment-pending h3{color:#f2d795;margin:0 0 12px}.shipment-pending p{line-height:1.7;color:#c4cbbd}.shipment-pending ul{padding-left:20px;line-height:1.9}.shipment-verified-title{margin:28px 0 0;font-size:1rem}
+
+.atlas-status{margin:22px 0;padding:22px;border:1px solid #3f5d45;border-radius:12px;background:linear-gradient(135deg,#101a14,#132019)}
+.atlas-status h3{margin:6px 0 0;font-size:1.35rem}.atlas-status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:18px 0;background:#304035;border:1px solid #304035;border-radius:9px;overflow:hidden}
+.atlas-status-grid p{display:grid;gap:7px;margin:0;padding:15px;background:#0f1812}.atlas-status-grid span{color:#9fb19d;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}.atlas-status-grid strong{text-transform:capitalize;color:#e4eedf}
+@media(max-width:600px){.atlas-status-grid{grid-template-columns:1fr}}
