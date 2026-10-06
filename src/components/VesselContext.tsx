@@ -1,6 +1,7 @@
 import type { Shipment } from '../domain/shipment';
 import { formatTime, selectForwarderReportedVesselVoyage } from '../domain/shipment';
 import '../styles/vessel-context.css';
+import { ardhiVerifiedVoyage } from '../data/ardhiVerifiedVoyage';
 
 const factoryHero = '/equipment/images/sp-ardhi-26-completed-build-attachments.jpg';
 
@@ -11,8 +12,12 @@ export function VesselContext({ data }: { data: Shipment }) {
   const vessel = context.vessel;
   const forwarderFacts = selectForwarderReportedVesselVoyage(data);
   const observation = context.observation;
-  const corridorStages = [...context.corridor.stages];
-  const reviewedAt = [...context.identitySources.map((source) => source.checkedAt), context.voyage.source.checkedAt].sort().at(-1) ?? data.lastUpdated;
+  const contextReviewedAt = [...context.identitySources.map((source) => source.checkedAt), context.voyage.source.checkedAt].sort().at(-1) ?? data.lastUpdated;
+  const useReviewedFallback = vessel.name === ardhiVerifiedVoyage.vesselName
+    && context.voyage.reference === ardhiVerifiedVoyage.voyageReference
+    && Date.parse(ardhiVerifiedVoyage.checkedAt) > Date.parse(contextReviewedAt);
+  const corridorStages = useReviewedFallback ? [...ardhiVerifiedVoyage.stages] : [...context.corridor.stages];
+  const reviewedAt = useReviewedFallback ? ardhiVerifiedVoyage.checkedAt : contextReviewedAt;
   const verifiedStageIndexes = corridorStages
     .map((stage, index) => ({ index, stage: stage.toLowerCase() }))
     .filter(({ stage }) => /(observed|departed|completed|complete)/.test(stage) && !/(scheduled|pending)/.test(stage))
