@@ -38,6 +38,29 @@ for(const width of [1440,390]) test(`public context is distinct from cargo and p
  await expect(page.locator('.shipment-status-line')).toContainText('Ocean departure awaiting confirmation');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await capture(page,`context-${width}`,true);expect(errors).toEqual([]);
 });
+test('newer reviewed ARDHI voyage survives stale public context without promoting cargo', async ({ page }) => {
+ const fixture=shipmentFixture({unverified:true});
+ const stale=JSON.parse(readFileSync('tests/fixtures/vessel-context.json','utf8'));
+ stale.identitySources.forEach(source=>{source.checkedAt='2026-09-26T17:37:00Z';});
+ stale.voyage.source.checkedAt='2026-09-26T17:37:00Z';
+ stale.corridor.summary='Older reviewed schedule context';
+ stale.corridor.stages=[
+  'Factory / export history',
+  'Yantian departure · vessel observed',
+  'Panama Canal · scheduled next',
+  'Savannah call · vessel schedule context',
+  'Inland delivery · cargo status pending'
+ ];
+ fixture.vesselContext=stale;
+ fixture.pendingReferences={factoryModel:'YF380',vesselDisplayReference:'EVER MAX',voyageDisplayReference:'1374-016E',vesselIdentityVerification:'pending',voyageVerification:'pending',cargoAssociation:'unconfirmed',recordedAt:'2026-09-12T06:10:49.225Z',source:'operator-supplied reference'};
+ await open(page,fixture,390);
+ await expect(page.locator('.journey-corridor')).toContainText('Current checkpoint: Savannah anchorage');
+ await expect(page.locator('.journey-corridor')).toContainText('Savannah anchorage · vessel arrival observed');
+ await expect(page.locator('.shipment-status-line')).toContainText('Ocean departure awaiting confirmation');
+ await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
 async function open(page, fixture, width = 1440) {
   await page.setViewportSize({ width, height: 1000 });
   await page.route('**/tech_companion.php*', route => route.fulfill({ json: { ok: true, documents: [] } }));
