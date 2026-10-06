@@ -175,3 +175,25 @@ test('invalid response and satellite failures cannot crash the passport', async 
   await expect(page.locator('.shipment-status-line')).toContainText('Departed Origin Port');
   await expect(page.locator('.shipment-imagery-empty')).toBeVisible();
 });
+
+test('MZIGO Passport shows factory Atlas context without inventing coordinates or shipping', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 1000 });
+  await page.route('**/api/atlas/assets/SP-MZIGO-26E/location', route => route.fulfill({ json: {
+    schemaVersion:1,assetId:'SP-MZIGO-26E',mode:'factory',freshness:'checkpoint',position:null,movement:null,
+    context:{vessel:null,voyage:null,carrier:null,flight:null,jobId:null,vehicleId:null,trailerId:null},
+    checkpoint:{label:'Shandong Kylin factory · shipping preparation',observedAt:'2026-09-15T00:00:00Z'},
+    source:{provider:'equipment-passport-record',url:'https://smashpro.app/equipment/sp-mzigo-26.html',confidence:0.95},
+    presentation:{profile:'factory',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','geofence']},
+    history:{available:true,observationCount:1,earliestObservationAt:'2026-09-15T00:00:00Z',latestObservationAt:'2026-09-15T00:00:00Z'},
+    simulated:false
+  }}));
+  await page.goto('/equipment/sp-mzigo-26.html');
+  const atlas=page.locator('.atlas-status');
+  await expect(atlas).toContainText('SmashPro Atlas');
+  await expect(atlas).toContainText('Factory context');
+  await expect(atlas).toContainText('Shandong Kylin factory · shipping preparation');
+  await expect(atlas).toContainText('No public coordinates are published');
+  await expect(page.locator('body')).toContainText('Shipping Preparation');
+  await expect(page.locator('body')).not.toContainText('Ocean departure confirmed');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
