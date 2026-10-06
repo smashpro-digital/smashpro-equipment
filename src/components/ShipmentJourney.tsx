@@ -2,6 +2,7 @@ import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from "
 import { eventAnchor, formatTime, positionStale, selectForwarderReportedVesselVoyage, stageText, type JourneyImage, type ShipmentResult } from "../domain/shipment";
 import "../styles/shipment-journey.css";
 import { VesselContext } from './VesselContext';
+import { atlasFreshnessLabel, atlasModeLabel } from "../domain/atlas";
 import { selectVerifiedCheckpointReference } from "../domain/ardhiCheckpoint";
 
 const ShipmentMap = lazy(() => import("./ShipmentMap"));
@@ -49,6 +50,15 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
       <div className="shipment-status-line" role="status"><span className={`shipment-badge is-${data?.stageVerification ?? "unavailable"}`}>{status === "cached" ? "Last known record" : data?.stageVerification === "confirmed" ? "Confirmed shipment record" : "Awaiting confirmation"}</span><strong>{stageText(result)}</strong><button type="button" onClick={refresh}>Refresh update</button></div>
       {status === "cached" && <p className="shipment-notice">Shipment update unavailable. Showing the last verified public record; this is not a live position. Imagery awaits a fresh approval check.</p>}
       {data?.vesselContext && <VesselContext data={data} />}
+      {data?.locationContext && <section className="atlas-status" aria-label="SmashPro Atlas location intelligence">
+        <div><p className="eyebrow">SmashPro Atlas</p><h3>{atlasModeLabel(data.locationContext.mode)} context</h3></div>
+        <div className="atlas-status-grid">
+          <p><span>Location state</span><strong>{atlasFreshnessLabel(data.locationContext.freshness)}</strong></p>
+          <p><span>Map profile</span><strong>{data.locationContext.presentation.preferredBasemap}</strong></p>
+          <p><span>History</span><strong>{data.locationContext.history.available ? `${data.locationContext.history.observationCount} location record${data.locationContext.history.observationCount === 1 ? "" : "s"}` : "Not available"}</strong></p>
+        </div>
+        <p className="shipment-small">Atlas selects the best approved location signal for this asset. Location intelligence does not prove cargo discharge, customs clearance, delivery, custody, commissioning, or job completion.</p>
+      </section>}
       {data?.pendingReferences && <section className={`shipment-pending ${data.vesselContext ? 'has-context' : ''}`} aria-labelledby="shipment-pending-title">
         <h3 id="shipment-pending-title">Pending references</h3>
         <p>Operator-supplied references awaiting verification. These do not confirm vessel identity, cargo loading or ocean departure.</p>
