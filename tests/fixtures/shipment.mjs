@@ -33,6 +33,17 @@ export function forwarderContextProjectionFixture(vesselContext) {
   fixture.vesselContext = vesselContext;
   fixture.currentPosition = null;
   fixture.positionState = 'unavailable';
+  fixture.locationContext = {
+    schemaVersion:1,assetId:'SP-ARDHI-26',mode:'ocean',freshness:'checkpoint',
+    position:{latitude:32,longitude:-81,precision:'whole-degree',observedAt:'2026-10-06T06:43:00Z'},
+    movement:null,
+    context:{vessel:'EVER MAX',voyage:'1374-016E',carrier:null,flight:null,jobId:null,vehicleId:null,trailerId:null},
+    checkpoint:{label:'Savannah anchorage',observedAt:'2026-10-06T06:43:00Z'},
+    source:{provider:'Synthetic Atlas fixture',url:'https://example.com/public-record',confidence:0.9},
+    presentation:{profile:'ocean',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','route']},
+    history:{available:true,observationCount:1,earliestObservationAt:'2026-10-06T06:43:00Z',latestObservationAt:'2026-10-06T06:43:00Z'},
+    simulated:false
+  };
   fixture.ports = [];
   fixture.route = { planned: [], completed: [], remaining: [], source: null, estimated: false };
   fixture.map = { ...fixture.map, trackSegments: [], originFacility: null, inlandDestination: null, routeState: 'unavailable' };
