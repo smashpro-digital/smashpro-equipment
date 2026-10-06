@@ -14,6 +14,9 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
   await expect(page.locator('.mini-passport')).toContainText('Ocean transit confirmed · 4 phases pending');
+  await expect(page.locator('.atlas-status')).toContainText('SmashPro Atlas');
+  await expect(page.locator('.atlas-status')).toContainText('Ocean context');
+  await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
   await expect(page.locator('.shipment-map-empty')).toHaveCount(0);
   await expect(page.locator('.shipment-map-summary')).toContainText('Verified vessel checkpoint');
   await expect(page.locator('.shipment-map-summary')).toContainText('Savannah anchorage · coarse reference point only, not live GPS');
@@ -28,6 +31,7 @@ for(const width of [1440,390]) test(`public context is distinct from cargo and p
  const fixture=shipmentFixture({unverified:true});fixture.vesselContext=JSON.parse(readFileSync('tests/fixtures/vessel-context.json','utf8'));
  fixture.pendingReferences={factoryModel:'YF380',vesselDisplayReference:'EVER MAX',voyageDisplayReference:'1374-016E',vesselIdentityVerification:'pending',voyageVerification:'pending',cargoAssociation:'unconfirmed',recordedAt:'2026-09-12T06:10:49.225Z',source:'operator-supplied reference'};
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,fixture,width);
+ await expect(page.locator('.atlas-status')).toContainText('Ocean context');await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
  await expect(page.locator('.journey-now')).toContainText('9935208');await expect(page.locator('.journey-now')).toContainText('563190500');await expect(page.locator('.journey-now')).toContainText('YF380');
  await expect(page.locator('.journey-truth')).toContainText('The voyage is forwarder-reported.');
  await expect(page.locator('.journey-vessel-summary')).toContainText('Forwarder-reported voyage 1374-016E');
