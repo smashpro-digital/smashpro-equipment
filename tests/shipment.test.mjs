@@ -5,7 +5,11 @@ import ts from 'typescript';
 import { forwarderContextProjectionFixture, shipmentFixture } from './fixtures/shipment.mjs';
 const contextCode = ts.transpileModule(readFileSync('src/domain/vesselContext.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const contextUrl = 'data:text/javascript;base64,' + Buffer.from(contextCode).toString('base64');
-const code = ts.transpileModule(readFileSync('src/domain/shipment.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText.replace("'./vesselContext'", JSON.stringify(contextUrl));
+const atlasCode = ts.transpileModule(readFileSync('src/domain/atlas.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const atlasUrl = 'data:text/javascript;base64,' + Buffer.from(atlasCode).toString('base64');
+const code = ts.transpileModule(readFileSync('src/domain/shipment.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+  .replace("'./vesselContext'", JSON.stringify(contextUrl))
+  .replace("'./atlas'", JSON.stringify(atlasUrl));
 const { parseShipment, loadShipment, cacheWire, readCache, CACHE_KEY, stageText, selectForwarderReportedVesselVoyage, shipmentLifecycleProgress, lifecycleProgressText, positionStale, safePublicUrl } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 const storage = () => { const rows = new Map(); return { getItem: key => rows.get(key) ?? null, setItem: (k, v) => rows.set(k, v), removeItem: k => rows.delete(k) }; };
 const response = d => async () => new Response(JSON.stringify(d), { status: 200 });

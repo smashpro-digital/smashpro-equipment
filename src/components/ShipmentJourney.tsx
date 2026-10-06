@@ -3,6 +3,7 @@ import { eventAnchor, formatTime, positionStale, selectForwarderReportedVesselVo
 import "../styles/shipment-journey.css";
 import { VesselContext } from './VesselContext';
 import { selectVerifiedCheckpointReference } from "../domain/ardhiCheckpoint";
+import { AtlasStatusPanel } from "./AtlasStatusPanel";
 
 const ShipmentMap = lazy(() => import("./ShipmentMap"));
 class MapBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -49,6 +50,7 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
       <div className="shipment-status-line" role="status"><span className={`shipment-badge is-${data?.stageVerification ?? "unavailable"}`}>{status === "cached" ? "Last known record" : data?.stageVerification === "confirmed" ? "Confirmed shipment record" : "Awaiting confirmation"}</span><strong>{stageText(result)}</strong><button type="button" onClick={refresh}>Refresh update</button></div>
       {status === "cached" && <p className="shipment-notice">Shipment update unavailable. Showing the last verified public record; this is not a live position. Imagery awaits a fresh approval check.</p>}
       {data?.vesselContext && <VesselContext data={data} />}
+      {data?.locationContext && <AtlasStatusPanel assetId={data.assetId} context={data.locationContext} />}
       {data?.pendingReferences && <section className={`shipment-pending ${data.vesselContext ? 'has-context' : ''}`} aria-labelledby="shipment-pending-title">
         <h3 id="shipment-pending-title">Pending references</h3>
         <p>Operator-supplied references awaiting verification. These do not confirm vessel identity, cargo loading or ocean departure.</p>

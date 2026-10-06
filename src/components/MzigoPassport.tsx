@@ -11,6 +11,7 @@ import { FleetLifecycleProgress } from "./FleetLifecycleProgress";
 import { mzigoRequests, mzigoLifecycle, mzigoCurrentStage, mzigoNextStage, mzigoStatusDetail } from "../data/mzigoPassport";
 import { mzigoFinalConfiguration } from "../data/mzigoPlatform";
 import { MzigoOemPlatform } from "./MzigoOemPlatform";
+import { AtlasStatusPanel } from "./AtlasStatusPanel";
 
 export function MzigoPassport({ item }: { item: Equipment }) {
   const authentic = item.gallery.filter(media => media.group);
@@ -31,6 +32,7 @@ export function MzigoPassport({ item }: { item: Equipment }) {
     <MzigoPassportHeader item={item} />
     <section className="section shell mzigo-purpose" id="overview"><div><p className="eyebrow">Move the Earth. Move the Load.</p><h2>Compact transport.<br />Electric purpose.</h2><p>Mzigo means load, cargo or freight. SP-MZIGO-26E is intended to move landscape materials, support property cleanup and stage loads alongside SmashPro's equipment fleet.</p></div><div id="projects"><h3>Configured around the load</h3><p>A four-wheel electric platform, remote controls and a hydraulic dump body keep this passport focused on material transport.</p><p>Quality inspection, SmashPro build approval and final payment are complete. Shipping preparation is current; export, transport and commissioning remain ahead. Rental availability has not been announced.</p></div></section>
     <div id="journey"><FleetLifecycleProgress stages={mzigoLifecycle} metrics={[{ id: "photos", label: "Factory photographs", value: authentic.filter(media => media.kind !== "video").length }, { id: "videos", label: "Factory videos", value: authentic.filter(media => media.kind === "video").length }]} currentStage={mzigoCurrentStage} nextStage={mzigoNextStage} eyebrow="Shipping Journey" title="Evidence advances the journey." description={mzigoStatusDetail} /></div>
+    <div className="shell"><AtlasStatusPanel assetId="SP-MZIGO-26E" /></div>
     <section className="section shell mzigo-customization" id="configuration"><div className="section-heading"><div><p className="eyebrow">Founders Edition</p><h2>Final Configuration.</h2></div><p>The as-built record separates photographed configuration from supplier-stated values that still require manufacturer engineering documentation.</p></div><dl className="mzigo-final-configuration">{mzigoFinalConfiguration.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd><strong>{fact.value}</strong><small>{fact.evidence}</small></dd></div>)}</dl>
       <div id="verification" className="mzigo-verification"><h3>Future options and manufacturer checks</h3><p>The completed September 14–15 configuration remains separate from the future option backlog.</p><dl>{mzigoRequests.map(request => <div key={request.title}><dt>{request.title}<small>{request.status}</small></dt><dd>{request.detail}</dd></div>)}</dl></div>
     </section>

@@ -18,7 +18,7 @@
     "src/components/MzigoBuildStory.tsx": "8f45f668c268ac9dbf76e17ef241cef13d97393258c13ab4fb0b11e354f90258",
     "src/components/MzigoMediaArchive.tsx": "cf236a0ec12edd82d90a20e421a4fc1f5509046ef4356bd291e4be1541e6afae",
     "src/components/MzigoOemPlatform.tsx": "a09b3a8baeea567bfcc5ec5a2ad27f216697ba13ad983072aa5611fa6d20bbcc",
-    "src/components/MzigoPassport.tsx": "1bfb37304f349c4654eccb52a4d84ba15873e13bfce8cd137a476f6f284a584d",
+    "src/components/MzigoPassport.tsx": "9cd1a04c255332d8b43698f658791f42dd4191d03697d66d1f3adc60579ca5c8",
     "src/components/MzigoPassportHeader.tsx": "2fd07d35464d25f979d697074b523011fa34f3e323df67c16759ff0d7e839ae6",
     "src/components/MzigoServiceRecord.tsx": "eaa99364413224619789faee9f454e47369c09195b54cde081dd1f0a8100c511"
   }

@@ -14,6 +14,9 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
   await expect(page.locator('.mini-passport')).toContainText('Ocean transit confirmed · 4 phases pending');
+  await expect(page.locator('.atlas-status')).toContainText('SmashPro Atlas');
+  await expect(page.locator('.atlas-status')).toContainText('Ocean context');
+  await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
   await expect(page.locator('.shipment-map-empty')).toHaveCount(0);
   await expect(page.locator('.shipment-map-summary')).toContainText('Verified vessel checkpoint');
   await expect(page.locator('.shipment-map-summary')).toContainText('Savannah anchorage · coarse reference point only, not live GPS');
@@ -28,6 +31,7 @@ for(const width of [1440,390]) test(`public context is distinct from cargo and p
  const fixture=shipmentFixture({unverified:true});fixture.vesselContext=JSON.parse(readFileSync('tests/fixtures/vessel-context.json','utf8'));
  fixture.pendingReferences={factoryModel:'YF380',vesselDisplayReference:'EVER MAX',voyageDisplayReference:'1374-016E',vesselIdentityVerification:'pending',voyageVerification:'pending',cargoAssociation:'unconfirmed',recordedAt:'2026-09-12T06:10:49.225Z',source:'operator-supplied reference'};
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,fixture,width);
+ await expect(page.locator('.atlas-status')).toContainText('Ocean context');await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
  await expect(page.locator('.journey-now')).toContainText('9935208');await expect(page.locator('.journey-now')).toContainText('563190500');await expect(page.locator('.journey-now')).toContainText('YF380');
  await expect(page.locator('.journey-truth')).toContainText('The voyage is forwarder-reported.');
  await expect(page.locator('.journey-vessel-summary')).toContainText('Forwarder-reported voyage 1374-016E');
@@ -170,4 +174,26 @@ test('invalid response and satellite failures cannot crash the passport', async 
   await page.route(endpoint, route => route.fulfill({ json: fixture })); await page.getByRole('button', { name: 'Refresh update' }).click();
   await expect(page.locator('.shipment-status-line')).toContainText('Departed Origin Port');
   await expect(page.locator('.shipment-imagery-empty')).toBeVisible();
+});
+
+test('MZIGO Passport shows factory Atlas context without inventing coordinates or shipping', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 1000 });
+  await page.route('**/api/atlas/assets/SP-MZIGO-26E/location', route => route.fulfill({ json: {
+    schemaVersion:1,assetId:'SP-MZIGO-26E',mode:'factory',freshness:'checkpoint',position:null,movement:null,
+    context:{vessel:null,voyage:null,carrier:null,flight:null,jobId:null,vehicleId:null,trailerId:null},
+    checkpoint:{label:'Shandong Kylin factory · shipping preparation',observedAt:'2026-09-15T00:00:00Z'},
+    source:{provider:'equipment-passport-record',url:'https://smashpro.app/equipment/sp-mzigo-26.html',confidence:0.95},
+    presentation:{profile:'factory',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','geofence']},
+    history:{available:true,observationCount:1,earliestObservationAt:'2026-09-15T00:00:00Z',latestObservationAt:'2026-09-15T00:00:00Z'},
+    simulated:false
+  }}));
+  await page.goto('/equipment/sp-mzigo-26.html');
+  const atlas=page.locator('.atlas-status');
+  await expect(atlas).toContainText('SmashPro Atlas');
+  await expect(atlas).toContainText('Factory context');
+  await expect(atlas).toContainText('Shandong Kylin factory · shipping preparation');
+  await expect(atlas).toContainText('No public coordinates are published');
+  await expect(page.locator('body')).toContainText('Shipping Preparation');
+  await expect(page.locator('body')).not.toContainText('Ocean departure confirmed');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
