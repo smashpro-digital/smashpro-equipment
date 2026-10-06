@@ -4,6 +4,17 @@ export function shipmentFixture({ stale = false, satellite = false, unverified =
   const source = { provider: 'Test carrier — synthetic fixture', url: 'https://example.com/public-record', observedAt: timestamp, confidence: 1, verification: 'provider' };
   const event = { id: 'fixture-departure', legId: 'fixture-leg', milestone: 'origin-departure', timestamp, source, summary: 'Departed Origin Port', eventType: 'carrier-update', eventState: 'confirmed', publicApproved: true };
   return {
+    locationContext: {
+      schemaVersion:1,assetId:'SP-ARDHI-26',mode:'ocean',freshness:unverified?'checkpoint':stale?'stale':'recent',
+      position:unverified?{latitude:32,longitude:-81,precision:'whole-degree',observedAt:'2026-10-06T06:43:00Z'}:{latitude:26,longitude:146,precision:'provider',observedAt:timestamp},
+      movement:unverified?null:{speed:16,speedUnit:'knots',heading:80,status:'under-way'},
+      context:{vessel:unverified?'EVER MAX':'Example vessel (fixture)',voyage:unverified?'1374-016E':'TEST-001',carrier:null,flight:null,jobId:null,vehicleId:null,trailerId:null},
+      checkpoint:unverified?{label:'Savannah anchorage',observedAt:'2026-10-06T06:43:00Z'}:null,
+      source:{provider:'Synthetic Atlas fixture',url:'https://example.com/public-record',confidence:0.9},
+      presentation:{profile:'ocean',preferredBasemap:'satellite',overlays:['position','verified-checkpoints','history','route']},
+      history:{available:true,observationCount:unverified?1:3,earliestObservationAt:unverified?'2026-10-06T06:43:00Z':timestamp,latestObservationAt:unverified?'2026-10-06T06:43:00Z':timestamp},
+      simulated:false
+    },
     schemaVersion: 2, assetId: 'SP-ARDHI-26', stageVerification: unverified ? 'unverified' : 'confirmed', lifecycleState: unverified ? 'awaiting-shipment' : 'ocean-transit', shipmentStatus: unverified ? 'Shipment stage unverified' : 'Departed Origin Port',
     vessel: unverified ? null : { name: 'Example vessel (fixture)', source }, voyage: unverified ? null : 'TEST-001', eta: null, etaState: 'unavailable', lastUpdated: unverified ? '' : timestamp, lastChecked: timestamp,
     currentPosition: unverified ? null : { latitude: 26, longitude: 146, timestamp, speedKnots: 16, course: 80, status: 'under-way', source }, positionState: unverified ? 'unavailable' : stale ? 'stale' : 'observed',
