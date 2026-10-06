@@ -14,10 +14,12 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
   await expect(page.locator('.mini-passport')).toContainText('Ocean transit confirmed · 4 phases pending');
-  await expect(page.locator('.shipment-map-empty')).toContainText('Awaiting a verified location');
-  await expect(page.locator('.shipment-map-summary')).toContainText('No public vessel-position observation is available');
-  await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved vessel-position observation available');
-  await expect(page.locator('.shipment-marker')).toHaveCount(0);
+  await expect(page.locator('.shipment-map-empty')).toHaveCount(0);
+  await expect(page.locator('.shipment-map-summary')).toContainText('Verified vessel checkpoint');
+  await expect(page.locator('.shipment-map-summary')).toContainText('Savannah anchorage · coarse reference point only, not live GPS');
+  await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved live vessel-position observation available');
+  await expect(page.locator('.shipment-marker.checkpoint')).toBeVisible();
+  await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);
   await expect(page.locator('main')).not.toContainText('Verified vessel');
   await expect(page.locator('main')).not.toContainText('satellite observations');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -31,7 +33,7 @@ for(const width of [1440,390]) test(`public context is distinct from cargo and p
  await expect(page.locator('.journey-vessel-summary')).toContainText('Forwarder-reported voyage 1374-016E');
  await expect(page.locator('.corridor-route')).toHaveCSS('stroke-dasharray','12px, 10px');
  await expect(page.locator('.corridor-vessel-marker')).toHaveCount(1);await expect(page.locator('.journey-corridor')).toContainText('Colón, Panama');await expect(page.locator('.journey-corridor')).toContainText('Current checkpoint: Savannah anchorage');await expect(page.locator('.journey-corridor')).toContainText('Savannah anchorage · vessel arrival observed');
- await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
+ await expect(page.locator('.shipment-marker.checkpoint')).toBeVisible();await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
  await expect(page.locator('.journey-observation')).toContainText('No timestamped AIS observation is approved');
  await page.locator('.journey-intelligence summary').focus();await page.keyboard.press('Enter');await expect(page.locator('.journey-intelligence')).toHaveAttribute('open','');
  const link=page.getByRole('link',{name:'Open vessel tracker ↗',exact:true}).first();await expect(link).toHaveAttribute('target','_blank');await link.focus();await expect(link).toBeFocused();
@@ -57,6 +59,8 @@ test('newer reviewed ARDHI voyage survives stale public context without promotin
  await expect(page.locator('.journey-corridor')).toContainText('Current checkpoint: Savannah anchorage');
  await expect(page.locator('.journey-corridor')).toContainText('Savannah anchorage · vessel arrival observed');
  await expect(page.locator('.shipment-status-line')).toContainText('Ocean departure awaiting confirmation');
+ await expect(page.locator('.shipment-map-summary')).toContainText('Verified vessel checkpoint');
+ await expect(page.locator('.shipment-marker.checkpoint')).toBeVisible();
  await expect(page.locator('.shipment-badge.is-confirmed')).toHaveCount(0);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
@@ -83,7 +87,7 @@ test('desktop API unavailable preserves archive and shows no fabricated route', 
   await open(page, null);
   await expect(page.locator('.shipment-status-line')).toContainText('Shipment update unavailable.');
   await expect(page.locator('.shipment-map-empty')).toContainText('Awaiting a verified location');
-  await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved vessel-position observation available');
+  await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved live vessel-position observation available');
   await expect(page.locator('.shipment-marker')).toHaveCount(0);
   await expect(page.locator('#history-factory-departure')).toBeAttached();
   await expect(page.locator('#history-export-crate')).toBeAttached();
