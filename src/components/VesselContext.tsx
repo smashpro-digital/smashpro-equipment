@@ -1,7 +1,6 @@
 import type { Shipment } from '../domain/shipment';
 import { formatTime, selectForwarderReportedVesselVoyage } from '../domain/shipment';
 import '../styles/vessel-context.css';
-import { ardhiVerifiedVoyage } from '../data/ardhiVerifiedVoyage';
 
 const factoryHero = '/equipment/images/sp-ardhi-26-completed-build-attachments.jpg';
 
@@ -12,7 +11,8 @@ export function VesselContext({ data }: { data: Shipment }) {
   const vessel = context.vessel;
   const forwarderFacts = selectForwarderReportedVesselVoyage(data);
   const observation = context.observation;
-  const corridorStages = [...ardhiVerifiedVoyage.stages];
+  const corridorStages = [...context.corridor.stages];
+  const reviewedAt = [...context.identitySources.map((source) => source.checkedAt), context.voyage.source.checkedAt].sort().at(-1) ?? data.lastUpdated;
   const verifiedStageIndexes = corridorStages
     .map((stage, index) => ({ index, stage: stage.toLowerCase() }))
     .filter(({ stage }) => /(observed|departed|completed|complete)/.test(stage) && !/(scheduled|pending)/.test(stage))
@@ -21,7 +21,7 @@ export function VesselContext({ data }: { data: Shipment }) {
   const currentCorridorStage = corridorStages[currentCorridorIndex] ?? corridorStages[0];
   const checkpointLabel = currentCorridorStage.split('·')[0]?.trim() || currentCorridorStage;
   const routePoints = [
-    [54,164],[205,126],[340,88],[455,110],[575,135],[685,114],[764,101],[790,98]
+    [54,164],[54,164],[205,126],[455,110],[575,135],[590,132],[685,114],[764,101]
   ] as const;
   const shipPoint = routePoints[Math.min(currentCorridorIndex, routePoints.length - 1)];
   const progressPercent = corridorStages.length > 1 ? Math.round((currentCorridorIndex / (corridorStages.length - 1)) * 100) : 0;
@@ -40,7 +40,7 @@ export function VesselContext({ data }: { data: Shipment }) {
         <p className="eyebrow">The road home · Chapter three</p>
         <p className="journey-kicker">Built in China. Bound for South Carolina.</p>
         <h3 id="monitored-vessel-title">ARDHI is coming home.</h3>
-        <p className="journey-lede">The machine is complete. The freight forwarder reports departure aboard {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference}. We are documenting the ocean leg while awaiting the container and bill-of-lading records.</p>
+        <p className="journey-lede">The machine is complete. The freight forwarder reports departure aboard {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference}. The vessel has now reached Savannah anchorage while cargo discharge, customs, release, and inland delivery remain unconfirmed.</p>
         <div className="journey-hero-status">
           <span aria-hidden="true" />
           <div><small>Current vessel checkpoint</small><strong>{checkpointLabel}</strong></div>
@@ -95,15 +95,15 @@ export function VesselContext({ data }: { data: Shipment }) {
     <details className="journey-intelligence">
       <summary><span><small>Source record</small><strong>Journey intelligence & verification</strong></span><em>Open details</em></summary>
       <div className="journey-intelligence-grid">
-        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>Supplier reconciled ARDHI references YFC260717B and BZHYF0822BMT1</li><li>Freight forwarder reports {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference} departed September 7</li><li>Latest verified vessel checkpoint: {checkpointLabel}</li><li>Estimated port arrival remains October 5 local time</li></ul></section>
-        <section><h4>What comes next</h4><ul><li>ISO container and bill-of-lading records</li><li>Independent carrier confirmation</li><li>Destination port and inland handoff</li><li>Receipt inspection and commissioning</li></ul></section>
+        <section><h4>What we know</h4><ul><li>Factory production and loading history documented</li><li>Supplier reconciled ARDHI references YFC260717B and BZHYF0822BMT1</li><li>Freight forwarder reports {forwarderFacts.vesselName} voyage {forwarderFacts.voyageReference} departed September 7</li><li>Latest verified vessel checkpoint: {checkpointLabel}</li><li>EVER MAX reached Savannah anchorage October 6 at 06:43 UTC</li></ul></section>
+        <section><h4>What comes next</h4><ul><li>Terminal berth / vessel discharge confirmation</li><li>SP-ARDHI-26 cargo discharge evidence</li><li>U.S. customs clearance and cargo release</li><li>Final-mile carrier, delivery, receipt inspection, and commissioning</li></ul></section>
       </div>
       {observation ? <div className="journey-observation"><strong>Latest approved observation</strong><p>{formatTime(observation.observedAt)} · {observation.destination ?? 'Destination not supplied'} · {observation.speedKnots === null ? 'Speed not supplied' : `${observation.speedKnots} kn`}</p><a href={observation.source.url} target="_blank" rel="noreferrer">Open observation source ↗</a></div> : <p className="journey-observation">No timestamped AIS observation is approved for reuse on this page yet.</p>}
       <div className="context-sources">
         {context.identitySources.map((source) => <p key={source.url}><a href={source.url} target="_blank" rel="noreferrer">Open vessel tracker ↗</a><small>{source.attribution} · checked {formatTime(source.checkedAt)}</small></p>)}
         <p><a href={context.voyage.source.url} target="_blank" rel="noreferrer">Open voyage schedule ↗</a><small>{context.voyage.source.attribution} · checked {formatTime(context.voyage.source.checkedAt)}</small></p>
       </div>
-      <p className="journey-boundary">Voyage visual last reviewed {formatTime(ardhiVerifiedVoyage.checkedAt)}. Vessel context does not prove cargo association. The projected corridor is not live GPS, sailed distance, cargo discharge, customs clearance, release, or a delivery promise. Last verified shipment update: {formatTime(data.lastUpdated)}.</p>
+      <p className="journey-boundary">Voyage visual last reviewed {formatTime(reviewedAt)}. Vessel context does not prove cargo association. The projected corridor is not live GPS, sailed distance, cargo discharge, customs clearance, release, or a delivery promise. Last verified shipment update: {formatTime(data.lastUpdated)}.</p>
     </details>
   </div>;
 }
