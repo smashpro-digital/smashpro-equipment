@@ -16,14 +16,14 @@
     {
       "url": "https://www.vesselfinder.com/vessels/details/9935208",
       "attribution": "VesselFinder · public vessel particulars",
-      "checkedAt": "2026-10-01T14:19:00Z",
+      "checkedAt": "2026-10-06T13:43:00Z",
       "classification": "publicly-corroborated",
       "publicVisible": true
     },
     {
       "url": "https://www.myshiptracking.com/vessels/ever-max-mmsi-563190500-imo-9935208",
       "attribution": "MyShipTracking · public vessel particulars",
-      "checkedAt": "2026-10-01T14:19:00Z",
+      "checkedAt": "2026-10-06T13:43:00Z",
       "classification": "publicly-corroborated",
       "publicVisible": true
     }
@@ -33,22 +33,23 @@
     "source": {
       "url": "https://atlas.flexport.com/vessel/imo%3A9935208/mmsi%3A563190500/name%3Aever-max",
       "attribution": "Flexport Atlas · public multi-carrier schedule context; schedule subject to change",
-      "checkedAt": "2026-10-01T14:19:00Z",
+      "checkedAt": "2026-10-06T13:43:00Z",
       "classification": "reported-schedule",
       "publicVisible": true
     }
   },
   "corridor": {
     "classification": "illustrative-projection",
-    "summary": "Public vessel data reviewed October 1 shows EVER MAX completed the trans-Pacific leg, departed the Panama Canal Pacific anchorage September 30 at 10:11 UTC, and arrived Colón, Panama at 23:42 UTC on the Atlantic/Caribbean side. Savannah remains later in the vessel rotation. This is vessel context only.",
+    "summary": "Public vessel data reviewed October 6 shows EVER MAX completed the trans-Pacific leg, departed the Panama Canal Pacific anchorage September 30 at 10:11 UTC, arrived Colón at 23:42 UTC, departed Colón October 1 at 23:04 UTC, and reached Savannah anchorage October 6 at 06:43 UTC. This is vessel context only.",
     "stages": [
       "Factory / export history",
       "Yantian departure · vessel observed",
       "Trans-Pacific leg · completed",
       "Panama Pacific anchorage · departed",
       "Colón, Panama · vessel arrival observed",
-      "Savannah call · vessel schedule context",
-      "Inland delivery · cargo status pending"
+      "Colón, Panama · vessel departed",
+      "Savannah anchorage · vessel arrival observed",
+      "Cargo discharge / customs / inland delivery · pending"
     ]
   },
   "observation": null
