@@ -2,13 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import type { GeoJsonObject } from "geojson";
 import type { Point, Shipment } from "../domain/shipment";
 import { eventAnchor, formatTime, positionStale, selectForwarderReportedVesselVoyage } from "../domain/shipment";
+import { selectVerifiedCheckpointReference } from "../domain/ardhiCheckpoint";
 import "leaflet/dist/leaflet.css";
 
 export default function ShipmentMap({ data }: { data: Shipment | null }) {
   const root = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
   const hasPosition = !!data?.currentPosition;
-  const hasLocations = hasPosition || !!data?.ports.length || !!data?.map.originFacility || !!data?.map.inlandDestination;
+  const checkpoint = selectVerifiedCheckpointReference(data);
+  const hasLocations = hasPosition || !!checkpoint || !!data?.ports.length || !!data?.map.originFacility || !!data?.map.inlandDestination;
   const vesselName = selectForwarderReportedVesselVoyage(data).vesselName;
   useEffect(() => {
     if (!root.current) return;
@@ -23,7 +25,7 @@ export default function ShipmentMap({ data }: { data: Shipment | null }) {
         const resize = new ResizeObserver(() => map.invalidateSize({ animate: false })); resize.observe(root.current);
         cleanup = () => { resize.disconnect(); map.remove(); };
         map.attributionControl.addAttribution('Reference map: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth · public domain</a>');
-        const points: Point[] = [...(data?.route.planned ?? []), ...(data?.ports.map(p => p.coordinates) ?? []), ...(data?.currentPosition ? [data.currentPosition] : []), ...(data?.map.originFacility ? [data.map.originFacility.coordinates] : []), ...(data?.map.inlandDestination ? [data.map.inlandDestination.coordinates] : [])];
+        const points: Point[] = [...(data?.route.planned ?? []), ...(data?.ports.map(p => p.coordinates) ?? []), ...(data?.currentPosition ? [data.currentPosition] : []), ...(checkpoint ? [checkpoint.referencePoint] : []), ...(data?.map.originFacility ? [data.map.originFacility.coordinates] : []), ...(data?.map.inlandDestination ? [data.map.inlandDestination.coordinates] : [])];
         const pacific = points.length > 1 && Math.max(...points.map(p => p.longitude)) - Math.min(...points.map(p => p.longitude)) > 180;
         const coord = (p: Point): [number, number] => [p.latitude, pacific && p.longitude < 0 ? p.longitude + 360 : p.longitude];
         const routes = L.layerGroup().addTo(map);
@@ -39,6 +41,7 @@ export default function ShipmentMap({ data }: { data: Shipment | null }) {
         if (data?.map.originFacility) marker(data.map.originFacility.coordinates, data.map.originFacility.label, "F", "facility");
         if (data?.map.inlandDestination) marker(data.map.inlandDestination.coordinates, `${data.map.inlandDestination.region} · coarse destination`, "R", "region");
         if (data?.currentPosition) marker(data.currentPosition, `${vesselName ?? "Vessel"} · ${positionStale(data) ? "last known" : "observed"} ${formatTime(data.currentPosition.timestamp)}`, "▲", "vessel", data.timeline.find(e => e.eventType === "ais-observation" && e.timestamp === data.currentPosition!.timestamp)?.id);
+        else if (checkpoint) marker(checkpoint.referencePoint, `${checkpoint.label} · verified checkpoint · not live GPS`, "●", "checkpoint");
         if (points.length) map.fitBounds(L.latLngBounds(points.map(coord)), { padding: [42, 42], maxZoom: 4, animate: false });
         try {
           const response = await fetch(`${import.meta.env.BASE_URL}maps/ne_110m_land.geojson`, { signal: controller.signal });
@@ -52,11 +55,11 @@ export default function ShipmentMap({ data }: { data: Shipment | null }) {
     }, { rootMargin: "160px" });
     observer.observe(root.current);
     return () => { disposed = true; controller.abort(); observer.disconnect(); cleanup(); };
-  }, [data, hasLocations, vesselName]);
+  }, [data, checkpoint, hasLocations, vesselName]);
   return <div className="shipment-map-frame">
     <div ref={root} className="shipment-map" role="region" aria-label="Shipment reference map" aria-describedby="shipment-map-summary" />
     {!hasLocations && <div className="shipment-map-empty"><span aria-hidden="true">◎</span><strong>Awaiting a verified location</strong><p>Ports and a vessel position will appear when public evidence is available.</p></div>}
     {failed && <p className="shipment-map-error">Reference geography unavailable. The text summary remains available.</p>}
-    <div className="shipment-map-legend"><span><i className="observed" />Observed vessel track</span><span><i className="projected" />Projected / reported route</span></div>
+    <div className="shipment-map-legend"><span><i className="observed" />Observed vessel track</span><span><i className="checkpoint" />Verified vessel checkpoint</span><span><i className="projected" />Projected / reported route</span></div>
   </div>;
 }

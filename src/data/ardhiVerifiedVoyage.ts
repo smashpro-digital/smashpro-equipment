@@ -15,6 +15,14 @@ export const ardhiVerifiedVoyage = {
   ],
   currentCheckpoint: "Savannah anchorage",
   nextCheckpoint: "Cargo discharge / customs / inland delivery",
+  checkpoint: {
+    label: "Savannah anchorage",
+    observedAt: "2026-10-06T06:43:00Z",
+    referencePoint: { latitude: 32, longitude: -81 },
+    precision: "whole-degree",
+    note: "Coarse Savannah-area reference point for verified-checkpoint visualization only; not AIS, GPS, or proof of cargo discharge.",
+    source: { label: "VesselFinder", url: "https://www.vesselfinder.com/vessels/details/9935208" },
+  },
   sources: [
     { label: "VesselFinder", url: "https://www.vesselfinder.com/vessels/details/9935208" },
     { label: "Flexport Atlas", url: "https://atlas.flexport.com/vessel/imo%3A9935208/mmsi%3A563190500/name%3Aever-max" },
