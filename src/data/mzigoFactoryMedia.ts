@@ -2,6 +2,8 @@ import type { EvidenceCategory, FactoryUpdate, GalleryImage, MediaPublicationCha
 
 import { mzigoLifecycle, mzigoFinalPayment, mzigoStatusLabel, mzigoStatusDetail } from "./mzigoPassport";
 
+import { mzigoExportMedia } from "./mzigoExportMedia";
+
 const archiveChannels: MediaPublicationChannel[] = ["passport", "equipment-gallery"];
 const launchChannels: MediaPublicationChannel[] = ["passport", "equipment-gallery", "marketing-library", "product-brochure", "social-media", "launch-timeline", "qr-pages"];
 
@@ -40,6 +42,7 @@ export const mzigoFactoryWalkaround: GalleryImage = {
 };
 
 export const mzigoFactoryGallery: GalleryImage[] = [
+  ...mzigoExportMedia,
   ...[mzigoFactoryPhotos.drive, mzigoFactoryPhotos.batteries].map(media => ({ ...media, group: "assembly" as const })),
   ...[mzigoFactoryPhotos.raised, mzigoFactoryPhotos.pump, mzigoFactoryPhotos.cylinder, mzigoFactoryPhotos.raisedLeft, mzigoFactoryPhotos.raisedRight].map(media => ({ ...media, group: "hydraulics" as const })),
   ...[mzigoFactoryPhotos.identity, mzigoFactoryPhotos.controls, mzigoFactoryPhotos.rear].map(media => ({ ...media, group: "branding" as const })),
@@ -47,7 +50,7 @@ export const mzigoFactoryGallery: GalleryImage[] = [
 ];
 
 export const mzigoFactoryUpdate: FactoryUpdate = {
-  date: mzigoFinalPayment.completedAt, heading: mzigoStatusLabel,
+  date: "2026-10-07", heading: mzigoStatusLabel,
   description: [
     "The September 14 and 15 factory evidence records the requested black wheels and battery boxes, installed tie-down anchors, retained SmashPro branding and QR identity, and post-revision access to the electric and hydraulic systems.",
     mzigoFinalPayment.summary, mzigoStatusDetail,
@@ -72,5 +75,5 @@ export const mzigoBuildChapters: MzigoBuildChapter[] = [
   { number: "03", date: "Sep 9, 2026", title: "Electric Drive Architecture", image: mzigoFactoryPhotos.drive, supporting: [], narrative: "A close-up records the drive hardware and cabling within the chassis.", verified: ["Motor/controller hardware visible.", "Electrical connections and chassis cabling photographed."], takeaway: "The controller and cabling reveal the hardware behind the electric drive." },
   { number: "04", date: "Sep 9 and 14, 2026", title: "Hydraulic Dump System", image: mzigoFactoryPhotos.approvedRaised, supporting: [mzigoFactoryPhotos.raisedDriveOverview, mzigoFactoryPhotos.pump, mzigoFactoryPhotos.cylinder], narrative: "Raised-bed views connect the lift geometry to the hydraulic power unit and maintenance access.", verified: ["Hydraulic dump body photographed in raised position.", "Central lift cylinder and pump/reservoir assembly visible.", "Post-revision drive packaging and access arrangement documented."], takeaway: "The raised body connects the full-machine view to the pump, reservoir, cylinder and drive-system details." },
   { number: "05", date: "Sep 14, 2026", title: "Approved Revisions", image: mzigoFactoryPhotos.blackBoxes, supporting: [mzigoFactoryPhotos.blackWheelDrive, mzigoFactoryPhotos.tieDown], narrative: "Close-ups record the black battery boxes, black wheel finish and added tie-down hardware.", verified: ["Black battery boxes installed.", "Black wheel finish installed.", "Tie-down anchor hardware photographed."], takeaway: "The requested finish and securement changes are preserved as as-built evidence." },
-  { number: "06", date: "Sep 15, 2026", title: "Build-Approved Machine", image: mzigoFactoryPhotos.approvedProfile, supporting: [], narrative: "The latest profile records the Founders Edition after quality inspection and SmashPro build approval.", verified: ["Completed green body and black wheels photographed.", "SmashPro identity, fleet decal and QR panel remain installed.", "Build approval recorded in the supplied production status."], takeaway: "Factory production approval remains complete. The October 1 payment record advances the machine to shipping preparation." },
+  { number: "06", date: "Sep 15, 2026", title: "Build-Approved Machine", image: mzigoFactoryPhotos.approvedProfile, supporting: [], narrative: "The September 15 profile records the Founders Edition after quality inspection and SmashPro build approval.", verified: ["Completed green body and black wheels photographed.", "SmashPro identity, fleet decal and QR panel remain installed.", "Build approval recorded in the supplied production status."], takeaway: "Factory production approval remains complete. Final payment followed on October 1; the October export chapter continues this record." },
 ];

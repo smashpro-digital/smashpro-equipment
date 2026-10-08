@@ -143,6 +143,9 @@ test('generic videos render sanitized posters and exclude credential-bearing pre
 test('ARDHI renderer, CSS, deployment gates and index validator remain protected',()=>{
   const baseline=JSON.parse(readFileSync('tests/fixtures/passport/ardhi-protected.json'));
   for(const [path,hash] of Object.entries(baseline.files))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replaceAll('\r\n','\n')).digest('hex'),hash,path);
+  const equipmentSource=readFileSync('src/data/equipment.ts','utf8').replaceAll('\r\n','\n');
+  const ardhiBlock=equipmentSource.slice(equipmentSource.indexOf('slug: "sp-ardhi-26"'),equipmentSource.indexOf('slug: "sp-mzigo-26"'));
+  assert.equal(createHash('sha256').update(ardhiBlock).digest('hex'),baseline.equipmentBlockHash);
   const extracted=readFileSync('src/data/ardhiEvidenceHistory.ts','utf8');
   const block=extracted.slice(extracted.indexOf('type EvidenceHistoryEntry =')).trimEnd().replace('export const DRIVE_EVIDENCE_HISTORY:','const DRIVE_EVIDENCE_HISTORY:')+'\n';
   assert.equal(createHash('sha256').update(block.replaceAll('\r\n','\n')).digest('hex'),baseline.historyBlockHash);
@@ -158,7 +161,7 @@ test('MZIGO renderer, source evidence, status, shared styles and deployment stay
   assert.equal(p.build.renderer,'protected');
   assert.equal(p.asset.public_path,'/sp-mzigo-26.html');
   assert.equal(p.asset.status_label,item.statusLabel);
-  assert.equal(p.asset.current_lifecycle_stage,'shipping_preparation');
+  assert.equal(p.asset.current_lifecycle_stage,'export_staging');
   assert.equal(p.records.find(r=>r.id===p.asset.hero_media_id).url,item.heroImage);
   for(const m of item.gallery){
     const r=p.records.find(r=>r.id===m.id);assert.ok(r,m.id);
@@ -172,11 +175,12 @@ test('MZIGO renderer, source evidence, status, shared styles and deployment stay
     assert.equal(r.title,e.title);assert.equal(r.detail,e.detail);assert.equal(r.occurred_at,e.occurredAt);
   }
   for(const s of item.specifications){const r=p.records.find(r=>r.kind==='specification'&&r.title===s.label);assert.equal(r.value,s.value);assert.equal(r.evidence_state==='verified',s.confirmed);}
-  assert.equal(p.records.filter(r=>r.media_type==='video').length,2);
+  assert.equal(p.records.filter(r=>r.media_type==='video').length,4);
   assert.equal(p.records.find(r=>r.title==='Payload'&&r.kind==='specification').evidence_state,'review_pending');
   assert.equal(domain.lifecycleStageStatus(p,'factory_completion'),'complete');
   assert.equal(domain.lifecycleStageStatus(p,'final_payment'),'complete');
-  for(const stage of ['packing','shipped','ocean_freight','arrival','commissioning'])assert.equal(domain.lifecycleStageStatus(p,stage),'pending');
+  assert.equal(domain.lifecycleStageStatus(p,'packing'),'complete');
+  for(const stage of ['shipped','ocean_freight','arrival','commissioning'])assert.equal(domain.lifecycleStageStatus(p,stage),'pending');
   for(const value of ['K600','500 kg','Shandong Kylin','Black wheels','controller','2026-10-01'])assert.ok(JSON.stringify(p).includes(value),value);
   // Protected cards still use the identical legacy allowlist and hero.
   assert.equal(index.publicEquipmentIndexRow(item).hero_image,item.heroImage);

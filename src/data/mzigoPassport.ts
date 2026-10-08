@@ -1,6 +1,6 @@
 import type { FleetLifecycleStage } from "../components/FleetLifecycleProgress";
 
-export const mzigoObservedSpecLabels = new Set(["Fleet ID", "Manufacturer", "Machine type", "Drive configuration", "Operation", "Dump bed", "Factory finish"]);
+export const mzigoObservedSpecLabels = new Set(["Platform", "Manufacturer serial number", "Manufacturer plate rated load", "Vehicle weight", "Production year", "Fleet ID", "Manufacturer", "Machine type", "Drive configuration", "Operation", "Dump bed", "Factory finish"]);
 
 export const mzigoRequests = [
   { title: "Bolt-on fenders and mud guards", status: "Future wishlist", detail: "No fender or mud-guard installation is documented on the Founders Edition." },
@@ -20,13 +20,13 @@ export const mzigoFinalPayment = {
 export const mzigoLifecycle: FleetLifecycleStage[] = [
   { id: "build-approved", label: "Build Approved", status: "complete", progress: 100, href: "#history-mzigo-build-approved" },
   { id: "final-payment", label: "Final Payment", status: mzigoFinalPayment.status, progress: 100, href: "#history-mzigo-final-payment" },
-  { id: "shipping-preparation", label: "Shipping Preparation", status: "current", progress: 0, href: "#shipping-evidence" },
-  { id: "wooden-crate", label: "Wooden Crate", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
-  { id: "export-inspection", label: "Export Inspection", status: "pending", progress: 0, href: "#documents" },
-  { id: "factory-departure", label: "Factory Departure", status: "pending", progress: 0, href: "#shipping-evidence" },
+  { id: "shipping-preparation", label: "Packing Preparation", status: "complete", progress: 100, href: "#mzigo-archive-export-journey" },
+  { id: "wooden-crate", label: "Wooden Crate", status: "complete", progress: 100, href: "#history-mzigo-packing" },
+  { id: "port-arrival", label: "Qingdao Export Staging", status: "current", progress: 0, href: "#history-mzigo-qingdao-staging" },
   { id: "freight-booking", label: "Freight Booked", status: "pending", progress: 0, href: "#shipping-evidence" },
+  { id: "export-inspection", label: "Export Inspection", status: "pending", progress: 0, href: "#documents" },
+  { id: "factory-departure", label: "Factory Handoff Record", status: "pending", progress: 0, href: "#shipping-evidence" },
   { id: "container-loading", label: "Container Loading", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
-  { id: "port-arrival", label: "Export / Port", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
   { id: "vessel-assignment", label: "Vessel Assignment", status: "pending", progress: 0, href: "#shipping-evidence" },
   { id: "ocean-departure", label: "Ocean Departure", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
   { id: "ocean-tracking", label: "Ocean Transit", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
@@ -41,4 +41,4 @@ const currentIndex = mzigoLifecycle.findIndex(stage => stage.status === "current
 export const mzigoCurrentStage = mzigoLifecycle[currentIndex].label;
 export const mzigoNextStage = mzigoLifecycle[currentIndex + 1].label;
 export const mzigoStatusLabel = `Paid in full · ${mzigoCurrentStage.toLowerCase()}`;
-export const mzigoStatusDetail = "The completed machine is entering shipping preparation. Final tie-down hardware installation/evidence, final shipping-preparation inspection, crating and crate completion, freight booking and tracking identifiers, factory departure, export and ocean-shipment evidence remain pending. It has not shipped. Rental availability has not been announced.";
+export const mzigoStatusDetail = "Paid in full. October 6 photographs document accessories, export-skid preparation and a completed wooden crate. On October 7 the supplier reported the machine at a warehouse at Qingdao Port. Awaiting freight booking / sailing evidence; no container, B/L, vessel, departure date or ETA is confirmed. It has not been verified as shipped by sea, received or commissioned. Rental availability has not been announced.";

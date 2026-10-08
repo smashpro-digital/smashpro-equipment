@@ -17,6 +17,6 @@ export function MzigoBuildStory() {
       <div className="mzigo-evidence-context"><div><strong>Verified in the media</strong><ul>{chapter.verified.map(fact => <li key={fact}>{fact}</li>)}</ul></div><div><strong>Operational meaning</strong><p>{chapter.takeaway}</p><small>Visual evidence documents configuration; it does not establish engineering ratings, inspection approval or readiness for service.</small></div></div>
       </PassportEvidenceRecord>
     </article>)}</div>
-    <footer className="mzigo-build-story__next"><p className="eyebrow">The next chapter</p><h3>Paid in full. Shipping preparation is current.</h3><p>{mzigoStatusDetail}</p></footer>
+    <footer className="mzigo-build-story__next"><p className="eyebrow">The next chapter</p><h3>Paid in full. Qingdao export staging.</h3><p>{mzigoStatusDetail}</p><a href="#export-evidence">Continue to October packing and identity evidence →</a></footer>
   </section>;
 }
