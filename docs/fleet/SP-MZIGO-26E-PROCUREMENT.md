@@ -29,13 +29,16 @@ Not documented
 
 | Field | Documented specification |
 | --- | --- |
-| Platform model | K600 — documented in SmashPro passport records; pending manufacturer specification sheet |
-| Payload capacity | 500 kg (1,102 lb) |
+| Platform model | K600 — physical KYLIN plate photographed October 6, 2026; full specification sheet still pending |
+| Earlier supplier payload | 500 kg / approximately 1,100 lb; historical statement retained |
+| Physical plate rated load | 750 kg; photographed October 6, 2026; difference unexplained |
+| Manufacturer serial | QLUP202609010001; photographed plate |
+| Plate vehicle weight / production year | 320 kg / 2026 |
 | Drive | 4WD Electric |
 | Operation | Remote controlled |
 | Dump bed | Hydraulic electric dump |
 
-The **K600** platform designation is recorded from SmashPro's own equipment passport documentation. It is not yet corroborated by a signed proforma invoice or manufacturer specification sheet and must remain marked pending until one is received.
+The **K600** platform designation is now corroborated by the physical manufacturer plate. The plate is the strongest physical-unit evidence currently available; the full manufacturer specification sheet and signed proforma remain missing. Earlier 500 kg wording is preserved without inventing a reason for the 750 kg plate rating.
 
 ## 4. Observed Production Changes
 
@@ -80,7 +83,7 @@ The October 1 final machine installment is USD 855.00. The separate Alibaba proc
 
 ## 9. Payment Terms
 
-Deposit paid, confirmed by the SmashPro Equipment Passport build status; its amount and date remain undocumented. Final payment completed October 1, 2026 and closes the remaining machine balance. The machine is paid in full and entering shipping preparation.
+Deposit paid, confirmed by the SmashPro Equipment Passport build status; its amount and date remain undocumented. Final payment completed October 1, 2026 and closes the remaining machine balance. The machine is paid in full. The October 6–7 evidence now documents packing/crating and supplier-reported Qingdao warehouse staging; freight booking and sailing remain unconfirmed.
 
 ### Payment history (append-only)
 
@@ -128,10 +131,10 @@ Not documented. Banking instructions must be independently verified with the ven
 | Shipping preparation | Current | Payment complete; no shipping completion inferred |
 | Final tie-down hardware installation/evidence | Pending | Earlier factory anchor detail does not close final shipping verification |
 | Final shipping-preparation inspection | Pending | Not documented |
-| Crate completion | Pending | Not documented |
+| Crate completion | Photographed October 6 | Completed-crate original private because of visible contact label |
 | Factory departure / freight booking | Pending | Not documented |
-| Export crating | Pending | Not documented |
-| Port delivery | Pending | Not documented |
+| Export crating | Photographed October 6 | Skid, crate assembly and accessory loadout |
+| Qingdao warehouse staging | Supplier-reported October 7 | User-relayed supplier statement; not sea departure or terminal clearance |
 | Vessel booking / ocean departure | Pending | Not documented |
 | Ocean freight | Pending | Not documented |
 | U.S. delivery | Pending | Not documented |
@@ -141,11 +144,11 @@ Not documented. Banking instructions must be independently verified with the ven
 | Document or identifier | Status | Value / reference |
 | --- | --- | --- |
 | Proforma invoice | Pending | To be added |
-| Manufacturer specification sheet (K600 confirmation) | Pending | To be added |
+| Full manufacturer specification sheet | Pending | To be added |
 | Shipping documents | Pending | To be added |
 | Bill of lading | Pending | To be added |
 | Container number | Pending | To be added |
-| Serial number | Pending | To be added |
+| Serial number | Photographed | QLUP202609010001 on physical manufacturer plate |
 | Motor serial numbers | Pending | To be added |
 | Battery specification sheet | Pending | To be added |
 | Factory QC report | Pending | To be added |
@@ -159,9 +162,11 @@ When a record is received, preserve the original file, record its date and sourc
 
 This document is the procurement source of truth for **SP-MZIGO-26E** until superseded by official factory documentation.
 
-Any specification recorded here that is not yet confirmed by a signed proforma invoice or manufacturer specification sheet — most notably the K600 platform designation — must remain marked pending until official documentation is received. When official documentation is received:
+Specifications not established by the physical unit plate or official manufacturer documentation remain pending. Plate identity and rating are not field-validation results. When official documentation is received:
 
 1. Preserve the prior documented value and the superseding document reference.
 2. Record the effective date and the person who verified the change.
 3. Update the applicable specification only after verification.
 4. Keep unconfirmed observations clearly separated from documented specifications.
+
+October evidence provenance: [manifest](evidence/sp-mzigo-26e-export-20261007.json) and [Passport evidence update](SP-MZIGO-26E-PASSPORT.md#october-67-2026-identity-and-export-evidence). Payment amounts, fees and historical evidence references are unchanged by this documentary update.

@@ -1,6 +1,10 @@
 # MZIGO historical media archive
 
-## Problem and result
+## September archive baseline
+
+This section preserves the September implementation history. The October update below extends the archive to 40 public records and fills Export Journey. The current hero is the separately labeled promotional poster.
+
+### Problem and result
 
 The generic lower gallery read only the August assembly entries in `equipment.gallery`, so it showed empty branding, hydraulics and completed-machine groups despite the September files being present in `mzigoFactoryMedia.ts`.
 
@@ -78,3 +82,86 @@ No application references use the raw import names. Existing curated media URLs,
 - Existing August media IDs remain valid. Build/timeline hash links select the correct chapter, clear an active search and focus the target record.
 - The media validator compares source/build bytes for all 25 factory files: 22 photos, two videos and the assembly-video poster. Concept art is not included in the authentic record count.
 - Tests cover completeness, uniqueness, chronology, search, deep-link resolution, initial archive markup and preserved identity/status. Browser interaction and mobile visual acceptance still require a connected browser; none was available during implementation.
+
+## October 6–7, 2026 export evidence
+
+Extends the September baseline without replacing its records. The archive now has 40 authentic public records: 36 images and four videos; 41 physical public factory files include the existing assembly-video poster. The October batch has 17 unique SHA-256 hashes: 14 public photographs, two public videos and one private crate photograph. No duplicates were removed. Similar charger/skid views are distinct photographs.
+
+Photographs bear October 6 timestamps; they were received October 7. Video filenames use the receipt date, with capture date explicitly unknown. Original bytes are preserved. New records are allowlisted only for Passport and Equipment Gallery; existing marketing allowlists are unchanged. Packing is factory/export evidence, never field-validation or sailing evidence.
+
+| Original source | Semantic filename | Visible evidence / handling |
+| --- | --- | --- |
+| `IMG-20261007-WA0000.jpg` | `sp-mzigo-26e-manufacturer-nameplate-2026-10-06.jpg` | KYLIN K600 manufacturer plate: serial QLUP202609010001, load 750 kg, vehicle weight 320 kg, production year 2026 |
+| `IMG-20261007-WA0001.jpg` | `sp-mzigo-26e-charger-us-style-plugs-2026-10-06.jpg` | Battery charger and two cords with U.S.-style three-prong plugs; electrical ratings and certification are not established by plug shape |
+| `IMG-20261007-WA0002.jpg` | `sp-mzigo-26e-charger-plug-detail-2026-10-06.jpg` | Alternate close view of the battery charger and plug prongs; not a duplicate photograph |
+| `IMG-20261007-WA0003.jpg` | `sp-mzigo-26e-toolkit-maintenance-qr-2026-10-06.jpg` | Open tool case with a metal joint/shaft component, labeled bottle and rolled QR material; exact component and bottle contents need confirmation |
+| `IMG-20261007-WA0004.jpg` | `sp-mzigo-26e-product-certificate-2026-10-06.jpg` | Kylin product certificate photographed in the tool case; document presence is not independent certification |
+| `IMG-20261007-WA0005.jpg` | `sp-mzigo-26e-hotrc-controller-instructions-2026-10-06.jpg` | Printed HotRC controller diagram with labeled switches and joysticks, alongside QR material |
+| `IMG-20261007-WA0006.jpg` | `sp-mzigo-26e-controller-batteries-documentation-2026-10-06.jpg` | Loose cylindrical batteries with printed controller instructions, product certificate and QR material |
+| `IMG-20261007-WA0007.jpg` | `sp-mzigo-26e-hotrc-remote-controller-2026-10-06.jpg` | HotRC handheld remote controller placed in the tool case above the printed instructions |
+| `IMG-20261007-WA0008.jpg` | `sp-mzigo-26e-export-skid-side-quarter-2026-10-06.jpg` | SP-MZIGO-26E on a wooden export skid while a crate wall is positioned behind it |
+| `IMG-20261007-WA0009.jpg` | `sp-mzigo-26e-export-skid-control-panel-quarter-2026-10-06.jpg` | Control-panel quarter view of the branded machine on the export skid with wheel blocking visible |
+| `IMG-20261007-WA0010.jpg` | `sp-mzigo-26e-export-skid-rear-quarter-2026-10-06.jpg` | Rear branding view on the export skid; tool case and boxed accessories are visible in the dump bed |
+| `IMG-20261007-WA0011.jpg` | `sp-mzigo-26e-export-skid-side-profile-2026-10-06.jpg` | Side profile of the green machine and black wheels on the wooden export skid |
+| `IMG-20261007-WA0012.jpg` | `sp-mzigo-26e-wood-crate-packing-in-progress-2026-10-06.jpg` | Crate side panels surround the machine; spare wheel, tool case and boxes are loaded in the dump bed |
+| `IMG-20261007-WA0013.jpg` | `sp-mzigo-26e-qc-pass-spare-wheel-loadout-2026-10-06.jpg` | QC PASS sticker on the bed beside a spare wheel/tire, yellow tool case and two closed boxes; no functional test result inferred |
+| `IMG-20261007-WA0014.jpg` | `sp-mzigo-26e-export-crate-complete-2026-10-06.jpg` | Completed closed wooden crate with handling marks; private warehouse address and contact label visible **Private original; excluded from public source/build.** |
+| `VID-20261007-WA0015.mp4` | `sp-mzigo-26e-export-skid-loading-video-2026-10-07.mp4` | Short factory clip shows the machine moving onto the wooden export skid; not a rated-load or field test |
+| `VID-20261007-WA0016.mp4` | `sp-mzigo-26e-export-skid-positioning-video-2026-10-07.mp4` | Short factory clip shows workers positioning the machine on the export skid; not commissioning |
+
+Full hashes, sizes, date bases and dimensions: [October provenance manifest](fleet/evidence/sp-mzigo-26e-export-20261007.json). The completed-crate original is preserved under the ignored local evidence directory; only its sanitized description and hash are committed. It must not be moved into public media without a separately reviewed privacy-safe derivative.
+
+The supplier statement relayed with this batch supports Qingdao warehouse staging only. No container, vessel, B/L, departure, ETA, customs release or delivery is established. The physical plate's 750 kg load is recorded alongside the earlier 500 kg statement without inventing a reason for the difference.
+
+### October branch validation
+
+Reference: branch base `0e7c51a`. Candidate retains the protected MZIGO renderer. No shared Passport component, ARDHI source block, 27E catalog source, stylesheet or deployment workflow changed. Protected hash fixtures were refreshed only for the authorized MZIGO changes; an additional ARDHI block hash preserves the base record.
+
+- `npm ci`: passed (lockfile unchanged; npm reported two existing high-severity dependency advisories).
+- `npm run validate`: passed — TypeScript, all **117 tests**, production build, five-record public index, 41 original factory media files, public projection/artifact privacy checks.
+- All **32 protected deployment outputs** present.
+- `git diff --check`: passed.
+- Browser captures at **320, 390, 768 and 1440 px**: ARDHI, MZIGO and 27E load without image failures, horizontal overflow or console/page errors under controlled external-service responses. MZIGO checks cover 14 unique export photos, two playable videos, nameplate lightbox/Escape, serial search, certificate deep link and truthful lifecycle/plate text.
+
+| Protected page | Width | Changed pixels (%) |
+| --- | ---: | ---: |
+| ardhi | 320 | 0.00000 |
+| ardhi | 390 | 0.00002 |
+| ardhi | 768 | 0.01222 |
+| ardhi | 1440 | 0.00468 |
+| 27e | 320 | 0.00000 |
+| 27e | 390 | 0.00000 |
+| 27e | 768 | 0.00000 |
+| 27e | 1440 | 0.00000 |
+
+ARDHI captures explicitly wait for video frame readiness. Remaining differences are native video-control rendering; source content and layout are unchanged. All protected comparisons retain the same dimensions and pass the existing 1% pixel-difference threshold. Screenshots and raw comparison results are retained locally in `local-notes/mzigo-export-20261007/`; the reproducible capture command is `node scripts/capture-mzigo-export.mjs http://127.0.0.1:4186/equipment after`.
+
+External-service boundary: reference and candidate use identical controlled unavailable document/shipment responses. These checks verify the source rendering and fallback behavior, not availability of the live document service. This branch changes no service integration. No merge or deployment was performed.
+
+### Changed files
+
+The 16 public media paths are listed in the October mapping above. Other changed paths:
+
+- `docs/fleet/SP-MZIGO-26E-PASSPORT.md`
+- `docs/fleet/SP-MZIGO-26E-PROCUREMENT.md`
+- `docs/fleet/evidence/sp-mzigo-26e-export-20261007.json`
+- `docs/mzigo-media-archive.md`
+- `scripts/capture-mzigo-export.mjs`
+- `scripts/validate-mzigo-media.mjs`
+- `src/components/MzigoBuildStory.tsx`
+- `src/components/MzigoExportEvidence.tsx`
+- `src/components/MzigoOemPlatform.tsx`
+- `src/components/MzigoPassport.tsx`
+- `src/components/MzigoPassportHeader.tsx`
+- `src/data/equipment.ts`
+- `src/data/mzigoCanonicalPassport.ts`
+- `src/data/mzigoExportMedia.ts`
+- `src/data/mzigoFactoryMedia.ts`
+- `src/data/mzigoPassport.ts`
+- `src/data/mzigoPlatform.ts`
+- `src/domain/mzigoArchive.ts`
+- `tests/fixtures/passport/ardhi-protected.json`
+- `tests/fixtures/passport/mzigo-protected.json`
+- `tests/mzigo-factory-media.test.mjs`
+- `tests/passport-automation.test.mjs`
+- `tests/routes.test.mjs`

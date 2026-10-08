@@ -13,9 +13,11 @@
     "src/app/manufacturerProfileMount.tsx": "b19cc92bdc39917093da4becaf7763b21dcdb74f8d84f21bde860ecc46a41821",
     "src/app/negotiationEvidenceMedia.ts": "98be69995801689cdcc93cf5587e55bce2233f8432a1ee5d34447a78c2129829",
     "src/domain/calendarMetrics.ts": "ca79dea318947e4655c1054197c5c28d641e3bd4112b3e66650c376d7d0afac1",
-    "src/data/equipment.ts": "e67d92bcea4b6b61cc463afa615c173e0fb396ca94f38a4a0d259c3e7c8a6ed0",
+    "src/data/equipment.ts": "223f8507147fdea920998551348a2b68d99bc6fb991694852b17e9fa8e598d11",
     "src/pages/EquipmentDetailPage.tsx": "93e28fc8f21032656e549621d87acab6e7558b7550f8f8b97e59ccb4cc581a58",
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
     "src/pages/ArdhiPassportPage.tsx": "c5ae30aa7fbee07b912e8654d3c176059ca3496da4442bb7410d11e1c0e327c6"
-  }
+  },
+  "review": "October 7 evidence update on 0e7c51a: only authorized MZIGO source changes refreshed. Protected mature renderers, shared components/styles and deploy gates retained. ARDHI equipment block unchanged from base; responsive captures compare that base.",
+  "equipmentBlockHash": "e828d09d679ca8f55c430759c1dd71398612e85aa77366e201fd1ce115f4fb91"
 }

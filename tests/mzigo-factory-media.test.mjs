@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -69,22 +69,22 @@ test('six build records link to canonical archive media without duplicate player
   }
 });
 
-test('archive has one canonical home for all 24 authentic records, including both videos', () => {
+test('archive has one canonical home for all 40 authentic records, including four videos', () => {
   const records = mzigoArchiveChapters.flatMap(chapter => mzigoArchiveSelection(mzigo.gallery, chapter.id));
-  assert.equal(records.length, 24);
+  assert.equal(records.length, 40);
   assert.equal(new Set(records.map(media => media.src)).size, records.length);
   assert.equal(new Set(records.map(mzigoMediaAnchor)).size, records.length);
-  assert.equal(records.filter(media => media.kind === 'video').length, 2);
+  assert.equal(records.filter(media => media.kind === 'video').length, 4);
   assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build').length, 10);
   assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine').length, 14);
   for (const media of [...Object.values(mzigoFactoryPhotos), mzigoFactoryWalkaround]) assert.equal(records.filter(record => record.src === media.src).length, 1);
   for (const media of records) {
     assert.ok(existsSync(media.src.replace('/equipment/', '')));
-    assert.match(media.capturedAt, /^2026-(08-31|09-(?:09|14|15))$/);
+    assert.match(media.capturedAt, /^2026-(08-31|09-(?:09|14|15)|10-(?:06|07))$/);
     if (media.kind === 'video') assert.ok(existsSync(media.poster.replace('/equipment/', '')));
   }
   assert.ok(!records.some(media => /hero/.test(media.src)), 'Concept artwork is separate from factory evidence');
-  for (const id of ['export-journey', 'delivery', 'operation', 'maintenance']) assert.equal(mzigoArchiveSelection(mzigo.gallery, id).length, 0);
+  for (const id of ['delivery', 'operation', 'maintenance']) assert.equal(mzigoArchiveSelection(mzigo.gallery, id).length, 0);
   assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine', '', 'qc').length, 1);
   assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine', '', 'shipping').length, 0);
 });
@@ -126,19 +126,19 @@ test('paid-in-full lifecycle has one current stage and does not advance shipping
   assert.equal(mzigo.identity.factoryModel, 'K600');
   assert.equal(mzigo.identity.operatingHours, 0);
   assert.equal(mzigoFinalPayment.status, 'complete');
-  assert.equal(mzigo.statusLabel, 'Paid in full · shipping preparation');
+  assert.equal(mzigo.statusLabel, 'Paid in full · qingdao export staging');
   assert.equal(mzigo.statusLabel, mzigoStatusLabel);
   assert.equal(mzigo.factoryUpdate.heading, mzigoStatusLabel);
   assert.ok(mzigo.overview.startsWith(mzigoStatusLabel), "Client metadata must retain the canonical payment status");
-  assert.equal(mzigo.factoryUpdate.date, '2026-10-01');
-  assert.equal(mzigoCurrentStage, 'Shipping Preparation');
-  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'complete').map(s => s.id), ['build-approved', 'final-payment']);
-  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'current').map(s => s.id), ['shipping-preparation']);
-  assert.ok(mzigoLifecycle.slice(3).every(s => s.status === 'pending' && s.progress === 0));
+  assert.equal(mzigo.factoryUpdate.date, '2026-10-07');
+  assert.equal(mzigoCurrentStage, 'Qingdao Export Staging');
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'complete').map(s => s.id), ['build-approved', 'final-payment', 'shipping-preparation', 'wooden-crate']);
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'current').map(s => s.id), ['port-arrival']);
+  assert.ok(mzigoLifecycle.slice(5).every(s => s.status === 'pending' && s.progress === 0));
   assert.ok(mzigoLifecycle.filter(s => s.status !== 'complete').every(s => s.progress === 0));
   assert.deepEqual(mzigo.factoryUpdate.timeline.slice(6), mzigoLifecycle.map(s => ({label:s.label,status:s.status === 'complete' ? 'completed' : s.status === 'current' ? 'current' : 'upcoming'})));
   assert.equal(mzigoShippingEvidenceSlots.find(s => s.id === 'final-payment').status, 'Complete');
-  assert.ok(mzigoShippingEvidenceSlots.filter(s => s.id !== 'final-payment').every(s => s.status === 'Pending'));
+  assert.ok(mzigoShippingEvidenceSlots.filter(s => !['final-payment','packing-crating','port-milestones'].includes(s.id)).every(s => s.status === 'Pending'));
   for (const id of ['commercial-invoice','packing-crating','factory-departure','freight-booking','carrier-container','port-milestones','vessel-ocean','customs-delivery','commissioning','final-tie-down','shipping-inspection']) assert.ok(mzigoShippingEvidenceSlots.some(s => s.id === id));
   assert.ok(mzigo.factoryUpdate.images.every(m => /2026-09-(14|15)/.test(m.src)));
 });
@@ -152,7 +152,7 @@ test('complete payment cannot coexist with stale payment copy in rendered or exp
     assert.doesNotMatch(text, /I020261001784090010205|880\.57|855\.00|25\.57/);
   }
   assert.match(html, /Paid in full/);
-  assert.match(html, /Current stage Shipping Preparation/);
+  assert.match(html, /Current stage Qingdao Export Staging/);
   assert.match(html, /is-complete[^]*?Final Payment/);
   assert.equal(mzigo.timeline.filter(e => e.id === 'mzigo-final-payment').length, 1);
   assert.equal(mzigo.timeline.find(e => e.id === 'mzigo-final-payment').occurredAt, '2026-10-01');
@@ -293,17 +293,16 @@ test('platform presentation includes engineering, collaboration, media, systems 
 });
 
 test('final configuration distinguishes photographed facts from supplier-stated payload', () => {
-  assert.equal(mzigoFinalConfiguration.length, 13);
-  assert.deepEqual(mzigoFinalConfiguration.find(fact => fact.label === 'Payload'), {
-    label: 'Payload', value: '1,100 lb stated payload', evidence: 'Supplier-stated; manufacturer engineering confirmation pending',
-  });
+  assert.equal(mzigoFinalConfiguration.length, 14);
+  assert.match(mzigoFinalConfiguration.find(fact => fact.label === 'Manufacturer plate rated load').value, /750 kg/);
+  assert.match(mzigoFinalConfiguration.find(fact => fact.label === 'Earlier supplier payload').value, /500 kg/);
   assert.match(mzigoFinalConfiguration.find(fact => fact.label === 'Securement hardware').evidence, /no recovery rating claimed/i);
 });
 
-test('media categories and explicit channel allowlists preserve empty shipping evidence', () => {
+test('media categories and explicit channel allowlists preserve publication boundaries for shipping evidence', () => {
   assert.deepEqual(mzigoEvidenceCategories.map(category => category.label), ['Exterior','Interior','Hydraulics','Electrical','Controls','Branding','Factory Progress','QC','Shipping']);
   for (const category of mzigoEvidenceCategories.filter(category => category.id !== 'shipping')) assert.ok(mzigo.gallery.some(media => media.evidenceCategory === category.id), category.label);
-  assert.equal(mzigo.gallery.some(media => media.evidenceCategory === 'shipping'), false);
+  assert.equal(mzigo.gallery.some(media => media.evidenceCategory === 'shipping'), true);
   assert.equal(approvedMzigoMedia(mzigo.gallery, 'social-media').length, 4);
   assert.ok(approvedMzigoMedia(mzigo.gallery, 'qr-pages').some(media => media.id === 'sp-mzigo-26e-build-approved-left-profile-2026-09-15'));
   assert.ok(mzigo.gallery.filter(media => media.group && media.approvedChannels).every(media => media.approvedChannels.includes('passport') && media.approvedChannels.includes('equipment-gallery')));
@@ -328,8 +327,8 @@ test('new marketing concepts are preserved as held source files and excluded fro
 });
 
 test('manufacturer-unverified ratings remain recorded but are not marked confirmed', () => {
-  for (const label of ['Platform','Payload','Battery','Battery runtime','Maximum speed','Maximum climbing grade','Remote control range']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, false, label);
-  for (const label of ['Fleet ID','Manufacturer','Operation','Dump bed','Factory finish']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, true, label);
+  for (const label of ['Payload','Battery','Battery runtime','Maximum speed','Maximum climbing grade','Remote control range']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, false, label);
+  for (const label of ['Platform','Manufacturer serial number','Manufacturer plate rated load','Vehicle weight','Production year','Fleet ID','Manufacturer','Operation','Dump bed','Factory finish']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, true, label);
   const deposit = mzigo.timeline.find(event => event.id === 'mzigo-deposit');
   assert.equal(deposit.occurredAt, undefined);
   assert.doesNotMatch(deposit.detail, /\$\d/);
@@ -340,8 +339,37 @@ test('generated MZIGO record qualifies ratings while the shared ARDHI sticker re
   const render = (item, evidenceMode) => renderToStaticMarkup(React.createElement(WindowSticker, {item, evidenceMode, packages:[], scores:{documentation:0,maintenance:0}}));
   const html = render(mzigo, true);
   assert.match(html, /not an OEM certificate/);
-  assert.match(html, /Paid in full · shipping preparation/);
-  assert.match(html, /K600 - verification pending/);
+  assert.match(html, /Paid in full · qingdao export staging/);
+  assert.doesNotMatch(html, /K600 - verification pending/);
+  assert.match(html, /750 kg/);
   assert.doesNotMatch(html, /Maintenance Score|No package currently qualified|Estimated Fleet Value/);
   assert.match(render(equipment[0], false), /Factory Specifications/);
+});
+
+
+test('October provenance preserves original bytes and excludes private crate from public media', () => {
+  const manifest = JSON.parse(readFileSync('docs/fleet/evidence/sp-mzigo-26e-export-20261007.json','utf8'));
+  assert.equal(manifest.records.length, 17);
+  assert.equal(new Set(manifest.records.map(r => r.sha256)).size, 17);
+  const records = mzigoArchiveSelection(mzigo.gallery, 'export-journey');
+  assert.equal(records.length, 16);
+  for (const r of manifest.records) {
+    const media = records.find(m => m.src.endsWith(r.filename));
+    if (r.visibility === 'private') {
+      assert.equal(media, undefined);
+      assert.equal(existsSync('images/' + r.filename), false);
+      continue;
+    }
+    assert.ok(media, r.filename);
+    assert.equal(createHash('sha256').update(readFileSync('images/' + r.filename)).digest('hex'),r.sha256);
+    assert.deepEqual(media.approvedChannels, ['passport','equipment-gallery']);
+    assert.equal(media.capturedAt,r.date);
+    if (media.kind === 'video') assert.match(media.caption,/capture date unverified/);
+  }
+  assert.equal(mzigo.identity.serialNumberPublic,'QLUP202609010001');
+  assert.equal(mzigo.specifications.find(s => s.label === 'Manufacturer plate rated load').value,'750 kg');
+  assert.match(mzigo.specifications.find(s => s.label === 'Payload').value,/500 kg/);
+  const staging = mzigo.timeline.find(e => e.id === 'mzigo-qingdao-staging');
+  assert.match(staging.detail,/supplier-reported export staging/);
+  assert.match(staging.detail,/not independently geolocated/);
 });

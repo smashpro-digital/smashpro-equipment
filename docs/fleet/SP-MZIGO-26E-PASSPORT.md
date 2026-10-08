@@ -1,9 +1,9 @@
 # SP-MZIGO-26E Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**  
-> Version: 1.3<br>
-> Status: Paid in Full / Shipping Preparation<br>
-> Last Updated: 2026-10-01
+> Version: 1.4<br>
+> Status: Paid in Full / Qingdao Export Staging (supplier-reported)<br>
+> Last Updated: 2026-10-07
 
 ---
 
@@ -12,7 +12,11 @@
 | Field | Value |
 |--------|-------|
 | Fleet Name | **SP-MZIGO-26E** |
-| Factory Model | **K600** — documented in SmashPro passport records; pending manufacturer specification sheet |
+| Factory Model | **K600** — confirmed by the physical manufacturer plate photographed October 6, 2026 |
+| Manufacturer serial number | QLUP202609010001 |
+| Manufacturer plate rated load | 750 kg |
+| Plate vehicle weight | 320 kg |
+| Production year | 2026 |
 | Equipment Type | Remote-Controlled Electric Material Carrier |
 | Fleet Category | Material Handling & Transport |
 | Manufacturer | Shandong Kylin Heavy Industry Machinery Co., Ltd. |
@@ -34,7 +38,7 @@ It is designed to operate alongside SP-ARDHI-26, SmashPro Fleet's flagship compa
 
 # Factory Model
 
-Factory Model: **K600** — documented in SmashPro passport records; pending manufacturer specification sheet confirmation.
+Factory Model: **K600** — confirmed by the physical manufacturer plate photographed October 6, 2026.
 
 Fleet Identity: **SP-MZIGO-26E**
 
@@ -65,7 +69,7 @@ Custom configuration produced specifically for SmashPro.
 
 # September 9, 2026 Factory Update
 
-The latest factory evidence batch documents the machine substantially assembled in its final SmashPro configuration.
+The September 9 factory evidence batch documents the machine substantially assembled in its final SmashPro configuration.
 
 Visible evidence includes:
 
@@ -118,7 +122,7 @@ Representative verified files reviewed for this update:
 ## Website media mapping
 
 The public passport uses the original files in `images/`, served under
-`/equipment/images/`. No files are renamed or replaced with placeholders.
+`/equipment/images/`. Semantic filenames preserve the original bytes; mappings and hashes are retained in the evidence manifests.
 
 | Factory Build Journey chapter | Original factory media |
 |---|---|
@@ -129,14 +133,13 @@ The public passport uses the original files in `images/`, served under
 | 05 — Approved Revisions | `sp-mzigo-26e-black-battery-boxes-hydraulic-power-unit-2026-09-14.jpg`; `sp-mzigo-26e-black-wheel-drive-motor-2026-09-14.jpg`; `sp-mzigo-26e-tie-down-anchor-detail-2026-09-14.jpg` |
 | 06 — Build-Approved Machine | `sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg` |
 
-The September 15 build-approved profile is the Passport and public-index hero; the September 9 three-quarter
-photograph remains the walkaround poster. The earlier brand illustration remains in the explicitly allowlisted design history. August 31 assembly photographs and video
+The polished brand poster remains the Passport and public-index hero, explicitly separate from factory evidence. The September 15 build-approved profile remains in the archive; the September 9 three-quarter photograph remains the walkaround poster. The earlier brand illustration remains in the explicitly allowlisted design history. August 31 assembly photographs and video
 remain in Media History. The Factory Build Journey renders through React using the existing
 `GalleryImage` and `FactoryUpdate` contracts. Video uses native inline controls,
 metadata preload and a direct-file fallback; it does not autoplay.
 
-Build validation verifies all 25 curated factory files reach `dist/images/` unchanged,
-including two binary MP4 files rather than Git LFS pointers. The supplied production
+Build validation verifies all 41 curated public factory files reach `dist/images/` unchanged,
+including four binary MP4 files rather than Git LFS pointers. The supplied production
 status records quality inspection passed; shipment remains upcoming. This update adds
 no new electrical ratings.
 
@@ -145,9 +148,10 @@ no new electrical ratings.
 | Field | Founders Edition record | Evidence status |
 | --- | --- | --- |
 | Fleet identity | SP-MZIGO-26E | Permanent Passport identity |
-| OEM platform | K600 | Recorded; manufacturer specification sheet pending |
+| OEM platform | K600 | Physical manufacturer plate photographed October 6 |
 | Machine type | Electric remote-controlled material carrier | Passport and factory record |
-| Payload | 1,100 lb stated payload | Supplier-stated; manufacturer engineering confirmation pending |
+| Earlier supplier payload | 500 kg / approximately 1,100 lb | Historical supplier statement; retained rather than overwritten |
+| Physical plate rated load | 750 kg | Unit-specific plate photographed October 6; reason for the difference is not documented |
 | Exterior | Green body, black chassis, black wheels and rims, black battery boxes | Photographed September 14–15 |
 | Material handling | Hydraulic dump body | Function photographed and filmed |
 | Controls | Remote control | Supplied controller photographed; range and operating limits pending documentation |
@@ -177,8 +181,9 @@ no new electrical ratings.
 
 | Item | Value |
 |------|-------|
-| Payload capacity | **500 kg (1,102 lb)** |
-| Vehicle weight | 320 kg (706 lb), including battery |
+| Earlier supplier payload | **500 kg (approximately 1,100 lb)**; historical statement |
+| Physical manufacturer plate rated load | **750 kg**; photographed October 6 |
+| Vehicle weight | 320 kg on the physical plate; plate does not define battery inclusion |
 | Maximum speed | 0–10 km/h (6.2 mph), adjustable |
 | Maximum climbing grade | 30° |
 
@@ -201,6 +206,8 @@ no new electrical ratings.
 Primary intended material roles include mulch, pine straw, gravel, decorative rock, soil, firewood, debris, and general material transport.
 
 ## Included Accessories and Spares
+
+The list below records the earlier procurement specification, not a completed receipt inventory. October photographs establish the actual packing observations in the update below; two chargers, a complete English manual, exact spare-shaft identity and final delivered inventory are not independently established by these images.
 
 - Remote controller
 - Toolbox
@@ -298,7 +305,7 @@ Open milestones requiring separate confirmation:
 - Customs release
 - Fleet commissioning
 
-Prepared evidence slots retain separate gates for final-payment evidence, the final commercial invoice, packing and crating photographs, factory departure, freight booking, carrier and container identifiers, port milestones, cargo-linked vessel information, ocean transit, customs release, delivery, commissioning and field validation. The October 1 payment record completes Final Payment. Shipping Preparation is current; all downstream evidence slots remain pending.
+Prepared evidence slots retain separate gates for final-payment evidence, the final commercial invoice, packing and crating photographs, factory departure, freight booking, carrier and container identifiers, port milestones, cargo-linked vessel information, ocean transit, customs release, delivery, commissioning and field validation. The October 1 payment record completes Final Payment. Packing and crate completion are now photographed. Supplier-reported Qingdao warehouse staging is current; freight booking and all sea-transit, receipt and commissioning gates remain pending.
 
 ---
 
@@ -320,15 +327,15 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 - ✅ Tie-Down Anchors Installed
 - ✅ Build Approved by SmashPro
 - ✅ Final Payment Complete — October 1, 2026
-- 🟢 Shipping Preparation — Current
+- 🟢 Qingdao Export Staging — Current (supplier-reported)
 - ⬜ Final Tie-Down Verification
 - ⬜ Final Shipping-Preparation Inspection
-- ⬜ Wooden Crate
+- ✅ Wooden Crate — photographed October 6
 - ⬜ Export Inspection
 - ⬜ Factory Departure
 - ⬜ Freight Booking
 - ⬜ Container Loading
-- ⬜ Port Arrival
+- 🟢 Qingdao warehouse staging — reported October 7; sea departure unconfirmed
 - ⬜ Ocean Departure
 - ⬜ Ocean Tracking
 - ⬜ U.S. Arrival
@@ -352,7 +359,7 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 | Field | Status |
 |------|--------|
 | Fleet Status | 🟢 Paid in Full |
-| Operational Status | Shipping Preparation |
+| Operational Status | Qingdao export staging (supplier-reported) |
 | Service Hours | 0 / Pre-commissioning |
 | Fleet Classification | Founders Fleet Asset |
 | Fleet Priority | Tier 1 |
@@ -371,7 +378,7 @@ SP-MZIGO-26E is SmashPro Fleet's first custom-built remote-controlled electric t
 
 # Media and System Integration
 
-Every factory asset has an evidence category: Exterior, Interior, Hydraulics, Electrical, Controls, Branding, Factory Progress, QC or Shipping. Shipping remains empty until real export evidence arrives.
+Every factory asset has an evidence category: Exterior, Interior, Hydraulics, Electrical, Controls, Branding, Factory Progress, QC or Shipping. The October batch now fills Shipping with packing/skid evidence. It does not prove ocean transit.
 
 Approved-channel metadata allows the Passport, Equipment Gallery, Marketing Library, Product Brochure, Social Media Assets, Launch Timeline and QR pages to select reviewed media without copying or renaming the evidence record again. External publication still requires its normal release workflow.
 
@@ -379,7 +386,7 @@ Digital HQ, Equipment Registry, Fleet Registry and SPGo must reference SP-MTC-00
 
 # SP-MZIGO Roadmap
 
-1. Final payment completed October 1, 2026; preserve payment evidence in the procurement record. Shipping preparation is current.
+1. Final payment completed October 1, 2026; preserve payment evidence in the procurement record. Qingdao export staging is current (supplier-reported).
 2. Record crating, export inspection, container loading, port delivery and ocean movement only as evidence arrives.
 3. Complete arrival inspection, commissioning and field validation.
 4. Use field results to engineer rated recovery, hitch, fender, lighting, wheel, tire, electrical and fleet-technology packages.
@@ -387,6 +394,20 @@ Digital HQ, Equipment Registry, Fleet Registry and SPGo must reference SP-MTC-00
 
 # October 1, 2026 Payment Update
 
-Final payment is complete and the remaining machine balance is paid in full. The public status is **Paid in full · shipping preparation**. Build Approved remains a completed historical milestone. The completed machine has not shipped: all packing, crating, factory departure, freight booking, export/port, vessel/ocean, arrival, customs, delivery, commissioning and field-validation gates remain pending. The existing September tie-down photographs do not establish final shipping hardware completion.
+Final payment is complete and the remaining machine balance is paid in full. At the time of this October 1 update, the public status was **Paid in full · shipping preparation**; the October 7 evidence below supersedes it. Build Approved remains a completed historical milestone. As of that October 1 record, the completed machine had not shipped: all packing, crating, factory departure, freight booking, export/port, vessel/ocean, arrival, customs, delivery, commissioning and field-validation gates remain pending. The existing September tie-down photographs do not establish final shipping hardware completion.
 
 The canonical [procurement record](SP-MZIGO-26E-PROCUREMENT.md) retains the prior deposit history and the October 1 evidence reference. Public lifecycle data is projected from `src/data/mzigoPassport.ts`; all pending/current stages have zero progress and only completed stages have 100%. No shipment percentage is inferred.
+
+# October 6–7, 2026 Identity and Export Evidence
+
+**Current: Paid in full · Qingdao export staging.** Final payment remains the existing October 1 milestone. October 6 timestamps document identity, accessories, skid preparation and completed crating. On October 7 the supplier statement relayed by the user said, “The machine is already in the warehouse at Qingdao Port.” This is a supplier report, not independent geolocation or evidence of sea departure.
+
+The physical KYLIN plate reads **K600**, serial **QLUP202609010001**, load **750 kg**, vehicle weight **320 kg**, production year **2026**. Every value was visually checked against the original photograph. The plate is the strongest physical-unit rating evidence currently available. The earlier 500 kg / approximately 1,100 lb supplier description remains in history; the reason for the difference is unknown. Neither rating is a field load test or commissioning clearance.
+
+The packing photographs show a HotRC remote, printed controller instructions, loose batteries, charger equipment and U.S.-style plugs, a tool case with a metal joint/shaft component and labeled bottle, maintenance QR material, a product certificate, and a spare wheel/tire. Exact spare identity, bottle contents, electrical ratings, complete manual coverage and final received inventory remain unverified. A QC PASS sticker and manufacturer certificate document factory markings/paperwork, not independent certification or a complete functional test.
+
+The existing Export Journey archive now holds 14 photos and two additional skid videos. Their source filenames, descriptions, dates and SHA-256 values are in [the October provenance manifest](evidence/sp-mzigo-26e-export-20261007.json); the readable mapping is in [the media archive](../mzigo-media-archive.md#october-67-2026-export-evidence). The completed-crate original is retained privately because an address/contact label is visible. No original bytes were edited, and that image is excluded from the public build.
+
+Packing sequence: accessories and plate recorded → machine positioned on skid → wheel blocking/crate walls → spare/accessory loadout → completed wooden crate → supplier-reported Qingdao warehouse staging. The two clips were received October 7; their capture dates are unknown. No duplicates were found in this batch.
+
+Freight booking, container, B/L, vessel/voyage, departure, ETA, destination port, customs, last-mile carrier, delivery, commissioning and field validation remain pending. The document-service integration is unchanged; photographed paperwork does not substitute for a complete downloadable manufacturer manual or shipping document.

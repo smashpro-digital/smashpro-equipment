@@ -6,7 +6,7 @@ import { mzigoFinalPayment, mzigoStatusLabel, mzigoStatusDetail } from "./mzigoP
 import { mzigoFinalConfiguration, mzigoEngineeringCallouts } from "./mzigoPlatform";
 
 export function normalizeMzigo(p: CanonicalPassport, item: Equipment): CanonicalPassport {
-  p.asset.current_lifecycle_stage = "shipping_preparation";
+  p.asset.current_lifecycle_stage = "export_staging";
   p.asset.status_label = mzigoStatusLabel;
   p.asset.status_detail = mzigoStatusDetail;
   p.asset.manufacturer = item.specifications.find(s => s.label === "Manufacturer")!.value;
@@ -43,6 +43,7 @@ export function normalizeMzigo(p: CanonicalPassport, item: Equipment): Canonical
     ["mzigo-factory-build", "production", "factory_build"],
     ["mzigo-build-approved", "factory_completion", "factory_build"],
     ["mzigo-final-payment", "final_payment", "final_payment"],
+    ["mzigo-packing", "packing", "packing"],
   ]) {
     const evidence = p.records.find(r => r.id === id)!;
     evidence.evidence_state = "verified";
@@ -53,7 +54,9 @@ export function normalizeMzigo(p: CanonicalPassport, item: Equipment): Canonical
       evidence_state: "verified", stage_id: stage,
       event_type: stage === "production" ? "production_started" : "completion", evidence_ids: [id]}));
   }
-  // Stable semantic IDs; supplier-stated payload and model remain unverified.
+  const staging = p.records.find(r => r.id === "mzigo-qingdao-staging")!;
+  Object.assign(staging, {source_type: "supplier", evidence_state: "submitted", evidence_classification: "export_staging", source_ref: "Supplier statement relayed with the October 7 evidence batch", source_visibility: "public"});
+  // Stable semantic IDs; historical supplier payload stays distinct from physical plate evidence.
   for (const c of mzigoFinalConfiguration) p.records.push(add({
     id: `mzigo-configuration-${c.label.toLowerCase().replaceAll(" ", "-")}`, kind: "configuration",
     title: c.label, detail: c.evidence, value: c.value,
@@ -73,9 +76,9 @@ export function normalizeMzigo(p: CanonicalPassport, item: Equipment): Canonical
     evidence_state: "submitted", source_type: "factory", occurred_at: "2026-09-09",
     evidence_classification: "operational_test", evidence_ids: ["sp-mzigo-26e-factory-complete-walkaround-2026-09-09"]}));
   p.records.push(add({id: "mzigo-controller-documentation", kind: "document", title: "Controller documentation",
-    detail: "Controller photographs and engineering callouts are preserved. Manufacturer electrical documentation remains pending; live public documents remain owned by the canonical document service.",
+    detail: "Controller photographs, the photographed HotRC instruction sheet and engineering callouts are preserved. Manufacturer electrical documentation remains pending; live public documents remain owned by the canonical document service.",
     evidence_classification: "controller", document_kind: "electrical_diagram",
-    evidence_ids: ["sp-mzigo-26e-motor-controller-detail-2026-09-09", "sp-mzigo-26e-remote-controller-2026-09-09"]}));
+    evidence_ids: ["sp-mzigo-26e-hotrc-controller-instructions-2026-10-06", "sp-mzigo-26e-motor-controller-detail-2026-09-09", "sp-mzigo-26e-remote-controller-2026-09-09"]}));
   p.records.push(add({id: "mzigo-field-validation", kind: "field_test", title: "Field validation pending",
     detail: "Physical receipt and commissioning remain future stages. No operating performance has been field validated.",
     test_state: "planned", evidence_classification: "commissioning"}));

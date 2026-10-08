@@ -22,7 +22,7 @@ export function MzigoPassportHeader({ item }: { item: Equipment }) {
         <div className="passport-summary-item" data-icon="✓"><span>Status</span><strong>{item.statusLabel}</strong></div>
         <div className="passport-summary-item" data-icon="◷"><span>Service Hours</span><strong>0 · pre-commissioning</strong></div>
       </div>
-      <p className="mzigo-model-note">K600 is the platform recorded in SmashPro's passport. Manufacturer specification-sheet confirmation remains pending. SP-MZIGO-26E is the permanent fleet identity.</p>
+      <p className="mzigo-model-note">K600 is confirmed on the physical KYLIN plate photographed October 6. Other performance limits still need manufacturer documentation. SP-MZIGO-26E is the permanent fleet identity.</p>
       <div className="status-panel"><span className="status-light" /><div><small>Current public status</small><strong>{item.statusLabel}</strong><p>{item.statusDetail}</p></div></div>
       <div className="mzigo-passport-utilities"><a href="#specifications">Factory specifications</a><a href="#mzigo-build-story">Build evidence</a></div>
     </section>

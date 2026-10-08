@@ -2,11 +2,11 @@
   "base": "a190948",
   "files": {
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
-    "src/data/equipment.ts": "e67d92bcea4b6b61cc463afa615c173e0fb396ca94f38a4a0d259c3e7c8a6ed0",
-    "src/data/mzigoPassport.ts": "c2497071ab474d48b9a4586ef548edc57a123aee33de7c5f1ebc3c06ac86c1a4",
-    "src/data/mzigoFactoryMedia.ts": "979c839b104ab12a5e81673c6390cb622c054a98e0a9590945ac619c351dca20",
-    "src/data/mzigoPlatform.ts": "9099ce2007066b894ba9973663acde3d2b9ffbfb084f10dadd6ae6fa093497aa",
-    "src/domain/mzigoArchive.ts": "3768ea4bc963c0c8f62618cb98b8e7a1722d862f4115bf483ac8d25954c10e0a",
+    "src/data/equipment.ts": "223f8507147fdea920998551348a2b68d99bc6fb991694852b17e9fa8e598d11",
+    "src/data/mzigoPassport.ts": "497e39ac46d71019e3e80b7141e20873d4e8c96f89d378c2a18f4f2c52b2f4ef",
+    "src/data/mzigoFactoryMedia.ts": "3a5fdbedfa924272e3f2d193918c8d64e58419513263883e9912bd172db211a2",
+    "src/data/mzigoPlatform.ts": "94aba3589373d8fb5edb81763751a1f3a0f35b07295c3bbbb0d56fb9a59c7407",
+    "src/domain/mzigoArchive.ts": "18a80b159767873d9cbdbfedaee59ee79b765f1125a39aa97da339ac46486ace",
     "src/styles/mzigo-passport-overrides.css": "de3c535ecde93f763210a7b041cff523343cb69ebfa24a4f615ca54e0c969bd1",
     "src/styles/ardhi-passport-compact-overrides.css": "3c2fe1e13922c64d08175e5f92ae3fd111e04fb7e81ba369b0b57d9787a7d5a7",
     "src/styles/ardhi-manufacturer-pdf-compact.css": "0aa0af89268a2fab5b529da2dc528f8c200a846b6bb76bcee27f975f06efd24b",
@@ -14,12 +14,13 @@
     "src/components/PassportHero.tsx": "9eead6913290d9b6ac1137dd8358fa29896ee07af26d05dd6cb2c0d46169f990",
     "src/components/PassportDocumentRecord.tsx": "6dc9eab984e26167873eebd7768d27f9fd09c1053d64288ec5af7ffe0c4bb912",
     ".github/workflows/deploy.yml": "61aadd4c6a33f6281215f57571f0452f916cac4c194a3d62096ce4d112ffcd79",
-    "scripts/validate-mzigo-media.mjs": "0d187a8e515dc05962ea5623cf677918959295179337a450cd989ac30fb493a3",
-    "src/components/MzigoBuildStory.tsx": "8f45f668c268ac9dbf76e17ef241cef13d97393258c13ab4fb0b11e354f90258",
+    "scripts/validate-mzigo-media.mjs": "3c509d9c00448e325242f36722056d4c02b6059d54dc6d54037af5b5e4651174",
+    "src/components/MzigoBuildStory.tsx": "d11f40ffc4597d50d8df0cd623c44b264042e05dc700d9367b9f79ed6c75acc1",
     "src/components/MzigoMediaArchive.tsx": "cf236a0ec12edd82d90a20e421a4fc1f5509046ef4356bd291e4be1541e6afae",
-    "src/components/MzigoOemPlatform.tsx": "a09b3a8baeea567bfcc5ec5a2ad27f216697ba13ad983072aa5611fa6d20bbcc",
-    "src/components/MzigoPassport.tsx": "9cd1a04c255332d8b43698f658791f42dd4191d03697d66d1f3adc60579ca5c8",
-    "src/components/MzigoPassportHeader.tsx": "2fd07d35464d25f979d697074b523011fa34f3e323df67c16759ff0d7e839ae6",
+    "src/components/MzigoOemPlatform.tsx": "0911ec5b8abf00ca6fc35380356e20ac88d85dba0fcabeb2085b4645445ba2be",
+    "src/components/MzigoPassport.tsx": "f334506b8cf4cfcdbee989fe09ccc12debe7718c8d4f1842e1077a8c47540fa0",
+    "src/components/MzigoPassportHeader.tsx": "9ef834db86b28415d34a6ddb9b396acda136bab1c85fc0d8b9b1920ce14109ca",
     "src/components/MzigoServiceRecord.tsx": "eaa99364413224619789faee9f454e47369c09195b54cde081dd1f0a8100c511"
-  }
+  },
+  "review": "October 7 evidence update on 0e7c51a: only authorized MZIGO source changes refreshed. Protected mature renderers, shared components/styles and deploy gates retained. ARDHI equipment block unchanged from base; responsive captures compare that base."
 }

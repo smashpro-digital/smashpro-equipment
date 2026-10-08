@@ -202,11 +202,12 @@ test("both fleet passports retain identity sections and the current Mzigo eviden
   assert.match(mzigoPassport, /Paid in Full \/ Shipping Preparation/);
 });
 
-test("SP-MZIGO-26E is classified as electric with a correctly converted published payload", () => {
+test("SP-MZIGO-26E retains historical payload beside physical plate evidence", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   assert.match(data, /fleetId: "SP-MZIGO-26E"/);
   assert.match(data, /powertrain: "Electric 4WD"/);
-  assert.match(data, /\["Payload", "500 kg \(1,102 lb\)", "Capacity"\]/);
+  assert.match(data, /Earlier supplier-stated: 500 kg \(approximately 1,100 lb\)/);
+  assert.match(data, /\["Manufacturer plate rated load", "750 kg"/);
   assert.match(data, /fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E"/);
   assert.match(data, /model: "SP-MZIGO-26E", factoryModel: "K600"/);
   const header = readFileSync("src/components/MzigoPassportHeader.tsx", "utf8");
