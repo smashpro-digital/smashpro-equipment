@@ -1,0 +1,126 @@
+name: Deploy MZIGO-27E Early Access Funnel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/pages/Mzigo27eCatalogPage.tsx'
+      - 'src/styles/mzigo27e-catalog.css'
+      - 'src/data/mzigo27eCatalog.ts'
+      - 'tests/mzigo-27e-waitlist.test.mjs'
+      - '.github/workflows/deploy-mzigo-27e-waitlist.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-equipment-showroom
+  cancel-in-progress: false
+
+jobs:
+  deploy-mzigo-27e:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://smashpro.app/equipment/catalog/sp-mzigo-27e/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install and validate equipment build
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          npm run validate:index
+      - name: Verify the approved release scope
+        run: |
+          set -euo pipefail
+          test -s dist/catalog/sp-mzigo-27e/index.html
+          test -d dist/assets
+          grep -RlF 'Join the Early Access List' dist/assets/ >/dev/null
+          grep -RlF '/api/equipment_preorder.php' dist/assets/ >/dev/null
+          code="$(curl -LsS -o /tmp/mzigo-early-access-api.txt -w '%{http_code}' https://smashpro.app/api/equipment_preorder.php)"
+          echo "Read-only waitlist endpoint availability: HTTP $code"
+          test "$code" = "405"
+      - name: Require existing deployment secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        run: |
+          set -euo pipefail
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_PORT; do
+            test -n "${!name:-}" || { echo "::error::Missing $name"; exit 1; }
+          done
+      - name: Deploy only the catalog entry and generated assets (no deletion)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import ftplib
+          import os
+          from pathlib import Path
+          root = '/public_html/smashpro.app/equipment'
+          files = [Path('dist/catalog/sp-mzigo-27e/index.html')]
+          files.extend(p for p in Path('dist/assets').rglob('*') if p.is_file())
+          assert all(p.is_file() for p in files) and len(files) > 1, 'Missing build assets'
+          ftp = ftplib.FTP()
+          ftp.connect(os.environ['FTP_SERVER'], int(os.environ['FTP_PORT']), timeout=45)
+          ftp.login(os.environ['FTP_USERNAME'], os.environ['FTP_PASSWORD'])
+          directories = sorted({root, root+'/assets', root+'/catalog', root+'/catalog/sp-mzigo-27e'})
+          for directory in directories:
+              try:
+                  ftp.mkd(directory)
+              except ftplib.error_perm as err:
+                  if not str(err).startswith('550'):
+                      raise
+          for path in files:
+              remote = root + '/' + path.relative_to('dist').as_posix()
+              parts = remote.rsplit('/', 1)[0]
+              try:
+                  ftp.mkd(parts)
+              except ftplib.error_perm as err:
+                  if not str(err).startswith('550'):
+                      raise
+              with path.open('rb') as handle:
+                  ftp.storbinary('STOR ' + remote, handle)
+          ftp.quit()
+          print('Uploaded the MZIGO catalog HTML and', len(files)-1, 'generated assets, without deleting other equipment pages.')
+          PY
+      - name: Verify live catalog and generated assets (read-only)
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib
+          import re
+          import urllib.request
+          from urllib.parse import urljoin
+          base = 'https://smashpro.app'
+          url = base + '/equipment/catalog/sp-mzigo-27e/?release=${{ github.sha }}'
+          req = urllib.request.Request(url, headers={'Cache-Control':'no-cache', 'User-Agent':'SmashPro-Release-Verification'})
+          with urllib.request.urlopen(req, timeout=40) as response:
+              remote = response.read().decode('utf-8')
+          local = pathlib.Path('dist/catalog/sp-mzigo-27e/index.html').read_text()
+          def assets(doc):
+              return set(re.findall(r'/equipment/assets/[^"\'<> ]+\.(?:js|css)', doc))
+          expected = assets(local)
+          observed = assets(remote)
+          assert expected and expected <= observed, f'Live entry does not reference new assets: expected={expected}, found={observed}'
+          for asset in expected:
+              with urllib.request.urlopen(base+asset, timeout=30) as response:
+                  assert response.status == 200 and len(response.read()) > 0, asset
+          print('Live 27E entry and', len(expected), 'hashed asset links verified.')
+          PY
