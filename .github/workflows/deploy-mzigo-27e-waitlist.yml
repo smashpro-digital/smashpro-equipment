@@ -115,7 +115,7 @@ jobs:
               remote = response.read().decode('utf-8')
           local = pathlib.Path('dist/catalog/sp-mzigo-27e/index.html').read_text()
           def assets(doc):
-              return set(re.findall(r'/equipment/assets/[^"\'<> ]+\\.(?:js|css)', doc))
+              return set(re.findall(r'/equipment/assets/[^"\'<> ]+\.(?:js|css)', doc))
           expected = assets(local)
           observed = assets(remote)
           assert expected and expected <= observed, f'Live entry does not reference new assets: expected={expected}, found={observed}'
