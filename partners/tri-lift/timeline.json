@@ -1,0 +1,10 @@
+[
+  {"id":"initial-contact","title":"Initial Contact","date":null,"status":"Not documented","documents":[],"notes":"No dated contact record was supplied."},
+  {"id":"rental-inquiry","title":"Rental Inquiry","date":null,"status":"Not documented","documents":[],"notes":"The quote establishes a rental proposal, not the date or channel of the initial inquiry."},
+  {"id":"forms-received","title":"Forms Received","date":null,"status":"Documents available","documents":["credit-application","coi-request"],"notes":"Imported from the owner's local archive on 2026-10-09. Original receipt date is not established."},
+  {"id":"forms-completed","title":"Forms Completed","date":null,"status":"Pending","documents":[],"notes":"No completed submission or account approval has been established."},
+  {"id":"insurance-verified","title":"Insurance Verified","date":null,"status":"Pending","documents":["coi-request"],"notes":"A request for a certificate of insurance is not proof of coverage or acceptance."},
+  {"id":"rental-quote-received","title":"Rental Quote Received","date":"2026-10-09","status":"Quote on file","documents":["rental-quote-20261009"],"notes":"Date is the quote's Date Sent. Acceptance and rental booking are not established."},
+  {"id":"delivery-support","title":"Delivery Support","date":null,"status":"Pending","documents":[],"notes":"Asset-specific planning is held in the private project record. No completed service is claimed."},
+  {"id":"future-fleet-support","title":"Future Fleet Support","date":null,"status":"Planned","documents":[],"notes":"Reuse the partner ID for later projects; confirm scope and availability individually."}
+]

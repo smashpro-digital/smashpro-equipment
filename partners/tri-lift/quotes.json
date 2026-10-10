@@ -1,0 +1,19 @@
+[
+  {
+    "id":"tri-lift-rental-20261009-01",
+    "quote_id":null,
+    "quote_id_note":"No supplier quote number is visible; id is an internal archive identifier.",
+    "date":"2026-10-09",
+    "equipment":"5k Pneumatic Lift",
+    "capacity":{"supplier_label":"5k","verified_value":null,"unit":null},
+    "delivery":{"status":"Quoted with pickup","price":null},
+    "pickup":{"status":"Quoted with delivery","price":null},
+    "operator_included":null,
+    "price":null,
+    "price_visibility":"Private original; not reproduced in the public repository",
+    "status":"Received; acceptance pending",
+    "notes":"Valid for 30 days from Date Sent; equipment subject to availability. Customer application and COI requested. No booking, payment or operator commitment is established.",
+    "documents":["rental-quote-20261009"],
+    "supersedes":null
+  }
+]
