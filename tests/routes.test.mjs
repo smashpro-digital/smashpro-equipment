@@ -321,7 +321,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   const data = readFileSync("src/data/equipment.ts", "utf8");
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   const passport = readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8");
-  assert.match(data, /statusLabel: "Shipment updates via Digital HQ"/);
+  assert.match(data, /statusLabel: "Arrived at U.S. Port"/);
   assert.doesNotMatch(data, /shippingStatus: \{ status: "Container Loaded"/);
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
   assert.match(data, /occurredAt: "2026-08-20"[\s\S]*title: "Final Successful Payment"[\s\S]*photos: \[\], videos: \[\]/);
@@ -336,8 +336,8 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.match(passport, /<ShipmentJourney result=\{shipment\}/);
   assert.doesNotMatch(passport, /currentStage=".*Ocean Transit"/);
   assert.match(passport, /useShipment/);
-  assert.match(passport, /asset-status-ribbon/);
-  assert.match(passport, /\["Fleet Asset", "#001"\]/);
+  assert.match(passport, /<ArdhiMissionDashboard/);
+  assert.match(readFileSync("src/components/ArdhiFlagship.tsx", "utf8"), /Fleet Asset 001/);
   assert.match(passport, /passport-specifications/);
   assert.match(passport, /specificationGroups\.map/);
   assert.doesNotMatch(passport, /const passport = \[/);
@@ -346,7 +346,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   }
   assert.doesNotMatch(passport, /label: "Overview"/, "the merged passport replaces the duplicate archive overview");
   assert.match(passport, /WindowSticker/);
-  assert.match(passport, /Official Equipment Window Sticker/);
+  assert.match(passport, /Equipment Window Sticker/);
   assert.match(passport, /sticker-viewer-backdrop/);
   assert.match(passport, /aria-modal="true"/);
   assert.match(passport, /event\.key === "Escape"/);
@@ -360,8 +360,8 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.doesNotMatch(passport, /Engineering Decisions/);
   assert.match(passport, /Payment History/);
   assert.doesNotMatch(passport, /Approximate Journey Distance|daysUntilArrival|7300/);
-  assert.match(passport, /stageText\(shipment\)/);
-  assert.match(passport, /lifecycleProgressText\(shipment\)/);
+  assert.match(passport, /ardhiPortArrival.status/);
+  assert.match(passport, /ArdhiMissionTimeline/);
   assert.doesNotMatch(passport, /2 \/ 7|Stage 2/);
   assert.doesNotMatch(readFileSync("src/pages/ArdhiPassportPage.tsx", "utf8"), /2 \/ 7|Stage 2/);
   assert.match(passport, /IntersectionObserver/);
@@ -422,7 +422,7 @@ test("equipment partners render only public relationship statuses", () => {
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   assert.match(component, /\["confirmed", "active", "completed"\]/);
   assert.match(component, /if \(!visiblePartners\.length\) return null/);
-  assert.match(readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8"), /<PartnerFieldSupport partners=\{item\.partners\} \/>/);
+  assert.match(readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8"), /<ArdhiFleetConnections item=\{item\} \/>/);
   assert.match(data, /brand: "Shandong Infront Machinery Group Co\., Ltd\."[\s\S]*status: "completed"/);
   for (const outreachOnlyBrand of ["Blue Diamond Attachments", "Skid Steer Solutions", "Eterra Attachments", "Ergodyne", "Radians", "Mechanix Wear", "Pyramex", "Strapinno", "Spytec", "Hapn"]) {
     assert.doesNotMatch(data, new RegExp(outreachOnlyBrand), `${outreachOnlyBrand} must not be published without a confirmed relationship`);

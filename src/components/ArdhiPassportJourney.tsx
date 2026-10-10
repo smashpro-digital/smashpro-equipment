@@ -1,17 +1,18 @@
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import type { Equipment, GalleryGroup, GalleryImage } from "../types/equipment";
 import { calculatePackages, calculatePassportScores } from "../domain/passport";
 import { WindowSticker } from "./WindowSticker";
-import { PartnerFieldSupport } from "./PartnerFieldSupport";
+import { ArdhiMissionDashboard, ArdhiMissionProfile, ArdhiMissionTimeline, ArdhiServiceRecord, ArdhiFleetConnections } from "./ArdhiFlagship";
+const ArdhiExpo = lazy(() => import("./ArdhiExpo"));
 import { ShipmentJourney } from "./ShipmentJourney";
 import { useShipment } from "../hooks/useShipment";
-import { lifecycleProgressText, selectForwarderReportedVesselVoyage, stageText } from "../domain/shipment";
+import { ardhiPortArrival } from "../data/ardhiPortArrival";
 import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
 
 const image = (name: string) => `/equipment/images/${name}`;
-type ArchiveChapter = "factory-build" | "finished-machine" | "export-journey" | "delivery" | "operation" | "maintenance";
+type ArchiveChapter = "factory-build" | "finished-machine" | "export-journey" | "ocean" | "port-arrival" | "warehouse" | "delivery" | "operation" | "maintenance";
 const chapters: Array<{
   id: ArchiveChapter;
   label: string;
@@ -37,9 +38,27 @@ const chapters: Array<{
     timelineId: "factory-departure",
   },
   {
+    id: "ocean",
+    label: "Ocean Voyage",
+    groups: [],
+    timelineId: "port-arrival",
+  },
+  {
+    id: "port-arrival",
+    label: "Port Arrival",
+    groups: ["arrival"],
+    timelineId: "port-arrival",
+  },
+  {
+    id: "warehouse",
+    label: "Warehouse",
+    groups: [],
+    timelineId: "warehouse-transfer",
+  },
+  {
     id: "delivery",
     label: "Delivery",
-    groups: ["arrival", "commissioning"],
+    groups: ["commissioning"],
     timelineId: "future-5",
   },
   {
@@ -52,7 +71,7 @@ const chapters: Array<{
     id: "maintenance",
     label: "Maintenance",
     groups: ["maintenance"],
-    timelineId: "future-15",
+    timelineId: "future-14",
   },
 ];
 const chapterForGroup = (group?: GalleryGroup) => chapters.find((chapter) => group && chapter.groups.includes(group));
@@ -72,6 +91,9 @@ type HistoryRecord = {
   documents?: number;
   attachments?: string[];
   outcome?: string;
+  mediaChapter?: ArchiveChapter;
+  mediaLabel?: string;
+  confidence?: string;
 };
 const history: HistoryRecord[] = [
   {
@@ -247,7 +269,8 @@ const history: HistoryRecord[] = [
     title: "Export Crate",
     status: "documented",
     narrative: "The completed machine was sealed inside its export crate for international transport.",
-    videos: [image("sp-ardhi-26-factory-departure-2026-09-02.mp4")],
+    mediaChapter: "export-journey",
+    mediaLabel: "View the original factory-departure video",
   },
   {
     id: "factory-departure",
@@ -255,7 +278,8 @@ const history: HistoryRecord[] = [
     title: "Factory Departure",
     status: "documented",
     narrative: "The authentic departure record shows the crated SP-ARDHI-26 leaving on the truck.",
-    videos: [image("sp-ardhi-26-factory-departure-2026-09-02.mp4")],
+    mediaChapter: "export-journey",
+    mediaLabel: "View the original factory-departure video",
   },
   {
     id: "grapple-ordered",
@@ -269,6 +293,22 @@ const history: HistoryRecord[] = [
     documents: 1,
     outcome: "Quoted lead time is 4–6 weeks, producing an approximate October 7–21 build-completion planning window. Fabrication and completion photos have been requested.",
   },
+  {
+    id: "port-arrival",
+    date: "Arrival date not supplied",
+    title: "Arrived at U.S. Port",
+    status: "current",
+    confidence: "Verified",
+    narrative: "The manufacturer confirmed that SP-ARDHI-26 has arrived at the destination port. The machine is awaiting customs clearance and transfer to the overseas warehouse.",
+    supplier: "Manufacturer confirmation, relayed by the owner and recorded October 9, 2026. The record date is not the arrival date.",
+    outcome: "Ocean voyage complete. Customs, warehouse transfer and final delivery scheduling remain pending.",
+    mediaChapter: "port-arrival",
+    mediaLabel: "View the port-arrival photograph",
+  },
+  { id: "customs-release", date: "Pending", title: "Released from Customs", status: "future", narrative: "Awaiting verified U.S. customs clearance and cargo release." },
+  { id: "warehouse-transfer", date: "Pending", title: "Transferred to Warehouse", status: "future", narrative: "Awaiting verified transfer to the overseas warehouse after customs clearance." },
+  { id: "delivery-scheduled", date: "Pending", title: "Delivery Scheduled", status: "future", narrative: "Awaiting final delivery scheduling confirmation." },
+  { id: "future-5", date: "Pending", title: "Delivery", status: "future", narrative: "Awaiting verified receipt of the machine. Delivery has not been completed." },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -285,6 +325,7 @@ const historyPhaseStarts: Record<string, string> = {
   "production-started": "Production",
   "freight-forwarder": "Export",
   "grapple-ordered": "Attachment Build",
+  "port-arrival": "U.S. Logistics",
   "future-6": "Commissioning",
   "future-10": "Operation",
   "future-14": "Maintenance",
@@ -312,6 +353,14 @@ const payments = [
 ];
 export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const shipment = useShipment();
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(false);
+  const [expo, setExpo] = useState(() => new URLSearchParams(window.location.search).get("expo") === "1");
+  const toggleExpo = () => {
+    const url = new URL(window.location.href);
+    if (expo) url.searchParams.delete("expo"); else url.searchParams.set("expo", "1");
+    window.history.replaceState(null, "", url); setExpo(!expo);
+  };
   const [expandedRecord, setExpandedRecord] = useState<string>();
   const [collapsedHistoryPhases, setCollapsedHistoryPhases] = useState<Set<string>>(() => new Set());
   const [query, setQuery] = useState("");
@@ -320,10 +369,9 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const [stickerOpen, setStickerOpen] = useState(false);
   const [stickerZoom, setStickerZoom] = useState(1);
   const [pendingStickerAction, setPendingStickerAction] = useState<"png" | "pdf">();
-  const [pageProgress, setPageProgress] = useState(0);
-  const [nowViewing, setNowViewing] = useState(["Passport", "Identity", "SP-ARDHI-26"]);
   const historyRefs = useRef<Record<string, HTMLLIElement | null>>({});
   const stickerModalRef = useRef<HTMLDivElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
   const selectedChapter = chapters.find(({ id }) => id === chapter) ?? chapters[0];
   const filteredMedia = useMemo(
     () =>
@@ -342,8 +390,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            const view = (entry.target as HTMLElement).dataset.view;
-            if (view) setNowViewing(view.split("|"));
             observer.unobserve(entry.target);
           }
         }),
@@ -354,13 +400,15 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   }, []);
   useEffect(() => {
     if (!lightbox) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const closeButton = lightboxRef.current?.querySelector<HTMLButtonElement>("button");
+    closeButton?.focus();
     const close = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setLightbox(undefined);
-      }
+      if (event.key === "Escape") setLightbox(undefined);
+      if (event.key === "Tab") { event.preventDefault(); closeButton?.focus(); }
     };
     document.addEventListener("keydown", close);
-    return () => document.removeEventListener("keydown", close);
+    return () => { document.removeEventListener("keydown", close); previousFocus?.focus(); };
   }, [lightbox]);
   useEffect(() => {
     if (!stickerOpen) return;
@@ -389,25 +437,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     });
     return () => cancelAnimationFrame(frame);
   }, [item.fleetId, pendingStickerAction, stickerOpen]);
-  useEffect(() => {
-    const update = () => {
-      const total = document.documentElement.scrollHeight - innerHeight;
-      setPageProgress(total > 0 ? Math.min(100, Math.round((scrollY / total) * 100)) : 0);
-    };
-    update();
-    addEventListener("scroll", update, { passive: true });
-    return () => removeEventListener("scroll", update);
-  }, []);
-  useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>("[data-view]");
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter(({ isIntersecting }) => isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      const view = (visible?.target as HTMLElement | undefined)?.dataset.view;
-      if (view) setNowViewing(view.split("|"));
-    }, { threshold: [0.25, 0.5, 0.75] });
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
   const selectChapter = (next: ArchiveChapter) => {
     const selected = chapters.find(({ id }) => id === next) ?? chapters[0];
     setChapter(next);
@@ -415,12 +444,11 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   };
   const investigateRecord = (record: HistoryRecord) => {
     setExpandedRecord(record.id);
-    const recordIndex = history.findIndex(({ id }) => id === record.id);
-    const phaseEntry = history.slice(0, recordIndex + 1).reverse().find(({ id }) => historyPhaseStarts[id]);
-    setNowViewing(["History", phaseEntry ? historyPhaseStarts[phaseEntry.id] : "Record", record.title]);
     const futureIndex = record.id.startsWith("future-") ? Number(record.id.slice(7)) : -1;
     let nextChapter: ArchiveChapter | undefined;
-    if (["production-started", "hydraulics-installed"].includes(record.id)) nextChapter = "factory-build";
+    if (record.mediaChapter) nextChapter = record.mediaChapter;
+    else if (record.id === "warehouse-transfer") nextChapter = "warehouse";
+    else if (["production-started", "hydraulics-installed"].includes(record.id)) nextChapter = "factory-build";
     else if (["branding-installed", "production-complete", "inspection"].includes(record.id)) nextChapter = "finished-machine";
     else if (["freight-forwarder", "export-crate", "factory-departure", "container-loaded", "ocean-voyage"].includes(record.id) || (futureIndex >= 0 && futureIndex <= 4)) nextChapter = "export-journey";
     else if (futureIndex >= 5 && futureIndex <= 6) nextChapter = "delivery";
@@ -438,8 +466,16 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   };
   useEffect(() => {
     const openLinkedRecord = () => {
+      const archiveId = window.location.hash.slice(1);
+      if (archiveId.startsWith("drive-")) {
+        setHistoryOpen(true);
+        requestAnimationFrame(() => { const target = document.getElementById(archiveId); const detail = target?.querySelector("details"); if (detail) detail.open = true; target?.scrollIntoView({ block: "center" }); });
+        return;
+      }
       const match = window.location.hash.match(/^#history-(.+)$/);
       if (!match) return;
+      setHistoryOpen(true);
+      requestAnimationFrame(() => { const target = document.getElementById(`history-${match[1]}`); const detail = target?.querySelector("details"); if (detail) detail.open = true; target?.scrollIntoView({ block: "center" }); });
       const record = history.find(({ id }) => id === match[1]);
       if (!record) return;
       const phase = historyPhaseByRecord[record.id];
@@ -465,21 +501,11 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   }, []);
   const packages = calculatePackages(item.upgrades, item.packageRules);
   const scores = calculatePassportScores(item);
-  const scrollToRecord = (id: string, viewing: string[]) => {
-    setNowViewing(viewing);
+  const scrollToRecord = (id: string, _viewing: string[]) => {
+    if (id === "evidence") setArchiveOpen(true);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const openSticker = (action?: "png" | "pdf") => { setStickerZoom(1); setStickerOpen(true); setPendingStickerAction(action); };
-  const forwarderFacts = selectForwarderReportedVesselVoyage(shipment.data);
-  const assetStatus = [
-    ["Passport", item.identity.model],
-    ["Factory Model", item.identity.factoryModel],
-    ["Service Hours", "0.0"],
-    ["Status", stageText(shipment)],
-    ["Vessel", forwarderFacts.vesselName ?? "Shipment record unavailable"],
-    ["ETA", shipment.data?.eta ?? "Awaiting confirmation"],
-    ["Fleet Asset", "#001"],
-  ];
   const specificationGroups = Object.entries(
     item.specifications.reduce<Record<string, typeof item.specifications>>((groups, specification) => {
       (groups[specification.group ?? "General"] ??= []).push(specification);
@@ -487,7 +513,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
     }, {}),
   );
   return (
-    <div className="ardhi-documentary">
+    <div className={`ardhi-documentary ardhi-flagship${expo ? " is-expo" : ""}`}>
       <PassportHero titleId="ardhi-v2-title" image={item.heroImage} alt="SP-ARDHI-26 completed flagship fleet machine">
           <p className="eyebrow">SP-ARDHI-26</p>
           <h1 id="ardhi-v2-title">
@@ -496,32 +522,16 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Fleet Asset <span>#001</span>
           </h1>
           <p>
-            Factory Complete <b>·</b> {stageText(shipment)}
+            Factory Complete <b>·</b> {ardhiPortArrival.status}
           </p>
-          <div className="ardhi-v2-hero__actions">
-            <a href="#passport" onClick={() => setNowViewing(["Passport", "Identity", "SP-ARDHI-26"])}>📘 Passport</a>
-            <a href="#journey" onClick={() => setNowViewing(["Journey", "Shipment record", stageText(shipment)])}>🌎 Journey</a>
-            <a href="#history" onClick={() => setNowViewing(["History", "Export", "Factory departure"])}>📜 History</a>
-            <a href="#service" onClick={() => setNowViewing(["Service", "Future Record", "Awaiting commissioning"])}>🛠 Service</a>
-          </div>
+          <p className="flagship-hero-description">A compact tracked loader. A complete factory-to-field story.</p>
+          <button className="flagship-expo-toggle" type="button" aria-pressed={expo} onClick={toggleExpo}>{expo ? "Exit Equip Expo mode" : "Equip Expo mode"}</button>
       </PassportHero>
-      <nav className="passport-rail" aria-label="Equipment passport chapters">
-        <div className="shell">
-          <a href="#passport" onClick={() => setNowViewing(["Passport", "Identity", "SP-ARDHI-26"])}>Passport</a>
-          <a href="#journey" onClick={() => setNowViewing(["Journey", "Shipment record", stageText(shipment)])}>Journey</a>
-          <a href="#history" onClick={() => setNowViewing(["History", "Export", "Factory departure"])}>History</a>
-          <a href="#service" onClick={() => setNowViewing(["Service", "Future Record", "Awaiting commissioning"])}>Service</a>
-        </div>
-      </nav>
-      <aside className="mini-passport" aria-label={`SP-ARDHI-26 reading progress ${pageProgress}%`}>
-        <div>
-          <strong>SP-ARDHI-26</strong>
-          <span>{stageText(shipment)}</span>
-        </div>
-        <b>{lifecycleProgressText(shipment)}</b>
-        <i style={{ width: `${pageProgress}%` }} />
-      </aside>
-      <div className="now-viewing" aria-live="polite"><span>Now Viewing</span><strong>SP-ARDHI-26</strong>{nowViewing.map((part) => <span key={part}>→ {part}</span>)}</div>
+      <ArdhiMissionDashboard />
+      <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
+        <a href="#passport">Identity</a><a href="#journey">Journey</a><a href="#history">History</a><a href="#service">Service</a><a href="#documents">Documents</a>
+      </div></nav>
+      {expo && <Suspense fallback={<p className="shell">Preparing the Expo passport...</p>}><ArdhiExpo /></Suspense>}
       <section className="section shell ardhi-passport-ledger passport-reveal" id="passport" data-passport-reveal data-view="Passport|Identity|SP-ARDHI-26" aria-labelledby="passport-ledger-title">
         <div className="section-heading">
           <div>
@@ -530,61 +540,16 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </div>
           <p>Everything needed to identify and verify SP-ARDHI-26 in the first two minutes.</p>
         </div>
-        <dl className="asset-status-ribbon" aria-label="Asset status ribbon">
-          {assetStatus.map(([label, value]) => (
-            <div className={label === "Status" ? "is-active" : undefined} key={label}>
-              <dt>{label}</dt>
-              <dd>{value}</dd>
-            </div>
-          ))}
-        </dl>
-        <section className="sticker-document-reference" aria-labelledby="window-sticker-card-title">
-          <div><span aria-hidden="true">🏷</span><p className="eyebrow">Official Equipment Window Sticker</p><h3 id="window-sticker-card-title">SP-ARDHI-26</h3><p>Fleet Asset #001 · Official configuration record</p><dl><div><dt>Current Status</dt><dd>{item.statusLabel}</dd></div><div><dt>Last Updated</dt><dd>September 2026</dd></div></dl></div>
-          <div className="sticker-document-actions"><button type="button" onClick={() => openSticker()}>View Full Sticker</button><button type="button" onClick={() => openSticker("png")}>Download PNG</button><button type="button" onClick={() => openSticker("pdf")}>Download PDF</button></div>
-        </section>
-        <div className="ardhi-overview-grid" id="overview-title">
-          <article className="document-card">
-            <img src={image("sp-ardhi-26-yf380-manufacturer-preview.png")} alt="First-page preview of the YF380 manufacturer specification PDF" loading="lazy" decoding="async" />
-            <span>Manufacturer PDF</span>
-            <h3>YF380 Specification Sheet</h3>
-            <p>Shandong Infront Machinery Group Co., Ltd.</p>
-            <dl>
-              <div>
-                <dt>File size</dt>
-                <dd>1.16 MB</dd>
-              </div>
-              <div>
-                <dt>Pages</dt>
-                <dd>1</dd>
-              </div>
-              <div>
-                <dt>File type</dt>
-                <dd>PDF</dd>
-              </div>
-              <div>
-                <dt>Date</dt>
-                <dd>Aug 16, 2026</dd>
-              </div>
-            </dl>
-            <div>
-              <a href={item.documents[0]?.url} target="_blank" rel="noopener noreferrer">
-                View PDF
-              </a>
-              <a href={item.documents[0]?.url} download={item.documents[0]?.downloadName}>
-                Download PDF
-              </a>
-            </div>
-          </article>
-        </div>
+        <ArdhiMissionProfile item={item} />
         <details className="passport-specifications" id="specifications">
-          <summary><span>Specifications</span><strong>{item.specifications.length + 3} verified asset fields</strong></summary>
+          <summary><span>Specifications</span><strong>{item.specifications.length + 3} configuration fields</strong></summary>
           <div className="passport-specifications__groups">
             <section>
               <h3>Operational Record</h3>
               <dl>
                 <div><dt>Current owner</dt><dd>SmashPro Fleet</dd></div>
                 <div><dt>Commissioning</dt><dd>Pending</dd></div>
-                <div><dt>Service hours</dt><dd>0.0 verified hours</dd></div>
+                <div><dt>Service hours</dt><dd>0 recorded hours; commissioning pending</dd></div>
               </dl>
             </section>
             {specificationGroups.map(([group, specifications]) => (
@@ -600,53 +565,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </div>
         </details>
       </section>
-      <section className={`section shell ardhi-document-library passport-reveal ${history.find(({ id }) => id === expandedRecord)?.documents ? "is-linked" : ""}`} id="documents" data-passport-reveal data-view="Documents|Library|Verification records" aria-labelledby="document-library-title">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Document Library</p>
-            <h2 id="document-library-title">Records that stay with the machine.</h2>
-          </div>
-          <p>Verified files are available now. Awaiting-verification cards preserve the record structure without claiming documents that have not arrived.</p>
-        </div>
-        <div>
-          <article className="is-available">
-            <img src={item.heroImage} alt="SP-ARDHI-26 equipment passport cover" loading="lazy" decoding="async" />
-            <span className="document-status is-verified">Verified</span>
-            <h3>Equipment Passport</h3>
-            <p>Permanent identity, configuration, journey, service, work, and maintenance history.</p>
-            <small>Updated Sep 2, 2026 · Web passport</small>
-            <a href="#passport-ledger-title">Open Passport</a>
-          </article>
-          <article className="is-available window-sticker-library-card">
-            <img src={image("sp-ardhi-26-window-sticker-preview.png")} alt="Preview of the official SP-ARDHI-26 equipment window sticker" loading="lazy" decoding="async" />
-            <span className="document-status is-verified">Verified</span><h3>Equipment Window Sticker</h3><p>Permanent configuration and identity certificate for SP-ARDHI-26.</p><small>Updated September 2026 · PNG / PDF / Print</small><button type="button" onClick={() => openSticker()}>View Full Sticker</button>
-          </article>
-          {item.documents.filter(({ kind, publicDisplay, url }) => kind === "manual" && publicDisplay && url).map((document) => (
-            <article className="is-available operator-manual-library-card" key={document.id}>
-              <img src={image("sp-ardhi-26-operator-manual-loader-preview.png")} alt="Side-view line illustration of the mini loader from the verified operator manual" loading="lazy" decoding="async" />
-              <span className="document-status is-verified">Verified</span>
-              <h3>{document.title}</h3>
-              <p>{document.description}</p>
-              <small>Revision: {document.revision} · Source: {document.source} · Received: {document.dateReceived}</small>
-              <div className="document-library-actions">
-                <a href={document.url} target="_blank" rel="noopener noreferrer">View PDF</a>
-                <a href={document.url} download={document.downloadName}>Download PDF</a>
-              </div>
-            </article>
-          ))}
-          {["Maintenance Manual", "Parts Manual", "Bill of Lading", "Packing List", "Inspection Sheet"].map((title, index) => (
-            <article className="is-reserved" key={title}>
-              <div aria-hidden="true">
-                <span>⌁</span> Blueprint record
-              </div>
-              <span className="document-status is-pending">{index < 2 ? "Pending Arrival" : "Awaiting Verification"}</span>
-              <h3>{title}</h3>
-              <p>This slot activates when a verified public file enters the equipment record.</p>
-              <small>Upon arrival · Status pending</small>
-            </article>
-          ))}
-        </div>
-      </section>
+      <ArdhiMissionTimeline />
       <ShipmentJourney result={shipment} refresh={shipment.refresh} />
       <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Documented archive" aria-labelledby="ardhi-history-title">
         <div className="shell">
@@ -657,6 +576,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             </div>
             <p>Expand any entry for narrative, decisions, media, supplier notes, technical notes, payments, attachments, and document counts.</p>
           </div>
+          <details className="flagship-disclosure flagship-history-disclosure" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}><summary>Explore the complete historical logbook</summary>
           <ol className="ardhi-expandable-timeline">
             {history.map((record) => (
               <Fragment key={record.id}>
@@ -691,13 +611,14 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
                       <span>{record.date}</span>
                       <strong>{record.title}</strong>
                       <em>
-                        {record.status} · {historyPhaseByRecord[record.id] === "Production" ? "Factory" : "Archive"}
+                        {record.confidence ?? record.status} · {historyPhaseByRecord[record.id] === "Production" ? "Factory" : "Archive"}
                         {(record.photos?.length ?? 0) + (record.videos?.length ?? 0) > 0 && ` · ${(record.photos?.length ?? 0) + (record.videos?.length ?? 0)} media`}
                         {!!record.documents && ` · ${record.documents} documents`}
                       </em>
                     </summary>
                     <div className="history-detail">
                       <p>{record.narrative}</p>
+                      {record.mediaChapter && <button className="ardhi-history-media-link" type="button" onClick={() => { setChapter(record.mediaChapter!); setQuery(""); scrollToRecord("evidence", ["Evidence", record.title, "Original media"]); }}>{record.mediaLabel}</button>}
                       {record.decision || linkedDecisions[record.id] ? (
                         <aside>
                           <b>Decision</b>
@@ -741,7 +662,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
                       {record.videos?.length ? (
                         <div className="history-media">
                           {record.videos.map((src) => (
-                            <video key={src} controls preload="metadata" poster={image("sp-ardhi-26-factory-departure-poster-2026-09-02.jpg")}>
+                            <video key={src} controls preload="none" poster={image("sp-ardhi-26-factory-departure-poster-2026-09-02.jpg")}>
                               <source src={src} type="video/mp4" />
                             </video>
                           ))}
@@ -758,7 +679,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
                         </div>
                         <div>
                           <dt>Status</dt>
-                          <dd>{record.status}</dd>
+                          <dd>{record.confidence ?? record.status}</dd>
                         </div>
                         <div>
                           <dt>Specifications</dt>
@@ -776,10 +697,11 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
                 </li>
               </Fragment>
             ))}
-          </ol>
+          </ol></details>
         </div>
       </section>
-      <section className="ardhi-payment-section passport-reveal" data-passport-reveal aria-labelledby="payments-title">
+      <details className="shell flagship-disclosure flagship-payment"><summary>Acquisition milestones &amp; payment history</summary>
+      <section className="ardhi-payment-section" aria-labelledby="payments-title">
         <div className="shell">
           <div className="section-heading">
             <div>
@@ -807,6 +729,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </ol>
         </div>
       </section>
+      </details>
       <section className="section shell ardhi-archive passport-reveal" id="evidence" data-passport-reveal data-view="Evidence|Historical Archive|Factory Build" aria-labelledby="archive-title">
         <div className="section-heading">
           <div>
@@ -815,14 +738,8 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </div>
           <p>Each authentic asset has one primary home. Timeline entries reference the record without repeating media.</p>
         </div>
-        <nav className="archive-chapters" aria-label="SP-ARDHI-26 historical chapters">
-          {chapters.map(({ id, label }, index) => (
-            <button type="button" className={chapter === id ? "is-active" : ""} aria-pressed={chapter === id} onClick={() => selectChapter(id)} key={id}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              {label}
-            </button>
-          ))}
-        </nav>
+        <details className="flagship-disclosure" open={archiveOpen} onToggle={event => setArchiveOpen(event.currentTarget.open)}><summary>Explore factory, shipping &amp; field media</summary>
+        <label className="flagship-archive-select">Archive chapter<select value={chapter} onChange={event => selectChapter(event.target.value as ArchiveChapter)}>{chapters.map(({ id, label }) => <option key={id} value={id}>{label}</option>)}</select></label>
         <>
           <div className="archive-tools">
             <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={`Search ${selectedChapter.label}`} aria-label={`Search ${selectedChapter.label} media`} />
@@ -832,7 +749,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               <article key={media.src} className={media.kind === "video" ? "is-video" : undefined}>
                 {media.kind === "video" ? (
                   <div className="archive-video">
-                    <video controls preload="metadata" poster={media.poster}>
+                    <video controls preload="none" poster={media.poster}>
                       <source src={media.src} type="video/mp4" />
                     </video>
                     <span className="archive-play" aria-hidden="true">
@@ -859,26 +776,92 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             ))}
           </div>
           {!filteredMedia.length ? <p className="empty-state">No verified media has been added to this chapter yet.</p> : null}
-        </>
+        </></details>
       </section>
-      <PartnerFieldSupport partners={item.partners} />
-      <section className="section shell ardhi-service-record passport-reveal" id="service" data-passport-reveal data-view="Service|Future Record|Awaiting commissioning" aria-labelledby="service-record-title">
+      <ArdhiFleetConnections item={item} />
+      <ArdhiServiceRecord />
+      <section className={`section shell ardhi-document-library passport-reveal ${history.find(({ id }) => id === expandedRecord)?.documents ? "is-linked" : ""}`} id="documents" data-passport-reveal data-view="Documents|Library|Verification records" aria-labelledby="document-library-title">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Future Record</p>
-            <h2 id="service-record-title">Service and operational history.</h2>
+            <p className="eyebrow">Document Library</p>
+            <h2 id="document-library-title">Records that stay with the machine.</h2>
           </div>
-          <p>Commissioning, jobs, operating hours, inspections, attachments, and maintenance will accumulate here as verified events in this same passport.</p>
+          <p>The permanent identity, operating references and shipment files. Pending records activate after public review.</p>
         </div>
-        <div className="service-record-status">
-          <span>Current state</span>
-          <strong>Awaiting commissioning</strong>
-          <small>0.0 verified service hours</small>
+        <div>
+          <article className="document-card">
+            <img src={image("sp-ardhi-26-yf380-manufacturer-preview.png")} alt="First-page preview of the YF380 manufacturer specification PDF" loading="lazy" decoding="async" />
+            <span>Manufacturer PDF</span>
+            <h3>YF380 Specification Sheet</h3>
+            <p>Shandong Infront Machinery Group Co., Ltd.</p>
+            <dl>
+              <div>
+                <dt>File size</dt>
+                <dd>1.16 MB</dd>
+              </div>
+              <div>
+                <dt>Pages</dt>
+                <dd>1</dd>
+              </div>
+              <div>
+                <dt>File type</dt>
+                <dd>PDF</dd>
+              </div>
+              <div>
+                <dt>Date</dt>
+                <dd>Aug 16, 2026</dd>
+              </div>
+            </dl>
+            <div>
+              <a href={item.documents[0]?.url} target="_blank" rel="noopener noreferrer">
+                View PDF
+              </a>
+              <a href={item.documents[0]?.url} download={item.documents[0]?.downloadName}>
+                Download PDF
+              </a>
+            </div>
+          </article>
+          <article className="is-available">
+            <img src={item.heroImage} alt="SP-ARDHI-26 equipment passport cover" loading="lazy" decoding="async" />
+            <span className="document-status is-verified">Verified</span>
+            <h3>Equipment Passport</h3>
+            <p>Permanent identity, configuration, journey, service, work, and maintenance history.</p>
+            <small>Updated October 9, 2026 · Web passport</small>
+            <a href="#passport-ledger-title">Open Passport</a>
+          </article>
+          <article className="is-available window-sticker-library-card">
+            <img src={image("sp-ardhi-26-window-sticker-preview.png")} alt="Preview of the official SP-ARDHI-26 equipment window sticker" loading="lazy" decoding="async" />
+            <span className="document-status is-verified">Verified</span><h3>Equipment Window Sticker</h3><p>Permanent configuration and identity certificate for SP-ARDHI-26.</p><small>Updated September 2026 · PNG / PDF / Print</small><button type="button" onClick={() => openSticker()}>View Full Sticker</button>
+          </article>
+          {item.documents.filter(({ kind, publicDisplay, url }) => kind === "manual" && publicDisplay && url).map((document) => (
+            <article className="is-available operator-manual-library-card" key={document.id}>
+              <img src={image("sp-ardhi-26-operator-manual-loader-preview.png")} alt="Side-view line illustration of the mini loader from the verified operator manual" loading="lazy" decoding="async" />
+              <span className="document-status is-verified">Verified</span>
+              <h3>{document.title}</h3>
+              <p>{document.description}</p>
+              <small>Revision: {document.revision} · Source: {document.source} · Received: {document.dateReceived}</small>
+              <div className="document-library-actions">
+                <a href={document.url} target="_blank" rel="noopener noreferrer">View PDF</a>
+                <a href={document.url} download={document.downloadName}>Download PDF</a>
+              </div>
+            </article>
+          ))}
+          {["Maintenance", "Bill of Lading", "Packing List", "Inspection"].map((title, index) => (
+            <article className="is-reserved" key={title}>
+              <div aria-hidden="true">
+                <span>⌁</span> Blueprint record
+              </div>
+              <span className="document-status is-pending">{index < 2 ? "Pending Arrival" : "Awaiting Verification"}</span>
+              <h3>{title}</h3>
+              <p>This slot activates when a verified public file enters the equipment record.</p>
+              <small>Upon arrival · Status pending</small>
+            </article>
+          ))}
         </div>
       </section>
       {stickerOpen ? <div className="sticker-viewer-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setStickerOpen(false); }}><div className="sticker-viewer" id="window-sticker-viewer" ref={stickerModalRef} role="dialog" aria-modal="true" aria-labelledby="sticker-viewer-title"><header><div><p className="eyebrow">Official equipment certificate</p><h2 id="sticker-viewer-title">Equipment Window Sticker</h2></div><div className="sticker-viewer__tools"><button type="button" onClick={() => setStickerZoom((zoom) => Math.max(.75, zoom - .25))} aria-label="Zoom out">−</button><output aria-label="Current zoom">{Math.round(stickerZoom * 100)}%</output><button type="button" onClick={() => setStickerZoom((zoom) => Math.min(2, zoom + .25))} aria-label="Zoom in">+</button><button type="button" onClick={() => setPendingStickerAction("png")}>Download PNG</button><button type="button" onClick={() => setPendingStickerAction("pdf")}>Download PDF</button><button type="button" onClick={() => window.print()}>Print</button><button type="button" onClick={() => setStickerOpen(false)}>Close</button></div></header><div className="sticker-viewer__viewport" aria-label="Zoomable and pannable window sticker"><div className="sticker-viewer__stage" style={{ width: `${stickerZoom * 100}%` }}><div style={{ transform: `scale(${stickerZoom})` }}><WindowSticker item={item} packages={packages} scores={scores} compact showActions={false}/></div></div></div></div></div> : null}
       {lightbox ? (
-        <div className="media-lightbox" role="dialog" aria-modal="true" aria-label={lightbox.alt} onClick={() => setLightbox(undefined)}>
+        <div className="media-lightbox" ref={lightboxRef} role="dialog" aria-modal="true" aria-label={lightbox.alt} onClick={() => setLightbox(undefined)}>
           <button type="button" onClick={() => setLightbox(undefined)} aria-label="Close media lightbox">
             ×
           </button>

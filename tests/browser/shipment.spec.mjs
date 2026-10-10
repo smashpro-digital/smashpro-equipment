@@ -13,19 +13,21 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.shipment-facts')).toContainText('Forwarder-reported voyage 1374-016E');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
-  await expect(page.locator('.mini-passport')).toContainText('Ocean transit confirmed · 4 phases pending');
+  await expect(page.locator('#mission-dashboard')).toContainText('Port Processing');
   await expect(page.locator('.atlas-status')).toContainText('SmashPro Atlas');
   await expect(page.locator('.atlas-status')).toContainText('Ocean context');
   await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
-  await expect(page.locator('.atlas-status__layers')).toContainText('marine');
-  await expect(page.locator('.atlas-status__layers')).toContainText('weather');
+  // This fixture publishes map primitives only, not marine/weather enrichment.
+  await expect(page.locator('.atlas-status__layers small')).toHaveCount(0);
   await expect(page.locator('.shipment-map-empty')).toHaveCount(0);
   await expect(page.locator('.shipment-map-summary')).toContainText('Verified vessel checkpoint');
   await expect(page.locator('.shipment-map-summary')).toContainText('Savannah anchorage · coarse reference point only, not live GPS');
   await expect(page.locator('.shipment-imagery-empty')).toContainText('No approved live vessel-position observation available');
   await expect(page.locator('.shipment-marker.checkpoint')).toBeVisible();
   await expect(page.locator('.shipment-marker.vessel')).toHaveCount(0);
-  await expect(page.locator('main')).not.toContainText('Verified vessel');
+  // A verified checkpoint is legitimate location evidence; the vessel identity
+  // field must still describe the forwarder's report rather than promote it.
+  await expect(page.locator('.shipment-facts')).not.toContainText('Verified vessel');
   await expect(page.locator('main')).not.toContainText('satellite observations');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
@@ -77,7 +79,9 @@ async function open(page, fixture, width = 1440) {
   await page.route('**/api/customer/catalog.php*', route => route.fulfill({ json: { ok: true, services: [] } }));
   await page.route(endpoint, route => fixture ? route.fulfill({ json: fixture }) : route.fulfill({ status: 503, body: 'unavailable' }));
   await page.goto('/equipment/sp-ardhi-26.html');
+  await page.locator('.ardhi-historical-logistics > summary').click();
   await page.locator('#journey').scrollIntoViewIfNeeded();
+  await page.locator('.shipment-map').scrollIntoViewIfNeeded();
   await expect(page.locator('.shipment-status-line')).not.toContainText('Checking shipment');
 }
 async function capture(page, name, fixture = false) {
@@ -197,7 +201,9 @@ test('MZIGO Passport shows factory Atlas context without inventing coordinates o
   await expect(atlas).toContainText('No public coordinates are published');
   await expect(atlas.locator('.atlas-status__layers')).toContainText('boundaries');
   await expect(atlas.locator('.atlas-status__layers')).toContainText('imagery');
-  await expect(page.locator('body')).toContainText('Shipping Preparation');
+  // The unchanged canonical passport has advanced to the October 7 record;
+  // the synthetic Atlas response must not roll that equipment status back.
+  await expect(page.locator('body')).toContainText('Qingdao Export Staging');
   await expect(page.locator('body')).not.toContainText('Ocean departure confirmed');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

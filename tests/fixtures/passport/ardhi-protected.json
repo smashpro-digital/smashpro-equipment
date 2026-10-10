@@ -2,7 +2,7 @@
   "base": "a190948",
   "historyBlockHash": "3de7645424f355f6f027a69a1613c7c20b6006231ee39531a110eea893c11a11",
   "files": {
-    "src/components/ArdhiPassportJourney.tsx": "346eae9ca90d611b3f64ac5e39fe174e8ffc955eb729996a457e05722b6921ac",
+    "src/components/ArdhiPassportJourney.tsx": "e0325a2fc76d148462b6a61f2db31765e7174b7233171dfa160e190b1f822533",
     "src/styles/ardhi-passport-v2.css": "125a8de1fb7002eb9133463964261dff94ef052abc6664538d3dfb579a4ad246",
     "src/styles/ardhi-passport-compact-overrides.css": "3c2fe1e13922c64d08175e5f92ae3fd111e04fb7e81ba369b0b57d9787a7d5a7",
     "src/styles/ardhi-manufacturer-pdf-compact.css": "0aa0af89268a2fab5b529da2dc528f8c200a846b6bb76bcee27f975f06efd24b",
@@ -13,11 +13,11 @@
     "src/app/manufacturerProfileMount.tsx": "b19cc92bdc39917093da4becaf7763b21dcdb74f8d84f21bde860ecc46a41821",
     "src/app/negotiationEvidenceMedia.ts": "98be69995801689cdcc93cf5587e55bce2233f8432a1ee5d34447a78c2129829",
     "src/domain/calendarMetrics.ts": "ca79dea318947e4655c1054197c5c28d641e3bd4112b3e66650c376d7d0afac1",
-    "src/data/equipment.ts": "223f8507147fdea920998551348a2b68d99bc6fb991694852b17e9fa8e598d11",
+    "src/data/equipment.ts": "c529317c6b0e03da901a22f32e0eff495975b821bf8c37442170507673d01f5e",
     "src/pages/EquipmentDetailPage.tsx": "93e28fc8f21032656e549621d87acab6e7558b7550f8f8b97e59ccb4cc581a58",
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
-    "src/pages/ArdhiPassportPage.tsx": "c5ae30aa7fbee07b912e8654d3c176059ca3496da4442bb7410d11e1c0e327c6"
+    "src/pages/ArdhiPassportPage.tsx": "539424e141749b9c4389f868912e70630781d502febe9f10a115da099fdb014b"
   },
-  "review": "October 7 evidence update on 0e7c51a: only authorized MZIGO source changes refreshed. Protected mature renderers, shared components/styles and deploy gates retained. ARDHI equipment block unchanged from base; responsive captures compare that base.",
-  "equipmentBlockHash": "e828d09d679ca8f55c430759c1dd71398612e85aa77366e201fd1ce115f4fb91"
+  "review": "October 10 authorized flagship v4 presentation, on reviewed October 9 ARDHI arrival baseline. Only ArdhiPassportJourney and ArdhiPassportPage hashes refreshed for this sprint. Existing history block hash, equipment block hash, shared styles, MZIGO, public-index validator and deployment gates remain protected. See SP-ARDHI-26-V4-AUDIT.md and v4 browser coverage.",
+  "equipmentBlockHash": "a27c8c37b2393a83ae31ce36209f27b06a802fb3c44ffb3fc69f6e5fdf061fe3"
 }

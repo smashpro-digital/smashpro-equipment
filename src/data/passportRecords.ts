@@ -8,6 +8,7 @@ import {
 } from "./liftmateEquipment";
 import { DRIVE_EVIDENCE_HISTORY } from "./ardhiEvidenceHistory";
 import { normalizeMzigo } from "./mzigoCanonicalPassport";
+import { ardhiPortArrival } from "./ardhiPortArrival";
 import type { Equipment } from "../types/equipment";
 import type {
   CanonicalPassport,
@@ -61,7 +62,7 @@ function fromEquipment(
       build_type,
       hero_media_id: `${id}-hero`,
       current_lifecycle_stage:
-        build_type === "partner_build" ? "configuration" : "ocean_freight",
+        build_type === "partner_build" ? "configuration" : id === "SP-ARDHI-26" ? "import_delivery" : "ocean_freight",
       status_label: item.statusLabel,
       status_detail: item.statusDetail ?? "",
       public_path: item.publicPath,
@@ -400,8 +401,26 @@ ardhi.build.sections.journey = {
   eyebrow: "Factory-to-field record",
   title: "Evidence preserves the lifecycle.",
   description:
-    "Factory completion and export preparation are documented. Ocean transit is forwarder-reported; live shipment verification remains owned by Digital HQ. Arrival, commissioning, field validation and service are pending.",
+    ardhiPortArrival.summary,
 };
+const portPhoto = ardhi.records.find(record => record.id === "ardhi-us-port-arrival")!;
+Object.assign(portPhoto, { media_kind: "shipping", source_type: "manufacturer", evidence_state: "verified", productionEvidence: false, factoryEvidence: false });
+ardhi.records.push({
+  id: "ardhi-manufacturer-port-arrival", asset_id: ardhi.asset.id,
+  kind: "evidence", title: ardhiPortArrival.status,
+  detail: `${ardhiPortArrival.summary} Manufacturer confirmation relayed by the owner; arrival date not supplied.`,
+  evidence_state: "verified", source_type: "manufacturer", source_ref: ardhiPortArrival.source,
+  source_visibility: "public", visibility: "public", sort_order: 210,
+  stage_id: "import_delivery", evidence_ids: [portPhoto.id],
+});
+ardhi.records.push({
+  id: "ardhi-ocean-voyage-complete", asset_id: ardhi.asset.id,
+  kind: "lifecycle_event", title: "Ocean Voyage Complete",
+  detail: "Manufacturer-confirmed arrival at the U.S. destination port. Customs and delivery remain pending.",
+  evidence_state: "verified", source_type: "manufacturer", source_visibility: "public",
+  visibility: "public", sort_order: 209, stage_id: "ocean_freight", event_type: "completion",
+  evidence_ids: ["ardhi-manufacturer-port-arrival"],
+});
 // Preserve the full historical record; commercially sensitive entries are excluded
 // from the new projection. The protected legacy renderer retains current behavior.
 const commercialHistoryIds = new Set([
@@ -483,8 +502,7 @@ ardhi.records.push({
   event_type: "production_started",
   evidence_ids: [production.id],
 });
-// No new shipping completion is inferred here. HQ remains authoritative at runtime
-// on the protected renderer; the repository record only reports ocean transit.
+// Preserve the earlier departure evidence separately from the later reviewed arrival.
 const reportedTransit = ardhi.records.find(r => r.id === "ardhi-ocean-departure-reported")!;
 reportedTransit.source_type = "supplier";
 reportedTransit.evidence_classification = "in_transit";
