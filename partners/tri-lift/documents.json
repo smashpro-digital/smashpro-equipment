@@ -1,0 +1,46 @@
+[
+  {
+    "id": "rental-quote-20261009",
+    "title": "Rental quote",
+    "filename": "10-9-26 Smash Pro.pdf",
+    "path": "quotes/10-9-26 Smash Pro.pdf",
+    "source_path": "Tri-Lift Industries/01 - Quotes & Rates/10-9-26 Smash Pro.pdf",
+    "sha256": "65ad04a8da15c82f00f92338e85968a76919683c3586887de1772f15e81ec5a1",
+    "bytes": 476562,
+    "thumbnail": "previews/rental-quote-20261009.png",
+    "visibility": "private_original"
+  },
+  {
+    "id": "credit-application",
+    "title": "Credit application",
+    "filename": "Credit Application for Account Setup - NC.pdf",
+    "path": "forms/Credit Application for Account Setup - NC.pdf",
+    "source_path": "Tri-Lift Industries/02 - Account Setup/Credit Application for Account Setup - NC.pdf",
+    "sha256": "a9663dc7638008497108d10cc014b509ae39c4aa24e8aff26fd22a319044d58b",
+    "bytes": 569234,
+    "thumbnail": "previews/credit-application.png",
+    "visibility": "private_original"
+  },
+  {
+    "id": "coi-request",
+    "title": "Certificate of insurance request",
+    "filename": "Request for COI.pdf",
+    "path": "insurance/Request for COI.pdf",
+    "source_path": "Tri-Lift Industries/02 - Account Setup/Request for COI.pdf",
+    "sha256": "63342bae871e04e27e314b57b32e572cec1a7277f101829648f35397d35f4693",
+    "bytes": 28678,
+    "thumbnail": "previews/coi-request.png",
+    "visibility": "private_original"
+  },
+  {
+    "id": "payment-reference",
+    "title": "Payment reference",
+    "filename": "TRI-LIFT-INDUSTRIES-ACH---WIRE-IN-DETAIL-EQUIPMENT-PURCHASES-092424c.pdf",
+    "path": "archive/payment-references/TRI-LIFT-INDUSTRIES-ACH---WIRE-IN-DETAIL-EQUIPMENT-PURCHASES-092424c.pdf",
+    "source_path": "Tri-Lift Industries/05 - Payment References/TRI-LIFT-INDUSTRIES-ACH---WIRE-IN-DETAIL-EQUIPMENT-PURCHASES-092424c.pdf",
+    "sha256": "97a5d497df2126eb912f217da2eb9700433333697ce8e0cfdb21f22f654dab79",
+    "bytes": 27738,
+    "thumbnail": "previews/payment-reference.png",
+    "visibility": "private_original"
+  }
+]
