@@ -4,6 +4,7 @@ import type { Equipment, GalleryGroup, GalleryImage } from "../types/equipment";
 import { calculatePackages, calculatePassportScores } from "../domain/passport";
 import { WindowSticker } from "./WindowSticker";
 import { ArdhiMissionDashboard, ArdhiMissionProfile, ArdhiMissionTimeline, ArdhiServiceRecord, ArdhiFleetConnections } from "./ArdhiFlagship";
+import { isExpoSearch } from "../data/ardhiExpo";
 const ArdhiExpo = lazy(() => import("./ArdhiExpo"));
 import { ShipmentJourney } from "./ShipmentJourney";
 import { useShipment } from "../hooks/useShipment";
@@ -355,10 +356,10 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const shipment = useShipment();
   const [historyOpen, setHistoryOpen] = useState(false);
   const [archiveOpen, setArchiveOpen] = useState(false);
-  const [expo, setExpo] = useState(() => new URLSearchParams(window.location.search).get("expo") === "1");
+  const [expo, setExpo] = useState(() => isExpoSearch(window.location.search));
   const toggleExpo = () => {
     const url = new URL(window.location.href);
-    if (expo) url.searchParams.delete("expo"); else url.searchParams.set("expo", "1");
+    if (expo) url.searchParams.delete("expo"); else url.searchParams.set("expo", "true");
     window.history.replaceState(null, "", url); setExpo(!expo);
   };
   const [expandedRecord, setExpandedRecord] = useState<string>();
@@ -524,14 +525,15 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <p>
             Factory Complete <b>·</b> {ardhiPortArrival.status}
           </p>
-          <p className="flagship-hero-description">A compact tracked loader. A complete factory-to-field story.</p>
+          <p className="flagship-hero-description">{expo ? "Welcome to the future of fleet management. You're not looking at a brochure. You're looking at the digital identity of a real commercial machine." : "A compact tracked loader. A complete factory-to-field story."}</p>
+          {expo && <a className="sponsor-button sponsor-hero-cta" href="#expo-opportunities">Find your opportunity</a>}
           <button className="flagship-expo-toggle" type="button" aria-pressed={expo} onClick={toggleExpo}>{expo ? "Exit Equip Expo mode" : "Equip Expo mode"}</button>
       </PassportHero>
+      {expo && <Suspense fallback={<p className="shell">Preparing the Expo experience...</p>}><ArdhiExpo item={item} /></Suspense>}
       <ArdhiMissionDashboard />
       <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
         <a href="#passport">Identity</a><a href="#journey">Journey</a><a href="#history">History</a><a href="#service">Service</a><a href="#documents">Documents</a>
       </div></nav>
-      {expo && <Suspense fallback={<p className="shell">Preparing the Expo passport...</p>}><ArdhiExpo /></Suspense>}
       <section className="section shell ardhi-passport-ledger passport-reveal" id="passport" data-passport-reveal data-view="Passport|Identity|SP-ARDHI-26" aria-labelledby="passport-ledger-title">
         <div className="section-heading">
           <div>
@@ -565,7 +567,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </div>
         </details>
       </section>
-      <ArdhiMissionTimeline />
+      <ArdhiMissionTimeline expo={expo} />
       <ShipmentJourney result={shipment} refresh={shipment.refresh} />
       <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Documented archive" aria-labelledby="ardhi-history-title">
         <div className="shell">
@@ -778,7 +780,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           {!filteredMedia.length ? <p className="empty-state">No verified media has been added to this chapter yet.</p> : null}
         </></details>
       </section>
-      <ArdhiFleetConnections item={item} />
+      <ArdhiFleetConnections item={item} showPartners={!expo} />
       <ArdhiServiceRecord />
       <section className={`section shell ardhi-document-library passport-reveal ${history.find(({ id }) => id === expandedRecord)?.documents ? "is-linked" : ""}`} id="documents" data-passport-reveal data-view="Documents|Library|Verification records" aria-labelledby="document-library-title">
         <div className="section-heading">

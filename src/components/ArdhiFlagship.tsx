@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { Equipment } from '../types/equipment';
 import { ardhiPortArrival } from '../data/ardhiPortArrival';
+import { sponsorRoadmap } from '../data/ardhiExpo';
 import { commissioningChecks, firstJob, firstJobPresentation, futureAttachments, missionProfile, missionTimeline, serviceEntries, verifiedEvidence } from '../data/ardhiFlagship';
 
 export function ArdhiMissionDashboard() {
@@ -26,13 +27,14 @@ export function ArdhiMissionProfile({ item }: { item: Equipment }) {
   </>;
 }
 
-export function ArdhiMissionTimeline() {
-  const complete = missionTimeline.filter(step => step.state === 'complete').length;
+export function ArdhiMissionTimeline({ expo = false }: { expo?: boolean }) {
+  const timeline = expo ? sponsorRoadmap : missionTimeline;
+  const complete = timeline.filter(step => step.state === 'complete').length;
   return <section className="shell flagship-roadmap" aria-labelledby="mission-timeline-title">
     <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Shipping is the current chapter. The ocean leg is complete; port release is next.</p></header>
-    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={missionTimeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${missionTimeline.length} milestones complete; shipping in progress`}><span style={{ '--mission-progress': `${complete / missionTimeline.length * 100}%` } as CSSProperties} /></div>
-    <ol>{missionTimeline.map((step, i) => <li key={step.title} className={`is-${step.state}`} aria-current={step.state === 'current' ? 'step' : undefined}><span>{String(i + 1).padStart(2, '0')}</span><a href={step.href}>{step.title}</a><small>{step.detail}</small></li>)}</ol>
-    <p className="flagship-note">Hours are record milestones, not manufacturer service intervals. Follow the operator manual for maintenance.</p>
+    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; customs release pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
+    <ol>{timeline.map((step, i) => <li key={step.title} className={`is-${step.state}`} aria-current={step.state === 'current' ? 'step' : undefined}><span>{String(i + 1).padStart(2, '0')}</span><a href={step.href}>{step.title}</a><small>{step.detail}</small></li>)}</ol>
+    <p className="flagship-note">{expo ? 'Future milestones are ambitions, not booked jobs, awarded contracts or connected automation. Each invites a scoped contribution.' : 'Hours are record milestones, not manufacturer service intervals. Follow the operator manual for maintenance.'}</p>
   </section>;
 }
 
@@ -50,16 +52,16 @@ export function ArdhiServiceRecord() {
   </section>;
 }
 
-export function ArdhiFleetConnections({ item }: { item: Equipment }) {
+export function ArdhiFleetConnections({ item, showPartners = true }: { item: Equipment; showPartners?: boolean }) {
   const partners = (item.partners ?? []).filter(partner => ["confirmed", "active", "completed"].includes(partner.status));
   return <section className="section shell flagship-ecosystem" aria-labelledby="fleet-connections-title">
     <header><p className="eyebrow">People / Platforms / Possibilities</p><h2 id="fleet-connections-title">A machine within a fleet.</h2></header>
-    <h3>Partners</h3><div className="flagship-partners">
+    {showPartners && <><h3>Partners</h3><div className="flagship-partners">
       {partners.map(partner => <article key={partner.id}><small>Manufacturer · {partner.status}</small><h4>{partner.brand}</h4><p>{partner.description}</p>{partner.storyUrl && <a href={partner.storyUrl}>Build record ↗</a>}</article>)}
       <article><small>Logistics · Pending</small><h4>Tri-Lift</h4><p>Proposed field support. Appointment and engagement pending.</p></article>
       <article><small>Freight · Pending</small><h4>Partner confirmation</h4><p>Public freight relationship to be confirmed.</p></article>
       <article><small>Sponsors · Open</small><h4>Build the next chapter.</h4><p>Attachment trials, field support and service opportunities.</p></article>
-    </div>
+    </div></>}
     <h3>Fleet connections</h3><p className="flagship-note">Shared fleet context. This sequence does not certify a towing configuration or transport readiness.</p><ol className="flagship-connections"><li><a href="/rebirth/">Project Rebirth</a></li><li><a href="#passport">SP-ARDHI-26</a></li><li><a href="/equipment/sp-mzigo-26.html">MZIGO</a></li><li><a href="/equipment/">Trailer · Planned</a></li><li><a href="/equipment/">Future Fleet</a></li></ol>
   </section>;
 }

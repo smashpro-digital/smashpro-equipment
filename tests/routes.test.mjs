@@ -422,7 +422,7 @@ test("equipment partners render only public relationship statuses", () => {
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   assert.match(component, /\["confirmed", "active", "completed"\]/);
   assert.match(component, /if \(!visiblePartners\.length\) return null/);
-  assert.match(readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8"), /<ArdhiFleetConnections item=\{item\} \/>/);
+  assert.match(readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8"), /<ArdhiFleetConnections item=\{item\} showPartners=\{!expo\} \/>/);
   assert.match(data, /brand: "Shandong Infront Machinery Group Co\., Ltd\."[\s\S]*status: "completed"/);
   for (const outreachOnlyBrand of ["Blue Diamond Attachments", "Skid Steer Solutions", "Eterra Attachments", "Ergodyne", "Radians", "Mechanix Wear", "Pyramex", "Strapinno", "Spytec", "Hapn"]) {
     assert.doesNotMatch(data, new RegExp(outreachOnlyBrand), `${outreachOnlyBrand} must not be published without a confirmed relationship`);
