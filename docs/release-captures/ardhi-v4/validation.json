@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-10",
+  "branch": "feature/sp-ardhi-v4-flagship-passport",
+  "baseline": "1a50b88 plus reviewed October 9 ARDHI work",
+  "unit_suite": {
+    "passed": 124
+  },
+  "final_focused_unit_checks": {
+    "passed": 55
+  },
+  "flagship_production_browser": {
+    "passed": 6
+  },
+  "shipment_browser": {
+    "suite_passed": 11,
+    "corrected_expectations_recheck_passed": 3,
+    "remaining_failures": 0
+  },
+  "typecheck": "passed",
+  "production_build": "passed",
+  "public_artifacts": "passed",
+  "widths": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "history_rows": 52,
+  "deployed": false,
+  "operational_integration": "read-only public commissioning/service slots; HQ adapter pending"
+}

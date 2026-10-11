@@ -1,0 +1,174 @@
+{
+  "checks": [
+    {
+      "screen": "public",
+      "width": 320,
+      "scrollWidth": 320,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "operator",
+      "width": 320,
+      "scrollWidth": 320,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkin",
+      "width": 320,
+      "scrollWidth": 320,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkout",
+      "width": 320,
+      "scrollWidth": 320,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "mechanic",
+      "width": 320,
+      "scrollWidth": 320,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "command",
+      "width": 320,
+      "scrollWidth": 320,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "public",
+      "width": 390,
+      "scrollWidth": 390,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "operator",
+      "width": 390,
+      "scrollWidth": 390,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkin",
+      "width": 390,
+      "scrollWidth": 390,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkout",
+      "width": 390,
+      "scrollWidth": 390,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "mechanic",
+      "width": 390,
+      "scrollWidth": 390,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "command",
+      "width": 390,
+      "scrollWidth": 390,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "public",
+      "width": 768,
+      "scrollWidth": 768,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "operator",
+      "width": 768,
+      "scrollWidth": 768,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkin",
+      "width": 768,
+      "scrollWidth": 768,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkout",
+      "width": 768,
+      "scrollWidth": 768,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "mechanic",
+      "width": 768,
+      "scrollWidth": 768,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "command",
+      "width": 768,
+      "scrollWidth": 768,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "public",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "operator",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkin",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "checkout",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "mechanic",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    },
+    {
+      "screen": "command",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "keyboardFocus": "pass",
+      "labels": "pass"
+    }
+  ],
+  "runtimeErrors": 0,
+  "networkRequests": 0
+}

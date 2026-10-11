@@ -6,6 +6,7 @@ import { equipmentImage as image } from "../lib/equipmentAssets";
 import { mzigoFactoryUpdate, mzigoFactoryGallery } from "./mzigoFactoryMedia";
 import { mzigoObservedSpecLabels, mzigoFinalPayment, mzigoStatusLabel, mzigoStatusDetail } from "./mzigoPassport";
 import { standardPackageRules } from "./packageRules";
+import { ardhiPortArrivalPhoto } from "./ardhiPortArrival";
 
 const specs = (values: Array<[string, string, string?, string?]>): EquipmentSpecification[] => values.map(([label, value, group, source], sortOrder) => ({ label, value, group: group ?? "General", source, confirmed: true, sortOrder }));
 
@@ -48,8 +49,8 @@ export const equipment: Equipment[] = [
     showroomGroup: "field-fleet", showroomOrder: 1, slug: "sp-ardhi-26", publicPath: "/sp-ardhi-26.html", fleetId: "SP-ARDHI-26", name: "Ardhi", category: "Compact Tracked Loader / Mini Skid Steer",
     pronunciation: "AHR-dhee", meaning: "“Ardhi” means earth in Swahili.", slogan: "Power. Precision. Purpose.",
     overview: "The flagship compact loader of the SmashPro Fleet, positioned for landscaping, grading, loading, excavation, pallet handling, and residential access.",
-    capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "shipping", statusLabel: "Shipment updates via Digital HQ",
-    statusDetail: "Ocean transit reported by the freight forwarder. Digital HQ preserves the source and verification level for each shipment milestone.",
+    capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "shipping", statusLabel: "Arrived at U.S. Port",
+    statusDetail: "Manufacturer-confirmed U.S. port arrival. Ocean voyage complete; awaiting customs clearance, warehouse transfer and final delivery scheduling.",
     identity: { passportId: "SPP-2026-0001", model: "SP-ARDHI-26", factoryModel: "YF380", edition: "Founder's Edition", finish: "SmashPro Green (RAL 6018)", assetClass: "Compact tracked loader", powertrain: "Internal combustion", modelYear: 2026 },
     specifications: specs([
       ["Fleet ID", "SP-ARDHI-26", "Identity"], ["Manufacturer model reference", "YF380", "Identity"], ["Manufacturer", "Shandong Infront Machinery Group Co., Ltd.", "Identity"], ["Machine type", "Compact mini skid loader", "Configuration"],
@@ -59,6 +60,8 @@ export const equipment: Equipment[] = [
       ["Raise cycle time", "4 s", "Performance", "Manufacturer specification PDF · 2026-08-16"], ["Dump cycle time", "1.3 s", "Performance", "Manufacturer specification PDF · 2026-08-16"], ["Lower cycle time", "3.2 s", "Performance", "Manufacturer specification PDF · 2026-08-16"],
       ["Overall dimensions with bucket", "2,285 × 810 × 1,270 mm (89.96 × 31.88 × 50 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Overall length without bucket", "1,782 mm (70.15 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Length without bucket, pedal folded", "1,570 mm (61.81 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Bucket width", "1,090 mm (42.91 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Wheelbase", "760 mm (29.92 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Ground clearance", "110 mm (4.33 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Forward turning radius", "1,300 mm (51.18 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum working height", "2,100 mm (82.7 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum pin height", "1,880 mm (74.01 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum dumping height", "1,480 mm (58.26 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum dumping distance", "430 mm (16.92 in)", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Maximum dumping angle", "30°", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Bucket rollback at ground", "25°", "Dimensions", "Manufacturer specification PDF · 2026-08-16"], ["Departure angle", "27°", "Dimensions", "Manufacturer specification PDF · 2026-08-16"],
       ["Factory finish", "Green High Gloss / RAL 6018", "Finish"], ["Factory cure", "195°C × 15 min", "Finish"],
+      ["Final shipping package weight", "950 kg (2,095 lb)", "Final Shipping Package", "Manufacturer confirmed · Verified; relayed by owner 2026-10-09"],
+      ["Final shipping package dimensions", "2090 × 1100 × 1300 mm", "Final Shipping Package", "Manufacturer confirmed · Verified; relayed by owner 2026-10-09"],
     ]),
     factoryFinish: { paintColor: "Green High Gloss", colorStandard: "RAL 6018", coatingProcess: "Industrial powder-coated finish", factoryCure: "195°C (383°F) for 15 minutes", summary: "Finished in a high-gloss RAL 6018 industrial coating and factory-cured for long-term durability and professional appearance." },
     passportExplanation: "YF380 is retained as the manufacturer's model designation for service parts and documentation. SP-ARDHI-26 is the permanent SmashPro fleet identity.",
@@ -155,6 +158,7 @@ export const equipment: Equipment[] = [
       { src: image("sp-ardhi-26-pallet-fork-test.mp4?v=h264-20260807"), alt: "SP-ARDHI-26 testing the pallet fork attachment", caption: "Pallet fork testing", kind: "video", group: "testing" },
       { src: image("sp-ardhi-26-factory-test.mp4"), alt: "SP-ARDHI-26 factory testing video", caption: "Factory testing", kind: "video", group: "testing" },
       { src: image("sp-ardhi-26-factory-build-walkaround.mp4"), alt: "SP-ARDHI-26 factory build video", caption: "Factory build", kind: "video", group: "assembly" },
+      ardhiPortArrivalPhoto,
     ], requirements: [{ title: "Eligibility", detail: "Contractor approval and account eligibility may be required." }, { title: "Documentation", detail: "Insurance, certification, and rental terms may apply." }],
   },
   {

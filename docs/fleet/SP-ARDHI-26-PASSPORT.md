@@ -355,6 +355,20 @@ SmashPro Branding Package
 
 # Shipping
 
+## Final Shipping Package
+
+| Field | Verified value |
+| --- | --- |
+| Weight | 950 kg (2,095 lb) |
+| Dimensions | 2090 × 1100 × 1300 mm |
+| Source | Manufacturer confirmed |
+| Status | Verified |
+
+Manufacturer confirmation relayed by the owner on October 9, 2026.
+These are shipping-package measurements, separate from the machine's
+operating weight and overall dimensions. The date received does not
+establish the port-arrival date or customs clearance.
+
 Shipping Method
 
 DDP
@@ -365,7 +379,21 @@ South Carolina, USA
 
 Current Lifecycle
 
-In Transit / Pre-Deployment
+Arrived at U.S. Port / Port Processing
+
+Current Stage
+
+Awaiting Customs Clearance
+
+Ocean Voyage
+
+Complete — manufacturer-confirmed destination-port arrival, relayed by the
+owner and recorded October 9, 2026. Exact arrival date not supplied.
+
+Next Milestones
+
+Customs release → transfer to overseas warehouse → final delivery scheduling.
+All remain pending. No delivery or commissioning is claimed.
 
 Historical Forwarder Arrival Target
 
@@ -375,7 +403,10 @@ Operational Availability
 
 Not yet commissioned; not available for scheduled field work solely because an arrival target exists.
 
-The live Equipment Passport shipping data remains the customer-facing projection for verified logistics milestones. This Markdown record must not guess a milestone that has not been confirmed.
+The Equipment Passport displays the reviewed manufacturer confirmation as
+the current logistics record. The older HQ vessel/shipment feed remains
+available as historical context until the canonical shipment record is
+reconciled. Vessel observations are not machine GPS or customs evidence.
 
 ---
 

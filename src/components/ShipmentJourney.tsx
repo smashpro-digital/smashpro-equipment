@@ -4,6 +4,7 @@ import "../styles/shipment-journey.css";
 import { VesselContext } from './VesselContext';
 import { selectVerifiedCheckpointReference } from "../domain/ardhiCheckpoint";
 import { AtlasStatusPanel } from "./AtlasStatusPanel";
+import { ArdhiPortProcessing } from "./ArdhiPortProcessing";
 
 const ShipmentMap = lazy(() => import("./ShipmentMap"));
 class MapBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -23,7 +24,7 @@ function SatelliteObservation({ image, aisTime }: { image: JourneyImage; aisTime
     </figcaption>
   </figure>;
 }
-export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; refresh: () => void }) {
+function HistoricalShipmentJourney({ result, refresh }: { result: ShipmentResult; refresh: () => void }) {
   const { data, status } = result;
   const [now, setNow] = useState(Date.now());
   const [openEvent, setOpenEvent] = useState<string>();
@@ -43,7 +44,7 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
   const aisObservations = data?.timeline.filter(event => event.eventType === "ais-observation").length ?? 0;
   const forwarderFacts = selectForwarderReportedVesselVoyage(data);
   const checkpoint = selectVerifiedCheckpointReference(data);
-  return <section id="journey" className="shipment-journey" aria-labelledby="shipment-journey-title">
+  return <section id="shipment-history" className="shipment-journey" aria-labelledby="shipment-journey-title">
     <div className="shell">
       <span id="history-container-loaded" /><span id="history-ocean-voyage" />
       <div className="shipment-heading"><div><p className="eyebrow">SP-ARDHI-26 · Asset journey</p><h2 id="shipment-journey-title">The journey, documented.</h2><p>From factory release to fleet arrival. Every update follows the evidence.</p></div><a className="shipment-archive-link" href="#history-factory-departure">Factory departure record ↗</a></div>
@@ -57,7 +58,7 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
         <ul><li>Factory model {data.pendingReferences.factoryModel}</li><li>{data.pendingReferences.vesselDisplayReference} — identity verification pending</li><li>Voyage {data.pendingReferences.voyageDisplayReference} — verification pending</li><li>Cargo association not yet confirmed</li></ul>
         <p className="shipment-small">Source: {data.pendingReferences.source} · Reference recorded {formatTime(data.pendingReferences.recordedAt)}. This is not a verified shipment-update timestamp.</p>
       </section>}
-      {(!data?.vesselContext || data.currentPosition || data.timeline.length > 0) && <>
+      {(!data?.vesselContext || data.currentPosition || data.timeline.length > 0 || checkpoint) && <>
       <h3 className="shipment-verified-title">Confirmed shipment facts</h3>
       <div className="shipment-facts"><div><span>Forwarder-reported vessel</span><strong>{forwarderFacts.vesselName ?? "No forwarder-reported vessel"}</strong><small>{forwarderFacts.voyageReference ? `Forwarder-reported voyage ${forwarderFacts.voyageReference}` : "No forwarder-reported voyage"}</small></div><div><span>Arrival estimate</span><strong>{data?.eta ?? "No confirmed estimate"}</strong><small>{data?.eta ? `${data.etaState} · not a delivery promise` : "No confirmed arrival estimate"}</small></div><div><span>Last shipment update</span><strong>{formatTime(data?.lastUpdated)}</strong><small>{data?.lastChecked ? `Source checked ${formatTime(data.lastChecked)}` : "No source check available"}</small></div></div>
       <div className="shipment-map-layout"><MapBoundary><Suspense fallback={<p className="shipment-map-loading">Loading reference map…</p>}><ShipmentMap data={data} /></Suspense></MapBoundary>
@@ -82,4 +83,21 @@ export function ShipmentJourney({ result, refresh }: { result: ShipmentResult; r
       </>}
     </div>
   </section>;
+}
+
+export function ShipmentJourney(props: { result: ShipmentResult; refresh: () => void }) {
+  const [historyOpen, setHistoryOpen] = useState(false);
+  useEffect(() => {
+    const openLinkedHistory = () => {
+      if (/^#(?:shipment-event-|history-container-loaded|history-ocean-voyage)/.test(window.location.hash)) setHistoryOpen(true);
+    };
+    openLinkedHistory();
+    window.addEventListener("hashchange", openLinkedHistory);
+    return () => window.removeEventListener("hashchange", openLinkedHistory);
+  }, []);
+  return <><ArdhiPortProcessing /><details className="shell ardhi-historical-logistics" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}>
+    <summary>Earlier vessel and shipment evidence</summary>
+    <p>The records below retain the earlier HQ shipment feed and vessel observations. Vessel checkpoints and historical arrival estimates are separate from the manufacturer-confirmed machine arrival above.</p>
+    {historyOpen && <HistoricalShipmentJourney {...props} />}
+  </details></>;
 }

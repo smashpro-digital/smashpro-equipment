@@ -1,0 +1,547 @@
+{
+  "notice": "All values are synthetic design fixtures. No real asset, assignment, observation, signature or service is asserted.",
+  "cases": [
+    {
+      "schema": "Session",
+      "value": {
+        "actor": {
+          "id": "EXAMPLE-OPERATOR-001",
+          "label": "Sample operator"
+        },
+        "asset": {
+          "assetId": "EXAMPLE-HQ-ASSET-001",
+          "fleetId": "EXAMPLE-FLEET-001",
+          "passportId": "EXAMPLE-PASSPORT-001",
+          "passportUrl": "https://example.invalid/equipment/example-asset.html",
+          "revision": 7
+        },
+        "capabilities": [
+          "passport.operations.read",
+          "passport.shift.write"
+        ],
+        "expiresAt": "2030-01-15T14:00:00Z",
+        "csrfToken": "EXAMPLE-NOT-A-SECRET"
+      }
+    },
+    {
+      "schema": "OperationsView",
+      "value": {
+        "asset": {
+          "assetId": "EXAMPLE-HQ-ASSET-001",
+          "fleetId": "EXAMPLE-FLEET-001",
+          "passportId": "EXAMPLE-PASSPORT-001",
+          "passportUrl": "https://example.invalid/equipment/example-asset.html",
+          "revision": 7
+        },
+        "mission": {
+          "mission": {
+            "id": "EXAMPLE-MISSION-001",
+            "label": "Sample mission"
+          },
+          "job": {
+            "id": "EXAMPLE-JOB-001",
+            "label": "Sample job"
+          },
+          "project": {
+            "id": "EXAMPLE-PROJECT-001",
+            "label": "Sample project"
+          },
+          "customer": {
+            "id": "EXAMPLE-CUSTOMER-001",
+            "label": "Sample customer"
+          },
+          "crew": [],
+          "status": "active",
+          "timezone": "America/New_York"
+        },
+        "activeShift": {
+          "shiftId": "EXAMPLE-SHIFT-001",
+          "assetId": "EXAMPLE-HQ-ASSET-001",
+          "operator": {
+            "id": "EXAMPLE-OPERATOR-001",
+            "label": "Sample operator"
+          },
+          "missionId": "EXAMPLE-MISSION-001",
+          "jobId": "EXAMPLE-JOB-001",
+          "state": "active",
+          "startedAt": "2030-01-15T13:00:00Z",
+          "endedAt": null,
+          "openingMeter": {
+            "value": 100,
+            "unit": "hours",
+            "meterId": "EXAMPLE-METER-001",
+            "capturedAt": "2030-01-15T13:00:00Z"
+          },
+          "closingMeter": null,
+          "atlasObservationId": null,
+          "atlasRegion": null,
+          "inspectionId": "EXAMPLE-INSPECTION-001",
+          "signatureEvidenceId": "EXAMPLE-SIGNATURE-001",
+          "photoEvidenceIds": []
+        },
+        "currentMeter": {
+          "value": 100,
+          "unit": "hours",
+          "meterId": "EXAMPLE-METER-001",
+          "capturedAt": "2030-01-15T13:00:00Z"
+        },
+        "hoursToday": null,
+        "hoursTimezone": "America/New_York",
+        "attachments": [],
+        "safetyState": "eligible",
+        "allowedActions": [
+          "checkout",
+          "report_damage"
+        ],
+        "projectedAt": "2030-01-15T13:00:00Z",
+        "serviceSync": "current"
+      }
+    },
+    {
+      "schema": "AtlasView",
+      "value": {
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "observationId": null,
+        "freshness": "unavailable",
+        "observedAt": null,
+        "position": null,
+        "region": null,
+        "yard": null,
+        "facility": null,
+        "geofence": null,
+        "lastMovementAt": null,
+        "mission": {
+          "id": "EXAMPLE-MISSION-001",
+          "label": "Sample mission"
+        },
+        "job": {
+          "id": "EXAMPLE-JOB-001",
+          "label": "Sample job"
+        },
+        "customer": {
+          "id": "EXAMPLE-CUSTOMER-001",
+          "label": "Sample customer"
+        },
+        "project": {
+          "id": "EXAMPLE-PROJECT-001",
+          "label": "Sample project"
+        },
+        "crew": [],
+        "status": "Location unavailable",
+        "sourceLabel": null,
+        "capabilities": []
+      }
+    },
+    {
+      "schema": "ProviderBinding",
+      "value": {
+        "bindingId": "EXAMPLE-BINDING-001",
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "providerId": "EXAMPLE-MANUAL-ADAPTER",
+        "validFrom": "2030-01-15T13:00:00Z",
+        "validUntil": null,
+        "capabilities": [
+          "location"
+        ],
+        "priority": 1,
+        "freshnessSeconds": 900,
+        "state": "active"
+      }
+    },
+    {
+      "schema": "LocationObservation",
+      "value": {
+        "observationId": "EXAMPLE-OBSERVATION-001",
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "bindingId": "EXAMPLE-BINDING-001",
+        "providerId": "EXAMPLE-MANUAL-ADAPTER",
+        "providerFamily": "manual",
+        "observedAt": "2030-01-15T13:00:00Z",
+        "receivedAt": "2030-01-15T13:00:00Z",
+        "position": null,
+        "region": {
+          "id": "EXAMPLE-REGION",
+          "label": "Declared sample region"
+        },
+        "confidence": 0.5,
+        "evidenceRef": null
+      }
+    },
+    {
+      "schema": "InspectionInput",
+      "value": {
+        "templateId": "EXAMPLE-TEMPLATE",
+        "templateVersion": 1,
+        "answers": [
+          {
+            "itemId": "EXAMPLE-SAFETY-CHECK",
+            "result": "pass",
+            "note": "Synthetic answer",
+            "evidenceIds": []
+          }
+        ],
+        "capturedAt": "2030-01-15T13:00:00Z"
+      }
+    },
+    {
+      "schema": "InspectionTemplate",
+      "value": {
+        "templateId": "EXAMPLE-TEMPLATE",
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "version": 1,
+        "items": [
+          {
+            "itemId": "EXAMPLE-SAFETY-CHECK",
+            "label": "Sample required safety check",
+            "required": true,
+            "critical": true,
+            "allowNotApplicable": false
+          }
+        ],
+        "requiredPhotoCount": 0,
+        "signatureRequired": true
+      }
+    },
+    {
+      "schema": "Inspection",
+      "value": {
+        "inspectionId": "EXAMPLE-INSPECTION-001",
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "actorId": "EXAMPLE-OPERATOR-001",
+        "templateId": "EXAMPLE-TEMPLATE",
+        "templateVersion": 1,
+        "result": "accepted",
+        "recordedAt": "2030-01-15T13:00:00Z"
+      }
+    },
+    {
+      "schema": "CheckIn",
+      "value": {
+        "missionId": "EXAMPLE-MISSION-001",
+        "jobId": "EXAMPLE-JOB-001",
+        "openingMeter": {
+          "value": 100,
+          "unit": "hours",
+          "meterId": "EXAMPLE-METER-001",
+          "capturedAt": "2030-01-15T13:00:00Z"
+        },
+        "inspectionId": "EXAMPLE-INSPECTION-001",
+        "photoEvidenceIds": [],
+        "signatureEvidenceId": "EXAMPLE-SIGNATURE-001",
+        "location": {
+          "status": "unavailable",
+          "position": null,
+          "declaredPlace": null,
+          "capturedAt": "2030-01-15T13:00:00Z"
+        },
+        "capturedAt": "2030-01-15T13:00:00Z"
+      }
+    },
+    {
+      "schema": "CheckOut",
+      "value": {
+        "closingMeter": {
+          "value": 102,
+          "unit": "hours",
+          "meterId": "EXAMPLE-METER-001",
+          "capturedAt": "2030-01-15T16:00:00Z"
+        },
+        "fuel": {
+          "amount": 5,
+          "unit": "liter",
+          "kind": "diesel"
+        },
+        "photoEvidenceIds": [],
+        "damage": [
+          {
+            "description": "Sample guard defect",
+            "severity": "major",
+            "evidenceIds": []
+          }
+        ],
+        "notes": "Synthetic checkout only",
+        "attachmentChanges": [],
+        "maintenanceIssues": [],
+        "location": {
+          "status": "unavailable",
+          "position": null,
+          "declaredPlace": null,
+          "capturedAt": "2030-01-15T16:00:00Z"
+        },
+        "capturedAt": "2030-01-15T16:00:00Z"
+      }
+    },
+    {
+      "schema": "ActivityInput",
+      "value": {
+        "kind": "attachment_change",
+        "capturedAt": "2030-01-15T13:00:00Z",
+        "notes": "Sample change only",
+        "evidenceIds": [],
+        "fuel": null,
+        "defect": null,
+        "attachmentChange": {
+          "attachmentId": "EXAMPLE-ATTACHMENT-001",
+          "action": "install",
+          "evidenceIds": []
+        }
+      }
+    },
+    {
+      "schema": "ServiceView",
+      "value": {
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "maintenance": [
+          {
+            "serviceRecordId": "EXAMPLE-SERVICE-001",
+            "assetId": "EXAMPLE-HQ-ASSET-001",
+            "kind": "defect_reported",
+            "status": "pending_sync",
+            "workOrderId": null,
+            "sourceEventId": "EXAMPLE-EVENT-001",
+            "recordedAt": "2030-01-15T13:00:00Z",
+            "summary": "Example defect report; not a completed repair"
+          }
+        ],
+        "workOrders": [],
+        "parts": [],
+        "warranty": [],
+        "manuals": [],
+        "bulletins": [],
+        "inspectionForms": [],
+        "nextCursor": null
+      }
+    },
+    {
+      "schema": "ServiceCommand",
+      "value": {
+        "action": "record_work",
+        "workPerformed": "Example inspection; no production record",
+        "partsUsed": [],
+        "meter": {
+          "value": 100,
+          "unit": "hours",
+          "meterId": "EXAMPLE-METER-001",
+          "capturedAt": "2030-01-15T13:00:00Z"
+        },
+        "evidenceIds": [],
+        "capturedAt": "2030-01-15T13:00:00Z"
+      }
+    },
+    {
+      "schema": "JourneyPage",
+      "value": {
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "events": [
+          {
+            "eventId": "EXAMPLE-EVENT-001",
+            "assetId": "EXAMPLE-HQ-ASSET-001",
+            "sequence": 1,
+            "kind": "service",
+            "occurredAt": "2030-01-15T13:00:00Z",
+            "recordedAt": "2030-01-15T13:00:00Z",
+            "actorId": "EXAMPLE-OPERATOR-001",
+            "sourceRef": "EXAMPLE-SHIFT-001",
+            "evidenceIds": [],
+            "visibility": "private",
+            "supersedesEventId": null,
+            "summary": "Example defect report; not a completed repair"
+          }
+        ],
+        "nextCursor": null
+      }
+    },
+    {
+      "schema": "CommandResult",
+      "value": {
+        "commandId": "EXAMPLE-COMMAND-001",
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "revision": 8,
+        "acceptedAt": "2030-01-15T16:00:01Z",
+        "eventIds": [
+          "EXAMPLE-EVENT-001"
+        ],
+        "shift": {
+          "shiftId": "EXAMPLE-SHIFT-001",
+          "assetId": "EXAMPLE-HQ-ASSET-001",
+          "operator": {
+            "id": "EXAMPLE-OPERATOR-001",
+            "label": "Sample operator"
+          },
+          "missionId": "EXAMPLE-MISSION-001",
+          "jobId": "EXAMPLE-JOB-001",
+          "state": "closed",
+          "startedAt": "2030-01-15T13:00:00Z",
+          "endedAt": "2030-01-15T16:00:01Z",
+          "openingMeter": {
+            "value": 100,
+            "unit": "hours",
+            "meterId": "EXAMPLE-METER-001",
+            "capturedAt": "2030-01-15T13:00:00Z"
+          },
+          "closingMeter": {
+            "value": 102,
+            "unit": "hours",
+            "meterId": "EXAMPLE-METER-001",
+            "capturedAt": "2030-01-15T16:00:00Z"
+          },
+          "atlasObservationId": null,
+          "atlasRegion": null,
+          "inspectionId": "EXAMPLE-INSPECTION-001",
+          "signatureEvidenceId": "EXAMPLE-SIGNATURE-001",
+          "photoEvidenceIds": []
+        },
+        "serviceRecords": [
+          {
+            "serviceRecordId": "EXAMPLE-SERVICE-001",
+            "assetId": "EXAMPLE-HQ-ASSET-001",
+            "kind": "defect_reported",
+            "status": "pending_sync",
+            "workOrderId": null,
+            "sourceEventId": "EXAMPLE-EVENT-001",
+            "recordedAt": "2030-01-15T13:00:00Z",
+            "summary": "Example defect report; not a completed repair"
+          }
+        ],
+        "serviceSync": "pending"
+      }
+    },
+    {
+      "schema": "EvidenceIntent",
+      "value": {
+        "purpose": "signature",
+        "contentType": "image/png",
+        "byteLength": 1024,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "schema": "EvidenceUpload",
+      "value": {
+        "evidenceId": "EXAMPLE-EVIDENCE-001",
+        "uploadUrl": "https://example.invalid/private-upload",
+        "expiresAt": "2030-01-15T13:05:00Z",
+        "status": "pending",
+        "method": "PUT"
+      }
+    },
+    {
+      "schema": "EvidenceComplete",
+      "value": {
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "schema": "EvidenceStatus",
+      "value": {
+        "evidenceId": "EXAMPLE-EVIDENCE-001",
+        "status": "processing"
+      }
+    },
+    {
+      "schema": "Download",
+      "value": {
+        "url": "https://example.invalid/private-document",
+        "expiresAt": "2030-01-15T13:05:00Z"
+      }
+    },
+    {
+      "schema": "FleetPage",
+      "value": {
+        "assets": [
+          {
+            "asset": {
+              "assetId": "EXAMPLE-HQ-ASSET-001",
+              "fleetId": "EXAMPLE-FLEET-001",
+              "passportId": "EXAMPLE-PASSPORT-001",
+              "passportUrl": "https://example.invalid/equipment/example-asset.html",
+              "revision": 7
+            },
+            "mission": {
+              "mission": {
+                "id": "EXAMPLE-MISSION-001",
+                "label": "Sample mission"
+              },
+              "job": {
+                "id": "EXAMPLE-JOB-001",
+                "label": "Sample job"
+              },
+              "project": {
+                "id": "EXAMPLE-PROJECT-001",
+                "label": "Sample project"
+              },
+              "customer": {
+                "id": "EXAMPLE-CUSTOMER-001",
+                "label": "Sample customer"
+              },
+              "crew": [],
+              "status": "active",
+              "timezone": "America/New_York"
+            },
+            "activeShift": {
+              "shiftId": "EXAMPLE-SHIFT-001",
+              "assetId": "EXAMPLE-HQ-ASSET-001",
+              "operator": {
+                "id": "EXAMPLE-OPERATOR-001",
+                "label": "Sample operator"
+              },
+              "missionId": "EXAMPLE-MISSION-001",
+              "jobId": "EXAMPLE-JOB-001",
+              "state": "active",
+              "startedAt": "2030-01-15T13:00:00Z",
+              "endedAt": null,
+              "openingMeter": {
+                "value": 100,
+                "unit": "hours",
+                "meterId": "EXAMPLE-METER-001",
+                "capturedAt": "2030-01-15T13:00:00Z"
+              },
+              "closingMeter": null,
+              "atlasObservationId": null,
+              "atlasRegion": null,
+              "inspectionId": "EXAMPLE-INSPECTION-001",
+              "signatureEvidenceId": "EXAMPLE-SIGNATURE-001",
+              "photoEvidenceIds": []
+            },
+            "currentMeter": {
+              "value": 100,
+              "unit": "hours",
+              "meterId": "EXAMPLE-METER-001",
+              "capturedAt": "2030-01-15T13:00:00Z"
+            },
+            "hoursToday": null,
+            "hoursTimezone": "America/New_York",
+            "attachments": [],
+            "safetyState": "eligible",
+            "allowedActions": [
+              "checkout",
+              "report_damage"
+            ],
+            "projectedAt": "2030-01-15T13:00:00Z",
+            "serviceSync": "current"
+          }
+        ],
+        "nextCursor": null,
+        "projectedAt": "2030-01-15T13:00:00Z"
+      }
+    },
+    {
+      "schema": "PublicServiceSummary",
+      "value": {
+        "assetId": "EXAMPLE-HQ-ASSET-001",
+        "summary": "No published service evidence",
+        "lastPublishedServiceAt": null,
+        "evidenceUrl": null
+      }
+    },
+    {
+      "schema": "Error",
+      "value": {
+        "code": "conflict",
+        "message": "Asset already has an active operator session",
+        "requestId": "EXAMPLE-REQUEST-001",
+        "fieldErrors": []
+      }
+    }
+  ]
+}
