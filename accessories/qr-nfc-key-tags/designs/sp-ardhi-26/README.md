@@ -4,6 +4,13 @@ Status: archived mesh; not print-approved or assembly-validated. Recorded
 2026-10-11. The `v1` name identifies this archived prototype, not a production
 release or a claim that earlier designs did not exist.
 
+## Open NFC pocket
+
+The owner identifies this file as the **Open NFC pocket** (non-hidden) variant.
+Install NFC **after printing**; **no NFC insertion pause is required**. This
+supersedes the earlier inference that the mesh represented a hidden NFC cavity.
+Hidden-cavity settings and insertion-pause instructions do not apply to this STL.
+
 - Asset: **SP-ARDHI-26**.
 - [Equipment passport documentation](../../../../docs/fleet/SP-ARDHI-26-PASSPORT.md).
 - Intended QR/NFC destination:
@@ -17,12 +24,14 @@ release or a claim that earlier designs did not exist.
 
 ## File inventory and provenance
 
-The owner identified one STL in Downloads. It was moved without changing its
-bytes. No existing repository references to the original filename were found.
+The owner identified one STL in Downloads. The initial archive moved it; the
+original has now been restored byte-for-byte to
+`C:\Users\Celac\Downloads\combined-1791693852650.stl` and is preserved there.
+The repository contains an identical copy under the variant-specific name below.
 
 | Original filename | Archived file | Status |
 | --- | --- | --- |
-| `combined-1791693852650.stl` | [print/sp-ardhi-26-key-tag-v1.stl](print/sp-ardhi-26-key-tag-v1.stl) | Supplied binary STL; 1,076,084 bytes; 21,520 triangles |
+| `combined-1791693852650.stl` | [print/sp-ardhi-26-key-tag-v1-open-nfc.stl](print/sp-ardhi-26-key-tag-v1-open-nfc.stl) | Open NFC pocket; binary STL; 1,076,084 bytes; 21,520 triangles |
 
 SHA-256:
 `63cb88dddeacbe2a2f4411e537ac14cceb666e94b0378576458d08907497f5eb`.
@@ -31,8 +40,8 @@ Required but not supplied/identified:
 
 | Expected artifact | Intended location | Missing evidence |
 | --- | --- | --- |
-| `sp-ardhi-26-key-tag-v1-settings.json` | `source/` | Original generator settings, including units and Hidden setting |
-| `sp-ardhi-26-key-tag-v1-ad5x.3mf` | `print/` | Actual AD5X project, nozzle/profile, orientation, and sliced preview |
+| `sp-ardhi-26-key-tag-v1-open-nfc-settings.json` | `source/` | Original generator settings, including units and open-pocket configuration |
+| `sp-ardhi-26-key-tag-v1-open-nfc-ad5x.3mf` | `print/` | Actual AD5X project, nozzle/profile, orientation, and sliced preview |
 | `sp-ardhi-26-key-tag-v1-<photo-description>.<original-extension>` | `photos/` | Latest 80 mm screenshot and identified prototype/assembly photos |
 | Separate 50 mm keychain design | `source/` and/or `print/` | Actual model/export; no confirmed 50 mm artifact located |
 
@@ -60,12 +69,14 @@ scaling. Confirm this in the actual AD5X project.
 | Additional side/loop geometry | Extends total X bound to -64.6; retained together in the original combined STL |
 | Raised surface geometry | Z: 4 to 5; total height is 5, not just the proposed 4-unit base |
 | Four candidate magnet pocket floors | Z: 3.1; each planar footprint spans 10.2 × 10.2; centers approximately (-39, -24.9), (24.9, -24.9), (-39, 24.9), (24.9, 24.9) |
-| Candidate hidden NFC cavity surfaces | X: -19.8 to 5.7; Y: -12.75 to 12.75; planes at Z: 1 and 2.5; **25.5 × 25.5** footprint and **1.5** separation |
+| Central planar surfaces, raw mesh observations | X: -19.8 to 5.7; Y: -12.75 to 12.75; planes at Z: 1 and 2.5; **25.5 × 25.5** footprint and **1.5** separation; these coordinates alone do not establish pocket depth or a hidden cavity |
 
-The observed planes are consistent with a 4-unit base, 3.1-deep pockets opened
-from the Z=0 face, and an internal 1.5-deep NFC cavity. Exact circular wall
-geometry, solid integrity, opening direction, and slicer interpretation remain
-to be verified with cross-sections. The observed cavity footprint and four
+The observed planes are consistent with a 4-unit base and 3.1-deep magnet pockets
+opened from the Z=0 face. The owner confirms the NFC pocket is open; the earlier
+hidden-cavity interpretation from planar separation was not established by this
+inspection and is withdrawn. Exact NFC recess depth, circular wall geometry,
+solid integrity, access, and slicer interpretation remain to be verified with
+cross-sections. The observed central footprint and four
 pocket footprints do not overlap in XY; this limited check does not certify
 the entire mesh or remaining wall strength. If the base is 4 and pocket depth
 is 3.1, nominal remaining material is 0.9; confirm actual geometry and strength.
@@ -84,13 +95,10 @@ revalidate pockets rather than shrinking magnets and NFC cavities with the tag.
 | Purchased magnets | Nominal **10 mm diameter × 3 mm thick** | Measure delivered parts; verify fit and retention |
 | Open magnet glue pockets | Proposed **10.2 mm diameter × 3.1 mm depth**, with a **4 mm base** | Mesh observations above are consistent; confirm exact geometry and printed fit |
 | Purchased NFC tags | Nominal **25 mm NTAG215 adhesive coins** | Thickness is unknown and must be measured, including installed adhesive/backing configuration |
-| Latest proposed hidden NFC cavity | Round, **25.5 mm diameter × 1.5 mm depth**, **Hidden enabled** | Mesh contains matching surface bounds/separation; original settings file is missing, so the toggle itself is unverified |
+| Current NFC variant | **Open NFC pocket**, installed after printing | Confirm actual recess depth and fit; no NFC insertion pause required |
 
-Final NFC cavity depth must follow **measured tag thickness plus clearance**,
-not the untested nominal 1.5 mm proposal. Hidden NFC insertion requires a
-slicer pause **before the first layer closing the cavity**. Determine that
-point from the actual sliced preview after confirming orientation, layer
-heights, and cavity geometry; no pause layer number has been established.
+Final NFC pocket fit must follow **measured tag thickness plus clearance**.
+No hidden-cavity dimensions or Hidden-enabled setting are assigned to this file.
 
 The current magnet design uses **open glue pockets**. Hidden magnet cavities
 are a future variant, not an implemented feature of this design.
@@ -98,6 +106,17 @@ are a future variant, not an implemented feature of this design.
 The owner prefers a **single-part clear adhesive with no two-part mixing**.
 Adhesive selection, PETG/magnet bond testing, and cure validation remain pending.
 No adhesive product or verified retention performance is claimed here.
+
+## Future hidden-NFC variant — not this STL
+
+A future hidden-NFC export must use a separate filename, such as
+`sp-ardhi-26-key-tag-v1-hidden-nfc.stl`, with its own settings, print project,
+geometry inspection, and assembly instructions. No such confirmed artifact is
+archived here. The earlier proposal of a round 25.5 mm diameter × 1.5 mm depth
+cavity with Hidden enabled belongs only to that future variant; final depth
+must follow measured tag thickness plus clearance. Any insertion pause for that
+future design must be determined from its actual sliced preview before its
+first cavity-closing layer. It is not an instruction for the open-pocket file.
 
 ## Assembly and validation checklist
 
@@ -108,13 +127,13 @@ All items remain open unless supported by a dated result and evidence.
       this is the intended 80 mm variant; identify any separate 50 mm variant.
 - [ ] Confirm the installed nozzle size matches the slicer profile and PETG setup.
 - [ ] Inspect mesh/cross-sections and sliced preview: pocket diameter/depth,
-      base thickness, remaining walls, closed NFC roof, and no cavity overlap.
+      base thickness, remaining walls, open NFC access, and no cavity overlap.
 - [ ] Measure actual magnets and NFC coin thickness; adjust clearance based on
       measurements and a printed fit sample before committing to assembly.
-- [ ] Program NFC with the intended URL and test it **before embedding**.
+- [ ] Program NFC with the intended URL and test it **before installation**.
 - [ ] Decode the printed QR and verify its exact destination, contrast, and size.
-- [ ] Determine and record the pause from the first cavity-closing layer in the
-      actual sliced preview; confirm insertion clearance before resuming.
+- [ ] Install NFC in the open pocket **after printing** and verify fit and
+      adhesion. **No NFC insertion pause is required for this variant.**
 - [ ] Select a single-part clear adhesive, test PETG/magnet bonding, confirm
       magnet orientation, and complete the required cure before loading.
 - [ ] Test QR and NFC after assembly **and on the intended mounting surface**;
@@ -122,8 +141,8 @@ All items remain open unless supported by a dated result and evidence.
 - [ ] Verify magnet retention with the **full key set** and intended handling.
 - [ ] Verify shared check-in deployment and explicit operator flow separately;
       a scan/tap opens a workflow and must **never automatically start a job**.
-- [ ] Record prototype revision, measurements, print/profile settings, pause
-      evidence, assembly photos, results, and unresolved issues before release.
+- [ ] Record prototype revision, measurements, print/profile settings, assembly
+      photos, results, and unresolved issues before release.
 
 Keep prototype photos in `photos/`. Only separately approved public photos may
 be copied to public `images/` with fleet-prefixed names; source and print files
