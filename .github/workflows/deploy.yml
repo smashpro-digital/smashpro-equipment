@@ -83,29 +83,18 @@ jobs:
         with:
           name: equipment-showroom-dist
           path: dist
-      - name: Require confirmed HQ ocean-transit evidence
-        run: |
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          const r = await fetch('https://api.smashpro.app/api/fleet/shipment/SP-ARDHI-26', { headers: { Origin: 'https://smashpro.app' }, redirect: 'error', signal: AbortSignal.timeout(20000) });
-          assert.equal(r.status, 200);
-          assert.equal(r.headers.get('access-control-allow-origin'), 'https://smashpro.app', 'Equipment origin must be explicitly allowed');
-          assert.match(r.headers.get('content-type') ?? '', /^application\/json/);
-          const p = await r.json();
-          assert.equal(p.schemaVersion, 2);
-          assert.equal(p.assetId, 'SP-ARDHI-26');
-          assert.equal(p.stageVerification, 'confirmed');
-          assert.equal(p.lifecycleState, 'ocean-transit');
-          assert.equal(p.shipmentStatus, 'Departed Origin Port');
-          assert.equal(p.eta, '2026-10-05');
-          assert.equal(p.etaState, 'estimated');
-          assert.equal(p.map.cargoAssociationConfirmed, true, 'Canonical cargo association must remain confirmed');
-          assert.deepEqual(p.timeline.map(event => event.milestone), ['container-loaded', 'export-cleared', 'origin-departure']);
-          assert.equal(p.currentPosition, null);
-          assert.equal(p.progressPercent, null);
-          assert.deepEqual(p.satelliteImagery, []);
-          console.log('HQ shipment prerequisite passed.');
-          NODE
+      - name: Check out matching release policy
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: release-source
+          lfs: false
+      - name: Set up Node.js for release policy
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Require reviewed port arrival and safe historical shipment evidence
+        run: node --experimental-strip-types release-source/scripts/verify-ardhi-release.mjs
       - name: Verify required deployment settings
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
