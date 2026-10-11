@@ -7,7 +7,7 @@
     "src/styles/ardhi-passport-compact-overrides.css": "3c2fe1e13922c64d08175e5f92ae3fd111e04fb7e81ba369b0b57d9787a7d5a7",
     "src/styles/ardhi-manufacturer-pdf-compact.css": "0aa0af89268a2fab5b529da2dc528f8c200a846b6bb76bcee27f975f06efd24b",
     "src/styles/ardhi-history-enhancements.css": "4695e756db959080f70de1c118634f4515561b7a5a8334cf0dd9130004e0e2f7",
-    ".github/workflows/deploy.yml": "61aadd4c6a33f6281215f57571f0452f916cac4c194a3d62096ce4d112ffcd79",
+    ".github/workflows/deploy.yml": "807f49cf297107107c8d8289b4964d53cb8f368393f8918924dbc85f73b7a88d",
     "scripts/validate-public-index.mjs": "cc14604987e8df9302c1ab28a5ea30179e69aae6043e700ebaee48802198149d",
     "src/main.tsx": "e1b841eb8e93a0de0fc6514196451c5004513ef63a90fb5e3f97a719391b57c0",
     "src/app/manufacturerProfileMount.tsx": "b19cc92bdc39917093da4becaf7763b21dcdb74f8d84f21bde860ecc46a41821",
@@ -18,6 +18,6 @@
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
     "src/pages/ArdhiPassportPage.tsx": "539424e141749b9c4389f868912e70630781d502febe9f10a115da099fdb014b"
   },
-  "review": "October 10 authorized flagship v4 presentation, on reviewed October 9 ARDHI arrival baseline. Only ArdhiPassportJourney and ArdhiPassportPage hashes refreshed for this sprint. Existing history block hash, equipment block hash, shared styles, MZIGO, public-index validator and deployment gates remain protected. See SP-ARDHI-26-V4-AUDIT.md and v4 browser coverage. October 10 Expo enhancement: only the Journey renderer hash refreshed for optional sponsor entry; history, canonical equipment and all other protected hashes retained.",
+  "review": "October 10 authorized flagship v4 presentation, on reviewed October 9 ARDHI arrival baseline. Only ArdhiPassportJourney and ArdhiPassportPage hashes refreshed for this sprint. Existing history block hash, equipment block hash, shared styles, MZIGO, public-index validator and deployment gates remain protected. See SP-ARDHI-26-V4-AUDIT.md and v4 browser coverage. October 10 Expo enhancement: only the Journey renderer hash refreshed for optional sponsor entry; history, canonical equipment and all other protected hashes retained. Authorized release-gate repair: verify reviewed port arrival separately from historical vessel association; only deployment workflow hash refreshed.",
   "equipmentBlockHash": "a27c8c37b2393a83ae31ce36209f27b06a802fb3c44ffb3fc69f6e5fdf061fe3"
 }
