@@ -1,0 +1,83 @@
+[
+  {
+    "width": 390,
+    "url": "https://smashpro.app/equipment/",
+    "captured_at": "2026-10-13T19:54:31.043Z",
+    "catalog_image_id": 1,
+    "creative_id": "4587303",
+    "image_dimensions": [
+      2160,
+      2700
+    ],
+    "image_loaded": true,
+    "image_uncropped": true,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "disclosure_visible": true,
+    "affiliate_url_matches_hq": true,
+    "youtube_cta": true,
+    "existing_sections_present": true,
+    "no_overflow": true,
+    "image_layout_stable": true,
+    "no_affiliate_clicks_on_load": true,
+    "page_errors": [],
+    "screenshot": "production-390.png"
+  },
+  {
+    "width": 768,
+    "url": "https://smashpro.app/equipment/",
+    "captured_at": "2026-10-13T19:54:40.336Z",
+    "catalog_image_id": 1,
+    "creative_id": "4587303",
+    "image_dimensions": [
+      2160,
+      2700
+    ],
+    "image_loaded": true,
+    "image_uncropped": true,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "disclosure_visible": true,
+    "affiliate_url_matches_hq": true,
+    "youtube_cta": true,
+    "existing_sections_present": true,
+    "no_overflow": true,
+    "image_layout_stable": true,
+    "no_affiliate_clicks_on_load": true,
+    "page_errors": [],
+    "screenshot": "production-768.png"
+  },
+  {
+    "width": 1440,
+    "url": "https://smashpro.app/equipment/",
+    "captured_at": "2026-10-13T19:54:46.843Z",
+    "catalog_image_id": 1,
+    "creative_id": "4587303",
+    "image_dimensions": [
+      2160,
+      2700
+    ],
+    "image_loaded": true,
+    "image_uncropped": true,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "disclosure_visible": true,
+    "affiliate_url_matches_hq": true,
+    "youtube_cta": true,
+    "existing_sections_present": true,
+    "no_overflow": true,
+    "image_layout_stable": true,
+    "no_affiliate_clicks_on_load": true,
+    "page_errors": [],
+    "screenshot": "production-1440.png"
+  }
+]

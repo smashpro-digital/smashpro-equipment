@@ -1,0 +1,15 @@
+{
+  "unit_tests": {"passed": 133, "failed": 0},
+  "typecheck": "passed",
+  "production_build": "passed",
+  "public_index_media_passport_checks": "passed",
+  "ardhi_artifact_check": "passed with Node 22 experimental type stripping",
+  "browser_scenarios": 17,
+  "browser_initial_built_run": {"passed": 16, "setup_timeout": 1},
+  "browser_targeted_retry": {"passed": 4, "failed": 0, "includes": ["390px image layout", "768px image layout", "1440px image layout", "image download failure"]},
+  "local_setup_notes": "The dev-server run was stopped after a timeout. The built run's only failure timed out creating a page before test assertions. A preview startup retry exceeded 60 seconds. Final targeted checks passed against a separately started built preview with 180-second per-test setup allowance; assertions remained enabled.",
+  "approval_failure_scenarios": ["503", "network", "malformed", "empty", "Garage", "stale", "unapproved link", "revocation", "expiry", "refresh timeout"],
+  "screenshots": ["local-fixture-390.png", "local-fixture-768.png", "local-fixture-1440.png"],
+  "screenshot_source": "Local synthetic approved catalog; official unaltered Awin image. Not production evidence.",
+  "visual_review": "All three captures inspected; image visible, uncropped, readable copy, disclosure and both CTAs. No horizontal overflow, image aspect ratio 4:5, stable dimensions after decode, targets at least 44px."
+}
