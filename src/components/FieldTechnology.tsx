@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { ButtonLink } from './ButtonLink';
-import { AffiliateCreativeRotator } from './AffiliateCreativeRotator';
 import { FIELD_CATALOG_URL, fieldTechnologyCard, type FieldTechnologyCard } from '../domain/fieldTechnology';
 import '../styles/field-technology.css';
 
@@ -61,6 +60,5 @@ export function FieldTechnology() {
         <p className="field-technology__status">Exploration stage. Purchase and field testing are not yet confirmed.</p>
       </div>
     </article>
-    <AffiliateCreativeRotator creatives={card.creatives} />
   </section>;
 }
