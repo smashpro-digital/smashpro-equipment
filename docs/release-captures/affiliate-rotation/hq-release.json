@@ -77,14 +77,14 @@
     "performance_display": true,
     "errors": []
   },
-  "equipment_source_commit": "fdae5db4a5c8e9ca86e07d819f7af016f3c3e4a2",
-  "equipment_merge_commit": "220e569e5b0eac46e0662ccf8c5fce72b2aeb706",
-  "equipment_pr": 87,
-  "equipment_ci_run": 38464751563,
-  "equipment_deployment_run": 38465227125,
+  "equipment_source_commit": "a31cac9d09de49f534c26051b1546406c72eab0f",
+  "equipment_merge_commit": "15d7c8a8453f947a8efec76c0f6592aaf3d69a3e",
+  "equipment_pr": 88,
+  "equipment_ci_run": 38467198002,
+  "equipment_deployment_run": 38467561399,
   "tests": {
     "equipment_unit": 135,
-    "equipment_browser_scenarios": 11,
+    "equipment_browser_scenarios": 13,
     "rotation_php_projection_assertions": 85,
     "rotation_auth_guards": 9,
     "equipment_build": true,
@@ -93,12 +93,12 @@
     "ardhi_artifact": true,
     "diff_check": true
   },
-  "production_verified_at": "2026-10-13T20:53:30.532185+00:00",
+  "production_verified_at": "2026-10-13T21:08:06.176Z",
   "equipment_deployment_result": "success",
   "hq_dashboard_deployment_result": "success",
   "live_artifacts": {
-    "equipment_bundle_url": "https://smashpro.app/equipment/assets/main-CCLbph-y.js",
-    "equipment_bundle_sha256": "92f06a347f33bf148f6f994e504749f0eb20a63ad48e1286037177d0f1c31e3b",
+    "equipment_bundle_url": "https://smashpro.app/equipment/assets/main-MFx_rFtq.js",
+    "equipment_bundle_sha256": "4e779fe8332088cc995d7038d75b7479c927e43f3189697d0edd6fcfba72f005",
     "matches_local_build": true,
     "hq_bundle_url": "https://smashpro.app/dashboard/assets/index-DCeuT5ot.js",
     "hq_rotation_admin_published": true,
@@ -108,7 +108,7 @@
     {
       "width": 390,
       "url": "https://smashpro.app/equipment/",
-      "captured_at": "2026-10-13T20:49:01.014Z",
+      "captured_at": "2026-10-13T21:07:30.736Z",
       "active_creatives": [
         "4587303",
         "4587311"
@@ -147,7 +147,7 @@
     {
       "width": 1440,
       "url": "https://smashpro.app/equipment/",
-      "captured_at": "2026-10-13T20:49:21.048Z",
+      "captured_at": "2026-10-13T21:08:06.176Z",
       "active_creatives": [
         "4587303",
         "4587311"
@@ -206,5 +206,19 @@
   ],
   "post_release_gateway_restored": true,
   "post_release_helper_removed": true,
-  "unresolved_technical_blockers": []
+  "unresolved_technical_blockers": [],
+  "equipment_initial_source_commit": "fdae5db4a5c8e9ca86e07d819f7af016f3c3e4a2",
+  "equipment_initial_merge_commit": "220e569e5b0eac46e0662ccf8c5fce72b2aeb706",
+  "equipment_initial_deployment_run": 38465227125,
+  "controls_space_reserved_on_image_failure": true,
+  "cache_revalidation": {
+    "scope": "https://smashpro.app/equipment/",
+    "encodings": [
+      "gzip",
+      "br"
+    ],
+    "method": "Scoped GET with Cache-Control no-cache and Pragma no-cache",
+    "final_captures": "Fresh browser contexts, normal URL, no request overrides"
+  },
+  "browser_report_readback_context": "Initial production acceptance: two impressions per eligible creative, zero clicks, NULL conversions. Later acceptance views may increment impressions."
 }
