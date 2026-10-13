@@ -1,7 +1,9 @@
-# AKASO Equipment integration — local implementation
+# AKASO Equipment integration — release status
 
 October 13, 2026. Branch: `feat/akaso-equipment-integration-20261013`.
-No deployment, merge, production approval or CRM mutation was performed.
+Implementation merged as `d8c56234f005411ec27cf1369c9ae478bf23fadb` ([PR #81](https://github.com/smashpro-digital/smashpro-equipment/pull/81)). The AKASO catalog is activated in production, but the React production upload is blocked by the existing shipment service dependency.
+
+See the [production activation receipt](AKASO-PRODUCTION-ACTIVATION-20261013.md) for current status. Earlier live observations and prerequisites below describe the pre-release inspection, not the current catalog state.
 
 ## Placement and presentation
 
