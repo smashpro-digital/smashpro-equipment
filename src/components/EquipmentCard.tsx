@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Equipment } from "../types/equipment";
 
 export function EquipmentCard({ item }: { item: Equipment }) {
+  const media = item.cardMedia ?? item.heroMedia;
   const preferredSpecs = item.slug === "sp-liftmate-27" ? ["OEM Model", "Rated Capacity", "Power", "Model Year"] : item.commissioning ? ["OEM model", "Machine type", "Filament system", "Multicolor"] : item.slug === "sp-nyasi-26"
     ? ["Factory model", "Machine type", "Engine", "Front equipment"] : item.slug === "sp-mzigo-26"
     ? ["Machine type", "Payload", "Power source", "Electric drive system"]
@@ -9,7 +10,7 @@ export function EquipmentCard({ item }: { item: Equipment }) {
   const quickSpecs = preferredSpecs.map((label) => item.specifications.find((spec) => spec.label === label)).filter((spec): spec is NonNullable<typeof spec> => Boolean(spec));
   return (
     <article className={`equipment-card equipment-card--${item.slug}`}>
-      <div className="equipment-card__media"><img src={item.heroImage} srcSet={item.heroMedia?.srcSet} sizes={item.heroMedia?.srcSet ? "(max-width: 768px) calc(100vw - 24px), (max-width: 1050px) 50vw, 33vw" : undefined} alt={item.heroMedia?.alt ?? `${item.fleetId} ${item.category}`} width={item.heroMedia?.width ?? 1536} height={item.heroMedia?.height ?? 1024} loading="lazy" decoding="async" /><span className="card-status">{item.statusLabel}</span></div>
+      <div className="equipment-card__media"><img src={item.cardMedia?.src ?? item.heroImage} srcSet={media?.srcSet} sizes={media?.srcSet ? "(max-width: 768px) calc(100vw - 24px), (max-width: 1050px) 50vw, 33vw" : undefined} alt={media?.alt ?? `${item.fleetId} ${item.category}`} width={media?.width ?? 1536} height={media?.height ?? 1024} loading="lazy" decoding="async" /><span className="card-status">{item.statusLabel}</span></div>
       <div className="equipment-card__overlay" />
       <div className="equipment-card__content">
         <p className="card-fleet-id">{item.fleetId}</p><h3>{item.name}</h3><p className="category-label">{item.category}</p><p className="card-capability">{item.capabilityStatement}</p>
