@@ -305,3 +305,7 @@ body:after{position:fixed;top:-22vw;right:-18vw;z-index:-1;width:52vw;height:52v
 #fleet .equipment-card--sp-liftmate-27 h3{font-size:2.35rem;margin:.35rem 0 .25rem}
 #fleet .equipment-card--sp-liftmate-27 .mini-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 #fleet .equipment-card--sp-liftmate-27 .card-cta{margin-top:auto}
+
+/* Preserve readable UMBA copy over the owner-supplied workshop artwork. */
+.equipment-card--sp-umba-26 .equipment-card__overlay{background:linear-gradient(180deg,#05080530 0%,#050805b8 35%,#050805f5 100%)}
+@media(max-width:768px){.equipment-card--sp-umba-26 .equipment-card__content{height:auto}}
