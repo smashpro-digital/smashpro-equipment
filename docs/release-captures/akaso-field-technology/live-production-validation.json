@@ -1,0 +1,38 @@
+[
+  {
+    "width": 390,
+    "url": "https://smashpro.app/equipment/",
+    "status": 200,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "no_overflow": true,
+    "disclosure": true,
+    "sponsored_link": true,
+    "secondary_cta_hidden": true,
+    "no_tracking_requests_on_load": true,
+    "page_errors": [],
+    "capture": "live-production-390.png",
+    "captured_at": "2026-10-13T18:38:08.662Z"
+  },
+  {
+    "width": 1440,
+    "url": "https://smashpro.app/equipment/",
+    "status": 200,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "no_overflow": true,
+    "disclosure": true,
+    "sponsored_link": true,
+    "secondary_cta_hidden": true,
+    "no_tracking_requests_on_load": true,
+    "page_errors": [],
+    "capture": "live-production-1440.png",
+    "captured_at": "2026-10-13T18:38:12.358Z"
+  }
+]

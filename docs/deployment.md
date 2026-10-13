@@ -47,7 +47,7 @@ Do not blanket-ignore failures or set `continue-on-error` on required checks. Fo
 2. Inspect current production and preserve the last successful artifact/commit for rollback. Verify live HTML and its referenced assets match that artifact. Confirm the fixed destination and secret names.
 3. Run **Actions > Build and Deploy Equipment Showroom > Run workflow** on main. Select the feature-specific inputs required by this release. For this AKASO activation: `akaso_release=true`, `shipment_release=false`.
 4. Confirm both validation and FTP upload succeed. A successful build or merge alone does not publish the website.
-5. Inspect the actual live page and asset URLs; verify affected functionality, public approval boundaries and mobile/desktop layout. Capture 390px and 1440px production evidence.
+5. Inspect the actual live page and asset URLs, including compressed browser responses. If normal HTML is stale, compare `Age`, `Last-Modified`, ETag and bundle names; revalidate only the Equipment HTML URL with no-cache request headers and verify a fresh normal-URL browser session. A query-busted result alone is not acceptance. Verify affected functionality, public approval boundaries and mobile/desktop layout. Capture 390px and 1440px production evidence.
 6. Record commit, PR, workflow run, artifact/rollback evidence and live acceptance. Keep outages in independent monitoring visible and honestly reported.
 
 ## Rollback

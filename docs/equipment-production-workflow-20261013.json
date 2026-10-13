@@ -1,0 +1,238 @@
+{
+  "conclusion": "success",
+  "headSha": "1488895f01963b380c2477e787db60f4bfd82e76",
+  "jobs": [
+    {
+      "completedAt": "2026-10-13T18:32:00Z",
+      "conclusion": "success",
+      "databaseId": 115469237974,
+      "name": "Validate production build",
+      "startedAt": "2026-10-13T18:31:12Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-13T18:31:14Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-13T18:31:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:29Z",
+          "conclusion": "success",
+          "name": "Check out showroom source",
+          "number": 2,
+          "startedAt": "2026-10-13T18:31:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:30Z",
+          "conclusion": "success",
+          "name": "Set up Node.js",
+          "number": 3,
+          "startedAt": "2026-10-13T18:31:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:32Z",
+          "conclusion": "success",
+          "name": "Install locked dependencies",
+          "number": 4,
+          "startedAt": "2026-10-13T18:31:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:36Z",
+          "conclusion": "success",
+          "name": "Run TypeScript checks",
+          "number": 5,
+          "startedAt": "2026-10-13T18:31:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:39Z",
+          "conclusion": "success",
+          "name": "Run tests",
+          "number": 6,
+          "startedAt": "2026-10-13T18:31:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:48Z",
+          "conclusion": "success",
+          "name": "Build static showroom",
+          "number": 7,
+          "startedAt": "2026-10-13T18:31:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:48Z",
+          "conclusion": "success",
+          "name": "Validate customer-safe Equipment Passport index",
+          "number": 8,
+          "startedAt": "2026-10-13T18:31:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:49Z",
+          "conclusion": "success",
+          "name": "Verify local ARDHI artifact and evidence",
+          "number": 9,
+          "startedAt": "2026-10-13T18:31:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:49Z",
+          "conclusion": "success",
+          "name": "Verify protected build outputs",
+          "number": 10,
+          "startedAt": "2026-10-13T18:31:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:57Z",
+          "conclusion": "success",
+          "name": "Upload validated showroom artifact",
+          "number": 11,
+          "startedAt": "2026-10-13T18:31:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:57Z",
+          "conclusion": "success",
+          "name": "Post Set up Node.js",
+          "number": 21,
+          "startedAt": "2026-10-13T18:31:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:57Z",
+          "conclusion": "success",
+          "name": "Post Check out showroom source",
+          "number": 22,
+          "startedAt": "2026-10-13T18:31:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:31:57Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 23,
+          "startedAt": "2026-10-13T18:31:57Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/38447316456/job/115469237974"
+    },
+    {
+      "completedAt": "2026-10-13T18:32:26Z",
+      "conclusion": "success",
+      "databaseId": 115469629447,
+      "name": "Deploy static showroom to production",
+      "startedAt": "2026-10-13T18:32:03Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-13T18:32:04Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-13T18:32:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:08Z",
+          "conclusion": "success",
+          "name": "Download validated showroom artifact",
+          "number": 2,
+          "startedAt": "2026-10-13T18:32:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:15Z",
+          "conclusion": "success",
+          "name": "Check out matching release policy",
+          "number": 3,
+          "startedAt": "2026-10-13T18:32:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:16Z",
+          "conclusion": "success",
+          "name": "Set up Node.js for release policy",
+          "number": 4,
+          "startedAt": "2026-10-13T18:32:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:16Z",
+          "conclusion": "success",
+          "name": "Verify downloaded ARDHI artifact and local evidence",
+          "number": 5,
+          "startedAt": "2026-10-13T18:32:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:16Z",
+          "conclusion": "skipped",
+          "name": "Require live evidence for shipment-specific release",
+          "number": 6,
+          "startedAt": "2026-10-13T18:32:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:17Z",
+          "conclusion": "success",
+          "name": "Require authorized public catalog for AKASO activation",
+          "number": 7,
+          "startedAt": "2026-10-13T18:32:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:17Z",
+          "conclusion": "success",
+          "name": "Verify required deployment settings",
+          "number": 8,
+          "startedAt": "2026-10-13T18:32:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:23Z",
+          "conclusion": "success",
+          "name": "Deploy generated output incrementally",
+          "number": 9,
+          "startedAt": "2026-10-13T18:32:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:23Z",
+          "conclusion": "success",
+          "name": "Post Set up Node.js for release policy",
+          "number": 17,
+          "startedAt": "2026-10-13T18:32:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:24Z",
+          "conclusion": "success",
+          "name": "Post Check out matching release policy",
+          "number": 18,
+          "startedAt": "2026-10-13T18:32:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-13T18:32:24Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-10-13T18:32:24Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/38447316456/job/115469629447"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/smashpro-digital/smashpro-equipment/actions/runs/38447316456"
+}
