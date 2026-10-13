@@ -1,0 +1,7 @@
+.field-technology__card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:2.5rem;padding:2rem;border:1px solid var(--line);background:var(--surface)}
+.field-technology__identity h3{margin:.5rem 0 1.25rem;font-size:clamp(2rem,4vw,3.5rem);line-height:1.1}
+.field-technology__stage{display:inline-block;padding:.35rem .75rem;border:1px solid var(--line);color:var(--green);font-size:.8rem}
+.field-technology__card p{color:var(--muted)}
+.field-technology__action{margin-top:1.5rem}
+.field-technology__disclosure{max-width:58ch;margin:.85rem 0 0;font-size:.85rem;line-height:1.6}
+@media(max-width:768px){.field-technology__card{grid-template-columns:1fr;gap:1rem;padding:1.25rem}.field-technology__action .button{width:100%}}

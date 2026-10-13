@@ -4,6 +4,7 @@ import { ButtonLink } from "../components/ButtonLink";
 import { EquipmentCard } from "../components/EquipmentCard";
 import { PageFrame } from "../components/PageFrame";
 import { AttachmentShowroom } from "../components/AttachmentShowroom";
+import { FieldTechnology } from "../components/FieldTechnology";
 import type { Equipment } from "../types/equipment";
 
 const standards = ["Maintained equipment", "Contractor eligibility", "Inspection process", "Clear rental terms", "Equipment support", "Growing attachment library"];
@@ -44,6 +45,7 @@ export function HomePage() {
 
       <section className="section shell split-section"><div><p className="eyebrow">Why SmashPro Fleet</p><h2>Readiness is part of the equipment.</h2><p>Rental access is a documented operating relationship built around people, machines, projects, attachments and condition.</p></div><div className="standards-list">{standards.map((item,index) => <div key={item}><span>0{index+1}</span><h3>{item}</h3><p>{index===0?"Fleet care and operating readiness are treated as core requirements.":index===1?"Access may depend on approval, insurance, certification and account standing.":"Clear steps support safer, more predictable equipment use."}</p></div>)}</div></section>
       <section className="process-section" id="rental-process"><div className="shell"><p className="eyebrow">Rental process</p><div className="section-heading"><h2>From request to closeout.</h2><p>This is the intended rental journey. Public availability and launch timing have not been announced.</p></div><ol className="process-grid">{rentalSteps.map((step,index) => <li key={step}><span>{String(index+1).padStart(2,"0")}</span><h3>{step}</h3></li>)}</ol></div></section>
+      <FieldTechnology />
       <section className="contractor-cta" id="contractors"><div className="shell"><p className="eyebrow">Equipment + project support</p><h2>Start with the right record.</h2><p>Ask about a machine, attachment, fabrication need or future project. Availability remains subject to readiness and review.</p><div className="button-row"><ButtonLink href="https://smashpro.app/contact" variant="primary">Contact SmashPro</ButtonLink><ButtonLink href="#fleet" variant="outline">Review Field Fleet</ButtonLink></div></div></section>
     </div>
   </PageFrame>;
