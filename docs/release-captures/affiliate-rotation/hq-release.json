@@ -1,0 +1,210 @@
+{
+  "hq_source_commit": "df44ff37d0d69ecbcae358f46357bed867f16a4f",
+  "hq_merge_commit": "fa429e7469e8651569cf75b8bba633b2109e492c",
+  "hq_pr": 232,
+  "hq_ci_run": 38463748496,
+  "hq_dashboard_deployment": 38464007398,
+  "migration_id": "2026-10-13-affiliate-rotation",
+  "mysql_version": "5.7.44-log",
+  "php_compatibility": "7.4.33",
+  "database_backup": "owner explicitly waived; not verified",
+  "schema_applied": true,
+  "schema_idempotency": true,
+  "activation_idempotency": true,
+  "gateway_cleanup": [
+    {
+      "gateway_restored": true,
+      "temporary_files_removed": true
+    },
+    {
+      "gateway_restored": true,
+      "temporary_files_removed": true
+    }
+  ],
+  "api_file_hashes": {
+    "dashboard/api/_affiliate_rotation.php": "9448069571e81fa933443bb8c7a4f96d3c744d71b9b38ce8ef68768e0308c911",
+    "dashboard/api/_affiliate_catalog.php": "587e24a8ba91cf7655dd6e4d05e191c6cf456bbfb9b138e95a83d92960040e2f",
+    "dashboard/api/affiliate_creative_event.php": "6c691d71bf7481b5fe3b21a1ca8a6becd0d6e9891ad56ad485aaf0e11e772e9c",
+    "dashboard/api/affiliate_foundation.php": "af4811cd2f966c9992af7be7e677e3ac46f9e904e0505f89fd8acc4f45c8a645"
+  },
+  "program_id": 1,
+  "campaign_id": 3,
+  "media_property_id": 1,
+  "placement_id": 3,
+  "placement": "equipment.field-technology.akaso360",
+  "creative_records": [
+    {
+      "record_id": 1,
+      "assignment_id": 1,
+      "awin_creative_id": "4587303",
+      "active": true
+    },
+    {
+      "record_id": 2,
+      "assignment_id": 2,
+      "awin_creative_id": "4158631",
+      "active": false
+    },
+    {
+      "record_id": 3,
+      "assignment_id": 3,
+      "awin_creative_id": "4597556",
+      "active": false
+    },
+    {
+      "record_id": 4,
+      "assignment_id": 4,
+      "awin_creative_id": "4597662",
+      "active": false
+    },
+    {
+      "record_id": 5,
+      "assignment_id": 5,
+      "awin_creative_id": "4587311",
+      "active": true
+    }
+  ],
+  "public_catalog": "https://smashpro.app/dashboard/api/public_gear.php?property=hq&placement=equipment.field-technology.akaso360",
+  "garage_excluded": true,
+  "public_allowlist_verified": true,
+  "admin_unauthenticated_status": 401,
+  "admin_local_test": {
+    "fixture": true,
+    "admin_form_submit": true,
+    "csrf_header": true,
+    "weight_order_schedule": true,
+    "optimistic_revision": true,
+    "performance_display": true,
+    "errors": []
+  },
+  "equipment_source_commit": "fdae5db4a5c8e9ca86e07d819f7af016f3c3e4a2",
+  "equipment_merge_commit": "220e569e5b0eac46e0662ccf8c5fce72b2aeb706",
+  "equipment_pr": 87,
+  "equipment_ci_run": 38464751563,
+  "equipment_deployment_run": 38465227125,
+  "tests": {
+    "equipment_unit": 135,
+    "equipment_browser_scenarios": 11,
+    "rotation_php_projection_assertions": 85,
+    "rotation_auth_guards": 9,
+    "equipment_build": true,
+    "hq_build": true,
+    "public_index": true,
+    "ardhi_artifact": true,
+    "diff_check": true
+  },
+  "production_verified_at": "2026-10-13T20:53:30.532185+00:00",
+  "equipment_deployment_result": "success",
+  "hq_dashboard_deployment_result": "success",
+  "live_artifacts": {
+    "equipment_bundle_url": "https://smashpro.app/equipment/assets/main-CCLbph-y.js",
+    "equipment_bundle_sha256": "92f06a347f33bf148f6f994e504749f0eb20a63ad48e1286037177d0f1c31e3b",
+    "matches_local_build": true,
+    "hq_bundle_url": "https://smashpro.app/dashboard/assets/index-DCeuT5ot.js",
+    "hq_rotation_admin_published": true,
+    "hq_bundle_sha256": "9d84ad7e2e5868799ab82c7c27b2adaeaebc16ec225fbd0b3d2b17680dc229e9"
+  },
+  "production_browser": [
+    {
+      "width": 390,
+      "url": "https://smashpro.app/equipment/",
+      "captured_at": "2026-10-13T20:49:01.014Z",
+      "active_creatives": [
+        "4587303",
+        "4587311"
+      ],
+      "assignment_ids": [
+        1,
+        5
+      ],
+      "creative_record_ids": [
+        1,
+        5
+      ],
+      "placement_id": 3,
+      "campaign_id": 3,
+      "media_property_id": 1,
+      "automatic_rotation": true,
+      "product_static": true,
+      "exact_awin_urls": true,
+      "disclosure": true,
+      "youtube_cta": true,
+      "section_order": [
+        "rental-process",
+        "field-technology",
+        "contractors"
+      ],
+      "no_overflow": true,
+      "stable_banner_height": true,
+      "telemetry_statuses": [
+        202,
+        202
+      ],
+      "no_clicks_on_load": true,
+      "page_errors": [],
+      "screenshot": "production-390.png"
+    },
+    {
+      "width": 1440,
+      "url": "https://smashpro.app/equipment/",
+      "captured_at": "2026-10-13T20:49:21.048Z",
+      "active_creatives": [
+        "4587303",
+        "4587311"
+      ],
+      "assignment_ids": [
+        1,
+        5
+      ],
+      "creative_record_ids": [
+        1,
+        5
+      ],
+      "placement_id": 3,
+      "campaign_id": 3,
+      "media_property_id": 1,
+      "automatic_rotation": true,
+      "product_static": true,
+      "exact_awin_urls": true,
+      "disclosure": true,
+      "youtube_cta": true,
+      "section_order": [
+        "rental-process",
+        "field-technology",
+        "contractors"
+      ],
+      "no_overflow": true,
+      "stable_banner_height": true,
+      "telemetry_statuses": [
+        202,
+        202
+      ],
+      "no_clicks_on_load": true,
+      "page_errors": [],
+      "screenshot": "production-1440.png"
+    }
+  ],
+  "browser_report_readback": [
+    {
+      "creative_id": 1,
+      "placement_id": 3,
+      "campaign_id": 3,
+      "media_property_id": 1,
+      "content_views": 2,
+      "clicks": 0,
+      "conversions": null
+    },
+    {
+      "creative_id": 5,
+      "placement_id": 3,
+      "campaign_id": 3,
+      "media_property_id": 1,
+      "content_views": 2,
+      "clicks": 0,
+      "conversions": null
+    }
+  ],
+  "post_release_gateway_restored": true,
+  "post_release_helper_removed": true,
+  "unresolved_technical_blockers": []
+}

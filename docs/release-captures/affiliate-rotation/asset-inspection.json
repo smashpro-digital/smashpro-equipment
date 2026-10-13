@@ -1,0 +1,47 @@
+[
+  {
+    "creative_id": "4587303",
+    "url": "https://www.awin1.com/cshow.php?s=4587303&v=69454&q=542867&r=3121518",
+    "width": 2160,
+    "height": 2700,
+    "bytes": 251631,
+    "sha256": "1087a269d7897092e5ff0013b8c03b6f0602f7ead0b41961bcb18657ab5a4d72",
+    "unchanged_from_previous": true
+  },
+  {
+    "creative_id": "4158631",
+    "url": "https://www.awin1.com/cshow.php?s=4158631&v=69454&q=542867&r=3121518",
+    "width": 800,
+    "height": 800,
+    "bytes": 527392,
+    "sha256": "f3d26472a20557e4907a1332a021c4651af97a0c0351d30a9b19a2587a11cd73",
+    "unchanged_from_previous": true
+  },
+  {
+    "creative_id": "4597556",
+    "url": "https://www.awin1.com/cshow.php?s=4597556&v=69454&q=542867&r=3121518",
+    "width": 5120,
+    "height": 1600,
+    "bytes": 229336,
+    "sha256": "e6928b6dedb748391345fdbef3cb95751e973abf1f75867f9c18ed0c43e1bec1",
+    "unchanged_from_previous": true
+  },
+  {
+    "creative_id": "4597662",
+    "url": "https://www.awin1.com/cshow.php?s=4597662&v=69454&q=542867&r=3121518",
+    "width": 1125,
+    "height": 1440,
+    "bytes": 162015,
+    "sha256": "0656932355ae5bbf6874cbfe91ebb27dbaac21841da715632a0016d6e30325bd",
+    "unchanged_from_previous": true
+  },
+  {
+    "creative_id": "4587311",
+    "url": "https://www.awin1.com/cshow.php?s=4587311&v=69454&q=542867&r=3121518",
+    "width": 2832,
+    "height": 1920,
+    "bytes": 404242,
+    "sha256": "c7a8df7733c0b3dc6d869d376da5672599026c04bc26d63a2a3254ed2963a035",
+    "unchanged_from_previous": true
+  }
+]
