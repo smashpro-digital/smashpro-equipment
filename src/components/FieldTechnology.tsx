@@ -5,6 +5,7 @@ import '../styles/field-technology.css';
 
 export function FieldTechnology() {
   const [card, setCard] = useState<FieldTechnologyCard | null>(null);
+  const [failedImage, setFailedImage] = useState<string | null>(null);
   useEffect(() => {
     let disposed = false;
     let active: AbortController | null = null;
@@ -40,11 +41,23 @@ export function FieldTechnology() {
 
   if (!card) return null;
   return <section className="section shell field-technology" id="field-technology" aria-labelledby="field-technology-title">
-    <div className="section-heading"><div><p className="eyebrow">Equipment stories, from the field</p><h2 id="field-technology-title">Field Technology &amp; Creator Gear</h2></div><p>New perspectives on the machines, the operators and the work.</p></div>
-    <article className="field-technology__card">
-      <div className="field-technology__identity"><p className="eyebrow">Camera exploration</p><h3>{card.name}</h3><span className="field-technology__stage">Exploring</span></div>
-      <div><p>{card.description}</p><p>We’re exploring equipment demonstrations, operator POV and Equip Expo 2026 coverage. Purchase, field testing and sponsorship are not claimed.</p>
-        <div className="field-technology__action"><ButtonLink href={card.url} sponsored onClick={event => { if (Date.now() >= card.validUntil) { event.preventDefault(); setCard(null); } }}>Explore AKASO 360</ButtonLink><p className="field-technology__disclosure">{card.disclosure}</p></div>
+    <p className="eyebrow">Field Technology &amp; Creator Gear</p>
+    <article className={"field-technology__card" + (card.image ? " field-technology__card--illustrated" : "")}>
+      {card.image && <figure className="field-technology__visual">
+        {failedImage === card.image.url ? <div className="field-technology__image-fallback"><strong>AKASO 360</strong><span>Product image unavailable</span></div> : <img src={card.image.url} width={card.image.width} height={card.image.height} alt={card.image.alt} loading="lazy" decoding="async" onError={() => setFailedImage(card.image!.url)} />}
+        <figcaption>Official AKASO product imagery</figcaption>
+      </figure>}
+      <div className="field-technology__story">
+        <div className="field-technology__identity"><span>{card.name}</span><span className="field-technology__stage">Exploring</span></div>
+        <h2 id="field-technology-title">Capture<br />Every Angle.</h2>
+        <p className="field-technology__intro">We're exploring the AKASO 360 to document real-world equipment operations, attachment demonstrations, and behind-the-scenes field work.</p>
+        <ul className="field-technology__stories" aria-label="Planned field stories"><li>Equipment in action</li><li>Attachment demonstrations</li><li>Behind the scenes</li></ul>
+        <div className="field-technology__action">
+          <ButtonLink href={card.url} sponsored onClick={event => { if (Date.now() >= card.validUntil) { event.preventDefault(); setCard(null); } }}>Explore AKASO 360</ButtonLink>
+          <ButtonLink href="https://www.youtube.com/@SmashProHQ" variant="quiet" external>Watch SmashPro Equipment</ButtonLink>
+        </div>
+        <p className="field-technology__disclosure">SmashPro participates in the AKASO Affiliate Program. {card.disclosure}</p>
+        <p className="field-technology__status">Exploration stage. Purchase and field testing are not yet confirmed.</p>
       </div>
     </article>
   </section>;

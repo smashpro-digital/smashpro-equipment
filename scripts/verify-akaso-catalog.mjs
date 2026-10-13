@@ -15,7 +15,11 @@ function keys(row, expected) { assert.deepEqual(Object.keys(row).sort(), expecte
 keys(payload, ['ok','schema_version','property','placement','generated_at','items']);
 const partner = payload.items[0], product = partner.products[0], link = product.links[0];
 keys(partner, ['name','classification','products']);
-keys(product, ['id','name','description','stage','featured','links']);
+keys(product, ['id','name','description','stage','featured','links', ...('image' in product ? ['image'] : [])]);
+if ('image' in product) {
+  keys(product.image, ['id','creative_id','url','width','height','alt']);
+  assert.ok(fieldTechnologyCard(payload)?.image, 'Published image must match the reviewed creative');
+}
 keys(link, ['url','advertiser_id','publisher_id','placement','campaign_id','property','disclosure','valid_until']);
 assert.match(link.disclosure, /commission/i);
 assert.equal(link.url, 'https://www.awin1.com/cread.php?awinmid=69454&awinaffid=3121518&campaign=akaso+360+spring+sale&clickref=smashpro360&ued=https%3A%2F%2Fshopakaso.com%2Fproducts%2Fakaso-360%3Fvariant%3D44081902846134');

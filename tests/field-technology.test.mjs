@@ -5,6 +5,19 @@ import ts from 'typescript';
 import { approvedCatalog } from './fixtures/field-technology.mjs';
 const code = ts.transpileModule(readFileSync('src/domain/fieldTechnology.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { fieldTechnologyCard } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
+
+test('only reviewed Equipment creative identity is rendered; invalid imagery preserves the approved link', () => {
+  const now = Date.now(), payload = approvedCatalog(now), product = payload.items[0].products[0];
+  const image = { id: 1, creative_id: '4587303', url: 'https://www.awin1.com/cshow.php?s=4587303&v=69454&q=542867&r=3121518', width: 2160, height: 2700, alt: 'AKASO 360 front and rear' };
+  product.image = image;
+  assert.deepEqual(fieldTechnologyCard(payload, now).image, image);
+  for (const patch of [{ url: 'https://untrusted.invalid/image.jpg' }, { creative_id: '4597556' }, { width: 0 }, { height: 800 }, { id: 0 }, { alt: '' }]) {
+    product.image = { ...image, ...patch };
+    const card = fieldTechnologyCard(payload, now);
+    assert.equal(card.image, null);
+    assert.equal(card.url, product.links[0].url);
+  }
+});
 test('approved equipment projection preserves the supplied URL and disclosure', () => {
   const now = Date.now(), payload = approvedCatalog(now), card = fieldTechnologyCard(payload, now);
   assert.equal(card.url, payload.items[0].products[0].links[0].url);
