@@ -1,0 +1,63 @@
+{
+  "garage_status": 400,
+  "results": [
+    {
+      "width": 390,
+      "url": "https://smashpro.app/equipment/",
+      "captured_at": "2026-10-13T22:21:13.450Z",
+      "catalog_creatives_preserved": [
+        "4587303",
+        "4587311"
+      ],
+      "slideshow_count": 0,
+      "product_image_count": 1,
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=69454&awinaffid=3121518&campaign=akaso+360+spring+sale&clickref=smashpro360&ued=https%3A%2F%2Fshopakaso.com%2Fproducts%2Fakaso-360%3Fvariant%3D44081902846134",
+      "affiliate_rel": "sponsored noopener noreferrer",
+      "disclosure": true,
+      "youtube_cta": true,
+      "section_order": [
+        "rental-process",
+        "field-technology",
+        "contractors"
+      ],
+      "no_empty_wrapper": true,
+      "no_overflow": true,
+      "creative_event_requests": 0,
+      "page_errors": [],
+      "script_urls": [
+        "https://smashpro.app/equipment/assets/global-BXuSDXMo.js",
+        "https://smashpro.app/equipment/assets/main-DCyz2j88.js"
+      ],
+      "screenshot": "production-390.png"
+    },
+    {
+      "width": 1440,
+      "url": "https://smashpro.app/equipment/",
+      "captured_at": "2026-10-13T22:21:30.606Z",
+      "catalog_creatives_preserved": [
+        "4587303",
+        "4587311"
+      ],
+      "slideshow_count": 0,
+      "product_image_count": 1,
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=69454&awinaffid=3121518&campaign=akaso+360+spring+sale&clickref=smashpro360&ued=https%3A%2F%2Fshopakaso.com%2Fproducts%2Fakaso-360%3Fvariant%3D44081902846134",
+      "affiliate_rel": "sponsored noopener noreferrer",
+      "disclosure": true,
+      "youtube_cta": true,
+      "section_order": [
+        "rental-process",
+        "field-technology",
+        "contractors"
+      ],
+      "no_empty_wrapper": true,
+      "no_overflow": true,
+      "creative_event_requests": 0,
+      "page_errors": [],
+      "script_urls": [
+        "https://smashpro.app/equipment/assets/global-BXuSDXMo.js",
+        "https://smashpro.app/equipment/assets/main-DCyz2j88.js"
+      ],
+      "screenshot": "production-1440.png"
+    }
+  ]
+}
