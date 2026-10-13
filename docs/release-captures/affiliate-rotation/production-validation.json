@@ -1,0 +1,80 @@
+[
+  {
+    "width": 390,
+    "url": "https://smashpro.app/equipment/",
+    "captured_at": "2026-10-13T20:49:01.014Z",
+    "active_creatives": [
+      "4587303",
+      "4587311"
+    ],
+    "assignment_ids": [
+      1,
+      5
+    ],
+    "creative_record_ids": [
+      1,
+      5
+    ],
+    "placement_id": 3,
+    "campaign_id": 3,
+    "media_property_id": 1,
+    "automatic_rotation": true,
+    "product_static": true,
+    "exact_awin_urls": true,
+    "disclosure": true,
+    "youtube_cta": true,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "no_overflow": true,
+    "stable_banner_height": true,
+    "telemetry_statuses": [
+      202,
+      202
+    ],
+    "no_clicks_on_load": true,
+    "page_errors": [],
+    "screenshot": "production-390.png"
+  },
+  {
+    "width": 1440,
+    "url": "https://smashpro.app/equipment/",
+    "captured_at": "2026-10-13T20:49:21.048Z",
+    "active_creatives": [
+      "4587303",
+      "4587311"
+    ],
+    "assignment_ids": [
+      1,
+      5
+    ],
+    "creative_record_ids": [
+      1,
+      5
+    ],
+    "placement_id": 3,
+    "campaign_id": 3,
+    "media_property_id": 1,
+    "automatic_rotation": true,
+    "product_static": true,
+    "exact_awin_urls": true,
+    "disclosure": true,
+    "youtube_cta": true,
+    "section_order": [
+      "rental-process",
+      "field-technology",
+      "contractors"
+    ],
+    "no_overflow": true,
+    "stable_banner_height": true,
+    "telemetry_statuses": [
+      202,
+      202
+    ],
+    "no_clicks_on_load": true,
+    "page_errors": [],
+    "screenshot": "production-1440.png"
+  }
+]
