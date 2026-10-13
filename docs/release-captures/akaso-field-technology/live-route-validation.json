@@ -1,0 +1,62 @@
+[
+  {
+    "url": "https://smashpro.app/equipment/",
+    "http_status": 200,
+    "sha256": "f66dda048037a387c5d9546775db8abb62f8fadf01e6c924c61b13fb0397404e"
+  },
+  {
+    "url": "https://smashpro.app/equipment/assets/global-BXuSDXMo.js",
+    "http_status": 200,
+    "sha256": "b37da115e144cd08732d67797559390982b57992121e44bce3954fc3f040ccf7"
+  },
+  {
+    "url": "https://smashpro.app/equipment/assets/main-CnyChK_t.js",
+    "http_status": 200,
+    "sha256": "1d66ec249c8fb8bdd651b8e264cb2020d16c21c3143582dd802e57e1d609a617"
+  },
+  {
+    "url": "https://smashpro.app/equipment/assets/global-CI2rpYqZ.css",
+    "http_status": 200,
+    "sha256": "6a2ed10f4bcc236a26ea08cb3dda14260144a32a9476846c185aaf6c1eff2111"
+  },
+  {
+    "url": "https://smashpro.app/equipment/assets/main-DxzfBZwF.css",
+    "http_status": 200,
+    "sha256": "1036c43e7d7bf3768927def94d09f241e5ca969b65e6a378752084ff3aa2a3cd"
+  },
+  {
+    "url": "https://smashpro.app/equipment/sp-ardhi-26.html",
+    "http_status": 200,
+    "sha256": "fae308a90b5b64fa17984a5533322ce81f77575798e3f60d05feb9b2e6ac1b7e"
+  },
+  {
+    "url": "https://smashpro.app/equipment/sp-mzigo-26.html",
+    "http_status": 200,
+    "sha256": "bb05749fd751e7728c079c56fdb402b7f57feecc5dc7d1c6a7c3ff6e48eb0ffb"
+  },
+  {
+    "url": "https://smashpro.app/equipment/sp-nyasi-26.html",
+    "http_status": 200,
+    "sha256": "498f024f5eae8d23e5a02d1c9dece6cda2524b636f38f372c47d191a48c86da8"
+  },
+  {
+    "url": "https://smashpro.app/equipment/sp-liftmate-27.html",
+    "http_status": 200,
+    "sha256": "ecd64513c24f90b5dff3889735147fb1f1445870fea4fe4bdc769dcac35e2d96"
+  },
+  {
+    "url": "https://smashpro.app/equipment/sp-umba-26.html",
+    "http_status": 200,
+    "sha256": "2d727127f042bfa93b585cb5cadd1fc18854b2777e839768f0518814ff8fc4a7"
+  },
+  {
+    "url": "https://smashpro.app/equipment/catalog/",
+    "http_status": 200,
+    "sha256": "22ff40ff0dde7af10d4c64f270c090964001aaf34625919542bfbc54816e5795"
+  },
+  {
+    "url": "https://smashpro.app/equipment/catalog/sp-pcm-001/",
+    "http_status": 200,
+    "sha256": "515d223d411e607f6c868d1a8232c319d5e4fbb7209caec2f942b0beca8b372d"
+  }
+]

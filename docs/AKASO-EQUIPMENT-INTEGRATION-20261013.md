@@ -1,5 +1,7 @@
 # AKASO Equipment integration — local implementation
 
+> Historical implementation/pre-activation notes. The integration is now deployed and verified live; see the [October 13 pipeline correction and production receipt](EQUIPMENT-DEPLOYMENT-CORRECTION-20261013.md). Earlier missing-endpoint and release-prerequisite statements below describe the initial inspection.
+
 October 13, 2026. Branch: `feat/akaso-equipment-integration-20261013`.
 No deployment, merge, production approval or CRM mutation was performed.
 
