@@ -26,7 +26,7 @@ test("Expo showroom presents the required semantic hierarchy", () => {
   const positions = ["id=\"fleet\"", "id=\"passports\"", "<AttachmentShowroom", "id=\"fabrication\"", "id=\"development\""].map(token => home.indexOf(token));
   assert.ok(positions.every(position => position >= 0));
   assert.deepEqual([...positions].sort((a,b) => a-b), positions);
-  assert.match(home, /Four machines\. Complementary roles\./);
+  assert.match(home, /Purpose-built machines\. One connected workflow\./);
   assert.match(home, /An Equipment Passport is the persistent public identity/);
   assert.match(home, /Concepts and prototypes remain discoverable/);
 });
