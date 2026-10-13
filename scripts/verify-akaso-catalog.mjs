@@ -15,7 +15,11 @@ function keys(row, expected) { assert.deepEqual(Object.keys(row).sort(), expecte
 keys(payload, ['ok','schema_version','property','placement','generated_at','items']);
 const partner = payload.items[0], product = partner.products[0], link = product.links[0];
 keys(partner, ['name','classification','products']);
-keys(product, ['id','name','description','stage','featured','links', ...('image' in product ? ['image'] : [])]);
+keys(product, ['id','name','description','stage','featured','links', ...('image' in product ? ['image'] : []), ...('creatives' in product ? ['creatives'] : [])]);
+if ('creatives' in product) {
+  assert.equal(fieldTechnologyCard(payload).creatives.length, product.creatives.length);
+  for (const creative of product.creatives) keys(creative, ['id','creative_record_id','creative_id','placement_id','placement','campaign_id','media_property_id','property','image_url','tracking_url','width','height','alt','weight','display_order','valid_until']);
+}
 if ('image' in product) {
   keys(product.image, ['id','creative_id','url','width','height','alt']);
   assert.ok(fieldTechnologyCard(payload)?.image, 'Published image must match the reviewed creative');

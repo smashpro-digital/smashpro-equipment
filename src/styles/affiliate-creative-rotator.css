@@ -1,0 +1,13 @@
+.affiliate-rotator { margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; background: var(--surface); min-width: 0; }
+.affiliate-rotator[hidden] { display: none; }
+.affiliate-rotator__heading, .affiliate-rotator__controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: .8rem 1rem; color: var(--muted); font-size: .8rem; }
+.affiliate-rotator__frame { height: clamp(260px, 35vw, 420px); display: grid; place-items: center; background: var(--ink); }
+.affiliate-rotator__frame a { display: block; width: 100%; height: 100%; min-height: 0; }
+.affiliate-rotator__frame img { display: block; width: 100%; height: 100%; object-fit: contain; animation: affiliate-banner-in 240ms ease-out; }
+.affiliate-rotator__frame p { padding: 1rem; text-align: center; color: var(--muted); }
+.affiliate-rotator__controls button { min-height: 44px; min-width: 44px; padding: .5rem .8rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--raised); color: #f4f7f3; cursor: pointer; font: inherit; }
+.affiliate-rotator__controls button:disabled { opacity: .65; cursor: default; }
+.affiliate-rotator a:focus-visible, .affiliate-rotator button:focus-visible { outline: 3px solid var(--green); outline-offset: -3px; }
+@keyframes affiliate-banner-in { from { opacity: .3; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .affiliate-rotator__frame img { animation: none; } }
+@media (max-width: 420px) { .affiliate-rotator__controls { justify-content: center; } .affiliate-rotator__controls > span { width: 100%; text-align: center; } }

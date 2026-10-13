@@ -1,8 +1,9 @@
+import { affiliateCreatives, type AffiliateCreative } from './affiliateCreatives.ts';
 export const FIELD_PLACEMENT = 'equipment.field-technology.akaso360';
 export const FIELD_CATALOG_URL = `/dashboard/api/public_gear.php?property=hq&placement=${FIELD_PLACEMENT}`;
 
 export type FieldTechnologyImage = { id: number; creative_id: string; url: string; width: number; height: number; alt: string };
-export type FieldTechnologyCard = { name: string; description: string; url: string; disclosure: string; validUntil: number; image: FieldTechnologyImage | null };
+export type FieldTechnologyCard = { name: string; description: string; url: string; disclosure: string; validUntil: number; image: FieldTechnologyImage | null; creatives: AffiliateCreative[] };
 const record = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
 const text = (value: unknown, max: number): value is string => typeof value === 'string' && value.trim().length > 0 && value.length <= max;
 
@@ -32,5 +33,5 @@ export function fieldTechnologyCard(payload: unknown, now = Date.now()): FieldTe
   if (record(candidate) && Number.isSafeInteger(candidate.id) && Number(candidate.id) > 0 && candidate.creative_id === '4587303' && candidate.width === 2160 && candidate.height === 2700 && text(candidate.alt, 300) && candidate.url === 'https://www.awin1.com/cshow.php?s=4587303&v=69454&q=542867&r=3121518') {
     image = { id: Number(candidate.id), creative_id: candidate.creative_id, url: candidate.url, width: candidate.width, height: candidate.height, alt: candidate.alt };
   }
-  return { name: product.name, description: product.description, url: link.url, disclosure: link.disclosure, validUntil, image };
+  return { name: product.name, description: product.description, url: link.url, disclosure: link.disclosure, validUntil, image, creatives: affiliateCreatives(product.creatives, FIELD_PLACEMENT, Number(link.campaign_id), validUntil, now) };
 }

@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { approvedCatalog } from './fixtures/field-technology.mjs';
-const code = ts.transpileModule(readFileSync('src/domain/fieldTechnology.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const options = { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } };
+const creativesModule = 'data:text/javascript;base64,' + Buffer.from(ts.transpileModule(readFileSync('src/domain/affiliateCreatives.ts', 'utf8'), options).outputText).toString('base64');
+const code = ts.transpileModule(readFileSync('src/domain/fieldTechnology.ts', 'utf8'), options).outputText.replace('./affiliateCreatives.ts', creativesModule);
 const { fieldTechnologyCard } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 
 test('only reviewed Equipment creative identity is rendered; invalid imagery preserves the approved link', () => {
