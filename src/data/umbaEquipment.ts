@@ -12,6 +12,13 @@ export const umbaEquipment: Equipment = {
   overview: "SP-UMBA-26 is SmashPro MicroFab's FlashForge AD5X multicolor FDM printer. Its existing operational identity is SP-3DP-001. Commissioning and material validation remain in progress.",
   capabilityStatement: "Multicolor FDM fabrication for prototypes, fixtures, adapters and small-batch development, subject to process validation.",
   heroImage: "/equipment/images/sp-umba-26-identity.svg", status: "commissioning", statusLabel: "Commissioning",
+  // Owner-supplied card artwork; not evidence of enclosure installation or readiness.
+  cardMedia: {
+    src: "/equipment/images/sp-umba-26-card-workshop.png", width: 1254, height: 1254,
+    alt: "UMBA promotional artwork: enclosed 3D printer with neon-green accents in a workshop",
+    mediaType: "promotional_artwork", evidenceClass: "concept_or_identity_art",
+    productionEvidence: false, factoryEvidence: false, fieldEvidence: false, public: true,
+  },
   statusDetail: "Machine identity is documented. Production readiness and material approvals require separate validation.",
   identity: { passportId: passport.passport_id, model: passport.fleet_id, factoryModel: passport.factory_model, edition: "MicroFab", assetClass: "FDM 3D Printer", modelYear: passport.model_year },
   specifications: [
