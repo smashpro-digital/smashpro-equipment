@@ -61,3 +61,6 @@ If byte-identical artifact restoration is needed, use the retained artifact with
 ## October 13 correction receipt
 
 Implementation and final live acceptance are recorded in [the pipeline correction release](EQUIPMENT-DEPLOYMENT-CORRECTION-20261013.md). The earlier [AKASO integration notes](AKASO-EQUIPMENT-INTEGRATION-20261013.md) describe its initial local validation and pre-activation state.
+
+
+AKASO premium visual release: see the [October 13 implementation, cache handling and production evidence](AKASO-PREMIUM-VISUAL-20261013.md). The deployment workflow itself is unchanged.

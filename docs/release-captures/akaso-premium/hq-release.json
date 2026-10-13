@@ -1,0 +1,47 @@
+{
+  "api": {
+    "api_path": "dashboard/api/_affiliate_catalog.php",
+    "before_sha256": "838beff383a92cfb6d539bf20f33b9c9e4328e66744be69cb7d6a43983021a37",
+    "deployed_sha256": "e595f335d7349522a59ba6804c79d98974dfb47264528dc877359f9fe62a45f2",
+    "remote_readback_verified": true
+  },
+  "activation": {
+    "ok": true,
+    "verified": true,
+    "already_applied": false,
+    "ids": {
+      "relationship_id": 1,
+      "media_property_id": 1,
+      "campaign_id": 3,
+      "permission_id": 3,
+      "creative_record_id": 1,
+      "creative_id": "4587303"
+    },
+    "schema_migration_required": false
+  },
+  "readback": {
+    "ok": true,
+    "dry_run": true,
+    "already_applied": true,
+    "plan_hash": "f5795b9479a326045328af4afb2b910adebd167771f3d1727386273f967cda49",
+    "ids": {
+      "relationship_id": 1,
+      "media_property_id": 1,
+      "campaign_id": 3,
+      "permission_id": 3,
+      "creative_record_id": 1,
+      "creative_id": "4587303"
+    },
+    "schema_migration_required": false
+  },
+  "cleanup": {
+    "gateway_restored": true,
+    "temporary_helper_removed": true
+  },
+  "pr": "https://github.com/smashpro-digital/digital-hq/pull/229",
+  "commit": "345fe5c5bf5348cff28360fb4ec73e76e5d4dfab",
+  "merge": "50226f7696b6cd43f0d614bfee7a8f2fbf3da31f",
+  "ci": "https://github.com/smashpro-digital/digital-hq/actions/runs/38453745122",
+  "schema_migrations": [],
+  "public_contract": "Equipment 200; Garage/unknown placement 400; anonymous admin 401; image public allowlist passed"
+}

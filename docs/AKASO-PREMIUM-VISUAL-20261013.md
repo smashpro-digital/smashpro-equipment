@@ -32,4 +32,35 @@ Initial live readback found the creative unpublished and permission planned. The
 
 Actual pre-change production captures: [390px](release-captures/akaso-premium/before-390.png), [768px](release-captures/akaso-premium/before-768.png), [1440px](release-captures/akaso-premium/before-1440.png).
 
-Local fixture captures are explicitly named `local-fixture-*`; they test a proposed approved image contract and are not evidence of production approval. Production acceptance and deployment receipts will be recorded after release.
+Local fixture captures are explicitly named `local-fixture-*`; they test a proposed approved image contract and are not evidence of production approval. Production acceptance and deployment receipts are recorded below.
+
+
+## Validated and deployed
+
+- Equipment implementation `53746a386fc1bd325dd11ab89c994a022e8f25ae`, [PR #85](https://github.com/smashpro-digital/smashpro-equipment/pull/85), merged conventionally after [CI passed](https://github.com/smashpro-digital/smashpro-equipment/actions/runs/38455429334).
+- Deployed merge `80e1372a727a1c37e2a2019939c2fd7bd9590282`. [Production run 38457601998](https://github.com/smashpro-digital/smashpro-equipment/actions/runs/38457601998) succeeded with `akaso_release=true`, `shipment_release=false`; build/tests, artifact safeguards, live catalog, deployment settings and incremental FTP passed. [Workflow receipt](release-captures/akaso-premium/production-workflow.json).
+- HQ implementation `345fe5c5bf5348cff28360fb4ec73e76e5d4dfab`, merge `50226f7696b6cd43f0d614bfee7a8f2fbf3da31f`, [PR #229](https://github.com/smashpro-digital/digital-hq/pull/229). PHP 8.2 and PHP 7.4 CI passed. [PR #230](https://github.com/smashpro-digital/digital-hq/pull/230) records the completed release. The scoped PHP API upload was verified by remote hash readback; the dashboard build was not used to publish PHP. [API/activation receipt](release-captures/akaso-premium/hq-release.json).
+- No schema migration. Authenticated activation applied only creative record 1 / creative 4587303 and promotional-assets permission 3. Dry-run, transactional apply, idempotent readback, anonymous rejection and temporary gateway cleanup passed. Existing affiliate URL and placement permissions stayed unchanged.
+- 133 unit tests, typecheck, production build, public index/media/passport checks and local ARDHI artifact verification passed. All 17 browser scenarios passed across the built run and targeted retry. Initial failures were local page/server setup timeouts before assertions; final responsive and image-failure checks passed with an already-running built preview. [Local validation details](release-captures/akaso-premium/local-validation.json).
+
+### Normal-URL production acceptance
+
+Fresh anonymous Chromium sessions at **https://smashpro.app/equipment/** passed at 390, 768 and 1440px. The image loaded from HQ's approved reference, retained its 4:5 ratio and used `object-fit: contain`. The section remained between rental process and contractors. The original affiliate URL and sponsored relation, Equipment YouTube CTA and visible disclosure passed. Existing fleet/passport/attachment/fabrication/development/rental/contractor/footer sections remained present. No horizontal overflow, post-decode dimension changes, page errors or automatic affiliate click requests were observed. The image request is the official Awin impression endpoint; no commission attribution is claimed.
+
+The live catalog again passed public-only field validation, Garage/unknown placement rejection and anonymous admin rejection. No Gear CTA was introduced.
+
+| Width | Before: actual production | After: actual production |
+| --- | --- | --- |
+| 390px | [Before](release-captures/akaso-premium/before-390.png) | [After](release-captures/akaso-premium/production-390.png) |
+| 768px | [Before](release-captures/akaso-premium/before-768.png) | [After](release-captures/akaso-premium/production-768.png) |
+| 1440px | [Before](release-captures/akaso-premium/before-1440.png) | [After](release-captures/akaso-premium/production-1440.png) |
+
+[Live browser assertions](release-captures/akaso-premium/production-validation.json). Local synthetic captures are separately named `local-fixture-*`.
+
+### Cache handling and rollback
+
+The first browser read received stale Brotli HTML (`Last-Modified: Tue, 13 Oct 2026 18:32:22 GMT`) referencing the removed prior bundle `main-CnyChK_t.js`. Gzip HTML was already current. Following the deployment runbook, a GET revalidated only `/equipment/` with `Accept-Encoding: br`, `Cache-Control: no-cache` and `Pragma: no-cache`. Its modification time became October 13 19:48:34 GMT and age zero. Final captures used fresh sessions at the normal URL, without query busting, extra cache headers or response interception.
+
+The live new JavaScript `main-CmpoIVpx.js` matched the local production artifact byte-for-byte: SHA-256 `0ffbba5531bf98a5adc17b3168e708d7d16948835a74ef989d5e682c58eaf772`. There was no global purge or hosting configuration change.
+
+To withdraw the image, use HQ's authenticated `review_asset` controls for creative record 1 with its current revision; retain the existing affiliate placement. API prior bytes were retained before the scoped upload. For frontend rollback, revert implementation `53746a3` through a reviewed PR and the existing production workflow; keep the Railway-independent workflow and canonical HQ records. No unresolved production blocker remains for this visual release.
