@@ -60,6 +60,15 @@ test('unavailable API fails closed and preserves Equipment layout', async ({ pag
   await page.route(endpoint, route => route.fulfill({ status: 503, json: { ok: false } })); await page.goto('/equipment/');
   await expect(page.locator('#field-technology')).toHaveCount(0); await expect(page.locator('#rental-process')).toHaveCount(1); await expect(page.locator('#contractors')).toHaveCount(1);
 });
+for (const width of [390, 1440]) test(`image failure preserves controls space at ${width}`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 1100 }); await page.emulateMedia({ reducedMotion: 'reduce' }); await setup(page, 2);
+  const banner = page.locator('.affiliate-rotator'); await banner.scrollIntoViewIfNeeded();
+  const before = (await banner.boundingBox()).height;
+  await page.route('https://www.awin1.com/cshow.php?s=9000001*', route => route.abort());
+  await banner.getByRole('button', { name: 'Next affiliate banner' }).click();
+  await expect(banner.locator('button')).toHaveCount(0); await expect(banner.locator('img')).toHaveAttribute('alt', /banner 1/);
+  expect((await banner.boundingBox()).height).toBe(before);
+});
 test('Garage catalog cannot publish', async ({ page }) => {
   await page.route(endpoint, route => route.fulfill({ json: { ...rotationCatalog(), property: 'garage' } })); await page.goto('/equipment/'); await expect(page.locator('#field-technology')).toHaveCount(0);
 });
