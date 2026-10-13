@@ -1,0 +1,49 @@
+{
+  "source_commit": "b80a2d0875d9999df569e429811d610d5605b4fc",
+  "run_id": 38100929184,
+  "artifact_id": 11688096462,
+  "github_archive_digest": "sha256:b68eefb4d6b60288d3a000f3b274bdd531d1e064b74e50faa26bc2bf7dbf3376",
+  "retained_artifact_directory": "equipment-rollback-38100929184 (operator-local retained artifact)",
+  "readback": [
+    {
+      "path": "index.html",
+      "sha256": "f69d333dbee54aba7fa984663551cb7bd41a870653cda86e0612ec6883c3f777",
+      "live_match": true
+    },
+    {
+      "path": "sp-ardhi-26.html",
+      "sha256": "fae308a90b5b64fa17984a5533322ce81f77575798e3f60d05feb9b2e6ac1b7e",
+      "live_match": true
+    },
+    {
+      "path": "sp-mzigo-26.html",
+      "sha256": "bb05749fd751e7728c079c56fdb402b7f57feecc5dc7d1c6a7c3ff6e48eb0ffb",
+      "live_match": true
+    },
+    {
+      "path": "sp-liftmate-27.html",
+      "sha256": "ecd64513c24f90b5dff3889735147fb1f1445870fea4fe4bdc769dcac35e2d96",
+      "live_match": true
+    },
+    {
+      "path": "assets/global-BXuSDXMo.js",
+      "sha256": "b37da115e144cd08732d67797559390982b57992121e44bce3954fc3f040ccf7",
+      "live_match": true
+    },
+    {
+      "path": "assets/main-C9bHwKmY.js",
+      "sha256": "1f68333d54e05f8b53ab3eb08948d90ac9f7956ef6a8772d5498620bfa2bab5e",
+      "live_match": true
+    },
+    {
+      "path": "assets/global-CI2rpYqZ.css",
+      "sha256": "6a2ed10f4bcc236a26ea08cb3dda14260144a32a9476846c185aaf6c1eff2111",
+      "live_match": true
+    },
+    {
+      "path": "assets/main-Dz0iLYBL.css",
+      "sha256": "7b7b59a34e8fdb69a2c0bca9d912245f8f46906a78700ea9fc4f32363f1fd49e",
+      "live_match": true
+    }
+  ]
+}

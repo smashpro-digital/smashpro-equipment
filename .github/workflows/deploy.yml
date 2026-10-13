@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      shipment_release:
+        description: 'Shipment-specific release: require live shipment evidence in addition to local safeguards'
+        type: boolean
+        default: false
+      akaso_release:
+        description: 'AKASO activation release: require approved live Equipment catalog'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -40,6 +49,8 @@ jobs:
         run: npm run build
       - name: Validate customer-safe Equipment Passport index
         run: npm run validate:index
+      - name: Verify local ARDHI artifact and evidence
+        run: node --experimental-strip-types scripts/verify-ardhi-artifact.mjs
       - name: Verify protected build outputs
         run: |
           missing=0
@@ -93,8 +104,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Require reviewed port arrival and safe historical shipment evidence
+      - name: Verify downloaded ARDHI artifact and local evidence
+        run: node --experimental-strip-types release-source/scripts/verify-ardhi-artifact.mjs
+      - name: Require live evidence for shipment-specific release
+        if: inputs.shipment_release
         run: node --experimental-strip-types release-source/scripts/verify-ardhi-release.mjs
+      - name: Require authorized public catalog for AKASO activation
+        if: inputs.akaso_release
+        run: node --experimental-strip-types release-source/scripts/verify-akaso-catalog.mjs
       - name: Verify required deployment settings
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}

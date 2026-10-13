@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 
 // Release contract for the reviewed October 9 arrival snapshot, not an HQ write.
 // A future lifecycle change needs a reviewed policy update, not an inferred milestone.
-export function verifyArdhiReleasePolicy(arrival, stages, shipment) {
+export function verifyArdhiArrivalPolicy(arrival, stages) {
   assert.equal(arrival.assetId, 'SP-ARDHI-26');
   assert.equal(arrival.status, 'Arrived at U.S. Port');
   assert.equal(arrival.currentStage, 'Awaiting Customs Clearance');
@@ -17,6 +17,11 @@ export function verifyArdhiReleasePolicy(arrival, stages, shipment) {
     ['customs', 'pending'], ['warehouse', 'pending'], ['delivery', 'pending'],
     ['commissioning', 'pending'], ['first-job', 'pending'],
   ], 'Only the reviewed manufacturer arrival may advance the public journey');
+  return { policy: 'ardhi-port-arrival-v1', currentStage: arrival.currentStage };
+}
+
+export function verifyArdhiReleasePolicy(arrival, stages, shipment) {
+  const local = verifyArdhiArrivalPolicy(arrival, stages);
 
   // The HQ response remains historical. Preserve its identity, schema, provenance,
   // chronology and privacy guards without requiring the machine to remain aboard.
@@ -35,5 +40,5 @@ export function verifyArdhiReleasePolicy(arrival, stages, shipment) {
   assert.equal(shipment.currentPosition, null, 'No current cargo/GPS position may be introduced by this release');
   assert.equal(shipment.progressPercent, null);
   assert.deepEqual(shipment.satelliteImagery, []);
-  return { policy: 'ardhi-port-arrival-v1', currentStage: arrival.currentStage, historicalCargoAssociationConfirmed: shipment.map.cargoAssociationConfirmed };
+  return { ...local, historicalCargoAssociationConfirmed: shipment.map.cargoAssociationConfirmed };
 }

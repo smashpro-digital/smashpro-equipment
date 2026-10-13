@@ -1,0 +1,24 @@
+name: Optional shipment service health
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shipment-health:
+    # Independent observability, never a dependency of the frontend deploy job.
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check real shipment response and evidence policy
+        run: node --experimental-strip-types scripts/check-shipment-health.mjs

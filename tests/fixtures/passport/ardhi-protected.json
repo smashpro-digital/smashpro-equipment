@@ -7,7 +7,7 @@
     "src/styles/ardhi-passport-compact-overrides.css": "3c2fe1e13922c64d08175e5f92ae3fd111e04fb7e81ba369b0b57d9787a7d5a7",
     "src/styles/ardhi-manufacturer-pdf-compact.css": "0aa0af89268a2fab5b529da2dc528f8c200a846b6bb76bcee27f975f06efd24b",
     "src/styles/ardhi-history-enhancements.css": "4695e756db959080f70de1c118634f4515561b7a5a8334cf0dd9130004e0e2f7",
-    ".github/workflows/deploy.yml": "807f49cf297107107c8d8289b4964d53cb8f368393f8918924dbc85f73b7a88d",
+    ".github/workflows/deploy.yml": "ffc07f4ef305390010fef01f2df3483e18ba347664e310b271667fc502f79766",
     "scripts/validate-public-index.mjs": "cc14604987e8df9302c1ab28a5ea30179e69aae6043e700ebaee48802198149d",
     "src/main.tsx": "e1b841eb8e93a0de0fc6514196451c5004513ef63a90fb5e3f97a719391b57c0",
     "src/app/manufacturerProfileMount.tsx": "b19cc92bdc39917093da4becaf7763b21dcdb74f8d84f21bde860ecc46a41821",
