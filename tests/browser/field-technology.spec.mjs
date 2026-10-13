@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+﻿import { test, expect } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { approvedCatalog } from '../fixtures/field-technology.mjs';
 const endpoint = '**/dashboard/api/public_gear.php?*';
@@ -82,10 +82,13 @@ test('revocation/API failure clears a previously approved card', async ({ page }
   await page.clock.fastForward(15001); await expect(page.locator('#field-technology')).toHaveCount(0);
 });
 test('expiry removes the card without retaining stale approval', async ({ page }) => {
-  await page.clock.install(); let requests = 0;
+  const now = Date.now();
+  await page.clock.install({ time: now - 60000 });
+  await page.clock.pauseAt(now);
+  let requests = 0;
   await page.route(endpoint, route => {
     if (++requests > 1) return new Promise(() => {});
-    const p = approvedCatalog(); p.items[0].products[0].links[0].valid_until = new Date(Date.now() + 2000).toISOString();
+    const p = approvedCatalog(now); p.items[0].products[0].links[0].valid_until = new Date(now + 2000).toISOString();
     return route.fulfill({ json: p });
   });
   await page.goto('/equipment/', { waitUntil: 'domcontentloaded' }); await expect(page.locator('#field-technology')).toBeVisible();
