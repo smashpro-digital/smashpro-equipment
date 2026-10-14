@@ -23,21 +23,17 @@ try {
     await page.locator("#evidence").scrollIntoViewIfNeeded();
     await page.locator(".passport-factory-gallery img").first().waitFor();
     await page.waitForFunction(() => [...document.querySelectorAll(".passport-factory-gallery img")].every(i => i.complete && i.naturalWidth > 0));
-    assert.equal(await page.locator(".passport-factory-gallery .archive-grid article").count(), 4);
+    assert.equal(await page.locator(".passport-factory-gallery .archive-grid article").count(), 3);
     for (const trigger of await page.locator(".passport-factory-gallery .archive-grid button").all()) {
       await trigger.click();
       assert.equal(await page.locator("dialog[open]").count(), 1);
+      assert.equal(await page.locator("dialog[open] a").count(), 0);
       await page.keyboard.press("Escape");
       assert.equal(await page.locator("dialog[open]").count(), 0);
       assert.ok(await trigger.evaluate(e => document.activeElement === e), "focus restored");
     }
-    const video = page.locator(".passport-factory-gallery video");
-    if (width === 390) {
-      await video.evaluate(async v => { v.muted = true; await v.play(); });
-      await page.waitForFunction(() => document.querySelector(".passport-factory-gallery video").currentTime > 0.2);
-      await video.evaluate(v => v.pause());
-      assert.equal(await video.evaluate(v => v.error), null);
-    }
+    assert.equal(await page.locator(".passport-factory-gallery video").count(), 0);
+    assert.equal(await page.locator(".passport-factory-gallery a").count(), 0);
     await page.reload({ waitUntil: "networkidle" });
     await page.locator(".passport-factory-gallery img").evaluateAll(imgs => { imgs.forEach(i => i.loading = "eager"); });
     await page.mouse.move(0, 0);
@@ -59,7 +55,7 @@ try {
     await card.locator("img").evaluate(i => i.decode());
     await page.waitForTimeout(200);
     await card.screenshot({ path: output + "/nyasi-card-" + width + ".png" });
-    results.push({ asset: "NYASI", width, overflow: false, galleryRecords: 4, dialogKeyboardAndFocus: true, videoPlayback: width === 390 ? "passed" : "not repeated", errors });
+    results.push({ asset: "NYASI", width, overflow: false, galleryRecords: 3, dialogKeyboardAndFocus: true, videoOmitted: true, originalLinksOmitted: true, errors });
     await page.close();
   }
   for (const width of [360, 390, 1440]) {
