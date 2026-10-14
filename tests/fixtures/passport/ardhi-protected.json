@@ -13,11 +13,11 @@
     "src/app/manufacturerProfileMount.tsx": "b19cc92bdc39917093da4becaf7763b21dcdb74f8d84f21bde860ecc46a41821",
     "src/app/negotiationEvidenceMedia.ts": "98be69995801689cdcc93cf5587e55bce2233f8432a1ee5d34447a78c2129829",
     "src/domain/calendarMetrics.ts": "ca79dea318947e4655c1054197c5c28d641e3bd4112b3e66650c376d7d0afac1",
-    "src/data/equipment.ts": "2c8805ccacc69168440cfd26d2b7fc049890cda3f7788fb6a0484f0c2c2b4f0d",
+    "src/data/equipment.ts": "6faac86e885133184d3d6f0b709760461c2e80407ecde058e8dccee99437a9cf",
     "src/pages/EquipmentDetailPage.tsx": "93e28fc8f21032656e549621d87acab6e7558b7550f8f8b97e59ccb4cc581a58",
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
     "src/pages/ArdhiPassportPage.tsx": "539424e141749b9c4389f868912e70630781d502febe9f10a115da099fdb014b"
   },
   "review": "October 10 authorized flagship v4 presentation, on reviewed October 9 ARDHI arrival baseline. Only ArdhiPassportJourney and ArdhiPassportPage hashes refreshed for this sprint. Existing history block hash, equipment block hash, shared styles, MZIGO, public-index validator and deployment gates remain protected. See SP-ARDHI-26-V4-AUDIT.md and v4 browser coverage. October 10 Expo enhancement: only the Journey renderer hash refreshed for optional sponsor entry; history, canonical equipment and all other protected hashes retained. Authorized release-gate repair: verify reviewed port arrival separately from historical vessel association; only deployment workflow hash refreshed.",
-  "equipmentBlockHash": "472ae06b5c5478bf6d268e5c089eb5a6dee7071f0848c20bc9999ad8ad7a63ae"
+  "equipmentBlockHash": "7ff99fd1a9728a96b5bfa1024822f5e50922c039107608b2481f31f886c144f0"
 }

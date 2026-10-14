@@ -55,7 +55,8 @@ export const nyasiPromotionalArtwork = {
 };
 export const nyasiEquipment: Equipment = {
   showroomGroup: "field-fleet",
-  showroomCard: { role: "Vegetation management", specLabels: ["Engine", "Front equipment"], imageLabel: "Concept artwork" },
+  showroomCard: { role: "Vegetation management", specLabels: ["Engine", "Front equipment"], imageLabel: "Custom concept artwork" },
+  cardMedia: {"src": "/equipment/images/sp-nyasi-26-showroom-custom-v1.png", "width": 1586, "height": 992, "alt": "Custom NYASI tracked mower with black front blade in a dark workshop; AI-generated concept artwork", "mediaType": "promotional_artwork", "evidenceClass": "concept_or_identity_art", "productionEvidence": false, "factoryEvidence": false, "fieldEvidence": false, "public": true},
   showroomOrder: 3,
   manufacturer: "Shandong Infront Machinery Co., Ltd. / Yingfang",
   slug: "sp-nyasi-26", publicPath: "/sp-nyasi-26.html", fleetId: "SP-NYASI-26", name: "Nyasi", category: "Remote-Control Tracked Mower",
