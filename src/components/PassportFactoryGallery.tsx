@@ -25,12 +25,11 @@ export function PassportFactoryGallery({ media }: { media: EvidenceMedia[] }) {
       <div className="archive-caption">
         <h3>{entry.title}</h3><p>{entry.caption}</p>
         <p><small>{entry.equipmentId} &middot; {entry.classification}<br />Supplied <time dateTime={entry.evidenceDate}>{entry.evidenceDate}</time> &middot; {entry.source}<br />{entry.lifecycle} &middot; Capture date unverified</small></p>
-        <a href={entry.kind === "video" ? entry.src : entry.originalSrc} target="_blank" rel="noopener noreferrer">{entry.kind === "video" ? "Open playable MP4" : "Open original photograph"}</a>
-        {entry.kind === "video" && <a href={entry.originalSrc} download>Download original supplier video (73 MB)</a>}
+        {entry.kind === "video" && <a href={entry.src} target="_blank" rel="noopener noreferrer">Open playable MP4</a>}
       </div>
     </article>)}</div>
     <dialog ref={dialog} className="passport-factory-dialog" aria-label="Factory photograph viewer" onClose={() => setSelected(undefined)} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
-      {selected && <><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close photograph</button><div className="factory-photo-expanded" data-rotation={selected.rotation}><img src={selected.src} alt={selected.alt} width={selected.width} height={selected.height} /></div><p>{selected.caption}</p><a href={selected.originalSrc} target="_blank" rel="noopener noreferrer">Open original photograph</a></>}
+      {selected && <><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close photograph</button><div className="factory-photo-expanded" data-rotation={selected.rotation}><img src={selected.src} alt={selected.alt} width={selected.width} height={selected.height} /></div><p>{selected.caption}</p></>}
     </dialog>
   </div>;
 }

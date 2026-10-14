@@ -1,3 +1,5 @@
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync, existsSync, statSync } from "node:fs";
@@ -60,4 +62,13 @@ test("imported originals match recorded hashes and playback is real H264 MP4", (
   assert.ok(bytes.includes(Buffer.from("avc1")));
   assert.ok(bytes.indexOf(Buffer.from("moov")) < bytes.indexOf(Buffer.from("mdat")), "fast-start metadata");
   assert.ok(statSync(video.src.replace("/equipment/", "")).size < 15000000);
+});
+
+test("public NYASI gallery shows three photographs without video or original-file links", () => {
+  const { NyasiPassport } = load("src/components/NyasiPassport.tsx");
+  const html = renderToStaticMarkup(React.createElement(NyasiPassport, { item }));
+  assert.equal((html.match(/class="factory-photo-frame"/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /<video|Open original photograph|Download original|Open playable MP4/);
+  assert.doesNotMatch(html, /href="[^"]*-original\.(jpg|mp4)"/);
+  assert.match(html, /View 3 factory photographs/);
 });

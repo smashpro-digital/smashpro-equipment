@@ -58,3 +58,7 @@ Results and screenshots are recorded in the pull request. Local browser script: 
 No production deployment or merge is authorized by this sprint.
 
 Completed locally: 141 tests passed; TypeScript and production build passed; public index/media/Passport artifact checks passed; ARDHI protected artifact passed; documentation links and git diff --check passed. Browser checks passed at all listed widths, with playback at 390 px. [Review screenshots and browser results](../release-captures/nyasi-factory-20261014/) are local preview evidence, not production deployment evidence.
+
+## Gallery presentation update
+
+The public NYASI gallery now displays only the three photographs. The portrait video remains archived as supplier evidence but is not rendered in the grid. Original-file links are removed from photo cards and the enlarged viewer; click-to-enlarge, orientation and the underlying source files remain intact. Earlier playback validation above records the initial release.
