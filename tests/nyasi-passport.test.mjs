@@ -14,8 +14,8 @@ test("NYASI public data preserves procurement truth and explicit exclusions", ()
   const data = read("src/data/nyasiEquipment.ts");
   assert.match(data, /SPP-2026-0004/);
   assert.match(data, /Factory Build Complete/);
-  assert.match(data, /\$600 initial payment is recorded as paid/);
-  assert.match(data, /\$1,565 remains due before shipment/);
+  assert.doesNotMatch(data, /\$[0-9]|1,565|2,165/);
+  assert.match(data, /financial details remain in the authorized Digital HQ record/);
   assert.match(data, /Top storage \/ cargo rack/);
   assert.match(data, /status: "removed"/);
   assert.doesNotMatch(data, /status: "shipping"/);

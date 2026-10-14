@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import type { Equipment } from "../types/equipment";
 
-export function SeoSchema({ item }: { item: Equipment }) {
+export function SeoSchema({ item, title: customTitle }: { item: Equipment; title?: string }) {
   useEffect(() => {
     const originalTitle = document.title;
-    const title = `${item.fleetId} Equipment Passport | SmashPro Fleet`;
+    const title = customTitle ?? `${item.fleetId} Equipment Passport | SmashPro Fleet`;
     const url = `https://smashpro.app/equipment${item.publicPath}`;
     const restore: Array<() => void> = [];
     const setHead = (selector: string, tag: string, identity: Record<string, string>, attribute: string, value: string) => {
@@ -33,6 +33,6 @@ export function SeoSchema({ item }: { item: Equipment }) {
     });
     document.head.append(schema);
     return () => { schema.remove(); restore.forEach(reset => reset()); document.title = originalTitle; };
-  }, [item]);
+  }, [item, customTitle]);
   return null;
 }
