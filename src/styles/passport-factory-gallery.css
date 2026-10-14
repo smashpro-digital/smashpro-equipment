@@ -14,3 +14,11 @@
 .passport-factory-dialog button { padding:.7rem; margin-bottom:.75rem; background:#101611; color:#fff; border:1px solid var(--green); }
 .passport-factory-dialog a { color:var(--green); }
 @media(prefers-reduced-motion:reduce) { .passport-factory-gallery .archive-grid article { transition:none; transform:none; } }
+
+.passport-factory-gallery .archive-grid .factory-photo-frame { display:block; position:relative; aspect-ratio:1; overflow:hidden; }
+.passport-factory-gallery .archive-grid .factory-photo-frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+.passport-factory-gallery .archive-grid .factory-photo-frame[data-rotation="-90"] img,
+.passport-factory-gallery .archive-grid article:hover .factory-photo-frame[data-rotation="-90"] img { transform:rotate(-90deg); }
+.passport-factory-dialog .factory-photo-expanded { width:min(100%,65vh); aspect-ratio:1; margin-inline:auto; }
+.passport-factory-dialog .factory-photo-expanded img { width:100%; height:100%; object-fit:contain; }
+.passport-factory-dialog .factory-photo-expanded[data-rotation="-90"] img { transform:rotate(-90deg); }

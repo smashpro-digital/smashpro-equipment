@@ -8,13 +8,13 @@ const provenance = {
   public: true, group: "completed-machine" as const, approvedChannels: ["passport"] as const,
 };
 export type FactoryEvidenceMedia = GalleryImage & {
-  title: string; originalSrc: string; srcSet?: string; equipmentId: string; source: string;
+  rotation?: -90; objectPosition?: string; title: string; originalSrc: string; srcSet?: string; equipmentId: string; source: string;
   evidenceDate: string; lifecycle: string; classification: string; public: boolean;
 };
 const photos = [
-  { slug: "front-blade", title: "Front blade and RATO engine", alt: "Green tracked LM500 viewed from above the black front blade, with RATO RV225-XPro engine, lift actuator, light housings and remote controller", caption: "Front blade, lift hardware, tracked chassis and RATO engine are visible. This photograph does not establish functional acceptance." },
-  { slug: "rear-controls", title: "Rear controls and remote controller", alt: "Oblique overhead view of the green LM500 showing rear control panel, emergency switch, handheld controller, engine and rubber track", caption: "Rear control panel and supplied controller are visible. Tow hitch installation and machine serial identification are not clearly documented." },
-  { slug: "overhead-tracks-engine", title: "Overhead chassis and blade assembly", alt: "Opposite overhead angle of the green tracked mower showing engine, black front blade, actuators and controller on the factory floor", caption: "Assembled platform supplied as NYASI factory evidence. Final decals are not visibly applied; serial/model confirmation remains pending." },
+  { slug: "front-blade", objectPosition: "center 30%", title: "Front blade and RATO engine", alt: "Green tracked LM500 viewed from above the black front blade, with RATO RV225-XPro engine, lift actuator, light housings and remote controller", caption: "Front blade, lift hardware, tracked chassis and RATO engine are visible. This photograph does not establish functional acceptance." },
+  { slug: "rear-controls", objectPosition: "center 70%", rotation: -90 as const, title: "Rear controls and remote controller", alt: "Oblique overhead view of the green LM500 showing rear control panel, emergency switch, handheld controller, engine and rubber track", caption: "Rear control panel and supplied controller are visible. Tow hitch installation and machine serial identification are not clearly documented." },
+  { slug: "overhead-tracks-engine", rotation: -90 as const, title: "Overhead chassis and blade assembly", alt: "Opposite overhead angle of the green tracked mower showing engine, black front blade, actuators and controller on the factory floor", caption: "Assembled platform supplied as NYASI factory evidence. Final decals are not visibly applied; serial/model confirmation remains pending." },
 ];
 export const nyasiFactoryMedia: FactoryEvidenceMedia[] = [
   ...photos.map(photo => {
