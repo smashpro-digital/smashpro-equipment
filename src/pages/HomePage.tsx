@@ -1,6 +1,8 @@
 import { attachments } from "../data/attachments";
 import { equipment } from "../data/equipment";
 import { ButtonLink } from "../components/ButtonLink";
+import { FleetEquipmentCard } from "../components/FleetEquipmentCard";
+import "../styles/fleet-layout.css";
 import { EquipmentCard } from "../components/EquipmentCard";
 import { PageFrame } from "../components/PageFrame";
 import { AttachmentShowroom } from "../components/AttachmentShowroom";
@@ -30,7 +32,10 @@ export function HomePage() {
     <div className="home-flow expo-showroom">
       <nav className="showroom-jump shell" aria-label="Equipment showroom sections"><a href="#fleet">Field Fleet</a><a href="#passports">Passports</a><a href="#attachments">Attachments</a><a href="#fabrication">Fabrication</a><a href="#development">Development</a></nav>
 
-      <section className="section shell showroom-group showroom-group--field" id="fleet" aria-labelledby="field-fleet-title"><div className="section-heading"><div><p className="eyebrow">01 / Field Fleet</p><h2 id="field-fleet-title">Four machines. Complementary roles.</h2></div><p>ARDHI moves earth and handles material. MZIGO transports loads remotely. NYASI is configured for remote vegetation management. LIFTMATE is a proposal-stage lifting and truck-bed loading platform. Public status reflects evidence, not availability.</p></div><div className="showroom-role-strip" aria-label="Field Fleet roles"><span>Earthmoving</span><span>Material transport</span><span>Vegetation management</span><span>Powered lifting</span></div><div className="equipment-grid equipment-grid--field">{fieldFleet.map(item => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
+      <section className="section shell showroom-group showroom-group--field" id="fleet" aria-labelledby="field-fleet-title">
+        <div className="fleet-heading"><p className="eyebrow">01 / Field Fleet</p><h2 id="field-fleet-title">Purpose-built machines. One connected workflow.</h2><p className="fleet-heading__subtitle">Meet the growing SmashPro fleet.</p></div>
+        <div className="fleet-grid">{fieldFleet.map(item => <FleetEquipmentCard key={item.fleetId} item={item} />)}</div>
+      </section>
 
       <section className="passport-system" id="passports" aria-labelledby="passport-system-title"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Connected Equipment</p><h2 id="passport-system-title">Every asset keeps its history.</h2></div><p>An Equipment Passport is the persistent public identity. It does not make every asset Field Fleet, and it never advances a milestone without evidence.</p></div><div className="passport-pillar-grid">{passportPillars.map(([number,title,copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
 

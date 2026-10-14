@@ -2,7 +2,7 @@
   "base": "a190948",
   "files": {
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
-    "src/data/equipment.ts": "c529317c6b0e03da901a22f32e0eff495975b821bf8c37442170507673d01f5e",
+    "src/data/equipment.ts": "2c8805ccacc69168440cfd26d2b7fc049890cda3f7788fb6a0484f0c2c2b4f0d",
     "src/data/mzigoPassport.ts": "497e39ac46d71019e3e80b7141e20873d4e8c96f89d378c2a18f4f2c52b2f4ef",
     "src/data/mzigoFactoryMedia.ts": "3a5fdbedfa924272e3f2d193918c8d64e58419513263883e9912bd172db211a2",
     "src/data/mzigoPlatform.ts": "94aba3589373d8fb5edb81763751a1f3a0f35b07295c3bbbb0d56fb9a59c7407",

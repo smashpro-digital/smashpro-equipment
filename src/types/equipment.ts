@@ -76,7 +76,8 @@ export interface EquipmentPublicRuntime {
 export interface Equipment {
   manufacturer?: string; operationalAssetId?: string; division?: string; showroomGroup: EquipmentShowroomGroup; showroomOrder: number; commissioning?: CommissioningRecord; publicRuntime?: EquipmentPublicRuntime;
   slug: string; publicPath: string; fleetId: string; name: string; category: string; pronunciation?: string; meaning: string; slogan: string;
-  overview: string; capabilityStatement: string; heroImage: string; heroMedia?: EquipmentHeroMedia; cardMedia?: EquipmentHeroMedia; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
+  overview: string; capabilityStatement: string; heroImage: string; heroMedia?: EquipmentHeroMedia; cardMedia?: EquipmentHeroMedia;
+  showroomCard?: { name?: string; role?: string; specLabels?: string[]; imageLabel?: string }; status: EquipmentStatus; statusLabel: string; statusDetail?: string; identity: EquipmentIdentity;
   specifications: EquipmentSpecification[]; factoryFinish?: FactoryFinish; factoryUpdate?: FactoryUpdate; factoryOptions: FactoryOption[]; upgrades: EquipmentUpgrade[];
   packageRules: PackageRule[]; attachments: EquipmentAttachment[]; includedItems: IncludedItem[]; documents: EquipmentDocument[]; serviceHistory: ServiceRecord[];
   timeline: TimelineEvent[]; media: MediaRecord[]; scores: PassportScores; valuation: PublicValuation;
