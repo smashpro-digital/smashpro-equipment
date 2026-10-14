@@ -3,7 +3,7 @@ import type { GalleryImage } from "../types/equipment";
 import "../styles/passport-factory-gallery.css";
 
 type EvidenceMedia = GalleryImage & {
-  title: string; originalSrc: string; srcSet?: string; equipmentId: string; source: string;
+  rotation?: -90; objectPosition?: string; title: string; originalSrc: string; srcSet?: string; equipmentId: string; source: string;
   evidenceDate: string; lifecycle: string; classification: string;
 };
 
@@ -19,8 +19,8 @@ export function PassportFactoryGallery({ media }: { media: EvidenceMedia[] }) {
             <source src={entry.src} type="video/mp4" />
             Your browser cannot play this video. Use the MP4 link below.
           </video>
-        : <button type="button" aria-label={`Enlarge ${entry.title}`} onClick={() => setSelected(entry)}>
-            <img src={entry.src} srcSet={entry.srcSet} sizes="(max-width: 700px) 90vw, (max-width: 1000px) 45vw, 380px" alt={entry.alt} width={entry.width} height={entry.height} loading="lazy" decoding="async" />
+        : <button type="button" className="factory-photo-frame" data-rotation={entry.rotation} aria-label={`Enlarge ${entry.title}`} onClick={() => setSelected(entry)}>
+            <img style={{ objectPosition: entry.objectPosition }} src={entry.src} srcSet={entry.srcSet} sizes="(max-width: 700px) 90vw, (max-width: 1000px) 45vw, 380px" alt={entry.alt} width={entry.width} height={entry.height} loading="lazy" decoding="async" />
           </button>}
       <div className="archive-caption">
         <h3>{entry.title}</h3><p>{entry.caption}</p>
@@ -30,7 +30,7 @@ export function PassportFactoryGallery({ media }: { media: EvidenceMedia[] }) {
       </div>
     </article>)}</div>
     <dialog ref={dialog} className="passport-factory-dialog" aria-label="Factory photograph viewer" onClose={() => setSelected(undefined)} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
-      {selected && <><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close photograph</button><img src={selected.src} alt={selected.alt} width={selected.width} height={selected.height} /><p>{selected.caption}</p><a href={selected.originalSrc} target="_blank" rel="noopener noreferrer">Open original photograph</a></>}
+      {selected && <><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close photograph</button><div className="factory-photo-expanded" data-rotation={selected.rotation}><img src={selected.src} alt={selected.alt} width={selected.width} height={selected.height} /></div><p>{selected.caption}</p><a href={selected.originalSrc} target="_blank" rel="noopener noreferrer">Open original photograph</a></>}
     </dialog>
   </div>;
 }
