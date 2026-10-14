@@ -1,0 +1,68 @@
+[
+  {
+    "asset": "NYASI",
+    "width": 360,
+    "overflow": false,
+    "galleryRecords": 4,
+    "dialogKeyboardAndFocus": true,
+    "videoPlayback": "not repeated",
+    "errors": []
+  },
+  {
+    "asset": "NYASI",
+    "width": 375,
+    "overflow": false,
+    "galleryRecords": 4,
+    "dialogKeyboardAndFocus": true,
+    "videoPlayback": "not repeated",
+    "errors": []
+  },
+  {
+    "asset": "NYASI",
+    "width": 390,
+    "overflow": false,
+    "galleryRecords": 4,
+    "dialogKeyboardAndFocus": true,
+    "videoPlayback": "passed",
+    "errors": []
+  },
+  {
+    "asset": "NYASI",
+    "width": 430,
+    "overflow": false,
+    "galleryRecords": 4,
+    "dialogKeyboardAndFocus": true,
+    "videoPlayback": "not repeated",
+    "errors": []
+  },
+  {
+    "asset": "NYASI",
+    "width": 1440,
+    "overflow": false,
+    "galleryRecords": 4,
+    "dialogKeyboardAndFocus": true,
+    "videoPlayback": "not repeated",
+    "errors": []
+  },
+  {
+    "asset": "ARDHI",
+    "width": 360,
+    "overflow": false,
+    "archivePresent": true,
+    "errors": []
+  },
+  {
+    "asset": "ARDHI",
+    "width": 390,
+    "overflow": false,
+    "archivePresent": true,
+    "errors": []
+  },
+  {
+    "asset": "ARDHI",
+    "width": 1440,
+    "overflow": false,
+    "archivePresent": true,
+    "errors": []
+  }
+]

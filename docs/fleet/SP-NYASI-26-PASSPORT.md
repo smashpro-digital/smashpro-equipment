@@ -1,9 +1,9 @@
 # SP-NYASI-26 Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**
-> Version: 3.0
-> Status: Initial payment paid / production pending
-> Last reconciled: 2026-10-05; canonical procurement record dated 2026-09-29
+> Version: 3.1
+> Status: Factory Build Complete / Final Configuration Review Pending
+> Last reconciled: 2026-10-14; canonical procurement record updated 2026-10-14
 > Canonical procurement source: Digital HQ `docs/equipment-procurement/SP-NYASI-26-lm500.md`
 
 ## Identity
@@ -23,7 +23,7 @@ The factory model remains part of the service and parts identity. SP-NYASI-26 is
 
 ## Confirmed ordered configuration
 
-- RATO 225 cc gasoline engine
+- RATO RV225-XPro / 225cc gasoline engine
 - Brushless drive configuration
 - Tracked chassis with remote control
 - SmashPro green finish and custom decals
@@ -52,17 +52,17 @@ The Alibaba order is active. Private payment identifiers, invoice files, account
 1. Configuration approved — complete
 2. Alibaba order created — complete
 3. Initial payment paid — complete
-4. Production pending — current
-5. Production in progress — pending
+4. Production preparation - complete (reported October 9)
+5. Factory Build Complete - complete (supplier-reported October 14)
 6. Branding / decals applied — pending
-7. Factory configuration review — pending
+7. Final Configuration Review Pending - current
 8. Final photo / video review — pending
 9. Remaining balance due and paid — pending
 10. Packing and shipping evidence — pending
 11. International transit and U.S. delivery — pending
 12. Receipt, inspection, commissioning, and operational release — pending
 
-Production is expected after the current Chinese holiday. No production-start date is confirmed. The supplier-stated terms are dispatch within 30 days after full payment and estimated delivery within 45 calendar days after dispatch; these are terms, not confirmed milestone dates.
+Supplier reported completion October 14. No intermediate assembly-start date is invented. The supplier-stated terms are dispatch within 30 days after full payment and estimated delivery within 45 calendar days after dispatch; these are terms, not confirmed milestone dates.
 
 ## Evidence state
 
@@ -77,7 +77,7 @@ Recorded privately:
 Still needed from Hailey Li:
 
 - Final decal artwork placement approval
-- Production photos and video tied to this order
+- Serial/model identification tying the pictured unit to the permanent asset record
 - Completed-machine configuration review
 - Final photo and video approval before remaining-balance payment
 - Packing, carrier, tracking, delivery, and commissioning evidence
@@ -106,7 +106,7 @@ The approved configuration above is an order baseline, not verification of insta
 
 | System | Ordered specification | Source |
 | --- | --- | --- |
-| Engine | RATO 225 cc gasoline | Proforma YF260916 as summarized in HQ |
+| Engine | RATO RV225-XPro / 225cc gasoline | Proforma YF260916 as summarized in HQ |
 | Drive | Brushless | HQ selected configuration |
 | Mobility | Tracked chassis, remote controlled | Selected LM500 configuration |
 | Front equipment | Remote-lift dozer / snow pusher | Proforma YF260916 |
@@ -127,7 +127,7 @@ Top rack: removed. Side cutter: not purchased. Separate cart: future idea, not i
 
 ## Lighting
 
-Factory lights, covers and cover plates are selected; installation photos and commissioning checks remain pending. No additional installed lighting is asserted.
+Headlight housings are visible in the October 14 photos. Powered headlights appear around 58-59 seconds in the supplier video. Complete lighting acceptance and commissioning remain pending.
 
 ## Branding
 
@@ -135,7 +135,7 @@ Final production artwork must still be delivered to Hailey and placement approve
 
 ## Color Scheme
 
-Green finish is ordered with a planned green/black visual system. No paint code, coating process or completed finish is verified.
+Green finish is visible in the factory photographs. Paint code, coating process and final finish acceptance remain unverified.
 
 ## Security
 
@@ -151,13 +151,13 @@ Remote mowing, light pushing/clearing and property maintenance remain intended u
 
 ## Factory Documentation
 
-The evidence register above separates private order/reference material from pending production evidence. OEM operating/maintenance instructions, technical limits, full warranty exclusions, packing documents and commissioning records remain needed.
+The evidence register separates private order/reference material from received factory evidence and pending final acceptance. OEM operating/maintenance instructions, technical limits, full warranty exclusions, packing documents and commissioning records remain needed.
 
 HQ's proforma summary states a supplier warranty of **one year or 1,000 hours, whichever occurs first, subject to stated exclusions**. Obtain the original conditions before asserting applicable coverage. Private original files were not independently revalidated during this repository reconciliation.
 
 ### Media Classification
 
-`images/sp-nyasi-26-showroom-hero-{640,960,1280,1672}.webp` are promotional identity artwork, approved October 2 in the Equipment runtime. They are not production, factory, delivery or field evidence. The authentic production gallery remains empty.
+`images/sp-nyasi-26-showroom-hero-{640,960,1280,1672}.webp` are promotional identity artwork, approved October 2 in the Equipment runtime. They are not production, factory, delivery or field evidence. Three original factory photographs and one supplier demonstration are now documented separately in [the media evidence record](SP-NYASI-26-FACTORY-EVIDENCE-20261014.md).
 
 ## Shipping
 
@@ -170,8 +170,9 @@ DDP is recorded. The 30-day dispatch term depends on full payment; the 45-calend
 | 2026-09-29 | Configuration approved and order active | Ordered baseline, not installed hardware |
 | 2026-09-29 | $600 initial payment recorded paid | $1,565 balance pending |
 | 2026-10-02 | Fleet identity artwork approved | Promotional artwork only |
-| Current | Production pending | No verified start date or production evidence |
-| Pending | Production, branding and final configuration/photo/video review | Asset-specific evidence required |
+| 2026-10-09 | Production preparation | Supplier report; no invented assembly-start date |
+| 2026-10-14 | Factory Build Complete | Supplier completion and received factory media; not final QC |
+| Current / pending | Final configuration, branding and functional acceptance | Serial/model identification and final acceptance evidence required |
 | Pending | Balance payment, packing, shipping and delivery | Separate payment/logistics gates |
 | Pending | Receipt, inspection, commissioning and release | No customer-readiness claim |
 
@@ -187,7 +188,7 @@ Commissioning must cover receipt/damage inspection, engine/startup, remote funct
 
 ## Asset Status
 
-Incoming fleet asset: **initial payment paid / production pending**. Not verified as in production, shipped, received, commissioned or customer-ready.
+Incoming fleet asset: **Factory Build Complete / Final Configuration Review Pending**. Supplier-reported completion; not shipped, received, commissioned or customer-ready.
 
 ## Motto
 
@@ -205,4 +206,4 @@ NYASI is intended to add remote-controlled land-maintenance capability. Operatin
 - [Digital HQ canonical record](https://github.com/smashpro-digital/digital-hq/blob/main/docs/equipment-procurement/SP-NYASI-26-lm500.md).
 - [Current runtime data](../../src/data/nyasiEquipment.ts).
 
-ARDHI supplies the document structure, not NYASI's lifecycle or specifications. This reconciliation changes no runtime state and publishes no private source documents.
+ARDHI supplies the document structure, not NYASI's lifecycle or specifications. This reconciliation updates the public runtime from the canonical record and publishes no private source documents.

@@ -1,0 +1,39 @@
+[
+  {
+    "source": "4353449936049.PNM.jpg",
+    "original": "sp-nyasi-26-factory-front-blade-2026-10-14-original.jpg",
+    "sha256": "e33c83c119b2b8b675583019a6ec9cc1e768b1b29ef0ea8b8941913b4506eb1b",
+    "dimensions": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "source": "4341446189459.PNM.jpg",
+    "original": "sp-nyasi-26-factory-rear-controls-2026-10-14-original.jpg",
+    "sha256": "7de3fe206c037a54ba0e8bfe05225aa0c530bdf322bb5646ceab93db376b58f2",
+    "dimensions": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "source": "4353449936058.PNM.jpg",
+    "original": "sp-nyasi-26-factory-overhead-tracks-engine-2026-10-14-original.jpg",
+    "sha256": "e01a5d843fd7831d48333da1e8061e581a60dcbfe424d8e939a9879712b9a525",
+    "dimensions": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "source": "4353451825300.PNM.mp4",
+    "original": "sp-nyasi-26-factory-remote-demonstration-2026-10-14-original.mp4",
+    "sha256": "4f848e57290829287d433fc2c3c313535edc12502bea1e02f2843b25131f2188",
+    "durationSeconds": 66.74,
+    "displayDimensions": [
+      1080,
+      1920
+    ]
+  }
+]

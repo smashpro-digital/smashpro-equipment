@@ -13,7 +13,7 @@ Index of all SmashPro Fleet Equipment Passport and procurement records. Every fl
 
 | Fleet ID | Equipment Type | Passport | Procurement Record |
 |----------|----------------|----------|--------------------|
-| SP-NYASI-26 | Remote-control tracked mower · initial payment paid / production pending | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | [SP-NYASI-26-PROCUREMENT.md](SP-NYASI-26-PROCUREMENT.md) — Digital HQ canonical reference |
+| SP-NYASI-26 | Remote-control tracked mower · factory build complete / final configuration review pending | [SP-NYASI-26-PASSPORT.md](SP-NYASI-26-PASSPORT.md) | [SP-NYASI-26-PROCUREMENT.md](SP-NYASI-26-PROCUREMENT.md) — Digital HQ canonical reference |
 
 ## Partner Builds
 

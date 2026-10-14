@@ -1,0 +1,16 @@
+.passport-factory-gallery .archive-grid { align-items:start; }
+.passport-factory-gallery .archive-grid article { min-width:0; scroll-margin-top:6rem; }
+.passport-factory-gallery .archive-grid img,.passport-factory-gallery .archive-grid video { display:block; width:100%; height:360px; object-fit:contain; background:#050806; }
+.passport-factory-gallery .archive-grid article:hover img { transform:none; }
+.passport-factory-gallery .archive-caption { transform:none; padding:1rem; }
+.passport-factory-gallery .archive-caption h3 { margin:0 0 .75rem; font-size:1.1rem; }
+.passport-factory-gallery .archive-caption p { margin:.75rem 0; padding:0; }
+.passport-factory-gallery .archive-caption small { line-height:1.7; }
+.passport-factory-gallery .archive-caption a { display:block; padding:.5rem 0; color:var(--green); }
+.passport-factory-gallery button:focus-visible,.passport-factory-gallery a:focus-visible { outline:3px solid var(--green); outline-offset:-3px; }
+.passport-factory-dialog { width:min(900px,92vw); max-height:90vh; padding:1rem; border:1px solid var(--green); background:#101611; color:#fff; }
+.passport-factory-dialog::backdrop { background:#000d; }
+.passport-factory-dialog img { display:block; width:100%; height:65vh; object-fit:contain; }
+.passport-factory-dialog button { padding:.7rem; margin-bottom:.75rem; background:#101611; color:#fff; border:1px solid var(--green); }
+.passport-factory-dialog a { color:var(--green); }
+@media(prefers-reduced-motion:reduce) { .passport-factory-gallery .archive-grid article { transition:none; transform:none; } }
