@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
-const captures = 'docs/release-captures/fleet-layout';
+const captures = process.env.FLEET_CAPTURE_DIR ?? 'docs/release-captures/fleet-layout';
 async function openFleet(page, width, count = 4) {
   await page.setViewportSize({ width, height: 1000 });
   await page.route('**/dashboard/api/public_gear.php?*', route => route.fulfill({ status: 503, json: { ok: false } }));

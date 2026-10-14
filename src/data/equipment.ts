@@ -47,8 +47,8 @@ export const equipment: Equipment[] = [
   nyasiEquipment,
   {
     showroomGroup: "field-fleet", showroomOrder: 1, slug: "sp-ardhi-26", publicPath: "/sp-ardhi-26.html", fleetId: "SP-ARDHI-26", name: "Ardhi", category: "Compact Tracked Loader / Mini Skid Steer",
-    showroomCard: {"role": "Earthmoving", "specLabels": ["Rated operating load", "Engine output"], "imageLabel": "Factory photo"},
-    cardMedia: {"src": "/equipment/images/sp-ardhi-26-left-side-profile.jpg", "width": 1276, "height": 1276, "alt": "SP-ARDHI-26 factory side view with tracks, loader arms and bucket", "mediaType": "documentary_photo", "evidenceClass": "factory_evidence", "productionEvidence": false, "factoryEvidence": true, "fieldEvidence": false, "public": true},
+    showroomCard: {"role": "Earthmoving", "specLabels": ["Rated operating load", "Engine output"], "imageLabel": "Custom concept artwork"},
+    cardMedia: {"src": "/equipment/images/sp-ardhi-26-showroom-custom-v1.png", "width": 1586, "height": 992, "alt": "Custom ARDHI tracked loader with black bucket in a dark green-lit workshop; AI-generated promotional artwork", "mediaType": "promotional_artwork", "evidenceClass": "concept_or_identity_art", "productionEvidence": false, "factoryEvidence": false, "fieldEvidence": false, "public": true},
     pronunciation: "AHR-dhee", meaning: "“Ardhi” means earth in Swahili.", slogan: "Power. Precision. Purpose.",
     overview: "The flagship compact loader of the SmashPro Fleet, positioned for landscaping, grading, loading, excavation, pallet handling, and residential access.",
     capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "shipping", statusLabel: "Arrived at U.S. Port",
@@ -165,8 +165,8 @@ export const equipment: Equipment[] = [
   },
   {
     showroomGroup: "field-fleet", showroomOrder: 2, slug: "sp-mzigo-26", publicPath: "/sp-mzigo-26.html", fleetId: "SP-MZIGO-26E", name: "SP-MZIGO-26E", category: "Electric Remote-Controlled Material Carrier",
-    showroomCard: {"name": "Mzigo", "role": "Material transport", "specLabels": ["Manufacturer plate rated load", "Drive configuration"], "imageLabel": "Factory photo"},
-    cardMedia: {"src": "/equipment/images/sp-mzigo-26e-build-approved-left-profile-2026-09-15.jpg", "width": 1280, "height": 960, "alt": "Build-approved SP-MZIGO-26E factory profile with green dump body and black wheels", "mediaType": "documentary_photo", "evidenceClass": "factory_evidence", "productionEvidence": false, "factoryEvidence": true, "fieldEvidence": false, "public": true},
+    showroomCard: {"name": "Mzigo", "role": "Material transport", "specLabels": ["Manufacturer plate rated load", "Drive configuration"], "imageLabel": "Custom concept artwork"},
+    cardMedia: {"src": "/equipment/images/sp-mzigo-26e-showroom-custom-v1.png", "width": 1586, "height": 992, "alt": "Custom MZIGO electric carrier with raised green dump bed in a dark workshop; AI-generated promotional artwork", "mediaType": "promotional_artwork", "evidenceClass": "concept_or_identity_art", "productionEvidence": false, "factoryEvidence": false, "fieldEvidence": false, "public": true},
     meaning: "“Mzigo” means load, cargo, or freight in Swahili.", slogan: "Move the Earth. Move the Load.", overview: `${mzigoStatusLabel}. SmashPro Fleet’s zero-emission intelligent material carrier, built for modern contractors who need quieter operation, remote-controlled precision, lower maintenance, and professional performance around homes and active job sites.`,
     capabilityStatement: "Electric material transport with zero tailpipe emissions, quiet operation, and remote-controlled precision.", heroImage: mzigoPromotionalArtwork.src, heroMedia: mzigoPromotionalArtwork, status: "fleet-build", statusLabel: mzigoStatusLabel, statusDetail: mzigoStatusDetail,
     identity: { passportId: "SPP-2026-0002", model: "SP-MZIGO-26E", factoryModel: "K600", serialNumberPublic: "QLUP202609010001", edition: "Founders Edition", finish: "SmashPro Custom Green", assetClass: "Remote-controlled material carrier", powertrain: "Electric 4WD", modelYear: 2026, operatingHours: 0 },

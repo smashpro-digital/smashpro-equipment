@@ -26,8 +26,8 @@ export const liftmateFieldTests = [
 
 export const liftmateEquipment: Equipment = {
   showroomGroup: "field-fleet",
-  showroomCard: { role: "Powered lifting", specLabels: ["Rated Capacity", "Power"], imageLabel: "OEM product reference" },
-  cardMedia: {"src": "/equipment/images/sp-liftmate-27-pairon-glide200-oem-thumbnail.jpg", "width": 1200, "height": 1200, "alt": "Official Pairon Glide200 product reference showing powered truck-bed loading; not the proposed SmashPro build", "mediaType": "promotional_artwork", "evidenceClass": "concept_or_identity_art", "productionEvidence": false, "factoryEvidence": false, "fieldEvidence": false, "public": true}, showroomOrder: 4, slug: "sp-liftmate-27", publicPath: "/sp-liftmate-27.html", fleetId: "SP-LIFTMATE-27", name: "LiftMate",
+  showroomCard: { role: "Powered lifting", specLabels: ["Rated Capacity", "Power"], imageLabel: "Custom concept artwork" },
+  cardMedia: {"src": "/equipment/images/sp-liftmate-27-showroom-custom-v1.png", "width": 1586, "height": 992, "alt": "Custom green LiftMate scissor platform loading a pickup in a dark workshop; AI-generated concept artwork", "mediaType": "promotional_artwork", "evidenceClass": "concept_or_identity_art", "productionEvidence": false, "factoryEvidence": false, "fieldEvidence": false, "public": true}, showroomOrder: 4, slug: "sp-liftmate-27", publicPath: "/sp-liftmate-27.html", fleetId: "SP-LIFTMATE-27", name: "LiftMate",
   category: "Pairon Tools Glide200 · Mobile Powered Lifting Platform", manufacturer: "Pairon Tools", meaning: "", slogan: "Same Tough Jobs. Bigger Possibilities.",
   overview: "SP-LIFTMATE-27 is the permanent technical and lifecycle record for a proposed Pairon Tools Glide200 SmashPro Edition. It separates the OEM platform, planned configuration and future validation from completed physical evidence.",
   capabilityStatement: "Proposed mobile powered lifting and truck-bed loading support for controlled SmashPro field evaluation.", heroImage: "/equipment/images/sp-liftmate-27-official-concept.png",
