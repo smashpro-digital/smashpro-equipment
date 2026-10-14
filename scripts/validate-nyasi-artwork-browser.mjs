@@ -28,14 +28,14 @@ try {
     page.on("pageerror", error => errors.push(error.message));
     page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
     await page.goto(`http://127.0.0.1:${port}/equipment/`, { waitUntil: "networkidle" });
-    const card = page.locator(".equipment-card--sp-nyasi-26");
+    const card = page.locator("[data-fleet-id='SP-NYASI-26']");
     await card.scrollIntoViewIfNeeded();
     const cardImage = card.locator("img");
     const cardState = await cardImage.evaluate(image => ({ src: image.currentSrc, naturalWidth: image.naturalWidth, fit: getComputedStyle(image).objectFit, alt: image.alt }));
-    assert.match(cardState.src, /sp-nyasi-26-showroom-hero-(640|960|1280|1672)\.webp/);
+    assert.match(cardState.src, /sp-nyasi-26-showroom-custom-v1\.png/);
     assert.ok(cardState.naturalWidth > 0);
-    assert.equal(cardState.fit, "contain");
-    assert.match(cardState.alt, /remote-control tracked mower/i);
+    assert.equal(cardState.fit, "cover");
+    assert.match(cardState.alt, /Custom NYASI tracked mower/i);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
     assert.equal(errors.length, 0);
     if (width === 390 || width === 1440) await card.screenshot({ path: `${output}/nyasi-showroom-card-${width}.png` });
@@ -46,7 +46,7 @@ try {
     assert.match(heroState.src, /sp-nyasi-26-showroom-hero-(640|960|1280|1672)\.webp/);
     assert.ok(heroState.naturalWidth > 0);
     assert.match(heroState.alt, /remote-control tracked mower/i);
-    assert.match(await page.locator(".nyasi-status").innerText(), /Production pending/i);
+    assert.match(await page.locator(".nyasi-status").innerText(), /Factory Build Complete/i);
     assert.match(await page.locator("body").innerText(), /Identity \/ promotional artwork/i);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
     assert.equal(errors.length, 0);

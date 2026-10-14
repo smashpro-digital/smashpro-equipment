@@ -1,17 +1,17 @@
 # SP-NYASI-26 Procurement Record
 
 > **Canonical status:** Digital HQ owns procurement truth. This Equipment reference follows ARDHI's structure without duplicating protected source documents, account identifiers or delivery details.
-> Last reconciled: 2026-10-05
+> Last reconciled: 2026-10-14
 
-Source: [Digital HQ LM500 record](https://github.com/smashpro-digital/digital-hq/blob/main/docs/equipment-procurement/SP-NYASI-26-lm500.md), dated September 29, reviewed at `caf96b5f78b7ef93383a288aa1561dc52aece028`. This is repository-record reconciliation, not new live supplier or payment verification.
+Source: [Digital HQ LM500 record](https://github.com/smashpro-digital/digital-hq/blob/main/docs/equipment-procurement/SP-NYASI-26-lm500.md), updated October 14, reviewed at `129de64d3e6bdb7353d5adef8c227d7afdef6b55`. This is repository-record reconciliation, not new live supplier or payment verification.
 
 ## 1. Procurement Summary
 
-SP-NYASI-26 / Passport SPP-2026-0004: LM500 remote-control tracked mower from Shandong Infront Machinery Co., Ltd. / Yingfang, contact Hailey Li. Order active; initial payment recorded paid; production pending.
+SP-NYASI-26 / Passport SPP-2026-0004: LM500 remote-control tracked mower from Shandong Infront Machinery Co., Ltd. / Yingfang, contact Hailey Li. Order active; initial payment recorded paid; Factory Build Complete / Final Configuration Review Pending.
 
 ### Evidence source boundary
 
-HQ summarizes supplier correspondence, invoice, order and payment evidence. Private originals were not independently revalidated here. Reference photography does not establish this asset's production.
+HQ summarizes supplier correspondence, invoice, order and payment evidence. Protected commercial originals were not independently revalidated here. The supplied October 14 factory media is documented separately; serial/model confirmation remains pending.
 
 ## 2. Proforma Invoice
 
@@ -19,7 +19,7 @@ YF260916 records LM500 / SP-NYASI-26, DDP and $2,165 total. Invoice date is not 
 
 ## 3. Machine Specifications
 
-See [Passport specifications](SP-NYASI-26-PASSPORT.md#specifications). RATO 225 cc gasoline, brushless drive and remote-controlled tracked chassis are ordered specifications, not physical verification.
+See [Passport specifications](SP-NYASI-26-PASSPORT.md#specifications). RATO RV225-XPro / 225cc gasoline, brushless drive and remote-controlled tracked chassis are ordered specifications, not physical verification.
 
 ## 4. Included Equipment and Accessories
 
@@ -51,7 +51,7 @@ $600 initial payment recorded paid; $1,565 remaining before shipment. Marketplac
 
 ## 9. Production Authorization and Build Evidence
 
-Order/deposit does not prove production started. Artwork submission, supplier acknowledgment, start confirmation, order-specific progress media and completed-machine photo/video review remain outstanding.
+Supplier reported production completion October 14, supported by three factory photographs and a 67-second supplier video. Final branding, configuration review, serial/model confirmation and functional acceptance remain outstanding. See [factory evidence](SP-NYASI-26-FACTORY-EVIDENCE-20261014.md).
 
 ## 10. Delivery
 
@@ -63,14 +63,14 @@ Supplier-stated **one year or 1,000 hours, whichever occurs first, subject to ex
 
 ## 12. Procurement Timeline
 
-September 29: approved configuration, active order, initial payment recorded. October 2: promotional artwork approved in Equipment. Current: production pending. Production, final review, balance payment, shipping, receipt and commissioning remain separate future gates.
+September 29: approved configuration, active order, initial payment recorded. October 2: promotional artwork approved in Equipment. October 9: production preparation reported. October 14: Factory Build Complete, supplier-reported. Final review, balance payment, shipping, receipt and commissioning remain separate future gates.
 
 ## 13. Future Documentation Register
 
 | Needed record | Purpose |
 | --- | --- |
 | Final artwork and supplier placement proof | Branding approval |
-| Production acknowledgment and asset-specific photos/video | Actual production |
+| Serial/model identification and final walkaround | Confirm exact unit and final configuration |
 | Final configuration/photo/video review | Review before balance payment |
 | Balance-payment evidence | Protected commercial reconciliation |
 | Packing list/media and carrier/tracking | Dispatch/shipping truth |
@@ -82,18 +82,19 @@ September 29: approved configuration, active order, initial payment recorded. Oc
 
 ## 14. Build and Purchase Experience
 
-Rack, blade and lighting decisions provide the purchase rationale. No completed-build or field-results narrative is supported. Add authentic media and dated observations only when received.
+Rack, blade and lighting decisions provide the purchase rationale. Supplier completion and factory media now support the build narrative; no field-results narrative is supported.
 
 ## 15. Canonical Status and Change Control
 
 | Reconciliation item | Finding / action |
 | --- | --- |
-| Identity, configuration, deposit and lifecycle | HQ and Equipment agree; runtime unchanged |
+| Identity, configuration, deposit and lifecycle | HQ completion state projected to Equipment; final acceptance pending |
 | Passport | Expanded to ARDHI's subject coverage |
 | Procurement companion | Added this canonical reference |
 | Selection rationale and warranty | Brought from HQ with source qualifiers |
 | October 2 artwork | Retained from Equipment; not factory branding proof |
 | Private originals and address exception | Remain in HQ |
-| Factory media, manuals, logistics and commissioning | Missing evidence remains pending |
+| Factory media | Three photos and supplier video received October 14 |
+| Manuals, logistics and commissioning | Missing evidence remains pending |
 
 Reconcile HQ evidence before public status changes. Preserve permanent IDs. This is not a parallel procurement ledger or authorization for payment, production, shipment or deployment.

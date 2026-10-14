@@ -13,7 +13,7 @@ test("NYASI has a dedicated public route and build entry", () => {
 test("NYASI public data preserves procurement truth and explicit exclusions", () => {
   const data = read("src/data/nyasiEquipment.ts");
   assert.match(data, /SPP-2026-0004/);
-  assert.match(data, /Production is expected after the current Chinese holiday/);
+  assert.match(data, /Factory Build Complete/);
   assert.match(data, /\$600 initial payment is recorded as paid/);
   assert.match(data, /\$1,565 remains due before shipment/);
   assert.match(data, /Top storage \/ cargo rack/);
