@@ -52,4 +52,3 @@ export const nyasiPartnershipInquiry: InquiryStory = {
 export const nyasiCommissioning: CommissioningCheck[] = [
   "Engine startup", "Remote controller", "Tracked drive", "Mower operation", "Headlights", "Blade lift", "Tow hook", "Safety systems", "Inspection and serial identification",
 ].map((title, index) => ({ id: `nyasi-check-${index + 1}`, title, status: "pending", evidence: [] }));
-

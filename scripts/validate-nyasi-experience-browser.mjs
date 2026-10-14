@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import { chromium } from '@playwright/test';
 import { mkdirSync,writeFileSync } from 'node:fs';
 const base=process.env.EQUIPMENT_PREVIEW_URL??'http://127.0.0.1:5196/equipment';
@@ -30,4 +30,3 @@ try {
  await page.close();
  writeFileSync(out+'/validation.json',JSON.stringify(results,null,2));console.log(JSON.stringify(results,null,2));
 }finally{await browser.close()}
-
