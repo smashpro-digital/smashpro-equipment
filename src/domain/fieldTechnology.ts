@@ -7,6 +7,22 @@ export type FieldTechnologyCard = { name: string; description: string; url: stri
 const record = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
 const text = (value: unknown, max: number): value is string => typeof value === 'string' && value.trim().length > 0 && value.length <= max;
 
+/** Keep the server's lease duration on devices with skewed clocks. */
+export function receivedFieldTechnologyCard(payload: unknown, serverDate: string | null, started: number, now = Date.now()): FieldTechnologyCard | null {
+  const serverNow = serverDate ? Date.parse(serverDate) : now;
+  if (!Number.isFinite(serverNow) || started > now) return null;
+  const card = fieldTechnologyCard(payload, serverNow);
+  if (!card) return null;
+  const remaining = card.validUntil - serverNow - (now - started);
+  if (remaining <= 0 || remaining > 60000) return null;
+  card.validUntil = now + remaining;
+  card.creatives = card.creatives.flatMap(creative => {
+    const duration = creative.validUntil - serverNow - (now - started);
+    return duration > 0 ? [{...creative,validUntil:now + Math.min(duration,remaining)}] : [];
+  });
+  return card;
+}
+
 /** Validate HQ's public projection, never infer authorization from a working URL. */
 export function fieldTechnologyCard(payload: unknown, now = Date.now(), placement = FIELD_PLACEMENT): FieldTechnologyCard | null {
   if (![FIELD_PLACEMENT, 'equipment.media.sp-med-cam-001'].includes(placement)) return null;

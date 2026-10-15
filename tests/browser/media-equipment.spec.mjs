@@ -1,6 +1,15 @@
 import {test,expect} from '@playwright/test';
 import {mkdirSync} from 'node:fs';
 const endpoint='**/dashboard/api/public_media_equipment.php?*';
+test('homepage preserves the showcase and discovers the media passport',async({page})=>{
+ if(!process.env.MEDIA_LIVE)await page.route('**/dashboard/api/public_gear.php?*',async route=>{const response=await page.request.get('https://smashpro.app/dashboard/api/public_gear.php?property=hq&placement=equipment.field-technology.akaso360');await route.fulfill({response});});
+ await page.goto('/equipment/',{waitUntil:'domcontentloaded'});
+ const section=page.locator('#field-technology');await expect(section).toBeVisible({timeout:25000});
+ await expect(section.getByRole('link',{name:'Explore the camera passport'})).toHaveAttribute('href','/equipment/sp-med-cam-001.html');
+ await expect(section.getByRole('link',{name:'Explore AKASO 360',exact:true})).toHaveAttribute('rel','sponsored noopener noreferrer');
+ expect(await section.evaluate(e=>[e.previousElementSibling.id,e.nextElementSibling.id])).toEqual(['rental-process','contractors']);
+ for(const id of ['fleet','passports','attachments','fabrication','development','rental-process','contractors'])await expect(page.locator(`#${id}`)).toHaveCount(1);
+});
 async function approved(page){if(!process.env.MEDIA_LIVE)await page.route(endpoint,async route=>{const response=await page.request.get('https://smashpro.app/dashboard/api/public_media_equipment.php?property=hq&asset=SP-MED-CAM-001');await route.fulfill({response});});}
 for(const width of [390,768,1440])test(`media passport presentation ${width}`,async({page})=>{
  await approved(page);await page.setViewportSize({width,height:1000});const errors=[];page.on('pageerror',e=>errors.push(e.message));
