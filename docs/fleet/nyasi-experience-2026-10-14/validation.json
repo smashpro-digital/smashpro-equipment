@@ -1,0 +1,76 @@
+[
+  {
+    "width": 360,
+    "anonymous": true,
+    "apiFailure": true,
+    "overflow": false,
+    "journeyEvidence": true,
+    "privatePricing": false,
+    "errors": []
+  },
+  {
+    "width": 375,
+    "anonymous": true,
+    "apiFailure": true,
+    "overflow": false,
+    "journeyEvidence": true,
+    "privatePricing": false,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "anonymous": true,
+    "apiFailure": true,
+    "overflow": false,
+    "journeyEvidence": true,
+    "privatePricing": false,
+    "errors": []
+  },
+  {
+    "width": 412,
+    "anonymous": true,
+    "apiFailure": true,
+    "overflow": false,
+    "journeyEvidence": true,
+    "privatePricing": false,
+    "errors": []
+  },
+  {
+    "width": 430,
+    "anonymous": true,
+    "apiFailure": true,
+    "overflow": false,
+    "journeyEvidence": true,
+    "privatePricing": false,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "anonymous": true,
+    "apiFailure": true,
+    "overflow": false,
+    "journeyEvidence": true,
+    "privatePricing": false,
+    "errors": []
+  },
+  {
+    "route": "/",
+    "status": 200
+  },
+  {
+    "route": "/sp-ardhi-26.html",
+    "status": 200
+  },
+  {
+    "route": "/sp-mzigo-26.html",
+    "status": 200
+  },
+  {
+    "route": "/catalog/",
+    "status": 200
+  },
+  {
+    "route": "/attachments/sp-att-bkt-001/",
+    "status": 200
+  }
+]

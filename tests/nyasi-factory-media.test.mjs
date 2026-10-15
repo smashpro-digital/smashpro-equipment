@@ -30,7 +30,7 @@ test("supplier completion advances only supported gates and the public index", (
   assert.equal(item.status, "fleet-build");
   assert.match(publicEquipmentIndexRow(item).status_label, /Factory Build Complete/);
   assert.match(item.statusDetail, /not shipped or commissioned/i);
-  assert.match(item.statusDetail, /1,565/);
+  assert.doesNotMatch(JSON.stringify(item), /\$[0-9]|1,565|2,165/);
   assert.deepEqual(nyasiLifecycle.filter(s => s.status === "complete").map(s => s.id), ["configuration-approved", "order-created", "initial-payment", "production-pending", "production"]);
   for (const id of ["branding", "balance-paid", "packing", "shipped", "international-transit", "commissioning", "operational"]) assert.equal(nyasiLifecycle.find(s => s.id === id).status, "pending");
   assert.equal(item.timeline.find(e => e.id === "nyasi-factory-build-complete").occurredAt, "2026-10-14");

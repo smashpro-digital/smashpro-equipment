@@ -7,13 +7,13 @@ mkdirSync(output, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const results = [];
 try {
-  for (const width of [360, 375, 390, 430, 1440]) {
+  for (const width of [360, 375, 390, 412, 430, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: "reduce" });
     const errors = [];
     page.on("pageerror", e => errors.push(e.message));
     await page.goto(base + "/sp-nyasi-26.html", { waitUntil: "networkidle" });
     assert.match(await page.locator(".nyasi-status").innerText(), /Factory Build Complete/i);
-    assert.match(await page.locator(".nyasi-status").innerText(), /1,565/);
+    assert.doesNotMatch(await page.locator(".nyasi-passport").textContent(), /\$[0-9]|1,565|2,165/);
     assert.equal(await page.locator('nav[aria-label="Passport sections"]').count(), 1);
     for (const link of await page.locator('nav[aria-label="Passport sections"] a').all()) {
       const href = await link.getAttribute("href");
