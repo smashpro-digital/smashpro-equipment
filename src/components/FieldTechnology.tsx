@@ -55,9 +55,10 @@ export function FieldTechnology() {
         <div className="field-technology__action">
           <ButtonLink href={card.url} sponsored onClick={event => { if (Date.now() >= card.validUntil) { event.preventDefault(); setCard(null); } }}>Explore AKASO 360</ButtonLink>
           <ButtonLink href="https://www.youtube.com/@SmashProHQ" variant="quiet" external>Watch SmashPro Equipment</ButtonLink>
+          <ButtonLink href="/equipment/sp-med-cam-001.html" variant="quiet">Explore the camera passport</ButtonLink>
         </div>
         <p className="field-technology__disclosure">SmashPro participates in the AKASO Affiliate Program. {card.disclosure}</p>
-        <p className="field-technology__status">Exploration stage. Purchase and field testing are not yet confirmed.</p>
+        <p className="field-technology__status">Exploration stage. Visit the camera passport for its current commissioning status and approved field footage.</p>
       </div>
     </article>
   </section>;
