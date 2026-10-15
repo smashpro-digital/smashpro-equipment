@@ -28,3 +28,11 @@ Public API readback returned 200 after registration. Anonymous migration access 
 See [architecture and release procedures](media-passport-architecture.md) for remaining commerce and original-clip source-policy work. There are no fabricated published videos, products, prices, inventory, or test results.
 
 Local release validation: 153 Node tests passed; TypeScript, production build, public-index and protected-passport checks passed. Five browser scenarios passed across the release checks. A transient refresh request exceeded the five-second fetch timeout; the refresh assertion allows the existing 15-second retry to recover. The HTTPS response Date is used to account for device clock skew without extending authorization leases.
+
+## Production release
+
+Equipment PR [#100](https://github.com/smashpro-digital/smashpro-equipment/pull/100), commit `eecd006`, merged as `ec7314b`. Workflow [38787500174](https://github.com/smashpro-digital/smashpro-equipment/actions/runs/38787500174) deployed successfully with the AKASO authorization check enabled. Anonymous live direct-load/refresh, API withdrawal, image fallback, affiliate CTA/disclosure, and 390/768/1440 checks all passed (five browser tests). Live captures are stored beside the local screenshots.
+
+Digital HQ PRs [#238](https://github.com/smashpro-digital/digital-hq/pull/238) and [#239](https://github.com/smashpro-digital/digital-hq/pull/239) add the backend and keep the exact camera placement reviewable through existing authenticated affiliate administration. Four scoped API files were hash-verified; the original migration gateway was restored and temporary includes removed. Garage/unknown-field requests returned 400 and absent passports returned 404.
+
+A final homepage readback found its pre-existing five-second clock-skew tolerance hid the showcase on this device. The same conservative response-Date lease handling is now applied to the homepage; expired authorizations still disappear and request duration is charged against the lease. A homepage regression test checks showcase position, the passport link, sponsored CTA, and preserved sections.

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ButtonLink } from './ButtonLink';
-import { FIELD_CATALOG_URL, fieldTechnologyCard, type FieldTechnologyCard } from '../domain/fieldTechnology';
+import { FIELD_CATALOG_URL, receivedFieldTechnologyCard, type FieldTechnologyCard } from '../domain/fieldTechnology';
 import '../styles/field-technology.css';
 
 export function FieldTechnology() {
@@ -14,11 +14,12 @@ export function FieldTechnology() {
       active?.abort();
       const controller = new AbortController();
       active = controller;
+      const started = Date.now();
       const timeout = setTimeout(() => controller.abort(), 5000);
       try {
         const response = await fetch(FIELD_CATALOG_URL, { signal: controller.signal, credentials: 'omit', cache: 'no-store', redirect: 'error', headers: { Accept: 'application/json' } });
         if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) throw new Error('Unavailable catalog');
-        const next = fieldTechnologyCard(await response.json());
+        const next = receivedFieldTechnologyCard(await response.json(), response.headers.get('date'), started);
         if (disposed || active !== controller) return;
         clearTimeout(expiry);
         setCard(next);

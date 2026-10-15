@@ -6,7 +6,7 @@ import { approvedCatalog } from './fixtures/field-technology.mjs';
 const options = { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } };
 const creativesModule = 'data:text/javascript;base64,' + Buffer.from(ts.transpileModule(readFileSync('src/domain/affiliateCreatives.ts', 'utf8'), options).outputText).toString('base64');
 const code = ts.transpileModule(readFileSync('src/domain/fieldTechnology.ts', 'utf8'), options).outputText.replace('./affiliateCreatives.ts', creativesModule);
-const { fieldTechnologyCard } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
+const { fieldTechnologyCard, receivedFieldTechnologyCard } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 
 test('only reviewed Equipment creative identity is rendered; invalid imagery preserves the approved link', () => {
   const now = Date.now(), payload = approvedCatalog(now), product = payload.items[0].products[0];
@@ -41,3 +41,5 @@ test('link identity, expiry, disclosure and URL safety are mandatory', () => {
     const p = approvedCatalog(now); Object.assign(p.items[0].products[0].links[0], patch); assert.equal(fieldTechnologyCard(p, now), null);
   }
 });
+
+test('response clock skew preserves a conservative homepage authorization lease',()=>{const now=Date.now(),server=Math.floor((now+18000)/1000)*1000,payload=approvedCatalog(server);const card=receivedFieldTechnologyCard(payload,new Date(server).toUTCString(),now-500,now);assert.ok(card);assert.ok(card.validUntil<=now+60000);assert.equal(receivedFieldTechnologyCard(payload,'invalid',now,now),null);assert.equal(receivedFieldTechnologyCard(payload,new Date(server).toUTCString(),now-61000,now),null);});
