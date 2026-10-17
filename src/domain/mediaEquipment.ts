@@ -7,7 +7,22 @@ export type FieldMediaVideo = {
   thumbnail: string | null; category: string; relatedAsset: string; recordingDevice: string | null;
   status: 'published'; displayOrder: number; publishedAt: string | null; channelId: string; campaignId: number | null;
 };
-export type FieldKitItem = {name: string; group: 'included' | 'purchased' | 'owned'; note: string};
+export type KitImage = {url: string; alt: string; source: string; width: number; height: number};
+export type KitShopping = {url: string; kind: 'affiliate'|'details'|'retailer'; label: string};
+export type FieldKitItem = {
+ name: string; group: 'included' | 'purchased' | 'owned'; note: string;
+ productId: number | null; category: string; image: KitImage | null; shopping: KitShopping | null;
+ lifecycle: 'Concept'|'Prototype'|'Testing'|'Available'|'Unavailable'|null; displayOrder: number;
+};
+function kitDetailsUrl(value: unknown): value is string {
+ if(typeof value!=='string'||/[\\\x00-\x20]/.test(value))return false;
+ try {const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!u.hash&&u.hostname==='shopakaso.com'&&/^\/products\/[a-z0-9-]+$/.test(u.pathname)&&[...u.searchParams.keys()].every(k=>k==='variant')&&u.searchParams.getAll('variant').length<=1&&(!u.searchParams.has('variant')||/^\d+$/.test(u.searchParams.get('variant')!));}catch{return false;}
+}
+function kitImage(value: unknown, productId: number|null): KitImage|null {
+ if(!record(value)||productId===null||value.product_id!==productId||typeof value.url!=='string'||value.url.length>2000||/[\\\x00-\x20]/.test(value.url)||typeof value.alt!=='string'||!value.alt.trim()||typeof value.source!=='string'||!value.source.trim()||!Number.isSafeInteger(value.width)||Number(value.width)<1||!Number.isSafeInteger(value.height)||Number(value.height)<1)return null;
+ try {const u=new URL(value.url);if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||u.hostname!=='cdn.shopify.com'||!u.pathname.startsWith('/s/files/1/0632/9037/6374/'))return null;}catch{return null;}
+ return {url:value.url,alt:value.alt.slice(0,240),source:value.source.slice(0,200),width:Number(value.width),height:Number(value.height)};
+}
 export type MediaPassport = {
   assetId: string; campaignId: number | null; validUntil: number; propertyId: number; card: FieldTechnologyCard | null;
   identity: Record<'name'|'manufacturer'|'bundle'|'category'|'status'|'summary', string>;
@@ -62,7 +77,11 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
   const fieldKit: FieldKitItem[]=[];
   if (Array.isArray(p.field_kit)) for (const item of p.field_kit) {
     if(!record(item)||typeof item.name!=='string'||!['included','purchased','owned'].includes(String(item.group)))continue;
-    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):''});
+    const productId=Number.isSafeInteger(item.product_id)&&Number(item.product_id)>0?Number(item.product_id):null;
+    const lifecycle=['Concept','Prototype','Testing','Available'].includes(String(item.lifecycle))?item.lifecycle as FieldKitItem['lifecycle']:(item.lifecycle==null?null:'Unavailable');
+    const details=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='details'&&kitDetailsUrl(item.shopping.url)?{url:item.shopping.url,kind:'details' as const,label:'View details'}:null;
+    const retailer=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='retailer'&&item.shopping.url==='https://a.co/d/01Lk7JHj'?{url:item.shopping.url,kind:'retailer' as const,label:'View on Amazon'}:null;
+    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):'',productId,category:typeof item.category==='string'?item.category.slice(0,100):'Field kit',image:kitImage(item.image,productId),shopping:lifecycle&&lifecycle!=='Available'?null:(retailer||details),lifecycle,displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0});
   }
   const accessories: MediaPassport['accessories'] = [];
   for (const item of p.accessories) {
@@ -70,6 +89,18 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
     accessories.push({product_id:item.product_id,name:item.name,description:typeof item.description==='string'?item.description:'',prototype_status:item.prototype_status,revision:typeof item.revision==='string'?item.revision:null,material:typeof item.material==='string'?item.material:null});
   }
   const card=fieldTechnologyCard({ok:true,schema_version:1,property:'hq',placement:p.placement,generated_at:value.generated_at,items:p.catalog},now,p.placement);
+  // Affiliate actions and Awin imagery are reused only from the fully validated catalog.
+  // A field-kit payload can never invent or rewrite a tracking URL.
+  if(card&&Array.isArray(p.catalog)) {
+    for(const partner of p.catalog)if(record(partner)&&Array.isArray(partner.products))for(const product of partner.products){
+      if(!record(product)||!Array.isArray(product.links)||!product.links.some(l=>record(l)&&l.url===card.url))continue;
+      for(const item of fieldKit)if(item.productId===product.id&&(!item.lifecycle||item.lifecycle==='Available')){
+        item.shopping={url:card.url,kind:'affiliate',label:'Shop AKASO 360'};
+        if(card.image)item.image={...card.image,source:'Approved Awin creative'};
+      }
+    }
+  }
+  fieldKit.sort((a,b)=>a.displayOrder-b.displayOrder);
   const catalog=p.catalog as {products:{links:{campaign_id:number}[]}[]}[];
   return {assetId:MEDIA_ASSET,campaignId:card?catalog[0].products[0].links[0].campaign_id:null,validUntil:until,propertyId:Number(p.media_property_id),identity:identity as MediaPassport['identity'],footage,fieldKit,accessories,card};
 }

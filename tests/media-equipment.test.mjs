@@ -20,4 +20,36 @@ test('physical HTML route and sitemap carry the canonical camera URL',()=>{for(c
 test('server clock skew does not extend authorization lease',()=>{const now=Date.now(),server=Math.floor((now+18000)/1000)*1000,v=fixture(server);const p=receivedMediaPassport(v,new Date(server).toUTCString(),now-500,now);assert.ok(p);assert.ok(p.validUntil-now<=60000);assert.equal(receivedMediaPassport(v,'invalid',now,now),null);});
 
 test('approved subject videos retain unknown capture provenance and require channel approval',()=>{const now=Date.now(),v=fixture(now);const video={id:42,capture_device:null,subject_equipment:'SP-MED-CAM-001',title:'Unboxing',url:'https://www.youtube.com/shorts/UfznEcnYz5k',publication_status:'published',approval_status:'approved',channel_id:'UC2wKsAtGR55PZMAUNuk2r6g',category:'Unboxing',display_order:10,published_at:null};v.passport.footage=[video];const result=mediaPassport(v,now).footage[0];assert.equal(result.videoId,'UfznEcnYz5k');assert.equal(result.recordingDevice,null);assert.equal(result.publishedAt,null);for(const change of [{approval_status:'draft'},{channel_id:'Garage'},{publication_status:'planned'},{subject_equipment:'SP-ARDHI-26'}]){v.passport.footage=[{...video,...change}];assert.deepEqual(mediaPassport(v,now).footage,[]);}});
-test('kit projection allowlists public fields and rejects unknown group',()=>{const now=Date.now(),v=fixture(now);v.passport.field_kit=[{name:'Case',group:'purchased',note:'Public',serial:'SECRET'},{name:'Other',group:'private'}];assert.deepEqual(mediaPassport(v,now).fieldKit,[{name:'Case',group:'purchased',note:'Public'}]);});
+test('kit projection allowlists public fields and rejects unknown group',()=>{const now=Date.now(),v=fixture(now);v.passport.field_kit=[{name:'Case',group:'purchased',note:'Public',serial:'SECRET'},{name:'Other',group:'private'}];const items=mediaPassport(v,now).fieldKit;assert.equal(items.length,1);assert.equal(items[0].name,'Case');assert.equal(items[0].group,'purchased');assert.equal(items[0].serial,undefined);assert.equal(items[0].image,null);assert.equal(items[0].shopping,null);});
+
+test('kit links cannot inject affiliate tracking, unsafe destinations or wrong product images',()=>{
+ const now=Date.now(),v=fixture(now);
+ const item={name:'Battery',group:'included',product_id:3,note:'Public',image:{product_id:4,url:'https://cdn.shopify.com/s/files/1/0632/9037/6374/files/battery.jpg',alt:'Battery',source:'AKASO',width:100,height:100}};
+ for(const url of ['javascript:alert(1)','https://shopakaso.com.evil.test/products/test','https://shopakaso.com/products/test?tag=madeup','https://user:pass@shopakaso.com/products/test']){
+  v.passport.field_kit=[{...item,shopping:{kind:'details',url,product_id:3}}];
+  const out=mediaPassport(v,now).fieldKit[0];assert.equal(out.shopping,null);assert.equal(out.image,null);
+ }
+ v.passport.field_kit=[{...item,shopping:{kind:'affiliate',url:'https://www.awin1.com/cread.php?invented=1',product_id:3}}];
+ assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
+});
+test('kit camera reuses approved tracking bytes and loses CTA when catalog is withdrawn',()=>{
+ const now=Date.now(),v=fixture(now),product=v.passport.catalog[0].products[0];
+ v.passport.field_kit=[{name:'Camera',group:'owned',product_id:product.id}];
+ assert.equal(mediaPassport(v,now).fieldKit[0].shopping.url,product.links[0].url);
+ v.passport.catalog=[];assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
+});
+test('future nonavailable kit products never show shopping actions',()=>{
+ const now=Date.now(),v=fixture(now);
+ for(const lifecycle of ['Concept','Prototype','Testing','Retired']){
+  v.passport.field_kit=[{name:'Mount',group:'owned',product_id:3,lifecycle,shopping:{kind:'details',product_id:3,url:'https://shopakaso.com/products/example'}}];
+  assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
+ }
+});
+
+test('verified case retailer remains non-affiliate and rejects URL changes',()=>{
+ const now=Date.now(),v=fixture(now),item={name:'Case',group:'purchased',product_id:6,shopping:{kind:'retailer',product_id:6,url:'https://a.co/d/01Lk7JHj'}};
+ v.passport.field_kit=[item];assert.equal(mediaPassport(v,now).fieldKit[0].shopping.kind,'retailer');
+ for(const url of ['https://a.co/d/OTHER','https://a.co/d/01Lk7JHj?tag=invented','https://evil.test']){
+  item.shopping.url=url;assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
+ }
+});
