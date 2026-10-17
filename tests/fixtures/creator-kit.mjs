@@ -71,9 +71,9 @@ const products=[
       "product_id": 6
     },
     "shopping": {
-      "url": "https://shopakaso.com/products/akaso-360-camera-carrying-case?variant=44610066153654",
-      "kind": "details",
-      "label": "View details",
+      "url": "https://a.co/d/01Lk7JHj",
+      "kind": "retailer",
+      "label": "View on Amazon",
       "product_id": 6
     }
   },

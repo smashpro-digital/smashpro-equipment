@@ -66,9 +66,12 @@ for(const width of [390,768,1440])test('Creator Kit grid and approved-image prev
  const carryingCase=kit.locator('.creator-kit-card').filter({has:page.getByRole('heading',{name:'AKASO 360 carrying case',exact:true})});
  await expect(carryingCase.getByText('IN OUR KIT',{exact:true})).toBeVisible();
  await expect(carryingCase.getByText('Purchased separately',{exact:true})).toBeVisible();
+ await expect(carryingCase.getByRole('link',{name:/View on Amazon/})).toHaveAttribute('href','https://a.co/d/01Lk7JHj');
+ await expect(carryingCase.getByText('Retailer link / Non-affiliate',{exact:true})).toBeVisible();
+ await expect(carryingCase.locator('a')).not.toHaveAttribute('rel',/sponsored/);
  for(const img of await kit.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);}
  await expect(kit.locator('a[rel*="sponsored"]')).toHaveCount(1);
- await expect(kit.getByRole('link',{name:/View details/})).toHaveCount(4);
+ await expect(kit.getByRole('link',{name:/View details/})).toHaveCount(3);
  await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(2);
  for(const link of await kit.locator('a').all()){await expect(link).toHaveAttribute('target','_blank');await expect(link).toHaveAttribute('rel',/noopener/);}
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

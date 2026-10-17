@@ -8,7 +8,7 @@ export type FieldMediaVideo = {
   status: 'published'; displayOrder: number; publishedAt: string | null; channelId: string; campaignId: number | null;
 };
 export type KitImage = {url: string; alt: string; source: string; width: number; height: number};
-export type KitShopping = {url: string; kind: 'affiliate'|'details'; label: string};
+export type KitShopping = {url: string; kind: 'affiliate'|'details'|'retailer'; label: string};
 export type FieldKitItem = {
  name: string; group: 'included' | 'purchased' | 'owned'; note: string;
  productId: number | null; category: string; image: KitImage | null; shopping: KitShopping | null;
@@ -80,7 +80,8 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
     const productId=Number.isSafeInteger(item.product_id)&&Number(item.product_id)>0?Number(item.product_id):null;
     const lifecycle=['Concept','Prototype','Testing','Available'].includes(String(item.lifecycle))?item.lifecycle as FieldKitItem['lifecycle']:(item.lifecycle==null?null:'Unavailable');
     const details=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='details'&&kitDetailsUrl(item.shopping.url)?{url:item.shopping.url,kind:'details' as const,label:'View details'}:null;
-    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):'',productId,category:typeof item.category==='string'?item.category.slice(0,100):'Field kit',image:kitImage(item.image,productId),shopping:lifecycle&&lifecycle!=='Available'?null:details,lifecycle,displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0});
+    const retailer=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='retailer'&&item.shopping.url==='https://a.co/d/01Lk7JHj'?{url:item.shopping.url,kind:'retailer' as const,label:'View on Amazon'}:null;
+    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):'',productId,category:typeof item.category==='string'?item.category.slice(0,100):'Field kit',image:kitImage(item.image,productId),shopping:lifecycle&&lifecycle!=='Available'?null:(retailer||details),lifecycle,displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0});
   }
   const accessories: MediaPassport['accessories'] = [];
   for (const item of p.accessories) {

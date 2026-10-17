@@ -45,3 +45,11 @@ test('future nonavailable kit products never show shopping actions',()=>{
   assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
  }
 });
+
+test('verified case retailer remains non-affiliate and rejects URL changes',()=>{
+ const now=Date.now(),v=fixture(now),item={name:'Case',group:'purchased',product_id:6,shopping:{kind:'retailer',product_id:6,url:'https://a.co/d/01Lk7JHj'}};
+ v.passport.field_kit=[item];assert.equal(mediaPassport(v,now).fieldKit[0].shopping.kind,'retailer');
+ for(const url of ['https://a.co/d/OTHER','https://a.co/d/01Lk7JHj?tag=invented','https://evil.test']){
+  item.shopping.url=url;assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
+ }
+});
