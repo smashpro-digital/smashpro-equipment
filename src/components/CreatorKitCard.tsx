@@ -16,9 +16,9 @@ export function CreatorKitCard({item,onVisit}:{item:FieldKitItem;onVisit?:(event
    {item.note&&<p>{item.note}</p>}
    <div className="creator-kit-card__footer">{shopping&&<>
     <p className="creator-kit-card__shopping-label">Explore this equipment</p>
-    <p className="creator-kit-card__relationship">{shopping.kind==='affiliate'?'Affiliate link':shopping.kind==='retailer'?'Retailer link / Non-affiliate':'Manufacturer details / Non-affiliate'}</p>
+    <p className="creator-kit-card__relationship">{shopping.kind==='affiliate'?'Affiliate link':shopping.kind==='retailer'?'Retailer link / Non-affiliate':shopping.kind==='manufacturer'?'Manufacturer shop / Non-affiliate':'Manufacturer details / Non-affiliate'}</p>
     <a className="creator-kit-card__link" href={shopping.url} target="_blank" rel={shopping.kind==='affiliate'?'sponsored noopener noreferrer':'noopener noreferrer'} onClick={event=>onVisit?.(event,item)} aria-label={shopping.label+' - '+item.name}>{shopping.label}<span aria-hidden="true">&#8599;</span></a>
-   </>}</div>
+   </>}{!shopping&&<p className="creator-kit-card__shopping-label">{item.lifecycle&&['Concept','Prototype','Testing'].includes(item.lifecycle)?'COMING SOON':!item.lifecycle&&item.group==='included'?'INCLUDED IN COMBO':'Purchase link unavailable'}</p>}</div>
   </div>
  </article>;
 }

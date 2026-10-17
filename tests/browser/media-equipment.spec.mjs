@@ -66,16 +66,19 @@ for(const width of [390,768,1440])test('Creator Kit grid and approved-image prev
  const carryingCase=kit.locator('.creator-kit-card').filter({has:page.getByRole('heading',{name:'AKASO 360 carrying case',exact:true})});
  await expect(carryingCase.getByText('IN OUR KIT',{exact:true})).toBeVisible();
  await expect(carryingCase.getByText('Purchased separately',{exact:true})).toBeVisible();
- await expect(carryingCase.getByRole('link',{name:/View on Amazon/})).toHaveAttribute('href','https://a.co/d/01Lk7JHj');
+ await expect(carryingCase.getByRole('link',{name:/SHOP NOW/})).toHaveAttribute('href','https://a.co/d/01Lk7JHj');
  await expect(carryingCase.getByText('Retailer link / Non-affiliate',{exact:true})).toBeVisible();
  await expect(carryingCase.locator('a')).not.toHaveAttribute('rel',/sponsored/);
  for(const img of await kit.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);}
  await expect(kit.locator('a[rel*="sponsored"]')).toHaveCount(1);
- await expect(kit.getByRole('link',{name:/View details/})).toHaveCount(3);
- await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(2);
+ await expect(kit.getByRole('link',{name:/VIEW PRODUCT/})).toHaveCount(1);
+ await expect(kit.getByRole('link',{name:/SHOP NOW/})).toHaveCount(4);
+ await expect(kit.getByText('INCLUDED IN COMBO',{exact:true})).toHaveCount(1);
+ await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(1);
  for(const link of await kit.locator('a').all()){await expect(link).toHaveAttribute('target','_blank');await expect(link).toHaveAttribute('rel',/noopener/);}
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- const boxes=await kit.locator('.creator-kit-card').evaluateAll(nodes=>nodes.map(n=>({x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width})));
+ const boxes=await kit.locator('.creator-kit-card').evaluateAll(nodes=>nodes.map(n=>({x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height})));
+ for(const row of new Set(boxes.map(b=>Math.round(b.y)))){const heights=boxes.filter(b=>Math.round(b.y)===row).map(b=>b.height);expect(Math.max(...heights)-Math.min(...heights)).toBeLessThan(1);}
  expect(new Set(boxes.map(b=>Math.round(b.x))).size).toBe(width===390?1:width===768?2:3);
  expect(Math.max(...boxes.map(b=>b.width))-Math.min(...boxes.map(b=>b.width))).toBeLessThan(1);
  await expect(page.getByRole('button',{name:/Load YouTube video/})).toHaveCount(2);
@@ -89,5 +92,6 @@ test('Creator Kit pending rights, image failure and nonavailable lifecycle fall 
  await kit.scrollIntoViewIfNeeded();await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(7);
  await expect(kit.locator('.creator-kit-card').nth(1).locator('a')).toHaveCount(0);
  await expect(kit.locator('.creator-kit-card').nth(1).getByText('IN OUR KIT',{exact:true})).toHaveCount(0);
+ await expect(kit.getByText('COMING SOON',{exact:true})).toHaveCount(1);
  await expect(kit.getByText('DESIGNED BY SMASHPRO',{exact:true})).toHaveCount(0);
 });

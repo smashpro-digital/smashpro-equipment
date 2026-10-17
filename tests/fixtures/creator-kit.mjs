@@ -11,13 +11,13 @@ const products=[
       "source": "AKASO official store product photography",
       "width": 1500,
       "height": 1495,
-      "product_id": 3
+      "product_id": 3, "purchase_verified": true
     },
     "shopping": {
       "url": "https://shopakaso.com/products/akaso-120cm-invisible-selfie-stick?variant=44352839352502",
       "kind": "details",
-      "label": "View details",
-      "product_id": 3
+      "label": "VIEW PRODUCT",
+      "product_id": 3, "purchase_verified": true
     }
   },
   {
@@ -35,7 +35,7 @@ const products=[
     "shopping": {
       "url": "https://shopakaso.com/products/akaso-360-camera-battery?variant=44332006637750",
       "kind": "details",
-      "label": "View details",
+      "label": "VIEW PRODUCT",
       "product_id": 4
     }
   },
@@ -49,13 +49,13 @@ const products=[
       "source": "AKASO official store product photography",
       "width": 1600,
       "height": 1600,
-      "product_id": 5
+      "product_id": 5, "purchase_verified": true
     },
     "shopping": {
       "url": "https://shopakaso.com/products/akaso-360-camera-battery?variant=44332006670518",
       "kind": "details",
-      "label": "View details",
-      "product_id": 5
+      "label": "VIEW PRODUCT",
+      "product_id": 5, "purchase_verified": true
     }
   },
   {
@@ -73,7 +73,7 @@ const products=[
     "shopping": {
       "url": "https://a.co/d/01Lk7JHj",
       "kind": "retailer",
-      "label": "View on Amazon",
+      "label": "SHOP NOW",
       "product_id": 6
     }
   },
@@ -81,7 +81,7 @@ const products=[
     "name": "Protective carrying pouch",
     "product_id": 7,
     "category": "Protection",
-    "image": null,
+    "image": {"url": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/b2066e5e826e581b37b149b3709f678e_1d508e23-6f64-490e-b0dc-891048098ae7.jpg?v=1763029956", "alt": "Official AKASO Creator Combo contents, with soft protective pouch at lower right", "width": 1600, "height": 1600, "source": "AKASO official Creator Combo contents image", "product_id": 7},
     "shopping": null
   }
 ];
