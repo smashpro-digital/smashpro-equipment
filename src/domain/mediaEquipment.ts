@@ -18,9 +18,13 @@ function kitDetailsUrl(value: unknown): value is string {
  if(typeof value!=='string'||/[\\\x00-\x20]/.test(value))return false;
  try {const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!u.hash&&u.hostname==='shopakaso.com'&&/^\/products\/[a-z0-9-]+$/.test(u.pathname)&&[...u.searchParams.keys()].every(k=>k==='variant')&&u.searchParams.getAll('variant').length<=1&&(!u.searchParams.has('variant')||/^\d+$/.test(u.searchParams.get('variant')!));}catch{return false;}
 }
-function kitImage(value: unknown, productId: number|null): KitImage|null {
- if(!record(value)||productId===null||value.product_id!==productId||typeof value.url!=='string'||value.url.length>2000||/[\\\x00-\x20]/.test(value.url)||typeof value.alt!=='string'||!value.alt.trim()||typeof value.source!=='string'||!value.source.trim()||!Number.isSafeInteger(value.width)||Number(value.width)<1||!Number.isSafeInteger(value.height)||Number(value.height)<1)return null;
- try {const u=new URL(value.url);if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||u.hostname!=='cdn.shopify.com'||!u.pathname.startsWith('/s/files/1/0632/9037/6374/'))return null;}catch{return null;}
+function kitImage(value: unknown, productId: number|null, itemKey: string|null=null): KitImage|null {
+ const owned=itemKey==='sandisk-extreme-256gb-b082wnc4nk'&&productId===null&&record(value)&&value.product_id===null&&value.item_key===itemKey;
+ if(!record(value)||(!owned&&productId===null)||value.product_id!==productId||typeof value.url!=='string'||value.url.length>2000||/[\\\x00-\x20]/.test(value.url)||typeof value.alt!=='string'||!value.alt.trim()||typeof value.source!=='string'||!value.source.trim()||!Number.isSafeInteger(value.width)||Number(value.width)<1||!Number.isSafeInteger(value.height)||Number(value.height)<1)return null;
+ try {const u=new URL(value.url);if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash)return null;
+  if(owned){if(u.hostname!=='m.media-amazon.com'||u.search||!/^\/images\/I\/[A-Za-z0-9+_.-]+\.jpg$/.test(u.pathname))return null;}
+  else if(u.hostname!=='cdn.shopify.com'||!u.pathname.startsWith('/s/files/1/0632/9037/6374/'))return null;
+ }catch{return null;}
  return {url:value.url,alt:value.alt.slice(0,240),source:value.source.slice(0,200),width:Number(value.width),height:Number(value.height)};
 }
 export type MediaPassport = {
@@ -78,10 +82,12 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
   if (Array.isArray(p.field_kit)) for (const item of p.field_kit) {
     if(!record(item)||typeof item.name!=='string'||!['included','purchased','owned'].includes(String(item.group)))continue;
     const productId=Number.isSafeInteger(item.product_id)&&Number(item.product_id)>0?Number(item.product_id):null;
+    const itemKey=productId===null&&item.item_key==='sandisk-extreme-256gb-b082wnc4nk'&&item.name==='SanDisk Extreme 256GB microSDXC'&&item.group==='purchased'?String(item.item_key):null;
+    const ownedRetailer=itemKey&&record(item.shopping)&&item.shopping.product_id===null&&item.shopping.item_key===itemKey&&item.shopping.kind==='retailer'&&item.shopping.url==='https://a.co/d/0hGla5w9'?{url:item.shopping.url,kind:'retailer' as const,label:'SHOP NOW'}:null;
     const lifecycle=['Concept','Prototype','Testing','Available'].includes(String(item.lifecycle))?item.lifecycle as FieldKitItem['lifecycle']:(item.lifecycle==null?null:'Unavailable');
     const details=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='details'&&kitDetailsUrl(item.shopping.url)?{url:item.shopping.url,kind:item.shopping.purchase_verified===true?'manufacturer' as const:'details' as const,label:item.shopping.purchase_verified===true?'SHOP NOW':'VIEW PRODUCT'}:null;
     const retailer=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='retailer'&&item.shopping.url==='https://a.co/d/01Lk7JHj'?{url:item.shopping.url,kind:'retailer' as const,label:'SHOP NOW'}:null;
-    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):'',productId,category:typeof item.category==='string'?item.category.slice(0,100):'Field kit',image:kitImage(item.image,productId),shopping:lifecycle&&lifecycle!=='Available'?null:(retailer||details),lifecycle,displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0});
+    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):'',productId,category:typeof item.category==='string'?item.category.slice(0,100):'Field kit',image:kitImage(item.image,productId,itemKey),shopping:lifecycle&&lifecycle!=='Available'?null:(ownedRetailer||retailer||details),lifecycle,displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0});
   }
   const accessories: MediaPassport['accessories'] = [];
   for (const item of p.accessories) {

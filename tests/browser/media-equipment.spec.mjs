@@ -72,9 +72,10 @@ for(const width of [390,768,1440])test('Creator Kit grid and approved-image prev
  for(const img of await kit.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);}
  await expect(kit.locator('a[rel*="sponsored"]')).toHaveCount(1);
  await expect(kit.getByRole('link',{name:/VIEW PRODUCT/})).toHaveCount(1);
- await expect(kit.getByRole('link',{name:/SHOP NOW/})).toHaveCount(4);
+ await expect(kit.getByRole('link',{name:/SHOP NOW/})).toHaveCount(5);
+ const sandisk=kit.getByRole('link',{name:/SHOP NOW - SanDisk/});await expect(sandisk).toHaveAttribute('href','https://a.co/d/0hGla5w9');await expect(sandisk).not.toHaveAttribute('rel',/sponsored/);
  await expect(kit.getByText('INCLUDED IN COMBO',{exact:true})).toHaveCount(1);
- await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(1);
+ await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(0);
  for(const link of await kit.locator('a').all()){await expect(link).toHaveAttribute('target','_blank');await expect(link).toHaveAttribute('rel',/noopener/);}
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  const boxes=await kit.locator('.creator-kit-card').evaluateAll(nodes=>nodes.map(n=>({x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height})));

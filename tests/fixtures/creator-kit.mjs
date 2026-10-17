@@ -1,6 +1,29 @@
 import {showcaseFixture} from './media-showcase.mjs';
 // Reviewed catalog values for local tests only. No fixture is imported by production.
 const products=[
+{
+  "name": "SanDisk Extreme 256GB microSDXC",
+  "product_id": null,
+  "item_key": "sandisk-extreme-256gb-b082wnc4nk",
+  "category": "Storage",
+  "note": "Purchased separately. Extreme 256GB microSDXC, U3 / V30 / A2. Model SDSQXA1-256G-GN6MN.",
+  "image": {
+    "url": "https://m.media-amazon.com/images/I/51MvsCPXi3L._AC_SL1500_.jpg",
+    "alt": "SanDisk Extreme 256GB microSDXC, U3 V30 A2",
+    "source": "Owner-selected Amazon product image",
+    "width": 889,
+    "height": 660,
+    "product_id": null,
+    "item_key": "sandisk-extreme-256gb-b082wnc4nk"
+  },
+  "shopping": {
+    "url": "https://a.co/d/0hGla5w9",
+    "kind": "retailer",
+    "label": "SHOP NOW",
+    "product_id": null,
+    "item_key": "sandisk-extreme-256gb-b082wnc4nk"
+  }
+},
   {
     "name": "120cm invisible selfie stick",
     "product_id": 3,

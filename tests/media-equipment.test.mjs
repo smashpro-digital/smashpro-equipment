@@ -59,3 +59,11 @@ test('kit CTA separates manufacturer purchasing from information and affiliate a
  assert.equal(mediaPassport(v,now).fieldKit[0].shopping.label,'SHOP NOW');assert.equal(mediaPassport(v,now).fieldKit[0].shopping.kind,'manufacturer');
  v.passport.field_kit[0].shopping.purchase_verified=false;assert.equal(mediaPassport(v,now).fieldKit[0].shopping.label,'VIEW PRODUCT');
 });
+
+test('owned SanDisk retail media requires exact item identity and keeps non-affiliate URL',()=>{
+ const now=Date.now(),v=fixture(now),key='sandisk-extreme-256gb-b082wnc4nk';
+ const item={name:'SanDisk Extreme 256GB microSDXC',group:'purchased',item_key:key,product_id:null,image:{item_key:key,product_id:null,url:'https://m.media-amazon.com/images/I/51MvsCPXi3L._AC_SL1500_.jpg',width:889,height:660,alt:'SanDisk Extreme card',source:'Amazon listing'},shopping:{item_key:key,product_id:null,kind:'retailer',url:'https://a.co/d/0hGla5w9'}};
+ v.passport.field_kit=[item];let out=mediaPassport(v,now).fieldKit[0];assert(out.image);assert.equal(out.shopping.kind,'retailer');
+ for(const field of ['item_key','name','group']){v.passport.field_kit=[{...item,[field]:field==='group'?'owned':'OTHER'}];out=mediaPassport(v,now).fieldKit[0];assert.equal(out.image,null);assert.equal(out.shopping,null);}
+ v.passport.field_kit=[{...item,shopping:{...item.shopping,url:item.shopping.url+'?tag=invented'},image:{...item.image,url:'https://unapproved.example/images/I/other.jpg'}}];out=mediaPassport(v,now).fieldKit[0];assert.equal(out.image,null);assert.equal(out.shopping,null);
+});
