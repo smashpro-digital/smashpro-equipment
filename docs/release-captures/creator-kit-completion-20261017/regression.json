@@ -1,0 +1,44 @@
+[
+  {
+    "route": "",
+    "http": 200,
+    "title": "BUILT TO MOVE THE WORK FORWARD.",
+    "jsErrors": [],
+    "overflow": false
+  },
+  {
+    "route": "sp-ardhi-26.html",
+    "http": 200,
+    "title": "SMASHPRO FLAGSHIP\nFLEET ASSET #001",
+    "jsErrors": [],
+    "overflow": false
+  },
+  {
+    "route": "sp-mzigo-26.html",
+    "http": 200,
+    "title": "SMASHPRO\nELECTRIC MATERIAL\nCARRIER K600",
+    "jsErrors": [],
+    "overflow": false
+  },
+  {
+    "route": "sp-nyasi-26.html",
+    "http": 200,
+    "title": "NYASI",
+    "jsErrors": [],
+    "overflow": false
+  },
+  {
+    "route": "sp-umba-26.html",
+    "http": 200,
+    "title": "SP-UMBA-26",
+    "jsErrors": [],
+    "overflow": false
+  },
+  {
+    "route": "sp-liftmate-27.html",
+    "http": 200,
+    "title": "SP-LIFTMATE-27",
+    "jsErrors": [],
+    "overflow": false
+  }
+]

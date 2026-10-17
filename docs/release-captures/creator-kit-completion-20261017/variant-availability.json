@@ -1,0 +1,37 @@
+[
+  {
+    "handle": "akaso-120cm-invisible-selfie-stick",
+    "id": 44352839352502,
+    "title": "120cm Invisible Selfie Stick",
+    "available": true,
+    "sku": "SYAC0184-BK"
+  },
+  {
+    "handle": "akaso-360-camera-battery",
+    "id": 44332006703286,
+    "title": "Akaso 360 Camera Battery & Charging Kit",
+    "available": true,
+    "sku": "SYAC0183-BK"
+  },
+  {
+    "handle": "akaso-360-camera-battery",
+    "id": 44332006637750,
+    "title": "Akaso 360 Camera Battery",
+    "available": false,
+    "sku": "SYAC0189-BK"
+  },
+  {
+    "handle": "akaso-360-camera-battery",
+    "id": 44332006670518,
+    "title": "Akaso 360 Multifunctional Charging Case",
+    "available": true,
+    "sku": "SYAC0182-BK"
+  },
+  {
+    "handle": "akaso-360-camera-carrying-case",
+    "id": 44610066153654,
+    "title": "Default Title",
+    "available": true,
+    "sku": "SYAC0204-BK"
+  }
+]

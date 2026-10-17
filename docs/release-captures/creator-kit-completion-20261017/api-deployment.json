@@ -1,0 +1,8 @@
+{
+  "path": "/public_html/smashpro.app/dashboard/api/_media_equipment.php",
+  "source_commit": "b7970656f05c5dfafeff62d7962a41d68b198c12",
+  "sha256": "f7501aaf4645ac8423bf5cb546cd21b2b5cdb8438e2f89d590fe0f12ee7d04d4",
+  "previous_sha256": "869a99dff2cb1306c53605eff0e48e8846f467ce07e8b1615b49fabf89790f41",
+  "byte_readback_verified": true,
+  "transport": "existing authenticated FTP; scoped PHP file only"
+}
