@@ -21,11 +21,20 @@ for(const width of [390,768,1024,1440])test(`media passport presentation ${width
  await expect(page.locator('.media-passport__disclosure').first()).toContainText('at no additional cost to the buyer');
  await expect(page.locator('.media-passport__visual > img')).toBeVisible();
  await expect.poll(()=>page.locator('.media-passport__visual > img').evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);
+ const hero=page.locator('.media-passport__hero');
+ await expect(hero.locator('img')).toHaveCount(1);
+ await expect(hero.locator('.field-video,.media-passport__field-detail')).toHaveCount(0);
+ const imageBox=await hero.locator('img').boundingBox();
+ expect(imageBox.height/imageBox.width).toBeCloseTo(1.25,1);
+ const heroBox=await hero.boundingBox(),unboxingBox=await page.locator('#unboxing').boundingBox();
+ expect(unboxingBox.y).toBeGreaterThanOrEqual(heroBox.y+heroBox.height);
+ const headlineSize=await hero.locator('h1').evaluate(e=>parseFloat(getComputedStyle(e).fontSize));
+ expect(headlineSize).toBeCloseTo(Math.max(44.8,Math.min(width*.054,88)),1);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await expect(page.locator('header')).toHaveCount(1);await expect(page.locator('footer')).toHaveCount(1);
  await expect(page.locator('a[href*="garage"],a[href*="checkout"]')).toHaveCount(0);
  await link.focus();await expect(link).toBeFocused();expect(errors).toEqual([]);
- const dir='docs/release-captures/akaso-passport-showcase';mkdirSync(dir,{recursive:true});await page.screenshot({path:`${dir}/${process.env.MEDIA_LIVE?'live':'local'}-${width}.png`,fullPage:true});
+ const dir=process.env.MEDIA_CAPTURE_DIR||'docs/release-captures/akaso-passport-showcase';mkdirSync(dir,{recursive:true});await page.screenshot({path:`${dir}/${process.env.MEDIA_LIVE?'live':'local'}-${width}.png`,fullPage:true});
  await page.reload();await expect(page.locator('h1')).toContainText('Capture the work.',{timeout:25000});
 });
 test('API failure and publication withdrawal remove public details and purchase actions',async({page})=>{

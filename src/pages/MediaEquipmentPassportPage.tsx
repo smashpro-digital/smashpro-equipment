@@ -53,13 +53,12 @@ export function MediaEquipmentPassportPage() {
     {!passport ? <section className="section" aria-live="polite"><p className="eyebrow">SmashPro Field Media &middot; {MEDIA_ASSET}</p><h1>{loading?'Loading equipment passport':'Equipment passport unavailable'}</h1><p>{loading?'Retrieving approved public information.':'Approved equipment information is temporarily unavailable. Please try again later.'}</p><ButtonLink href="/equipment/">Explore equipment</ButtonLink></section> : <>
       <section className="media-passport__hero" aria-labelledby="media-title">
         <div><p className="eyebrow">SmashPro Field Media &middot; {passport.assetId}</p><p className="media-passport__product">{passport.identity.name} <span>{passport.identity.bundle}</span></p><h1 id="media-title">Capture the work.<br/><em>Own the story.</em></h1>
-          <p className="media-passport__lead">The work happens once. Explore a new perspective on equipment, the people behind it, and the moments between.</p>
+          <p className="media-passport__lead">Every equipment operation creates moments worth documenting. We're developing field-camera setups for equipment demonstrations, attachment changes, jobsite progress, and behind-the-scenes footage.</p>
+          <p className="media-passport__status">{passport.identity.status}</p><p>{passport.identity.summary}</p>
           <div className="media-passport__actions">{shop('hero')}<ButtonLink href={unboxing?'#unboxing':'#field-footage'} variant="quiet">{unboxing?'Watch our unboxing':'Explore field stories'}</ButtonLink></div>
-          <p className="media-passport__status">{passport.identity.status}</p><p className="media-passport__ownership">{passport.identity.summary}</p>
           {card&&<p className="media-passport__disclosure">{disclosure}</p>}
         </div>
-        <figure className="media-passport__visual">{card?.image&&!imageFailed?<img src={card.image.url} alt={card.image.alt} width={card.image.width} height={card.image.height} onError={()=>setImageFailed(true)}/>:<div className="media-passport__image-fallback">{passport.identity.name}<small>Product imagery unavailable</small></div>}<figcaption>01 / {card?.image&&!imageFailed?'Official AKASO product imagery':'SmashPro Field Media'}</figcaption>
-          {unboxing?.thumbnail&&<div className="media-passport__field-detail"><img src={unboxing.thumbnail} alt="SmashPro AKASO 360 unboxing video still" width="480" height="360" loading="lazy"/><span>Our camera.<br/>Our field journal.</span></div>}
+        <figure className="media-passport__visual">{card?.image&&!imageFailed?<img src={card.image.url} alt={card.image.alt} width={card.image.width} height={card.image.height} onError={()=>setImageFailed(true)}/>:<div className="media-passport__image-fallback">{passport.identity.name}<small>Product imagery unavailable</small></div>}<figcaption>{card?.image&&!imageFailed?'Official AKASO product imagery':'SmashPro Field Media'}</figcaption>
         </figure>
       </section>
       <div className="media-passport__manifesto"><span>POWER. PRECISION. PURPOSE.</span><p>Independently purchased. Learning in public. Built around real work.</p></div>
