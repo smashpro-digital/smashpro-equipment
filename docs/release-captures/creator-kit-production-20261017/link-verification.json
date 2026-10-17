@@ -1,0 +1,72 @@
+[
+  {
+    "label": "AKASO 360 Creator Combo",
+    "source_url": "https://www.awin1.com/cread.php?awinmid=69454&awinaffid=3121518&campaign=akaso+360+spring+sale&clickref=smashpro360&ued=https%3A%2F%2Fshopakaso.com%2Fproducts%2Fakaso-360%3Fvariant%3D44081902846134",
+    "http": "200",
+    "destination": "https://shopakaso.com/products/akaso-360?variant=44081902846134 (publisher 3121518 retained; transient click IDs omitted)",
+    "transport_exit": 0
+  },
+  {
+    "label": "AKASO 360 Creator Combo image",
+    "source_url": "https://www.awin1.com/cshow.php?s=4587303&v=69454&q=542867&r=3121518",
+    "http": "200",
+    "destination": "https://a1.awin1.com/ads/awin/69454/img360_3_4-1763092676567.jpg",
+    "transport_exit": 0
+  },
+  {
+    "label": "120cm invisible selfie stick",
+    "source_url": "https://shopakaso.com/products/akaso-120cm-invisible-selfie-stick?variant=44352839352502",
+    "http": "200",
+    "destination": "https://shopakaso.com/products/akaso-120cm-invisible-selfie-stick?variant=44352839352502",
+    "transport_exit": 0
+  },
+  {
+    "label": "120cm invisible selfie stick image",
+    "source_url": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/120cm_02.jpg?v=1761274200",
+    "http": "200",
+    "destination": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/120cm_02.jpg?v=1761274200",
+    "transport_exit": 0
+  },
+  {
+    "label": "Rechargeable batteries",
+    "source_url": "https://shopakaso.com/products/akaso-360-camera-battery?variant=44332006637750",
+    "http": "200",
+    "destination": "https://shopakaso.com/products/akaso-360-camera-battery?variant=44332006637750",
+    "transport_exit": 0
+  },
+  {
+    "label": "Rechargeable batteries image",
+    "source_url": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/AKASO_360__02.jpg?v=1760412431",
+    "http": "200",
+    "destination": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/AKASO_360__02.jpg?v=1760412431",
+    "transport_exit": 0
+  },
+  {
+    "label": "Battery charging case",
+    "source_url": "https://shopakaso.com/products/akaso-360-camera-battery?variant=44332006670518",
+    "http": "200",
+    "destination": "https://shopakaso.com/products/akaso-360-camera-battery?variant=44332006670518",
+    "transport_exit": 0
+  },
+  {
+    "label": "Battery charging case image",
+    "source_url": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/ActionCameraBatteryCharger_10.jpg?v=1760412431",
+    "http": "200",
+    "destination": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/ActionCameraBatteryCharger_10.jpg?v=1760412431",
+    "transport_exit": 0
+  },
+  {
+    "label": "AKASO 360 carrying case",
+    "source_url": "https://a.co/d/01Lk7JHj",
+    "http": "200",
+    "destination": "https://www.amazon.com/dp/B0G1C14LPK?ref=cm_sw_r_cp_ud_dp_DQ9V1Y03J7Z4EWAPPAVQ_1&ref_=cm_sw_r_cp_ud_dp_DQ9V1Y03J7Z4EWAPPAVQ_1&social_share=cm_sw_r_cp_ud_dp_DQ9V1Y03J7Z4EWAPPAVQ_1",
+    "transport_exit": 0
+  },
+  {
+    "label": "AKASO 360 carrying case image",
+    "source_url": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/360_Camera_Carrying_Case.png?v=1769672159",
+    "http": "200",
+    "destination": "https://cdn.shopify.com/s/files/1/0632/9037/6374/files/360_Camera_Carrying_Case.png?v=1769672159",
+    "transport_exit": 0
+  }
+]

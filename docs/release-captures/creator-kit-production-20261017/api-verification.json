@@ -1,0 +1,17 @@
+{
+  "http": 200,
+  "kit_count": 7,
+  "images": 5,
+  "case_retailer": {
+    "url": "https://a.co/d/01Lk7JHj",
+    "kind": "retailer",
+    "label": "View on Amazon",
+    "product_id": 6
+  },
+  "videos": [
+    "https://www.youtube.com/shorts/UfznEcnYz5k",
+    "https://www.youtube.com/shorts/siyujtCJmfw"
+  ],
+  "garage_http": 400,
+  "private_fields_absent": true
+}

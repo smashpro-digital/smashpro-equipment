@@ -1,0 +1,24 @@
+{
+  "frontend_run": 39012026636,
+  "frontend_sha": "c1d545b15dc7608ec695cdb70a60d32a23823a1c",
+  "html_matches": true,
+  "assets": [
+    {
+      "path": "assets/global-CSFkCh9Q.js",
+      "sha256": "b73f0347a18e58b98975b0bfe1a3ceb967942bdffe39f989a43ffd7c746128a7"
+    },
+    {
+      "path": "assets/main-Bv_ASDu_.js",
+      "sha256": "61907ee495cd0ba481764aa1bef4567d5f7871d77bc3ed76711ca6977febb5ae"
+    },
+    {
+      "path": "assets/global-CvCwES7v.css",
+      "sha256": "f1cd40fe228460c5c20750b10e09e0e43253f32a36c4cc60e578a7e17448bda5"
+    },
+    {
+      "path": "assets/main-CVUrvPJO.css",
+      "sha256": "69d343c39f7068f4afaad3de32995b093945d392930aa0410dd374da33d4d414"
+    }
+  ],
+  "api_sha256": "c649d33dbee64406f949ba30112722f41f0b0276e34498b63a01a0b9f4528b7a"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "sp-med-cam-001.html",
+    "sha256": "b4252569ca1b39e3d352e546f33e1d87c89be6123a820ec5de4d7c9fee1bd7ba",
+    "byte_match": false,
+    "line_ending_normalized_match": true
+  },
+  {
+    "path": "assets/main-DlPrMDuZ.js",
+    "sha256": "51866ec35b3d94897c89ac404d92e508b1526fec249d68ba2fc52cd644b3778f",
+    "byte_match": true,
+    "line_ending_normalized_match": true
+  },
+  {
+    "path": "assets/main-X5ZQpBjm.css",
+    "sha256": "ffdfcbcadc378230dc26c2e180e91ba94a89fe1b93c1759365ae5369cce53555",
+    "byte_match": true,
+    "line_ending_normalized_match": true
+  },
+  {
+    "path": "assets/global-CSFkCh9Q.js",
+    "sha256": "b73f0347a18e58b98975b0bfe1a3ceb967942bdffe39f989a43ffd7c746128a7",
+    "byte_match": true,
+    "line_ending_normalized_match": true
+  },
+  {
+    "path": "assets/global-CvCwES7v.css",
+    "sha256": "f1cd40fe228460c5c20750b10e09e0e43253f32a36c4cc60e578a7e17448bda5",
+    "byte_match": true,
+    "line_ending_normalized_match": true
+  }
+]
