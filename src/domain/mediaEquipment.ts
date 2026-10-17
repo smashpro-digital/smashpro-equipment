@@ -8,7 +8,7 @@ export type FieldMediaVideo = {
   status: 'published'; displayOrder: number; publishedAt: string | null; channelId: string; campaignId: number | null;
 };
 export type KitImage = {url: string; alt: string; source: string; width: number; height: number};
-export type KitShopping = {url: string; kind: 'affiliate'|'details'|'retailer'; label: string};
+export type KitShopping = {url: string; kind: 'affiliate'|'details'|'retailer'|'manufacturer'; label: string};
 export type FieldKitItem = {
  name: string; group: 'included' | 'purchased' | 'owned'; note: string;
  productId: number | null; category: string; image: KitImage | null; shopping: KitShopping | null;
@@ -79,8 +79,8 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
     if(!record(item)||typeof item.name!=='string'||!['included','purchased','owned'].includes(String(item.group)))continue;
     const productId=Number.isSafeInteger(item.product_id)&&Number(item.product_id)>0?Number(item.product_id):null;
     const lifecycle=['Concept','Prototype','Testing','Available'].includes(String(item.lifecycle))?item.lifecycle as FieldKitItem['lifecycle']:(item.lifecycle==null?null:'Unavailable');
-    const details=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='details'&&kitDetailsUrl(item.shopping.url)?{url:item.shopping.url,kind:'details' as const,label:'View details'}:null;
-    const retailer=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='retailer'&&item.shopping.url==='https://a.co/d/01Lk7JHj'?{url:item.shopping.url,kind:'retailer' as const,label:'View on Amazon'}:null;
+    const details=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='details'&&kitDetailsUrl(item.shopping.url)?{url:item.shopping.url,kind:item.shopping.purchase_verified===true?'manufacturer' as const:'details' as const,label:item.shopping.purchase_verified===true?'SHOP NOW':'VIEW PRODUCT'}:null;
+    const retailer=productId!==null&&record(item.shopping)&&item.shopping.product_id===productId&&item.shopping.kind==='retailer'&&item.shopping.url==='https://a.co/d/01Lk7JHj'?{url:item.shopping.url,kind:'retailer' as const,label:'SHOP NOW'}:null;
     fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):'',productId,category:typeof item.category==='string'?item.category.slice(0,100):'Field kit',image:kitImage(item.image,productId),shopping:lifecycle&&lifecycle!=='Available'?null:(retailer||details),lifecycle,displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0});
   }
   const accessories: MediaPassport['accessories'] = [];
@@ -95,7 +95,7 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
     for(const partner of p.catalog)if(record(partner)&&Array.isArray(partner.products))for(const product of partner.products){
       if(!record(product)||!Array.isArray(product.links)||!product.links.some(l=>record(l)&&l.url===card.url))continue;
       for(const item of fieldKit)if(item.productId===product.id&&(!item.lifecycle||item.lifecycle==='Available')){
-        item.shopping={url:card.url,kind:'affiliate',label:'Shop AKASO 360'};
+        item.shopping={url:card.url,kind:'affiliate',label:'SHOP NOW'};
         if(card.image)item.image={...card.image,source:'Approved Awin creative'};
       }
     }

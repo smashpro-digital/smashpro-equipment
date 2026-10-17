@@ -53,3 +53,9 @@ test('verified case retailer remains non-affiliate and rejects URL changes',()=>
   item.shopping.url=url;assert.equal(mediaPassport(v,now).fieldKit[0].shopping,null);
  }
 });
+
+test('kit CTA separates manufacturer purchasing from information and affiliate attribution',()=>{
+ const now=Date.now(),v=fixture(now);v.passport.field_kit=[{name:'Stick',group:'included',product_id:3,shopping:{kind:'details',product_id:3,url:'https://shopakaso.com/products/stick',purchase_verified:true}}];
+ assert.equal(mediaPassport(v,now).fieldKit[0].shopping.label,'SHOP NOW');assert.equal(mediaPassport(v,now).fieldKit[0].shopping.kind,'manufacturer');
+ v.passport.field_kit[0].shopping.purchase_verified=false;assert.equal(mediaPassport(v,now).fieldKit[0].shopping.label,'VIEW PRODUCT');
+});
