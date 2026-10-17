@@ -1,0 +1,5 @@
+# Originals may contain customer, financial and insurance information.
+**/*.pdf
+**/previews/
+**/*.private.json
+**/private/
