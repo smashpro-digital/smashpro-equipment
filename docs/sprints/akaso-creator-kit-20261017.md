@@ -135,3 +135,26 @@ from the camera's Awin affiliate link. No mount, completed design, stock, price,
 checkout endpoint or sale availability is asserted or created in this refinement.
 
 Refinement validation: production build (including TypeScript) and four targeted Creator Kit browser tests passed at 390px, 768px and 1440px. Screenshots: [kit-first captures](../release-captures/creator-kit-trust/README.md). No deployment or database changes were made for this refinement.
+
+## Accessory image authorization received (2026-10-17)
+
+The owner explicitly confirmed: "AKASO accessory photo reuse is authorized."
+This supersedes the pending-permission status above for the four already-reviewed
+manufacturer images: selfie stick, batteries, charging case and carrying case.
+Authorization ID: `2026-10-17-akaso-accessory-photo-reuse`.
+
+Using the existing authenticated migration gateway, passport 4's existing kit
+media associations for product IDs 3, 4, 5 and 6 now have approved rights and
+visibility, with the owner statement recorded per image. Source URLs, identity
+verification dates, catalog records, tracking links, ownership groups and general
+public catalog visibility remain unchanged. No schema changes, new products,
+Garage permission changes or blanket promotional grant were made.
+
+Anonymous requests returned 401. Dry-run plan hashes were checked before writes;
+two applies succeeded with the same IDs and full identity readback verification.
+The temporary helper was removed and the original gateway restored byte-for-byte.
+PHP 7.4 lint and kit rights/privacy/URL/lease/SQL-resolver tests passed.
+
+The pouch and SanDisk card still have no verified image. This authorization does
+not grant permission for third-party SanDisk photography. The public API and
+Equipment application changes remain undeployed; live display is not claimed.
