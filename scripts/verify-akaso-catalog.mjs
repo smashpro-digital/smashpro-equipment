@@ -1,28 +1,30 @@
 import assert from 'node:assert/strict';
-import { FIELD_CATALOG_URL, fieldTechnologyCard } from '../src/domain/fieldTechnology.ts';
+import { FIELD_CATALOG_URL, receivedFieldTechnologyCard } from '../src/domain/fieldTechnology.ts';
 
 const origin = 'https://smashpro.app';
 async function read(path) {
   return fetch(new URL(path, origin), { redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(20000), headers: { Accept: 'application/json' } });
 }
+const started = Date.now();
 const response = await read(FIELD_CATALOG_URL);
 assert.equal(response.status, 200);
 assert.match(response.headers.get('content-type') ?? '', /^application\/json/);
 assert.match(response.headers.get('cache-control') ?? '', /no-store/);
 const payload = await response.json();
-assert.ok(fieldTechnologyCard(payload), 'HQ must authorize exactly one current Equipment AKASO 360 link');
+const card = receivedFieldTechnologyCard(payload, response.headers.get('date'), started);
+assert.ok(card, 'HQ must authorize exactly one current Equipment AKASO 360 link');
 function keys(row, expected) { assert.deepEqual(Object.keys(row).sort(), expected.sort(), 'Public projection must contain only approved fields'); }
 keys(payload, ['ok','schema_version','property','placement','generated_at','items']);
 const partner = payload.items[0], product = partner.products[0], link = product.links[0];
 keys(partner, ['name','classification','products']);
 keys(product, ['id','name','description','stage','featured','links', ...('image' in product ? ['image'] : []), ...('creatives' in product ? ['creatives'] : [])]);
 if ('creatives' in product) {
-  assert.equal(fieldTechnologyCard(payload).creatives.length, product.creatives.length);
+  assert.equal(card.creatives.length, product.creatives.length);
   for (const creative of product.creatives) keys(creative, ['id','creative_record_id','creative_id','placement_id','placement','campaign_id','media_property_id','property','image_url','tracking_url','width','height','alt','weight','display_order','valid_until']);
 }
 if ('image' in product) {
   keys(product.image, ['id','creative_id','url','width','height','alt']);
-  assert.ok(fieldTechnologyCard(payload)?.image, 'Published image must match the reviewed creative');
+  assert.ok(card?.image, 'Published image must match the reviewed creative');
 }
 keys(link, ['url','advertiser_id','publisher_id','placement','campaign_id','property','disclosure','valid_until']);
 assert.match(link.disclosure, /commission/i);

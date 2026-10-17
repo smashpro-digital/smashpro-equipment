@@ -1,10 +1,17 @@
 import { fieldTechnologyCard, type FieldTechnologyCard } from './fieldTechnology.ts';
 export const MEDIA_ASSET = 'SP-MED-CAM-001';
 export const MEDIA_API = `/dashboard/api/public_media_equipment.php?property=hq&asset=${MEDIA_ASSET}`;
+export const EQUIPMENT_CHANNEL = 'UC2wKsAtGR55PZMAUNuk2r6g';
+export type FieldMediaVideo = {
+  id: number; videoId: string; title: string; description: string; url: string;
+  thumbnail: string | null; category: string; relatedAsset: string; recordingDevice: string | null;
+  status: 'published'; displayOrder: number; publishedAt: string | null; channelId: string; campaignId: number | null;
+};
+export type FieldKitItem = {name: string; group: 'included' | 'purchased' | 'owned'; note: string};
 export type MediaPassport = {
   assetId: string; campaignId: number | null; validUntil: number; propertyId: number; card: FieldTechnologyCard | null;
   identity: Record<'name'|'manufacturer'|'bundle'|'category'|'status'|'summary', string>;
-  footage: {id: number; title: string; description: string; url: string}[];
+  footage: FieldMediaVideo[]; fieldKit: FieldKitItem[];
   accessories: {product_id: string; name: string; description: string; prototype_status: string; revision: string|null; material: string|null}[];
 };
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -37,12 +44,25 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
   }
   const footage: MediaPassport['footage'] = [];
   for (const item of p.footage) {
-    if (!record(item) || item.capture_device !== MEDIA_ASSET || typeof item.title !== 'string' || !Number.isSafeInteger(item.id) || typeof item.url !== 'string') continue;
+    if (!record(item) || (item.capture_device !== MEDIA_ASSET && item.subject_equipment !== MEDIA_ASSET) || typeof item.title !== 'string' || !Number.isSafeInteger(item.id) || typeof item.url !== 'string') continue;
+    // Subject-only media must explicitly carry Equipment publication approval.
+    if (item.publication_status !== 'published' || item.channel_id !== EQUIPMENT_CHANNEL || item.approval_status !== 'approved') continue;
+    let videoId: string;
     try { const url = new URL(item.url); if (url.protocol !== 'https:' || url.username || url.password || url.port || !['youtube.com','www.youtube.com','youtu.be'].includes(url.hostname)) continue;
       const id = url.hostname === 'youtu.be' ? url.pathname.slice(1) : url.pathname.startsWith('/shorts/') ? url.pathname.slice(8) : url.pathname === '/watch' ? url.searchParams.get('v') : '';
-      if (!id || !/^[\w-]{11}$/.test(id)) continue;
+      if (!id || !/^[A-Za-z0-9_-]{11}$/.test(id)) continue;
+      videoId = id;
     } catch { continue; }
-    footage.push({id:Number(item.id),title:item.title,description:typeof item.description==='string'?item.description:'',url:item.url});
+    const thumbnail = typeof item.thumbnail_url === 'string' && /^\/equipment\/images\/[a-z0-9-]+\.(jpg|webp|png)$/.test(item.thumbnail_url) ? item.thumbnail_url : null;
+    footage.push({id:Number(item.id),videoId,title:item.title.slice(0,220),description:typeof item.description==='string'?item.description.slice(0,1000):'',url:`https://www.youtube.com/watch?v=${videoId}`,thumbnail,
+      category:typeof item.category==='string'?item.category:'Field testing',relatedAsset:MEDIA_ASSET,recordingDevice:item.capture_device===MEDIA_ASSET?MEDIA_ASSET:null,
+      status:'published',displayOrder:Number.isSafeInteger(item.display_order)?Number(item.display_order):0,publishedAt:typeof item.published_at==='string'&&Number.isFinite(Date.parse(item.published_at))?item.published_at:null,channelId:EQUIPMENT_CHANNEL,campaignId:Number.isSafeInteger(item.campaign_id)?Number(item.campaign_id):null});
+  }
+  footage.sort((a,b)=>a.displayOrder-b.displayOrder||a.id-b.id);
+  const fieldKit: FieldKitItem[]=[];
+  if (Array.isArray(p.field_kit)) for (const item of p.field_kit) {
+    if(!record(item)||typeof item.name!=='string'||!['included','purchased','owned'].includes(String(item.group)))continue;
+    fieldKit.push({name:item.name.slice(0,180),group:item.group as FieldKitItem['group'],note:typeof item.note==='string'?item.note.slice(0,500):''});
   }
   const accessories: MediaPassport['accessories'] = [];
   for (const item of p.accessories) {
@@ -51,5 +71,5 @@ export function mediaPassport(value: unknown, now = Date.now()): MediaPassport |
   }
   const card=fieldTechnologyCard({ok:true,schema_version:1,property:'hq',placement:p.placement,generated_at:value.generated_at,items:p.catalog},now,p.placement);
   const catalog=p.catalog as {products:{links:{campaign_id:number}[]}[]}[];
-  return {assetId:MEDIA_ASSET,campaignId:card?catalog[0].products[0].links[0].campaign_id:null,validUntil:until,propertyId:Number(p.media_property_id),identity:identity as MediaPassport['identity'],footage,accessories,card};
+  return {assetId:MEDIA_ASSET,campaignId:card?catalog[0].products[0].links[0].campaign_id:null,validUntil:until,propertyId:Number(p.media_property_id),identity:identity as MediaPassport['identity'],footage,fieldKit,accessories,card};
 }
