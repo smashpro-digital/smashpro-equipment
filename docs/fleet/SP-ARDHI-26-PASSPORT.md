@@ -471,6 +471,15 @@ Tier 1
 
 ---
 
+# Identification accessory
+
+[ARDHI magnetic QR/NFC key-tag prototype](../../accessories/qr-nfc-key-tags/designs/sp-ardhi-26/README.md)
+records the design file, proposed hardware, and assembly validation checklist.
+Shared check-in deployment remains unverified; scan/tap must open a workflow,
+never automatically start a job.
+
+---
+
 # Motto
 
 > **Power. Precision. Purpose.**
