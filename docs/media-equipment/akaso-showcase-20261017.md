@@ -50,3 +50,25 @@ Exact video publication dates and capture devices remain unknown. No claim of co
 Release verifier correction: the local clock was approximately 20 seconds behind the HTTPS origin. The existing runtime already validates using the response Date and subtracts the complete request duration. `verify-akaso-catalog.mjs` now uses that same tested lease function instead of rejecting a valid response against the local clock; all authorization, expiry, URL and allowlist checks remain enforced.
 
 Final local evidence: all nine browser scenarios passed (the 390px external image check passed on targeted rerun with a 20-second allowance). The real, unmocked privacy-enhanced unboxing iframe loaded the correct title and SmashPro HQ author; `real-player-local.png` records the player. No autoplay or playback-completion claim. Changed-file secret-pattern scan and diff whitespace validation passed.
+
+## Production release evidence
+
+Equipment PR [#102](https://github.com/smashpro-digital/smashpro-equipment/pull/102) merged implementation `edcf0a8d35eed8f3eb23f3cdfdd4cf1db1a30042` as `c1d545b15dc7608ec695cdb70a60d32a23823a1c`. Workflow [39012026636](https://github.com/smashpro-digital/smashpro-equipment/actions/runs/39012026636) completed successfully with `akaso_release=true`, `shipment_release=false`; protected artifacts and live affiliate approval passed. No Railway dependency was introduced.
+
+HQ PR [#245](https://github.com/smashpro-digital/digital-hq/pull/245) merged implementation `f51efc5866961b5b061242c1647ce3e1c37a9a70` as `85a2ce1e23485a743dd929afb7b83420d0633127`. Scoped `_media_equipment.php` deployment SHA-256: `c649d33dbee64406f949ba30112722f41f0b0276e34498b63a01a0b9f4528b7a`. Previous file SHA-256: `8ac206d8e21f782c86af787b4c61331aa8b36fb6729f3b78e13c30fd07cf8b99`. Backend file readback matched; no unrelated API files were deployed.
+
+Public API readback returned two approved video records and seven allowlisted kit entries. Garage and unknown query fields returned 400. The original Awin CTA resolved to the canonical AKASO product variant with HTTP 200, with no commission attribution claim.
+
+Initial live browsers received the previous cached HTML shell. Normal-URL readback subsequently confirmed `main-Bv_ASDu_.js`; all four responsive checks passed on repeat without relying on query-busted acceptance or changing cache configuration. Nine live scenarios passed across the initial run and the targeted responsive rerun: homepage preservation; four viewports; API failure; broken image; explicit player consent; media/affiliate withdrawal. Interception tests only modify browser responses, not production data.
+
+Independent live captures at 390px and 1440px returned HTTP 200, no overflow, three approved shopping placements, and zero pre-consent iframes. Both unmocked YouTube players loaded their correct titles and SmashPro HQ authors. This verifies embedded player availability, not playback completion or a physical QR scan.
+
+- [390px live page](../release-captures/akaso-passport-showcase/live-390.png)
+- [1440px live page](../release-captures/akaso-passport-showcase/live-1440.png)
+- [390px hero](../release-captures/akaso-passport-showcase/live-390-hero.png)
+- [1440px hero](../release-captures/akaso-passport-showcase/live-1440-hero.png)
+- [Live player: unboxing](../release-captures/akaso-passport-showcase/live-player-UfznEcnYz5k.png)
+- [Live player: first impressions](../release-captures/akaso-passport-showcase/live-player-siyujtCJmfw.png)
+- [Machine-readable browser evidence](../release-captures/akaso-passport-showcase/live-verification.json)
+
+The original worktrees remain untouched. This evidence update changes documentation/screenshots only and requires no application redeployment.
