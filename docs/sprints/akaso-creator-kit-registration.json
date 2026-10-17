@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "registration_id": "2026-10-17-creator-kit-products-v1",
+  "passport_id": 4,
+  "product_ids": {
+    "akaso-120cm-invisible-selfie-stick": 3,
+    "akaso-360-camera-battery": 4,
+    "akaso-360-camera-battery-charger": 5,
+    "akaso-360-camera-carrying-case": 6,
+    "akaso-360-protective-pouch": 7
+  },
+  "schema_changes": false,
+  "new_images_public": false
+}

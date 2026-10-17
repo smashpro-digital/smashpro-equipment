@@ -1,5 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {mkdirSync} from 'node:fs';
+import {creatorKitFixture} from '../fixtures/creator-kit.mjs';
 import {showcaseFixture} from '../fixtures/media-showcase.mjs';
 const endpoint='**/dashboard/api/public_media_equipment.php?*';
 test('homepage preserves the showcase and discovers the media passport',async({page})=>{
@@ -54,4 +55,30 @@ test('video players require consent and preserve vertical frames and separate at
 test('media and affiliate withdrawal do not fabricate substitute content',async({page})=>{
  await page.route(endpoint,route=>{const v=showcaseFixture();v.passport.catalog=[];v.passport.footage=v.passport.footage.map(x=>({...x,approval_status:'draft'}));return route.fulfill({json:v});});
  await page.goto('/equipment/sp-med-cam-001.html');await expect(page.locator('h1')).toContainText('Capture the work.');await expect(page.locator('#unboxing')).toHaveCount(0);await expect(page.getByRole('link',{name:'Shop AKASO 360'})).toHaveCount(0);await expect(page.getByRole('button',{name:/Load YouTube/})).toHaveCount(0);
+});
+
+for(const width of [390,768,1440])test('Creator Kit grid and approved-image preview '+width,async({page})=>{
+ await page.setViewportSize({width,height:1000});
+ await page.route(endpoint,r=>r.fulfill({json:creatorKitFixture(Date.now(),true)}));
+ await page.goto('/equipment/sp-med-cam-001.html');
+ const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(7);
+ for(const img of await kit.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);}
+ await expect(kit.locator('a[rel*="sponsored"]')).toHaveCount(1);
+ await expect(kit.getByRole('link',{name:/View details/})).toHaveCount(4);
+ await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(2);
+ for(const link of await kit.locator('a').all()){await expect(link).toHaveAttribute('target','_blank');await expect(link).toHaveAttribute('rel',/noopener/);}
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ const boxes=await kit.locator('.creator-kit-card').evaluateAll(nodes=>nodes.map(n=>({x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width})));
+ expect(new Set(boxes.map(b=>Math.round(b.x))).size).toBe(width===390?1:width===768?2:3);
+ expect(Math.max(...boxes.map(b=>b.width))-Math.min(...boxes.map(b=>b.width))).toBeLessThan(1);
+ await expect(page.getByRole('button',{name:/Load YouTube video/})).toHaveCount(2);
+});
+test('Creator Kit pending rights, image failure and nonavailable lifecycle fall back safely',async({page})=>{
+ const value=creatorKitFixture();value.passport.field_kit[1].lifecycle='Prototype';
+ await page.route(endpoint,r=>r.fulfill({json:value}));
+ await page.route('https://www.awin1.com/cshow.php?*',r=>r.abort());
+ await page.goto('/equipment/sp-med-cam-001.html');
+ const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(7);
+ await kit.scrollIntoViewIfNeeded();await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(7);
+ await expect(kit.locator('.creator-kit-card').nth(1).locator('a')).toHaveCount(0);
 });
