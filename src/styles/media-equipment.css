@@ -57,6 +57,11 @@
 .creator-kit-card__badge { align-self:flex-start; border-left:2px solid var(--green); padding-left:.75rem; color:#b6d79d; font-size:.85rem; }
 .creator-kit-card__footer { margin-top:auto; padding-top:1rem; }
 .creator-kit-card__relationship { font-size:.8rem; color:#b6bfb4; }
-.creator-kit-card .button { width:100%; }
+.creator-kit-card__ownership { margin-top:0; color:var(--muted); font-size:.85rem; }
+.creator-kit-card__shopping-label { margin:0; color:var(--muted); font-size:.8rem; }
+.creator-kit-card__footer:has(a) { border-top:1px solid #34402e; margin-top:auto; }
+.creator-kit-card__link { display:inline-flex; gap:.75rem; align-items:center; min-height:44px; color:var(--green-bright); text-underline-offset:.25em; font-weight:700; }
+.creator-kit-card__link:hover { color:var(--white); }
+.creator-kit-card__link:focus-visible { outline:2px solid var(--green-bright); outline-offset:4px; }
 @media(max-width:1000px){.creator-kit-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:600px){.creator-kit-grid{grid-template-columns:1fr;}}

@@ -113,3 +113,25 @@ gateway-kit-inspect.php, gateway-kit-register.php, creator-kit-products.json,
 test-kit.php; this documentation and sanitized registration receipt.
 
 Production readback after registration: existing hq passport API HTTP 200 with seven kit entries; Garage property request HTTP 400. Public API code was not deployed.
+
+## Kit-first presentation refinement
+
+Current documented camera/accessory entries display IN OUR KIT. Their existing
+Creator Combo contents / Purchased separately / Owned equipment classifications
+remain visible below the badge. Lifecycle-only items keep their lifecycle badge;
+a concept or prototype does not automatically acquire a kit-membership claim.
+Copy preserves the distinction between ownership and completed field testing.
+
+Shopping sits in a secondary footer with a text link and clear affiliate or
+non-affiliate labeling. Catalog approval never establishes ownership.
+
+Future MicroFab direction: DESIGNED BY SMASHPRO is reserved for a developed
+SmashPro design with canonical manufacturing evidence, not concepts, third-party
+gear, or a brand-name match. A future ARDHI mount can appear alongside the camera
+once its canonical module and compatibility association are approved. A direct
+SmashPro purchase action additionally requires an Available lifecycle and a
+verified, approved direct-commerce destination; it must be labeled distinctly
+from the camera's Awin affiliate link. No mount, completed design, stock, price,
+checkout endpoint or sale availability is asserted or created in this refinement.
+
+Refinement validation: production build (including TypeScript) and four targeted Creator Kit browser tests passed at 390px, 768px and 1440px. Screenshots: [kit-first captures](../release-captures/creator-kit-trust/README.md). No deployment or database changes were made for this refinement.

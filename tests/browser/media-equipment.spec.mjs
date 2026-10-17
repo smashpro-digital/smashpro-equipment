@@ -62,6 +62,10 @@ for(const width of [390,768,1440])test('Creator Kit grid and approved-image prev
  await page.route(endpoint,r=>r.fulfill({json:creatorKitFixture(Date.now(),true)}));
  await page.goto('/equipment/sp-med-cam-001.html');
  const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(7);
+ await expect(kit.getByText('IN OUR KIT',{exact:true})).toHaveCount(7);
+ const carryingCase=kit.locator('.creator-kit-card').filter({has:page.getByRole('heading',{name:'AKASO 360 carrying case',exact:true})});
+ await expect(carryingCase.getByText('IN OUR KIT',{exact:true})).toBeVisible();
+ await expect(carryingCase.getByText('Purchased separately',{exact:true})).toBeVisible();
  for(const img of await kit.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);}
  await expect(kit.locator('a[rel*="sponsored"]')).toHaveCount(1);
  await expect(kit.getByRole('link',{name:/View details/})).toHaveCount(4);
@@ -81,4 +85,6 @@ test('Creator Kit pending rights, image failure and nonavailable lifecycle fall 
  const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(7);
  await kit.scrollIntoViewIfNeeded();await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(7);
  await expect(kit.locator('.creator-kit-card').nth(1).locator('a')).toHaveCount(0);
+ await expect(kit.locator('.creator-kit-card').nth(1).getByText('IN OUR KIT',{exact:true})).toHaveCount(0);
+ await expect(kit.getByText('DESIGNED BY SMASHPRO',{exact:true})).toHaveCount(0);
 });
