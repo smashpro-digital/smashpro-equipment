@@ -67,3 +67,10 @@ test('owned SanDisk retail media requires exact item identity and keeps non-affi
  for(const field of ['item_key','name','group']){v.passport.field_kit=[{...item,[field]:field==='group'?'owned':'OTHER'}];out=mediaPassport(v,now).fieldKit[0];assert.equal(out.image,null);assert.equal(out.shopping,null);}
  v.passport.field_kit=[{...item,shopping:{...item.shopping,url:item.shopping.url+'?tag=invented'},image:{...item.image,url:'https://unapproved.example/images/I/other.jpg'}}];out=mediaPassport(v,now).fieldKit[0];assert.equal(out.image,null);assert.equal(out.shopping,null);
 });
+
+test('approved kit-specific image wins without changing hero catalog image or affiliate URL',()=>{
+ const now=Date.now(),v=fixture(now),product=v.passport.catalog[0].products[0];
+ const hero=mediaPassport(v,now).card.image;
+ v.passport.field_kit=[{name:'AKASO 360 Creator Combo',group:'owned',product_id:product.id,note:'Independently purchased by SmashPro.',image:{product_id:product.id,source_product_id:7,url:'https://cdn.shopify.com/s/files/1/0632/9037/6374/files/combo.jpg',alt:'Combo contents',source:'Approved source',width:1600,height:1600}}];
+ const out=mediaPassport(v,now);assert.equal(out.fieldKit[0].image.alt,'Combo contents');assert.equal(out.fieldKit[0].shopping.label,'SHOP AKASO 360');assert.equal(out.fieldKit[0].shopping.url,product.links[0].url);assert.deepEqual(out.card.image,hero);
+});

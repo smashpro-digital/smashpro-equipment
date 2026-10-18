@@ -61,8 +61,8 @@ for(const width of [390,768,1440])test('Creator Kit grid and approved-image prev
  await page.setViewportSize({width,height:1000});
  await page.route(endpoint,r=>r.fulfill({json:creatorKitFixture(Date.now(),true)}));
  await page.goto('/equipment/sp-med-cam-001.html');
- const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(7);
- await expect(kit.getByText('IN OUR KIT',{exact:true})).toHaveCount(7);
+ const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(6);
+ await expect(kit.getByText('IN OUR KIT',{exact:true})).toHaveCount(6);
  const carryingCase=kit.locator('.creator-kit-card').filter({has:page.getByRole('heading',{name:'AKASO 360 carrying case',exact:true})});
  await expect(carryingCase.getByText('IN OUR KIT',{exact:true})).toBeVisible();
  await expect(carryingCase.getByText('Purchased separately',{exact:true})).toBeVisible();
@@ -70,11 +70,12 @@ for(const width of [390,768,1440])test('Creator Kit grid and approved-image prev
  await expect(carryingCase.getByText('Retailer link / Non-affiliate',{exact:true})).toBeVisible();
  await expect(carryingCase.locator('a')).not.toHaveAttribute('rel',/sponsored/);
  for(const img of await kit.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate(e=>e.complete&&e.naturalWidth>0),{timeout:20000}).toBe(true);}
+ const combo=kit.locator('.creator-kit-card').filter({has:page.getByRole('heading',{name:'AKASO 360 Creator Combo',exact:true})});await expect(combo.getByRole('link',{name:/SHOP AKASO 360/})).toHaveAttribute('rel','sponsored noopener noreferrer');await expect(combo.locator('img')).toHaveAttribute('src',/b2066e5e826e581b37b149b3709f678e/);await expect(kit.getByRole('heading',{name:'Protective carrying pouch',exact:true})).toHaveCount(0);
  await expect(kit.locator('a[rel*="sponsored"]')).toHaveCount(1);
  await expect(kit.getByRole('link',{name:/VIEW PRODUCT/})).toHaveCount(1);
- await expect(kit.getByRole('link',{name:/SHOP NOW/})).toHaveCount(5);
+ await expect(kit.getByRole('link',{name:/SHOP NOW/})).toHaveCount(4);
  const sandisk=kit.getByRole('link',{name:/SHOP NOW - SanDisk/});await expect(sandisk).toHaveAttribute('href','https://a.co/d/0hGla5w9');await expect(sandisk).not.toHaveAttribute('rel',/sponsored/);
- await expect(kit.getByText('INCLUDED IN COMBO',{exact:true})).toHaveCount(1);
+ await expect(kit.getByText('INCLUDED IN COMBO',{exact:true})).toHaveCount(0);
  await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(0);
  for(const link of await kit.locator('a').all()){await expect(link).toHaveAttribute('target','_blank');await expect(link).toHaveAttribute('rel',/noopener/);}
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -89,8 +90,8 @@ test('Creator Kit pending rights, image failure and nonavailable lifecycle fall 
  await page.route(endpoint,r=>r.fulfill({json:value}));
  await page.route('https://www.awin1.com/cshow.php?*',r=>r.abort());
  await page.goto('/equipment/sp-med-cam-001.html');
- const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(7);
- await kit.scrollIntoViewIfNeeded();await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(7);
+ const kit=page.locator('#field-kit');await expect(kit.locator('.creator-kit-card')).toHaveCount(6);
+ await kit.scrollIntoViewIfNeeded();await expect(kit.getByText('Product image unavailable',{exact:true})).toHaveCount(6);
  await expect(kit.locator('.creator-kit-card').nth(1).locator('a')).toHaveCount(0);
  await expect(kit.locator('.creator-kit-card').nth(1).getByText('IN OUR KIT',{exact:true})).toHaveCount(0);
  await expect(kit.getByText('COMING SOON',{exact:true})).toHaveCount(1);
