@@ -1,0 +1,3 @@
+.expo-banner{display:flex;align-items:center;justify-content:space-between;gap:2rem;margin-block:1.5rem 2.5rem;padding:1.5rem 2rem;border:1px solid #416b36;border-radius:18px;background:linear-gradient(115deg,#15271b,#080e0b);color:#f4f7f3}
+.expo-banner h2{font-size:clamp(1.3rem,2.2vw,1.85rem);line-height:1.2;max-width:720px;margin:.5rem 0}.expo-banner p:last-child{color:#bdc9c1;margin-bottom:0}.expo-banner__link{flex-shrink:0;border-radius:8px;background:#8dff38;color:#081008;padding:1rem 1.2rem;font-weight:750;text-decoration:none}.expo-banner__link:focus-visible{outline:3px solid #fff;outline-offset:5px}
+@media(max-width:767px){.expo-banner{flex-direction:column;align-items:flex-start;gap:1.2rem;padding:1.5rem}.expo-banner__link{max-width:100%;white-space:normal}}

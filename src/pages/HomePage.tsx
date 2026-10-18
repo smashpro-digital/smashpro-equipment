@@ -7,6 +7,7 @@ import { EquipmentCard } from "../components/EquipmentCard";
 import { PageFrame } from "../components/PageFrame";
 import { AttachmentShowroom } from "../components/AttachmentShowroom";
 import { FieldTechnology } from "../components/FieldTechnology";
+import { ExpoBanner } from "../components/ExpoBanner";
 import type { Equipment } from "../types/equipment";
 
 const standards = ["Maintained equipment", "Contractor eligibility", "Inspection process", "Clear rental terms", "Equipment support", "Growing attachment library"];
@@ -30,6 +31,7 @@ export function HomePage() {
     </section>
 
     <div className="home-flow expo-showroom">
+        <ExpoBanner />
       <nav className="showroom-jump shell" aria-label="Equipment showroom sections"><a href="#fleet">Field Fleet</a><a href="#passports">Passports</a><a href="#attachments">Attachments</a><a href="#fabrication">Fabrication</a><a href="#development">Development</a></nav>
 
       <section className="section shell showroom-group showroom-group--field" id="fleet" aria-labelledby="field-fleet-title">
