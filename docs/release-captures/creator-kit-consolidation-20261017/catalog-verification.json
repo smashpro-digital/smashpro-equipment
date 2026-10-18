@@ -1,0 +1,14 @@
+{
+  "passport_id": 4,
+  "creator_product_id": 1,
+  "source_product_id": 7,
+  "stored_kit_entries": 7,
+  "visible_entries": 6,
+  "catalog_products_unchanged": true,
+  "permissions_links_feeds_unchanged": true,
+  "source_media_metadata_unchanged": true,
+  "other_five_kit_entries_unchanged": true,
+  "registration": "2026-10-17-creator-kit-consolidation",
+  "schema_changes": false,
+  "image_files_created": 0
+}

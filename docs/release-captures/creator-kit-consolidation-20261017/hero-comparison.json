@@ -1,0 +1,17 @@
+[
+  {
+    "width": 390,
+    "identical_hero_screenshot_bytes": true,
+    "sha256": "63e6d51faeafc14756ddec887e979c40604c492a94b561167593ff26b908039d"
+  },
+  {
+    "width": 768,
+    "identical_hero_screenshot_bytes": true,
+    "sha256": "5cddb96a3901ca532b5c871c9b66741f555d2bd35009b0c676ec600c17efa613"
+  },
+  {
+    "width": 1440,
+    "identical_hero_screenshot_bytes": true,
+    "sha256": "e0325c7d5f874b9ba7937c6e13ae04d145a7ca9994bfa866c1dfcb244c673226"
+  }
+]
