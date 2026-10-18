@@ -114,5 +114,7 @@ export function creatorKitFixture(now=Date.now(),approvedImages=false){
   const product=products.find(p=>p.name===item.name);
   return {...item,...(product?{...product,image:approvedImages?product.image:null}:{}),display_order:(i+1)*10};
  });
+ const pouch=products.find(p=>p.name==='Protective carrying pouch');
+ value.passport.field_kit=value.passport.field_kit.filter(i=>i.name!=='Protective carrying pouch').map(i=>i.name==='AKASO 360 Creator Combo'?{...i,category:'360 camera',note:'Independently purchased by SmashPro.',shopping_note:'Shopping link opens the Standard Combo; contents differ from our Creator Combo.',image:approvedImages?{...pouch.image,product_id:i.product_id,source_product_id:7,alt:'AKASO 360 Creator Combo with camera and included accessories'}:null}:i);
  return value;
 }
