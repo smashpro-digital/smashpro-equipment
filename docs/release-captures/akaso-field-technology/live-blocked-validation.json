@@ -1,0 +1,22 @@
+[
+  {
+    "width": 390,
+    "url": "https://smashpro.app/equipment/",
+    "http_status": 200,
+    "akaso_section_present": false,
+    "release_state": "Not deployed: existing shipment release safeguard blocked by expired Railway trial",
+    "no_horizontal_overflow": true,
+    "capture": "live-blocked-390.png",
+    "captured_at": "2026-10-13T16:01:16.784Z"
+  },
+  {
+    "width": 1440,
+    "url": "https://smashpro.app/equipment/",
+    "http_status": 200,
+    "akaso_section_present": false,
+    "release_state": "Not deployed: existing shipment release safeguard blocked by expired Railway trial",
+    "no_horizontal_overflow": true,
+    "capture": "live-blocked-1440.png",
+    "captured_at": "2026-10-13T16:01:21.899Z"
+  }
+]
