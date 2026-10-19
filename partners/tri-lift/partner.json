@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "partner-tri-lift",
+  "name": "Tri-Lift Industries",
+  "category": "Material Handling",
+  "status": "Active",
+  "relationship": "Local Equipment Partner",
+  "region": "Columbia, South Carolina",
+  "source": "Owner-created local partner record; active relationship does not mean an approved rental or completed service.",
+  "services": ["Forklift Rental", "Telehandler Rental", "Material Handling", "Operator Services", "Delivery Support"],
+  "service_scope_note": "Owner-requested service categories. Availability and inclusion must be confirmed for each quote; operator inclusion is not established.",
+  "visibility": "internal_workspace",
+  "public_deployment": false
+}
