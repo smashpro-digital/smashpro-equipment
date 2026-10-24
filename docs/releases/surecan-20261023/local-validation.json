@@ -1,0 +1,58 @@
+[
+  {
+    "width": 360,
+    "http": 200,
+    "products": 6,
+    "imagesDecoded": 7,
+    "noOverflow": true,
+    "fleetCardsPreserved": true,
+    "disclosure": true
+  },
+  {
+    "width": 390,
+    "http": 200,
+    "products": 6,
+    "imagesDecoded": 7,
+    "noOverflow": true,
+    "fleetCardsPreserved": true,
+    "disclosure": true
+  },
+  {
+    "width": 768,
+    "http": 200,
+    "products": 6,
+    "imagesDecoded": 7,
+    "noOverflow": true,
+    "fleetCardsPreserved": true,
+    "disclosure": true
+  },
+  {
+    "width": 1440,
+    "http": 200,
+    "products": 6,
+    "imagesDecoded": 7,
+    "noOverflow": true,
+    "fleetCardsPreserved": true,
+    "disclosure": true
+  },
+  {
+    "route": "sp-ardhi-26.html",
+    "status": 200,
+    "title": "SP-ARDHI-26 Equipment Passport | SmashPro Fleet"
+  },
+  {
+    "route": "sp-mzigo-26.html",
+    "status": 200,
+    "title": "SP-MZIGO-26E Equipment Passport | SmashPro Fleet"
+  },
+  {
+    "route": "sp-nyasi-26.html",
+    "status": 200,
+    "title": "SP-NYASI-26 Equipment Passport | Remote Mower | SmashPro"
+  },
+  {
+    "route": "sp-mzigo-27e/",
+    "status": 200,
+    "title": "SmashPro Equipment | Official Fleet Showroom"
+  }
+]
