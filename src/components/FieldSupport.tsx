@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import '../styles/field-support.css';
 const assetRoot = '/wp-content/themes/smashpro/assets';
-const release = 'field-tested-20261023-v1';
+const release = 'field-tested-20261023-v2';
 
 /** Media owns the shared renderer; HQ owns the records. */
 export function FieldSupport() {
