@@ -1,0 +1,14 @@
+{
+  "registry": {
+    "partner_id": 4,
+    "campaign_id": 5,
+    "opportunity_id": 4,
+    "relationship_id": 2
+  },
+  "public_export_sha256": "0eda0cfb40d30bea67f81d15b4d49fb70ae8906a5219af3b683fa506f2bf041f",
+  "products": 6,
+  "readback": true,
+  "retry_no_duplicate": true,
+  "anonymous_gateway": 401,
+  "private_manifest_http": 404
+}

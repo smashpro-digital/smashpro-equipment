@@ -7,6 +7,7 @@ import { EquipmentCard } from "../components/EquipmentCard";
 import { PageFrame } from "../components/PageFrame";
 import { AttachmentShowroom } from "../components/AttachmentShowroom";
 import { FieldTechnology } from "../components/FieldTechnology";
+import { FieldSupport } from "../components/FieldSupport";
 import { ExpoBanner } from "../components/ExpoBanner";
 import type { Equipment } from "../types/equipment";
 
@@ -32,7 +33,7 @@ export function HomePage() {
 
     <div className="home-flow expo-showroom">
         <ExpoBanner />
-      <nav className="showroom-jump shell" aria-label="Equipment showroom sections"><a href="#fleet">Field Fleet</a><a href="#passports">Passports</a><a href="#attachments">Attachments</a><a href="#fabrication">Fabrication</a><a href="#development">Development</a></nav>
+      <nav className="showroom-jump shell" aria-label="Equipment showroom sections"><a href="#fleet">Field Fleet</a><a href="#passports">Passports</a><a href="#attachments">Attachments</a><a href="#field-support">Field support</a><a href="#fabrication">Fabrication</a><a href="#development">Development</a></nav>
 
       <section className="section shell showroom-group showroom-group--field" id="fleet" aria-labelledby="field-fleet-title">
         <div className="fleet-heading"><p className="eyebrow">01 / Field Fleet</p><h2 id="field-fleet-title">Purpose-built machines. One connected workflow.</h2><p className="fleet-heading__subtitle">Meet the growing SmashPro fleet.</p></div>
@@ -42,6 +43,7 @@ export function HomePage() {
       <section className="passport-system" id="passports" aria-labelledby="passport-system-title"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Connected Equipment</p><h2 id="passport-system-title">Every asset keeps its history.</h2></div><p>An Equipment Passport is the persistent public identity. It does not make every asset Field Fleet, and it never advances a milestone without evidence.</p></div><div className="passport-pillar-grid">{passportPillars.map(([number,title,copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
 
       <AttachmentShowroom attachments={attachments} />
+      <FieldSupport />
 
       <section className="section shell showroom-group showroom-group--fabrication" id="fabrication" aria-labelledby="fabrication-title"><div className="section-heading"><div><p className="eyebrow">03 / Fabrication + MicroFab</p><h2 id="fabrication-title">Tools that build for the field.</h2></div><p>Fabrication assets support prototypes, fixtures, adapters and field-ready solutions. They keep their own Equipment Passports without entering the primary Field Fleet lineup.</p></div><div className="fabrication-intro"><strong>FIELD FLEET</strong><span>goes to the job</span><i aria-hidden="true">→</i><strong>MICROFAB</strong><span>helps build for the job</span></div><div className="equipment-grid equipment-grid--fabrication">{fabrication.map(item => <EquipmentCard key={item.fleetId} item={item} />)}</div></section>
 

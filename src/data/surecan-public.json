@@ -1,0 +1,97 @@
+{
+  "source": "Digital HQ partnership registry",
+  "registry": {
+    "partner_id": 4,
+    "campaign_id": 5,
+    "opportunity_id": 4,
+    "relationship_id": 2
+  },
+  "verified_on": "2026-10-23",
+  "manufacturer": "SURE-CAN",
+  "designation": "Official Ambassador Partner",
+  "affiliate_url": "https://www.surecanusa.com/?ref=smashpro",
+  "discount_code": "SMASHPRO",
+  "customer_discount_percent": 10,
+  "disclosure": "SmashPro may earn a commission from qualifying purchases.",
+  "sample_disclosure": "SmashPro received a gasoline can and a green race jug as complimentary Equip Expo samples. Field reviews are forthcoming.",
+  "products": [
+    {
+      "sku": "SUR2SFG2",
+      "name": "2+ Gallon Gasoline Type II Safety Can",
+      "capacity": "2+ gallons",
+      "color": "Red",
+      "price": 57.5,
+      "currency": "USD",
+      "source_url": "https://www.surecanusa.com/product-page/2-gallon-gasoline-type-ii-safety-can",
+      "image_url": "https://static.wixstatic.com/media/c6cd7b_be29e519f2aa44e5aba23a776878417b~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
+      "image_alt": "SURE-CAN 2+ Gallon Gasoline Type Ii Safety Can in red",
+      "use": "Gasoline only.",
+      "verified_on": "2026-10-23"
+    },
+    {
+      "sku": "SUR5SFG2",
+      "name": "5 Gallon Gasoline Type II Safety Can",
+      "capacity": "5 gallons",
+      "color": "Red",
+      "price": 77.5,
+      "currency": "USD",
+      "source_url": "https://www.surecanusa.com/product-page/5-gallon-gasoline-surecan",
+      "image_url": "https://static.wixstatic.com/media/c6cd7b_f42dcbcb28dc4869bea1fa2906733e14~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
+      "image_alt": "SURE-CAN 5 Gallon Gasoline Type Ii Safety Can in red",
+      "use": "Gasoline only.",
+      "verified_on": "2026-10-23"
+    },
+    {
+      "sku": "SUR2SFD2",
+      "name": "2+ Gallon Diesel Type II Safety Can",
+      "capacity": "2+ gallons",
+      "color": "Yellow",
+      "price": 57.5,
+      "currency": "USD",
+      "source_url": "https://www.surecanusa.com/product-page/copy-of-2-gallon-diesel-type-ii-safety-can",
+      "image_url": "https://static.wixstatic.com/media/c6cd7b_6784f7483eb84e4dae66663b11ba5407~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
+      "image_alt": "SURE-CAN 2+ Gallon Diesel Type Ii Safety Can in yellow",
+      "use": "Diesel only.",
+      "verified_on": "2026-10-23"
+    },
+    {
+      "sku": "SUR5SFD2",
+      "name": "5 Gallon Diesel Type II Safety Can",
+      "capacity": "5 gallons",
+      "color": "Yellow",
+      "price": 77.5,
+      "currency": "USD",
+      "source_url": "https://www.surecanusa.com/product-page/5-gallon-diesel-type-ii-safety-can",
+      "image_url": "https://static.wixstatic.com/media/c6cd7b_ace09a573a0b4f3090938bc8c2de8959~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
+      "image_alt": "SURE-CAN 5 Gallon Diesel Type Ii Safety Can in yellow",
+      "use": "Diesel only.",
+      "verified_on": "2026-10-23"
+    },
+    {
+      "sku": "SUR5SFK2",
+      "name": "5 Gallon Kerosene Type II Safety Can",
+      "capacity": "5 gallons",
+      "color": "Blue",
+      "price": 77.5,
+      "currency": "USD",
+      "source_url": "https://www.surecanusa.com/product-page/5-gallon-kerosene-type-ii-safety-can",
+      "image_url": "https://static.wixstatic.com/media/c6cd7b_3b9618ab7278499886b09d6b2099e39b~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
+      "image_alt": "SURE-CAN 5 Gallon Kerosene Type Ii Safety Can in blue",
+      "use": "Kerosene only.",
+      "verified_on": "2026-10-23"
+    },
+    {
+      "sku": "SUR5RJG",
+      "name": "5 Gallon Fast Flow Race Jug",
+      "capacity": "5.5 gallons",
+      "color": "Green",
+      "price": 29.99,
+      "currency": "USD",
+      "source_url": "https://www.surecanusa.com/product-page/5-gallon-fast-flow-race-jug",
+      "image_url": "https://static.wixstatic.com/media/fb5240_ab227cef247842c8925ce258910b7693~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
+      "image_alt": "SURE-CAN 5 Gallon Fast Flow Race Jug in green",
+      "use": "Non-fuel utility liquids only. Not for fuel or kerosene.",
+      "verified_on": "2026-10-23"
+    }
+  ]
+}
