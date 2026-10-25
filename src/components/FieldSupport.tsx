@@ -31,7 +31,6 @@ export function FieldSupport() {
       <p className="ft-disclosure">Follow our received products and planned tests. Each card shows the current relationship and review status.</p>
       <p data-ft-status role="status">Loading current partner records…</p>
       <div data-ft-content />
-      <p><a className="ft-button" href="/media/#field-tested">Watch Field Tests</a></p>
     </div>
   </section>;
 }
