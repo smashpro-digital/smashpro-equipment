@@ -13,7 +13,7 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.shipment-facts')).toContainText('Forwarder-reported voyage 1374-016E');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
-  await expect(page.locator('#mission-dashboard')).toContainText('Port Processing');
+  await expect(page.locator('#mission-dashboard')).toContainText('Receiving inspection');
   await expect(page.locator('.atlas-status')).toContainText('SmashPro Atlas');
   await expect(page.locator('.atlas-status')).toContainText('Ocean context');
   await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');
@@ -86,11 +86,11 @@ async function open(page, fixture, width = 1440) {
 }
 async function capture(page, name, fixture = false) {
   await mkdir('tmp/shipment-captures', { recursive: true });
-  if (fixture) await page.locator('#journey').evaluate(section => {
+  if (fixture) await page.locator('.ardhi-historical-logistics').evaluate(section => {
     const label = document.createElement('p'); label.textContent = 'SYNTHETIC TEST FIXTURE — NOT ACTUAL SHIPMENT EVIDENCE'; label.style.cssText = 'padding:12px;background:#332912;color:#ffe3a5;text-align:center;font:12px sans-serif'; section.prepend(label);
   });
   // Exclude fixed page chrome from section-only captures; interaction checks use the normal page.
-  await page.locator('#journey').screenshot({ path: `tmp/shipment-captures/${name}.png`, style: '.mini-passport,.now-viewing,.skip-link{visibility:hidden!important}' });
+  await page.locator('.ardhi-historical-logistics').screenshot({ path: `tmp/shipment-captures/${name}.png`, style: '.mini-passport,.now-viewing,.skip-link{visibility:hidden!important}' });
 }
 test('desktop API unavailable preserves archive and shows no fabricated route', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));

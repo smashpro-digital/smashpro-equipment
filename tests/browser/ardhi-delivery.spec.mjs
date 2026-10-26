@@ -23,6 +23,10 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect(page.locator('#commissioning-crate-opened')).toContainText('Documented');
   await expect(page.locator('#commissioning-accessories')).toContainText('Pending');
   await expect(page.locator('#service')).toContainText('Awaiting Commissioning');
+  await page.locator('#commissioning-plan summary').click();
+  await expect(page.locator('.ardhi-commissioning-plan > li')).toHaveCount(12);
+  await expect(page.locator('#operator-preparation')).toContainText('not connected on this Passport');
+  await page.locator('#commissioning-plan summary').click();
   const link = page.getByRole('link', { name: 'Read the delivery event', exact: true });
   await link.focus(); await expect(link).toBeFocused(); await page.keyboard.press('Enter');
   await expect(page.locator('#history-future-5 details')).toHaveAttribute('open', '');
@@ -33,8 +37,8 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   for (const section of ['.ardhi-v2-hero', '#journey', '#delivery-media', '#service']) {
     await page.locator(section).scrollIntoViewIfNeeded();
     await page.locator(section).locator('img').evaluateAll(async images => { await Promise.all(images.map(image => image.decode())); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
-    mkdirSync('docs/release-captures/ardhi-delivery-20261026', { recursive: true });
-    await page.locator(section).screenshot({ style: ".passport-rail, .skip-link { visibility: hidden !important; }", path: `docs/release-captures/ardhi-delivery-20261026/${width}-${section.replace(/[.#]/g, '')}.png` });
+    mkdirSync(process.env.ARDHI_CAPTURE_DIR ?? 'tmp/ardhi-captures', { recursive: true });
+    await page.locator(section).screenshot({ style: ".passport-rail, .skip-link { visibility: hidden !important; }", path: `${process.env.ARDHI_CAPTURE_DIR ?? 'tmp/ardhi-captures'}/${width}-${section.replace(/[.#]/g, '')}.png` });
   }
   expect(errors).toEqual([]);
 });

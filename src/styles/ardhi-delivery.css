@@ -27,3 +27,11 @@
 .ardhi-delivery .equipment-watch__player iframe, .ardhi-delivery .equipment-watch__player button { width: 100%; height: 100%; border: 1px solid #49613d; }
 @media(max-width: 1000px) { .ardhi-delivery-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ardhi-delivery-proof dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media(max-width: 600px) { .ardhi-delivery-media-grid, .ardhi-delivery-stages, .ardhi-delivery-proof dl { grid-template-columns: 1fr; } }
+
+.ardhi-homecoming { margin-block: 2.5rem; }
+.ardhi-homecoming details { border-top: 1px solid #344332; padding-block: 1rem; }
+.ardhi-homecoming summary { cursor: pointer; padding: .75rem 0; font-weight: 700; }
+.ardhi-homecoming summary:focus-visible { outline: 3px solid #e4c786; outline-offset: 4px; }
+.ardhi-homecoming li { margin-block: .8rem; line-height: 1.7; }
+.ardhi-commissioning-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 1.5rem; padding-left: 1.5rem; }
+.ardhi-commissioning-plan span, .ardhi-commissioning-plan time { display: block; color: #c5cec5; }

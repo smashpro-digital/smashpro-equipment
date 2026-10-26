@@ -11,12 +11,12 @@ for (const width of [320, 390, 768, 1440]) test(`flagship narrative, evidence an
   await page.setViewportSize({ width, height: 1000 });
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await open(page);
-  await expect(page.locator('.passport-rail a')).toHaveText(['Identity', 'Journey', 'History', 'Service', 'Documents']);
+  await expect(page.locator('.passport-rail a')).toHaveText(['Identity', 'Journey', 'History', 'Media', 'Service', 'Documents']);
   const order = await page.evaluate(() => ['.ardhi-v2-hero', '#mission-dashboard', '.passport-rail', '#passport', '.flagship-roadmap', '#journey', '#history', '#service', '#documents'].map(selector => document.querySelector(selector).getBoundingClientRect().top));
   expect(order).toEqual([...order].sort((a, b) => a - b));
-  await expect(page.locator('#mission-dashboard')).toContainText('Awaiting Release');
+  await expect(page.locator('#mission-dashboard')).toContainText('Receiving inspection');
   await expect(page.locator('#journey')).toContainText('Verified');
-  await expect(page.locator('.flagship-checklist > li')).toHaveCount(12);
+  await expect(page.locator('.flagship-checklist > li')).toHaveCount(15);
   await expect(page.locator('.flagship-first-job')).toContainText('Awaiting Commissioning');
   await expect(page.locator('.flagship-service-grid [role=cell]')).toHaveCount(0);
   await expect(page.locator('.flagship-capabilities .is-future li')).toHaveCount(6);
@@ -36,7 +36,7 @@ test('arrival and factory deep links retain their full history, including inject
   await open(page, '#history-port-arrival');
   await expect(page.locator('.flagship-history-disclosure')).toHaveAttribute('open', '');
   await expect(page.locator('#history-port-arrival details')).toHaveAttribute('open', '');
-  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(52);
+  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(53);
   await page.goto('/equipment/sp-ardhi-26.html#history-production-complete');
   await expect(page.locator('#history-production-complete details')).toHaveAttribute('open', '');
   await page.goto('/equipment/sp-ardhi-26.html#drive-low-price-offer-review');
@@ -71,9 +71,9 @@ for (const width of [320, 390, 768, 1440]) test(`Expo sponsor experience preserv
   await expect(page.getByRole('link', { name: 'Discuss Partnership', exact: true })).toHaveAttribute('href', 'https://smashpro.app/contact');
   await expect(page.locator('.sponsor-video video,.sponsor-video iframe')).toHaveCount(0);
   await expect(page.locator('.flagship-partners')).toHaveCount(0);
-  await expect(page.locator('.flagship-roadmap li.is-pending')).toHaveCount(8);
+  await expect(page.locator('.flagship-roadmap li.is-pending')).toHaveCount(7);
   await expect(page.locator('.flagship-roadmap')).toContainText('not booked jobs');
-  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(52);
+  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(53);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   const ids = await page.locator('[id]').evaluateAll(nodes => nodes.map(node => node.id));
   expect(new Set(ids).size).toBe(ids.length);
@@ -93,11 +93,11 @@ for (const width of [320, 390, 768, 1440]) test(`Expo sponsor experience preserv
     return a.length === b.length && a.every((value, index) => value === b[index]);
   }, { actual, expected })).toBe(true);
   await page.getByText('Share the Expo experience · QR', { exact: true }).click();
-  mkdirSync('docs/release-captures/expo-sponsor', { recursive: true });
+  mkdirSync('tmp/expo-sponsor', { recursive: true });
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
-  await page.screenshot({ path: `docs/release-captures/expo-sponsor/${width}-entry.png` });
-  await page.locator('#expo-experience').screenshot({ path: `docs/release-captures/expo-sponsor/${width}-experience.png` });
+  await page.screenshot({ path: `tmp/expo-sponsor/${width}-entry.png` });
+  await page.locator('#expo-experience').screenshot({ path: `tmp/expo-sponsor/${width}-experience.png` });
   expect(errors).toEqual([]);
 });
 

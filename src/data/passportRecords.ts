@@ -414,12 +414,12 @@ const unboxing = ardhi.records.find(record => record.id === "ardhi-unboxing-2026
 Object.assign(unboxing, { kind: "lifecycle_event", evidence_state: "verified", source_type: "smashpro", stage_id: "receiving_inspection", event_type: "crate_opened", evidence_ids: ardhiUnboxingPhotos.map(photo => photo.id!) });
 // Public delivery evidence is an owner-confirmed carrier summary plus reviewed photographs.
 const delivery = ardhi.records.find(record => record.id === "ardhi-delivery-20261026")!;
-Object.assign(delivery, { kind: "lifecycle_event", evidence_state: "verified", source_type: "carrier", stage_id: "delivery", event_type: "delivered", evidence_ids: ["ardhi-delivery-confirmation-20261026"] });
+Object.assign(delivery, { kind: "lifecycle_event", evidence_state: "verified", source_type: "carrier", stage_id: "arrival", event_type: "completion", evidence_ids: ["ardhi-delivery-confirmation-20261026"] });
 ardhi.records.push({
   id: "ardhi-delivery-confirmation-20261026", asset_id: ardhi.asset.id,
   kind: "evidence", title: "Owner-confirmed carrier delivery", detail: ardhiDelivery.evidence, evidence_classification: "received", evidence_ids: ardhiDeliveryPhotos.map(photo => photo.id!),
   evidence_state: "verified", source_type: "carrier", source_ref: `${ardhiDelivery.carrier} / ${ardhiDelivery.pro}`,
-  source_visibility: "public", visibility: "public", sort_order: 220, stage_id: "delivery",
+  source_visibility: "public", visibility: "public", sort_order: 220, stage_id: "arrival",
 });
 const portPhoto = ardhi.records.find(record => record.id === "ardhi-us-port-arrival")!;
 Object.assign(portPhoto, { media_kind: "shipping", source_type: "manufacturer", evidence_state: "verified", productionEvidence: false, factoryEvidence: false });

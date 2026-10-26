@@ -1,0 +1,48 @@
+[
+  {
+    "url": "https://smashpro.app/equipment/sp-ardhi-26.html",
+    "status": 200,
+    "final": "https://smashpro.app/equipment/sp-ardhi-26.html",
+    "bytes": 1660
+  },
+  {
+    "url": "https://smashpro.app/equipment/",
+    "status": 200,
+    "final": "https://smashpro.app/equipment/",
+    "bytes": 1916
+  },
+  {
+    "url": "https://smashpro.app/media/",
+    "status": 200,
+    "final": "https://smashpro.app/media/",
+    "bytes": 95956
+  },
+  {
+    "url": "https://smashpro.app/dashboard/",
+    "status": 200,
+    "final": "https://smashpro.app/dashboard/",
+    "bytes": 1128
+  },
+  {
+    "url": "https://smashpro.app/k/ARDHI26-K01/",
+    "status": 200,
+    "final": "https://smashpro.app/k/ARDHI26-K01/",
+    "bytes": 5959
+  },
+  {
+    "url": "https://smashpro.app/equipment/sp-ardhi-26.html#check-in",
+    "status": 200,
+    "final": "https://smashpro.app/equipment/sp-ardhi-26.html#check-in",
+    "bytes": 1660
+  },
+  {
+    "url": "https://smashpro.app/",
+    "status": 200,
+    "final": "https://smashpro.app/",
+    "bytes": 70216
+  },
+  {
+    "url": "https://api.smashpro.app/api/fleet/shipment/SP-ARDHI-26",
+    "error": "HTTP Error 404: Not Found"
+  }
+]

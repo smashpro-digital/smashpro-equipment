@@ -6,8 +6,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { createServer } from 'vite';
 
 const server = await createServer({ configFile: false, esbuild: { jsx: 'automatic' }, optimizeDeps: { noDiscovery: true, include: [] }, server: { middlewareMode: true, hmr: false }, appType: 'custom' });
-const [delivery, records, domain, flagship, watch] = await Promise.all([
-  '/src/data/ardhiDelivery.ts', '/src/data/passportRecords.ts', '/src/domain/passportAutomation.ts', '/src/data/ardhiFlagship.ts', '/src/components/EquipmentWatch.tsx',
+const [delivery, records, domain, flagship, watch, homecoming] = await Promise.all([
+  '/src/data/ardhiDelivery.ts', '/src/data/passportRecords.ts', '/src/domain/passportAutomation.ts', '/src/data/ardhiFlagship.ts', '/src/components/EquipmentWatch.tsx', '/src/data/ardhiHomecoming.ts',
 ].map(path => server.ssrLoadModule(path)));
 await server.close();
 const passport = domain.projectPassportPublicRecord(records.canonicalPassports.find(p => p.asset.id === 'SP-ARDHI-26'));
@@ -30,6 +30,9 @@ test('verified delivery advances receipt only and preserves manufacturer and ves
   assert.deepEqual(flagship.commissioningChecks.filter(c => flagship.verifiedEvidence(c.evidence).length).map(c => c.id), ['delivery', 'crate-opened']);
   for (const id of ['crate-inspection','accessories','fluids','first-start','first-drive','operator','field-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
   assert.equal(flagship.firstJobPresentation(flagship.firstJob, flagship.commissioningChecks).mission, 'Awaiting Commissioning');
+  assert.equal(domain.lifecycleStageStatus(passport, 'arrival'), 'complete');
+  assert.equal(domain.lifecycleStageStatus(passport, 'receiving_inspection'), 'current');
+  assert.equal(domain.lifecycleStageStatus(passport, 'commissioning'), 'pending');
   assert.equal(domain.hasMilestoneEvidence(passport, 'commissioning'), false);
 });
 
@@ -88,4 +91,23 @@ test('public delivery JPEG metadata contains orientation only, not GPS or vendor
     assert.equal(exifCount, 1);
     assert.equal(data.indexOf(Buffer.from([0xff, 0xd9]), offset), data.length - 2);
   }
+});
+
+test('Homecoming references existing media and keeps operational gates closed', () => {
+  const collection = homecoming.ardhiHomecoming;
+  assert.equal(collection.publisher, 'SmashPro HQ');
+  assert.equal(collection.assetId, 'SP-ARDHI-26');
+  assert.equal(collection.categories.length, 14);
+  const ids = new Set([...delivery.ardhiDeliveryPhotos, ...delivery.ardhiUnboxingPhotos].map(p => p.id));
+  for (const category of collection.categories) for (const id of category.mediaIds) assert.ok(ids.has(id));
+  const milestones = homecoming.ardhiCommissioningMilestones;
+  assert.equal(milestones.length, 12);
+  assert.deepEqual(milestones.filter(m => m.status === 'complete').map(m => m.id), ['delivered']);
+  assert.equal(milestones.find(m => m.id === 'unboxing').status, 'partial');
+  for (const milestone of milestones.filter(m => m.status === 'pending')) {
+    assert.equal(milestone.date, null);
+    assert.equal(milestone.photoIds.length + milestone.videoIds.length + milestone.inspectionEvidenceIds.length, 0);
+  }
+  assert.deepEqual(homecoming.ardhiReadiness, { operational: false, rentalReady: false, operatorCheckInEnabled: false });
+  assert.doesNotMatch(JSON.stringify(homecoming), /operatorId|latitude|longitude|custody|garage/i);
 });

@@ -46,7 +46,7 @@ Checks include TypeScript, unit tests, production build, public index/media/pass
 
 Protected hash fixtures are refreshed only for the reviewed ARDHI renderer and shared equipment-file change. The MZIGO portion, original drive-history hash, shared styles and deployment workflow remain unchanged.
 
-No merge or deployment is authorized in this sprint. Remaining evidence: publishable carrier confirmation if desired; receiving inspection; complete accessory inventory; engine/hydraulic checks; verified first-start/first-movement footage; operator commissioning; first field test; any future delivery article and HQ media association IDs.
+The subsequent production-release mission authorizes merge and deployment after validation. See [Homecoming and operational handoff](SP-ARDHI-26-HOMECOMING.md). Remaining evidence: publishable carrier confirmation if desired; receiving inspection; complete accessory inventory; engine/hydraulic checks; verified first-start/first-movement footage; operator commissioning; first field test; any future delivery article and HQ media association IDs.
 
 ### Results
 
