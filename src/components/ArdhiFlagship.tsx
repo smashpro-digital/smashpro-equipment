@@ -14,7 +14,7 @@ export function ArdhiMissionDashboard() {
   return <section className="shell flagship-dashboard" id="mission-dashboard" aria-labelledby="mission-dashboard-title">
     <header><div><p className="eyebrow">Fleet Asset 001 / Mission Control</p><h2 id="mission-dashboard-title">SP-ARDHI-26</h2></div><p><span className="flagship-status-dot" aria-hidden="true" /> {ardhiDelivery.status}</p></header>
     <dl>{fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    <footer><span>Delivered October 26, 2026; unboxing and commissioning unverified</span><a href="#history-future-5">View current evidence ↗</a></footer>
+    <footer><span>Delivered October 26, 2026; crate opening documented; commissioning unverified</span><a href="#history-future-5">View current evidence ↗</a></footer>
   </section>;
 }
 

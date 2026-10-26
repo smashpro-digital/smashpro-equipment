@@ -19,11 +19,15 @@ export function ArdhiDeliveryJourney() {
 }
 
 export function ArdhiDeliveryMedia({ item }: { item: Equipment }) {
+  const unboxingPhotos = item.gallery.filter(photo => photo.group === 'commissioning' && photo.kind !== 'video');
   const photos = item.gallery.filter(photo => photo.group === 'delivery' && photo.kind !== 'video');
   return <section className="section shell ardhi-delivery" id="delivery-media" aria-labelledby="ardhi-delivery-media-title">
-    <header><p className="eyebrow">Arrival / Unboxing / Commissioning</p><h2 id="ardhi-delivery-media-title">From crate to first start.</h2><p>Follow ARDHI's arrival through reviewed photographs and SmashPro HQ videos. Unboxing and commissioning are not yet verified.</p></header>
+    <header><p className="eyebrow">Arrival / Unboxing / Commissioning</p><h2 id="ardhi-delivery-media-title">From crate to first start.</h2><p>Follow ARDHI's arrival through reviewed photographs and SmashPro HQ videos. Crate opening is documented; receiving inspection and commissioning remain pending.</p></header>
     <h3>Delivery photo gallery</h3>
     <div className="ardhi-delivery-media-grid">{photos.length ? photos.map(photo => <figure key={photo.id ?? photo.src}><img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" /><figcaption>{photo.caption}</figcaption></figure>) : <article className="ardhi-media-pending"><p className="eyebrow">Photograph pending publication</p><h4>Shipping crate on the ground</h4><p>The delivery photograph is confirmed by the owner but is not yet available in this public gallery. It will appear after upload and privacy review.</p></article>}</div>
+    <div id="unboxing-photos"><h3>Crate disassembly / Unboxing photos</h3><p>Crate opening and panel removal documented October 26, 2026. ARDHI remains on its shipping base; inspection results and operational readiness are not verified.</p>
+      <div className="ardhi-delivery-media-grid">{unboxingPhotos.map(photo => <figure key={photo.id ?? photo.src}><img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" /><figcaption>{photo.caption}</figcaption></figure>)}</div>
+    </div>
     <div id="watch-ardhi"><h3>Watch ARDHI</h3><EquipmentWatch videos={ardhiDeliveryVideos} equipmentId={item.fleetId} channelUrl="https://www.youtube.com/@SmashProHQ" emptyMessage="Unboxing and first-start episodes are pending. Verified Shorts and full-length videos will appear here after publication." /></div>
     <div className="ardhi-delivery-media-grid">{ardhiMediaSlots.map(slot => <article className="ardhi-media-pending" key={slot.id}><p className="eyebrow">Upcoming / Not yet verified</p><h4>{slot.title}</h4><p>{slot.detail}</p></article>)}</div>
     <nav className="ardhi-delivery-links" aria-label="Follow ARDHI across SmashPro"><a href="/media/">Media Center</a><a href="/equipment/#fleet">Equipment Showcase</a><a href="/">SmashPro stories</a><a id="check-in" href="/k/ARDHI26-K01/">Operator access / sign-in required</a><a href="/dashboard/">Digital HQ · sign-in required</a></nav>

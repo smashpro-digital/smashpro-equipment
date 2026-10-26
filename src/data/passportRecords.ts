@@ -1,4 +1,4 @@
-import { ardhiDelivery, ardhiDeliveryPhotos } from "./ardhiDelivery";
+import { ardhiDelivery, ardhiDeliveryPhotos, ardhiUnboxingPhotos } from "./ardhiDelivery";
 // Build/server entry only. React imports virtual:passport-public instead.
 import { equipment } from "./equipment";
 import {
@@ -405,10 +405,13 @@ ardhi.build.sections.journey = {
     ardhiDelivery.summary,
 };
 // Preserve the source identity and keep delivery photographs separate from factory/field tests.
-for (const photo of ardhiDeliveryPhotos) {
+for (const photo of [...ardhiDeliveryPhotos, ...ardhiUnboxingPhotos]) {
   const record = ardhi.records.find(record => record.id === photo.id)!;
   Object.assign(record, { media_kind: "shipping", source_type: "smashpro", evidence_state: "verified", productionEvidence: false, factoryEvidence: false, fieldEvidence: false });
 }
+// Crate opening is a discrete receiving event, never a commissioning completion.
+const unboxing = ardhi.records.find(record => record.id === "ardhi-unboxing-20261026")!;
+Object.assign(unboxing, { kind: "lifecycle_event", evidence_state: "verified", source_type: "smashpro", stage_id: "receiving_inspection", event_type: "crate_opened", evidence_ids: ardhiUnboxingPhotos.map(photo => photo.id!) });
 // Public delivery evidence is an owner-confirmed carrier summary plus reviewed photographs.
 const delivery = ardhi.records.find(record => record.id === "ardhi-delivery-20261026")!;
 Object.assign(delivery, { kind: "lifecycle_event", evidence_state: "verified", source_type: "carrier", stage_id: "delivery", event_type: "delivered", evidence_ids: ["ardhi-delivery-confirmation-20261026"] });

@@ -1,4 +1,4 @@
-import { ardhiDelivery, ardhiDeliveryEvent, ardhiDeliveryPhotos } from "./ardhiDelivery";
+import { ardhiDelivery, ardhiDeliveryEvent, ardhiDeliveryPhotos, ardhiUnboxingPhotos, ardhiUnboxingEvent } from "./ardhiDelivery";
 import { umbaEquipment } from "./umbaEquipment";
 import { liftmateEquipment } from "./liftmateEquipment";
 import { nyasiEquipment } from "./nyasiEquipment";
@@ -115,6 +115,7 @@ export const equipment: Equipment[] = [
     ], serviceHistory: [],
     timeline: [
       ardhiDeliveryEvent,
+      ardhiUnboxingEvent,
       // The supplier intentionally created two linked Alibaba order groups for staged payments on this one SP-ARDHI-26 acquisition; they do not represent two machines.
       { id: "ardhi-procurement-opened", occurredAt: "2026-07-15", kind: "purchase", title: "Alibaba Procurement Opened", detail: "Two linked marketplace order groups were created to support staged payments for one SP-ARDHI-26 acquisition.", publicDisplay: true },
       { id: "ardhi-proforma-approved", occurredAt: "2026-07-16", kind: "purchase", title: "Configuration and Proforma Invoice Approved", detail: "Signed proforma invoice YF260716 established the YF380 configuration and $3,990 DDP commercial baseline, including export crate packaging and transportation.", publicDisplay: true },
@@ -141,9 +142,10 @@ export const equipment: Equipment[] = [
     capabilities: ["Earthmoving and grading", "Loading and unloading", "Pallet handling", "Tight-access work", "Attachment-powered work"],
     capabilityIds: ["compact_access", "material_handling", "grading", "lifting", "landscape", "cleanup", "pallet_handling"], attachmentIds: ["bucket", "pallet_forks"],
     idealUses: ["Landscape installation", "Property cleanup", "Residential access", "Material staging", "Site preparation"],
-    restrictions: ["Receiving inspection pending. Unboxing, commissioning and operational readiness are not yet verified.", "Rental availability has not been announced.", "Operator eligibility, transport, site access, and attachment approval must be confirmed before use."],
+    restrictions: ["Crate opening documented. Receiving inspection, commissioning and operational readiness are not yet verified.", "Rental availability has not been announced.", "Operator eligibility, transport, site access, and attachment approval must be confirmed before use."],
     gallery: [
       ...ardhiDeliveryPhotos,
+      ...ardhiUnboxingPhotos,
       { id: "ardhi-shipping-hydraulics", src: image("sp-ardhi-26-shipping-2026-08-21-01.png"), alt: "Front-left view of SP-ARDHI-26 on a wooden shipping pallet with its bucket, auxiliary hydraulic couplers, tracks, and a yellow tool case visible", caption: "SP-ARDHI-26 staged on its wooden pallet with the bucket and auxiliary hydraulic connections visible.", capturedAt: "2026-08-21", width: 1366, height: 1024, group: "shipping" },
       { id: "ardhi-shipping-front", src: image("sp-ardhi-26-shipping-2026-08-21-02.png"), alt: "Front view of SP-ARDHI-26 positioned on a wooden pallet in the factory staging area beside shipping-crate panels", caption: "Front view of the machine positioned on its pallet in the factory staging area.", capturedAt: "2026-08-21", width: 1024, height: 1366, group: "shipping" },
       { id: "ardhi-shipping-pallet-blocking", src: image("sp-ardhi-26-shipping-2026-08-21-03.png"), alt: "Close view beneath SP-ARDHI-26 showing the black steel undercarriage secured against wooden pallet blocking during shipping preparation", caption: "Undercarriage and wooden pallet blocking documented during shipping preparation.", capturedAt: "2026-08-21", width: 1366, height: 1024, group: "shipping" },

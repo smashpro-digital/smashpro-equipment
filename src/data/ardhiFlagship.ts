@@ -6,11 +6,11 @@ export function verifiedEvidence(evidence: PublicEvidence[]) {
 }
 export type CommissioningCheck = { id: string; title: string; evidence: PublicEvidence[] };
 export const commissioningChecks: CommissioningCheck[] = [
-  ['delivery', 'Delivery'], ['crate-inspection', 'Crate Inspection'], ['crate-opened', 'Unboxing'], ['accessories', 'Accessories and attachments'],
+  ['delivery', 'Delivery'], ['crate-inspection', 'Crate Inspection'], ['crate-opened', 'Crate opened / panels removed'], ['accessories', 'Accessories and attachments'],
   ['fluids', 'Engine and hydraulic fluid checks'], ['battery', 'Battery'], ['hydraulics', 'Hydraulics'], ['engine', 'Engine'],
   ['first-start', 'First startup'], ['first-drive', 'First movement'], ['operator', 'Operator commissioning'], ['field-test', 'First field test'], ['photos', 'Photos'],
   ['warranty', 'Warranty'], ['passport-complete', 'Passport Complete'],
-].map(([id, title]) => ({ id, title, evidence: id === 'delivery' ? [{ title: 'Verified October 26 delivery', href: '#history-future-5', state: 'verified' }] : [] }));
+].map(([id, title]) => ({ id, title, evidence: id === 'delivery' ? [{ title: 'Verified October 26 delivery', href: '#history-future-5', state: 'verified' }] : id === 'crate-opened' ? [{ title: 'Crate opening photographs', href: '#history-unboxing-20261026', state: 'verified' }] : [] }));
 
 export type ServiceEntry = {
   id: string; hours: number; date: string; technician: string;

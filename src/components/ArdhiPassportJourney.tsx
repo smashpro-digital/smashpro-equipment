@@ -8,7 +8,7 @@ import { isExpoSearch } from "../data/ardhiExpo";
 const ArdhiExpo = lazy(() => import("./ArdhiExpo"));
 import { ShipmentJourney } from "./ShipmentJourney";
 import { useShipment } from "../hooks/useShipment";
-import { ardhiDelivery, ardhiDeliveryEvent } from "../data/ardhiDelivery";
+import { ardhiDelivery, ardhiDeliveryEvent, ardhiUnboxingEvent } from "../data/ardhiDelivery";
 import { ArdhiDeliveryMedia } from "./ArdhiDelivery";
 import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
@@ -311,6 +311,7 @@ const history: HistoryRecord[] = [
   { id: "warehouse-transfer", date: "Pending", title: "Transferred to Warehouse", status: "future", narrative: "Separate warehouse-transfer evidence and date remain unverified; final delivery is documented below." },
   { id: "delivery-scheduled", date: "Pending", title: "Delivery Scheduled", status: "future", narrative: "Scheduling evidence was not supplied. Actual final-mile delivery was completed October 26, 2026." },
   { id: "future-5", date: ardhiDelivery.date, title: ardhiDeliveryEvent.title, status: "documented", confidence: "Verified delivery", narrative: ardhiDeliveryEvent.detail!, supplier: `${ardhiDelivery.carrier} / PRO ${ardhiDelivery.pro} / ${ardhiDelivery.origin}`, outcome: "Receiving inspection pending. Not operational or rental-ready.", mediaChapter: "delivery", mediaLabel: "View delivery media status" },
+  { id: "unboxing-20261026", date: "2026-10-26", title: ardhiUnboxingEvent.title, status: "documented", confidence: "Photographed", narrative: ardhiUnboxingEvent.detail!, mediaChapter: "delivery", mediaLabel: "View crate disassembly photographs" },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -526,7 +527,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <p>
             Arrived October 26, 2026 <b>/</b> Receiving inspection
           </p>
-          <p className="flagship-hero-description">{expo ? "Welcome to the future of fleet management. You're not looking at a brochure. You're looking at the digital identity of a real commercial machine." : "ARDHI is here. Our flagship has arrived; unboxing and commissioning are the next chapter."}</p>
+          <p className="flagship-hero-description">{expo ? "Welcome to the future of fleet management. You're not looking at a brochure. You're looking at the digital identity of a real commercial machine." : "ARDHI is here. Our flagship has arrived. The crate is open; receiving inspection and commissioning are next."}</p>
           {expo && <a className="sponsor-button sponsor-hero-cta" href="#expo-opportunities">Find your opportunity</a>}
           <button className="flagship-expo-toggle" type="button" aria-pressed={expo} onClick={toggleExpo}>{expo ? "Exit Equip Expo mode" : "Equip Expo mode"}</button>
       </PassportHero>

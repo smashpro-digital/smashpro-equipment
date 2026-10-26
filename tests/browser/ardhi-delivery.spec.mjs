@@ -12,18 +12,22 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect(page.locator('#journey')).toContainText('R+L Carriers');
   await expect(page.locator('#journey')).toContainText('IACO468333');
   await expect(page.locator('#mission-dashboard')).toContainText('Receiving inspection');
-  await expect(page.locator('#delivery-media img')).toHaveCount(2);
+  await expect(page.locator('#delivery-media img')).toHaveCount(5);
   await page.locator('#delivery-media').scrollIntoViewIfNeeded();
+  for (const image of await page.locator('#delivery-media img').all()) { await image.scrollIntoViewIfNeeded(); await image.evaluate(image => image.decode()); }
   await expect.poll(() => page.locator('#delivery-media img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   await expect(page.locator('#watch-ardhi iframe')).toHaveCount(0);
   await expect(page.locator('#check-in')).toHaveAttribute('href', '/k/ARDHI26-K01/');
   await expect(page.locator('#commissioning-first-start')).toContainText('Pending');
   await expect(page.locator('#commissioning-delivery')).toContainText('Documented');
+  await expect(page.locator('#commissioning-crate-opened')).toContainText('Documented');
+  await expect(page.locator('#commissioning-accessories')).toContainText('Pending');
   await expect(page.locator('#service')).toContainText('Awaiting Commissioning');
   const link = page.getByRole('link', { name: 'Read the delivery event', exact: true });
   await link.focus(); await expect(link).toBeFocused(); await page.keyboard.press('Enter');
   await expect(page.locator('#history-future-5 details')).toHaveAttribute('open', '');
   await expect(page.locator('#history-future-5')).toContainText('Final-mile delivery complete');
+  await expect(page.locator('#history-unboxing-20261026')).toContainText('Crate opened and panels removed');
   for (const id of ['history-production-complete', 'history-factory-departure', 'history-port-arrival']) await expect(page.locator(`#${id}`)).toHaveCount(1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   for (const section of ['.ardhi-v2-hero', '#journey', '#delivery-media', '#service']) {

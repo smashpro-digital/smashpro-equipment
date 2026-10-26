@@ -13,7 +13,7 @@
 
 SP-ARDHI-26 / YF380 was delivered by **R+L Carriers**, PRO **IACO468333**, from **CONVOY USA-SAVANNAH**. The owner confirmed carrier delivery and supplied photographs of the closed wooden crate on the ground. Crated weight is approximately **950 kg**, separate from operating weight.
 
-**Current state: Delivered / Receiving inspection.** Unboxing, accessories inventory, fluid checks, first startup, first movement, operator commissioning and first field test are not yet verified. ARDHI is not represented as operational or rental-ready. Separate customs/warehouse event dates remain unverified; historical records below retain their original context.
+**Current state: Delivered / Receiving inspection.** Crate opening and panel removal are photographed. ARDHI remains on its shipping base; receiving inspection, complete accessories inventory, fluid checks, first startup, first movement, operator commissioning and first field test remain unverified. ARDHI is not represented as operational or rental-ready. Separate customs/warehouse event dates remain unverified; historical records below retain their original context.
 
 See the [delivery implementation and media record](SP-ARDHI-26-DELIVERY-20261026.md) for photo provenance, remaining evidence, privacy handling and validation.
 

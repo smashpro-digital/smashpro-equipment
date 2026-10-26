@@ -17,21 +17,26 @@ test('verified delivery advances receipt only and preserves manufacturer and ves
   assert.equal(passport.asset.current_lifecycle_stage, 'receiving_inspection');
   assert.equal(delivery.ardhiDelivery.date, '2026-10-26');
   assert.equal(delivery.ardhiDelivery.pro, 'IACO468333');
+  assert.equal(new Set(passport.records.map(r => r.id)).size, passport.records.length);
+  const opened = passport.records.find(r => r.id === 'ardhi-unboxing-20261026');
+  assert.equal(opened.event_type, 'crate_opened');
+  assert.equal(opened.stage_id, 'receiving_inspection');
+  assert.equal(opened.evidence_ids.length, 3);
   const event = passport.records.find(r => r.id === 'ardhi-delivery-20261026');
   assert.equal(event.occurred_at, '2026-10-26');
   assert.equal(event.evidence_state, 'verified');
   assert.deepEqual(event.evidence_ids, ['ardhi-delivery-confirmation-20261026']);
   for (const id of ['ardhi-manufacturer-port-arrival', 'ardhi-ocean-departure-reported', 'ardhi-factory-build', 'ardhi-export-customs-released']) assert.ok(passport.records.some(r => r.id === id), id);
-  assert.deepEqual(flagship.commissioningChecks.filter(c => flagship.verifiedEvidence(c.evidence).length).map(c => c.id), ['delivery']);
-  for (const id of ['crate-inspection','crate-opened','accessories','fluids','first-start','first-drive','operator','field-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
+  assert.deepEqual(flagship.commissioningChecks.filter(c => flagship.verifiedEvidence(c.evidence).length).map(c => c.id), ['delivery', 'crate-opened']);
+  for (const id of ['crate-inspection','accessories','fluids','first-start','first-drive','operator','field-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
   assert.equal(flagship.firstJobPresentation(flagship.firstJob, flagship.commissioningChecks).mission, 'Awaiting Commissioning');
   assert.equal(domain.hasMilestoneEvidence(passport, 'commissioning'), false);
 });
 
 test('delivery photographs preserve evidence identity; future videos are never fabricated', () => {
   assert.equal(delivery.ardhiDeliveryPhotos.length, 2);
-  for (const photo of delivery.ardhiDeliveryPhotos) {
-    assert.equal(photo.group, 'delivery');
+  for (const photo of [...delivery.ardhiDeliveryPhotos, ...delivery.ardhiUnboxingPhotos]) {
+    assert.ok(['delivery', 'commissioning'].includes(photo.group));
     assert.ok(readFileSync(photo.src.replace('/equipment/', '')).length > 0);
     const projected = passport.records.find(r => r.id === photo.id);
     assert.equal(projected.factoryEvidence, false);
@@ -60,7 +65,7 @@ test('Shorts and full-length videos retain consent, asset and publication gates'
 });
 
 test('public delivery JPEG metadata contains orientation only, not GPS or vendor payloads', () => {
-  for (const photo of delivery.ardhiDeliveryPhotos) {
+  for (const photo of [...delivery.ardhiDeliveryPhotos, ...delivery.ardhiUnboxingPhotos]) {
     const data = readFileSync(photo.src.replace('/equipment/', ''));
     let offset = 2, exifCount = 0;
     while (data[offset + 1] !== 0xda) {

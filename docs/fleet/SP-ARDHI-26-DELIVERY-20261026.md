@@ -4,7 +4,7 @@
 
 SP-ARDHI-26 / YF380 was delivered October 26, 2026 by R+L Carriers, PRO IACO468333, freight origin CONVOY USA-SAVANNAH. The owner confirmed carrier delivery and supplied photographs showing the wooden shipping crate on the ground. Crated weight is approximately 950 kg; it is not operating weight. The carrier confirmation document itself has not been supplied for public publication.
 
-Delivery is complete. Receiving inspection, unboxing, accessories/attachments inventory, engine and hydraulic fluid checks, first startup, first movement, operator commissioning and first field test remain pending. No operational, rental-ready, damage-free, inspection-passed or contents-accepted claim is made.
+Delivery is complete. Crate opening and panel removal are now documented. Receiving inspection, complete accessories/attachments inventory, engine and hydraulic fluid checks, first startup, first movement, operator commissioning and first field test remain pending. No operational, rental-ready, damage-free, inspection-passed or contents-accepted claim is made.
 
 ## Implementation audit
 
@@ -12,7 +12,7 @@ Delivery is complete. Receiving inspection, unboxing, accessories/attachments in
 - `ardhiDelivery.ts` supplies one reviewed editorial delivery record to the equipment collection, Journey, media gallery and public passport projection. Existing `history-future-5` is completed rather than duplicated; old links remain valid.
 - Original factory, payment, export, vessel and port records remain. October 9 port-arrival data remains an immutable historical snapshot. Customs-release and warehouse dates are not inferred from final delivery.
 - `ShipmentJourney` presents delivery first and retains its older feed, vessel map and Atlas context inside “Earlier vessel and shipment evidence.” Older/cached/unavailable feed data cannot regress the new reviewed delivery state. Atlas has not been written to or relabeled as delivery proof.
-- Commissioning evidence gates remain. Only delivery is documented; first job and service readiness stay pending. Sponsor opportunities and existing public QR/Expo links remain unchanged.
+- Commissioning evidence gates remain. Delivery and crate opening are documented; first job and service readiness stay pending. Sponsor opportunities and existing public QR/Expo links remain unchanged.
 - This repository does not own the authenticated Smart Key PHP routes or operator sessions. No authentication, check-in handler, database or private custody record is changed. The stable Passport `#check-in` anchor links to the existing `/k/ARDHI26-K01/` route, which remains external; its HTTP availability was checked, not an authenticated operator session. No check-in is inferred from viewing this Passport.
 
 ## Delivery photographs
@@ -46,7 +46,7 @@ Checks include TypeScript, unit tests, production build, public index/media/pass
 
 Protected hash fixtures are refreshed only for the reviewed ARDHI renderer and shared equipment-file change. The MZIGO portion, original drive-history hash, shared styles and deployment workflow remain unchanged.
 
-No merge or deployment is authorized in this sprint. Remaining evidence: publishable carrier confirmation if desired; receiving inspection; unboxing and accessory inventory; engine/hydraulic checks; verified first-start/first-movement footage; operator commissioning; first field test; any future delivery article and HQ media association IDs.
+No merge or deployment is authorized in this sprint. Remaining evidence: publishable carrier confirmation if desired; receiving inspection; complete accessory inventory; engine/hydraulic checks; verified first-start/first-movement footage; operator commissioning; first field test; any future delivery article and HQ media association IDs.
 
 ### Results
 
@@ -57,3 +57,19 @@ No merge or deployment is authorized in this sprint. Remaining evidence: publish
 - Source photo pixels match the public JPEGs; only orientation and the ICC color profile remain as metadata. GPS and vendor metadata are excluded by a regression test.
 - Existing Smart Key, dashboard and live Passport returned HTTP 200 during read-only checks. Media Center fetch timed out; its established repository destination is retained. No signed-in operator-session or physical NFC test was performed.
 - Section captures hide the sticky navigation and focused skip link only during screenshot capture; behavior is tested with normal page styles.
+
+## October 26 follow-up: crate disassembly photographs
+
+Owner supplied 14 images in `Crate dissamble-20261026T155401Z-1-001/Crate dissamble`. Three complementary images were reviewed and added to the existing equipment gallery under `commissioning`; the delivery photos remain in their original group.
+
+| Source | Public copy |
+| --- | --- |
+| `20261026_105230.jpg` | `sp-ardhi-26-unboxing-2026-10-26-crate-opened.jpg` |
+| `20261026_112916.jpg` | `sp-ardhi-26-unboxing-2026-10-26-panels-removed.jpg` |
+| `20261026_113052.jpg` | `sp-ardhi-26-unboxing-2026-10-26-tool-case.jpg` |
+
+The originals are unchanged. Public JPEGs preserve original pixels and orientation, remove GPS and vendor metadata, and retain only orientation/ICC metadata. Images show crate access, removed panels, the machine on its shipping base and the open tool case. No residential address, personal contact or readable private license plate is shown in the selected views.
+
+`ardhi-unboxing-20261026` is the receiving event; History uses `history-unboxing-20261026`. Media IDs are distinct, associated once and reused by the gallery and evidence links. Only the narrowly labeled `Crate opened / panels removed` checklist item advances. No damage-free inspection, complete accessory receipt, removal from the base, first startup/movement, fluid check or commissioning is inferred. Unboxing video remains pending even though photographs exist. Delivery captions retain their earlier, closed-crate chronology.
+
+Follow-up validation: `npm.cmd run validate` passed all 170 unit tests, TypeScript, production build and public artifact checks. Focused receiving/metadata tests passed 4/4 after adding event-ID uniqueness assertions. All four Playwright scenarios passed again at 390/768/1440px with five gallery images decoded and crate opening documented while startup and accessories acceptance remain pending. Updated screenshots are included. No merge, deployment, database or authentication changes.
