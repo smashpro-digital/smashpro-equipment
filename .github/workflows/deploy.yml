@@ -11,6 +11,10 @@ on:
         description: 'Shipment-specific release: require live shipment evidence in addition to local safeguards'
         type: boolean
         default: false
+      delivery_release:
+        description: 'Owner-verified October 26 ARDHI delivery: require reviewed local evidence and privacy'
+        type: boolean
+        default: false
       akaso_release:
         description: 'AKASO activation release: require approved live Equipment catalog'
         type: boolean
@@ -51,6 +55,8 @@ jobs:
         run: npm run validate:index
       - name: Verify local ARDHI artifact and evidence
         run: node --experimental-strip-types scripts/verify-ardhi-artifact.mjs
+      - name: Verify reviewed delivery evidence and privacy
+        run: node scripts/verify-ardhi-delivery.mjs
       - name: Verify protected build outputs
         run: |
           missing=0
@@ -106,6 +112,9 @@ jobs:
           node-version: 22
       - name: Verify downloaded ARDHI artifact and local evidence
         run: node --experimental-strip-types release-source/scripts/verify-ardhi-artifact.mjs
+      - name: Require reviewed evidence for owner-verified delivery release
+        if: inputs.delivery_release
+        run: node release-source/scripts/verify-ardhi-delivery.mjs
       - name: Require live evidence for shipment-specific release
         if: inputs.shipment_release
         run: node --experimental-strip-types release-source/scripts/verify-ardhi-release.mjs

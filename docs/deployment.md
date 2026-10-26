@@ -64,3 +64,7 @@ Implementation and final live acceptance are recorded in [the pipeline correctio
 
 
 AKASO premium visual release: see the [October 13 implementation, cache handling and production evidence](AKASO-PREMIUM-VISUAL-20261013.md). The deployment workflow itself is unchanged.
+
+## October 26 owner-verified delivery exception
+
+The owner explicitly authorized a scoped delivery gate for PR #115. Use `delivery_release=true`, `shipment_release=false`, `akaso_release=false` for the October 26 SP-ARDHI-26 delivery/receiving release. This is independent owner-supplied carrier/photo evidence, not a claim that the unavailable shipment API is healthy. `verify-ardhi-delivery.mjs` pins the five privacy-reviewed photo hashes and requires the built public index to retain receiving-inspection status and no rental availability. CI still runs the delivery privacy, canonical arrival and pending-readiness tests. The downloaded production artifact repeats the evidence check. The original shipment-specific gate and scheduled health monitor remain unchanged and still fail on the real outage. Future shipment API behavior/evidence changes still require `shipment_release=true`; this exception does not certify any remote operational state.

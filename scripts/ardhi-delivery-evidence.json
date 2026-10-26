@@ -1,0 +1,12 @@
+{
+  "policy": "ardhi-owner-verified-delivery-20261026-v1",
+  "assetId": "SP-ARDHI-26",
+  "statusLabel": "Delivered / Receiving inspection",
+  "photos": {
+    "images/sp-ardhi-26-delivery-2026-10-26-carrier-and-crate.jpg": "62035198da69fdaba4b587b3a888773d52b71d60604af7f66b95023cff854942",
+    "images/sp-ardhi-26-delivery-2026-10-26-crate-on-ground.jpg": "48592d69ff4e44ea1c9bc7175960434e515311e0573791c86b2d8dcf02e54cf1",
+    "images/sp-ardhi-26-unboxing-2026-10-26-crate-opened.jpg": "c90697f376be1eacda440a510084668a568c51245001f2ceb1e3c99b17ac39ac",
+    "images/sp-ardhi-26-unboxing-2026-10-26-panels-removed.jpg": "c134bad036b168bcf816de71c3c335d444b1372d401482b4e2fff30317c0f78a",
+    "images/sp-ardhi-26-unboxing-2026-10-26-tool-case.jpg": "7e3ed87df028ff74a15ca8924501f1a032dfc30140fa950c3ba28890daecd46b"
+  }
+}
