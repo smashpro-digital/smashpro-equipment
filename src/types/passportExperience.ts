@@ -1,6 +1,7 @@
 export interface EquipmentVideo {
   equipmentId: string;
   videoId: string;
+  format?: "short" | "video"; // Existing YouTube record format; default is full-length.
   title: string;
   description: string;
   category: string;

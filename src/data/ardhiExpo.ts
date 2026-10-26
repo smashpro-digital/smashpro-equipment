@@ -21,6 +21,8 @@ export const partnerLifecycle = ['Partner', 'Equipment Installed', 'Passport Upd
 export const comingSoon = ['First Startup', 'First Job', 'First Grapple', 'First Brush Cutter', 'First Trailer', 'First Maintenance'];
 export const sponsorRoadmap = [
   { title: 'Factory', state: 'complete', detail: 'Build documented', href: '#history-production-complete' },
-  { title: 'Ocean', state: 'complete', detail: 'Manufacturer-confirmed arrival; customs pending', href: '#history-port-arrival' },
-  ...['Delivery', 'Commissioning', 'Training', 'Residential Jobs', 'Commercial Jobs', 'County Contracts', 'Fleet Expansion', 'Automation'].map(title => ({ title, state: 'pending', detail: 'Future ambition · sponsor opportunity', href: '#expo-partnership' })),
+  { title: 'Ocean', state: 'complete', detail: 'Historical port arrival documented', href: '#history-port-arrival' },
+  { title: 'Delivery', state: 'complete', detail: 'October 26, 2026', href: '#history-future-5' },
+  { title: 'Receiving inspection', state: 'current', detail: 'Pending inspection; pre-service', href: '#commissioning-crate-inspection' },
+  ...['Commissioning', 'Training', 'Residential Jobs', 'Commercial Jobs', 'County Contracts', 'Fleet Expansion', 'Automation'].map(title => ({ title, state: 'pending', detail: 'Future ambition · sponsor opportunity', href: '#expo-partnership' })),
 ];

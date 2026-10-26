@@ -4,7 +4,8 @@ import "../styles/shipment-journey.css";
 import { VesselContext } from './VesselContext';
 import { selectVerifiedCheckpointReference } from "../domain/ardhiCheckpoint";
 import { AtlasStatusPanel } from "./AtlasStatusPanel";
-import { ArdhiPortProcessing } from "./ArdhiPortProcessing";
+import { ArdhiDeliveryJourney } from "./ArdhiDelivery";
+import "../styles/ardhi-port-processing.css";
 
 const ShipmentMap = lazy(() => import("./ShipmentMap"));
 class MapBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -95,9 +96,9 @@ export function ShipmentJourney(props: { result: ShipmentResult; refresh: () => 
     window.addEventListener("hashchange", openLinkedHistory);
     return () => window.removeEventListener("hashchange", openLinkedHistory);
   }, []);
-  return <><ArdhiPortProcessing /><details className="shell ardhi-historical-logistics" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}>
+  return <><ArdhiDeliveryJourney /><details className="shell ardhi-historical-logistics" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}>
     <summary>Earlier vessel and shipment evidence</summary>
-    <p>The records below retain the earlier HQ shipment feed and vessel observations. Vessel checkpoints and historical arrival estimates are separate from the manufacturer-confirmed machine arrival above.</p>
+    <p>The records below retain the earlier HQ shipment feed and vessel observations. Vessel checkpoints and historical arrival estimates are separate from the owner-confirmed final delivery above.</p>
     {historyOpen && <HistoricalShipmentJourney {...props} />}
   </details></>;
 }

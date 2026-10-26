@@ -1,3 +1,4 @@
+import { ardhiDelivery, ardhiDeliveryPhotos, ardhiUnboxingPhotos } from "./ardhiDelivery";
 // Build/server entry only. React imports virtual:passport-public instead.
 import { equipment } from "./equipment";
 import {
@@ -62,7 +63,7 @@ function fromEquipment(
       build_type,
       hero_media_id: `${id}-hero`,
       current_lifecycle_stage:
-        build_type === "partner_build" ? "configuration" : id === "SP-ARDHI-26" ? "import_delivery" : "ocean_freight",
+        build_type === "partner_build" ? "configuration" : id === "SP-ARDHI-26" ? "receiving_inspection" : "ocean_freight",
       status_label: item.statusLabel,
       status_detail: item.statusDetail ?? "",
       public_path: item.publicPath,
@@ -401,8 +402,25 @@ ardhi.build.sections.journey = {
   eyebrow: "Factory-to-field record",
   title: "Evidence preserves the lifecycle.",
   description:
-    ardhiPortArrival.summary,
+    ardhiDelivery.summary,
 };
+// Preserve the source identity and keep delivery photographs separate from factory/field tests.
+for (const photo of [...ardhiDeliveryPhotos, ...ardhiUnboxingPhotos]) {
+  const record = ardhi.records.find(record => record.id === photo.id)!;
+  Object.assign(record, { media_kind: "shipping", source_type: "smashpro", evidence_state: "verified", productionEvidence: false, factoryEvidence: false, fieldEvidence: false });
+}
+// Crate opening is a discrete receiving event, never a commissioning completion.
+const unboxing = ardhi.records.find(record => record.id === "ardhi-unboxing-20261026")!;
+Object.assign(unboxing, { kind: "lifecycle_event", evidence_state: "verified", source_type: "smashpro", stage_id: "receiving_inspection", event_type: "crate_opened", evidence_ids: ardhiUnboxingPhotos.map(photo => photo.id!) });
+// Public delivery evidence is an owner-confirmed carrier summary plus reviewed photographs.
+const delivery = ardhi.records.find(record => record.id === "ardhi-delivery-20261026")!;
+Object.assign(delivery, { kind: "lifecycle_event", evidence_state: "verified", source_type: "carrier", stage_id: "arrival", event_type: "completion", evidence_ids: ["ardhi-delivery-confirmation-20261026"] });
+ardhi.records.push({
+  id: "ardhi-delivery-confirmation-20261026", asset_id: ardhi.asset.id,
+  kind: "evidence", title: "Owner-confirmed carrier delivery", detail: ardhiDelivery.evidence, evidence_classification: "received", evidence_ids: ardhiDeliveryPhotos.map(photo => photo.id!),
+  evidence_state: "verified", source_type: "carrier", source_ref: `${ardhiDelivery.carrier} / ${ardhiDelivery.pro}`,
+  source_visibility: "public", visibility: "public", sort_order: 220, stage_id: "arrival",
+});
 const portPhoto = ardhi.records.find(record => record.id === "ardhi-us-port-arrival")!;
 Object.assign(portPhoto, { media_kind: "shipping", source_type: "manufacturer", evidence_state: "verified", productionEvidence: false, factoryEvidence: false });
 ardhi.records.push({

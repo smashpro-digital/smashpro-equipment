@@ -1,0 +1,82 @@
+[
+  {
+    "route": "sp-mzigo-26",
+    "width": 390,
+    "http": 200,
+    "heading": "SMASHPRO\nELECTRIC MATERIAL\nCARRIER K600",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-nyasi-26",
+    "width": 390,
+    "http": 200,
+    "heading": "NYASI",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-umba-26",
+    "width": 390,
+    "http": 200,
+    "heading": "SP-UMBA-26",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-liftmate-27",
+    "width": 390,
+    "http": 200,
+    "heading": "SP-LIFTMATE-27",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-med-cam-001",
+    "width": 390,
+    "http": 200,
+    "heading": "EQUIPMENT PASSPORT UNAVAILABLE",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-mzigo-26",
+    "width": 1440,
+    "http": 200,
+    "heading": "SMASHPRO\nELECTRIC MATERIAL\nCARRIER K600",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-nyasi-26",
+    "width": 1440,
+    "http": 200,
+    "heading": "NYASI",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-umba-26",
+    "width": 1440,
+    "http": 200,
+    "heading": "SP-UMBA-26",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-liftmate-27",
+    "width": 1440,
+    "http": 200,
+    "heading": "SP-LIFTMATE-27",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "sp-med-cam-001",
+    "width": 1440,
+    "http": 200,
+    "heading": "EQUIPMENT PASSPORT UNAVAILABLE",
+    "overflow": false,
+    "errors": []
+  }
+]

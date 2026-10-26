@@ -6,11 +6,11 @@ export function verifiedEvidence(evidence: PublicEvidence[]) {
 }
 export type CommissioningCheck = { id: string; title: string; evidence: PublicEvidence[] };
 export const commissioningChecks: CommissioningCheck[] = [
-  ['delivery', 'Delivery'], ['crate-inspection', 'Crate Inspection'], ['crate-opened', 'Crate Opened'],
-  ['fluids', 'Fluid Check'], ['battery', 'Battery'], ['hydraulics', 'Hydraulics'], ['engine', 'Engine'],
-  ['first-start', 'First Start'], ['first-drive', 'First Drive'], ['photos', 'Photos'],
+  ['delivery', 'Delivery'], ['crate-inspection', 'Crate Inspection'], ['crate-opened', 'Crate opened / panels removed'], ['accessories', 'Accessories and attachments'],
+  ['fluids', 'Engine and hydraulic fluid checks'], ['battery', 'Battery'], ['hydraulics', 'Hydraulics'], ['engine', 'Engine'],
+  ['first-start', 'First startup'], ['first-drive', 'First movement'], ['operator', 'Operator commissioning'], ['field-test', 'First field test'], ['photos', 'Photos'],
   ['warranty', 'Warranty'], ['passport-complete', 'Passport Complete'],
-].map(([id, title]) => ({ id, title, evidence: [] }));
+].map(([id, title]) => ({ id, title, evidence: id === 'delivery' ? [{ title: 'Verified October 26 delivery', href: '#history-future-5', state: 'verified' }] : id === 'crate-opened' ? [{ title: 'Crate opening photographs', href: '#history-unboxing-20261026', state: 'verified' }] : [] }));
 
 export type ServiceEntry = {
   id: string; hours: number; date: string; technician: string;
@@ -40,7 +40,9 @@ export const missionProfile = [
 
 export const missionTimeline = [
   { title: 'Factory', state: 'complete', detail: 'Build and testing documented', href: '#history-production-complete' },
-  { title: 'Shipping', state: 'current', detail: 'Ocean complete · awaiting customs', href: '#journey' },
-  ...['Delivery', 'Commissioning', 'Training', 'First Job', '25 Hours', '50 Hours', '100 Hours', 'Attachments', 'Maintenance', 'Retirement'].map(title => ({ title, state: 'pending', detail: 'Future milestone', href: '#service' })),
+  { title: 'Shipping', state: 'complete', detail: 'Final-mile delivery documented', href: '#journey' },
+  { title: 'Delivery', state: 'complete', detail: 'October 26, 2026', href: '#history-future-5' },
+  { title: 'Receiving inspection', state: 'current', detail: 'Inspection pending', href: '#commissioning-crate-inspection' },
+  ...['Commissioning', 'Training', 'First Job', '25 Hours', '50 Hours', '100 Hours', 'Attachments', 'Maintenance', 'Retirement'].map(title => ({ title, state: 'pending', detail: 'Future milestone', href: '#service' })),
 ];
 export const futureAttachments = ['Grapple', 'Brush Cutter', 'Auger', 'Rake', 'Snow Blade', 'Trencher'];

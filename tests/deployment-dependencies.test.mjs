@@ -27,3 +27,22 @@ test('frontend deployment keeps mandatory safeguards without depending on shipme
   assert.match(monitor, /run: node --experimental-strip-types scripts\/check-shipment-health.mjs/);
   assert.ok(!monitor.includes('continue-on-error'), 'Service outage must remain visible as failed monitoring');
 });
+
+
+test('scoped delivery gate rejects missing/changed photos and conflicting public status', async () => {
+  const { verifyDeliveryArtifact } = await import('../scripts/verify-ardhi-delivery.mjs');
+  // Real reviewed source photographs; this gate is repeated on the built artifact.
+  const snapshot = { equipment: [{ fleet_id: 'SP-ARDHI-26', status_label: 'Delivered / Receiving inspection' }] };
+  const read = path => path === 'equipment-index.json' ? Buffer.from(JSON.stringify(snapshot)) : readFileSync(path);
+  assert.equal(verifyDeliveryArtifact(read).photos, 5);
+  assert.throws(() => verifyDeliveryArtifact(path => path.endsWith('.jpg') ? Buffer.from('changed') : read(path)));
+  snapshot.equipment[0].rental_available = true;
+  assert.throws(() => verifyDeliveryArtifact(read));
+  delete snapshot.equipment[0].rental_available;
+  snapshot.equipment[0].status_label = 'Operational';
+  assert.throws(() => verifyDeliveryArtifact(read));
+  snapshot.equipment = [];
+  assert.throws(() => verifyDeliveryArtifact(read));
+  const workflow = readFileSync('.github/workflows/deploy.yml', 'utf8');
+  assert.match(workflow, /if: inputs.delivery_release\s+run: node release-source\/scripts\/verify-ardhi-delivery.mjs/);
+});

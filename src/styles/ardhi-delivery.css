@@ -1,0 +1,37 @@
+.ardhi-delivery, .ardhi-delivery [id] { scroll-margin-top: 150px; }
+.ardhi-delivery header { max-width: 850px; }
+.ardhi-delivery h2 { font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.1; }
+.ardhi-delivery p { line-height: 1.75; color: #c5cec5; }
+.ardhi-delivery-proof { padding: clamp(1.2rem, 3vw, 2rem); border: 1px solid #49613d; border-left: 4px solid #76c043; background: #101b14; margin-block: 2rem; }
+.ardhi-delivery-proof dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.ardhi-delivery dt { color: #b8c4b5; font-size: .8rem; }
+.ardhi-delivery dd { margin: .5rem 0 0; font-weight: 700; overflow-wrap: anywhere; }
+.ardhi-delivery-stages { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .75rem; list-style: none; padding: 0; }
+.ardhi-delivery-stages li { border: 1px solid #344332; padding: 1.2rem; background: #101811; }
+.ardhi-delivery-stages .is-complete { border-top: 3px solid #76c043; }
+.ardhi-delivery-stages .is-current { border: 2px solid #c5ad70; }
+.ardhi-delivery-stages small, .ardhi-delivery-stages a { display: block; margin-bottom: .6rem; }
+.ardhi-delivery-stages small { color: #c5cec5; }
+.ardhi-delivery-stages p { font-size: .85rem; margin: 0; }
+.ardhi-delivery-media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-block: 1.5rem 2.5rem; }
+.ardhi-delivery-media-grid figure, .ardhi-media-pending { margin: 0; padding: 1.5rem; background: #101811; border: 1px solid #344332; }
+.ardhi-delivery-media-grid img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: contain; }
+.ardhi-delivery-media-grid figcaption { padding-top: 1rem; line-height: 1.65; }
+.ardhi-delivery-media-grid h4 { font-size: 1.2rem; margin-block: .75rem; }
+.ardhi-delivery-links { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
+.ardhi-delivery a { color: #b3e486; text-underline-offset: .25em; }
+.ardhi-delivery a:focus-visible, .ardhi-delivery button:focus-visible { outline: 3px solid #e4c786; outline-offset: 4px; }
+.ardhi-delivery-links a { padding-block: .75rem; }
+.ardhi-delivery .equipment-watch__player { aspect-ratio: 16/9; max-width: 850px; }
+.ardhi-delivery .equipment-watch__player.is-short { aspect-ratio: 9/16; max-width: 390px; }
+.ardhi-delivery .equipment-watch__player iframe, .ardhi-delivery .equipment-watch__player button { width: 100%; height: 100%; border: 1px solid #49613d; }
+@media(max-width: 1000px) { .ardhi-delivery-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ardhi-delivery-proof dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 600px) { .ardhi-delivery-media-grid, .ardhi-delivery-stages, .ardhi-delivery-proof dl { grid-template-columns: 1fr; } }
+
+.ardhi-homecoming { margin-block: 2.5rem; }
+.ardhi-homecoming details { border-top: 1px solid #344332; padding-block: 1rem; }
+.ardhi-homecoming summary { cursor: pointer; padding: .75rem 0; font-weight: 700; }
+.ardhi-homecoming summary:focus-visible { outline: 3px solid #e4c786; outline-offset: 4px; }
+.ardhi-homecoming li { margin-block: .8rem; line-height: 1.7; }
+.ardhi-commissioning-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 1.5rem; padding-left: 1.5rem; }
+.ardhi-commissioning-plan span, .ardhi-commissioning-plan time { display: block; color: #c5cec5; }
