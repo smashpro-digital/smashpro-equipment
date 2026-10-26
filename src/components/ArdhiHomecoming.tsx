@@ -1,4 +1,4 @@
-import { ardhiHomecoming, ardhiCommissioningMilestones } from '../data/ardhiHomecoming';
+import { ardhiHomecoming } from '../data/ardhiHomecoming';
 
 export function ArdhiHomecoming() {
   return <div className="ardhi-homecoming" id="homecoming">
@@ -7,13 +7,7 @@ export function ArdhiHomecoming() {
     <details><summary>Explore the Homecoming collection plan</summary>
       <ul>{ardhiHomecoming.categories.map(category => <li key={category.title}>{category.title} — {category.mediaIds.length ? <a href={category.title === 'Carrier delivery' || category.title === 'Crate arrival' ? '#delivery-media' : '#unboxing-photos'}>Photographs available</a> : 'Media pending'}</li>)}</ul>
     </details>
-    <details id="commissioning-plan"><summary>Receiving and commissioning milestones</summary>
-      <p>Delivered does not mean operational or rental-ready. Crate opening is photographed; inspections and commissioning are still pending.</p>
-      <ol className="ardhi-commissioning-plan">{ardhiCommissioningMilestones.map(milestone => <li key={milestone.id}>
-        <strong>{milestone.title}</strong><span>{milestone.status === 'complete' ? 'Documented' : milestone.status === 'partial' ? 'Partially documented' : 'Pending'}</span>
-        {milestone.date && <time dateTime={milestone.date}>{milestone.date}</time>}<p>{milestone.notes}</p>
-      </li>)}</ol>
-    </details>
+    <p id="commissioning-plan"><a href="#inspections">View receiving inspections and commissioning progress</a></p>
     <aside id="operator-preparation" aria-labelledby="operator-preparation-title">
       <h3 id="operator-preparation-title">Operator access / next phase</h3>
       <p>The Smart Key opens the existing sign-in experience. Scanning does not start a job, authorize operation or record an inspection.</p>

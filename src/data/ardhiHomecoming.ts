@@ -16,28 +16,8 @@ export const ardhiHomecoming = {
   ].map(([title, mediaIds]) => ({ title: title as string, mediaIds: mediaIds as string[] })),
 };
 
-export type CommissioningMilestone = {
-  id: string; title: string; status: 'pending' | 'partial' | 'complete'; date: string | null;
-  notes: string; photoIds: string[]; videoIds: string[]; inspectionEvidenceIds: string[];
-};
-// Operator attribution belongs in a protected server record, never this public projection.
-// Dates describe supplied evidence, not a fabricated inspection completion date.
-export const ardhiCommissioningMilestones: CommissioningMilestone[] = [
-  { id: 'delivered', title: 'Delivered', status: 'complete', date: '2026-10-26', notes: 'Owner-confirmed carrier delivery and photographs.', photoIds: ardhiDeliveryPhotos.map(p => p.id!), videoIds: [], inspectionEvidenceIds: [] },
-  ...[
-    ['receiving-inspection', 'Receiving Inspection'], ['unboxing', 'Unboxing'],
-    ['assembly', 'Assembly Verification'], ['engine', 'Engine Inspection'],
-    ['hydraulics', 'Hydraulic System Inspection'], ['startup', 'First Startup'],
-    ['movement', 'Initial Movement'], ['familiarization', 'Operator Familiarization'],
-    ['commissioning', 'Commissioning Complete'], ['field-ready', 'Field Ready'],
-    ['customer-deployment', 'First Customer Deployment'],
-  ].map(([id, title]): CommissioningMilestone => ({
-    id, title, status: id === 'unboxing' ? 'partial' : 'pending',
-    date: id === 'unboxing' ? '2026-10-26' : null,
-    notes: id === 'unboxing' ? 'Crate opened and panels removed; complete inventory and removal from shipping base remain unverified.' : 'Awaiting documented evidence and review.',
-    photoIds: id === 'unboxing' ? ardhiUnboxingPhotos.map(p => p.id!) : [], videoIds: [], inspectionEvidenceIds: [],
-  })),
-];
+// Compatibility projection from the single commissioning checklist; no independent status authority.
+export { commissioningChecks as ardhiCommissioningMilestones } from './ardhiFlagship';
 
 // Explicit public readiness snapshot. Only a reviewed release may advance it.
 export const ardhiReadiness = { operational: false, rentalReady: false, operatorCheckInEnabled: false } as const;

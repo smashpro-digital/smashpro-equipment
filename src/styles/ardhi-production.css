@@ -1,0 +1,23 @@
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero {display:grid;grid-template-columns:1fr 1fr;height:auto;min-height:560px;background:#080d09;overflow:hidden}
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero>img {position:absolute;left:0;top:0;width:100%;height:100%;clip-path:inset(0 0 0 50%);object-fit:cover;object-position:right center;opacity:1}
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero .ardhi-v2-hero__shade {background:linear-gradient(90deg,#080d09 46%,transparent 64%)}
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero .ardhi-v2-hero__copy {position:relative;grid-column:1 / -1;width:min(1400px,calc(100% - 64px));padding-block:80px;min-height:0}
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero h1 {font-size:clamp(2.5rem,4.4vw,4.8rem);line-height:1.04;max-width:53%;letter-spacing:-.035em}
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero p {max-width:47%;color:#e1e8df}
+.ardhi-documentary.ardhi-flagship .ardhi-production-hero .eyebrow {color:#91cd48}
+.ardhi-production-actions {display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.ardhi-production-actions a {padding:12px 18px;border:1px solid #7db839;color:#e9f2e0;background:#102014;font-weight:700;text-decoration:none}
+.ardhi-production-actions a:first-child {background:#90ce45;color:#091106}
+.ardhi-production a:focus-visible,.ardhi-production-actions a:focus-visible {outline:3px solid #d5b76e;outline-offset:4px}
+.ardhi-production {scroll-margin-top:120px}.ardhi-production header {max-width:850px}.ardhi-observation {padding:24px;border-left:3px solid #d5b76e;background:#111a12;margin:28px 0}
+.ardhi-production-checks {padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ardhi-production-checks li {border:1px solid #34432d;background:#0e160f;padding:18px;scroll-margin-top:120px}
+.ardhi-production-checks summary {cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}.production-status {font-size:.8rem;color:#cbd5c7;flex-shrink:0}.production-status.is-needs_attention,.production-status.is-blocked {color:#dfc083}.production-status.is-passed {color:#9cdb65}
+.ardhi-production-checks dd {margin:4px 0 14px}.ardhi-production-checks dt {color:#aebba8;font-size:.85rem}.ardhi-maintenance-systems {padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.ardhi-maintenance-systems li {padding:20px;background:#111a12}.ardhi-maintenance-systems span {display:block;margin-top:10px;color:#bfcaba}
+.ardhi-expo-archive {padding-block:32px}.ardhi-expo-archive>summary {cursor:pointer;font-weight:700;color:#cfb46c}
+@media(max-width:767px){.ardhi-documentary.ardhi-flagship .ardhi-production-hero {display:flex;flex-direction:column;min-height:0}.ardhi-documentary.ardhi-flagship .ardhi-production-hero>img {position:relative;left:0;order:2;width:200%;max-width:none;align-self:flex-end;height:330px;clip-path:none;object-position:right center}.ardhi-documentary.ardhi-flagship .ardhi-production-hero .ardhi-v2-hero__shade {display:none}.ardhi-documentary.ardhi-flagship .ardhi-production-hero .ardhi-v2-hero__copy {width:calc(100% - 40px);padding:48px 0 28px}.ardhi-documentary.ardhi-flagship .ardhi-production-hero h1,.ardhi-documentary.ardhi-flagship .ardhi-production-hero p {max-width:none}.ardhi-production-checks {grid-template-columns:1fr}.ardhi-maintenance-systems {grid-template-columns:repeat(2,minmax(0,1fr))}.ardhi-production-checks summary {align-items:flex-start}.ardhi-observation {padding:18px}}
+
+.ardhi-documentary.ardhi-flagship .passport-rail>div {grid-template-columns:repeat(7,minmax(0,1fr))}
+@media(max-width:767px){.ardhi-documentary.ardhi-flagship .passport-rail>div {grid-template-columns:repeat(4,minmax(0,1fr))}.ardhi-documentary.ardhi-flagship .passport-rail a {min-height:44px;font-size:.72rem}.ardhi-documentary.ardhi-flagship .ardhi-production-hero {height:auto}}
+
+.ardhi-documentary.ardhi-flagship .flagship-service-grid [role="row"] {grid-template-columns:repeat(6,minmax(0,1fr))}
+@media(max-width:767px){.ardhi-documentary.ardhi-flagship .flagship-service-grid [role="row"] {grid-template-columns:1fr}}

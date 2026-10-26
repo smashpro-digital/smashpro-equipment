@@ -1,3 +1,4 @@
+import { firstStartObservation } from './ardhiFlagship';
 import type { GalleryImage, TimelineEvent } from '../types/equipment';
 import type { EquipmentVideo } from '../types/passportExperience';
 
@@ -51,3 +52,17 @@ export const ardhiDeliveryStages = [
   { title: 'Receiving inspection', state: 'current', detail: 'Inspection pending; no readiness claim', href: '#commissioning-crate-inspection' },
   { title: 'Commissioning', state: 'pending', detail: 'Not yet verified', href: '#service' },
 ] as const;
+
+export const ardhiFirstStartEvent: TimelineEvent = {
+  id: firstStartObservation.id, occurredAt: firstStartObservation.date, kind: 'status',
+  title: firstStartObservation.title, detail: `${firstStartObservation.source}: ${firstStartObservation.summary} Not commissioned; no confirmed engine defect.`, publicDisplay: true,
+};
+export const ardhiMediaCollections = [
+  { id: 'delivery', title: 'Delivery', slots: ['R+L delivery confirmation document - AWAITING MEDIA', 'Freight crate photographs - published below', 'Delivery video - AWAITING MEDIA'], mediaIds: ardhiDeliveryPhotos.map(p => p.id!) },
+  { id: 'unboxing', title: 'Unboxing', slots: ['Crate inspection', 'Opening the crate', 'First reveal', 'Equipment walkaround', 'Factory branding', 'Included attachments'], mediaIds: ardhiUnboxingPhotos.map(p => p.id!) },
+  { id: 'first-start', title: 'First start', slots: ['Engine inspection - AWAITING MEDIA', 'First startup attempt - AWAITING MEDIA', 'Successful first startup - AWAITING MEDIA', 'Resolution - AWAITING MEDIA'], mediaIds: [] },
+  { id: 'commissioning', title: 'Commissioning', slots: ['Fluid inspections', 'Safety inspection', 'First movement', 'Final approval'], mediaIds: [] },
+  { id: 'field-tests', title: 'Field tests', slots: ['First operator check-in', 'First field demonstration'], mediaIds: [] },
+  { id: 'maintenance', title: 'Maintenance', slots: ['Service inspection', 'Parts and service evidence'], mediaIds: [] },
+  { id: 'attachments', title: 'Attachments', slots: ['Fitment inspection', 'Attachment testing'], mediaIds: [] },
+];

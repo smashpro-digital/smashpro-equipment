@@ -18,15 +18,13 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect.poll(() => page.locator('#delivery-media img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   await expect(page.locator('#watch-ardhi iframe')).toHaveCount(0);
   await expect(page.locator('#check-in')).toHaveAttribute('href', '/k/ARDHI26-K01/');
-  await expect(page.locator('#commissioning-first-start')).toContainText('Pending');
-  await expect(page.locator('#commissioning-delivery')).toContainText('Documented');
-  await expect(page.locator('#commissioning-crate-opened')).toContainText('Documented');
-  await expect(page.locator('#commissioning-accessories')).toContainText('Pending');
+  await expect(page.locator('#commissioning-first-start')).toContainText('Needs attention');
+  await expect(page.locator('#commissioning-delivery')).toContainText('Passed');
+  await expect(page.locator('#commissioning-crate-opened')).toContainText('In progress');
+  await expect(page.locator('#commissioning-accessories')).toContainText('Not started');
   await expect(page.locator('#service')).toContainText('Awaiting Commissioning');
-  await page.locator('#commissioning-plan summary').click();
-  await expect(page.locator('.ardhi-commissioning-plan > li')).toHaveCount(12);
+  await expect(page.locator('.ardhi-production-checks > li')).toHaveCount(16);
   await expect(page.locator('#operator-preparation')).toContainText('not connected on this Passport');
-  await page.locator('#commissioning-plan summary').click();
   const link = page.getByRole('link', { name: 'Read the delivery event', exact: true });
   await link.focus(); await expect(link).toBeFocused(); await page.keyboard.press('Enter');
   await expect(page.locator('#history-future-5 details')).toHaveAttribute('open', '');
@@ -53,5 +51,34 @@ test('historical Atlas feed cannot regress delivery; Expo QR experience stays av
   await page.locator('.ardhi-historical-logistics > summary').click();
   await expect(page.locator('#shipment-history')).toBeVisible();
   await expect(page.locator('#journey')).not.toContainText('Awaiting Customs');
-  await expect(page.getByRole('button', { name: 'Exit Equip Expo mode' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Close Expo presentation' })).toBeVisible();
+});
+
+for (const width of [390, 1440]) test(`production inspections, anchors and public boundaries at ${width}`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 950 });
+  await page.route('**/api/**', route => route.fulfill({ status: 503, body: 'Offline review' }));
+  await page.goto('/equipment/sp-ardhi-26.html#check-in');
+  await expect(page.locator('#check-in')).toHaveAttribute('href', '/k/ARDHI26-K01/');
+  await expect(page.locator('#first-start-observation')).toContainText('Diagnosis is unknown');
+  await expect(page.locator('#inspections')).toContainText('Not commissioned, operational or rental-ready');
+  await expect(page.locator('#inspections input, #inspections form, #maintenance input')).toHaveCount(0);
+  await expect(page.locator('.ardhi-production-hero button')).toHaveCount(0);
+  await expect(page.locator('.ardhi-production-hero')).not.toContainText('Expo');
+  for (const link of await page.locator('.passport-rail a, .ardhi-production-actions a').all()) {
+    const href = await link.getAttribute('href');
+    await expect(page.locator(href)).toHaveCount(1);
+  }
+  const disclosure = page.locator('#commissioning-first-start summary');
+  await disclosure.focus(); await page.keyboard.press('Enter');
+  await expect(page.locator('#commissioning-first-start details')).toHaveAttribute('open', '');
+  await expect(page.locator('#commissioning-first-start')).toContainText('Resolution: Pending');
+  await expect(page.locator('#maintenance')).toContainText('not yet verified');
+  const ids = await page.locator('[id]').evaluateAll(nodes => nodes.map(node => node.id));
+  expect(new Set(ids).size).toBe(ids.length);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  mkdirSync('tmp/production-passport-captures', { recursive: true });
+  for (const section of ['.ardhi-production-hero', '#inspections', '#maintenance']) {
+    await page.locator(section).scrollIntoViewIfNeeded();
+    await page.locator(section).screenshot({ animations: 'disabled', style: '.passport-rail {visibility:hidden}', path: `tmp/production-passport-captures/${width}-${section.replace(/[.#]/g,'')}.png` });
+  }
 });

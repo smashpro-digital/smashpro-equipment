@@ -28,7 +28,7 @@ test('verified delivery advances receipt only and preserves manufacturer and ves
   assert.deepEqual(event.evidence_ids, ['ardhi-delivery-confirmation-20261026']);
   for (const id of ['ardhi-manufacturer-port-arrival', 'ardhi-ocean-departure-reported', 'ardhi-factory-build', 'ardhi-export-customs-released']) assert.ok(passport.records.some(r => r.id === id), id);
   assert.deepEqual(flagship.commissioningChecks.filter(c => flagship.verifiedEvidence(c.evidence).length).map(c => c.id), ['delivery', 'crate-opened']);
-  for (const id of ['crate-inspection','accessories','fluids','first-start','first-drive','operator','field-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
+  for (const id of ['crate-inspection','accessories','engine-oil','hydraulic-fluid','first-start','first-drive','attachment-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
   assert.equal(flagship.firstJobPresentation(flagship.firstJob, flagship.commissioningChecks).mission, 'Awaiting Commissioning');
   assert.equal(domain.lifecycleStageStatus(passport, 'arrival'), 'complete');
   assert.equal(domain.lifecycleStageStatus(passport, 'receiving_inspection'), 'current');
@@ -101,13 +101,24 @@ test('Homecoming references existing media and keeps operational gates closed', 
   const ids = new Set([...delivery.ardhiDeliveryPhotos, ...delivery.ardhiUnboxingPhotos].map(p => p.id));
   for (const category of collection.categories) for (const id of category.mediaIds) assert.ok(ids.has(id));
   const milestones = homecoming.ardhiCommissioningMilestones;
-  assert.equal(milestones.length, 12);
-  assert.deepEqual(milestones.filter(m => m.status === 'complete').map(m => m.id), ['delivered']);
-  assert.equal(milestones.find(m => m.id === 'unboxing').status, 'partial');
-  for (const milestone of milestones.filter(m => m.status === 'pending')) {
+  assert.equal(milestones.length, 16);
+  assert.deepEqual(milestones.filter(m => m.status === 'passed').map(m => m.id), ['delivery']);
+  assert.equal(milestones.find(m => m.id === 'crate-opened').status, 'in_progress');
+  for (const milestone of milestones.filter(m => m.status === 'not_started')) {
     assert.equal(milestone.date, null);
-    assert.equal(milestone.photoIds.length + milestone.videoIds.length + milestone.inspectionEvidenceIds.length, 0);
+    assert.equal(milestone.photoIds.length + milestone.videoIds.length + milestone.evidence.length, 0);
   }
   assert.deepEqual(homecoming.ardhiReadiness, { operational: false, rentalReady: false, operatorCheckInEnabled: false });
   assert.doesNotMatch(JSON.stringify(homecoming), /operatorId|latitude|longitude|custody|garage/i);
+});
+
+test('startup is an owner observation without operational or defect proof', () => {
+  const record = passport.records.find(r => r.id === flagship.firstStartObservation.id);
+  assert.equal(record.event_type, 'startup_attempt');
+  assert.notEqual(record.evidence_state, 'verified');
+  assert.deepEqual(record.evidence_ids, []);
+  assert.equal(record.fieldEvidence, false);
+  assert.equal(flagship.commissioningChecks.find(c => c.id === 'first-start').status, 'needs_attention');
+  assert.equal(flagship.commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
+  assert.equal(delivery.ardhiMediaCollections.length, 7);
 });
