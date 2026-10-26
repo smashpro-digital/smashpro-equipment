@@ -321,7 +321,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   const data = readFileSync("src/data/equipment.ts", "utf8");
   const detail = readFileSync("src/pages/EquipmentDetailPage.tsx", "utf8");
   const passport = readFileSync("src/components/ArdhiPassportJourney.tsx", "utf8");
-  assert.match(data, /statusLabel: "Arrived at U.S. Port"/);
+  assert.match(data, /statusLabel: ardhiDelivery.status/);
   assert.doesNotMatch(data, /shippingStatus: \{ status: "Container Loaded"/);
   assert.match(data, /occurredAt: "2026-08-21"[\s\S]*title: "Shipping Phase Started"/);
   assert.match(data, /occurredAt: "2026-08-20"[\s\S]*title: "Final Successful Payment"[\s\S]*photos: \[\], videos: \[\]/);
@@ -360,7 +360,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.doesNotMatch(passport, /Engineering Decisions/);
   assert.match(passport, /Payment History/);
   assert.doesNotMatch(passport, /Approximate Journey Distance|daysUntilArrival|7300/);
-  assert.match(passport, /ardhiPortArrival.status/);
+  assert.match(passport, /Arrived October 26, 2026/);
   assert.match(passport, /ArdhiMissionTimeline/);
   assert.doesNotMatch(passport, /2 \/ 7|Stage 2/);
   assert.doesNotMatch(readFileSync("src/pages/ArdhiPassportPage.tsx", "utf8"), /2 \/ 7|Stage 2/);

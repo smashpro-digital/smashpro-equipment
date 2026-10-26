@@ -1,20 +1,20 @@
 import type { CSSProperties } from 'react';
 import type { Equipment } from '../types/equipment';
-import { ardhiPortArrival } from '../data/ardhiPortArrival';
+import { ardhiDelivery } from '../data/ardhiDelivery';
 import { sponsorRoadmap } from '../data/ardhiExpo';
 import { commissioningChecks, firstJob, firstJobPresentation, futureAttachments, missionProfile, missionTimeline, serviceEntries, verifiedEvidence } from '../data/ardhiFlagship';
 
 export function ArdhiMissionDashboard() {
   const fields = [
-    ['Current Mission', ardhiPortArrival.mission], ['Current Lifecycle', 'Import & delivery'],
-    ['Current Chapter', 'Awaiting Release'], ['Service Hours', '0 recorded · commissioning pending'],
-    ['Fleet Status', 'Pre-service'], ['Next Event', 'Customs release'],
-    ['Current Evidence', `${ardhiPortArrival.confidence} · ${ardhiPortArrival.source}`], ['Current Location', ardhiPortArrival.location],
+    ['Current Mission', 'Receiving inspection'], ['Current Lifecycle', 'Delivered / pre-service'],
+    ['Current Chapter', 'Arrival & inspection'], ['Service Hours', '0 recorded · commissioning pending'],
+    ['Fleet Status', 'Pre-service'], ['Next Event', 'Crate inspection'],
+    ['Current Evidence', 'Owner-confirmed carrier delivery'], ['Current Location', 'Delivery complete / location withheld'],
   ];
   return <section className="shell flagship-dashboard" id="mission-dashboard" aria-labelledby="mission-dashboard-title">
-    <header><div><p className="eyebrow">Fleet Asset 001 / Mission Control</p><h2 id="mission-dashboard-title">SP-ARDHI-26</h2></div><p><span className="flagship-status-dot" aria-hidden="true" /> {ardhiPortArrival.currentStage}</p></header>
+    <header><div><p className="eyebrow">Fleet Asset 001 / Mission Control</p><h2 id="mission-dashboard-title">SP-ARDHI-26</h2></div><p><span className="flagship-status-dot" aria-hidden="true" /> {ardhiDelivery.status}</p></header>
     <dl>{fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    <footer><span>Manufacturer confirmation recorded October 9, 2026 · arrival date not supplied</span><a href="#history-port-arrival">View current evidence ↗</a></footer>
+    <footer><span>Delivered October 26, 2026; unboxing and commissioning unverified</span><a href="#history-future-5">View current evidence ↗</a></footer>
   </section>;
 }
 
@@ -31,8 +31,8 @@ export function ArdhiMissionTimeline({ expo = false }: { expo?: boolean }) {
   const timeline = expo ? sponsorRoadmap : missionTimeline;
   const complete = timeline.filter(step => step.state === 'complete').length;
   return <section className="shell flagship-roadmap" aria-labelledby="mission-timeline-title">
-    <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Shipping is the current chapter. The ocean leg is complete; port release is next.</p></header>
-    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; customs release pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
+    <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Delivery is complete. Receiving inspection is the current chapter; commissioning remains pending.</p></header>
+    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; receiving inspection pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
     <ol>{timeline.map((step, i) => <li key={step.title} className={`is-${step.state}`} aria-current={step.state === 'current' ? 'step' : undefined}><span>{String(i + 1).padStart(2, '0')}</span><a href={step.href}>{step.title}</a><small>{step.detail}</small></li>)}</ol>
     <p className="flagship-note">{expo ? 'Future milestones are ambitions, not booked jobs, awarded contracts or connected automation. Each invites a scoped contribution.' : 'Hours are record milestones, not manufacturer service intervals. Follow the operator manual for maintenance.'}</p>
   </section>;

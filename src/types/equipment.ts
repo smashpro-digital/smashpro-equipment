@@ -4,7 +4,7 @@ export type RecordVisibility = "public" | "private";
 export type TimelineKind = "factory-build" | "purchase" | "delivery" | "upgrade" | "maintenance" | "attachment" | "media" | "rental" | "revenue" | "hours" | "state" | "status";
 
 export interface EquipmentSpecification { id?: string; groupId?: string; label: string; value: string; confirmed: boolean; group?: string; source?: string; sortOrder?: number; }
-export type GalleryGroup = "factory" | "assembly" | "branding" | "hydraulics" | "testing" | "completed-machine" | "export" | "shipping" | "arrival" | "commissioning" | "jobs" | "maintenance";
+export type GalleryGroup = "factory" | "assembly" | "branding" | "hydraulics" | "testing" | "completed-machine" | "export" | "shipping" | "arrival" | "delivery" | "commissioning" | "jobs" | "maintenance";
 export type EvidenceCategory = "exterior" | "interior" | "hydraulics" | "electrical" | "controls" | "branding" | "factory-progress" | "qc" | "shipping";
 export type MediaPublicationChannel = "passport" | "equipment-gallery" | "marketing-library" | "product-brochure" | "social-media" | "launch-timeline" | "qr-pages";
 export interface GalleryImage { id?: string; src: string; alt: string; caption: string; kind?: "image" | "video"; poster?: string; capturedAt?: string; width?: number; height?: number; group?: GalleryGroup; evidenceCategory?: EvidenceCategory; approvedChannels?: MediaPublicationChannel[]; }

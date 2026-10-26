@@ -8,7 +8,8 @@ import { isExpoSearch } from "../data/ardhiExpo";
 const ArdhiExpo = lazy(() => import("./ArdhiExpo"));
 import { ShipmentJourney } from "./ShipmentJourney";
 import { useShipment } from "../hooks/useShipment";
-import { ardhiPortArrival } from "../data/ardhiPortArrival";
+import { ardhiDelivery, ardhiDeliveryEvent } from "../data/ardhiDelivery";
+import { ArdhiDeliveryMedia } from "./ArdhiDelivery";
 import { PassportHero } from "./PassportHero";
 import "../styles/ardhi-passport-v2.css";
 
@@ -59,7 +60,7 @@ const chapters: Array<{
   {
     id: "delivery",
     label: "Delivery",
-    groups: ["commissioning"],
+    groups: ["delivery", "commissioning"],
     timelineId: "future-5",
   },
   {
@@ -298,18 +299,18 @@ const history: HistoryRecord[] = [
     id: "port-arrival",
     date: "Arrival date not supplied",
     title: "Arrived at U.S. Port",
-    status: "current",
+    status: "documented",
     confidence: "Verified",
-    narrative: "The manufacturer confirmed that SP-ARDHI-26 has arrived at the destination port. The machine is awaiting customs clearance and transfer to the overseas warehouse.",
+    narrative: "The manufacturer confirmed that SP-ARDHI-26 has arrived at the destination port. At that time, customs clearance and transfer to the overseas warehouse were pending.",
     supplier: "Manufacturer confirmation, relayed by the owner and recorded October 9, 2026. The record date is not the arrival date.",
-    outcome: "Ocean voyage complete. Customs, warehouse transfer and final delivery scheduling remain pending.",
+    outcome: "Ocean voyage complete. This historical update preceded the verified October 26 final-mile delivery.",
     mediaChapter: "port-arrival",
     mediaLabel: "View the port-arrival photograph",
   },
-  { id: "customs-release", date: "Pending", title: "Released from Customs", status: "future", narrative: "Awaiting verified U.S. customs clearance and cargo release." },
-  { id: "warehouse-transfer", date: "Pending", title: "Transferred to Warehouse", status: "future", narrative: "Awaiting verified transfer to the overseas warehouse after customs clearance." },
-  { id: "delivery-scheduled", date: "Pending", title: "Delivery Scheduled", status: "future", narrative: "Awaiting final delivery scheduling confirmation." },
-  { id: "future-5", date: "Pending", title: "Delivery", status: "future", narrative: "Awaiting verified receipt of the machine. Delivery has not been completed." },
+  { id: "customs-release", date: "Pending", title: "Released from Customs", status: "future", narrative: "Separate customs-release evidence and date remain unverified; final delivery is documented below." },
+  { id: "warehouse-transfer", date: "Pending", title: "Transferred to Warehouse", status: "future", narrative: "Separate warehouse-transfer evidence and date remain unverified; final delivery is documented below." },
+  { id: "delivery-scheduled", date: "Pending", title: "Delivery Scheduled", status: "future", narrative: "Scheduling evidence was not supplied. Actual final-mile delivery was completed October 26, 2026." },
+  { id: "future-5", date: ardhiDelivery.date, title: ardhiDeliveryEvent.title, status: "documented", confidence: "Verified delivery", narrative: ardhiDeliveryEvent.detail!, supplier: `${ardhiDelivery.carrier} / PRO ${ardhiDelivery.pro} / ${ardhiDelivery.origin}`, outcome: "Receiving inspection pending. Not operational or rental-ready.", mediaChapter: "delivery", mediaLabel: "View delivery media status" },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -523,16 +524,16 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Fleet Asset <span>#001</span>
           </h1>
           <p>
-            Factory Complete <b>·</b> {ardhiPortArrival.status}
+            Arrived October 26, 2026 <b>/</b> Receiving inspection
           </p>
-          <p className="flagship-hero-description">{expo ? "Welcome to the future of fleet management. You're not looking at a brochure. You're looking at the digital identity of a real commercial machine." : "A compact tracked loader. A complete factory-to-field story."}</p>
+          <p className="flagship-hero-description">{expo ? "Welcome to the future of fleet management. You're not looking at a brochure. You're looking at the digital identity of a real commercial machine." : "ARDHI is here. Our flagship has arrived; unboxing and commissioning are the next chapter."}</p>
           {expo && <a className="sponsor-button sponsor-hero-cta" href="#expo-opportunities">Find your opportunity</a>}
           <button className="flagship-expo-toggle" type="button" aria-pressed={expo} onClick={toggleExpo}>{expo ? "Exit Equip Expo mode" : "Equip Expo mode"}</button>
       </PassportHero>
       {expo && <Suspense fallback={<p className="shell">Preparing the Expo experience...</p>}><ArdhiExpo item={item} /></Suspense>}
       <ArdhiMissionDashboard />
       <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
-        <a href="#passport">Identity</a><a href="#journey">Journey</a><a href="#history">History</a><a href="#service">Service</a><a href="#documents">Documents</a>
+        <a href="#passport">Identity</a><a href="#journey">Journey</a><a href="#history">History</a><a href="#delivery-media">Media</a><a href="#service">Service</a><a href="#documents">Documents</a>
       </div></nav>
       <section className="section shell ardhi-passport-ledger passport-reveal" id="passport" data-passport-reveal data-view="Passport|Identity|SP-ARDHI-26" aria-labelledby="passport-ledger-title">
         <div className="section-heading">
@@ -569,6 +570,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
       </section>
       <ArdhiMissionTimeline expo={expo} />
       <ShipmentJourney result={shipment} refresh={shipment.refresh} />
+      <ArdhiDeliveryMedia item={item} />
       <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Documented archive" aria-labelledby="ardhi-history-title">
         <div className="shell">
           <div className="section-heading">

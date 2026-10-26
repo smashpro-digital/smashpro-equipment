@@ -1,3 +1,4 @@
+import { ardhiDelivery, ardhiDeliveryEvent, ardhiDeliveryPhotos } from "./ardhiDelivery";
 import { umbaEquipment } from "./umbaEquipment";
 import { liftmateEquipment } from "./liftmateEquipment";
 import { nyasiEquipment } from "./nyasiEquipment";
@@ -51,8 +52,8 @@ export const equipment: Equipment[] = [
     cardMedia: {"src": "/equipment/images/sp-ardhi-26-showroom-custom-v1.png", "width": 1586, "height": 992, "alt": "Custom ARDHI tracked loader with black bucket in a dark green-lit workshop; AI-generated promotional artwork", "mediaType": "promotional_artwork", "evidenceClass": "concept_or_identity_art", "productionEvidence": false, "factoryEvidence": false, "fieldEvidence": false, "public": true},
     pronunciation: "AHR-dhee", meaning: "“Ardhi” means earth in Swahili.", slogan: "Power. Precision. Purpose.",
     overview: "The flagship compact loader of the SmashPro Fleet, positioned for landscaping, grading, loading, excavation, pallet handling, and residential access.",
-    capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "shipping", statusLabel: "Arrived at U.S. Port",
-    statusDetail: "Manufacturer-confirmed U.S. port arrival. Ocean voyage complete; awaiting customs clearance, warehouse transfer and final delivery scheduling.",
+    capabilityStatement: "Compact earthmoving, lifting, landscaping, material handling, and attachment-powered work.", heroImage: image("sp-ardhi-26-hero.png"), status: "commissioning", statusLabel: ardhiDelivery.status,
+    statusDetail: ardhiDelivery.summary,
     identity: { passportId: "SPP-2026-0001", model: "SP-ARDHI-26", factoryModel: "YF380", edition: "Founder's Edition", finish: "SmashPro Green (RAL 6018)", assetClass: "Compact tracked loader", powertrain: "Internal combustion", modelYear: 2026 },
     specifications: specs([
       ["Fleet ID", "SP-ARDHI-26", "Identity"], ["Manufacturer model reference", "YF380", "Identity"], ["Manufacturer", "Shandong Infront Machinery Group Co., Ltd.", "Identity"], ["Machine type", "Compact mini skid loader", "Configuration"],
@@ -113,6 +114,7 @@ export const equipment: Equipment[] = [
       { id: "ardhi-yfe380-operator-instruction-manual-202609", title: "Operator Manual", description: "Manufacturer-provided operating and safety manual covering machine components, controls, preparation, attachments, driving, storage, maintenance, specifications, and support.", source: "Shandong Infront Machinery Group", revision: "Manufacturer", verificationStatus: "verified", dateReceived: "September 2026", downloadName: "SP-ARDHI-26-YFE380-Operator-Instruction-Manual.pdf", kind: "manual", url: "/equipment/documents/sp-ardhi-26/yfe380-operator-instruction-manual.pdf", publicDisplay: true },
     ], serviceHistory: [],
     timeline: [
+      ardhiDeliveryEvent,
       // The supplier intentionally created two linked Alibaba order groups for staged payments on this one SP-ARDHI-26 acquisition; they do not represent two machines.
       { id: "ardhi-procurement-opened", occurredAt: "2026-07-15", kind: "purchase", title: "Alibaba Procurement Opened", detail: "Two linked marketplace order groups were created to support staged payments for one SP-ARDHI-26 acquisition.", publicDisplay: true },
       { id: "ardhi-proforma-approved", occurredAt: "2026-07-16", kind: "purchase", title: "Configuration and Proforma Invoice Approved", detail: "Signed proforma invoice YF260716 established the YF380 configuration and $3,990 DDP commercial baseline, including export crate packaging and transportation.", publicDisplay: true },
@@ -139,8 +141,9 @@ export const equipment: Equipment[] = [
     capabilities: ["Earthmoving and grading", "Loading and unloading", "Pallet handling", "Tight-access work", "Attachment-powered work"],
     capabilityIds: ["compact_access", "material_handling", "grading", "lifting", "landscape", "cleanup", "pallet_handling"], attachmentIds: ["bucket", "pallet_forks"],
     idealUses: ["Landscape installation", "Property cleanup", "Residential access", "Material staging", "Site preparation"],
-    restrictions: ["Rental availability has not been announced.", "Operator eligibility, transport, site access, and attachment approval must be confirmed before use."],
+    restrictions: ["Receiving inspection pending. Unboxing, commissioning and operational readiness are not yet verified.", "Rental availability has not been announced.", "Operator eligibility, transport, site access, and attachment approval must be confirmed before use."],
     gallery: [
+      ...ardhiDeliveryPhotos,
       { id: "ardhi-shipping-hydraulics", src: image("sp-ardhi-26-shipping-2026-08-21-01.png"), alt: "Front-left view of SP-ARDHI-26 on a wooden shipping pallet with its bucket, auxiliary hydraulic couplers, tracks, and a yellow tool case visible", caption: "SP-ARDHI-26 staged on its wooden pallet with the bucket and auxiliary hydraulic connections visible.", capturedAt: "2026-08-21", width: 1366, height: 1024, group: "shipping" },
       { id: "ardhi-shipping-front", src: image("sp-ardhi-26-shipping-2026-08-21-02.png"), alt: "Front view of SP-ARDHI-26 positioned on a wooden pallet in the factory staging area beside shipping-crate panels", caption: "Front view of the machine positioned on its pallet in the factory staging area.", capturedAt: "2026-08-21", width: 1024, height: 1366, group: "shipping" },
       { id: "ardhi-shipping-pallet-blocking", src: image("sp-ardhi-26-shipping-2026-08-21-03.png"), alt: "Close view beneath SP-ARDHI-26 showing the black steel undercarriage secured against wooden pallet blocking during shipping preparation", caption: "Undercarriage and wooden pallet blocking documented during shipping preparation.", capturedAt: "2026-08-21", width: 1366, height: 1024, group: "shipping" },

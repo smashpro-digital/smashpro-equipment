@@ -1,11 +1,21 @@
 # SP-ARDHI-26 Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**  
-> Version: 1.2  
-> Status: In Transit / Pre-Deployment  
-> Last Updated: 2026-10-06
+> Version: 1.3
+>
+> Status: Delivered / Receiving Inspection
+>
+> Last Updated: 2026-10-26
 
-> **Lifecycle truth:** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record carried an **October 5, 2026** planning target. Public vessel context now records EVER MAX voyage 1374-016E departing Colón on October 1 and reaching **Savannah anchorage on October 6 at 06:43 UTC**. This is a vessel-level checkpoint only. SP-ARDHI-26 cargo discharge, U.S. customs clearance, cargo release, final-mile delivery, receipt, and commissioning remain unconfirmed. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
+> **Historical October 6 snapshot (superseded by delivery below):** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record carried an **October 5, 2026** planning target. Public vessel context now records EVER MAX voyage 1374-016E departing Colón on October 1 and reaching **Savannah anchorage on October 6 at 06:43 UTC**. This is a vessel-level checkpoint only. SP-ARDHI-26 cargo discharge, U.S. customs clearance, cargo release, final-mile delivery, receipt, and commissioning remain unconfirmed. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
+
+## Verified delivery - October 26, 2026
+
+SP-ARDHI-26 / YF380 was delivered by **R+L Carriers**, PRO **IACO468333**, from **CONVOY USA-SAVANNAH**. The owner confirmed carrier delivery and supplied photographs of the closed wooden crate on the ground. Crated weight is approximately **950 kg**, separate from operating weight.
+
+**Current state: Delivered / Receiving inspection.** Unboxing, accessories inventory, fluid checks, first startup, first movement, operator commissioning and first field test are not yet verified. ARDHI is not represented as operational or rental-ready. Separate customs/warehouse event dates remain unverified; historical records below retain their original context.
+
+See the [delivery implementation and media record](SP-ARDHI-26-DELIVERY-20261026.md) for photo provenance, remaining evidence, privacy handling and validation.
 
 ---
 
@@ -376,6 +386,10 @@ DDP
 Destination
 
 South Carolina, USA
+
+### Historical port-processing snapshot (October 9, 2026)
+
+The following logistics snapshot is retained as history; the October 26 delivery update above supersedes its current-state wording.
 
 Current Lifecycle
 
