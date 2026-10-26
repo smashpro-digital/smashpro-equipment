@@ -412,6 +412,9 @@ for (const photo of [...ardhiDeliveryPhotos, ...ardhiUnboxingPhotos]) {
 // Crate opening is a discrete receiving event, never a commissioning completion.
 const unboxing = ardhi.records.find(record => record.id === "ardhi-unboxing-20261026")!;
 Object.assign(unboxing, { kind: "lifecycle_event", evidence_state: "verified", source_type: "smashpro", stage_id: "receiving_inspection", event_type: "crate_opened", evidence_ids: ardhiUnboxingPhotos.map(photo => photo.id!) });
+// An owner-reported unsuccessful attempt is not commissioning completion or a defect diagnosis.
+const startupAttempt = ardhi.records.find(record => record.id === "ardhi-first-start-attempt-20261026")!;
+Object.assign(startupAttempt, { kind: "lifecycle_event", evidence_state: "pending", source_type: "smashpro", stage_id: "receiving_inspection", event_type: "startup_attempt", evidence_ids: [], productionEvidence: false, factoryEvidence: false, fieldEvidence: false });
 // Public delivery evidence is an owner-confirmed carrier summary plus reviewed photographs.
 const delivery = ardhi.records.find(record => record.id === "ardhi-delivery-20261026")!;
 Object.assign(delivery, { kind: "lifecycle_event", evidence_state: "verified", source_type: "carrier", stage_id: "arrival", event_type: "completion", evidence_ids: ["ardhi-delivery-confirmation-20261026"] });

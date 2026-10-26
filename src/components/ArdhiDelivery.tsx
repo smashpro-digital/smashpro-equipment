@@ -1,4 +1,4 @@
-import { ardhiDelivery, ardhiDeliveryStages, ardhiDeliveryVideos, ardhiMediaSlots } from '../data/ardhiDelivery';
+import { ardhiDelivery, ardhiDeliveryStages, ardhiDeliveryVideos, ardhiMediaSlots, ardhiMediaCollections } from '../data/ardhiDelivery';
 import { ardhiPortArrival } from '../data/ardhiPortArrival';
 import type { Equipment } from '../types/equipment';
 import { ArdhiHomecoming } from './ArdhiHomecoming';
@@ -30,7 +30,8 @@ export function ArdhiDeliveryMedia({ item }: { item: Equipment }) {
       <div className="ardhi-delivery-media-grid">{unboxingPhotos.map(photo => <figure key={photo.id ?? photo.src}><img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" /><figcaption>{photo.caption}</figcaption></figure>)}</div>
     </div>
     <div id="watch-ardhi"><h3>Watch ARDHI</h3><EquipmentWatch videos={ardhiDeliveryVideos} equipmentId={item.fleetId} channelUrl="https://www.youtube.com/@SmashProHQ" emptyMessage="Unboxing and first-start episodes are pending. Verified Shorts and full-length videos will appear here after publication." /></div>
-    <div className="ardhi-delivery-media-grid">{ardhiMediaSlots.map(slot => <article className="ardhi-media-pending" key={slot.id}><p className="eyebrow">Upcoming / Not yet verified</p><h4>{slot.title}</h4><p>{slot.detail}</p></article>)}</div>
+    <div className="ardhi-delivery-media-grid">{ardhiMediaSlots.map(slot => <article className="ardhi-media-pending" key={slot.id}><p className="eyebrow">AWAITING MEDIA</p><h4>{slot.title}</h4><p>{slot.detail}</p></article>)}</div>
+    <details className="flagship-disclosure"><summary>Media collections / evidence still needed</summary><p>SmashPro HQ is the publishing channel. Records reference existing media IDs; no additional uploads or publications are simulated.</p><div className="ardhi-delivery-media-grid">{ardhiMediaCollections.map(collection => <article key={collection.id}><h4>{collection.title}</h4><p>{collection.mediaIds.length ? <a href={collection.id === 'delivery' ? '#delivery-media' : '#unboxing-photos'}>Reviewed photographs available</a> : 'AWAITING MEDIA'}</p><ul>{collection.slots.map(slot => <li key={slot}>{slot}</li>)}</ul></article>)}</div></details>
     <ArdhiHomecoming />
     <nav className="ardhi-delivery-links" aria-label="Follow ARDHI across SmashPro"><a href="/media/">Media Center</a><a href="/equipment/#fleet">Equipment Showcase</a><a href="/">SmashPro stories</a><a id="check-in" href="/k/ARDHI26-K01/">Operator access / sign-in required</a><a href="/dashboard/">Digital HQ · sign-in required</a></nav>
   </section>;

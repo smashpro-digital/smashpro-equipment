@@ -1,3 +1,5 @@
+import { firstStartObservation } from '../data/ardhiFlagship';
+import { ArdhiInspections, ArdhiMaintenancePlan } from './ArdhiProduction';
 import { Fragment, lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import type { Equipment, GalleryGroup, GalleryImage } from "../types/equipment";
@@ -312,6 +314,7 @@ const history: HistoryRecord[] = [
   { id: "delivery-scheduled", date: "Pending", title: "Delivery Scheduled", status: "future", narrative: "Scheduling evidence was not supplied. Actual final-mile delivery was completed October 26, 2026." },
   { id: "future-5", date: ardhiDelivery.date, title: ardhiDeliveryEvent.title, status: "documented", confidence: "Verified delivery", narrative: ardhiDeliveryEvent.detail!, supplier: `${ardhiDelivery.carrier} / PRO ${ardhiDelivery.pro} / ${ardhiDelivery.origin}`, outcome: "Receiving inspection pending. Not operational or rental-ready.", mediaChapter: "delivery", mediaLabel: "View delivery media status" },
   { id: "unboxing-20261026", date: "2026-10-26", title: ardhiUnboxingEvent.title, status: "documented", confidence: "Photographed", narrative: ardhiUnboxingEvent.detail!, mediaChapter: "delivery", mediaLabel: "View crate disassembly photographs" },
+  { id: firstStartObservation.id, date: firstStartObservation.date, title: firstStartObservation.title, status: "current", confidence: "Owner report", narrative: firstStartObservation.summary, outcome: "Not commissioned; no confirmed engine defect. Inspection and resolution pending." },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -517,7 +520,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   );
   return (
     <div className={`ardhi-documentary ardhi-flagship${expo ? " is-expo" : ""}`}>
-      <PassportHero titleId="ardhi-v2-title" image={item.heroImage} alt="SP-ARDHI-26 completed flagship fleet machine">
+      <PassportHero titleId="ardhi-v2-title" className="ardhi-production-hero" image={item.heroImage} alt="SP-ARDHI-26 completed flagship fleet machine">
           <p className="eyebrow">SP-ARDHI-26</p>
           <h1 id="ardhi-v2-title">
             SmashPro Flagship
@@ -527,14 +530,12 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <p>
             Arrived October 26, 2026 <b>/</b> Receiving inspection
           </p>
-          <p className="flagship-hero-description">{expo ? "Welcome to the future of fleet management. You're not looking at a brochure. You're looking at the digital identity of a real commercial machine." : "ARDHI is here. Our flagship has arrived. The crate is open; receiving inspection and commissioning are next."}</p>
-          {expo && <a className="sponsor-button sponsor-hero-cta" href="#expo-opportunities">Find your opportunity</a>}
-          <button className="flagship-expo-toggle" type="button" aria-pressed={expo} onClick={toggleExpo}>{expo ? "Exit Equip Expo mode" : "Equip Expo mode"}</button>
+          <p className="flagship-hero-description">ARDHI is here. Receiving inspection is underway; commissioning remains pending.</p>
+          <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#journey">Explore Journey</a></div>
       </PassportHero>
-      {expo && <Suspense fallback={<p className="shell">Preparing the Expo experience...</p>}><ArdhiExpo item={item} /></Suspense>}
       <ArdhiMissionDashboard />
       <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
-        <a href="#passport">Identity</a><a href="#journey">Journey</a><a href="#history">History</a><a href="#delivery-media">Media</a><a href="#service">Service</a><a href="#documents">Documents</a>
+        <a href="#passport">Overview</a><a href="#journey">Journey</a><a href="#inspections">Inspections</a><a href="#maintenance">Maintenance</a><a href="#delivery-media">Media</a><a href="#capabilities">Attachments</a><a href="#history">History</a>
       </div></nav>
       <section className="section shell ardhi-passport-ledger passport-reveal" id="passport" data-passport-reveal data-view="Passport|Identity|SP-ARDHI-26" aria-labelledby="passport-ledger-title">
         <div className="section-heading">
@@ -553,7 +554,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               <dl>
                 <div><dt>Current owner</dt><dd>SmashPro Fleet</dd></div>
                 <div><dt>Commissioning</dt><dd>Pending</dd></div>
-                <div><dt>Service hours</dt><dd>0 recorded hours; commissioning pending</dd></div>
+                <div><dt>Service hours</dt><dd>Hours unverified; commissioning pending</dd></div>
               </dl>
             </section>
             {specificationGroups.map(([group, specifications]) => (
@@ -569,8 +570,10 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           </div>
         </details>
       </section>
-      <ArdhiMissionTimeline expo={expo} />
+      <ArdhiMissionTimeline />
       <ShipmentJourney result={shipment} refresh={shipment.refresh} />
+      <ArdhiInspections />
+      <ArdhiMaintenancePlan />
       <ArdhiDeliveryMedia item={item} />
       <section className="timeline-section ardhi-history passport-reveal" id="history" data-passport-reveal data-view="History|Export|Documented archive" aria-labelledby="ardhi-history-title">
         <div className="shell">
@@ -785,6 +788,11 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
       </section>
       <ArdhiFleetConnections item={item} showPartners={!expo} />
       <ArdhiServiceRecord />
+      <details className="shell ardhi-expo-archive" open={expo || undefined}><summary>Equip Expo / historical showcase</summary>
+        <p>The Expo presentation is preserved as an archive. It does not establish current commissioning or rental readiness.</p>
+        <button className="flagship-expo-toggle" type="button" aria-pressed={expo} onClick={toggleExpo}>{expo ? "Close Expo presentation" : "Open Expo presentation"}</button>
+        {expo && <Suspense fallback={<p>Preparing the Expo archive...</p>}><ArdhiExpo item={item} /></Suspense>}
+      </details>
       <section className={`section shell ardhi-document-library passport-reveal ${history.find(({ id }) => id === expandedRecord)?.documents ? "is-linked" : ""}`} id="documents" data-passport-reveal data-view="Documents|Library|Verification records" aria-labelledby="document-library-title">
         <div className="section-heading">
           <div>

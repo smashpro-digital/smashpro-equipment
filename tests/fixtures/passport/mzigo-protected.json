@@ -2,7 +2,7 @@
   "base": "a190948",
   "files": {
     "src/pages/MzigoPassportPage.tsx": "d4929c1a56ae50660a3783233e9606d1d544d96397027b29b22975c21544dbbb",
-    "src/data/equipment.ts": "9da345d0ad9bf88d67ea9a6391d51851f14f425909a29a4db3b2d8f382d347bd",
+    "src/data/equipment.ts": "28895f5555e63fce5a505865be9bac778aaa49096004d3b8b7f340c618c72844",
     "src/data/mzigoPassport.ts": "497e39ac46d71019e3e80b7141e20873d4e8c96f89d378c2a18f4f2c52b2f4ef",
     "src/data/mzigoFactoryMedia.ts": "3a5fdbedfa924272e3f2d193918c8d64e58419513263883e9912bd172db211a2",
     "src/data/mzigoPlatform.ts": "94aba3589373d8fb5edb81763751a1f3a0f35b07295c3bbbb0d56fb9a59c7407",
@@ -22,5 +22,5 @@
     "src/components/MzigoPassportHeader.tsx": "9ef834db86b28415d34a6ddb9b396acda136bab1c85fc0d8b9b1920ce14109ca",
     "src/components/MzigoServiceRecord.tsx": "eaa99364413224619789faee9f454e47369c09195b54cde081dd1f0a8100c511"
   },
-  "review": "October 9 authorized ARDHI manufacturer-confirmed port-processing update. Only ARDHI renderer and shared equipment-file hash refreshed where applicable. MZIGO block is byte-identical to 1a50b88; protected styles, other renderers and deployment gates remain unchanged. Authorized release-gate repair: verify reviewed port arrival separately from historical vessel association; only deployment workflow hash refreshed. October 26 verified delivery: refresh only ARDHI renderer and shared equipment-file hashes for reviewed ARDHI status/event/media imports; all other machines, original drive history, styles and deployment gates unchanged. See SP-ARDHI-26-DELIVERY-20261026.md. October 26 follow-up: reviewed owner-supplied crate-opening photos and receiving event; commissioning remains pending. October 26 owner-authorized scoped delivery evidence gate; workflow hash only refreshed. Live shipment check and independent monitor remain unchanged."
+  "review": "October 9 authorized ARDHI manufacturer-confirmed port-processing update. Only ARDHI renderer and shared equipment-file hash refreshed where applicable. MZIGO block is byte-identical to 1a50b88; protected styles, other renderers and deployment gates remain unchanged. Authorized release-gate repair: verify reviewed port arrival separately from historical vessel association; only deployment workflow hash refreshed. October 26 verified delivery: refresh only ARDHI renderer and shared equipment-file hashes for reviewed ARDHI status/event/media imports; all other machines, original drive history, styles and deployment gates unchanged. See SP-ARDHI-26-DELIVERY-20261026.md. October 26 follow-up: reviewed owner-supplied crate-opening photos and receiving event; commissioning remains pending. October 26 owner-authorized scoped delivery evidence gate; workflow hash only refreshed. Live shipment check and independent monitor remain unchanged. October 26 production Passport: reviewed ARDHI renderer and owner-reported unsuccessful start event; original historical evidence, other equipment blocks, shared CSS and deployment gates unchanged."
 }

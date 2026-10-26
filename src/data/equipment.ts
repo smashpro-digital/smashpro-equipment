@@ -1,4 +1,4 @@
-import { ardhiDelivery, ardhiDeliveryEvent, ardhiDeliveryPhotos, ardhiUnboxingPhotos, ardhiUnboxingEvent } from "./ardhiDelivery";
+import { ardhiDelivery, ardhiFirstStartEvent, ardhiDeliveryEvent, ardhiDeliveryPhotos, ardhiUnboxingPhotos, ardhiUnboxingEvent } from "./ardhiDelivery";
 import { umbaEquipment } from "./umbaEquipment";
 import { liftmateEquipment } from "./liftmateEquipment";
 import { nyasiEquipment } from "./nyasiEquipment";
@@ -116,6 +116,7 @@ export const equipment: Equipment[] = [
     timeline: [
       ardhiDeliveryEvent,
       ardhiUnboxingEvent,
+      ardhiFirstStartEvent,
       // The supplier intentionally created two linked Alibaba order groups for staged payments on this one SP-ARDHI-26 acquisition; they do not represent two machines.
       { id: "ardhi-procurement-opened", occurredAt: "2026-07-15", kind: "purchase", title: "Alibaba Procurement Opened", detail: "Two linked marketplace order groups were created to support staged payments for one SP-ARDHI-26 acquisition.", publicDisplay: true },
       { id: "ardhi-proforma-approved", occurredAt: "2026-07-16", kind: "purchase", title: "Configuration and Proforma Invoice Approved", detail: "Signed proforma invoice YF260716 established the YF380 configuration and $3,990 DDP commercial baseline, including export crate packaging and transportation.", publicDisplay: true },
