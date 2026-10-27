@@ -9,3 +9,5 @@ Current public checklist: Delivered / Receiving inspection / Commissioning in pr
 Awaiting engine identification, applicable oil guidance and measured level, odor assessment, track photographs and diagnosis, safety/attachment acceptance, meter reading, supporting media and independent commissioning approval. No automatic reminders enabled.
 
 This follow-up is separate from approved PR #116 (production ccff8000e65902adedef21dec6324b880de24540). Do not merge or deploy this follow-up without release approval.
+
+Validation: TypeScript, 175 unit tests, production build, public index/media/privacy checks and git diff --check passed. Browser scenarios: 11 flagship, 14 shipment and 6 delivery passed, including 390/768/1440px. An obsolete inventory-state expectation was corrected; one 768px run exceeded 60 seconds under concurrent test load and passed in 48.7 seconds on an isolated rerun with a 120-second ceiling. GitHub validation of implementation commit 3ff691a passed; deployment skipped. Non-ARDHI equipment source and original failed-start history remain unchanged.
