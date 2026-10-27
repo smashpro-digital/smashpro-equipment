@@ -107,6 +107,20 @@ Custom configuration produced specifically for SmashPro.
 
 ---
 
+
+## Receiving inspection and fluid research — October 26, 2026
+
+**Status: Received / commissioning hold.** After the machine was moved off its shipping crate, a puncture was discovered in one rubber track. The affected side was concealed while on the pallet. Cause and timing are undetermined; do not label as confirmed shipping damage. Photographic evidence exists. Supplier assessment and track safety/replacement guidance are pending. Avoid further operation until inspected.
+
+**Engine identification:** Runtong R740-1, 739 cc twin-cylinder gasoline, per procurement and passport records; engine's physical yellow label confirms Runtong and 739 cc. The YFE380 operator manual in Google Drive calls for SAE 10W-30 when topping up, checks on level ground at least 15 minutes after shutdown, and a level at the upper dipstick mark. It references a Briggs & Stratton chart and defers engine-specific instructions to the engine manufacturer's manual. Therefore synthetic-oil approval, API classification, exact oil capacity, dipstick procedure and break-in interval remain **unverified for Runtong R740-1**.
+
+**Oil-level observation:** Dipstick showed oily residue but no clear measurable level. Do not start until correct level and procedure are verified. Do not assume the engine is empty or fill by an unverified nominal capacity.
+
+**Fuel tank:** 20 L / 5.3 US gal is a **provisional comparison estimate only**, not a verified YF380 specification; comparable R740-powered machines vary. Request supplier confirmation before publishing as a verified capacity.
+
+**Next evidence required:** Runtong R740-1 engine manual, factory fuel tank capacity, track inspection/warranty decision, confirmed oil level, and full commissioning checklist. No operational readiness or customer availability is implied.
+
+---
 ## Hydraulic System
 
 Factory Configuration:
