@@ -122,3 +122,22 @@ test('startup is an owner observation without operational or defect proof', () =
   assert.equal(flagship.commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
   assert.equal(delivery.ardhiMediaCollections.length, 7);
 });
+
+test('later owner reports append without clearing service attention or approving operation', () => {
+  const canonical = records.canonicalPassports.find(p => p.asset.id === 'SP-ARDHI-26');
+  assert.match(canonical.records.find(r => r.id === 'ardhi-first-start-attempt-20261026').detail, /unsuccessful/);
+  assert.equal(flagship.commissioningObservations.length, 4);
+  for (const observation of flagship.commissioningObservations) {
+    const record = canonical.records.find(r => r.id === observation.id);
+    assert.equal(record.kind, 'lifecycle_event'); assert.equal(record.evidence_state, 'pending');
+    assert.equal(record.stage_id, 'receiving_inspection'); assert.equal(record.fieldEvidence, false);
+    assert.deepEqual(record.evidence_ids, []);
+  }
+  assert.deepEqual(flagship.commissioningReadiness, {commissioned:false, operational:false, rentalReady:false});
+  assert.match(flagship.commissioningObservations[0].summary, /started successfully/);
+  assert.match(flagship.commissioningObservations[1].summary, /level and quantity remain unverified/);
+  assert.match(flagship.commissioningObservations[3].summary, /has not been repaired/);
+  for (const id of ['first-start','engine-oil']) assert.equal(flagship.commissioningChecks.find(c=>c.id===id).status,'needs_attention');
+  assert.equal(flagship.commissioningChecks.find(c=>c.id==='passport-complete').status,'blocked');
+  assert.equal(domain.hasMilestoneEvidence(passport,'commissioning'),false);
+});

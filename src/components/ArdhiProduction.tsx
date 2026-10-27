@@ -1,16 +1,17 @@
-import { commissioningChecks, firstStartObservation, maintenanceSystems } from '../data/ardhiFlagship';
+import { commissioningChecks, commissioningObservations, commissioningLifecycle, firstStartObservation, maintenanceSystems } from '../data/ardhiFlagship';
 import '../styles/ardhi-production.css';
 const labels = { not_started: 'Not started', in_progress: 'In progress', passed: 'Passed', needs_attention: 'Needs attention', blocked: 'Blocked' };
 
 export function ArdhiInspections() {
   return <section className="section shell ardhi-production" id="inspections" aria-labelledby="inspections-title">
-    <header><p className="eyebrow">Receiving / commissioning</p><h2 id="inspections-title">Evidence before operation.</h2><p>Delivered / Receiving inspection. Not commissioned, operational or rental-ready.</p></header>
+    <header><p className="eyebrow">Receiving / commissioning</p><h2 id="inspections-title">Evidence before operation.</h2><p>{commissioningLifecycle}. Not commissioned, operational or rental-ready.</p></header>
     <article className="ardhi-observation" id="first-start-observation">
       <p className="eyebrow">Owner report ? October 26, 2026</p><h3>{firstStartObservation.title}</h3>
       <p>{firstStartObservation.summary}</p><p>This is an observation, not a confirmed defective engine.</p>
-      <details><summary>Observations still needed</summary><ul>{firstStartObservation.missingObservations.map(label => <li key={label}>{label}: not yet documented</li>)}</ul></details>
+      <details><summary>Original attempt: information not recorded at that time</summary><ul>{firstStartObservation.missingObservations.map(label => <li key={label}>{label}: not yet documented</li>)}</ul></details>
       <p><a href="/equipment/documents/sp-ardhi-26/yfe380-operator-instruction-manual.pdf">Existing YFE380 instruction manual</a>: applicability to this delivered YF380 and its engine must be confirmed with the manufacturer. No mechanical adjustment is prescribed here.</p>
     </article>
+    <div aria-label="Later owner observations">{commissioningObservations.map(record => <article className="ardhi-observation" key={record.id}><p className="eyebrow">Owner report - {record.date}</p><h3>{record.title}</h3><p>{record.summary}</p><p>Supporting media and inspection approval pending.</p></article>)}</div>
     <ol className="ardhi-production-checks">{commissioningChecks.map(check => <li id={`commissioning-${check.id}`} key={check.id}>
       <details><summary><strong>{check.title}</strong><span className={`production-status is-${check.status}`}>{labels[check.status]}</span></summary>
       <p>{check.notes}</p><dl><div><dt>Evidence date</dt><dd>{check.date ?? 'Not recorded'} ? time not recorded</dd></div><div><dt>Review / approval</dt><dd>{check.approval === 'pending' ? 'Pending' : 'Reviewed'}</dd></div></dl>

@@ -1,4 +1,4 @@
-import { firstStartObservation } from '../data/ardhiFlagship';
+import { firstStartObservation, commissioningObservations } from '../data/ardhiFlagship';
 import { ArdhiInspections, ArdhiMaintenancePlan } from './ArdhiProduction';
 import { Fragment, lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
@@ -315,6 +315,7 @@ const history: HistoryRecord[] = [
   { id: "future-5", date: ardhiDelivery.date, title: ardhiDeliveryEvent.title, status: "documented", confidence: "Verified delivery", narrative: ardhiDeliveryEvent.detail!, supplier: `${ardhiDelivery.carrier} / PRO ${ardhiDelivery.pro} / ${ardhiDelivery.origin}`, outcome: "Receiving inspection pending. Not operational or rental-ready.", mediaChapter: "delivery", mediaLabel: "View delivery media status" },
   { id: "unboxing-20261026", date: "2026-10-26", title: ardhiUnboxingEvent.title, status: "documented", confidence: "Photographed", narrative: ardhiUnboxingEvent.detail!, mediaChapter: "delivery", mediaLabel: "View crate disassembly photographs" },
   { id: firstStartObservation.id, date: firstStartObservation.date, title: firstStartObservation.title, status: "current", confidence: "Owner report", narrative: firstStartObservation.summary, outcome: "Not commissioned; no confirmed engine defect. Inspection and resolution pending." },
+  ...commissioningObservations.map((record): HistoryRecord => ({ id: record.id, date: record.date, title: record.title, status: 'current', confidence: 'Owner report - evidence pending', narrative: record.summary, outcome: 'Service attention required. Not commissioned, operational or rental-ready.' })),
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,

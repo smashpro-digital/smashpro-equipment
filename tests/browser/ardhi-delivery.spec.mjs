@@ -19,9 +19,12 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect(page.locator('#watch-ardhi iframe')).toHaveCount(0);
   await expect(page.locator('#check-in')).toHaveAttribute('href', '/k/ARDHI26-K01/');
   await expect(page.locator('#commissioning-first-start')).toContainText('Needs attention');
+  await expect(page.locator('#inspections')).toContainText('Service attention required');
+  await expect(page.getByRole('heading', {name: 'Engine subsequently started - owner report'}).first()).toBeVisible();
+  await expect(page.locator('[aria-label="Later owner observations"]')).toContainText('has not been repaired');
   await expect(page.locator('#commissioning-delivery')).toContainText('Passed');
   await expect(page.locator('#commissioning-crate-opened')).toContainText('In progress');
-  await expect(page.locator('#commissioning-accessories')).toContainText('Not started');
+  await expect(page.locator('#commissioning-accessories')).toContainText('In progress');
   await expect(page.locator('#service')).toContainText('Awaiting Commissioning');
   await expect(page.locator('.ardhi-production-checks > li')).toHaveCount(16);
   await expect(page.locator('#operator-preparation')).toContainText('not connected on this Passport');
