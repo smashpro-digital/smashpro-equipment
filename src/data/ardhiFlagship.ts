@@ -82,3 +82,13 @@ export const missionTimeline = [
   ...['Commissioning', 'Training', 'First Job', '25 Hours', '50 Hours', '100 Hours', 'Attachments', 'Maintenance', 'Retirement'].map(title => ({ title, state: 'pending', detail: 'Future milestone', href: '#service' })),
 ];
 export const futureAttachments = ['Grapple', 'Brush Cutter', 'Auger', 'Rake', 'Snow Blade', 'Trencher'];
+
+// Factory reference guidance, not commissioning acceptance for this asset.
+export const factoryStartupReference = {
+  id: 'ardhi-factory-startup-reference-20261027', title: 'Factory startup sequence',
+  src: '/equipment/images/sp-ardhi-26-factory-startup-reference-20261027.mp4',
+  poster: '/equipment/images/sp-ardhi-26-factory-startup-reference-20261027.jpg',
+  receivedAt: '2026-10-27', durationSeconds: 30.488,
+  description: 'Factory-supplied demonstration of the control panel, startup and shutdown sequence. The video includes on-screen instructions.',
+  applicability: 'Shown on a factory reference machine. Confirm the controls and procedure apply to the delivered YF380. This is guidance, not ARDHI commissioning or inspection acceptance.',
+} as const;

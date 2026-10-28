@@ -1,10 +1,20 @@
-import { commissioningChecks, commissioningObservations, commissioningLifecycle, firstStartObservation, maintenanceSystems } from '../data/ardhiFlagship';
+import { factoryStartupReference, commissioningChecks, commissioningObservations, commissioningLifecycle, firstStartObservation, maintenanceSystems } from '../data/ardhiFlagship';
 import '../styles/ardhi-production.css';
 const labels = { not_started: 'Not started', in_progress: 'In progress', passed: 'Passed', needs_attention: 'Needs attention', blocked: 'Blocked' };
 
 export function ArdhiInspections() {
   return <section className="section shell ardhi-production" id="inspections" aria-labelledby="inspections-title">
     <header><p className="eyebrow">Receiving / commissioning</p><h2 id="inspections-title">Evidence before operation.</h2><p>{commissioningLifecycle}. Not commissioned, operational or rental-ready.</p></header>
+    <article className="ardhi-startup-reference" id="factory-startup-reference" aria-labelledby="factory-startup-title">
+      <p className="eyebrow">Factory guidance / testing and inspection</p>
+      <h3 id="factory-startup-title">{factoryStartupReference.title}</h3>
+      <p>{factoryStartupReference.description}</p>
+      <video controls playsInline preload="none" poster={factoryStartupReference.poster} width="1920" height="1080" aria-label="Factory startup and shutdown demonstration" aria-describedby="factory-startup-context">
+        <source src={factoryStartupReference.src} type="video/mp4" />
+        Your browser does not support this video. <a href={factoryStartupReference.src}>Watch the factory startup reference</a>.
+      </video>
+      <p id="factory-startup-context">{factoryStartupReference.applicability}</p>
+    </article>
     <article className="ardhi-observation" id="first-start-observation">
       <p className="eyebrow">Owner report ? October 26, 2026</p><h3>{firstStartObservation.title}</h3>
       <p>{firstStartObservation.summary}</p><p>This is an observation, not a confirmed defective engine.</p>

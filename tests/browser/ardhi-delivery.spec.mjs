@@ -85,3 +85,23 @@ for (const width of [390, 1440]) test(`production inspections, anchors and publi
     await page.locator(section).screenshot({ animations: 'disabled', style: '.passport-rail {visibility:hidden}', path: `tmp/production-passport-captures/${width}-${section.replace(/[.#]/g,'')}.png` });
   }
 });
+
+for (const width of [390, 1440]) test(`factory startup reference video at ${width}`, async ({ page }) => {
+  await page.setViewportSize({width, height:950});
+  await page.route('**/api/**', route => route.fulfill({status:503,body:'Unavailable'}));
+  await page.goto('/equipment/sp-ardhi-26.html#factory-startup-reference');
+  const section = page.locator('#factory-startup-reference');
+  const video = section.locator('video');
+  await expect(section).toContainText('not ARDHI commissioning or inspection acceptance');
+  await expect(video).toHaveAttribute('preload','none');
+  expect(await video.evaluate(v => v.paused && !v.autoplay && v.controls)).toBe(true);
+  await video.evaluate(v => {v.muted = true; v.load();});
+  await expect.poll(() => video.evaluate(v => v.readyState)).toBeGreaterThanOrEqual(2);
+  await video.evaluate(v => v.play());
+  await expect.poll(() => video.evaluate(v => v.currentTime)).toBeGreaterThan(0);
+  expect(await video.evaluate(v => v.videoWidth)).toBe(1920);
+  await video.evaluate(v => { v.pause(); return new Promise(resolve => { v.addEventListener('seeked', resolve, {once:true}); v.currentTime = 2; }); });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(page.locator('#commissioning-first-start')).toContainText('Needs attention');
+  await section.screenshot({path:`tmp/startup-reference-${width}.png`,style:'.passport-rail{visibility:hidden!important}'});
+});
