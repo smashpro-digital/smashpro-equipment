@@ -1,3 +1,4 @@
+import { commissioningObservations } from './ardhiFlagship';
 import { ardhiDelivery, ardhiDeliveryPhotos, ardhiUnboxingPhotos } from "./ardhiDelivery";
 // Build/server entry only. React imports virtual:passport-public instead.
 import { equipment } from "./equipment";
@@ -415,6 +416,11 @@ Object.assign(unboxing, { kind: "lifecycle_event", evidence_state: "verified", s
 // An owner-reported unsuccessful attempt is not commissioning completion or a defect diagnosis.
 const startupAttempt = ardhi.records.find(record => record.id === "ardhi-first-start-attempt-20261026")!;
 Object.assign(startupAttempt, { kind: "lifecycle_event", evidence_state: "pending", source_type: "smashpro", stage_id: "receiving_inspection", event_type: "startup_attempt", evidence_ids: [], productionEvidence: false, factoryEvidence: false, fieldEvidence: false });
+// Owner reports are pending evidence, never field acceptance or readiness approval.
+for (const observation of commissioningObservations) {
+  const record = ardhi.records.find(record => record.id === observation.id)!;
+  Object.assign(record, { kind: 'lifecycle_event', evidence_state: 'pending', source_type: 'smashpro', stage_id: 'receiving_inspection', event_type: 'owner_observation', evidence_ids: [], productionEvidence: false, factoryEvidence: false, fieldEvidence: false });
+}
 // Public delivery evidence is an owner-confirmed carrier summary plus reviewed photographs.
 const delivery = ardhi.records.find(record => record.id === "ardhi-delivery-20261026")!;
 Object.assign(delivery, { kind: "lifecycle_event", evidence_state: "verified", source_type: "carrier", stage_id: "arrival", event_type: "completion", evidence_ids: ["ardhi-delivery-confirmation-20261026"] });

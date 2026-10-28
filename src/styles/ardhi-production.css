@@ -21,3 +21,7 @@
 
 .ardhi-documentary.ardhi-flagship .flagship-service-grid [role="row"] {grid-template-columns:repeat(6,minmax(0,1fr))}
 @media(max-width:767px){.ardhi-documentary.ardhi-flagship .flagship-service-grid [role="row"] {grid-template-columns:1fr}}
+
+.ardhi-startup-reference {margin:28px 0;padding:clamp(18px,3vw,28px);border:1px solid #34432d;background:#0e160f}
+.ardhi-startup-reference video {display:block;width:100%;max-width:960px;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000;margin:20px 0}
+.ardhi-startup-reference video:focus-visible {outline:3px solid #d5b76e;outline-offset:4px}

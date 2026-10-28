@@ -19,7 +19,7 @@ test('first job cannot become Project 001 from dates, completion flag or incompl
 });
 test('only delivery is documented; commissioning remains pending and invalid evidence never qualifies', () => {
   assert.equal(commissioningChecks.length, 16);
-  assert.deepEqual(commissioningChecks.filter(check => check.evidence.length).map(check => check.id), ['delivery', 'crate-opened']);
+  assert.deepEqual(commissioningChecks.filter(check => check.evidence.length).map(check => check.id), ['delivery', 'crate-inspection', 'crate-opened']);
   assert.deepEqual(serviceEntries, []);
   assert.deepEqual(verifiedEvidence([{ ...proof, href: '' }, { ...proof, title: '' }, { ...proof, href: 'javascript:alert(1)' }, { ...proof, href: 'https://private.invalid/inspection.pdf' }, { ...proof, state: 'pending' }]), []);
   assert.deepEqual(verifiedEvidence([proof]), [proof]);

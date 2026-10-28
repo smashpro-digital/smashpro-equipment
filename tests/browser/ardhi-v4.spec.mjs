@@ -36,7 +36,7 @@ test('arrival and factory deep links retain their full history, including inject
   await open(page, '#history-port-arrival');
   await expect(page.locator('.flagship-history-disclosure')).toHaveAttribute('open', '');
   await expect(page.locator('#history-port-arrival details')).toHaveAttribute('open', '');
-  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(54);
+  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(58);
   await page.goto('/equipment/sp-ardhi-26.html#history-production-complete');
   await expect(page.locator('#history-production-complete details')).toHaveAttribute('open', '');
   await page.goto('/equipment/sp-ardhi-26.html#drive-low-price-offer-review');
@@ -73,7 +73,7 @@ for (const width of [320, 390, 768, 1440]) test(`Expo sponsor experience preserv
   await expect(page.locator('.flagship-partners')).toHaveCount(0);
   await expect(page.locator('.flagship-roadmap li.is-pending')).toHaveCount(9);
   await expect(page.locator('.flagship-roadmap')).toContainText('not manufacturer service intervals');
-  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(54);
+  await expect(page.locator('.ardhi-expandable-timeline > li:not(.history-phase)')).toHaveCount(58);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   const ids = await page.locator('[id]').evaluateAll(nodes => nodes.map(node => node.id));
   expect(new Set(ids).size).toBe(ids.length);

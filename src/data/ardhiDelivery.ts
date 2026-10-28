@@ -1,4 +1,4 @@
-import { firstStartObservation } from './ardhiFlagship';
+import { firstStartObservation, commissioningObservations } from './ardhiFlagship';
 import type { GalleryImage, TimelineEvent } from '../types/equipment';
 import type { EquipmentVideo } from '../types/passportExperience';
 
@@ -66,3 +66,5 @@ export const ardhiMediaCollections = [
   { id: 'maintenance', title: 'Maintenance', slots: ['Service inspection', 'Parts and service evidence'], mediaIds: [] },
   { id: 'attachments', title: 'Attachments', slots: ['Fitment inspection', 'Attachment testing'], mediaIds: [] },
 ];
+
+export const ardhiCommissioningEvents: TimelineEvent[] = commissioningObservations.map(record => ({ id: record.id, occurredAt: record.date, kind: 'status', title: record.title, detail: `${record.source}: ${record.summary} Not commissioned, operational or rental-ready.`, publicDisplay: true }));
