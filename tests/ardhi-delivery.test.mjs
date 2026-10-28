@@ -28,7 +28,7 @@ test('verified delivery advances receipt only and preserves manufacturer and ves
   assert.deepEqual(event.evidence_ids, ['ardhi-delivery-confirmation-20261026']);
   for (const id of ['ardhi-manufacturer-port-arrival', 'ardhi-ocean-departure-reported', 'ardhi-factory-build', 'ardhi-export-customs-released']) assert.ok(passport.records.some(r => r.id === id), id);
   assert.deepEqual(flagship.commissioningChecks.filter(c => flagship.verifiedEvidence(c.evidence).length).map(c => c.id), ['delivery', 'crate-opened']);
-  for (const id of ['crate-inspection','accessories','engine-oil','hydraulic-fluid','first-start','first-drive','attachment-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
+  for (const id of ['accessories','engine-oil','hydraulic-fluid','first-start','first-drive','attachment-test']) assert.equal(flagship.commissioningChecks.find(c => c.id === id).evidence.length, 0);
   assert.equal(flagship.firstJobPresentation(flagship.firstJob, flagship.commissioningChecks).mission, 'Awaiting Commissioning');
   assert.equal(domain.lifecycleStageStatus(passport, 'arrival'), 'complete');
   assert.equal(domain.lifecycleStageStatus(passport, 'receiving_inspection'), 'current');

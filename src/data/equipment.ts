@@ -140,6 +140,7 @@ export const equipment: Equipment[] = [
       { id: "ardhi-test", title: "Factory testing", kind: "video", url: image("sp-ardhi-26-factory-test.mp4") },
       { id: "ardhi-build", title: "Factory build", kind: "video", url: image("sp-ardhi-26-factory-build-walkaround.mp4") },
       { id: "ardhi-factory-departure-video-20260902", title: "Factory departure documented", kind: "video", role: "build", url: image("sp-ardhi-26-factory-departure-2026-09-02.mp4"), publishedAt: "2026-09-02", description: "The sealed wooden export crate leaving the factory on a truck before container loading." },
+      { id: "ardhi-short-dm58h2mkoj0", title: "ARDHI field update | YouTube Short", kind: "youtube", role: "short", url: "https://www.youtube.com/shorts/DM58h2mkOj0", description: "Owner-supplied ARDHI YouTube Short. Content classification and commissioning claims pending editorial review." },
     ], scores: { documentation: 0, maintenance: 0 }, valuation: { currency: "USD", status: "pending" },
     capabilities: ["Earthmoving and grading", "Loading and unloading", "Pallet handling", "Tight-access work", "Attachment-powered work"],
     capabilityIds: ["compact_access", "material_handling", "grading", "lifting", "landscape", "cleanup", "pallet_handling"], attachmentIds: ["bucket", "pallet_forks"],
