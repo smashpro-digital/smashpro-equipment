@@ -11,7 +11,7 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect(page.locator('.ardhi-v2-hero')).toContainText('Arrived October 26, 2026');
   await expect(page.locator('#journey')).toContainText('R+L Carriers');
   await expect(page.locator('#journey')).toContainText('IACO468333');
-  await expect(page.locator('#mission-dashboard')).toContainText('Receiving inspection');
+  await expect(page.locator('#mission-dashboard')).toContainText('Commissioning & field evaluation');
   await expect(page.locator('#delivery-media img')).toHaveCount(5);
   await page.locator('#delivery-media').scrollIntoViewIfNeeded();
   for (const image of await page.locator('#delivery-media img').all()) { await image.scrollIntoViewIfNeeded(); await image.evaluate(image => image.decode()); }
@@ -21,7 +21,7 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect(page.locator('#commissioning-first-start')).toContainText('Needs attention');
   await expect(page.locator('#inspections')).toContainText('Service attention required');
   await expect(page.getByRole('heading', {name: 'Engine subsequently started - owner report'}).first()).toBeVisible();
-  await expect(page.locator('[aria-label="Later owner observations"]')).toContainText('has not been repaired');
+  await expect(page.locator('[aria-label="October 26 historical observations"]')).toContainText('has not been repaired');
   await expect(page.locator('#commissioning-delivery')).toContainText('Passed');
   await expect(page.locator('#commissioning-crate-opened')).toContainText('In progress');
   await expect(page.locator('#commissioning-accessories')).toContainText('In progress');

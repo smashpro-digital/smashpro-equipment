@@ -1,3 +1,4 @@
+import postDelivery from '../data/ardhiPostDelivery.json';
 import { firstStartObservation, commissioningObservations } from '../data/ardhiFlagship';
 import { ArdhiInspections, ArdhiMaintenancePlan } from './ArdhiProduction';
 import { Fragment, lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
@@ -529,9 +530,9 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Fleet Asset <span>#001</span>
           </h1>
           <p>
-            Arrived October 26, 2026 <b>/</b> Receiving inspection
+            Arrived October 26, 2026 <b>/</b> Field evaluation underway
           </p>
-          <p className="flagship-hero-description">ARDHI is here. Receiving inspection is underway; commissioning remains pending.</p>
+          <p className="flagship-hero-description">{postDelivery.summary}</p>
           <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#journey">Explore Journey</a></div>
       </PassportHero>
       <ArdhiMissionDashboard />
@@ -840,7 +841,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             <span className="document-status is-verified">Verified</span>
             <h3>Equipment Passport</h3>
             <p>Permanent identity, configuration, journey, service, work, and maintenance history.</p>
-            <small>Updated October 9, 2026 · Web passport</small>
+            <small>Updated November 1, 2026 · Web passport</small>
             <a href="#passport-ledger-title">Open Passport</a>
           </article>
           <article className="is-available window-sticker-library-card">
@@ -860,15 +861,15 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               </div>
             </article>
           ))}
-          {["Maintenance", "Bill of Lading", "Packing List", "Inspection"].map((title, index) => (
+          {["Maintenance", "Bill of Lading", "Packing List", "Inspection"].map((title) => (
             <article className="is-reserved" key={title}>
               <div aria-hidden="true">
                 <span>⌁</span> Blueprint record
               </div>
-              <span className="document-status is-pending">{index < 2 ? "Pending Arrival" : "Awaiting Verification"}</span>
+              <span className="document-status is-pending">Awaiting Verification</span>
               <h3>{title}</h3>
               <p>This slot activates when a verified public file enters the equipment record.</p>
-              <small>Upon arrival · Status pending</small>
+              <small>Delivery complete · Public file pending</small>
             </article>
           ))}
         </div>

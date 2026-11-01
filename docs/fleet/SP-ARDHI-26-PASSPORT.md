@@ -9,6 +9,11 @@
 
 > **Historical October 6 snapshot (superseded by delivery below):** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record carried an **October 5, 2026** planning target. Public vessel context now records EVER MAX voyage 1374-016E departing Colón on October 1 and reaching **Savannah anchorage on October 6 at 06:43 UTC**. This is a vessel-level checkpoint only. SP-ARDHI-26 cargo discharge, U.S. customs clearance, cargo release, final-mile delivery, receipt, and commissioning remain unconfirmed. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
 
+## Current update - November 1, 2026
+
+**Delivered / Commissioning and field evaluation underway / Inspection follow-up required.**
+Owner reports oil-level correction, restart after charging and October 31 dirt-day activities. These do not establish a completed repair, commissioning approval, rated lifting capacity, customer-job completion or operational release. See [post-delivery reconciliation](SP-ARDHI-26-POST-DELIVERY-20261101.md). Earlier snapshots below retain their original evidence state and are not current-state assertions.
+
 ## Verified delivery - October 26, 2026
 
 SP-ARDHI-26 / YF380 was delivered by **R+L Carriers**, PRO **IACO468333**, from **CONVOY USA-SAVANNAH**. The owner confirmed carrier delivery and supplied photographs of the closed wooden crate on the ground. Crated weight is approximately **950 kg**, separate from operating weight.

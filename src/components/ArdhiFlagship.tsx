@@ -1,20 +1,21 @@
 import type { CSSProperties } from 'react';
 import type { Equipment } from '../types/equipment';
+import postDelivery from '../data/ardhiPostDelivery.json';
 import { ardhiDelivery } from '../data/ardhiDelivery';
 import { sponsorRoadmap } from '../data/ardhiExpo';
 import { commissioningChecks, firstJob, firstJobPresentation, futureAttachments, missionProfile, missionTimeline, serviceEntries, verifiedEvidence } from '../data/ardhiFlagship';
 
 export function ArdhiMissionDashboard() {
   const fields = [
-    ['Current Mission', 'Receiving inspection'], ['Current Lifecycle', 'Delivered / pre-service'],
-    ['Current Chapter', 'Arrival & inspection'], ['Service Hours', 'Not yet verified'],
-    ['Fleet Status', 'Pre-service'], ['Next Event', 'Crate inspection'],
-    ['Current Evidence', 'Owner-confirmed carrier delivery'], ['Current Location', 'Delivery complete / location withheld'],
+    ['Current Mission', 'Commissioning & field evaluation'], ['Current Lifecycle', 'Delivered / pre-service'],
+    ['Current Chapter', 'First dirt-day evaluation'], ['Service Hours', 'Not yet verified'],
+    ['Fleet Status', 'Inspection follow-up required'], ['Next Event', 'Inspection review'],
+    ['Current Evidence', 'Operator report / media review pending'], ['Current Location', 'Delivery complete / location withheld'],
   ];
   return <section className="shell flagship-dashboard" id="mission-dashboard" aria-labelledby="mission-dashboard-title">
     <header><div><p className="eyebrow">Fleet Asset 001 / Mission Control</p><h2 id="mission-dashboard-title">SP-ARDHI-26</h2></div><p><span className="flagship-status-dot" aria-hidden="true" /> {ardhiDelivery.status}</p></header>
     <dl>{fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    <footer><span>Delivered October 26, 2026; crate opening documented; commissioning unverified</span><a href="#history-future-5">View current evidence ↗</a></footer>
+    <footer><span>Delivered October 26; field evaluation reported October 31; commissioning approval pending</span><a href="#field-evaluation">View current chapter ↗</a></footer>
   </section>;
 }
 
@@ -31,8 +32,8 @@ export function ArdhiMissionTimeline({ expo = false }: { expo?: boolean }) {
   const timeline = expo ? sponsorRoadmap : missionTimeline;
   const complete = timeline.filter(step => step.state === 'complete').length;
   return <section className="shell flagship-roadmap" aria-labelledby="mission-timeline-title">
-    <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Delivery is complete. Receiving inspection is the current chapter; commissioning remains pending.</p></header>
-    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; receiving inspection pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
+    <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Delivery is complete. Commissioning and field evaluation are underway; inspection follow-up and final approval remain pending.</p></header>
+    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; commissioning approval pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
     <ol>{timeline.map((step, i) => <li key={step.title} className={`is-${step.state}`} aria-current={step.state === 'current' ? 'step' : undefined}><span>{String(i + 1).padStart(2, '0')}</span><a href={step.href}>{step.title}</a><small>{step.detail}</small></li>)}</ol>
     <p className="flagship-note">{expo ? 'Future milestones are ambitions, not booked jobs, awarded contracts or connected automation. Each invites a scoped contribution.' : 'Hours are record milestones, not manufacturer service intervals. Follow the operator manual for maintenance.'}</p>
   </section>;
@@ -43,7 +44,12 @@ export function ArdhiServiceRecord() {
   const columns = ['Hours', 'Date', 'Photos', 'Parts', 'Attachments', 'Warranty'];
   const verifiedServices = serviceEntries.filter(entry => verifiedEvidence(entry.evidence).length > 0);
   return <section className="section shell ardhi-service-record flagship-service" id="service" aria-labelledby="service-record-title">
-    <header><p className="eyebrow">Service / Field Readiness</p><h2 id="service-record-title">The next chapter starts here.</h2><p>Awaiting commissioning. No field service hours or completed service entries have been recorded.</p></header>
+    <header><p className="eyebrow">Service / Field Readiness</p><h2 id="service-record-title">From delivery to field evaluation.</h2><p>{postDelivery.readiness}</p></header>
+    <article className="ardhi-observation" id="field-evaluation"><p className="eyebrow">Operator report · Updated {postDelivery.asOf}</p><h3>October 31 dirt day</h3><p>{postDelivery.summary}</p><ul>{postDelivery.fieldActivities.map(activity => <li key={activity}>{activity}</li>)}</ul><p>A full pallet lift is not documented. Rated lifting capacity and load center require verification before a full pallet lift is authorized.</p><p>{postDelivery.mediaSummary}</p><a href="#delivery-media">Existing delivery evidence</a></article>
+    <div className="flagship-profile-grid" aria-label="Post-delivery milestones">{postDelivery.milestones.map(entry => <article key={entry.key}><p className="eyebrow">{entry.date}</p><h3>{entry.title}</h3><p>{entry.summary}</p><a href={entry.href}>View record</a></article>)}</div>
+    <div id="night-ops"><h3>Night Ops development</h3><div className="flagship-profile-grid">{postDelivery.nightOps.map(stage => <article key={stage.title}><p className="eyebrow">{stage.status}</p><h4>{stage.title}</h4><p>{stage.summary}</p></article>)}</div></div>
+    <h3>Inspection follow-up</h3><p>{postDelivery.maintenanceSummary}</p>
+    <h3>Attachments and upgrades</h3><p>{postDelivery.upgradeSummary}</p>
     <div className="flagship-first-job"><div><p className="eyebrow">{job.title}</p><h3>{job.mission}</h3></div><dl><div><dt>Estimated</dt><dd>{job.estimate}</dd></div></dl><p>Becomes Project 001 when commissioning and the completed job have public supporting evidence.</p></div>
     <h3>Service record</h3><p>Future public entries will retain reviewed hours and supporting evidence. Technician identities, costs and private notes remain protected.</p>
     <div className="flagship-service-grid" role="table" aria-label="Service record"><div role="row" className="flagship-service-head">{columns.map(title => <strong role="columnheader" key={title}>{title}</strong>)}</div>{verifiedServices.map(entry => <div role="row" key={entry.id}>{[String(entry.hours), entry.date, entry.photos.map(photo => <a key={photo.href} href={photo.href}>{photo.title}</a>), entry.parts.join(', '), entry.attachments.join(', '), entry.warranty].map((value, i) => <div role="cell" key={columns[i]}><span className="flagship-mobile-label" aria-hidden="true">{columns[i]}</span>{value}</div>)}</div>)}</div>

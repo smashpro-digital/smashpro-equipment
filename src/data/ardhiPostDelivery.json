@@ -1,0 +1,59 @@
+{
+  "assetId": "SP-ARDHI-26",
+  "asOf": "2026-11-01",
+  "source": "Operator report; supporting media pending where indicated",
+  "status": "Delivered / Commissioning and field evaluation underway",
+  "summary": "ARDHI is developing from factory delivery into field evaluation. His October 31 dirt-day activities are operator-reported; inspection follow-up and commissioning approval remain open.",
+  "readiness": "Commissioning approval and customer-service readiness remain pending. Field evaluation is not a release for customer work.",
+  "milestones": [
+    {
+      "key": "delivery",
+      "date": "October 26, 2026",
+      "title": "Delivery and uncrating",
+      "summary": "Carrier delivery and crate opening are documented in the existing gallery.",
+      "href": "#delivery-media"
+    },
+    {
+      "key": "recovery",
+      "date": "October 26 - November 1, 2026",
+      "title": "Commissioning recovery",
+      "summary": "Starting restored following battery charging after an oil-level correction. Further operating observation and inspection remain required; this is not a confirmed diagnosis.",
+      "href": "#inspections"
+    },
+    {
+      "key": "field",
+      "date": "October 31, 2026",
+      "title": "First dirt-day evaluation",
+      "summary": "Operator-reported bucket handling, playground-area preparation, grading, dirt movement and pallet-fork practice. Field photographs await review. A full pallet lift is not documented.",
+      "href": "#field-evaluation"
+    }
+  ],
+  "fieldActivities": [
+    "Bucket handling and grading",
+    "Playground-area preparation",
+    "Dirt movement",
+    "Material handling practice",
+    "Pallet-fork testing",
+    "Red mulch handling evaluation"
+  ],
+  "nightOps": [
+    {
+      "title": "V1 - Removable magnetic lights",
+      "status": "Initial configuration reported",
+      "summary": "Battery-powered magnetic lights and purple accents: 12 initially reported; eight more planned for a 20-light target. Removable side and rear placement supports inspection."
+    },
+    {
+      "title": "V2 - Hardwired work lighting",
+      "status": "Concept - not installed",
+      "summary": "LASFIT light bar and AUXBEAM pods are proposed for forward and wider worksite coverage, with desired amber/white capability. Factory pods stay ignition controlled; purple accents use a separate proposed circuit."
+    },
+    {
+      "title": "V3 - Engine-off illumination",
+      "status": "Design candidate - not purchased or installed",
+      "summary": "A dedicated auxiliary battery, protected independent circuits, fused distribution, weather-resistant enclosure and compatible charging are planned. A 12V 30Ah LiFePO4 battery is a candidate, not an installed upgrade."
+    }
+  ],
+  "maintenanceSummary": "Oil-level correction and restart after charging are operator-reported. Inspection follow-up remains open. Detailed troubleshooting, defect photographs, supplier messages and warranty discussions remain in Digital HQ.",
+  "upgradeSummary": "Bucket, pallet forks and factory lights are present. Digging teeth, transport hooks, securing points, mirrors, extinguisher, lighting and recovery accessories remain under evaluation or procurement. The grapple is not received or installed.",
+  "mediaSummary": "Delivery, crate-opening photographs and factory startup guidance remain available. Field, charging, lighting and inspection evidence awaits review; factory footage is not presented as field-test proof."
+}

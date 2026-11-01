@@ -13,7 +13,7 @@ await server.close();
 const passport = domain.projectPassportPublicRecord(records.canonicalPassports.find(p => p.asset.id === 'SP-ARDHI-26'));
 
 test('verified delivery advances receipt only and preserves manufacturer and vessel history', () => {
-  assert.equal(passport.asset.status_label, 'Delivered / Receiving inspection');
+  assert.equal(passport.asset.status_label, 'Delivered / Commissioning and field evaluation underway');
   assert.equal(passport.asset.current_lifecycle_stage, 'receiving_inspection');
   assert.equal(delivery.ardhiDelivery.date, '2026-10-26');
   assert.equal(delivery.ardhiDelivery.pro, 'IACO468333');

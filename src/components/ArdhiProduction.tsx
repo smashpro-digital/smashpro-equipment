@@ -16,19 +16,20 @@ export function ArdhiInspections() {
       <p id="factory-startup-context">{factoryStartupReference.applicability}</p>
     </article>
     <article className="ardhi-observation" id="first-start-observation">
-      <p className="eyebrow">Owner report ? October 26, 2026</p><h3>{firstStartObservation.title}</h3>
+      <p className="eyebrow">Historical owner report - October 26, 2026</p><h3>{firstStartObservation.title}</h3>
       <p>{firstStartObservation.summary}</p><p>This is an observation, not a confirmed defective engine.</p>
       <details><summary>Original attempt: information not recorded at that time</summary><ul>{firstStartObservation.missingObservations.map(label => <li key={label}>{label}: not yet documented</li>)}</ul></details>
       <p><a href="/equipment/documents/sp-ardhi-26/yfe380-operator-instruction-manual.pdf">Existing YFE380 instruction manual</a>: applicability to this delivered YF380 and its engine must be confirmed with the manufacturer. No mechanical adjustment is prescribed here.</p>
     </article>
-    <div aria-label="Later owner observations">{commissioningObservations.map(record => <article className="ardhi-observation" key={record.id}><p className="eyebrow">Owner report - {record.date}</p><h3>{record.title}</h3><p>{record.summary}</p><p>Supporting media and inspection approval pending.</p></article>)}</div>
+    <div aria-label="October 26 historical observations">{commissioningObservations.map(record => <article className="ardhi-observation" key={record.id}><p className="eyebrow">Owner report - {record.date}</p><h3>{record.title}</h3><p>{record.summary}</p><p>Historical observation preserved. See the updated post-delivery record for subsequent recovery; inspection approval remains pending.</p></article>)}</div>
     <ol className="ardhi-production-checks">{commissioningChecks.map(check => <li id={`commissioning-${check.id}`} key={check.id}>
       <details><summary><strong>{check.title}</strong><span className={`production-status is-${check.status}`}>{labels[check.status]}</span></summary>
-      <p>{check.notes}</p><dl><div><dt>Evidence date</dt><dd>{check.date ?? 'Not recorded'} ? time not recorded</dd></div><div><dt>Review / approval</dt><dd>{check.approval === 'pending' ? 'Pending' : 'Reviewed'}</dd></div></dl>
+      <p>{check.notes}</p><dl><div><dt>Evidence date</dt><dd>{check.date ?? 'Not recorded'} - time not recorded</dd></div><div><dt>Review / approval</dt><dd>{check.approval === 'pending' ? 'Pending' : 'Reviewed'}</dd></div></dl>
       {check.evidence.map(e => <p key={e.href}><a href={e.href}>{e.title}</a></p>)}
       {!check.evidence.length && <p>AWAITING MEDIA / inspection evidence</p>}
       {check.issue && <p>Issue: {check.issue} Resolution: {check.resolution ?? 'Pending'}</p>}
       </details></li>)}</ol>
+    <p><a href="#field-evaluation">November 1 update: commissioning recovery and field evaluation</a></p>
     <p>Operator attribution, issue resolution and sign-off require protected records. This public checklist is read-only; no inspection is submitted here.</p>
   </section>;
 }
