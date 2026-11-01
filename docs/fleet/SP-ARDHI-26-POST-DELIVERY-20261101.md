@@ -19,8 +19,10 @@ Deployment/publication: not merged or deployed by this task. Remaining acceptanc
 - Full unit suite: 177/177 passed. Focused final projection, delivery, release-policy and protected-passport rerun: 30/30 passed.
 - TypeScript, Vite production build, customer-safe index, MZIGO media, public artifact and delivery-photo privacy/hash checks passed.
 - New browser scenarios: 3/3 at 390, 768 and 1440 pixels; no horizontal overflow or page errors, valid new anchors, unchanged Smart Key destination and commissioning approval gate. Screenshots visually reviewed at mobile/desktop.
-- Existing delivery/history/Expo regressions: final rerun in progress; receipt updated before handoff.
+- Existing delivery/history/Expo regressions: 19/19 passed, including media decode, startup-video playback, keyboard/lightbox behavior, QR links and layouts at 320/390/768/1440. Combined browser result: 22/22.
 - Five existing public delivery/unboxing image hashes are unchanged. Delivery-policy status wording now follows the reviewed current editorial state; asset uniqueness and readiness/privacy checks are retained.
 - HQ draft: https://github.com/smashpro-digital/digital-hq/pull/284 . HQ source owns the nine private proposals and 23 evidence categories.
 
 [Mobile field evaluation](../release-captures/ardhi-postdelivery-20261101/390-field.png) | [Desktop Night Ops](../release-captures/ardhi-postdelivery-20261101/1440-lighting.png) | [Mobile hero](../release-captures/ardhi-postdelivery-20261101/390-hero.png)
+
+Hosted CI initially caught a stale positive status fixture in deployment-dependencies.test.mjs after the delivery-policy label changed. Updated that fixture and added explicit rejection of the old receiving-only label; photo hashes and readiness rejection checks are unchanged. No production pipeline bypass.
