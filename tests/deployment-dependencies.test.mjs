@@ -32,13 +32,15 @@ test('frontend deployment keeps mandatory safeguards without depending on shipme
 test('scoped delivery gate rejects missing/changed photos and conflicting public status', async () => {
   const { verifyDeliveryArtifact } = await import('../scripts/verify-ardhi-delivery.mjs');
   // Real reviewed source photographs; this gate is repeated on the built artifact.
-  const snapshot = { equipment: [{ fleet_id: 'SP-ARDHI-26', status_label: 'Delivered / Receiving inspection' }] };
+  const snapshot = { equipment: [{ fleet_id: 'SP-ARDHI-26', status_label: 'Delivered / Commissioning and field evaluation underway' }] };
   const read = path => path === 'equipment-index.json' ? Buffer.from(JSON.stringify(snapshot)) : readFileSync(path);
   assert.equal(verifyDeliveryArtifact(read).photos, 5);
   assert.throws(() => verifyDeliveryArtifact(path => path.endsWith('.jpg') ? Buffer.from('changed') : read(path)));
   snapshot.equipment[0].rental_available = true;
   assert.throws(() => verifyDeliveryArtifact(read));
   delete snapshot.equipment[0].rental_available;
+  snapshot.equipment[0].status_label = 'Delivered / Receiving inspection';
+  assert.throws(() => verifyDeliveryArtifact(read));
   snapshot.equipment[0].status_label = 'Operational';
   assert.throws(() => verifyDeliveryArtifact(read));
   snapshot.equipment = [];

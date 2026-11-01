@@ -1,3 +1,4 @@
+import postDelivery from './ardhiPostDelivery.json';
 import { firstStartObservation, commissioningObservations } from './ardhiFlagship';
 import type { GalleryImage, TimelineEvent } from '../types/equipment';
 import type { EquipmentVideo } from '../types/passportExperience';
@@ -6,10 +7,10 @@ import type { EquipmentVideo } from '../types/passportExperience';
 // This public editorial projection does not write to Digital HQ or Atlas.
 export const ardhiDelivery = {
   assetId: 'SP-ARDHI-26', model: 'YF380', date: '2026-10-26',
-  status: 'Delivered / Receiving inspection',
+  status: postDelivery.status,
   carrier: 'R+L Carriers', pro: 'IACO468333', origin: 'CONVOY USA-SAVANNAH',
   cratedWeight: 'Approximately 950 kg',
-  summary: 'ARDHI has arrived. Final-mile delivery was completed on October 26, 2026. Crate opening and panel removal are now photographed; receiving inspection and commissioning remain pending.',
+  summary: 'ARDHI arrived October 26, 2026. Delivery and crate opening are documented; commissioning and field evaluation are underway. Inspection follow-up and commissioning approval remain pending.',
   evidence: 'Carrier confirmation and photographs of the wooden shipping crate on the ground, confirmed by the owner on October 26, 2026. Delivery photographs are published below; the carrier confirmation document remains unpublished.',
 } as const;
 
@@ -42,7 +43,7 @@ export const ardhiUnboxingEvent: TimelineEvent = {
 export const ardhiDeliveryVideos: EquipmentVideo[] = [];
 export const ardhiMediaSlots = [
   { id: 'unboxing', title: 'Unboxing video', detail: 'Video pending. Crate opening and panel removal are documented in the photo gallery.' },
-  { id: 'first-start', title: 'First startup', detail: 'Video pending. First startup and commissioning are not yet verified.' },
+  { id: 'first-start', title: 'First startup', detail: 'Video pending. Startup and later restart are operator-reported; commissioning approval remains pending.' },
 ] as const;
 
 export const ardhiDeliveryStages = [

@@ -14,7 +14,7 @@ for (const width of [320, 390, 768, 1440]) test(`flagship narrative, evidence an
   await expect(page.locator('.passport-rail a')).toHaveText(['Overview', 'Journey', 'Inspections', 'Maintenance', 'Media', 'Attachments', 'History']);
   const order = await page.evaluate(() => ['.ardhi-v2-hero', '#mission-dashboard', '.passport-rail', '#passport', '.flagship-roadmap', '#journey', '#history', '#service', '#documents'].map(selector => document.querySelector(selector).getBoundingClientRect().top));
   expect(order).toEqual([...order].sort((a, b) => a - b));
-  await expect(page.locator('#mission-dashboard')).toContainText('Receiving inspection');
+  await expect(page.locator('#mission-dashboard')).toContainText('Commissioning & field evaluation');
   await expect(page.locator('#journey')).toContainText('Verified');
   await expect(page.locator('.ardhi-production-checks > li')).toHaveCount(16);
   await expect(page.locator('.flagship-first-job')).toContainText('Awaiting Commissioning');
@@ -60,7 +60,7 @@ for (const width of [320, 390, 768, 1440]) test(`Expo sponsor experience preserv
   await page.setViewportSize({ width, height: 1000 });
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await open(page, '?expo=true');
-  await expect(page.locator('.flagship-hero-description')).toContainText('commissioning remains pending');
+  await expect(page.locator('.flagship-hero-description')).toContainText('commissioning approval remain open');
   await expect(page.locator('#expo-title')).toHaveText('What could your company become part of?');
   await expect(page.locator('.sponsor-selector option')).toHaveCount(12);
   await page.locator('.sponsor-selector select').selectOption('insurance');

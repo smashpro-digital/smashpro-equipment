@@ -5,6 +5,19 @@ import ts from 'typescript';
 const compiled = ts.transpileModule(readFileSync('src/data/ardhiFlagship.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { commissioningChecks, firstJob, firstJobPresentation, serviceEntries, verifiedEvidence } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
 const proof = { title: 'Reviewed inspection', href: '/equipment/documents/inspection.pdf', state: 'verified' };
+test('November 1 activity updates do not grant commissioning approval', () => {
+  for (const id of ['battery', 'first-drive', 'hydraulics']) {
+    const check = commissioningChecks.find(c => c.id === id);
+    assert.equal(check.status, 'in_progress', id);
+    assert.ok(check.progressLabel, id);
+    assert.equal(check.approval, 'pending', id);
+  }
+  assert.equal(commissioningChecks.find(c => c.id === 'engine-oil').status, 'needs_attention');
+  assert.equal(commissioningChecks.find(c => c.id === 'hydraulic-fluid').status, 'not_started');
+  assert.equal(commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
+  assert.equal(commissioningChecks.find(c => c.id === 'first-start').date, null);
+  assert.equal(commissioningChecks.find(c => c.id === 'first-drive').date, '2026-10-31');
+});
 const ready = commissioningChecks.map(check => ({ ...check, status: 'passed', approval: 'reviewed', evidence: [proof] }));
 test('first job cannot become Project 001 from dates, completion flag or incomplete commissioning alone', () => {
   const done = { status: 'completed', mission: 'Material placement', evidence: [proof] };

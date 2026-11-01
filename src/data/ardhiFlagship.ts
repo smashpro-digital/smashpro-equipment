@@ -7,7 +7,7 @@ export function verifiedEvidence(evidence: PublicEvidence[]) {
 export type CommissioningStatus = 'not_started' | 'in_progress' | 'passed' | 'needs_attention' | 'blocked';
 // Public editorial projection only. Operator identity and approval audit belong in HQ.
 export type CommissioningCheck = {
-  id: string; title: string; status: CommissioningStatus; date: string | null;
+  id: string; title: string; status: CommissioningStatus; date: string | null; progressLabel?: string;
   notes: string; evidence: PublicEvidence[]; photoIds: string[]; videoIds: string[];
   issue: string | null; resolution: string | null; approval: 'pending' | 'reviewed';
 };
@@ -25,8 +25,20 @@ export const commissioningObservations = [
   { id: 'ardhi-safety-accessories-owner-report-20261026', title: 'Lights, horn and attachments - owner observations', summary: 'Headlights and horn reportedly worked. Bucket removed; pallet forks assembled and attached; attachments visually inspected. Full safety, attachment locking, load and functional acceptance remain unverified.' },
   { id: 'ardhi-track-observation-owner-report-20261026', title: 'Left rubber track hole reported', summary: 'A hole was observed in the left rubber track. Condition is undiagnosed and the track has not been repaired. Supporting photographs and qualified review are pending.' },
 ].map(record => ({ ...record, date: '2026-10-26', source: 'Owner report', evidenceState: 'pending' as const }));
-export const commissioningLifecycle = 'Delivered / Receiving inspection / Commissioning in progress / Service attention required';
+export const commissioningLifecycle = 'Delivered / Commissioning and field evaluation underway / Service attention required';
 export const commissioningReadiness = { commissioned: false, operational: false, rentalReady: false } as const;
+// Current public progress, separate from formal inspection acceptance. Source:
+// ardhiPostDelivery.json (HQ-reviewed operator-report projection, November 1).
+const currentCheckProgress: Record<string, Partial<CommissioningCheck>> = {
+  'crate-opened': { progressLabel: 'Uncrated · review pending', notes: 'Crate opening is documented; subsequent field evaluation is operator-reported. Inventory and formal receiving approval remain open.' },
+  restraints: { status: 'in_progress', progressLabel: 'Removal review pending', notes: 'Subsequent field movement is operator-reported. Shipping-base and restraint-removal inspection has not been signed off.', date: null },
+  battery: { status: 'in_progress', progressLabel: 'Charging reported', notes: 'Restart following battery charging is operator-reported for October 26 – November 1. Battery condition, charging-system inspection and approval remain unverified.', date: null },
+  'first-start': { status: 'needs_attention', progressLabel: 'Restart reported', notes: 'Starting restored following battery charging after an oil-level correction, per the October 26 – November 1 operator report. Preserve the initial failed attempt; root cause and inspection approval remain open.', date: null },
+  'first-drive': { status: 'in_progress', progressLabel: 'Movement reported', notes: 'October 31 dirt-day movement and grading are operator-reported. This records activity, not approved travel-system performance or commissioning.', date: '2026-10-31' },
+  hydraulics: { status: 'in_progress', progressLabel: 'Field evaluation underway', notes: 'October 31 bucket handling and grading are operator-reported. Hydraulic fluid verification, leak inspection and formal function-test acceptance remain open.', date: '2026-10-31' },
+  'attachment-test': { progressLabel: 'Field evaluation underway', notes: 'October 31 bucket handling and pallet-fork practice are operator-reported. Full pallet lifting, attachment locking and load acceptance are not documented.', date: '2026-10-31' },
+  'engine-oil': { progressLabel: 'Correction reported · review pending', date: null },
+};
 export const commissioningChecks: CommissioningCheck[] = [
   ['delivery', 'Freight delivery'], ['crate-inspection', 'Crate condition inspection'],
   ['crate-opened', 'Unboxing'], ['accessories', 'Equipment inventory'],
@@ -40,11 +52,12 @@ export const commissioningChecks: CommissioningCheck[] = [
   id, title,
   status: id === 'delivery' ? 'passed' : ['engine', 'crate-inspection', 'crate-opened', 'fuel', 'accessories', 'safety', 'attachment-test'].includes(id) ? 'in_progress' : ['first-start', 'engine-oil'].includes(id) ? 'needs_attention' : id === 'passport-complete' ? 'blocked' : 'not_started',
   date: ['delivery', 'crate-inspection', 'engine', 'crate-opened', 'fuel', 'first-start', 'engine-oil', 'accessories', 'safety', 'attachment-test'].includes(id) ? '2026-10-26' : null,
-  notes: id === 'delivery' ? 'Owner-confirmed carrier delivery and reviewed photographs.' : id === 'crate-inspection' ? 'Crate photographed on delivery; formal damage-free condition inspection not yet verified.' : id === 'engine' ? 'Owner photographed factory YF380 identification plate and 739cc engine. Engine identity documented; engine condition and startup readiness not approved.' : id === 'crate-opened' ? 'Crate opened and panels removed; complete inventory and removal from shipping base remain unverified.' : id === 'fuel' ? 'Owner reports gasoline added; fuel specification and system checks remain unverified.' : id === 'first-start' ? commissioningObservations[0].summary + ' Service attention and commissioning review remain required.' : id === 'engine-oil' ? commissioningObservations[1].summary : ['accessories', 'safety', 'attachment-test'].includes(id) ? commissioningObservations[2].summary : 'Awaiting documented inspection and review.',
+  notes: id === 'delivery' ? 'Owner-confirmed carrier delivery and reviewed photographs.' : id === 'crate-inspection' ? 'Crate photographed on delivery; formal damage-free condition inspection not yet verified.' : id === 'engine' ? 'Owner photographed factory YF380 identification plate and 739cc engine. Engine identity documented; engine condition and startup readiness not approved.' : id === 'crate-opened' ? 'Crate opened and panels removed; complete inventory and removal from shipping base remain unverified.' : id === 'fuel' ? 'Owner reports gasoline added; fuel specification and system checks remain unverified.' : id === 'first-start' ? commissioningObservations[0].summary + ' Service attention and commissioning review remain required.' : id === 'engine-oil' ? 'Operator reports oil-level correction and later restart after charging during October 26 - November 1. Continued observation and inspection approval pending; see post-delivery record.' : ['accessories', 'safety', 'attachment-test'].includes(id) ? commissioningObservations[2].summary : 'Awaiting documented inspection and review.',
   evidence: id === 'delivery' ? [{ title: 'Verified October 26 delivery', href: '#history-future-5', state: 'verified' }] : id === 'crate-opened' ? [{ title: 'Crate opening photographs', href: '#history-unboxing-20261026', state: 'verified' }] : id === 'crate-inspection' ? [{ title: 'Delivery crate photographs', href: '#delivery-media', state: 'verified' }] : [],
   photoIds: id === 'delivery' ? ['ardhi-delivery-carrier-and-crate-20261026', 'ardhi-delivery-crate-on-ground-20261026'] : id === 'crate-opened' ? ['ardhi-crate-opened-20261026', 'ardhi-panels-removed-20261026', 'ardhi-tool-case-20261026'] : [],
-  videoIds: [], issue: id === 'first-start' ? 'Initial failed attempt preserved; later start reported, hot smell unresolved.' : id === 'engine-oil' ? 'Potentially low oil; level and quantity unverified.' : null,
+  videoIds: [], issue: id === 'first-start' ? 'Initial failed attempt preserved; later restart after charging reported. Inspection approval remains open.' : id === 'engine-oil' ? 'Earlier potentially-low observation superseded by operator-reported overfill and correction. Inspection remains open.' : null,
   resolution: null, approval: 'pending',
+  ...currentCheckProgress[id],
 }));
 export const maintenanceSystems = ['Engine', 'Hydraulics', 'Tracks', 'Battery', 'Filters', 'Grease points', 'Attachments', 'Safety systems'];
 
@@ -78,8 +91,9 @@ export const missionTimeline = [
   { title: 'Factory', state: 'complete', detail: 'Build and testing documented', href: '#history-production-complete' },
   { title: 'Shipping', state: 'complete', detail: 'Final-mile delivery documented', href: '#journey' },
   { title: 'Delivery', state: 'complete', detail: 'October 26, 2026', href: '#history-future-5' },
-  { title: 'Receiving inspection', state: 'current', detail: 'Inspection pending', href: '#commissioning-crate-inspection' },
-  ...['Commissioning', 'Training', 'First Job', '25 Hours', '50 Hours', '100 Hours', 'Attachments', 'Maintenance', 'Retirement'].map(title => ({ title, state: 'pending', detail: 'Future milestone', href: '#service' })),
+  { title: 'Receiving inspection', state: 'current', detail: 'Inspection follow-up open', href: '#commissioning-crate-inspection' },
+  { title: 'Field evaluation', state: 'current', detail: 'October 31 operator report', href: '#field-evaluation' },
+  ...['Commissioning approval', 'Training', 'First Job', '25 Hours', '50 Hours', '100 Hours', 'Attachments', 'Maintenance', 'Retirement'].map(title => ({ title, state: 'pending', detail: 'Future milestone', href: '#service' })),
 ];
 export const futureAttachments = ['Grapple', 'Brush Cutter', 'Auger', 'Rake', 'Snow Blade', 'Trencher'];
 
