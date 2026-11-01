@@ -1,5 +1,11 @@
 # ARDHI post-delivery public update — November 1, 2026
 
+## Checklist follow-up
+
+The inspection grid now reflects the same November 1 operator-report projection as the field-evaluation section: restart and charging reported, movement reported on October 31, and hydraulic/attachment field evaluation underway. Public progress labels distinguish observed activity from a passed inspection. Uncrating and restraint-removal review remain separate from inventory acceptance. Oil correction still requires review; hydraulic-fluid verification and final commissioning approval have not advanced. Range-based reports do not invent an exact event date. No database, readiness flag, private operator record or canonical media record changes.
+
+The newly supplied Dirt day and Inspection and testing folders have been inventoried, with a field-photo contact sheet reviewed. This checklist correction does not publish their originals or count factory startup footage as ARDHI field-test evidence. Public derivatives and canonical media registration remain a separate task.
+
 The existing ARDHI passport now distinguishes documented October 26 delivery, operator-reported commissioning recovery and October 31 field evaluation from final commissioning approval. The hero, mission dashboard, timeline, inspection context and existing service section reflect that progression. Historical failed-start, potentially-low-oil and track observations remain intact; the current oil note links to the subsequent correction/recovery. No completed repair, public customer job or operating-hour reading is invented.
 
 Night Ops V1 (reported removable lights), V2 (hardwired concept) and V3 (engine-off power candidate) appear in the existing Flagship layout. A 12V 30Ah LiFePO4 battery is explicitly not purchased or installed. Field work includes grading, playground preparation, dirt and material movement, fork practice and mulch evaluation; no full-pallet-lift completion is claimed. Existing delivery/unboxing media and the factory-reference video remain; missing field/inspection imagery is labeled pending.
@@ -26,3 +32,5 @@ Deployment/publication: not merged or deployed by this task. Remaining acceptanc
 [Mobile field evaluation](../release-captures/ardhi-postdelivery-20261101/390-field.png) | [Desktop Night Ops](../release-captures/ardhi-postdelivery-20261101/1440-lighting.png) | [Mobile hero](../release-captures/ardhi-postdelivery-20261101/390-hero.png)
 
 Hosted CI initially caught a stale positive status fixture in deployment-dependencies.test.mjs after the delivery-policy label changed. Updated that fixture and added explicit rejection of the old receiving-only label; photo hashes and readiness rejection checks are unchanged. No production pipeline bypass.
+
+Checklist follow-up validation: 178/178 unit tests; TypeScript, production build and public artifact checks passed. Browser checks passed at 390/768/1440px with updated progress labels, expandable notes, unchanged approval gate and no horizontal overflow. New 390-checklist.png and 1440-checklist.png captures are local previews. Not deployed.

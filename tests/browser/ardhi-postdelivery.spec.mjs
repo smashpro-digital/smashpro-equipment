@@ -11,6 +11,18 @@ for (const width of [390,768,1440]) test(`post-delivery review at ${width}px`,as
   await expect(page.locator('#night-ops')).toContainText('not purchased or installed');
   await expect(page.locator('.flagship-first-job')).toContainText('Awaiting Commissioning');
   await expect(page.locator('.ardhi-production-checks > li')).toHaveCount(16);
+  await expect(page.locator('#commissioning-first-start summary')).toContainText('Restart reported');
+  await expect(page.locator('#commissioning-first-drive summary')).toContainText('Movement reported');
+  await expect(page.locator('#commissioning-hydraulics summary')).toContainText('Field evaluation underway');
+  await expect(page.locator('#commissioning-passport-complete summary')).toContainText('Blocked');
+  await page.locator('#commissioning-first-drive summary').click();
+  await expect(page.locator('#commissioning-first-drive')).toContainText('2026-10-31');
+  await expect(page.locator('#commissioning-first-drive')).toContainText('Pending');
+  await page.locator('#commissioning-first-drive summary').click();
+  await page.locator('.ardhi-production-checks').scrollIntoViewIfNeeded();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  mkdirSync('tmp/checklist-review',{recursive:true});
+  await page.screenshot({path:`tmp/checklist-review/${width}-checklist.png`});
   await expect(page.locator('a[href="/k/ARDHI26-K01/"]').first()).toBeAttached();
   const ids=await page.locator('[id]').evaluateAll(nodes=>nodes.map(n=>n.id));expect(new Set(ids).size).toBe(ids.length);
   const links=await page.locator('#service a[href^="#"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));

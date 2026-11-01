@@ -7,7 +7,7 @@ export function verifiedEvidence(evidence: PublicEvidence[]) {
 export type CommissioningStatus = 'not_started' | 'in_progress' | 'passed' | 'needs_attention' | 'blocked';
 // Public editorial projection only. Operator identity and approval audit belong in HQ.
 export type CommissioningCheck = {
-  id: string; title: string; status: CommissioningStatus; date: string | null;
+  id: string; title: string; status: CommissioningStatus; date: string | null; progressLabel?: string;
   notes: string; evidence: PublicEvidence[]; photoIds: string[]; videoIds: string[];
   issue: string | null; resolution: string | null; approval: 'pending' | 'reviewed';
 };
@@ -27,6 +27,18 @@ export const commissioningObservations = [
 ].map(record => ({ ...record, date: '2026-10-26', source: 'Owner report', evidenceState: 'pending' as const }));
 export const commissioningLifecycle = 'Delivered / Commissioning and field evaluation underway / Service attention required';
 export const commissioningReadiness = { commissioned: false, operational: false, rentalReady: false } as const;
+// Current public progress, separate from formal inspection acceptance. Source:
+// ardhiPostDelivery.json (HQ-reviewed operator-report projection, November 1).
+const currentCheckProgress: Record<string, Partial<CommissioningCheck>> = {
+  'crate-opened': { progressLabel: 'Uncrated · review pending', notes: 'Crate opening is documented; subsequent field evaluation is operator-reported. Inventory and formal receiving approval remain open.' },
+  restraints: { status: 'in_progress', progressLabel: 'Removal review pending', notes: 'Subsequent field movement is operator-reported. Shipping-base and restraint-removal inspection has not been signed off.', date: null },
+  battery: { status: 'in_progress', progressLabel: 'Charging reported', notes: 'Restart following battery charging is operator-reported for October 26 – November 1. Battery condition, charging-system inspection and approval remain unverified.', date: null },
+  'first-start': { status: 'needs_attention', progressLabel: 'Restart reported', notes: 'Starting restored following battery charging after an oil-level correction, per the October 26 – November 1 operator report. Preserve the initial failed attempt; root cause and inspection approval remain open.', date: null },
+  'first-drive': { status: 'in_progress', progressLabel: 'Movement reported', notes: 'October 31 dirt-day movement and grading are operator-reported. This records activity, not approved travel-system performance or commissioning.', date: '2026-10-31' },
+  hydraulics: { status: 'in_progress', progressLabel: 'Field evaluation underway', notes: 'October 31 bucket handling and grading are operator-reported. Hydraulic fluid verification, leak inspection and formal function-test acceptance remain open.', date: '2026-10-31' },
+  'attachment-test': { progressLabel: 'Field evaluation underway', notes: 'October 31 bucket handling and pallet-fork practice are operator-reported. Full pallet lifting, attachment locking and load acceptance are not documented.', date: '2026-10-31' },
+  'engine-oil': { progressLabel: 'Correction reported · review pending', date: null },
+};
 export const commissioningChecks: CommissioningCheck[] = [
   ['delivery', 'Freight delivery'], ['crate-inspection', 'Crate condition inspection'],
   ['crate-opened', 'Unboxing'], ['accessories', 'Equipment inventory'],
@@ -45,6 +57,7 @@ export const commissioningChecks: CommissioningCheck[] = [
   photoIds: id === 'delivery' ? ['ardhi-delivery-carrier-and-crate-20261026', 'ardhi-delivery-crate-on-ground-20261026'] : id === 'crate-opened' ? ['ardhi-crate-opened-20261026', 'ardhi-panels-removed-20261026', 'ardhi-tool-case-20261026'] : [],
   videoIds: [], issue: id === 'first-start' ? 'Initial failed attempt preserved; later restart after charging reported. Inspection approval remains open.' : id === 'engine-oil' ? 'Earlier potentially-low observation superseded by operator-reported overfill and correction. Inspection remains open.' : null,
   resolution: null, approval: 'pending',
+  ...currentCheckProgress[id],
 }));
 export const maintenanceSystems = ['Engine', 'Hydraulics', 'Tracks', 'Battery', 'Filters', 'Grease points', 'Attachments', 'Safety systems'];
 
