@@ -1,6 +1,6 @@
 /** Transport-neutral contracts. These records are not a second equipment registry:
  * asset IDs refer to the existing fleet identity and may later come from HQ. */
-export type PassportBuildType = "factory_import" | "partner_build";
+export type PassportBuildType = "factory_import" | "partner_build" | "dealer_stock";
 export type EvidenceState =
   | "concept"
   | "requested"
@@ -50,6 +50,7 @@ export type RecordKind =
 export type MediaKind =
   | "concept"
   | "partner_proof"
+  | "dealer"
   | "factory"
   | "shipping"
   | "commissioning"
