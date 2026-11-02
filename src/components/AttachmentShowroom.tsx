@@ -13,12 +13,15 @@ const statusLabel: Record<AttachmentPassport["status"], string> = {
 };
 
 export function AttachmentShowroom({ attachments }: { attachments: AttachmentPassport[] }) {
-  const groups = attachments.reduce<Record<string, AttachmentPassport[]>>((acc, item) => {
+  // Public showroom includes acquired and committed attachments, not speculative capabilities.
+  const visibleAttachments = attachments.filter((item) => !["planned", "selected", "retired"].includes(item.status));
+  const featured = visibleAttachments.find((item) => item.featured) ?? visibleAttachments[0];
+  // Featured passport is presented once, not duplicated in the category cards.
+  const groups = visibleAttachments.filter((item) => item.passportId !== featured?.passportId).reduce<Record<string, AttachmentPassport[]>>((acc, item) => {
     const key = item.type;
     (acc[key] ??= []).push(item);
     return acc;
   }, {});
-  const featured = attachments.find((item) => item.featured) ?? attachments[0];
 
   return (
     <section className="attachment-showroom" id="attachments" aria-labelledby="attachments-title">
