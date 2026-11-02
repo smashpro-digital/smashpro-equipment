@@ -861,17 +861,6 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               </div>
             </article>
           ))}
-          {["Maintenance", "Bill of Lading", "Packing List", "Inspection"].map((title) => (
-            <article className="is-reserved" key={title}>
-              <div aria-hidden="true">
-                <span>⌁</span> Blueprint record
-              </div>
-              <span className="document-status is-pending">Awaiting Verification</span>
-              <h3>{title}</h3>
-              <p>This slot activates when a verified public file enters the equipment record.</p>
-              <small>Delivery complete · Public file pending</small>
-            </article>
-          ))}
         </div>
       </section>
       {stickerOpen ? <div className="sticker-viewer-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setStickerOpen(false); }}><div className="sticker-viewer" id="window-sticker-viewer" ref={stickerModalRef} role="dialog" aria-modal="true" aria-labelledby="sticker-viewer-title"><header><div><p className="eyebrow">Official equipment certificate</p><h2 id="sticker-viewer-title">Equipment Window Sticker</h2></div><div className="sticker-viewer__tools"><button type="button" onClick={() => setStickerZoom((zoom) => Math.max(.75, zoom - .25))} aria-label="Zoom out">−</button><output aria-label="Current zoom">{Math.round(stickerZoom * 100)}%</output><button type="button" onClick={() => setStickerZoom((zoom) => Math.min(2, zoom + .25))} aria-label="Zoom in">+</button><button type="button" onClick={() => setPendingStickerAction("png")}>Download PNG</button><button type="button" onClick={() => setPendingStickerAction("pdf")}>Download PDF</button><button type="button" onClick={() => window.print()}>Print</button><button type="button" onClick={() => setStickerOpen(false)}>Close</button></div></header><div className="sticker-viewer__viewport" aria-label="Zoomable and pannable window sticker"><div className="sticker-viewer__stage" style={{ width: `${stickerZoom * 100}%` }}><div style={{ transform: `scale(${stickerZoom})` }}><WindowSticker item={item} packages={packages} scores={scores} compact showActions={false}/></div></div></div></div></div> : null}
