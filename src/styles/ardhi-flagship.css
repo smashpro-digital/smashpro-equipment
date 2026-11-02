@@ -97,6 +97,9 @@
 .ardhi-flagship .ardhi-document-library > div:last-child { grid-template-columns: repeat(4,minmax(0,1fr)); }
 .ardhi-flagship .ardhi-document-library article { padding: 1rem; }
 .ardhi-flagship .ardhi-document-library article > img { height: 145px; width: 100%; object-fit: contain; background: #dce0d5; }
+/* Display the manufacturer sheet artwork, not a scaled-down full PDF page. */
+.ardhi-flagship .ardhi-document-library article > img.manufacturer-spec-hero-preview { object-fit: cover; object-position: center top; }
+
 .ardhi-flagship .ardhi-document-library article h3 { font-size: 1.05rem; }
 .ardhi-flagship .ardhi-document-library article > .flagship-document-placeholder { display: grid; height: 145px; place-items: center; background: #18251c; color: #aebcad; }
 .flagship-document-placeholder svg { height: 100px; width: 130px; }
