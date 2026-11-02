@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import type { AttachmentPassport } from "../types/equipment";
 import { ButtonLink } from "./ButtonLink";
 
@@ -16,14 +15,24 @@ const statusLabel: Record<AttachmentPassport["status"], string> = {
 export function AttachmentShowroom({ attachments }: { attachments: AttachmentPassport[] }) {
   // Public showroom includes acquired and committed attachments, not speculative capabilities.
   const visibleAttachments = attachments.filter((item) => !["planned", "selected", "retired"].includes(item.status));
-  const [featuredIndex, setFeaturedIndex] = useState(0);
+  // Choose a stable featured passport per visit, not a timed carousel.
+  // Session storage preserves the selection during navigation within the same visit.
   const featuredOrder = [...visibleAttachments].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
-  const featured = featuredOrder[featuredIndex % featuredOrder.length];
-  useEffect(() => {
-    if (featuredOrder.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setFeaturedIndex((index) => (index + 1) % featuredOrder.length), 8000);
-    return () => window.clearInterval(timer);
-  }, [featuredOrder.length]);
+  const featured = (() => {
+    if (!featuredOrder.length) return undefined;
+    if (typeof window === "undefined") return featuredOrder[0];
+    try {
+      const key = "smashpro-featured-attachment-v1";
+      const saved = window.sessionStorage.getItem(key);
+      const existing = featuredOrder.find((item) => item.passportId === saved);
+      if (existing) return existing;
+      const selected = featuredOrder[Math.floor(Math.random() * featuredOrder.length)];
+      window.sessionStorage.setItem(key, selected.passportId);
+      return selected;
+    } catch {
+      return featuredOrder[0];
+    }
+  })();
   // Featured passport is presented once, not duplicated in the category cards.
   const groups = visibleAttachments.filter((item) => item.passportId !== featured?.passportId).reduce<Record<string, AttachmentPassport[]>>((acc, item) => {
     const key = item.type;
@@ -46,12 +55,6 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
         </div>
 
         {featured && (
-          <>
-          <div className="attachment-feature__rotation" aria-label="Featured attachment controls" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "0.75rem", marginBottom: "1rem" }}>
-            <span aria-live="polite">Featured {featuredIndex % featuredOrder.length + 1} of {featuredOrder.length}</span>
-            <button type="button" aria-label="Previous featured attachment" onClick={() => setFeaturedIndex((index) => (index - 1 + featuredOrder.length) % featuredOrder.length)} disabled={featuredOrder.length < 2}>Previous</button>
-            <button type="button" aria-label="Next featured attachment" onClick={() => setFeaturedIndex((index) => (index + 1) % featuredOrder.length)} disabled={featuredOrder.length < 2}>Next</button>
-          </div>
           <article className="attachment-feature">
             <div className={`attachment-feature__visual${featured.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}`}>
               {featured.image ? (
@@ -83,7 +86,6 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
               </div>
             </div>
           </article>
-          </>
         )}
 
         <div className="attachment-type-grid">
