@@ -805,7 +805,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
         </div>
         <div>
           <article className="document-card">
-            <img src={image("sp-ardhi-26-yf380-manufacturer-preview.png")} alt="First-page preview of the YF380 manufacturer specification PDF" loading="lazy" decoding="async" />
+            <img src={image("sp-ardhi-26-yf380-manufacturer-preview.png")} alt="Top hero graphic from the YF380 manufacturer specification PDF" className="manufacturer-spec-hero-preview" loading="lazy" decoding="async" />
             <span>Manufacturer PDF</span>
             <h3>YF380 Specification Sheet</h3>
             <p>Shandong Infront Machinery Group Co., Ltd.</p>
