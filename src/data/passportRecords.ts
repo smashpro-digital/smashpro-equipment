@@ -1,3 +1,4 @@
+import bebaDumpPassport from "./bebaDumpPassport.json";
 import { commissioningObservations } from './ardhiFlagship';
 import { ardhiDelivery, ardhiDeliveryPhotos, ardhiUnboxingPhotos } from "./ardhiDelivery";
 // Build/server entry only. React imports virtual:passport-public instead.
@@ -535,4 +536,6 @@ reportedTransit.source_type = "supplier";
 reportedTransit.evidence_classification = "in_transit";
 const mzigoEquipment = equipment.find(e => e.fleetId === "SP-MZIGO-26E")!;
 const mzigo = normalizeMzigo(fromEquipment(mzigoEquipment, "factory_import"), mzigoEquipment);
-export const canonicalPassports: CanonicalPassport[] = [ardhi, liftmate, mzigo];
+// JSON is a portable, table-shaped public record; HQ persistence must use the reviewed gateway.
+const bebaDump = bebaDumpPassport as unknown as CanonicalPassport;
+export const canonicalPassports: CanonicalPassport[] = [ardhi, liftmate, mzigo, bebaDump];
