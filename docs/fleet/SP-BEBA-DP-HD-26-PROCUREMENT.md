@@ -35,6 +35,7 @@
 | 2026-11-02 | Jose confirmed lime-green unit #64598 available, color visually similar, $12,650 trailer price, and no simple electric-jack retrofit on built stock | Live dealer response on this date; inventory can change |
 | 2026-11-02 | Jose confirmed stationary F-150 photo acceptable even though truck is not operable/road-ready; revised delivered Hopkins terms quoted | Dealer explanation of RTO delivery/photo workflow; verify final contract |
 | 2026-11-02 | Jose promised detailed photos/video for November 3 and said he emailed the Hopkins agreement | Media and actual contract contents not yet inspected in this procurement record |
+| 2026-11-02 | Kinema's listing for lime-green stock #64598 states 4-ft walls; Maurice clarified 2-ft walls were on a separate black comparison trailer | Dealer-published model specification, **not yet physically measured** |
 
 The original dealer emails and any contract/identity/payment documents remain in protected systems. Public concept renders, SmashPro mockups and promotional images are **not** evidence of production finish, fitment, weight, component ratings, or ownership.
 
@@ -48,7 +49,7 @@ The original dealer emails and any contract/identity/payment documents remain in
 | Empty / tare weight | **5,200 lb** | Dealer statement; scale ticket if available |
 | Payload | **8,800 lb** (14,000 − 5,200) | Dealer-confirmed arithmetic; actual loaded weight remains subject to certified ratings and distribution |
 | Usable interior bed | Approximately **7 ft × 13.5 ft** | Dealer statement; exact measurement/media pending |
-| Sidewalls | Tall-sidewall / **4-ft candidate** described in selection request | Actual sidewall height, top-rail/clearance height and usable opening pending dealer measurement |
+| Sidewalls | **4 ft (48 in)** explicitly specified on [Kinema's lime-green stock #64598 listing](https://kinematrailerdepot.com/product/new-cynergy-cargo-7x14ta-dump-trailer-3/) and confirmed by owner for this model; the **2-ft walls belonged to a separate black comparison trailer** | Actual wall measurement, top-rail/clearance height and usable opening pending dealer photo/video and tape confirmation |
 | Equipment ramps | Stored underneath; **10,500 lb total distributed rating** | Photos, length, width, angle, deployment, concentration/track-load restrictions pending |
 | Tie-downs | **Four D-rings** | Actual positions, mounts and WLL/ratings pending photo/spec |
 | Dump hoist | **12,000 lb hoist rating** | Manufacturer/hoist labeling and operating instructions pending |
