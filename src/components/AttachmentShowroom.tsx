@@ -13,12 +13,32 @@ const statusLabel: Record<AttachmentPassport["status"], string> = {
 };
 
 export function AttachmentShowroom({ attachments }: { attachments: AttachmentPassport[] }) {
-  const groups = attachments.reduce<Record<string, AttachmentPassport[]>>((acc, item) => {
+  // Public showroom includes acquired and committed attachments, not speculative capabilities.
+  const visibleAttachments = attachments.filter((item) => !["planned", "selected", "retired"].includes(item.status));
+  // Choose a stable featured passport per visit, not a timed carousel.
+  // Session storage preserves the selection during navigation within the same visit.
+  const featuredOrder = [...visibleAttachments].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+  const featured = (() => {
+    if (!featuredOrder.length) return undefined;
+    if (typeof window === "undefined") return featuredOrder[0];
+    try {
+      const key = "smashpro-featured-attachment-v1";
+      const saved = window.sessionStorage.getItem(key);
+      const existing = featuredOrder.find((item) => item.passportId === saved);
+      if (existing) return existing;
+      const selected = featuredOrder[Math.floor(Math.random() * featuredOrder.length)];
+      window.sessionStorage.setItem(key, selected.passportId);
+      return selected;
+    } catch {
+      return featuredOrder[0];
+    }
+  })();
+  // Featured passport is presented once, not duplicated in the category cards.
+  const groups = visibleAttachments.filter((item) => item.passportId !== featured?.passportId).reduce<Record<string, AttachmentPassport[]>>((acc, item) => {
     const key = item.type;
     (acc[key] ??= []).push(item);
     return acc;
   }, {});
-  const featured = attachments.find((item) => item.featured) ?? attachments[0];
 
   return (
     <section className="attachment-showroom" id="attachments" aria-labelledby="attachments-title">
