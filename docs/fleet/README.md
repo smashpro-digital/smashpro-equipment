@@ -30,7 +30,7 @@ These fleet IDs are reserved and approved but not yet purchased, owned, or in se
 | Fleet ID | Equipment Type | Passport | Procurement Record |
 |----------|----------------|----------|--------------------|
 | SP-BEBA-HD-26 | Heavy-duty equipment trailer (planned) | [SP-BEBA-HD-26-PASSPORT.md](SP-BEBA-HD-26-PASSPORT.md) | Not yet created |
-| SP-BEBA-DP-HD-26 | 7×14 14K dump trailer (candidate; not acquired) | Not yet created — distinct dump-trailer Passport pending commissioning | [SP-BEBA-DP-HD-26-PROCUREMENT.md](SP-BEBA-DP-HD-26-PROCUREMENT.md) |
+| SP-BEBA-DP-HD-26 | 7×14 14K, 4-ft-wall lime-green Cynergy dump trailer (candidate; not acquired) | [SP-BEBA-DP-HD-26-PASSPORT.md](SP-BEBA-DP-HD-26-PASSPORT.md) · [data-driven preview](https://smashpro.app/equipment/sp-beba-dp-hd-26.html) (noindex until approved) | [SP-BEBA-DP-HD-26-PROCUREMENT.md](SP-BEBA-DP-HD-26-PROCUREMENT.md) |
 | SP-GARI-26E | Electric utility / promotional golf-cart rebuild (planned) | [SP-GARI-26E-PASSPORT.md](SP-GARI-26E-PASSPORT.md) | [SP-GARI-26E-PROCUREMENT.md](SP-GARI-26E-PROCUREMENT.md) |
 | SP-INAMA-26 | Low-profile hydraulic tilt/lowering equipment trailer (planned) | [SP-INAMA-26-PASSPORT.md](SP-INAMA-26-PASSPORT.md) | [SP-INAMA-26-PROCUREMENT.md](SP-INAMA-26-PROCUREMENT.md) |
 
