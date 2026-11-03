@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router-dom";
 import type { Equipment } from "../types/equipment";
 import type {
@@ -11,6 +11,7 @@ import { passportTemplates } from "../domain/passportTemplates";
 import { PageFrame } from "./PageFrame";
 import { PassportHero } from "./PassportHero";
 import { PassportEvidenceRecord } from "./PassportEvidenceRecord";
+import { PassportHistoryFeed, type PassportHistoryItem } from "./PassportHistoryFeed";
 import { PassportDocumentRecord } from "./PassportDocumentRecord";
 import { FleetLifecycleProgress } from "./FleetLifecycleProgress";
 import { SeoSchema } from "./SeoSchema";
@@ -410,37 +411,71 @@ function Documents({ passport: p }: Props) {
   );
 }
 function History({ passport: p }: Props) {
+  const [archiveOpen, setArchiveOpen] = useState(false);
+  const evidence = rows(p, "evidence");
+  const recent: PassportHistoryItem[] = [...evidence]
+    .sort((a, b) => {
+      const aDate = Date.parse(a.occurred_at ?? "");
+      const bDate = Date.parse(b.occurred_at ?? "");
+      return (Number.isNaN(bDate) ? -Infinity : bDate) -
+        (Number.isNaN(aDate) ? -Infinity : aDate);
+    })
+    .slice(0, 3)
+    .map((record) => ({
+      id: record.id,
+      date: record.occurred_at ?? "Date not published",
+      title: record.title,
+      summary: record.detail ?? "Supporting record available in the archive.",
+      state: stateLabel(record.evidence_state),
+    }));
+
+  // Preserve direct links to evidence records when the archive is collapsed.
+  useEffect(() => {
+    const revealHash = () => {
+      if (window.location.hash.startsWith("#history-")) setArchiveOpen(true);
+    };
+    revealHash();
+    window.addEventListener("hashchange", revealHash);
+    return () => window.removeEventListener("hashchange", revealHash);
+  }, []);
+
   return (
-    <div className="liftmate-evidence-list">
-      {rows(p, "evidence").map((r, i) => (
-        <PassportEvidenceRecord
-          key={r.id}
-          id={`history-${r.id}`}
-          date={r.occurred_at ?? "Date not published"}
-          phase={stateLabel(r.evidence_state)}
-          title={r.title}
-          label="Documented · Open record"
-          defaultOpen={i === 0}
-        >
-          <p>{r.detail}</p>
-          {r.decision && <p>{r.decision}</p>}
-          {r.supplier && <p>{r.supplier}</p>}
-          {r.photos?.map((src) => (
-            <img key={src} src={src} alt={r.title} loading="lazy" />
+    <>
+      <PassportHistoryFeed items={recent} onArchiveClick={() => setArchiveOpen(true)} />
+      <details id="passport-history-archive" open={archiveOpen} onToggle={(event) => setArchiveOpen(event.currentTarget.open)}>
+        <summary>Complete historical archive</summary>
+        <div className="liftmate-evidence-list">
+          {evidence.map((r, i) => (
+            <PassportEvidenceRecord
+              key={r.id}
+              id={`history-${r.id}`}
+              date={r.occurred_at ?? "Date not published"}
+              phase={stateLabel(r.evidence_state)}
+              title={r.title}
+              label="Documented · Open record"
+              defaultOpen={i === 0}
+            >
+              <p>{r.detail}</p>
+              {r.decision && <p>{r.decision}</p>}
+              {r.supplier && <p>{r.supplier}</p>}
+              {r.photos?.map((src) => (
+                <img key={src} src={src} alt={r.title} loading="lazy" />
+              ))}
+              <dl>
+                <div>
+                  <dt>Evidence state</dt>
+                  <dd>{stateLabel(r.evidence_state)}</dd>
+                </div>
+                <div>
+                  <dt>Source</dt>
+                  <dd>{r.source_ref ?? stateLabel(r.source_type)}</dd>
+                </div>
+              </dl>
+            </PassportEvidenceRecord>
           ))}
-          <dl>
-            <div>
-              <dt>Evidence state</dt>
-              <dd>{stateLabel(r.evidence_state)}</dd>
-            </div>
-            <div>
-              <dt>Source</dt>
-              <dd>{r.source_ref ?? stateLabel(r.source_type)}</dd>
-            </div>
-          </dl>
-        </PassportEvidenceRecord>
-      ))}
-    </div>
+        </div>
+      </details>
+    </>
   );
 }
 function StageRecords({ passport: p }: Props) {
