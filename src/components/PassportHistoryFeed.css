@@ -119,3 +119,23 @@
     margin-top: .35rem;
   }
 }
+
+#passport-history-archive {
+  margin: 1.1rem 0 2rem;
+  overflow: hidden;
+  border: 1px solid #35493b;
+  border-radius: 12px;
+  background: #111b15;
+  color: #edf4e9;
+}
+
+#passport-history-archive > summary {
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  color: #b4ed91;
+  font-weight: 750;
+}
+
+#passport-history-archive > .liftmate-evidence-list {
+  padding: .3rem 1.15rem 1.15rem;
+}
