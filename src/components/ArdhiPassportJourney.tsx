@@ -14,6 +14,7 @@ import { useShipment } from "../hooks/useShipment";
 import { ardhiDelivery, ardhiDeliveryEvent, ardhiUnboxingEvent } from "../data/ardhiDelivery";
 import { ArdhiDeliveryMedia } from "./ArdhiDelivery";
 import { PassportHero } from "./PassportHero";
+import { PassportHistoryFeed, type PassportHistoryItem } from "./PassportHistoryFeed";
 import "../styles/ardhi-passport-v2.css";
 
 const image = (name: string) => `/equipment/images/${name}`;
@@ -317,6 +318,7 @@ const history: HistoryRecord[] = [
   { id: "unboxing-20261026", date: "2026-10-26", title: ardhiUnboxingEvent.title, status: "documented", confidence: "Photographed", narrative: ardhiUnboxingEvent.detail!, mediaChapter: "delivery", mediaLabel: "View crate disassembly photographs" },
   { id: firstStartObservation.id, date: firstStartObservation.date, title: firstStartObservation.title, status: "current", confidence: "Owner report", narrative: firstStartObservation.summary, outcome: "Not commissioned; no confirmed engine defect. Inspection and resolution pending." },
   ...commissioningObservations.map((record): HistoryRecord => ({ id: record.id, date: record.date, title: record.title, status: 'current', confidence: 'Owner report - evidence pending', narrative: record.summary, outcome: 'Service attention required. Not commissioned, operational or rental-ready.' })),
+  { id: "dirt-day-20261031", date: "Oct 31, 2026", title: "Dirt Day — First Field Evaluation", status: "current", confidence: "Operator report · Media review pending", narrative: postDelivery.summary, outcome: "Commissioning approval and inspection follow-up remain open. This is not rental readiness." },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -334,6 +336,7 @@ const historyPhaseStarts: Record<string, string> = {
   "freight-forwarder": "Export",
   "grapple-ordered": "Attachment Build",
   "port-arrival": "U.S. Logistics",
+  "dirt-day-20261031": "Field Evaluation",
   "future-6": "Commissioning",
   "future-10": "Operation",
   "future-14": "Maintenance",
@@ -344,6 +347,19 @@ const historyPhaseByRecord = history.reduce<Record<string, string>>((phases, rec
   phases.__current = phase;
   return phases;
 }, {});
+
+const recentHistoryItems: PassportHistoryItem[] = ["dirt-day-20261031", "future-5", "production-complete"]
+  .map((id) => history.find((record) => record.id === id))
+  .filter((record): record is HistoryRecord => Boolean(record))
+  .map((record) => ({
+    id: record.id,
+    date: record.date,
+    title: record.title,
+    summary: record.narrative,
+    state: record.confidence ?? record.status,
+    href: record.id === "dirt-day-20261031" ? "#field-evaluation" : `#history-${record.id}`,
+    linkLabel: record.id === "dirt-day-20261031" ? "View field summary" : "View source event",
+  }));
 
 const linkedDecisions: Record<string, string> = {
   "identity-approved": "Keep the YF380 factory model for manufacturer traceability while giving the machine the permanent SP-ARDHI-26 fleet identity.",
@@ -533,7 +549,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Arrived October 26, 2026 <b>/</b> Field evaluation underway
           </p>
           <p className="flagship-hero-description">{postDelivery.summary}</p>
-          <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#journey">Explore Journey</a></div>
+          <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#history">Recent History</a></div>
       </PassportHero>
       <ArdhiMissionDashboard />
       <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
@@ -582,11 +598,12 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Permanent Historical Record</p>
-              <h2 id="ardhi-history-title">Every event keeps its evidence and reason.</h2>
+              <h2 id="ardhi-history-title">Recent milestones. Permanent evidence.</h2>
             </div>
-            <p>Expand any entry for narrative, decisions, media, supplier notes, technical notes, payments, attachments, and document counts.</p>
+            <p>Read the latest events here. The complete logbook retains earlier source records and supporting evidence.</p>
           </div>
-          <details className="flagship-disclosure flagship-history-disclosure" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}><summary>Explore the complete historical logbook</summary>
+          <PassportHistoryFeed items={recentHistoryItems} onArchiveClick={() => { setHistoryOpen(true); requestAnimationFrame(() => document.getElementById("ardhi-full-history")?.scrollIntoView({ block: "start", behavior: "smooth" })); }} />
+          <details id="ardhi-full-history" className="flagship-disclosure flagship-history-disclosure" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}><summary>Explore the complete historical logbook</summary>
           <ol className="ardhi-expandable-timeline">
             {history.map((record) => (
               <Fragment key={record.id}>
