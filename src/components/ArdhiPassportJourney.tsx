@@ -318,7 +318,6 @@ const history: HistoryRecord[] = [
   { id: "unboxing-20261026", date: "2026-10-26", title: ardhiUnboxingEvent.title, status: "documented", confidence: "Photographed", narrative: ardhiUnboxingEvent.detail!, mediaChapter: "delivery", mediaLabel: "View crate disassembly photographs" },
   { id: firstStartObservation.id, date: firstStartObservation.date, title: firstStartObservation.title, status: "current", confidence: "Owner report", narrative: firstStartObservation.summary, outcome: "Not commissioned; no confirmed engine defect. Inspection and resolution pending." },
   ...commissioningObservations.map((record): HistoryRecord => ({ id: record.id, date: record.date, title: record.title, status: 'current', confidence: 'Owner report - evidence pending', narrative: record.summary, outcome: 'Service attention required. Not commissioned, operational or rental-ready.' })),
-  { id: "dirt-day-20261031", date: "Oct 31, 2026", title: "Dirt Day — First Field Evaluation", status: "current", confidence: "Operator report · Media review pending", narrative: postDelivery.summary, outcome: "Commissioning approval and inspection follow-up remain open. This is not rental readiness." },
   ...["Ocean Departure", "Cross Pacific", "USA Arrival", "Customs", "Released", "Delivery", "Commissioning", "First Startup", "First Fuel", "First Attachment", "First Job", "10 Hours", "50 Hours", "100 Hours", "Annual Inspection"].map(
     (title, index): HistoryRecord => ({
       id: `future-${index}`,
@@ -336,7 +335,6 @@ const historyPhaseStarts: Record<string, string> = {
   "freight-forwarder": "Export",
   "grapple-ordered": "Attachment Build",
   "port-arrival": "U.S. Logistics",
-  "dirt-day-20261031": "Field Evaluation",
   "future-6": "Commissioning",
   "future-10": "Operation",
   "future-14": "Maintenance",
@@ -348,18 +346,29 @@ const historyPhaseByRecord = history.reduce<Record<string, string>>((phases, rec
   return phases;
 }, {});
 
-const recentHistoryItems: PassportHistoryItem[] = ["dirt-day-20261031", "future-5", "production-complete"]
-  .map((id) => history.find((record) => record.id === id))
-  .filter((record): record is HistoryRecord => Boolean(record))
-  .map((record) => ({
-    id: record.id,
-    date: record.date,
-    title: record.title,
-    summary: record.narrative,
-    state: record.confidence ?? record.status,
-    href: record.id === "dirt-day-20261031" ? "#field-evaluation" : `#history-${record.id}`,
-    linkLabel: record.id === "dirt-day-20261031" ? "View field summary" : "View source event",
-  }));
+const recentHistoryItems: PassportHistoryItem[] = [
+  {
+    id: "dirt-day-20261031",
+    date: "Oct 31, 2026",
+    title: "Dirt Day — First Field Evaluation",
+    summary: postDelivery.summary,
+    state: "Operator report · Media review pending",
+    href: "#field-evaluation",
+    linkLabel: "View field summary",
+  },
+  ...["future-5", "production-complete"]
+    .map((id) => history.find((record) => record.id === id))
+    .filter((record): record is HistoryRecord => Boolean(record))
+    .map((record) => ({
+      id: record.id,
+      date: record.date,
+      title: record.title,
+      summary: record.narrative,
+      state: record.confidence ?? record.status,
+      href: `#history-${record.id}`,
+      linkLabel: "View source event",
+    })),
+];
 
 const linkedDecisions: Record<string, string> = {
   "identity-approved": "Keep the YF380 factory model for manufacturer traceability while giving the machine the permanent SP-ARDHI-26 fleet identity.",
