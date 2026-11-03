@@ -1,0 +1,141 @@
+.passport-history-feed {
+  margin: 1.5rem 0 2rem;
+  color: #edf4e9;
+}
+
+.passport-history-feed__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.passport-history-feed__heading h3 {
+  margin: .2rem 0 0;
+  color: #f4f8ef;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+}
+
+.passport-history-feed__heading > span {
+  color: #a8b7a9;
+  font-size: .85rem;
+  text-align: right;
+}
+
+.passport-history-feed__eyebrow {
+  margin: 0;
+  color: #a5e96d;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.passport-history-feed__items {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: .85rem;
+  margin: 0;
+  padding: 0;
+}
+
+.passport-history-feed__item {
+  min-width: 0;
+  border: 1px solid #35493b;
+  border-radius: 14px;
+  background: linear-gradient(150deg, #18251d, #101913);
+  padding: 1.05rem 1.1rem;
+}
+
+.passport-history-feed__item time {
+  display: block;
+  color: #adbaaf;
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.passport-history-feed__item h4 {
+  margin: .35rem 0 .5rem;
+  color: #f2f7ee;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.passport-history-feed__state {
+  display: inline-block;
+  border: 1px solid #557751;
+  border-radius: 999px;
+  padding: .2rem .55rem;
+  color: #b6e59c;
+  font-size: .71rem;
+  font-weight: 700;
+}
+
+.passport-history-feed__item p {
+  margin: .7rem 0 .85rem;
+  color: #d0dad0;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.passport-history-feed__item a,
+.passport-history-feed__archive {
+  color: #a9ef7c;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.passport-history-feed__item a:hover,
+.passport-history-feed__item a:focus-visible {
+  text-decoration: underline;
+}
+
+.passport-history-feed__archive {
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: .65rem .85rem;
+  border: 1px solid #5e8155;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: .87rem;
+}
+
+.passport-history-feed__archive:hover,
+.passport-history-feed__archive:focus-visible {
+  background: #223327;
+}
+
+@media (max-width: 640px) {
+  .passport-history-feed__heading {
+    display: block;
+  }
+
+  .passport-history-feed__heading > span {
+    display: block;
+    text-align: left;
+    margin-top: .35rem;
+  }
+}
+
+#passport-history-archive {
+  margin: 1.1rem 0 2rem;
+  overflow: hidden;
+  border: 1px solid #35493b;
+  border-radius: 12px;
+  background: #111b15;
+  color: #edf4e9;
+}
+
+#passport-history-archive > summary {
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  color: #b4ed91;
+  font-weight: 750;
+}
+
+#passport-history-archive > .liftmate-evidence-list {
+  padding: .3rem 1.15rem 1.15rem;
+}

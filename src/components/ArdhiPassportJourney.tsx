@@ -14,6 +14,7 @@ import { useShipment } from "../hooks/useShipment";
 import { ardhiDelivery, ardhiDeliveryEvent, ardhiUnboxingEvent } from "../data/ardhiDelivery";
 import { ArdhiDeliveryMedia } from "./ArdhiDelivery";
 import { PassportHero } from "./PassportHero";
+import { PassportHistoryFeed, type PassportHistoryItem } from "./PassportHistoryFeed";
 import "../styles/ardhi-passport-v2.css";
 
 const image = (name: string) => `/equipment/images/${name}`;
@@ -345,6 +346,30 @@ const historyPhaseByRecord = history.reduce<Record<string, string>>((phases, rec
   return phases;
 }, {});
 
+const recentHistoryItems: PassportHistoryItem[] = [
+  {
+    id: "dirt-day-20261031",
+    date: "Oct 31, 2026",
+    title: "Dirt Day — First Field Evaluation",
+    summary: postDelivery.summary,
+    state: "Operator report · Media review pending",
+    href: "#field-evaluation",
+    linkLabel: "View field summary",
+  },
+  ...["future-5", "production-complete"]
+    .map((id) => history.find((record) => record.id === id))
+    .filter((record): record is HistoryRecord => Boolean(record))
+    .map((record) => ({
+      id: record.id,
+      date: record.date,
+      title: record.title,
+      summary: record.narrative,
+      state: record.confidence ?? record.status,
+      href: `#history-${record.id}`,
+      linkLabel: "View source event",
+    })),
+];
+
 const linkedDecisions: Record<string, string> = {
   "identity-approved": "Keep the YF380 factory model for manufacturer traceability while giving the machine the permanent SP-ARDHI-26 fleet identity.",
   "branding-approved": "Choose the documented RAL 6018 fleet finish and preserve SmashPro identity on the machine and primary attachments.",
@@ -533,7 +558,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Arrived October 26, 2026 <b>/</b> Field evaluation underway
           </p>
           <p className="flagship-hero-description">{postDelivery.summary}</p>
-          <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#journey">Explore Journey</a></div>
+          <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#history">Recent History</a></div>
       </PassportHero>
       <ArdhiMissionDashboard />
       <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
@@ -582,11 +607,12 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Permanent Historical Record</p>
-              <h2 id="ardhi-history-title">Every event keeps its evidence and reason.</h2>
+              <h2 id="ardhi-history-title">Recent milestones. Permanent evidence.</h2>
             </div>
-            <p>Expand any entry for narrative, decisions, media, supplier notes, technical notes, payments, attachments, and document counts.</p>
+            <p>Read the latest events here. The complete logbook retains earlier source records and supporting evidence.</p>
           </div>
-          <details className="flagship-disclosure flagship-history-disclosure" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}><summary>Explore the complete historical logbook</summary>
+          <PassportHistoryFeed items={recentHistoryItems} onArchiveClick={() => { setHistoryOpen(true); requestAnimationFrame(() => document.getElementById("ardhi-full-history")?.scrollIntoView({ block: "start", behavior: "smooth" })); }} />
+          <details id="ardhi-full-history" className="flagship-disclosure flagship-history-disclosure" open={historyOpen} onToggle={event => setHistoryOpen(event.currentTarget.open)}><summary>Explore the complete historical logbook</summary>
           <ol className="ardhi-expandable-timeline">
             {history.map((record) => (
               <Fragment key={record.id}>
