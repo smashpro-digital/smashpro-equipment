@@ -9,7 +9,7 @@
     "oem_model": "7X14TA tandem dump",
     "asset_class": "Dump Trailer · 14K class",
     "build_type": "dealer_stock",
-    "hero_media_id": "beba-stock-photo-2",
+    "hero_media_id": "beba-branding-concept-hero",
     "current_lifecycle_stage": "dealer_review",
     "status_label": "Candidate · Not acquired",
     "status_detail": "Lime-green stock #64598 under dealer review. No deposit, title, registration, delivery or SmashPro commissioning is recorded.",
@@ -61,7 +61,7 @@
       "media": {
         "eyebrow": "Dealer-sourced gallery",
         "title": "Stock reference photos.\nOperational proof comes later.",
-        "description": "Images link to Kinema's inventory listing and are attributed to the dealer. A later receiving gallery must use actual SmashPro photos after acquisition."
+        "description": "Images link to Kinema's inventory listing and are attributed to the dealer. A clearly labeled SmashPro branding concept render is included for visualization only. A later receiving gallery must use actual SmashPro photos after acquisition."
       },
       "documents": {
         "eyebrow": "Evidence-controlled documents",
@@ -109,10 +109,31 @@
       "4-ft sidewalls are dealer-listed for green stock #64598; 2-ft walls belong to a separate black comparison trailer. Physical measurement pending.",
       "Dealer listing images remain attributed; publication/derivative reuse rights and actual inventory status must be confirmed."
     ],
-    "hero_caption": "Original Kinema Trailer Depot stock listing image. Dealer reference only—not evidence of SmashPro ownership, delivery or commissioning.",
+    "hero_caption": "SmashPro branding concept render on the Cynergy 7×14TA platform. Visualization only—not the physical unit and not evidence of SmashPro ownership, delivery or commissioning.",
     "hero_eyebrow": "SmashPro Equipment Passport · Dealer-stock candidate"
   },
   "records": [
+    {
+      "id": "beba-branding-concept-hero",
+      "asset_id": "SP-BEBA-DP-HD-26",
+      "kind": "media",
+      "title": "SmashPro branding concept render",
+      "detail": "SmashPro visualization of planned BEBA branding on the Cynergy 7×14TA platform. Concept render only—not the physical unit and not evidence of purchase, delivery, VIN or field acceptance.",
+      "evidence_state": "concept",
+      "source_type": "smashpro",
+      "visibility": "public",
+      "sort_order": 90,
+      "url": "/equipment/images/sp-beba-dp-hd-26-branding-concept-hero.jpg",
+      "alt": "SmashPro branding concept render of the lime-green BEBA 7×14 dump trailer",
+      "width": 1365,
+      "height": 768,
+      "media_type": "image",
+      "media_kind": "concept",
+      "source_visibility": "public",
+      "productionEvidence": false,
+      "factoryEvidence": false,
+      "fieldEvidence": false
+    },
     {
       "id": "beba-stock-photo-hero",
       "asset_id": "SP-BEBA-DP-HD-26",
