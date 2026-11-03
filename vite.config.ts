@@ -98,6 +98,7 @@ export default defineConfig(({ mode }) => {
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
         umba: resolve(projectDirectory, "sp-umba-26.html"),
         liftmate: resolve(projectDirectory, "sp-liftmate-27.html"),
+        bebaDump: resolve(projectDirectory, "sp-beba-dp-hd-26.html"),
         nyasi: resolve(projectDirectory, "sp-nyasi-26.html"),
         mediaCamera: resolve(projectDirectory, "sp-med-cam-001.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),

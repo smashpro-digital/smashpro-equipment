@@ -69,6 +69,44 @@ export const passportTemplates: Record<
   PassportBuildType,
   PassportBuildTemplate
 > = {
+  dealer_stock: {
+    type: "dealer_stock",
+    label: "Dealer stock acquisition",
+    sections: [
+      section("overview", "overview", "Overview"),
+      section("identity", "identity", "Identity"),
+      section("partners", "dealership", "Dealer / Manufacturer"),
+      section("configuration", "configuration", "Stock Configuration"),
+      section("journey", "journey", "Acquisition Journey"),
+      shared[0],
+      section("fieldTests", "field-tests", "Acceptance Checks"),
+      ...shared.slice(1),
+    ],
+    lifecycleStages: stages([
+      ["candidate", "Dealer listing identified", "#history"],
+      ["dealer_review", "Exact-unit photo / video review", "#media"],
+      ["reservation", "Reservation / deposit"],
+      ["contract", "Agreement and title review"],
+      ["delivery", "Dealer delivery"],
+      ["registration", "Registration / tow readiness"],
+      ["commissioning", "Commissioning / acceptance"],
+      ["field_validation", "Field validation", "#field-tests"],
+      ["service", "Service"],
+    ]),
+    mediaDestinations: [
+      { id: "dealer", label: "Dealer listing images" },
+      { id: "shipping", label: "Delivery evidence" },
+      { id: "commissioning", label: "Receiving and commissioning" },
+      { id: "field", label: "Field validation" },
+      { id: "service", label: "Service history" },
+    ],
+    documentDestinations: [
+      { id: "manufacturer_spec", label: "Manufacturer / VIN specifications" },
+      { id: "commissioning_checklist", label: "Acceptance checklist" },
+      { id: "warranty", label: "Warranty" },
+      { id: "field_validation", label: "Field validation" },
+    ],
+  },
   partner_build: {
     type: "partner_build",
     label: "Partner build",

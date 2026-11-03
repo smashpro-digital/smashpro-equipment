@@ -18,8 +18,8 @@ const project=domain.projectPassportPublicRecord;
 const render=p=>renderToStaticMarkup(React.createElement(MemoryRouter,null,React.createElement(components.EquipmentPassport,{passport:p})));
 const lift=data.canonicalPassports.find(p=>p.asset.id==='SP-LIFTMATE-27');
 
-test('build type resolves two real templates and orders a shared section registry',()=>{
-  assert.deepEqual(Object.keys(templates.passportTemplates).sort(),['factory_import','partner_build']);
+test('build type resolves three real templates and orders a shared section registry',()=>{
+  assert.deepEqual(Object.keys(templates.passportTemplates).sort(),['dealer_stock','factory_import','partner_build']);
   for(const p of data.canonicalPassports){assert.equal(templates.passportTemplates[p.asset.build_type].type,p.asset.build_type);for(const s of templates.passportTemplates[p.asset.build_type].sections)assert.equal(typeof components.passportSections[s.key],'function');}
   assert.deepEqual(templates.passportTemplates.partner_build.lifecycleStages.map(s=>s.id),['concept','configuration','partner_proof','build_authorization','production','factory_qc','packing','shipping','arrival','commissioning','field_validation','long_term_use']);
 });
@@ -207,8 +207,8 @@ test('MZIGO build complete plus paid final payment and packing never imply shipm
   assert.equal(domain.lifecycleStageStatus(project(c),'commissioned'),'pending');
 });
 
-test('three-passport contract matrix preserves identity, state, supported sections and public privacy',()=>{
-  assert.deepEqual(data.canonicalPassports.map(p=>p.asset.id).sort(),['SP-ARDHI-26','SP-LIFTMATE-27','SP-MZIGO-26E']);
+test('four-passport contract matrix preserves identity, state, supported sections and public privacy',()=>{
+  assert.deepEqual(data.canonicalPassports.map(p=>p.asset.id).sort(),['SP-ARDHI-26','SP-BEBA-DP-HD-26','SP-LIFTMATE-27','SP-MZIGO-26E']);
   for(const source of data.canonicalPassports){
     const c=structuredClone(source);c.procurement={internal_notes:'MATRIX_PRIVATE_CANARY'};
     c.records.push({...c.records[0],id:'matrix-private',visibility:'private',detail:'MATRIX_PRIVATE_CANARY'});
@@ -221,4 +221,33 @@ test('three-passport contract matrix preserves identity, state, supported sectio
     assert.ok(!JSON.stringify(p).includes('MATRIX_PRIVATE_CANARY'));
     assert.ok(!JSON.stringify(p).includes('matrix-private'));
   }
+});
+
+
+test('BEBA dealer-stock candidate is rendered from data without showing owned inventory or private finance',()=>{
+  const source=data.canonicalPassports.find(p=>p.asset.id==='SP-BEBA-DP-HD-26');
+  assert.ok(source,'BEBA canonical data record exists');
+  const p=project(source),html=render(p);
+  assert.equal(p.build.renderer,'generic');assert.equal(p.asset.build_type,'dealer_stock');
+  assert.equal(p.asset.current_lifecycle_stage,'dealer_review');
+  assert.equal(p.asset.passport_id,'Pending allocation');
+  assert.equal(p.records.filter(r=>r.kind==='media'&&r.media_kind==='dealer').length,7);
+  assert.equal(p.records.find(r=>r.id==='beba-walls')?.value,'4 ft (48 in)');
+  assert.match(html,/4 ft \(48 in\)/);
+  assert.match(html,/four-foot walls explicitly listed/i);
+  assert.match(html,/Not acquired/);
+  assert.match(html,/data-build-type="dealer_stock"/);
+  assert.equal(domain.lifecycleStageStatus(p,'candidate'),'complete');
+  assert.equal(domain.lifecycleStageStatus(p,'dealer_review'),'current');
+  for(const stage of ['reservation','contract','delivery','registration','commissioning','field_validation'])assert.equal(domain.lifecycleStageStatus(p,stage),'pending',stage);
+  for(const record of p.records.filter(r=>r.kind==='media'))assert.equal(record.fieldEvidence,false);
+  const json=JSON.stringify(p);
+  for(const secret of ['576.72','1746.22','1,265','kinematrailerdepot@gmail.com','Hopkins Management Group'])assert.ok(!json.includes(secret),secret);
+  const showroom=readFileSync('src/data/equipment.ts','utf8');
+  const sitemap=readFileSync('public/sitemap.xml','utf8');
+  assert.ok(!showroom.includes("SP-BEBA-DP-HD-26"),'candidate stays out of showroom');
+  assert.ok(!sitemap.includes('sp-beba-dp-hd-26.html'),'candidate stays out of sitemap');
+  const entry=readFileSync('sp-beba-dp-hd-26.html','utf8');
+  assert.match(entry,/noindex,nofollow/);
+  assert.match(readFileSync('vite.config.ts','utf8'),/sp-beba-dp-hd-26\.html/);
 });

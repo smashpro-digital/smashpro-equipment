@@ -9,7 +9,13 @@ try {
   const {equipment}=await server.ssrLoadModule('/src/data/equipment.ts');
   const index=JSON.parse(readFileSync('dist/equipment-index.json','utf8'));
   for(const canonical of canonicalPassports.filter(p=>p.build.renderer==='generic')) {
-    const row=publicEquipmentIndexRow(equipment.find(e=>e.fleetId===canonical.asset.id),projectPassportPublicRecord(canonical));
+    const item=equipment.find(e=>e.fleetId===canonical.asset.id);
+    if(!item){
+      // Pre-acquisition passports without a showroom entry must stay out of the public index.
+      assert.ok(!index.equipment.some(e=>e.fleet_id===canonical.asset.id),`Public index lists non-showroom passport ${canonical.asset.id}`);
+      continue;
+    }
+    const row=publicEquipmentIndexRow(item,projectPassportPublicRecord(canonical));
     assert.deepEqual(index.equipment.find(e=>e.fleet_id===row.fleet_id),row);
   }
   const bundle=readdirSync('dist/assets').filter(p=>p.endsWith('.js')).map(p=>readFileSync(`dist/assets/${p}`,'utf8')).join('\n');
