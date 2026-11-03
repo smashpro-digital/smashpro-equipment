@@ -352,7 +352,6 @@ function Media({ passport: p }: Props) {
                 width={r.width}
                 height={r.height}
                 loading="lazy"
-                style={{ objectFit: "contain" }}
               />
             )}
             <figcaption>
