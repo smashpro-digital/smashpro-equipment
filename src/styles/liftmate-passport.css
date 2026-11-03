@@ -8,3 +8,20 @@
 .liftmate-passport[data-passport-renderer="generic"] .liftmate-state.is-review_pending{border-color:#8a7341;color:#e3c777}
 .liftmate-passport[data-passport-renderer="generic"] .passport-section-partners> .section-heading{margin-bottom:2rem}
 .liftmate-passport[data-passport-renderer="generic"] .liftmate-evidence-list img{max-width:100%;height:auto}
+.liftmate-passport[data-passport-renderer="generic"] .liftmate-media-archive img{object-fit:contain}
+/* Dealer-stock passports: premium documentary treatment. Scoped by build type so partner builds keep their reviewed presentation. */
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-hero>img{object-fit:cover;object-position:center 62%}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive{grid-auto-flow:dense;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:330px;gap:14px;border:0;background:transparent}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure{position:relative;grid-column:span 2;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#0b100d;box-shadow:0 18px 44px rgba(0,0,0,.35)}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:first-of-type{grid-column:span 4;grid-row:span 2}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure>img{width:100%;height:100%;object-fit:cover;object-position:center 55%;transition:transform .7s cubic-bezier(.2,.6,.2,1)}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:hover>img,.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:focus-within>img{transform:scale(1.045)}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figcaption{position:absolute;inset:auto 0 0 0;padding:2.6rem 1.15rem 1.05rem;background:linear-gradient(180deg,transparent,rgba(4,8,5,.9) 62%)}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figcaption strong{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#eaf4ec}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figcaption span{max-height:0;margin-top:0;overflow:hidden;opacity:0;font-size:.8rem;line-height:1.5;color:#c3cec6;transition:max-height .45s ease,opacity .45s ease,margin-top .45s ease}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:hover figcaption span,.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:focus-within figcaption span{max-height:9em;margin-top:.45rem;opacity:1}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive article{min-height:170px;border:1px dashed #2e3c32;border-radius:18px;background:rgba(14,19,15,.65)}
+.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:focus-visible{outline:3px solid var(--green-bright);outline-offset:3px}
+@media(hover:none){.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figcaption span{max-height:none;margin-top:.45rem;opacity:1}}
+@media(max-width:1000px){.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto}.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure,.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:first-of-type{grid-column:span 2;grid-row:auto}.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure>img{height:auto;aspect-ratio:4/3}}
+@media(max-width:700px){.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive{grid-template-columns:1fr;gap:12px}.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure,.liftmate-passport[data-build-type="dealer_stock"] .liftmate-media-archive figure:first-of-type{grid-column:auto}}

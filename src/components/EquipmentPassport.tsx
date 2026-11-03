@@ -336,6 +336,8 @@ function Media({ passport: p }: Props) {
             key={r.id}
             data-media-kind={r.media_kind}
             data-evidence-state={r.evidence_state}
+            // Dealer-stock captions reveal on hover/focus; the figure must be keyboard-focusable for :focus-within.
+            tabIndex={p.asset.build_type === "dealer_stock" ? 0 : undefined}
           >
             {r.media_type === "video" ? (
               <video
@@ -352,7 +354,6 @@ function Media({ passport: p }: Props) {
                 width={r.width}
                 height={r.height}
                 loading="lazy"
-                style={{ objectFit: "contain" }}
               />
             )}
             <figcaption>
