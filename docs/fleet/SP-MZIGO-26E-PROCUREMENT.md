@@ -97,7 +97,7 @@ Evidence: [October 1 payment transcription](evidence/SP-MZIGO-26E-ALIBABA-PAYMEN
 | --- | --- |
 | Packaging | Not documented |
 | Destination | South Carolina, USA |
-| Delivery estimate | Not documented |
+| Delivery estimate | Supplier ETA 2026-11-28 for ocean arrival milestone; final delivery date not documented |
 
 ## 11. Warranty
 
@@ -125,15 +125,15 @@ Not documented. Banking instructions must be independently verified with the ven
 | Quality inspection | Passed | Supplied 2026-09-15 production status |
 | SmashPro build approval | Approved | Supplied 2026-09-15 production status |
 | Final payment | Complete | 2026-10-01; invoice #I020261001784090010205 |
-| Shipping preparation | Current | Payment complete; no shipping completion inferred |
+| Shipping preparation | Complete | Factory packing/crating evidence received |
 | Final tie-down hardware installation/evidence | Pending | Earlier factory anchor detail does not close final shipping verification |
 | Final shipping-preparation inspection | Pending | Not documented |
-| Crate completion | Pending | Not documented |
-| Factory departure / freight booking | Pending | Not documented |
-| Export crating | Pending | Not documented |
-| Port delivery | Pending | Not documented |
-| Vessel booking / ocean departure | Pending | Not documented |
-| Ocean freight | Pending | Not documented |
+| Crate completion | Complete | Factory wooden-crate evidence received |
+| Factory departure / freight booking | Complete | Supplier shipment/export handoff evidence received |
+| Export crating | Complete | Factory evidence received |
+| Port delivery | Complete | Supplier confirmed Qingdao Port warehouse staging |
+| Vessel booking / ocean departure | Complete | Supplier confirmed NUE TALOS / 1289-045E; shipment QDOH26100023 departed 2026-10-23 |
+| Ocean freight | Current | Supplier ETA 2026-11-28; public vessel observations are route context, not cargo-specific proof |
 | U.S. delivery | Pending | Not documented |
 
 ## 14. Future Documentation Register
