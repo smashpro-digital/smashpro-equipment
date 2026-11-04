@@ -3,19 +3,19 @@ import type { Equipment } from '../types/equipment';
 import postDelivery from '../data/ardhiPostDelivery.json';
 import { ardhiDelivery } from '../data/ardhiDelivery';
 import { sponsorRoadmap } from '../data/ardhiExpo';
-import { commissioningChecks, firstJob, firstJobPresentation, futureAttachments, missionProfile, missionTimeline, serviceEntries, verifiedEvidence } from '../data/ardhiFlagship';
+import { commissioningChecks, firstJob, firstJobPresentation, futureAttachments, missionProfile, missionTimeline, serviceAttention, serviceEntries, verifiedEvidence } from '../data/ardhiFlagship';
 
 export function ArdhiMissionDashboard() {
   const fields = [
     ['Current Mission', 'Commissioning & field evaluation'], ['Current Lifecycle', 'Delivered / pre-service'],
-    ['Current Chapter', 'First dirt-day evaluation'], ['Service Hours', 'Not yet verified'],
-    ['Fleet Status', 'Inspection follow-up required'], ['Next Event', 'Inspection review'],
+    ['Current Chapter', 'First dirt-day evaluation'], ['Service Hours', '~5 reported · meter not verified'],
+    ['Fleet Status', 'Open service items'], ['Next Event', 'Throttle diagnosis / inspections'],
     ['Current Evidence', 'Operator report / media review pending'], ['Current Location', 'Delivery complete / location withheld'],
   ];
   return <section className="shell flagship-dashboard" id="mission-dashboard" aria-labelledby="mission-dashboard-title">
     <header><div><p className="eyebrow">Fleet Asset 001 / Mission Control</p><h2 id="mission-dashboard-title">SP-ARDHI-26</h2></div><p><span className="flagship-status-dot" aria-hidden="true" /> {ardhiDelivery.status}</p></header>
     <dl>{fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    <footer><span>Delivered October 26; field evaluation reported October 31; commissioning approval pending</span><a href="#field-evaluation">View current chapter ↗</a></footer>
+    <footer><span>Delivered October 26; field evaluation reported October 31; open service items; commissioning approval pending</span><a href="#field-evaluation">View current chapter ↗</a></footer>
   </section>;
 }
 
@@ -45,10 +45,10 @@ export function ArdhiServiceRecord() {
   const verifiedServices = serviceEntries.filter(entry => verifiedEvidence(entry.evidence).length > 0);
   return <section className="section shell ardhi-service-record flagship-service" id="service" aria-labelledby="service-record-title">
     <header><p className="eyebrow">Service / Field Readiness</p><h2 id="service-record-title">From delivery to field evaluation.</h2><p>{postDelivery.readiness}</p></header>
-    <article className="ardhi-observation" id="field-evaluation"><p className="eyebrow">Operator report · Updated {postDelivery.asOf}</p><h3>October 31 dirt day</h3><p>{postDelivery.summary}</p><ul>{postDelivery.fieldActivities.map(activity => <li key={activity}>{activity}</li>)}</ul><p>A full pallet lift is not documented. Rated lifting capacity and load center require verification before a full pallet lift is authorized.</p><p>{postDelivery.mediaSummary}</p><a href="#delivery-media">Existing delivery evidence</a></article>
+    <article className="ardhi-observation" id="field-evaluation"><p className="eyebrow">Operator report · Updated {postDelivery.asOf}</p><h3>October 31 dirt day</h3><p>{postDelivery.summary}</p><ul>{postDelivery.fieldActivities.map(activity => <li key={activity}>{activity}</li>)}</ul><p>Reported operating time now totals roughly five hours, including a 3+ hour session. These are operator-reported durations, not a verified hour-meter reading.</p><p>A full pallet lift is not documented. Rated lifting capacity and load center require verification before a full pallet lift is authorized.</p><p>{postDelivery.mediaSummary}</p><a href="#delivery-media">Existing delivery evidence</a></article>
     <div className="flagship-profile-grid" aria-label="Post-delivery milestones">{postDelivery.milestones.map(entry => <article key={entry.key}><p className="eyebrow">{entry.date}</p><h3>{entry.title}</h3><p>{entry.summary}</p><a href={entry.href}>View record</a></article>)}</div>
     <div id="night-ops"><h3>Night Ops development</h3><div className="flagship-profile-grid">{postDelivery.nightOps.map(stage => <article key={stage.title}><p className="eyebrow">{stage.status}</p><h4>{stage.title}</h4><p>{stage.summary}</p></article>)}</div></div>
-    <h3>Inspection follow-up</h3><p>{postDelivery.maintenanceSummary}</p>
+    <h3>Inspection follow-up</h3><p>{postDelivery.maintenanceSummary}</p><p>{serviceAttention}</p>
     <h3>Attachments and upgrades</h3><p>{postDelivery.upgradeSummary}</p>
     <div className="flagship-first-job"><div><p className="eyebrow">{job.title}</p><h3>{job.mission}</h3></div><dl><div><dt>Estimated</dt><dd>{job.estimate}</dd></div></dl><p>Becomes Project 001 when commissioning and the completed job have public supporting evidence.</p></div>
     <h3>Service record</h3><p>Future public entries will retain reviewed hours and supporting evidence. Technician identities, costs and private notes remain protected.</p>

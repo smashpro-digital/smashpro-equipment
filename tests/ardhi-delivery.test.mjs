@@ -118,7 +118,10 @@ test('startup is an owner observation without operational or defect proof', () =
   assert.notEqual(record.evidence_state, 'verified');
   assert.deepEqual(record.evidence_ids, []);
   assert.equal(record.fieldEvidence, false);
-  assert.equal(flagship.commissioningChecks.find(c => c.id === 'first-start').status, 'needs_attention');
+  const firstStart = flagship.commissioningChecks.find(c => c.id === 'first-start');
+  assert.equal(firstStart.status, 'in_progress');
+  assert.match(firstStart.progressLabel, /Milestone reached/);
+  assert.equal(firstStart.approval, 'pending');
   assert.equal(flagship.commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
   assert.equal(delivery.ardhiMediaCollections.length, 7);
 });
@@ -137,7 +140,8 @@ test('later owner reports append without clearing service attention or approving
   assert.match(flagship.commissioningObservations[0].summary, /started successfully/);
   assert.match(flagship.commissioningObservations[1].summary, /level and quantity remain unverified/);
   assert.match(flagship.commissioningObservations[3].summary, /has not been repaired/);
-  for (const id of ['first-start','engine-oil']) assert.equal(flagship.commissioningChecks.find(c=>c.id===id).status,'needs_attention');
+  for (const id of ['engine-oil','attachment-test']) assert.equal(flagship.commissioningChecks.find(c=>c.id===id).status,'needs_attention');
+  assert.equal(flagship.commissioningChecks.find(c=>c.id==='first-start').approval,'pending');
   assert.equal(flagship.commissioningChecks.find(c=>c.id==='passport-complete').status,'blocked');
   assert.equal(domain.hasMilestoneEvidence(passport,'commissioning'),false);
 });
