@@ -33,7 +33,7 @@ export const commissioningReadiness = { commissioned: false, operational: false,
 // warranty/parts record and the November 3 owner report. Activity records what
 // happened or was reported; outstanding records the specific remaining check.
 const currentCheckProgress: Record<string, Partial<CommissioningCheck>> = {
-  delivery: { activity: 'Carrier delivery completed October 26, 2026; photographs reviewed.', outstanding: 'None.' },
+  delivery: { activity: 'Carrier delivery completed October 26, 2026; photographs reviewed.', outstanding: 'Final receiving review and sign-off as part of commissioning approval.' },
   'crate-inspection': { progressLabel: 'Photographed · review pending', activity: 'Crate photographed on arrival, October 26.', outstanding: 'Formal damage-free condition sign-off.' },
   'crate-opened': { progressLabel: 'Uncrating complete · review pending', notes: 'Uncrating is complete. A left-track puncture, previously hidden by the pallet, was found after crate removal; the supplier describes sprocket-engagement openings as normal track design and no track warranty claim is confirmed.', activity: 'Crate opened and panels removed October 26; machine has since moved off the shipping base.', outstanding: 'Receiving review; qualified track inspection tracked under Lifetime care.' },
   accessories: { status: 'in_progress', progressLabel: 'In use · acceptance pending', notes: 'Bucket, pallet forks and factory accessories are present and have been used in reported field work.', activity: 'Accessories visually inspected October 26; bucket and forks used in the field (reported).', outstanding: 'Complete inventory acceptance against the packing list.' },
