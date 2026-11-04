@@ -2,8 +2,8 @@
 
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.3<br>
-> Status: Paid in Full / Shipping Preparation<br>
-> Last Updated: 2026-10-01
+> Status: Shipped / Ocean Transit<br>
+> Last Updated: 2026-11-03
 
 ---
 
@@ -209,6 +209,16 @@ Primary intended material roles include mulch, pine straw, gravel, decorative ro
 - Remote-control batteries
 - Spare drive shaft
 - Spare tire
+
+---
+
+# October 23–November 3, 2026 Ocean Transit Update
+
+Supplier confirmation records shipment reference **QDOH26100023** as shipped on **October 23, 2026**. The supplier-provided vessel/voyage context is **NUE TALOS / 1289-045E**, with an estimated arrival date of **November 28, 2026**.
+
+The unit had previously been documented packed/crated and staged at the Qingdao Port warehouse. Port/container-loading photography was reported unavailable through the shipping company, so container loading remains an evidence limitation rather than an inferred photographed milestone.
+
+Public vessel schedule observations may be used as route context, but they are not cargo-specific proof for SP-MZIGO-26E. Container number, bill of lading, confirmed U.S. arrival port, customs release, final-mile delivery, commissioning and field validation remain pending until shipment-specific evidence is received.
 
 ---
 
