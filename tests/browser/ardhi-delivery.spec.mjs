@@ -18,13 +18,13 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect.poll(() => page.locator('#delivery-media img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   await expect(page.locator('#watch-ardhi iframe')).toHaveCount(0);
   await expect(page.locator('#check-in')).toHaveAttribute('href', '/k/ARDHI26-K01/');
-  await expect(page.locator('#commissioning-first-start')).toContainText('Needs attention');
-  await expect(page.locator('#inspections')).toContainText('Service attention required');
+  await expect(page.locator('#commissioning-first-start')).toContainText('Milestone reached');
+  await expect(page.locator('#inspections')).toContainText('Open service items');
   await expect(page.getByRole('heading', {name: 'Engine subsequently started - owner report'}).first()).toBeVisible();
   await expect(page.locator('[aria-label="October 26 historical observations"]')).toContainText('has not been repaired');
   await expect(page.locator('#commissioning-delivery')).toContainText('Passed');
-  await expect(page.locator('#commissioning-crate-opened')).toContainText('In progress');
-  await expect(page.locator('#commissioning-accessories')).toContainText('In progress');
+  await expect(page.locator('#commissioning-crate-opened')).toContainText('Uncrating complete');
+  await expect(page.locator('#commissioning-accessories')).toContainText('In use');
   await expect(page.locator('#service')).toContainText('Awaiting Commissioning');
   await expect(page.locator('.ardhi-production-checks > li')).toHaveCount(16);
   await expect(page.locator('#operator-preparation')).toContainText('not connected on this Passport');
@@ -75,7 +75,7 @@ for (const width of [390, 1440]) test(`production inspections, anchors and publi
   await disclosure.focus(); await page.keyboard.press('Enter');
   await expect(page.locator('#commissioning-first-start details')).toHaveAttribute('open', '');
   await expect(page.locator('#commissioning-first-start')).toContainText('Resolution: Pending');
-  await expect(page.locator('#maintenance')).toContainText('not yet verified');
+  await expect(page.locator('#maintenance')).toContainText('no verified hour-meter reading');
   const ids = await page.locator('[id]').evaluateAll(nodes => nodes.map(node => node.id));
   expect(new Set(ids).size).toBe(ids.length);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -102,6 +102,6 @@ for (const width of [390, 1440]) test(`factory startup reference video at ${widt
   expect(await video.evaluate(v => v.videoWidth)).toBe(1920);
   await video.evaluate(v => { v.pause(); return new Promise(resolve => { v.addEventListener('seeked', resolve, {once:true}); v.currentTime = 2; }); });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await expect(page.locator('#commissioning-first-start')).toContainText('Needs attention');
+  await expect(page.locator('#commissioning-first-start')).toContainText('Milestone reached');
   await section.screenshot({path:`tmp/startup-reference-${width}.png`,style:'.passport-rail{visibility:hidden!important}'});
 });

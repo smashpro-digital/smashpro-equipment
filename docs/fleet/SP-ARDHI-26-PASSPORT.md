@@ -1,15 +1,20 @@
 # SP-ARDHI-26 Equipment Passport
 
 > **SmashPro Fleet Equipment Passport**  
-> Version: 1.3
+> Version: 1.4
 >
-> Status: Delivered / Receiving Inspection
+> Status: Delivered / Field evaluation reported / Open service items
 >
-> Last Updated: 2026-10-26
+> Last Updated: 2026-11-03
 
 > **Historical October 6 snapshot (superseded by delivery below):** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record carried an **October 5, 2026** planning target. Public vessel context now records EVER MAX voyage 1374-016E departing Colón on October 1 and reaching **Savannah anchorage on October 6 at 06:43 UTC**. This is a vessel-level checkpoint only. SP-ARDHI-26 cargo discharge, U.S. customs clearance, cargo release, final-mile delivery, receipt, and commissioning remain unconfirmed. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
 
-## Current update - November 1, 2026
+## Current update - November 3, 2026
+
+**Delivered / Field evaluation reported / Open service items.**
+ARDHI has started, moved and performed bucket/dirt work; reported operating time totals roughly five hours, including a 3+ hour session (operator-reported — no verified hour-meter reading). Two open service items: the throttle lever physically stops at about half travel since Dirt Day (cause unverified; replacement cable ordered November 2, not installed) and the quick-change locking pin repair is owner-reported with an additional screw added to both pins (reported November 3; independent retention verification pending). Commissioning approval remains pending. See the [warranty and parts record](SP-ARDHI-26-WARRANTY-AND-PARTS-20261102.md).
+
+## Historical update - November 1, 2026
 
 **Delivered / Commissioning and field evaluation underway / Inspection follow-up required.**
 Owner reports oil-level correction, restart after charging and October 31 dirt-day activities. These do not establish a completed repair, commissioning approval, rated lifting capacity, customer-job completion or operational release. See [post-delivery reconciliation](SP-ARDHI-26-POST-DELIVERY-20261101.md). Earlier snapshots below retain their original evidence state and are not current-state assertions.
@@ -18,7 +23,7 @@ Owner reports oil-level correction, restart after charging and October 31 dirt-d
 
 SP-ARDHI-26 / YF380 was delivered by **R+L Carriers**, PRO **IACO468333**, from **CONVOY USA-SAVANNAH**. The owner confirmed carrier delivery and supplied photographs of the closed wooden crate on the ground. Crated weight is approximately **950 kg**, separate from operating weight.
 
-**Current state: Delivered / Receiving inspection.** Crate opening and panel removal are photographed. ARDHI remains on its shipping base; receiving inspection, complete accessories inventory, fluid checks, first startup, first movement, operator commissioning and first field test remain unverified. ARDHI is not represented as operational or rental-ready. Separate customs/warehouse event dates remain unverified; historical records below retain their original context.
+**October 26 receiving snapshot (superseded by the current update above):** Crate opening and panel removal are photographed. At that time ARDHI remained on its shipping base; receiving inspection, complete accessories inventory, fluid checks, first startup, first movement, operator commissioning and first field test were unverified. ARDHI is not represented as operational or rental-ready. Separate customs/warehouse event dates remain unverified; historical records below retain their original context.
 
 See the [delivery implementation and media record](SP-ARDHI-26-DELIVERY-20261026.md) for photo provenance, remaining evidence, privacy handling and validation.
 

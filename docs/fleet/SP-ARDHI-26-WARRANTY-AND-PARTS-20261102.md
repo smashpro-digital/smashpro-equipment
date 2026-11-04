@@ -38,3 +38,9 @@ Amazon order placed (owner screenshot); **estimated delivery Tuesday 2026-11-03*
 - Log installation date, actual costs, testing results, and close-out evidence separately.
 
 **Evidence source:** Owner-supplied supplier chat and Amazon order screenshots in conversation; no formal OEM warranty PDF or confirmed parts compatibility yet.
+
+## Update — reported November 3, 2026
+
+- Owner reports the quick-change locking pin issue **repaired**, with an additional retaining screw added to **both** locking pins. The repair date was not separately recorded; this is an owner report, not a verified retention inspection, and the screw specification is not manufacturer-approved.
+- Independent retention and function verification of both pins remains required before loaded attachment work.
+- The throttle travel restriction remains **open**; the ordered replacement cable is not confirmed installed or verified.

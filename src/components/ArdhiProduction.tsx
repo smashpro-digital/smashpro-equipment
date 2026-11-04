@@ -1,4 +1,4 @@
-import { factoryStartupReference, commissioningChecks, commissioningObservations, commissioningLifecycle, firstStartObservation, maintenanceSystems } from '../data/ardhiFlagship';
+import { factoryStartupReference, commissioningChecks, commissioningObservations, commissioningLifecycle, fieldFindings, firstStartObservation, maintenanceBaselines } from '../data/ardhiFlagship';
 import '../styles/ardhi-production.css';
 const labels = { not_started: 'Not started', in_progress: 'In progress', passed: 'Passed', needs_attention: 'Needs attention', blocked: 'Blocked' };
 
@@ -21,16 +21,18 @@ export function ArdhiInspections() {
       <details><summary>Original attempt: information not recorded at that time</summary><ul>{firstStartObservation.missingObservations.map(label => <li key={label}>{label}: not yet documented</li>)}</ul></details>
       <p><a href="/equipment/documents/sp-ardhi-26/yfe380-operator-instruction-manual.pdf">Existing YFE380 instruction manual</a>: applicability to this delivered YF380 and its engine must be confirmed with the manufacturer. No mechanical adjustment is prescribed here.</p>
     </article>
-    <div aria-label="October 26 historical observations">{commissioningObservations.map(record => <article className="ardhi-observation" key={record.id}><p className="eyebrow">Owner report - {record.date}</p><h3>{record.title}</h3><p>{record.summary}</p><p>Historical observation preserved. See the updated post-delivery record for subsequent recovery; inspection approval remains pending.</p></article>)}</div>
-    <p>Updated November 1, 2026: reported activity is shown separately from inspection approval. Expand an item for its evidence and outstanding checks.</p>
+    <div aria-label="October 26 historical observations">{commissioningObservations.map(record => <article className="ardhi-observation" key={record.id}><p className="eyebrow">Owner report - {record.date}</p><h3>{record.title}</h3><p>{record.summary}</p></article>)}</div>
+    <p>Historical observations are preserved as recorded. See the post-delivery findings below for subsequent recovery and open items; inspection approval remains pending.</p>
+    <div aria-label="Post-delivery findings" className="ardhi-field-findings">{fieldFindings.map(finding => <article className="ardhi-observation" key={finding.id}><p className="eyebrow">{finding.state} · {finding.date}</p><h3>{finding.title}</h3><p>{finding.summary}</p></article>)}</div>
+    <p>Updated November 3, 2026: each item separates reported activity from inspection approval. Expand an item for its latest update, evidence and outstanding checks.</p>
     <ol className="ardhi-production-checks">{commissioningChecks.map(check => <li id={`commissioning-${check.id}`} key={check.id}>
       <details><summary><strong>{check.title}</strong><span className={`production-status is-${check.status}`}>{check.progressLabel ?? labels[check.status]}</span></summary>
-      <p>{check.notes}</p><dl><div><dt>Evidence date</dt><dd>{check.date ?? 'Not recorded'} - time not recorded</dd></div><div><dt>Review / approval</dt><dd>{check.approval === 'pending' ? 'Pending' : 'Reviewed'}</dd></div></dl>
+      <p>{check.notes}</p><dl>{check.activity && <div><dt>Activity / latest update</dt><dd>{check.activity}</dd></div>}<div><dt>Evidence date</dt><dd>{check.date ?? 'Not recorded'} - time not recorded</dd></div><div><dt>Review / approval</dt><dd>{check.approval === 'pending' ? 'Pending' : 'Reviewed'}</dd></div>{check.outstanding && <div><dt>Outstanding</dt><dd>{check.outstanding}</dd></div>}</dl>
       {check.evidence.map(e => <p key={e.href}><a href={e.href}>{e.title}</a></p>)}
       {!check.evidence.length && <p>AWAITING MEDIA / inspection evidence</p>}
       {check.issue && <p>Issue: {check.issue} Resolution: {check.resolution ?? 'Pending'}</p>}
       </details></li>)}</ol>
-    <p><a href="#field-evaluation">November 1 update: commissioning recovery and field evaluation</a></p>
+    <p><a href="#field-evaluation">Latest: field evaluation and open service items (updated November 3)</a></p>
     <p>Operator attribution, issue resolution and sign-off require protected records. This public checklist is read-only; no inspection is submitted here.</p>
   </section>;
 }
@@ -38,8 +40,8 @@ export function ArdhiInspections() {
 export function ArdhiMaintenancePlan() {
   return <section className="section shell ardhi-production" id="maintenance" aria-labelledby="maintenance-title">
     <p className="eyebrow">Lifetime care / preparation</p><h2 id="maintenance-title">Maintenance starts with a verified baseline.</h2>
-    <p>Engine hours and applicable service intervals are not yet verified. Follow manufacturer guidance once the machine and engine are identified.</p>
-    <ul className="ardhi-maintenance-systems">{maintenanceSystems.map(system => <li key={system}><strong>{system}</strong><span>Baseline inspection pending</span></li>)}</ul>
+    <p>The engine label is documented: a Runtong 739 cc twin-cylinder gasoline engine on the YF380 plate. Operating time is operator-reported — roughly five field hours — with no verified hour-meter reading. Service intervals follow manufacturer guidance once its applicability to the delivered YF380 is confirmed.</p>
+    <ul className="ardhi-maintenance-systems is-baselines">{maintenanceBaselines.map(baseline => <li key={baseline.system}><strong>{baseline.system}</strong><span>{baseline.updated ? `Updated ${baseline.updated}` : 'No dated record yet'}</span><p><b>Known:</b> {baseline.known}</p><p><b>Outstanding:</b> {baseline.outstanding}</p></li>)}</ul>
     <p>Future records need hours, applicable interval, parts, inspection evidence and next-due date. Costs, technician identities and private notes belong in Digital HQ. No schedule, completed service or operational integration is implied.</p>
     <a href="#service">View published service history</a>
   </section>;

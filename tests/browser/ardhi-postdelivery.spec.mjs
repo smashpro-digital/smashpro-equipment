@@ -11,9 +11,9 @@ for (const width of [390,768,1440]) test(`post-delivery review at ${width}px`,as
   await expect(page.locator('#night-ops')).toContainText('not purchased or installed');
   await expect(page.locator('.flagship-first-job')).toContainText('Awaiting Commissioning');
   await expect(page.locator('.ardhi-production-checks > li')).toHaveCount(16);
-  await expect(page.locator('#commissioning-first-start summary')).toContainText('Restart reported');
-  await expect(page.locator('#commissioning-first-drive summary')).toContainText('Movement reported');
-  await expect(page.locator('#commissioning-hydraulics summary')).toContainText('Field evaluation underway');
+  await expect(page.locator('#commissioning-first-start summary')).toContainText('Milestone reached');
+  await expect(page.locator('#commissioning-first-drive summary')).toContainText('Milestone reached');
+  await expect(page.locator('#commissioning-hydraulics summary')).toContainText('Field work reported');
   await expect(page.locator('#commissioning-passport-complete summary')).toContainText('Blocked');
   await page.locator('#commissioning-first-drive summary').click();
   await expect(page.locator('#commissioning-first-drive')).toContainText('2026-10-31');
@@ -30,10 +30,10 @@ for (const width of [390,768,1440]) test(`post-delivery review at ${width}px`,as
   await page.locator('#field-evaluation').scrollIntoViewIfNeeded();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(errors).toEqual([]);
-  mkdirSync('docs/release-captures/ardhi-postdelivery-20261101',{recursive:true});
-  await page.screenshot({path:`docs/release-captures/ardhi-postdelivery-20261101/${width}-field.png`});
+  mkdirSync('docs/release-captures/ardhi-care-refresh-20261103',{recursive:true});
+  await page.screenshot({path:`docs/release-captures/ardhi-care-refresh-20261103/${width}-field.png`});
   await page.locator('#night-ops').scrollIntoViewIfNeeded();
-  await page.screenshot({path:`docs/release-captures/ardhi-postdelivery-20261101/${width}-lighting.png`});
+  await page.screenshot({path:`docs/release-captures/ardhi-care-refresh-20261103/${width}-lighting.png`});
   await page.locator('.ardhi-v2-hero').scrollIntoViewIfNeeded();
-  await page.screenshot({path:`docs/release-captures/ardhi-postdelivery-20261101/${width}-hero.png`});
+  await page.screenshot({path:`docs/release-captures/ardhi-care-refresh-20261103/${width}-hero.png`});
 });
