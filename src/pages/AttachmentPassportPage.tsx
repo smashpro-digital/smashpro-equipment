@@ -62,8 +62,25 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         {item.verifiedFleetIds?.length ? <div className="attachment-passport-hosts"><strong>Verified host evidence</strong>{item.verifiedFleetIds.map((id) => <a href={id === "SP-ARDHI-26" ? "/equipment/sp-ardhi-26.html" : "/equipment/"} key={id}>{id}</a>)}</div> : null}
       </section>
 
+      {item.upgrades?.length ? <section className="section shell" id="attachment-upgrades">
+        <div className="section-heading"><div><p className="eyebrow">Attachment modifications</p><h2>Upgrades and wear components.</h2></div><p>Tracked against this attachment's permanent passport, without creating duplicate equipment assets.</p></div>
+        <div className="attachment-checklist">{item.upgrades.map((upgrade) => <article className="attachment-check" key={upgrade.id}>
+          <div className="attachment-check__top"><span>{upgrade.status}</span><small>{upgrade.id}</small></div><h3>{upgrade.name}</h3><p>{upgrade.description}</p>
+        </article>)}</div>
+      </section> : null}
+
+      {item.fieldEvidence?.length ? <section className="section shell" id="attachment-field-evidence">
+        <div className="section-heading"><div><p className="eyebrow">Field evidence</p><h2>From attachment to actual work.</h2></div><p>Selected, verified attachment photographs belong here. Full customer grading portfolios stay with their project records.</p></div>
+        <div className="attachment-checklist">{item.fieldEvidence.map((evidence) => <article className="attachment-check" key={evidence.id}>
+          <div className="attachment-check__top"><span>{evidence.status === "verified" ? "Documented image" : "Awaiting field evidence"}</span></div>
+          {evidence.status === "verified" && evidence.image ? <img src={evidence.image} alt={evidence.imageAlt ?? evidence.title} loading="lazy" style={{width:"100%",height:"auto",maxHeight:"300px",objectFit:"contain",marginBottom:"1rem"}}/> : null}
+          <h3>{evidence.title}</h3><p>{evidence.description}</p>
+          {evidence.status === "verified" && evidence.projectUrl ? <a href={evidence.projectUrl}>View project portfolio</a> : null}
+        </article>)}</div>
+      </section> : null}
+
       {item.fitmentChecklist?.length ? (
-        <section className="section shell">
+        <section className="section shell" id="attachment-fitment">
           <div className="section-heading"><div><p className="eyebrow">Procurement fitment checklist</p><h2>The questions we ask before steel meets machine.</h2></div><p>This checklist is carried forward from real attachment procurement so future purchases are evaluated against the same standard.</p></div>
           <div className="attachment-checklist">
             {item.fitmentChecklist.map((check) => (
@@ -76,6 +93,14 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
           </div>
         </section>
       ) : null}
+
+      {item.passportId === "SP-ATT-BKT-001" && <section className="section shell" id="attachment-related-work">
+        <div className="section-heading"><div><p className="eyebrow">Related work</p><h2>See the bucket in context.</h2></div><p>Customer project articles are published and associated with the canonical service category through SmashPro's existing project infrastructure. Booking stays with the service workflow.</p></div>
+        <div className="button-row">
+          <ButtonLink href="/equipment/sp-ardhi-26.html" variant="outline">ARDHI equipment passport</ButtonLink>
+          <ButtonLink href="https://smashpro.app/services/">Browse related services</ButtonLink>
+        </div>
+      </section>}
 
       {item.procurement ? (
         <section className="attachment-detail"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Procurement snapshot</p><h2>Commercial facts, separate from fitment.</h2></div><p>Pricing, freight, lead time, support, and payment terms are recorded without turning procurement status into an availability claim.</p></div><dl className="spec-grid">
