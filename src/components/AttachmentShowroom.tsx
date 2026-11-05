@@ -67,7 +67,7 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
             </div>
             <div className="attachment-feature__body">
               <div className="attachment-feature__topline">
-                <span className={`attachment-status attachment-status--${featured.status}`}>{statusLabel[featured.status]}</span>
+                <span className={`attachment-status attachment-status--${featured.status}`}>{featured.passportId === "SP-ATT-GRP-001" ? "Paid in full · Awaiting shipment" : statusLabel[featured.status]}</span>
                 <span>{featured.category}</span>
               </div>
               <p className="attachment-feature__kicker">{featured.passportId} {featured.manufacturer ? `· ${featured.manufacturer}` : ""}</p>
@@ -102,7 +102,7 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
                       <strong>{item.name}</strong>
                       <span>{item.passportId} · {item.plateRequirement?.label ?? "Plate TBD"}</span>
                     </div>
-                    <span className={`attachment-status attachment-status--${item.status}`}>{statusLabel[item.status]}</span>
+                    <span className={`attachment-status attachment-status--${item.status}`}>{item.passportId === "SP-ATT-GRP-001" ? "Paid in full · Awaiting shipment" : statusLabel[item.status]}</span>
                   </a>
                 ))}
               </div>
