@@ -16,6 +16,13 @@ export const attachments: AttachmentPassport[] = [
     description: "Factory-supplied general-purpose bucket documented with SP-ARDHI-26 for material moving, loading, grading support, and general property work.",
     capabilities: ["Material moving", "Loading", "Light grading support", "Site preparation"],
     width: "42.91 in",
+    // Accessory is tracked under this existing bucket passport, not as a second attachment.
+    fitmentChecklist: [
+      { key: "bdi-teeth-order", question: "Are the BDI 6684447 six bolt-on teeth received?", answer: "Six-piece kit ordered November 5, 2026; delivery estimated November 7. Receipt not confirmed.", status: "pending", source: "Owner-provided Amazon order confirmation" },
+      { key: "bdi-teeth-fitment", question: "Do the 1.76-inch tooth bolt centers, jaw opening and hardware fit the factory bucket?", answer: "Factory hole spacing and cutting-edge thickness require physical verification; no modification authorized.", status: "pending", source: "Seller dimension diagram and owner bucket photographs" },
+      { key: "bdi-teeth-finish", question: "Is the planned RAL 6018 coating approved for the tooth steel?", answer: "Quotes requested; coating partner, steel compatibility and finish are not yet confirmed.", status: "pending", source: "SmashPro upgrade plan" },
+      { key: "bdi-teeth-install", question: "Have all six teeth been safely installed and field-tested?", answer: "Installation and testing pending successful receipt and fitment.", status: "pending" },
+    ],
     image: "/equipment/images/sp-ardhi-26-bucket-branding.png",
     imageAlt: "SP-ARDHI-26 general-purpose bucket with SmashPro branding",
     serviceUrl: "https://smashpro.app/services/",
