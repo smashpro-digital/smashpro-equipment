@@ -1,7 +1,7 @@
 # SP-ARDHI-26 Grapple Procurement Record
 
-> Status: Ordered / build initiated; deposit paid; not received or commissioned
-> Updated: 2026-09-09
+> Status: Fabrication complete, invoice #292 paid in full 2026-11-05; awaiting dispatch/tracking; not received or commissioned
+> Updated: 2026-11-05
 
 ## Decision
 
@@ -40,7 +40,7 @@ The September 9 receipt email was sent by the shared HighWay Attachments sales a
 | Freight to ZIP 29061 | $285 |
 | Documented order total | $2,297 |
 | Deposit paid 2026-09-09 | $297 |
-| Remaining balance | **$2,000** |
+| October 30 payment | $1,000 |\n| November 5 final payment | $1,000 |\n| Remaining balance | **$0.00 (PAID IN FULL)** |
 | Balance timing | Due when build is complete |
 | Lead time | 4–6 weeks |
 | Approximate build-completion window | Oct 7–21, 2026 |
@@ -105,4 +105,8 @@ Before customer activation:
 
 `selected -> ordered/building -> completed -> balance_paid -> shipped -> received -> fitment_verified -> commissioned -> customer_ready`
 
-Current state: **ordered/building**.
+Current state: **paid_in_full_awaiting_dispatch**. No shipment, tracking, delivery, fitment or commissioning confirmed.
+
+## Final payment evidence — November 5, 2026
+
+HighWay Attachments emailed three-page `img11052026_0001.pdf` confirming invoice #292 marked PAID, $1,000 Visa payment applied, and $0 due. Processor page confirms approval/capture at 09:23:55 EST. Total paid $2,297 across Sept 9 ($297), Oct 30 ($1,000), and Nov 5 ($1,000). Vendor's verbal ~2-day delivery estimate begins after full payment but no delivery date, carrier, dispatch or tracking is confirmed. Public showroom/passport status should say **Paid in full · Awaiting shipment**, not delivered or service-ready. Source: Gmail message `1a1ac1bac8d24560` (private receipt; no card details on public pages).
