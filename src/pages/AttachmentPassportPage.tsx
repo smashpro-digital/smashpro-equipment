@@ -80,7 +80,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
       </section> : null}
 
       {item.fitmentChecklist?.length ? (
-        <section className="section shell">
+        <section className="section shell" id="attachment-fitment">
           <div className="section-heading"><div><p className="eyebrow">Procurement fitment checklist</p><h2>The questions we ask before steel meets machine.</h2></div><p>This checklist is carried forward from real attachment procurement so future purchases are evaluated against the same standard.</p></div>
           <div className="attachment-checklist">
             {item.fitmentChecklist.map((check) => (
@@ -93,6 +93,14 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
           </div>
         </section>
       ) : null}
+
+      {item.passportId === "SP-ATT-BKT-001" && <section className="section shell" id="attachment-related-work">
+        <div className="section-heading"><div><p className="eyebrow">Related work</p><h2>See the bucket in context.</h2></div><p>Customer project articles are published and associated with the canonical service category through SmashPro's existing project infrastructure. Booking stays with the service workflow.</p></div>
+        <div className="button-row">
+          <ButtonLink href="/equipment/sp-ardhi-26.html" variant="outline">ARDHI equipment passport</ButtonLink>
+          <ButtonLink href="https://smashpro.app/services/">Browse related services</ButtonLink>
+        </div>
+      </section>}
 
       {item.procurement ? (
         <section className="attachment-detail"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Procurement snapshot</p><h2>Commercial facts, separate from fitment.</h2></div><p>Pricing, freight, lead time, support, and payment terms are recorded without turning procurement status into an availability claim.</p></div><dl className="spec-grid">
