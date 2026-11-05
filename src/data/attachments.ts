@@ -24,7 +24,7 @@ export const attachments: AttachmentPassport[] = [
       procurementDocument: "docs/fleet/SP-ATT-BKT-001-BDI-6684447-TEETH-PROCUREMENT.md",
     }],
     fieldEvidence: [
-      { id: "factory-bucket-branding", title: "Factory bucket identity", description: "Existing approved factory bucket branding image. This is not evidence of the teeth being installed or a completed grading job.", status: "verified", image: "/equipment/images/sp-ardhi-26-bucket-branding.png", imageAlt: "SmashPro branded factory bucket" },
+      { id: "factory-bucket-branding", title: "ARDHI factory bucket in the field", description: "Owner-supplied October 31, 2026 photograph of the factory general-purpose bucket mounted on ARDHI, before installation of the BDI digging teeth. This documents attachment identity, not a completed grading job.", status: "verified", image: "https://smashpro.app/wp-content/uploads/2026/11/20261031_131720.jpg", imageAlt: "SmashPro ARDHI tracked mini skid steer with black factory general-purpose bucket and green-and-white SMASHPRO branding on a wooded driveway" },
       { id: "bucket-field-grading", title: "Field grading and site preparation", description: "Reserved for reviewed actual field photographs with project attribution and customer privacy approval.", status: "pending" },
       { id: "bdi-fitment", title: "Six-tooth installation and field test", description: "Awaiting delivery, physical fitment and verified installation photographs.", status: "pending" },
     ],
@@ -35,8 +35,8 @@ export const attachments: AttachmentPassport[] = [
       { key: "bdi-teeth-finish", question: "Is the planned RAL 6018 coating approved for the tooth steel?", answer: "Quotes requested; coating partner, steel compatibility and finish are not yet confirmed.", status: "pending", source: "SmashPro upgrade plan" },
       { key: "bdi-teeth-install", question: "Have all six teeth been safely installed and field-tested?", answer: "Installation and testing pending successful receipt and fitment.", status: "pending" },
     ],
-    image: "/equipment/images/sp-ardhi-26-bucket-branding.png",
-    imageAlt: "SP-ARDHI-26 general-purpose bucket with SmashPro branding",
+    image: "https://smashpro.app/wp-content/uploads/2026/11/20261031_131720.jpg",
+    imageAlt: "ARDHI mini skid steer with its black SmashPro branded factory bucket photographed outdoors before the digging teeth upgrade",
     serviceUrl: "https://smashpro.app/services/",
   },
   {
