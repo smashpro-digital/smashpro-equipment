@@ -137,7 +137,25 @@ export interface AttachmentFitmentChecklistItem {
   status: "confirmed" | "pending" | "not-applicable";
   source?: string;
 }
+export interface AttachmentFieldEvidence {
+  id: string;
+  title: string;
+  description: string;
+  status: "verified" | "pending";
+  image?: string;
+  imageAlt?: string;
+  projectUrl?: string;
+}
+export interface AttachmentUpgradeRecord {
+  id: string;
+  name: string;
+  status: "planned" | "ordered" | "installed" | "removed";
+  description: string;
+  procurementDocument?: string;
+}
 export interface AttachmentPassport {
+  fieldEvidence?: AttachmentFieldEvidence[];
+  upgrades?: AttachmentUpgradeRecord[];
   passportId: string;
   assetTag: string;
   slug: string;
