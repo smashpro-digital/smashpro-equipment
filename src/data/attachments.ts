@@ -16,6 +16,18 @@ export const attachments: AttachmentPassport[] = [
     description: "Factory-supplied general-purpose bucket documented with SP-ARDHI-26 for material moving, loading, grading support, and general property work.",
     capabilities: ["Material moving", "Loading", "Light grading support", "Site preparation"],
     width: "42.91 in",
+    upgrades: [{
+      id: "SP-UPG-BKT-TEETH-001",
+      name: "BDI 6684447 six-tooth digging upgrade",
+      status: "ordered",
+      description: "Six sandwich-style bolt-on teeth ordered November 5, 2026. Receipt, hole alignment, installation, RAL 6018 coating and field validation remain pending.",
+      procurementDocument: "docs/fleet/SP-ATT-BKT-001-BDI-6684447-TEETH-PROCUREMENT.md",
+    }],
+    fieldEvidence: [
+      { id: "factory-bucket-branding", title: "Factory bucket identity", description: "Existing approved factory bucket branding image. This is not evidence of the teeth being installed or a completed grading job.", status: "verified", image: "/equipment/images/sp-ardhi-26-bucket-branding.png", imageAlt: "SmashPro branded factory bucket" },
+      { id: "bucket-field-grading", title: "Field grading and site preparation", description: "Reserved for reviewed actual field photographs with project attribution and customer privacy approval.", status: "pending" },
+      { id: "bdi-fitment", title: "Six-tooth installation and field test", description: "Awaiting delivery, physical fitment and verified installation photographs.", status: "pending" },
+    ],
     // Accessory is tracked under this existing bucket passport, not as a second attachment.
     fitmentChecklist: [
       { key: "bdi-teeth-order", question: "Are the BDI 6684447 six bolt-on teeth received?", answer: "Six-piece kit ordered November 5, 2026; delivery estimated November 7. Receipt not confirmed.", status: "pending", source: "Owner-provided Amazon order confirmation" },
