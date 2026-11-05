@@ -33,7 +33,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         <dl className="spec-grid">
           <div><dt>Passport ID</dt><dd>{item.passportId}</dd></div>
           <div><dt>Asset tag</dt><dd>{item.assetTag}</dd></div>
-          <div><dt>Status</dt><dd>{item.status}</dd></div>
+          <div><dt>Status</dt><dd>{item.passportId === "SP-ATT-GRP-001" ? "Paid in full · Awaiting shipment" : item.status}</dd></div>
           <div><dt>Attachment type</dt><dd>{item.typeLabel}</dd></div>
           <div><dt>Manufacturer</dt><dd>{item.manufacturer ?? "Not assigned"}</dd></div>
           <div><dt>Model</dt><dd>{item.model ?? "Not assigned"}</dd></div>
