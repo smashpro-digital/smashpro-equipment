@@ -1,7 +1,7 @@
 # SP-ARDHI-26 Grapple Procurement Record
 
-> Status: Fabrication complete, invoice #292 paid in full 2026-11-05; awaiting dispatch/tracking; not received or commissioned
-> Updated: 2026-11-05
+ > Status: Paid in full; shipped via Estes on 2026-11-05; delivery/commissioning pending
+> Updated: 2026-11-06
 
 ## Decision
 
@@ -110,3 +110,7 @@ Current state: **paid_in_full_awaiting_dispatch**. No shipment, tracking, delive
 ## Final payment evidence — November 5, 2026
 
 HighWay Attachments emailed three-page `img11052026_0001.pdf` confirming invoice #292 marked PAID, $1,000 Visa payment applied, and $0 due. Processor page confirms approval/capture at 09:23:55 EST. Total paid $2,297 across Sept 9 ($297), Oct 30 ($1,000), and Nov 5 ($1,000). Vendor's verbal ~2-day delivery estimate begins after full payment but no delivery date, carrier, dispatch or tracking is confirmed. Public showroom/passport status should say **Paid in full · Awaiting shipment**, not delivered or service-ready. Source: Gmail message `1a1ac1bac8d24560` (private receipt; no card details on public pages).
+
+## Freight evidence — November 6, 2026
+
+Estes tracking **0178760094** to ZIP 29061 shows shipped November 5, 2026. SMS says no appointment or signature required. No confirmed out-for-delivery or delivery scan in user screenshots. https://estes.delivery/h/0178760094/29061 . Do not mark received or commissioned until confirmed.
