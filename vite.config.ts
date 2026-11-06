@@ -95,6 +95,7 @@ export default defineConfig(({ mode }) => {
       input: {
         catalog: resolve(projectDirectory, "index.html"),
         ardhi: resolve(projectDirectory, "sp-ardhi-26.html"),
+        ardhiMedia: resolve(projectDirectory, "sp-ardhi-26-media.html"),
         mzigo: resolve(projectDirectory, "sp-mzigo-26.html"),
         umba: resolve(projectDirectory, "sp-umba-26.html"),
         liftmate: resolve(projectDirectory, "sp-liftmate-27.html"),

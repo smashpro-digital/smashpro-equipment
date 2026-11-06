@@ -3,6 +3,7 @@ import { MediaEquipmentPassportPage } from "../pages/MediaEquipmentPassportPage"
 import { NyasiPassportPage } from "../pages/NyasiPassportPage";
 import { Route, Switch } from "react-router-dom";
 import { ArdhiPassportPage } from "../pages/ArdhiPassportPage";
+import { ArdhiMediaCollectionPage } from "../pages/ArdhiMediaCollectionPage";
 import { MzigoPassportPage } from "../pages/MzigoPassportPage";
 import { GenericPassportRoute, genericPassportRoutes } from "../pages/GenericPassportRoute";
 import { GolfCartTechBuildPage } from "../pages/GolfCartTechBuildPage";
@@ -20,6 +21,7 @@ export function App() {
       <Route exact path="/index.html" component={HomePage} />
       <Route exact path="/sp-med-cam-001.html" component={MediaEquipmentPassportPage} />
       <Route exact path="/sp-ardhi-26.html" component={ArdhiPassportPage} />
+      <Route exact path="/sp-ardhi-26-media.html" component={ArdhiMediaCollectionPage} />
       <Route exact path="/sp-mzigo-26.html" component={MzigoPassportPage} />
       <Route exact path="/sp-umba-26.html" render={() => <EquipmentPassportPage slug="sp-umba-26" />} />
       {genericPassportRoutes.map(route => <Route exact key={route.path} path={route.path} render={() => <GenericPassportRoute assetId={route.assetId} />} />)}
