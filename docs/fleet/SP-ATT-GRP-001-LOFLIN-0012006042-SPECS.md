@@ -10,7 +10,7 @@ Canonical attachment passport spec record for the selected SmashPro grapple.
 - Product family: Mini Skid Steer & Compact Tractor Root Grapple
 - Selected configuration: 42 in Mini Root Grapple with Toro Dingo mount
 - Loflin part number: `0012006042`
-- Current SmashPro status: ordered / building; $297 deposit paid 2026-09-09; not active
+- Current SmashPro status: paid in full November 5, 2026; awaiting shipment; not received, fitted or commissioned
 
 ## Manufacturer-published specifications
 
@@ -57,30 +57,33 @@ These drawing values are preserved as **reference geometry** only. Do not presen
 - Quoted subtotal before applicable tax/fees: $2,297
 - Finish selected: standard black
 - Finished weight: 370 lb
-- Lead time: 4–6 weeks
-- Stock status at last confirmation: 42 in version out of stock; normally stocked
+- Historical quoted lead time: 4–6 weeks; fabrication reported complete October 28, 2026
+- Current fabrication/shipping status: complete per October 28 vendor call; dispatch and tracking unconfirmed
 - Retail seller: HighWay Attachments | Denton, NC
 - Sales contacts on receipt email: Jordan Peacock and Jason Martin, Equipment Sales
 - Sales email: `denton@hwyattach.com`
 - Order placed / deposit date: 2026-09-09
 - Deposit paid: $297
-- Remaining balance: $2,000
+- October 30 payment: $1,000
+- November 5 final payment: $1,000
+- Total paid: $2,297
+- Remaining balance: $0
 - Balance timing: due when build is complete
 - Approximate build-completion planning window: October 7–21, 2026, based on the quoted 4–6 week lead time
 - Accepted payment methods reported by Loflin: cash, credit card, check
-- Card-processing fee / any additional tax: confirm before final payment
+- Final invoice #292 paid in full November 5; no additional charge shown
 - Warranty / replacement-parts process: not yet documented
 
 ## Open items before commissioning
 
 1. Confirm exact hydraulic coupler size/spec supplied on the finished unit.
 2. Confirm hoses and couplers included with the shipped attachment.
-3. Confirm the documented $2,297 total is final and reconcile any card-processing fee or tax before paying the $2,000 balance.
+3. Final receipt reconciled November 5: invoice #292 paid in full; $0 due. Preserve private evidence in Digital HQ.
 4. Obtain warranty and replacement-parts support terms.
 5. Record the order/invoice number, confirmed completion date, balance-payment date, ship date, and delivery date.
 6. Perform physical Toro-Dingo / Mini Universal fitment verification on receipt.
 7. Cycle grapple through full open/close range and verify hose/cylinder clearance.
-8. Track the pending request for fabrication, paint, final-assembly, and completed-unit photos; update the attachment passport when authentic production media is received.
+8. Respect the vendor restriction on plant photography and routine build updates. Add authentic receipt and field-test media when reviewed; absence of plant photos is not a procurement blocker.
 
 ## Public-source reference
 
