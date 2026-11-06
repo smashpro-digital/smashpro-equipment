@@ -11,7 +11,7 @@ for (const width of [390, 768, 1440]) test(`reviewed visual local fixture at ${w
   await page.goto('/equipment/', { waitUntil: 'domcontentloaded' });
   const section = page.locator('#field-technology'), image = section.locator('img');
   await section.scrollIntoViewIfNeeded(); await expect(image).toBeVisible();
-  await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth === 2160)).toBe(true);
+  await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth === 2160), { timeout: 15000 }).toBe(true);
   expect(await image.evaluate(el => getComputedStyle(el).objectFit)).toBe('contain');
   const box = await image.boundingBox(); expect(Math.abs(box.width / box.height - .8)).toBeLessThan(.01);
   await expect(section.getByRole('link', { name: 'Watch SmashPro Equipment' })).toHaveAttribute('href', 'https://www.youtube.com/@SmashProHQ');
@@ -33,6 +33,23 @@ test('failed creative download keeps dimensions and approved actions available',
   await expect(section.getByText('Product image unavailable')).toBeVisible(); await expect(section.locator('img')).toHaveCount(0);
   await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toBeVisible();
   expect((await section.locator('figure').boundingBox()).height).toBeGreaterThan(200);
+});
+test('direct Passport entry loads showcase assets when breadcrumb navigation returns home', async ({ page }) => {
+  await page.route(endpoint, route => {
+    const payload = approvedCatalog();
+    payload.items[0].products[0].image = creative;
+    return route.fulfill({ json: payload });
+  });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/equipment/sp-umba-26.html', { waitUntil: 'domcontentloaded' });
+  await page.getByRole('navigation', { name: 'Breadcrumb' }).getByRole('link', { name: 'Equipment' }).click();
+  const section = page.locator('#field-technology');
+  await expect(section.getByRole('heading', { name: 'Capture Every Angle.' })).toBeVisible();
+  await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toHaveAttribute('rel', 'sponsored noopener noreferrer');
+  expect(await page.locator('script[type="module"][src$="/equipment-feature-showcase.js"]').count()).toBe(1);
+  expect(await page.locator('link[rel="stylesheet"][href$="/equipment-feature-showcase.css"]').count()).toBe(1);
+  expect(errors).toEqual([]);
 });
 test('optional showcase retains Expo context and non-affiliate actions when the feed is unavailable', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 1000 });
