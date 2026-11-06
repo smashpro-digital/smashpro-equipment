@@ -93,7 +93,7 @@ export const attachments: AttachmentPassport[] = [
     typeLabel: "Root Grapples",
     name: "Loflin 42 in Mini Root Grapple #1",
     category: "Cleanup + material handling",
-    status: "ordered",
+    status: "in-transit",
     plateRequirement: {
       standard: "toro-dingo-mini-universal",
       label: "Toro Dingo / Mini Universal",
@@ -121,8 +121,8 @@ export const attachments: AttachmentPassport[] = [
       freight: "$285 to ZIP 29061",
       deliveredSubtotal: "$2,297 before applicable tax/fees",
       taxOrFees: "Final invoice #292 paid in full November 5, 2026; no additional charge shown",
-      stockStatus: "Fabrication complete; paid in full November 5, 2026; awaiting shipment/tracking",
-      leadTime: "Build complete October 28 (vendor call); dispatch pending; vendor estimated ~2 days after full payment for arrival, unconfirmed",
+      stockStatus: "Shipped November 5, 2026 via Estes Express Lines · tracking 0178760094 · delivery pending",
+      leadTime: "Shipped November 5, 2026; delivery date not yet confirmed",
       paymentStructure: "$297 paid September 9 + $1,000 October 30 + $1,000 November 5, 2026; invoice #292 paid in full; $0 balance",
       paymentMethods: ["Cash", "Credit card", "Check"],
       warranty: "Not yet documented in the current procurement record",
@@ -164,7 +164,7 @@ export const attachments: AttachmentPassport[] = [
     // https://www.loflinfabrication.com/wp-content/uploads/2026/04/mini-root-grapple-single-tine.webp
     image: "/equipment/images/sp-att-grp-001-loflin-42-inch-mini-root-grapple.webp",
     imageAlt: "Loflin Mini Root Grapple carrying a large log",
-    description: "Paid-in-full 42-inch black Mini Root Grapple, fabrication complete and awaiting dispatch/tracking. Planned for brush and vegetation cleanup, landscape tear-out cleanup, storm debris handling, and limb/small-log handling only after delivery and commissioning.",
+    description: "Paid-in-full 42-inch black Mini Root Grapple shipped November 5 via Estes Express Lines (tracking 0178760094); delivery and commissioning pending. Planned for brush and vegetation cleanup, landscape tear-out cleanup, storm debris handling, and limb/small-log handling only after delivery and commissioning.",
     capabilities: ["Brush cleanup", "Vegetation handling", "Storm debris", "Limb and small-log handling"],
     width: "42 in",
     weight: "370 lb",
