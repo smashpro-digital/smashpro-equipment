@@ -34,6 +34,57 @@ test('failed creative download keeps dimensions and approved actions available',
   await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toBeVisible();
   expect((await section.locator('figure').boundingBox()).height).toBeGreaterThan(200);
 });
+test('optional showcase retains Expo context and non-affiliate actions when the feed is unavailable', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 1000 });
+  await page.route(endpoint, route => route.fulfill({ status: 503, json: { ok: false } }));
+  await page.route('https://www.awin1.com/cshow.php?*', route => route.abort());
+  await page.goto('/equipment/', { waitUntil: 'domcontentloaded' });
+  const config = {
+    id: 'equip-expo-feature-fixture',
+    eyebrow: 'BEHIND THE FOOTAGE',
+    manufacturer: 'AKASO',
+    model: '360',
+    status: 'EXPLORING',
+    headline: 'CAPTURE EVERY ANGLE.',
+    description: 'SmashPro is exploring the camera as part of its equipment-media workflow.',
+    image: { src: creative.url, alt: creative.alt, caption: 'Official AKASO product imagery', width: creative.width, height: creative.height },
+    features: ['Equipment in action', 'Attachment demonstrations', 'Behind-the-scenes coverage'],
+    actions: [
+      { label: 'Explore AKASO 360', href: '', variant: 'primary', external: true, sponsored: true },
+      { label: 'Watch SmashPro Equipment', href: 'https://www.youtube.com/@SmashProHQ', variant: 'secondary', external: true },
+      { label: 'Explore Camera Passport', href: '/equipment/sp-med-cam-001.html', variant: 'secondary' },
+    ],
+    disclosure: 'SmashPro participates in the AKASO Affiliate Program.',
+    theme: 'green',
+    feed: {
+      url: '/dashboard/api/public_gear.php?property=hq&placement=equipment.field-technology.akaso360',
+      placement: 'equipment.field-technology.akaso360',
+      product: 'AKASO 360',
+      advertiserId: '69454',
+      publisherId: '3121518',
+      destination: 'https://shopakaso.com/products/akaso-360?variant=44081902846134',
+      creativeId: '4587303',
+      imageUrl: creative.url,
+      imageWidth: creative.width,
+      imageHeight: creative.height,
+    },
+    feedActionIndex: 0,
+    requireFeed: false,
+  };
+  await page.evaluate(async value => {
+    await customElements.whenDefined('equipment-feature-showcase');
+    const element = document.createElement('equipment-feature-showcase');
+    element.setAttribute('data-config', JSON.stringify(value));
+    document.body.append(element);
+  }, config);
+  const section = page.locator('#equip-expo-feature-fixture');
+  await expect(section.getByRole('heading', { name: 'CAPTURE EVERY ANGLE.' })).toBeVisible();
+  await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toHaveCount(0);
+  await expect(section.getByRole('link', { name: 'Watch SmashPro Equipment' })).toHaveAttribute('href', 'https://www.youtube.com/@SmashProHQ');
+  await expect(section.getByRole('link', { name: 'Explore Camera Passport' })).toHaveAttribute('href', '/equipment/sp-med-cam-001.html');
+  await expect(section).toContainText('Behind-the-scenes coverage');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
 async function baseline(page) {
   await expect(page.locator('#fleet .equipment-card')).toHaveCount(4);
   for (const id of ['passports','attachments','fabrication','development','rental-process','contractors']) await expect(page.locator(`#${id}`)).toHaveCount(1);
