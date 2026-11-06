@@ -30,9 +30,9 @@ Legend: **C** = media collection page chapter, **A/B/C-story** = article draft
 | sp-ardhi-26-delivery-2026-10-26-carrier-and-crate.jpg | uncrating | C, A-story (P: delivery) |
 | sp-ardhi-26-unboxing-2026-10-26-crate-opened.jpg | uncrating | C, A-story (P: delivery) |
 | sp-ardhi-26-unboxing-2026-10-26-panels-removed.jpg | uncrating | C (P: delivery) |
-| sp-ardhi-26-inspection-pallet-forks-unboxed-2026-10-27.jpg | uncrating | C |
+| sp-ardhi-26-inspection-pallet-forks-unboxed-2026-10-27.jpg | uncrating | C, fork attachment passport evidence |
 | sp-ardhi-26-inspection-engine-739cc-2026-10-27.jpg | uncrating | C, C-story hero |
-| sp-ardhi-26-inspection-pallet-forks-mounted-2026-10-27-01.jpg | uncrating | C, C-story |
+| sp-ardhi-26-inspection-pallet-forks-mounted-2026-10-27-01.jpg | uncrating | C, C-story, fork attachment passport hero + evidence |
 | sp-ardhi-26-inspection-testing-2026-10-27.mp4 (+ new poster) | uncrating | C |
 | sp-ardhi-26-field-test-2026-10-31-04.jpg | field | C lead/hero, A-story hero, WP card |
 | sp-ardhi-26-field-test-2026-10-31-01.jpg | field | C, A-story, B-story |
