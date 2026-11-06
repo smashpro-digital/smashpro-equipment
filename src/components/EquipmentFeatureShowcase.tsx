@@ -74,7 +74,9 @@ function loadEquipmentFeatureShowcaseAssets() {
 
 export function EquipmentFeatureShowcase(props: EquipmentFeatureShowcaseProps) {
   useEffect(loadEquipmentFeatureShowcaseAssets, []);
+  const config = JSON.stringify(props);
   return createElement("equipment-feature-showcase", {
-    "data-config": JSON.stringify(props),
+    key: config,
+    "data-config": config,
   });
 }

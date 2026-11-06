@@ -51,6 +51,33 @@ test('direct Passport entry loads showcase assets when breadcrumb navigation ret
   expect(await page.locator('link[rel="stylesheet"][href$="/equipment-feature-showcase.css"]').count()).toBe(1);
   expect(errors).toEqual([]);
 });
+test('no-image feed fallback keeps a full-width story at tablet size', async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1000 });
+  await page.route(endpoint, route => {
+    const payload = approvedCatalog();
+    payload.items[0].products[0].image = null;
+    return route.fulfill({ json: payload });
+  });
+  await page.goto('/equipment/', { waitUntil: 'domcontentloaded' });
+  const source = await page.locator('#field-technology').getAttribute('data-config');
+  await page.evaluate(async source => {
+    await customElements.whenDefined('equipment-feature-showcase');
+    const config = JSON.parse(source);
+    config.id = 'no-image-tablet-fixture';
+    config.layout = 'image-right';
+    const element = document.createElement('equipment-feature-showcase');
+    element.id = config.id;
+    element.setAttribute('data-config', JSON.stringify(config));
+    document.body.append(element);
+  }, source);
+  const section = page.locator('#no-image-tablet-fixture');
+  await expect(section.getByRole('heading', { name: 'CAPTURE EVERY ANGLE.' })).toBeVisible();
+  await expect(section.locator('img')).toHaveCount(0);
+  const card = section.locator('.equipment-feature-showcase__card');
+  const story = section.locator('.equipment-feature-showcase__story');
+  expect(await card.evaluate(element => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/))).toHaveLength(1);
+  expect((await story.boundingBox()).width / (await card.boundingBox()).width).toBeGreaterThan(0.95);
+});
 test('optional showcase retains Expo context and non-affiliate actions when the feed is unavailable', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 1000 });
   await page.route(endpoint, route => route.fulfill({ status: 503, json: { ok: false } }));
