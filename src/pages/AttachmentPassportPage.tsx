@@ -1,3 +1,5 @@
+import { AttachmentUpgradeRegistry } from "../components/AttachmentUpgradeRegistry";
+import "../styles/bucket-passport-v2.css";
 import { Redirect } from "react-router-dom";
 import { ButtonLink } from "../components/ButtonLink";
 import { PageFrame } from "../components/PageFrame";
@@ -10,11 +12,12 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
   return (
     <PageFrame>
       <div className="shell breadcrumbs"><a href="/equipment/">Equipment</a><span>/</span><a href="/equipment/#attachments">Attachments</a><span>/</span><span>{item.passportId}</span></div>
-      <section className="attachment-passport-hero">
+      <section className={`attachment-passport-hero${item.passportId === "SP-ATT-BKT-001" ? " bucket-passport-hero" : ""}`}>
         <div className="shell attachment-passport-hero__grid">
           <div>
             <p className="eyebrow">Attachment passport · {item.passportId}</p>
             <h1>{item.name}</h1>
+            {item.passportId === "SP-ATT-BKT-001" && <><p className="bucket-upgrade-state">Six-tooth upgrade / Ordered</p><p className="bucket-hero-facts">42.91-inch factory width / SP-BKT-ARDHI-01<br />Toro Dingo / Mini Universal / SP-ARDHI-26</p></>}
             <p className="attachment-passport-hero__lede">{item.description}</p>
             <div className="button-row"><ButtonLink href="/equipment/#attachments" variant="outline">Back to attachment library</ButtonLink>{item.serviceUrl && <ButtonLink href={item.serviceUrl}>Explore supported work</ButtonLink>}</div>
           </div>
@@ -62,12 +65,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         {item.verifiedFleetIds?.length ? <div className="attachment-passport-hosts"><strong>Verified host evidence</strong>{item.verifiedFleetIds.map((id) => <a href={id === "SP-ARDHI-26" ? "/equipment/sp-ardhi-26.html" : "/equipment/"} key={id}>{id}</a>)}</div> : null}
       </section>
 
-      {item.upgrades?.length ? <section className="section shell" id="attachment-upgrades">
-        <div className="section-heading"><div><p className="eyebrow">Attachment modifications</p><h2>Upgrades and wear components.</h2></div><p>Tracked against this attachment's permanent passport, without creating duplicate equipment assets.</p></div>
-        <div className="attachment-checklist">{item.upgrades.map((upgrade) => <article className="attachment-check" key={upgrade.id}>
-          <div className="attachment-check__top"><span>{upgrade.status}</span><small>{upgrade.id}</small></div><h3>{upgrade.name}</h3><p>{upgrade.description}</p>
-        </article>)}</div>
-      </section> : null}
+      <AttachmentUpgradeRegistry item={item} />
 
       {item.fieldEvidence?.length ? <section className="section shell" id="attachment-field-evidence">
         <div className="section-heading"><div><p className="eyebrow">Field evidence</p><h2>From attachment to actual work.</h2></div><p>Selected, verified attachment photographs belong here. Full customer grading portfolios stay with their project records.</p></div>
@@ -97,6 +95,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
       {item.passportId === "SP-ATT-BKT-001" && <section className="section shell" id="attachment-related-work">
         <div className="section-heading"><div><p className="eyebrow">Related work</p><h2>See the bucket in context.</h2></div><p>Customer project articles are published and associated with the canonical service category through SmashPro's existing project infrastructure. Booking stays with the service workflow.</p></div>
         <div className="button-row">
+          <ButtonLink href="https://smashpro.app/ardhi-six-tooth-bucket-upgrade/">Read the six-tooth upgrade journal</ButtonLink>
           <ButtonLink href="/equipment/sp-ardhi-26.html" variant="outline">ARDHI equipment passport</ButtonLink>
           <ButtonLink href="https://smashpro.app/services/">Browse related services</ButtonLink>
         </div>

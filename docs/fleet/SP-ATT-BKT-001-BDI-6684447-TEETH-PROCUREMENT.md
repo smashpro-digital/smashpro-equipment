@@ -5,7 +5,7 @@ Status: **Ordered; delivery, fitment, coating, installation, and field validatio
 ## Asset relationships
 - Host: SP-ARDHI-26 (YF380 mini skid)
 - Existing factory bucket passport: SP-ATT-BKT-001 / SP-BKT-ARDHI-01
-- Proposed component upgrade ID: SP-UPG-BKT-TEETH-001 (not a separate attachment passport)
+- Component upgrade ID: SP-UPG-BKT-TEETH-001 (not a separate attachment passport)
 - Product: BDI Wear Parts 6684447, six individual sandwich-style bolt-on trenching bucket teeth, with supplied bolts/nuts per listing
 
 ## Purchase evidence (owner-provided Amazon order screenshots, November 5, 2026)
@@ -32,6 +32,10 @@ Status: **Ordered; delivery, fitment, coating, installation, and field validatio
 
 ## Editorial and partner handoff
 - Canonical technical record: this procurement document and SP-ATT-BKT-001 passport.
-- Story: planned WordPress equipment-upgrade case study; never describe order as installed or tested.
+- Existing story: WordPress post 939, https://smashpro.app/ardhi-six-tooth-bucket-upgrade/; never describe order as installed or tested.
 - Media: delivered kit, side-by-side factory bucket, precise hole measurement, one-tooth fitment, six-tooth installation, coating before/after, field test, wear follow-up, 9:16 Short and long-form video.
 - Outreach to powder-coating businesses is exploratory; no quote or sponsorship confirmed.
+
+## Digital HQ association
+
+Canonical procurement/modification evidence is maintained in Digital HQ `docs/equipment-procurement/SP-ATT-BKT-001-BDI-6684447-TEETH.md`, linked to the existing host, bucket and upgrade IDs. Public registry data remains static, not automatic HQ synchronization. No duplicate equipment asset, CRM record or customer job is created.
