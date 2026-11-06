@@ -1,0 +1,20 @@
+﻿import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createServer } from 'vite';
+const server=await createServer({configFile:false,optimizeDeps:{noDiscovery:true,include:[]},server:{middlewareMode:true,hmr:false},appType:'custom'});
+const {attachments}=await server.ssrLoadModule('/src/data/attachments.ts');await server.close();
+const bucket=attachments.find(a=>a.passportId==='SP-ATT-BKT-001');
+const upgrade=bucket.upgrades.find(u=>u.id==='SP-UPG-BKT-TEETH-001');
+test('bucket upgrade retains canonical asset identity and confirmed purchase only',()=>{
+ assert.equal(attachments.filter(a=>a.passportId===bucket.passportId).length,1);
+ assert.equal(attachments.filter(a=>a.passportId==='SP-ATT-GRP-001').length,1);
+ assert.equal(attachments.some(a=>a.passportId===upgrade.id),false);
+ assert.equal(bucket.assetTag,'SP-BKT-ARDHI-01');assert.equal(upgrade.status,'ordered');
+ assert.equal(upgrade.purchasedAt,'2026-11-05');assert.equal(upgrade.quantity,6);assert.equal(upgrade.costs.total,'$107.99');
+ assert.equal(bucket.image,'https://smashpro.app/wp-content/uploads/2026/11/20261031_131720.jpg');
+ assert.equal(upgrade.milestones.filter(s=>s.status==='completed').length,2);
+ assert.deepEqual(upgrade.milestones.filter(s=>s.status==='current').map(s=>s.id),['delivery']);
+ assert.ok(upgrade.milestones.slice(3).every(s=>s.status==='upcoming'));
+ assert.ok(bucket.fieldEvidence.filter(e=>e.id!=='factory-bucket-branding').every(e=>e.status==='pending'&&!e.image));
+ assert.match(upgrade.coatingPlan,/no quote accepted or partnership confirmed/);
+});

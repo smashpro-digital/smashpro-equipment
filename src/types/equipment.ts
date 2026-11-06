@@ -152,6 +152,18 @@ export interface AttachmentUpgradeRecord {
   status: "planned" | "ordered" | "installed" | "removed";
   description: string;
   procurementDocument?: string;
+  manufacturer?: string;
+  partNumber?: string;
+  quantity?: number;
+  purchasedAt?: string;
+  costs?: { subtotal: string; tax: string; shipping: string; total: string };
+  specifications?: { label: string; value: string }[];
+  fitmentRequirements?: string[];
+  coatingPlan?: string;
+  installationStatus?: string;
+  fieldTestStatus?: string;
+  milestones?: EquipmentLifecycleMilestone[];
+  articleUrl?: string;
 }
 export interface AttachmentPassport {
   fieldEvidence?: AttachmentFieldEvidence[];
