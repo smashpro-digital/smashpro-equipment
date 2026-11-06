@@ -37,7 +37,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         <AttachmentSpecGrid fields={[
           { label: "Passport ID", value: item.passportId },
           { label: "Asset tag", value: item.assetTag },
-          { label: "Status", value: item.passportId === "SP-ATT-GRP-001" ? "Paid in full \u00b7 Awaiting shipment" : item.status },
+          { label: "Status", value: item.passportId === "SP-ATT-GRP-001" ? "In transit · Estes Express Lines" : item.status },
           { label: "Attachment type", value: item.typeLabel },
           { label: "Manufacturer", value: item.manufacturer },
           { label: "Model", value: item.model },
@@ -66,6 +66,25 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         {item.verifiedFleetIds?.length ? <div className="attachment-passport-hosts"><strong>Verified host evidence</strong>{item.verifiedFleetIds.map((id) => <a href={id === "SP-ARDHI-26" ? "/equipment/sp-ardhi-26.html" : "/equipment/"} key={id}>{id}</a>)}</div> : null}
       </section>
 
+
+      {item.passportId === "SP-ATT-GRP-001" && <section className="section shell" id="grapple-freight">
+        <div className="section-heading"><div><p className="eyebrow">Freight and delivery</p><h2>Estes Express Lines · In transit</h2></div><p>Shipped November 5, 2026. Delivery has not been confirmed. Carrier updates may change without notice.</p></div>
+        <AttachmentSpecGrid fields={[
+          { label: "Carrier", value: "Estes Express Lines" },
+          { label: "Tracking / PRO", value: "0178760094" },
+          { label: "Shipped", value: "November 5, 2026" },
+          { label: "Delivery status", value: "In transit · Not yet delivered" },
+          { label: "Appointment", value: "Not required per carrier notice" },
+          { label: "Signature", value: "Not required per carrier notice" },
+          { label: "Home delivery phone", value: "1-888-858-2684" },
+          { label: "Home delivery email", value: "Delivery@estes-express.com" },
+        ]} />
+        <div className="button-row">
+          <ButtonLink href="https://estes.delivery/h/0178760094/29061">Track with Estes</ButtonLink>
+          <ButtonLink href="mailto:Delivery@estes-express.com" variant="outline">Contact carrier</ButtonLink>
+        </div>
+        <p className="large-copy">After delivery: inspect for freight damage, document receipt, verify mount and hydraulic connections, and complete commissioning before activating services.</p>
+      </section>}
       <AttachmentUpgradeRegistry item={item} />
 
       {item.fieldEvidence?.length ? <section className="section shell" id="attachment-field-evidence">
