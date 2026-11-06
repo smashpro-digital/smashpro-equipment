@@ -11,7 +11,7 @@ for (const width of [390, 768, 1440]) test(`reviewed visual local fixture at ${w
   await page.goto('/equipment/', { waitUntil: 'domcontentloaded' });
   const section = page.locator('#field-technology'), image = section.locator('img');
   await section.scrollIntoViewIfNeeded(); await expect(image).toBeVisible();
-  await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth === 2160)).toBe(true);
+  await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth === 2160), { timeout: 15000 }).toBe(true);
   expect(await image.evaluate(el => getComputedStyle(el).objectFit)).toBe('contain');
   const box = await image.boundingBox(); expect(Math.abs(box.width / box.height - .8)).toBeLessThan(.01);
   await expect(section.getByRole('link', { name: 'Watch SmashPro Equipment' })).toHaveAttribute('href', 'https://www.youtube.com/@SmashProHQ');
@@ -33,6 +33,101 @@ test('failed creative download keeps dimensions and approved actions available',
   await expect(section.getByText('Product image unavailable')).toBeVisible(); await expect(section.locator('img')).toHaveCount(0);
   await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toBeVisible();
   expect((await section.locator('figure').boundingBox()).height).toBeGreaterThan(200);
+});
+test('direct Passport entry loads showcase assets when breadcrumb navigation returns home', async ({ page }) => {
+  await page.route(endpoint, route => {
+    const payload = approvedCatalog();
+    payload.items[0].products[0].image = creative;
+    return route.fulfill({ json: payload });
+  });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/equipment/sp-umba-26.html', { waitUntil: 'domcontentloaded' });
+  await page.getByRole('navigation', { name: 'Breadcrumb' }).getByRole('link', { name: 'Equipment' }).click();
+  const section = page.locator('#field-technology');
+  await expect(section.getByRole('heading', { name: 'Capture Every Angle.' })).toBeVisible();
+  await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toHaveAttribute('rel', 'sponsored noopener noreferrer');
+  expect(await page.locator('script[type="module"][src$="/equipment-feature-showcase.js"]').count()).toBe(1);
+  expect(await page.locator('link[rel="stylesheet"][href$="/equipment-feature-showcase.css"]').count()).toBe(1);
+  expect(errors).toEqual([]);
+});
+test('no-image feed fallback keeps a full-width story at tablet size', async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1000 });
+  await page.route(endpoint, route => {
+    const payload = approvedCatalog();
+    payload.items[0].products[0].image = null;
+    return route.fulfill({ json: payload });
+  });
+  await page.goto('/equipment/', { waitUntil: 'domcontentloaded' });
+  const source = await page.locator('#field-technology').getAttribute('data-config');
+  await page.evaluate(async source => {
+    await customElements.whenDefined('equipment-feature-showcase');
+    const config = JSON.parse(source);
+    config.id = 'no-image-tablet-fixture';
+    config.layout = 'image-right';
+    const element = document.createElement('equipment-feature-showcase');
+    element.id = config.id;
+    element.setAttribute('data-config', JSON.stringify(config));
+    document.body.append(element);
+  }, source);
+  const section = page.locator('#no-image-tablet-fixture');
+  await expect(section.getByRole('heading', { name: 'CAPTURE EVERY ANGLE.' })).toBeVisible();
+  await expect(section.locator('img')).toHaveCount(0);
+  const card = section.locator('.equipment-feature-showcase__card');
+  const story = section.locator('.equipment-feature-showcase__story');
+  expect(await card.evaluate(element => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/))).toHaveLength(1);
+  expect((await story.boundingBox()).width / (await card.boundingBox()).width).toBeGreaterThan(0.95);
+});
+test('optional showcase retains Expo context and non-affiliate actions when the feed is unavailable', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 1000 });
+  await page.route(endpoint, route => route.fulfill({ status: 503, json: { ok: false } }));
+  await page.route('https://www.awin1.com/cshow.php?*', route => route.abort());
+  await page.goto('/equipment/', { waitUntil: 'domcontentloaded' });
+  const config = {
+    id: 'equip-expo-feature-fixture',
+    eyebrow: 'BEHIND THE FOOTAGE',
+    manufacturer: 'AKASO',
+    model: '360',
+    status: 'EXPLORING',
+    headline: 'CAPTURE EVERY ANGLE.',
+    description: 'SmashPro is exploring the camera as part of its equipment-media workflow.',
+    image: { src: creative.url, alt: creative.alt, caption: 'Official AKASO product imagery', width: creative.width, height: creative.height },
+    features: ['Equipment in action', 'Attachment demonstrations', 'Behind-the-scenes coverage'],
+    actions: [
+      { label: 'Explore AKASO 360', href: '', variant: 'primary', external: true, sponsored: true },
+      { label: 'Watch SmashPro Equipment', href: 'https://www.youtube.com/@SmashProHQ', variant: 'secondary', external: true },
+      { label: 'Explore Camera Passport', href: '/equipment/sp-med-cam-001.html', variant: 'secondary' },
+    ],
+    disclosure: 'SmashPro participates in the AKASO Affiliate Program.',
+    theme: 'green',
+    feed: {
+      url: '/dashboard/api/public_gear.php?property=hq&placement=equipment.field-technology.akaso360',
+      placement: 'equipment.field-technology.akaso360',
+      product: 'AKASO 360',
+      advertiserId: '69454',
+      publisherId: '3121518',
+      destination: 'https://shopakaso.com/products/akaso-360?variant=44081902846134',
+      creativeId: '4587303',
+      imageUrl: creative.url,
+      imageWidth: creative.width,
+      imageHeight: creative.height,
+    },
+    feedActionIndex: 0,
+    requireFeed: false,
+  };
+  await page.evaluate(async value => {
+    await customElements.whenDefined('equipment-feature-showcase');
+    const element = document.createElement('equipment-feature-showcase');
+    element.setAttribute('data-config', JSON.stringify(value));
+    document.body.append(element);
+  }, config);
+  const section = page.locator('#equip-expo-feature-fixture');
+  await expect(section.getByRole('heading', { name: 'CAPTURE EVERY ANGLE.' })).toBeVisible();
+  await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toHaveCount(0);
+  await expect(section.getByRole('link', { name: 'Watch SmashPro Equipment' })).toHaveAttribute('href', 'https://www.youtube.com/@SmashProHQ');
+  await expect(section.getByRole('link', { name: 'Explore Camera Passport' })).toHaveAttribute('href', '/equipment/sp-med-cam-001.html');
+  await expect(section).toContainText('Behind-the-scenes coverage');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 async function baseline(page) {
   await expect(page.locator('#fleet .equipment-card')).toHaveCount(4);

@@ -21,14 +21,14 @@ for (const count of [0, 1, 5]) test(`${count} approved creatives never adds a sl
   const section = page.locator('#field-technology');
   await section.scrollIntoViewIfNeeded();
   await expect(section.locator('img')).toHaveCount(1);
-  await expect(section.locator('.field-technology__visual img')).toHaveAttribute('src', /s=4587303&/);
+  await expect(section.locator('.equipment-feature-showcase__visual img')).toHaveAttribute('src', /s=4587303&/);
   await expect(page.locator('.affiliate-rotator')).toHaveCount(0);
   await expect(section.getByRole('button')).toHaveCount(0);
   await expect(section.getByRole('link', { name: 'Explore AKASO 360' })).toHaveAttribute('href', rotationCatalog().items[0].products[0].links[0].url);
   await page.waitForTimeout(8500);
   expect(events).toEqual([]);
   await expect(section.locator('img')).toHaveCount(1);
-  expect(await section.evaluate(el => el.lastElementChild.classList.contains('field-technology__card'))).toBe(true);
+  expect(await section.evaluate(el => el.lastElementChild.classList.contains('equipment-feature-showcase__section'))).toBe(true);
 });
 for (const scenario of ['unavailable', 'garage']) test(`${scenario} catalog fails closed`, async ({ page }) => {
   await page.route(endpoint, route => scenario === 'unavailable'
