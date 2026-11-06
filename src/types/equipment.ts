@@ -153,7 +153,20 @@ export interface AttachmentUpgradeRecord {
   description: string;
   procurementDocument?: string;
 }
+export interface AttachmentFieldTest {
+  title: string;
+  objectives: string[];
+  commissioningCriteria: string[];
+  mediaSlots: { id: string; title: string; format: "image" | "short" | "video"; mediaIds: string[] }[];
+  gallery: GalleryImage[];
+  videos: import("./passportExperience").EquipmentVideo[];
+}
 export interface AttachmentPassport {
+  statusLabel?: string;
+  manufacturerPart?: string;
+  intendedHostIds?: string[];
+  procurementMilestones?: EquipmentLifecycleMilestone[];
+  fieldTest?: AttachmentFieldTest;
   fieldEvidence?: AttachmentFieldEvidence[];
   upgrades?: AttachmentUpgradeRecord[];
   passportId: string;

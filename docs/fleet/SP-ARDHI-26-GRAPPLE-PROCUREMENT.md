@@ -40,15 +40,17 @@ The September 9 receipt email was sent by the shared HighWay Attachments sales a
 | Freight to ZIP 29061 | $285 |
 | Documented order total | $2,297 |
 | Deposit paid 2026-09-09 | $297 |
-| October 30 payment | $1,000 |\n| November 5 final payment | $1,000 |\n| Remaining balance | **$0.00 (PAID IN FULL)** |
+| October 30 payment | $1,000 |
+| November 5 final payment | $1,000 |
+| Remaining balance | **$0.00 (PAID IN FULL)** |
 | Balance timing | Due when build is complete |
 | Lead time | 4–6 weeks |
 | Approximate build-completion window | Oct 7–21, 2026 |
-| Tax / additional card fee | No additional amount recorded; confirm before final payment |
+| Tax / additional card fee | Final receipt paid in full; no additional amount shown |
 
 The October 7–21 window is calculated from the September 9 order/deposit date and the quoted 4–6 week production estimate. It is a planning range, not a guaranteed shipment or delivery date.
 
-## Receipt evidence
+## Historical receipt evidence / September 9, 2026
 
 - Evidence type: HighWay Attachments sales receipt
 - Received: 2026-09-09
@@ -68,7 +70,7 @@ On 2026-09-09 SmashPro replied in the sales-receipt thread asking HighWay Attach
 - final assembly; and
 - the completed grapple before shipment.
 
-The request also stated that HighWay Attachments and Loflin Fabrication would receive credit in resulting SmashPro content. The request is pending vendor response and is not a promise that production media will be supplied.
+The request also stated that HighWay Attachments and Loflin Fabrication would receive credit in resulting SmashPro content. The subsequent September 20 vendor response restricts plant photography and routine build updates. The original request is historical; lack of plant photos is not a procurement blocker.
 
 ## Fitment / hydraulic record
 
@@ -79,7 +81,7 @@ The request also stated that HighWay Attachments and Loflin Fabrication would re
 - Loflin stated auxiliary flow is not a deciding fitment factor for this grapple.
 - Physical mount fit, coupler connection, hose routing, cylinder/jaw clearance, and controlled cycling remain commissioning checks.
 
-## Remaining procurement gates
+## Historical procurement gates / superseded by November 5 reconciliation
 
 Before final payment or shipment:
 
@@ -110,3 +112,11 @@ Current state: **paid_in_full_awaiting_dispatch**. No shipment, tracking, delive
 ## Final payment evidence — November 5, 2026
 
 HighWay Attachments emailed three-page `img11052026_0001.pdf` confirming invoice #292 marked PAID, $1,000 Visa payment applied, and $0 due. Processor page confirms approval/capture at 09:23:55 EST. Total paid $2,297 across Sept 9 ($297), Oct 30 ($1,000), and Nov 5 ($1,000). Vendor's verbal ~2-day delivery estimate begins after full payment but no delivery date, carrier, dispatch or tracking is confirmed. Public showroom/passport status should say **Paid in full · Awaiting shipment**, not delivered or service-ready. Source: Gmail message `1a1ac1bac8d24560` (private receipt; no card details on public pages).
+
+## V2 public projection / November 5, 2026
+
+Digital HQ `docs/equipment-procurement/SP-ARDHI-26-loflin-mini-root-grapple.md` remains canonical for procurement evidence. The current record is paid in full, $2,297 paid and $0 due; shipment, receipt, fitment and commissioning are pending. Earlier receipt balances and build planning windows above are historical, not current obligations.
+
+The Equipment site uses static `src/data/attachments.ts`, not a live HQ procurement integration. The existing `ordered` lifecycle value is retained; `statusLabel` provides the sanitized commercial substatus in both passport and showroom. No Web integration change is necessary. The official locally served manufacturer photograph is illustrative manufacturer media, not evidence that the purchased unit has been delivered or operated.
+
+Field-test media uses existing `GalleryImage` records and `PassportFactoryGallery`, and existing `EquipmentVideo` records with `EquipmentWatch` publication/verification gates. Slot `mediaIds` reference gallery IDs or video IDs. Publish only reviewed records associated with SP-ATT-GRP-001, with source/date and privacy checks; do not use placeholder URLs or invented timestamps. No approved brush-pile before photos were identified in the reviewed repository records; all evaluation slots remain empty. Commissioning criteria are pending internal checks, not completed work.

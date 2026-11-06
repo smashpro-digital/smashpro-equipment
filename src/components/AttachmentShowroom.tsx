@@ -1,7 +1,7 @@
 import type { AttachmentPassport } from "../types/equipment";
 import { ButtonLink } from "./ButtonLink";
 
-const statusLabel: Record<AttachmentPassport["status"], string> = {
+export const statusLabel: Record<AttachmentPassport["status"], string> = {
   documented: "Documented",
   selected: "Selected · Procurement",
   ordered: "Ordered",
@@ -67,7 +67,7 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
             </div>
             <div className="attachment-feature__body">
               <div className="attachment-feature__topline">
-                <span className={`attachment-status attachment-status--${featured.status}`}>{featured.passportId === "SP-ATT-GRP-001" ? "Paid in full · Awaiting shipment" : statusLabel[featured.status]}</span>
+                <span className={`attachment-status attachment-status--${featured.status}`}>{featured.statusLabel ?? statusLabel[featured.status]}</span>
                 <span>{featured.category}</span>
               </div>
               <p className="attachment-feature__kicker">{featured.passportId} {featured.manufacturer ? `· ${featured.manufacturer}` : ""}</p>
@@ -99,10 +99,11 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
                 {items.map((item) => (
                   <a className="attachment-passport-row" href={item.publicPath} key={item.passportId}>
                     <div>
+                      {item.image && <img className="attachment-row-image" src={item.image} alt={item.imageAlt ?? item.name} loading="lazy" />}
                       <strong>{item.name}</strong>
                       <span>{item.passportId} · {item.plateRequirement?.label ?? "Plate TBD"}</span>
                     </div>
-                    <span className={`attachment-status attachment-status--${item.status}`}>{item.passportId === "SP-ATT-GRP-001" ? "Paid in full · Awaiting shipment" : statusLabel[item.status]}</span>
+                    <span className={`attachment-status attachment-status--${item.status}`}>{item.statusLabel ?? statusLabel[item.status]}</span>
                   </a>
                 ))}
               </div>
