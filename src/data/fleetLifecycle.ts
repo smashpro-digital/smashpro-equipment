@@ -54,3 +54,12 @@ export function publicLifecycleForAsset(assetId:string, events:readonly FleetLif
     article:e.article?.state==='published' && e.article.url && /^https:\/\/smashpro\.app\//.test(e.article.url) ? e.article : undefined
   }));
 }
+export function mergePublicLifecycleEvents(assetId:string, databaseEvents:readonly FleetLifecycleEvent[]|null) {
+  const editorial=publicLifecycleForAsset(assetId);
+  if (!databaseEvents) return editorial;
+  const reviewed=databaseEvents.filter(event=>event.assetId===assetId && event.approval==='reviewed');
+  const retainedBlockers=editorial.filter(event=>event.serviceRelease==='blocked' && !reviewed.some(db=>db.id===event.id && db.serviceRelease==='approved'));
+  const database=reviewed.filter(event=>!retainedBlockers.some(blocked=>blocked.id===event.id));
+  const fallback=editorial.filter(event=>!reviewed.some(db=>db.id===event.id) && !retainedBlockers.some(blocked=>blocked.id===event.id));
+  return [...database,...fallback,...retainedBlockers].sort((a,b)=>b.occurredOn.localeCompare(a.occurredOn)||a.id.localeCompare(b.id));
+}

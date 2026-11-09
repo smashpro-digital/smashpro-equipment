@@ -5,7 +5,7 @@ import ts from 'typescript';
 const compiled = ts.transpileModule(readFileSync('src/data/ardhiFlagship.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { commissioningChecks, firstJob, firstJobPresentation, serviceEntries, verifiedEvidence } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
 const proof = { title: 'Reviewed inspection', href: '/equipment/documents/inspection.pdf', state: 'verified' };
-test('November 3 activity updates do not grant commissioning approval', () => {
+test('November 8 activity updates do not grant commissioning approval', () => {
   for (const id of ['battery', 'first-drive', 'hydraulics', 'first-start']) {
     const check = commissioningChecks.find(c => c.id === id);
     assert.equal(check.status, 'in_progress', id);
@@ -15,7 +15,8 @@ test('November 3 activity updates do not grant commissioning approval', () => {
   assert.equal(commissioningChecks.find(c => c.id === 'engine-oil').status, 'needs_attention');
   assert.equal(commissioningChecks.find(c => c.id === 'hydraulic-fluid').status, 'not_started');
   assert.equal(commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
-  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /throttle travel restriction/i);
+  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /Throttle travel restoration is owner-reported/i);
+  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /service-blocking thrown track/i);
   assert.equal(commissioningChecks.find(c => c.id === 'first-start').date, '2026-10-26');
   assert.equal(commissioningChecks.find(c => c.id === 'first-drive').date, '2026-10-31');
   const attachment = commissioningChecks.find(c => c.id === 'attachment-test');

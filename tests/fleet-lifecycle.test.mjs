@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 const compiled = ts.transpileModule(readFileSync('src/data/fleetLifecycle.ts','utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { ardhiLifecycleEvents, publicLifecycleForAsset } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
+const { ardhiLifecycleEvents, publicLifecycleForAsset, mergePublicLifecycleEvents } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
 test('ARDHI lifecycle IDs are unique and open track repair blocks service release', () => {
   assert.equal(new Set(ardhiLifecycleEvents.map(e=>e.id)).size,ardhiLifecycleEvents.length);
   const track = publicLifecycleForAsset('SP-ARDHI-26').find(e=>e.id==='DEF-003');
@@ -15,6 +15,19 @@ test('verified throttle travel does not imply whole-machine service approval', (
   const throttle=publicLifecycleForAsset('SP-ARDHI-26').find(e=>e.id==='DEF-001');
   assert.equal(throttle.status,'verified');
   assert.notEqual(throttle.serviceRelease,'approved');
+});
+test('partial reviewed database feeds retain pending editorial statuses and blockers', () => {
+  const throttle=publicLifecycleForAsset('SP-ARDHI-26').filter(e=>e.id==='DEF-001');
+  const events=mergePublicLifecycleEvents('SP-ARDHI-26',throttle);
+  const byId=new Map(events.map(event=>[event.id,event]));
+  assert.equal(byId.get('DEF-001').status,'verified');
+  assert.equal(byId.get('DEF-001').serviceRelease,'pending');
+  assert.equal(byId.get('DEF-002').approval,'pending');
+  assert.match(byId.get('DEF-002').summary,/verification remains pending/);
+  assert.equal(byId.get('DEF-003').status,'repair_pending');
+  assert.equal(byId.get('DEF-003').serviceRelease,'blocked');
+  assert.equal(byId.get('UPG-BKT-006').status,'testing_pending');
+  assert.equal(byId.get('UPG-BKT-006').approval,'pending');
 });
 test('projection rejects unreviewed evidence, foreign article URLs and other asset events', () => {
   const sample={...ardhiLifecycleEvents[0],assetId:'SP-ARDHI-26',article:{state:'published',url:'https://outside.example/track',title:'Untrusted'},evidence:[{kind:'photo',label:'Private',url:'https://private.example/file',reviewed:true},{kind:'photo',label:'Unreviewed',url:'/equipment/track.jpg',reviewed:false},{kind:'photo',label:'Approved',url:'/equipment/track.jpg',reviewed:true}]};
