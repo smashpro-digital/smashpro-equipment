@@ -54,7 +54,10 @@ export function ArdhiMaintenancePlan() {
       }).catch(() => { if (!controller.signal.aborted) setFeedState('unavailable'); });
     return () => controller.abort();
   }, []);
-  const events = [...(dbEvents ?? publicLifecycleForAsset('SP-ARDHI-26'))].sort((a, b) => b.occurredOn.localeCompare(a.occurredOn) || a.id.localeCompare(b.id));
+  const editorial = publicLifecycleForAsset('SP-ARDHI-26');
+  // A missing database row must not silently clear a known service-blocking incident.
+  const retainedBlockers = editorial.filter(event => event.serviceRelease === 'blocked' && !dbEvents?.some(db => db.id === event.id && db.serviceRelease === 'approved'));
+  const events = [...(dbEvents ? [...dbEvents.filter(event => !retainedBlockers.some(blocked => blocked.id === event.id)), ...retainedBlockers] : editorial)].sort((a, b) => b.occurredOn.localeCompare(a.occurredOn) || a.id.localeCompare(b.id));
   const active = events.filter(event => event.status === 'repair_pending' || event.status === 'reported' || event.status === 'diagnosing');
   return <section className="section shell ardhi-production" id="maintenance" aria-labelledby="maintenance-title">
     <p className="eyebrow">Lifetime care / preparation</p><h2 id="maintenance-title">Maintenance starts with a verified baseline.</h2>
