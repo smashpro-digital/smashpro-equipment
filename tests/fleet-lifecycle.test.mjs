@@ -30,9 +30,29 @@ test('partial reviewed database feeds retain pending editorial statuses and bloc
   assert.equal(byId.get('UPG-BKT-006').approval,'pending');
 });
 test('projection rejects unreviewed evidence, foreign article URLs and other asset events', () => {
-  const sample={...ardhiLifecycleEvents[0],assetId:'SP-ARDHI-26',article:{state:'published',url:'https://outside.example/track',title:'Untrusted'},evidence:[{kind:'photo',label:'Private',url:'https://private.example/file',reviewed:true},{kind:'photo',label:'Unreviewed',url:'/equipment/track.jpg',reviewed:false},{kind:'photo',label:'Approved',url:'/equipment/track.jpg',reviewed:true}]};
+  const sample={...ardhiLifecycleEvents[0],assetId:'SP-ARDHI-26',purchaseCost:4200,ownerEmail:'private@example.com',article:{state:'published',url:'https://outside.example/track',title:'Untrusted',supplier:'Private supplier'},evidence:[{kind:'photo',label:'Private',url:'https://private.example/file',reviewed:true,storageKey:'private/receipt.jpg'},{kind:'photo',label:'Unreviewed',url:'/equipment/track.jpg',reviewed:false},{kind:'photo',label:'Approved',url:'/equipment/track.jpg',reviewed:true,adminId:12}]};
   const [event]=publicLifecycleForAsset('SP-ARDHI-26',[sample]);
   assert.equal(event.article,undefined);
   assert.deepEqual(event.evidence.map(e=>e.label),['Approved']);
+  assert.deepEqual(Object.keys(event).sort(),['approval','assetId','componentIds','evidence','id','occurredOn','relatedEventIds','reportedOn','serviceRelease','status','summary','title','type'].sort());
+  assert.equal(event.purchaseCost,undefined);
+  assert.equal(event.ownerEmail,undefined);
+  assert.deepEqual(Object.keys(event.evidence[0]).sort(),['kind','label','reviewed','url'].sort());
   assert.deepEqual(publicLifecycleForAsset('OTHER-ASSET',[sample]),[]);
+});
+test('database lifecycle records replace editorial track content without releasing its blocker', () => {
+  const database = publicLifecycleForAsset('SP-ARDHI-26').map(event => ({
+    ...event,
+    approval: 'reviewed',
+    ...(event.id === 'DEF-003' ? {summary:'Database-backed unresolved track record.'} : {})
+  }));
+  const track = mergePublicLifecycleEvents('SP-ARDHI-26',database).find(event=>event.id==='DEF-003');
+  assert.equal(track.summary,'Database-backed unresolved track record.');
+  assert.equal(track.serviceRelease,'blocked');
+});
+test('pin repair date is not confused with its report date', () => {
+  const pins=publicLifecycleForAsset('SP-ARDHI-26').find(event=>event.id==='DEF-002');
+  assert.equal(pins.occurredOn,null);
+  assert.equal(pins.reportedOn,'2026-11-08');
+  assert.match(pins.summary,/repair date was not separately recorded/i);
 });

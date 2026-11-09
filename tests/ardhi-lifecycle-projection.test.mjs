@@ -18,9 +18,17 @@ test('track remains blocked and throttle is verified', () => {
   assert.match(data, /id:'DEF-003'[\s\S]*?status:'repair_pending'[\s\S]*?serviceRelease:'blocked'/);
   assert.match(data, /id:'DEF-001'[\s\S]*?status:'verified'/);
 });
+test('pin repair has an unrecorded occurrence date and a separate report date', () => {
+  assert.match(data, /id:'DEF-002'[\s\S]*?occurredOn:null,reportedOn:'2026-11-08'/);
+  assert.match(data, /repair date was not separately recorded/);
+  assert.match(ui, /Occurrence date not recorded/);
+  assert.match(ui, /reported \$\{event\.reportedOn\}/);
+});
 test('draft article links are excluded from public lifecycle projection', () => {
   assert.match(data, /e\.article\?\.state==='published'/);
   assert.match(data, /smashpro\\\.app/);
+  assert.match(data, /id:e\.id,assetId:e\.assetId,type:e\.type,status:e\.status/);
+  assert.doesNotMatch(data, /\.\.\.e,/);
 });
 test('commissioning copy shows restored throttle travel without implying approval', () => {
   const engine = commissioningChecks.find(check => check.id === 'engine');
