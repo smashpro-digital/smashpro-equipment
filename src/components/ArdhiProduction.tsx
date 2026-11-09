@@ -1,4 +1,5 @@
 import { factoryStartupReference, commissioningChecks, commissioningObservations, commissioningLifecycle, fieldFindings, firstStartObservation, maintenanceBaselines } from '../data/ardhiFlagship';
+import { publicLifecycleForAsset } from '../data/fleetLifecycle';
 import '../styles/ardhi-production.css';
 const labels = { not_started: 'Not started', in_progress: 'In progress', passed: 'Passed', needs_attention: 'Needs attention', blocked: 'Blocked' };
 
@@ -38,10 +39,12 @@ export function ArdhiInspections() {
 }
 
 export function ArdhiMaintenancePlan() {
+  const events = [...publicLifecycleForAsset('SP-ARDHI-26')].sort((a, b) => b.occurredOn.localeCompare(a.occurredOn) || a.id.localeCompare(b.id));
+  const active = events.filter(event => event.status === 'repair_pending' || event.status === 'reported' || event.status === 'diagnosing');
   return <section className="section shell ardhi-production" id="maintenance" aria-labelledby="maintenance-title">
     <p className="eyebrow">Lifetime care / preparation</p><h2 id="maintenance-title">Maintenance starts with a verified baseline.</h2>
     <p>The engine label is documented: a Runtong 739 cc twin-cylinder gasoline engine on the YF380 plate. Operating time is operator-reported — roughly five field hours — with no verified hour-meter reading. Service intervals follow manufacturer guidance once its applicability to the delivered YF380 is confirmed.</p>
-    <ul className="ardhi-maintenance-systems is-baselines">{maintenanceBaselines.map(baseline => <li key={baseline.system}><strong>{baseline.system}</strong><span>{baseline.updated ? `Updated ${baseline.updated}` : 'No dated record yet'}</span><p><b>Known:</b> {baseline.known}</p><p><b>Outstanding:</b> {baseline.outstanding}</p></li>)}</ul>
+    <section aria-labelledby="ardhi-active-service-title"><h3 id="ardhi-active-service-title">Active service items</h3><p>Reviewed source-controlled lifecycle projection. Digital HQ live synchronization is not connected. An open safety-critical repair does not grant operating clearance.</p><ul className="ardhi-maintenance-systems">{active.map(event => <li key={event.id}><strong>{event.title}</strong><span>{event.id} · {event.occurredOn} · {event.status.replaceAll('_', ' ')}</span><p>{event.summary}</p><p>Service release: {event.serviceRelease}. Approval: {event.approval}.</p></li>)}</ul></section><section aria-labelledby="ardhi-lifecycle-title"><h3 id="ardhi-lifecycle-title">Repair and upgrade history</h3><p>Historical owner observations are preserved; this summary does not replace independent inspections.</p><ul className="ardhi-maintenance-systems">{events.map(event => <li key={event.id}><strong>{event.title}</strong><span>{event.type.replaceAll('_', ' ')} · {event.occurredOn} · {event.status.replaceAll('_', ' ')}</span><p>{event.summary}</p>{event.article && <p><a href={event.article.url}>Read published field journal</a></p>}</li>)}</ul></section><h3>System baselines and outstanding inspections</h3><ul className="ardhi-maintenance-systems is-baselines">{maintenanceBaselines.map(baseline => <li key={baseline.system}><strong>{baseline.system}</strong><span>{baseline.updated ? `Updated ${baseline.updated}` : 'No dated record yet'}</span><p><b>Known:</b> {baseline.known}</p><p><b>Outstanding:</b> {baseline.outstanding}</p></li>)}</ul>
     <p>Future records need hours, applicable interval, parts, inspection evidence and next-due date. Costs, technician identities and private notes belong in Digital HQ. No schedule, completed service or operational integration is implied.</p>
     <a href="#service">View published service history</a>
   </section>;
