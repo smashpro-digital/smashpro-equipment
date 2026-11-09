@@ -9,7 +9,7 @@ export type FleetLifecycleEvent = {
   id: string; assetId: string; type: FleetEventType; status: FleetEventStatus;
   title: string; occurredOn: string | null; reportedOn: string | null; summary: string; componentIds: string[];
   relatedEventIds: string[]; evidence: FleetEvidence[];
-  article?: { state: 'draft' | 'published'; url?: string; title: string } | null;
+  article?: { state: 'draft' | 'published'; postId?: number; url?: string; title: string } | null;
   approval: 'pending' | 'reviewed'; serviceRelease: 'blocked' | 'pending' | 'approved';
 };
 export const ardhiLifecycleEvents: readonly FleetLifecycleEvent[] = [
@@ -19,7 +19,7 @@ export const ardhiLifecycleEvents: readonly FleetLifecycleEvent[] = [
     summary:'Owner photographed track displaced from undercarriage. Cause and repair unverified. Awaiting OEM tension and reinstallation procedure.',
     componentIds:['rubber-track','undercarriage'],relatedEventIds:[],
     evidence:[{kind:'photo',label:'Owner track incident photo, WP media 967',reviewed:true},{kind:'photo',label:'Owner track incident photo, WP media 966',reviewed:true}],
-    article:{state:'draft',title:'Field Repair 003 | Thrown track: real-world recovery'},
+    article:{state:'draft',postId:969,title:'Field Repair 003 | Thrown Track: Real-World Recovery'},
     approval:'pending',serviceRelease:'blocked'
   },
   {
@@ -81,7 +81,7 @@ export function isFleetLifecycleEvent(value:unknown):value is FleetLifecycleEven
     && Array.isArray(event.relatedEventIds) && event.relatedEventIds.every(id=>typeof id==='string')
     && Array.isArray(event.evidence)
     && event.evidence.every(item=>isRecord(item) && ['photo','video','supplier','inspection'].includes(String(item.kind)) && typeof item.label==='string' && typeof item.reviewed==='boolean' && (item.url===undefined || typeof item.url==='string'))
-    && (article===undefined || article===null || (isRecord(article) && ['draft','published'].includes(String(article.state)) && typeof article.title==='string' && (article.url===undefined || typeof article.url==='string')))
+    && (article===undefined || article===null || (isRecord(article) && ['draft','published'].includes(String(article.state)) && typeof article.title==='string' && (article.postId===undefined || (Number.isSafeInteger(article.postId) && Number(article.postId)>0)) && (article.url===undefined || typeof article.url==='string')))
     && (event.approval==='pending' || event.approval==='reviewed')
     && ['blocked','pending','approved'].includes(String(event.serviceRelease));
 }
