@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 const data = readFileSync(new URL('../src/data/fleetLifecycle.ts', import.meta.url), 'utf8');
+const attachments = readFileSync(new URL('../src/data/attachments.ts', import.meta.url), 'utf8');
+const postDelivery = JSON.parse(readFileSync(new URL('../src/data/ardhiPostDelivery.json', import.meta.url), 'utf8'));
 const flagship = readFileSync(new URL('../src/data/ardhiFlagship.ts', import.meta.url), 'utf8');
 const ui = readFileSync(new URL('../src/components/ArdhiProduction.tsx', import.meta.url), 'utf8');
 const compiledFlagship = ts.transpileModule(flagship, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
@@ -34,8 +36,17 @@ test('commissioning copy shows restored throttle travel without implying approva
   const engine = commissioningChecks.find(check => check.id === 'engine');
   const approval = commissioningChecks.find(check => check.id === 'passport-complete');
   assert.match(engine.notes, /Throttle travel was restored November 8/);
+  assert.match(engine.notes, /full lever travel was owner-verified/);
   assert.doesNotMatch(engine.notes, /throttle travel restriction is open/);
-  assert.match(approval.notes, /unrepaired, service-blocking thrown track/);
+  assert.match(approval.notes, /Throttle-travel repair is owner-verified and resolved/);
+  assert.match(approval.notes, /unresolved, service-blocking thrown track/);
   assert.match(approval.notes, /quick-change retention verification/);
   assert.match(ui, /Latest: lifecycle and open service items \(updated November 8\)/);
+});
+test('bucket installation is reconciled while fitment safety and field testing remain pending', () => {
+  assert.match(attachments, /status: "installed"/);
+  assert.match(attachments, /Owner-reported installed November 7, 2026/);
+  assert.match(attachments, /fieldTestStatus: "Pending; no digging or wear results recorded"/);
+  assert.match(postDelivery.upgradeSummary, /six-tooth bucket configuration is owner-reported installed/);
+  assert.match(postDelivery.upgradeSummary, /field performance testing and independent attachment safety review remain pending/);
 });

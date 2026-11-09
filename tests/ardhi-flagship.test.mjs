@@ -15,7 +15,7 @@ test('November 8 activity updates do not grant commissioning approval', () => {
   assert.equal(commissioningChecks.find(c => c.id === 'engine-oil').status, 'needs_attention');
   assert.equal(commissioningChecks.find(c => c.id === 'hydraulic-fluid').status, 'not_started');
   assert.equal(commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
-  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /Throttle travel restoration is owner-reported/i);
+  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /Throttle-travel repair is owner-verified and resolved/i);
   assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /service-blocking thrown track/i);
   assert.equal(commissioningChecks.find(c => c.id === 'first-start').date, '2026-10-26');
   assert.equal(commissioningChecks.find(c => c.id === 'first-drive').date, '2026-10-31');
