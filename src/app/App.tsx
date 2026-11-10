@@ -1,5 +1,6 @@
 import { EquipmentPassportPage } from "../pages/EquipmentDetailPage";
 import { MediaEquipmentPassportPage } from "../pages/MediaEquipmentPassportPage";
+import { ShelleyesEvaluationPassportPage, ShelleyesFieldStudyPage } from "../pages/ShelleyesEvaluationPages";
 import { NyasiPassportPage } from "../pages/NyasiPassportPage";
 import { Route, Switch } from "react-router-dom";
 import { ArdhiPassportPage } from "../pages/ArdhiPassportPage";
@@ -19,6 +20,8 @@ export function App() {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/index.html" component={HomePage} />
       <Route exact path="/sp-med-cam-001.html" component={MediaEquipmentPassportPage} />
+      <Route exact path="/shelleyes-s7p-evaluation.html" component={ShelleyesEvaluationPassportPage} />
+      <Route exact path="/shelleyes-s7p-field-study.html" component={ShelleyesFieldStudyPage} />
       <Route exact path="/sp-ardhi-26.html" component={ArdhiPassportPage} />
       <Route exact path="/sp-mzigo-26.html" component={MzigoPassportPage} />
       <Route exact path="/sp-umba-26.html" render={() => <EquipmentPassportPage slug="sp-umba-26" />} />
