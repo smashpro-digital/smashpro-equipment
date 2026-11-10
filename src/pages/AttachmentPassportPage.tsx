@@ -37,7 +37,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         <AttachmentSpecGrid fields={[
           { label: "Passport ID", value: item.passportId },
           { label: "Asset tag", value: item.assetTag },
-          { label: "Status", value: item.passportId === "SP-ATT-GRP-001" ? "At local delivery partner · Scheduling pending" : item.status },
+          { label: "Status", value: item.passportId === "SP-ATT-GRP-001" ? "Delivery scheduled · Nov 11 (time pending)" : item.status },
           { label: "Attachment type", value: item.typeLabel },
           { label: "Manufacturer", value: item.manufacturer },
           { label: "Model", value: item.model },
@@ -68,12 +68,12 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
 
 
       {item.passportId === "SP-ATT-GRP-001" && <section className="section shell" id="grapple-freight">
-        <div className="section-heading"><div><p className="eyebrow">Freight and delivery</p><h2>Estes Express Lines · In transit</h2></div><p>Shipped November 5, 2026; received by local delivery partner November 9. Final delivery date is pending. Carrier updates may change without notice.</p></div>
+        <div className="section-heading"><div><p className="eyebrow">Freight and delivery</p><h2>Estes Express Lines · In transit</h2></div><p>Shipped November 5, 2026; received by local delivery partner November 9. Delivery scheduled November 11; time/window confirmation pending November 10. Carrier updates may change without notice.</p></div>
         <AttachmentSpecGrid fields={[
           { label: "Carrier", value: "Estes Express Lines" },
           { label: "Tracking / PRO", value: "0178760094" },
           { label: "Shipped", value: "November 5, 2026" },
-          { label: "Delivery status", value: "Received by EFM / ACME Logistics · Scheduling pending (Nov 9)" },
+          { label: "Delivery status", value: "Delivery scheduled Wednesday, November 11, 2026 · Time to be confirmed November 10" },
           { label: "Local delivery partner", value: "EFM / ACME Logistics" },
           { label: "Local delivery contact", value: "803-217-0677" },
           { label: "Appointment", value: "Not required per carrier notice" },
