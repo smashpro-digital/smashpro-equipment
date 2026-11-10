@@ -101,6 +101,8 @@ export default defineConfig(({ mode }) => {
         bebaDump: resolve(projectDirectory, "sp-beba-dp-hd-26.html"),
         nyasi: resolve(projectDirectory, "sp-nyasi-26.html"),
         mediaCamera: resolve(projectDirectory, "sp-med-cam-001.html"),
+        shelleyesEvaluation: resolve(projectDirectory, "shelleyes-s7p-evaluation.html"),
+        shelleyesFieldStudy: resolve(projectDirectory, "shelleyes-s7p-field-study.html"),
         golfCartTechBuild: resolve(projectDirectory, "golf-cart-tech-build.html"),
         productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),
