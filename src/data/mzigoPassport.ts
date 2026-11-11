@@ -29,7 +29,7 @@ export const mzigoLifecycle: FleetLifecycleStage[] = [
   { id: "port-arrival", label: "Export / Port", status: "complete", progress: 100, href: "#mzigo-archive-export-journey" },
   { id: "vessel-assignment", label: "Vessel Assignment", status: "complete", progress: 100, href: "#shipping-evidence" },
   { id: "ocean-departure", label: "Ocean Departure", status: "complete", progress: 100, href: "#mzigo-archive-export-journey" },
-  { id: "ocean-tracking", label: "Ocean Transit", status: "current", progress: 55, href: "#mzigo-archive-export-journey" },
+  { id: "ocean-tracking", label: "Ocean Transit", status: "current", progress: 65, href: "#mzigo-archive-export-journey" },
   { id: "us-arrival", label: "U.S. Arrival", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "customs", label: "Customs", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "delivery", label: "Delivery", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
@@ -41,4 +41,4 @@ const currentIndex = mzigoLifecycle.findIndex(stage => stage.status === "current
 export const mzigoCurrentStage = mzigoLifecycle[currentIndex].label;
 export const mzigoNextStage = mzigoLifecycle[currentIndex + 1].label;
 export const mzigoStatusLabel = `Shipped · ${mzigoCurrentStage.toLowerCase()}`;
-export const mzigoStatusDetail = "Supplier-confirmed shipment QDOH26100023 departed October 23, 2026 and is in ocean transit. Vessel/voyage context is NUE TALOS 1289-045E, with supplier ETA November 28, 2026. Public vessel observations support the route context but are not cargo-specific proof. Container number, bill of lading, U.S. port arrival, customs, delivery, commissioning and field validation remain pending. Rental availability has not been announced.";
+export const mzigoStatusDetail = "Supplier-confirmed shipment QDOH26100023 departed October 23, 2026 and remains in ocean transit. Vessel/voyage context is NUE TALOS 1289-045E, with supplier ETA November 28, 2026. Public vessel observations through November 10 support a Pacific crossing after the East Asia port rotation, with Panama/Colón next; Savannah remains schedule-supported around November 28 but is not cargo-confirmed. Public vessel observations are route context, not cargo-specific proof. Container number, bill of lading, U.S. port arrival, customs, delivery, commissioning and field validation remain pending. Rental availability has not been announced.";
