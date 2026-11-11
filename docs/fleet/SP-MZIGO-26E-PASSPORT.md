@@ -3,7 +3,7 @@
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.3<br>
 > Status: Shipped / Ocean Transit<br>
-> Last Updated: 2026-11-03
+> Last Updated: 2026-11-11
 
 ---
 
@@ -218,7 +218,7 @@ Supplier confirmation records shipment reference **QDOH26100023** as shipped on 
 
 The unit had previously been documented packed/crated and staged at the Qingdao Port warehouse. Port/container-loading photography was reported unavailable through the shipping company, so container loading remains an evidence limitation rather than an inferred photographed milestone.
 
-Public vessel schedule observations may be used as route context, but they are not cargo-specific proof for SP-MZIGO-26E. Container number, bill of lading, confirmed U.S. arrival port, customs release, final-mile delivery, commissioning and field validation remain pending until shipment-specific evidence is received.
+Public vessel schedule observations may be used as route context, but they are not cargo-specific proof for SP-MZIGO-26E. Container number, bill of lading, confirmed U.S. arrival port, customs release, final-mile delivery, commissioning and field validation remain pending until shipment-specific evidence is received. As of the November 10 public-vessel check, the voyage context supports the East Asia rotation being complete and a Pacific crossing toward Panama/Colón. Savannah remains schedule-supported around November 28, but the Passport does not promote it to a confirmed cargo discharge port without shipment-specific evidence.
 
 ---
 
