@@ -133,7 +133,7 @@ Not documented. Banking instructions must be independently verified with the ven
 | Export crating | Complete | Factory evidence received |
 | Port delivery | Complete | Supplier confirmed Qingdao Port warehouse staging |
 | Vessel booking / ocean departure | Complete | Supplier confirmed NUE TALOS / 1289-045E; shipment QDOH26100023 departed 2026-10-23 |
-| Ocean freight | Current | Supplier ETA 2026-11-28; public vessel observations are route context, not cargo-specific proof |
+| Ocean freight | Current | Public vessel observations through 2026-11-10 support Pacific crossing with Panama/Colón next; supplier ETA remains 2026-11-28; Savannah is schedule-supported but not cargo-confirmed |
 | U.S. delivery | Pending | Not documented |
 
 ## 14. Future Documentation Register
