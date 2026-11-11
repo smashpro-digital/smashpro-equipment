@@ -145,6 +145,7 @@ export interface AttachmentFieldEvidence {
   image?: string;
   imageAlt?: string;
   projectUrl?: string;
+  category?: "Delivery" | "Identification" | "Construction" | "Inspection";
 }
 export interface AttachmentUpgradeRecord {
   id: string;
@@ -166,6 +167,31 @@ export interface AttachmentUpgradeRecord {
   articleUrl?: string;
 }
 export interface AttachmentPassport {
+  receiving?: {
+    statusLabel: string;
+    showroomStatusLabel: string;
+    serialNumber: string;
+    manufacturedAt: string;
+    manufacturerJobId: string;
+    nameplateMount: string;
+    nameplateWeight: string;
+    factoryTest: string;
+    hostFleetId: string;
+    freight: {
+      carrier: string;
+      finalMileCarrier: string;
+      pro: string;
+      shippedAt: string;
+      deliveredAt: string;
+      location: string;
+      service: string;
+      shipment: string;
+    };
+    timeline: { id: string; label: string; date?: string; detail: string }[];
+    commissioningChecklist: string[];
+    fieldTestPlan: string;
+    manufacturerReference: GalleryImage;
+  };
   fieldEvidence?: AttachmentFieldEvidence[];
   upgrades?: AttachmentUpgradeRecord[];
   passportId: string;

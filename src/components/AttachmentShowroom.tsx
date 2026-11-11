@@ -56,18 +56,17 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
 
         {featured && (
           <article className="attachment-feature">
-            <div className={`attachment-feature__visual${featured.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}`}>
+            <div className={`attachment-feature__visual${featured.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}${featured.receiving && featured.image ? " attachment-visual--receiving" : ""}`}>
               {featured.image ? (
                 <img src={featured.image} alt={featured.imageAlt ?? featured.name} loading="lazy" decoding="async" />
               ) : (
-                <div className="attachment-feature__monogram"><span>{featured.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>{featured.width ? "IN" : "ATT"}</small></div>
+                featured.receiving ? <div className="attachment-photo-placeholder"><strong>Actual product photograph pending</strong><p>Approved owner receiving image unavailable.</p></div> : <div className="attachment-feature__monogram"><span>{featured.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>{featured.width ? "IN" : "ATT"}</small></div>
               )}
-              {featured.image && featured.passportId === "SP-ATT-GRP-001" && <div className="attachment-feature__monogram"><span>42</span><small>IN</small></div>}
               <span className="attachment-feature__fleet">{featured.plateRequirement?.label ?? "Plate requirement pending"}</span>
             </div>
             <div className="attachment-feature__body">
               <div className="attachment-feature__topline">
-                <span className={`attachment-status attachment-status--${featured.status}`}>{featured.passportId === "SP-ATT-GRP-001" ? "In transit · Estes freight" : statusLabel[featured.status]}</span>
+                <span className={`attachment-status attachment-status--${featured.status}`}>{featured.receiving?.showroomStatusLabel ?? statusLabel[featured.status]}</span>
                 <span>{featured.category}</span>
               </div>
               <p className="attachment-feature__kicker">{featured.passportId} {featured.manufacturer ? `· ${featured.manufacturer}` : ""}</p>
@@ -102,7 +101,7 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
                       <strong>{item.name}</strong>
                       <span>{item.passportId} · {item.plateRequirement?.label ?? "Plate TBD"}</span>
                     </div>
-                    <span className={`attachment-status attachment-status--${item.status}`}>{item.passportId === "SP-ATT-GRP-001" ? "In transit · Estes freight" : statusLabel[item.status]}</span>
+                    <span className={`attachment-status attachment-status--${item.status}`}>{item.receiving?.showroomStatusLabel ?? statusLabel[item.status]}</span>
                   </a>
                 ))}
               </div>
