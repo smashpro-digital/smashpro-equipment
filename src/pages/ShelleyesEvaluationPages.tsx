@@ -4,7 +4,7 @@ import '../styles/shelleyes-evaluation.css';
 
 const evaluationReference = 'SP-MED-S7P-EVAL-26';
 const evaluationUrl = '/equipment/shelleyes-s7p-evaluation.html';
-const studyUrl = '/equipment/shelleyes-s7p-field-study.html';
+const studyUrl = 'https://smashpro.app/smashpro-live-view-contractor-camera-case-study/';
 
 const capabilities = [
   { label: 'Connectivity', value: 'LTE / Wi-Fi 6 / Bluetooth 5.4', note: 'Manufacturer-reported. Carrier support is unconfirmed.' },
