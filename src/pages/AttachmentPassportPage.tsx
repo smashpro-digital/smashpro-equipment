@@ -1,5 +1,6 @@
 import { AttachmentSpecGrid } from "../components/AttachmentSpecGrid";
 import { AttachmentUpgradeRegistry } from "../components/AttachmentUpgradeRegistry";
+import { AttachmentReceiving } from "../components/AttachmentReceiving";
 import "../styles/bucket-passport-v2.css";
 import { Redirect } from "react-router-dom";
 import { ButtonLink } from "../components/ButtonLink";
@@ -18,15 +19,15 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
           <div>
             <p className="eyebrow">Attachment passport · {item.passportId}</p>
             <h1>{item.name}</h1>
+            {item.receiving && <><p className="attachment-status attachment-status--commissioning">{item.receiving.statusLabel}</p><p>{item.manufacturer} · {item.model} · Serial {item.receiving.serialNumber}</p></>}
             {item.passportId === "SP-ATT-BKT-001" && <><p className="bucket-upgrade-state">Six-tooth upgrade / Ordered</p><p className="bucket-hero-facts">42.91-inch factory width / SP-BKT-ARDHI-01<br />Toro Dingo / Mini Universal / SP-ARDHI-26</p></>}
             <p className="attachment-passport-hero__lede">{item.description}</p>
             <div className="button-row"><ButtonLink href="/equipment/#attachments" variant="outline">Back to attachment library</ButtonLink>{item.serviceUrl && <ButtonLink href={item.serviceUrl}>Explore supported work</ButtonLink>}</div>
           </div>
-          <div className={`attachment-passport-hero__visual${item.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}`}>
-            {item.image ? <img src={item.image} alt={item.imageAlt ?? item.name} /> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
-            {item.passportId === "SP-ATT-GRP-001" && <>
-              <div className="attachment-feature__monogram"><span>42</span><small>IN</small></div>
-              <span className="attachment-feature__fleet">{item.plateRequirement?.label}</span>
+          <div className={`attachment-passport-hero__visual${item.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}${item.receiving && item.image ? " attachment-visual--receiving" : ""}`}>
+            {item.image ? <img src={item.image} alt={item.imageAlt ?? item.name} /> : item.receiving ? <div className="attachment-photo-placeholder"><strong>Actual delivered grapple photograph pending</strong><p>Approved owner hero image unavailable. Serial {item.receiving.serialNumber}; no catalog image substituted.</p></div> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
+            {item.passportId === "SP-ATT-GRP-001" && item.image && <>
+              <span className="attachment-feature__fleet">Owner receiving photograph · November 11, 2026</span>
             </>}
           </div>
         </div>
@@ -37,12 +38,18 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
         <AttachmentSpecGrid fields={[
           { label: "Passport ID", value: item.passportId },
           { label: "Asset tag", value: item.assetTag },
-          { label: "Status", value: item.passportId === "SP-ATT-GRP-001" ? "Received · Commissioning pending" : item.status },
+          { label: "Status", value: item.receiving?.statusLabel ?? item.status },
           { label: "Attachment type", value: item.typeLabel },
           { label: "Manufacturer", value: item.manufacturer },
           { label: "Model", value: item.model },
+          { label: "Serial number", value: item.receiving?.serialNumber },
+          { label: "Manufacture date", value: item.receiving?.manufacturedAt },
+          { label: "Manufacturer job ID", value: item.receiving?.manufacturerJobId },
           { label: "Width", value: item.width },
           { label: "Weight", value: item.weight },
+          { label: "Physical nameplate weight", value: item.receiving?.nameplateWeight },
+          { label: "Nameplate mounting interface", value: item.receiving?.nameplateMount },
+          { label: "Planned host · fitment pending", value: item.receiving?.hostFleetId },
           { label: "Attachment plate", value: item.plateRequirement?.label },
         ]} />
       </section>
@@ -57,39 +64,22 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
           { label: "Hydraulic circuit", value: item.hydraulicRequirement?.circuit },
           { label: "Hydraulic couplers", value: item.hydraulicRequirement?.couplers },
           { label: "Pressure", value: item.hydraulicRequirement?.pressure },
+          { label: "Factory test sticker", value: item.receiving?.factoryTest },
           { label: "Flow", value: item.hydraulicRequirement?.flow },
           { label: "Jaw opening", value: item.construction?.jawOpening },
           { label: "Steel / tine detail", value: item.construction?.steelThickness },
           { label: "Cylinder protection", value: item.construction?.cylinderProtection },
         ]} />
         {item.plateRequirement?.notes && <p className="large-copy">{item.plateRequirement.notes}</p>}
+        {item.hydraulicRequirement?.notes && <p className="large-copy">{item.hydraulicRequirement.notes}</p>}
         {item.verifiedFleetIds?.length ? <div className="attachment-passport-hosts"><strong>Verified host evidence</strong>{item.verifiedFleetIds.map((id) => <a href={id === "SP-ARDHI-26" ? "/equipment/sp-ardhi-26.html" : "/equipment/"} key={id}>{id}</a>)}</div> : null}
       </section>
 
 
-      {item.passportId === "SP-ATT-GRP-001" && <section className="section shell" id="grapple-freight">
-        <div className="section-heading"><div><p className="eyebrow">Freight and delivery</p><h2>Estes Express Lines · In transit</h2></div><p>Shipped November 5, 2026; delivered to SmashPro November 11 via ACME Logistics. Commissioning pending. Carrier updates may change without notice.</p></div>
-        <AttachmentSpecGrid fields={[
-          { label: "Carrier", value: "Estes Express Lines" },
-          { label: "Tracking / PRO", value: "0178760094" },
-          { label: "Shipped", value: "November 5, 2026" },
-          { label: "Delivery status", value: "Delivered November 11, 2026 · Physical inspection and commissioning pending" },
-          { label: "Local delivery partner", value: "EFM / ACME Logistics" },
-          { label: "Local delivery contact", value: "803-217-0677" },
-          { label: "Appointment", value: "Not required per carrier notice" },
-          { label: "Signature", value: "Not required per carrier notice" },
-          { label: "Home delivery phone", value: "1-888-858-2684" },
-          { label: "Home delivery email", value: "Delivery@estes-express.com" },
-        ]} />
-        <div className="button-row">
-          <ButtonLink href="https://estes.delivery/h/0178760094/29061">Track with Estes</ButtonLink>
-          <ButtonLink href="mailto:Delivery@estes-express.com" variant="outline">Contact carrier</ButtonLink>
-        </div>
-        <p className="large-copy">After delivery: inspect for freight damage, document receipt, verify mount and hydraulic connections, and complete commissioning before activating services.</p>
-      </section>}
+      <AttachmentReceiving item={item} />
       <AttachmentUpgradeRegistry item={item} />
 
-      {item.fieldEvidence?.length ? <section className="section shell" id="attachment-field-evidence">
+      {!item.receiving && item.fieldEvidence?.length ? <section className="section shell" id="attachment-field-evidence">
         <div className="section-heading"><div><p className="eyebrow">Field evidence</p><h2>From attachment to actual work.</h2></div><p>Selected, verified attachment photographs belong here. Full customer grading portfolios stay with their project records.</p></div>
         <div className="attachment-checklist">{item.fieldEvidence.map((evidence) => <article className="attachment-check" key={evidence.id}>
           <div className="attachment-check__top"><span>{evidence.status === "verified" ? "Documented image" : "Awaiting field evidence"}</span></div>
