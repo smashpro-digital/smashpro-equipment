@@ -7,9 +7,10 @@
 ## Public pages
 
 - Evaluation passport: `/equipment/shelleyes-s7p-evaluation.html`
-- Field study: `/equipment/shelleyes-s7p-field-study.html`
+- Independent technology case study (WordPress, managed by `smashpro-web`): `https://smashpro.app/smashpro-live-view-contractor-camera-case-study/`
+- Legacy field study: `/equipment/shelleyes-s7p-field-study.html` (automatic handoff to the WordPress article; preserve inbound links)
 
-These pages are explicitly **pre-acquisition research pages**. The term “Evaluation Passport” is a public editorial format, not the approval-controlled Digital HQ equipment passport projection. They must not be fed into the canonical equipment index or presented as owned fleet inventory.
+The equipment path is the evaluation **passport**, while the separate WordPress article follows the established editorial case-study pattern. Both document **pre-acquisition research**. The term “Evaluation Passport” is a public editorial format, not the approval-controlled Digital HQ equipment passport projection. They must not be fed into the canonical equipment index or presented as owned fleet inventory.
 
 ## Permanent ID decision
 
