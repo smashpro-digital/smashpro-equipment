@@ -93,7 +93,7 @@ export const attachments: AttachmentPassport[] = [
     typeLabel: "Root Grapples",
     name: "Loflin 42 in Mini Root Grapple #1",
     category: "Cleanup + material handling",
-    status: "in-transit",
+    status: "commissioning",
     plateRequirement: {
       standard: "toro-dingo-mini-universal",
       label: "Toro Dingo / Mini Universal",
@@ -103,9 +103,9 @@ export const attachments: AttachmentPassport[] = [
     hydraulicRequirement: {
       circuit: "Reversing auxiliary hydraulic circuit",
       couplers: "Two hydraulic quick couplers",
-      pressure: "Up to 3,500 psi acceptable",
+      pressure: "Max 3,200 PSI per actual serial-numbered unit nameplate and factory test sticker",
       flow: "Not a deciding fitment factor for this grapple per Loflin",
-      notes: "SP-ARDHI-26 documented system pressure is approximately 2,466 psi."
+      notes: "SP-ARDHI-26 documented system pressure is approximately 2,466 psi. Physical hose/coupler and function tests pending."
     },
     construction: {
       overallWidth: "42 in",
@@ -121,8 +121,8 @@ export const attachments: AttachmentPassport[] = [
       freight: "$285 to ZIP 29061",
       deliveredSubtotal: "$2,297 before applicable tax/fees",
       taxOrFees: "Final invoice #292 paid in full November 5, 2026; no additional charge shown",
-      stockStatus: "Shipped November 5, 2026 via Estes Express Lines · tracking 0178760094 · delivery pending",
-      leadTime: "Shipped November 5, 2026; delivery date not yet confirmed",
+      stockStatus: "Delivered November 11, 2026 via ACME Logistics (Estes PRO 0178760094); receiving documented, commissioning pending",
+      leadTime: "Delivered November 11, 2026; operational commissioning pending",
       paymentStructure: "$297 paid September 9 + $1,000 October 30 + $1,000 November 5, 2026; invoice #292 paid in full; $0 balance",
       paymentMethods: ["Cash", "Credit card", "Check"],
       warranty: "Not yet documented in the current procurement record",
@@ -132,6 +132,11 @@ export const attachments: AttachmentPassport[] = [
       branding: "Removable SmashPro branding after delivery; custom colors/designs require 20-piece minimum",
       partnershipValue: "Field-test / content / long-term attachment-partner value under evaluation; not represented as sponsorship",
     },
+    fieldEvidence: [
+      { id: "loflin-receiving-20261111", title: "Delivered to SmashPro", description: "Owner-supplied November 11, 2026 photographs document the actual grapple on its timber shipping cradle and ACME Logistics final-mile delivery. Receiving is confirmed; hydraulic operation and machine fitment are not.", status: "pending" },
+      { id: "loflin-nameplate-20261111", title: "Serial and factory pressure identification", description: "Physical nameplate: model SMPRMINIRG, serial 2459685, manufacture date October 22, 2026, size 42, TORODINGO hookup, maximum 3200 PSI, job 16486-0001-001. Factory sticker reads TESTED 3200 psi. Owner photo evidence awaiting approved public media URL.", status: "pending" },
+      { id: "loflin-commissioning", title: "ARDHI mounting and hydraulic commissioning", description: "Pending ARDHI repair, physical mount-lock inspection, hose/coupler compatibility, leak check, controlled unloaded jaw cycling, and operator release.", status: "pending" },
+    ],
     fitmentChecklist: [
       { key: "design-type", question: "What exact attachment model / design type is this?", answer: "Loflin Mini Root Grapple", status: "confirmed", source: "Loflin direct discussion" },
       { key: "plate-standard", question: "What attachment plate / quick-attach standard does it require?", answer: "Toro Dingo / Mini Universal", status: "confirmed", source: "Loflin fitment review" },
@@ -142,7 +147,7 @@ export const attachments: AttachmentPassport[] = [
       { key: "steel-tines", question: "What steel thickness / tine construction is used?", answer: "Historical literature references 3/8 in upper tine steel; final production construction should be verified at receipt", status: "confirmed", source: "Loflin Mini Catalog" },
       { key: "cylinder", question: "What cylinder configuration and protection are used?", answer: "Protected cylinder / hose routing is documented; exact cylinder dimensions are not yet recorded", status: "pending", source: "Loflin literature / procurement record" },
       { key: "hydraulic-circuit", question: "Does it require a reversing auxiliary hydraulic circuit?", answer: "Yes, two reversing hydraulic lines", status: "confirmed", source: "Greg Loflin" },
-      { key: "pressure", question: "What hydraulic pressure range is acceptable?", answer: "Up to approximately 3,500 psi", status: "confirmed", source: "Greg Loflin" },
+      { key: "pressure", question: "What hydraulic pressure range is acceptable?", answer: "Actual unit nameplate maximum 3,200 PSI (factory TESTED 3200 PSI sticker); supersedes preliminary 3,500 PSI vendor guidance", status: "confirmed", source: "Greg Loflin" },
       { key: "flow", question: "What hydraulic flow is required or acceptable?", answer: "Loflin stated flow is not a deciding fitment factor for this grapple", status: "confirmed", source: "Greg Loflin" },
       { key: "couplers", question: "What hose / coupler type and size are supplied or required?", answer: "Two hydraulic quick couplers will be supplied; exact coupler size/spec is not yet recorded", status: "pending", source: "Loflin discussion" },
       { key: "included-hardware", question: "Are hoses and couplers included?", answer: "Quick couplers are expected with the grapple; exact included hose/coupler package to verify at order/receipt", status: "pending", source: "Loflin discussion" },
@@ -159,12 +164,12 @@ export const attachments: AttachmentPassport[] = [
     ],
     verifiedFleetIds: ["SP-ARDHI-26"],
     manufacturer: "Loflin Fabrication",
-    model: "Mini Root Grapple",
+    model: "SMPRMINIRG · serial 2459685 · manufactured 2026-10-22",
     // Official manufacturer photo, served locally without alteration.
     // https://www.loflinfabrication.com/wp-content/uploads/2026/04/mini-root-grapple-single-tine.webp
     image: "/equipment/images/sp-att-grp-001-loflin-42-inch-mini-root-grapple.webp",
     imageAlt: "Loflin Mini Root Grapple carrying a large log",
-    description: "Paid-in-full 42-inch black Mini Root Grapple shipped November 5 via Estes Express Lines (tracking 0178760094); delivery and commissioning pending. Planned for brush and vegetation cleanup, landscape tear-out cleanup, storm debris handling, and limb/small-log handling only after delivery and commissioning.",
+    description: "Paid-in-full 42-inch black Mini Root Grapple physically received November 11, 2026 (Estes / ACME Logistics). Serial 2459685; inspection and ARDHI commissioning pending. Planned for brush and vegetation cleanup, landscape tear-out cleanup, storm debris handling, and limb/small-log handling only after delivery and commissioning.",
     capabilities: ["Brush cleanup", "Vegetation handling", "Storm debris", "Limb and small-log handling"],
     width: "42 in",
     weight: "370 lb",
