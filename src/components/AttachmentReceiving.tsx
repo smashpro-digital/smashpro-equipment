@@ -1,6 +1,7 @@
 import type { AttachmentPassport } from "../types/equipment";
 import { AttachmentSpecGrid } from "./AttachmentSpecGrid";
 import { PassportFactoryGallery } from "./PassportFactoryGallery";
+import { EquipmentWatch, publishedEquipmentVideos } from "./EquipmentWatch";
 import "../styles/attachment-receiving.css";
 
 const displayDate = (date: string) => new Intl.DateTimeFormat("en-US", {
@@ -10,15 +11,18 @@ const displayDate = (date: string) => new Intl.DateTimeFormat("en-US", {
 export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
   const receiving = item.receiving;
   if (!receiving) return null;
-  const categories = ["Delivery", "Identification", "Construction", "Inspection"] as const;
+  const categories = ["Delivery", "Equipment Overview", "Manufacturer Identification", "Mounting and Fitment"] as const;
   const reference = receiving.manufacturerReference;
+  const availableVideos = publishedEquipmentVideos(receiving.videoSlots.flatMap(slot => slot.publication ? [slot.publication.video] : []), item.passportId);
 
   return <>
     <section className="section shell" id="attachment-procurement-timeline">
       <div className="section-heading"><div><p className="eyebrow">Procurement timeline</p><h2>From order to physical receipt.</h2></div><p>Commercial completion and receiving do not authorize operation.</p></div>
-      <ol className="attachment-receiving-timeline">
-        {receiving.timeline.map(event => <li key={event.id}>
-          {event.date ? <time dateTime={event.date}>{displayDate(event.date)}</time> : <span>Date not recorded</span>}
+      <p className="attachment-status attachment-status--commissioning">{receiving.showroomStatusLabel}</p>
+      <ol className="attachment-receiving-timeline" aria-label="Procurement and readiness milestones">
+        {receiving.timeline.map(event => <li className={`is-${event.status}`} key={event.id}>
+          <span className="attachment-receiving-timeline__status">{event.status === "completed" ? "Complete" : "Pending"}</span>
+          {event.date && <time dateTime={event.date}>{displayDate(event.date)}</time>}
           <h3>{event.label}</h3><p>{event.detail}</p>
         </li>)}
       </ol>
@@ -45,12 +49,14 @@ export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
         const approved = entries.flatMap(entry => entry.status === "verified" && entry.image && entry.imageAlt ? [{
           id: entry.id, src: entry.image, originalSrc: entry.image, alt: entry.imageAlt,
           caption: entry.description, title: entry.title, equipmentId: item.passportId,
+          width: entry.width, height: entry.height,
           source: "Owner-provided, approved public receiving photograph",
           evidenceDate: receiving.freight.deliveredAt, lifecycle: "Received; commissioning pending",
           classification: category,
         }] : []);
         return <div className="attachment-receiving-gallery__group" key={category}>
           <h3>{category}</h3>
+          {category === "Mounting and Fitment" && <p>Measurements are preliminary physical observations, not certified mounting dimensions. Physical mounting and hydraulic operation remain unverified.</p>}
           {approved.length > 0 && <PassportFactoryGallery media={approved} />}
           <div className="attachment-checklist">{entries.filter(entry => !approved.some(image => image.id === entry.id)).map(entry => <article className="attachment-check attachment-check--pending" key={entry.id}>
             <div className="attachment-check__top"><span>Public photograph missing</span></div>
@@ -72,6 +78,23 @@ export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
     <section className="section shell" id="attachment-field-test-001">
       <div className="section-heading"><div><p className="eyebrow">Field Test 001 · Planned</p><h2>Brush and debris recovery.</h2></div><p>{receiving.fieldTestPlan}</p></div>
       <p className="attachment-receiving-notice">Test date, operating observations and results: not yet recorded.</p>
+    </section>
+
+    <section className="section shell attachment-receiving-videos" id="attachment-videos" aria-labelledby="attachment-videos-title">
+      <div className="section-heading"><div><p className="eyebrow">Watch the next chapters</p><h2 id="attachment-videos-title">From delivery to the first brush pile.</h2></div><p>Working titles only until a reviewed video is published. No publication date, thumbnail, duration or video URL is currently available. A video does not authorize service activation.</p></div>
+      <div className="attachment-checklist">{receiving.videoSlots.map(slot => {
+        const publication = slot.publication;
+        const published = publication && availableVideos.some(video => video === publication.video);
+        return <article className={`attachment-check${published ? "" : " attachment-check--pending"}`} key={slot.id} aria-labelledby={slot.id}>
+          <div className="attachment-check__top"><span>{published ? "Published video" : slot.status}</span></div>
+          {published && publication.thumbnail && <img src={publication.thumbnail.src} alt={publication.thumbnail.alt} width={publication.thumbnail.width} height={publication.thumbnail.height} loading="lazy" decoding="async" />}
+          <h3 id={slot.id}>{published ? publication.video.title : slot.title}</h3>
+          <p>{published ? publication.video.description : slot.description}</p>
+          <ul>{slot.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
+          {published && <p>{publication.duration && <>Duration: {publication.duration} · </>}Published <time dateTime={publication.video.publishedAt}>{publication.video.publishedAt}</time></p>}
+        </article>;
+      })}</div>
+      {availableVideos.length > 0 && <EquipmentWatch videos={availableVideos} equipmentId={item.passportId} channelUrl="https://www.youtube.com/@SmashProHQ" emptyMessage="No approved published grapple videos are available." />}
     </section>
   </>;
 }

@@ -22,7 +22,7 @@ test("one received serial-numbered grapple with distinct weight and lifecycle re
   assert.equal(grapple.receiving.manufacturedAt, "2026-10-22");
   assert.equal(grapple.receiving.manufacturerJobId, "16486-0001-001");
   assert.equal(grapple.receiving.nameplateMount, "TORODINGO");
-  assert.match(grapple.receiving.nameplateWeight, /^Blank/);
+  assert.match(grapple.receiving.nameplateWeight, /^Not specified.*blank/);
   assert.match(grapple.weight, /370 lbs.*specification, not measured/);
   assert.match(grapple.receiving.freight.shipment, /390 lbs freight shipment weight/);
   assert.match(grapple.hydraulicRequirement.pressure, /Max 3,200 PSI/);
@@ -80,5 +80,59 @@ test("showroom links the existing grapple once in both featured and category pos
     assert.match(html, /LOFLIN 42&quot; MINI ROOT GRAPPLE/);
     assert.match(html, /Received · Commissioning Pending/);
     assert.doesNotMatch(html, /In transit · Estes freight/);
+  }
+});
+
+test("seven procurement milestones are complete and operational milestones remain pending", () => {
+  const completed = grapple.receiving.timeline.filter(event => event.status === "completed");
+  assert.deepEqual(completed.map(event => [event.id, event.date]), [
+    ["order", "2026-09-09"], ["manufacture", "2026-10-22"], ["fabrication", "2026-10-28"],
+    ["paid", "2026-11-05"], ["shipped", "2026-11-05"], ["handoff", "2026-11-09"], ["received", "2026-11-11"],
+  ]);
+  assert.deepEqual(grapple.receiving.timeline.filter(event => event.status === "pending").map(event => event.id), ["commissioning", "field-test"]);
+  const html = render(AttachmentReceiving, { item: grapple });
+  assert.equal((html.match(/class="is-completed"/g) ?? []).length, 7);
+  assert.equal((html.match(/class="is-pending"/g) ?? []).length, 2);
+  assert.match(html, /November 9, 2026/);
+});
+
+test("four requested receiving groups preserve approved media and label preliminary measurements", () => {
+  const html = render(AttachmentReceiving, { item: grapple });
+  for (const category of ["Delivery", "Equipment Overview", "Manufacturer Identification", "Mounting and Fitment"]) {
+    assert.ok(html.includes(`<h3>${category}</h3>`), `Missing ${category}`);
+  }
+  assert.match(html, /preliminary physical observations, not certified mounting dimensions/i);
+  assert.match(html, /width="2000" height="1500"/);
+});
+
+test("two planned videos render working titles but no fake player or publication metadata", () => {
+  assert.equal(grapple.receiving.videoSlots.length, 2);
+  assert.ok(grapple.receiving.videoSlots.every(slot => !slot.publication));
+  const html = render(AttachmentReceiving, { item: grapple });
+  assert.match(html, /\$2,297 Later\.\.\. ARDHI&#x27;s New Grapple Is HERE!/);
+  assert.match(html, /Can ARDHI Handle This Brush Pile\?/);
+  assert.match(html, /Video production pending/);
+  assert.match(html, /Field test pending/);
+  assert.doesNotMatch(html, /<iframe|<video|youtube\.com\/watch|youtube-nocookie\.com/);
+});
+
+test("future reviewed video reuses consent player; private, future or wrong-asset publication is hidden", () => {
+  const video = {
+    equipmentId: grapple.passportId, videoId: "abc123DEF45", title: "Synthetic reviewed video",
+    description: "Test fixture only", category: "Delivery", lifecycleStage: "Received",
+    publishedAt: "2026-11-11", verifiedAt: "2026-11-11", visibility: "public",
+  };
+  const withVideo = publication => ({
+    ...grapple, receiving: { ...grapple.receiving, videoSlots: [{ ...grapple.receiving.videoSlots[0], publication }] },
+  });
+  const html = render(AttachmentReceiving, { item: withVideo({ video, duration: "4:20", thumbnail: grapple.receiving.manufacturerReference }) });
+  assert.match(html, /Load Synthetic reviewed video/);
+  assert.match(html, /Duration: 4:20/);
+  assert.match(html, /youtube\.com\/watch\?v=abc123DEF45/);
+  assert.doesNotMatch(html, /<iframe/);
+  for (const invalid of [{ ...video, visibility: "private" }, { ...video, publishedAt: "2099-01-01" }, { ...video, equipmentId: "SP-ARDHI-26" }]) {
+    const markup = render(AttachmentReceiving, { item: withVideo({ video: invalid }) });
+    assert.doesNotMatch(markup, /Synthetic reviewed video|4:20|youtube\.com\/watch|Load video|<iframe/);
+    assert.match(markup, /Video production pending/);
   }
 });

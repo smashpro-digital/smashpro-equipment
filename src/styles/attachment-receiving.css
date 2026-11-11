@@ -1,6 +1,9 @@
 .attachment-receiving-notice{padding:1rem;border-left:3px solid var(--green);background:var(--surface);color:var(--muted)}
 .attachment-receiving-timeline{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
 .attachment-receiving-timeline li{padding:1.25rem;border:1px solid var(--line);border-top:3px solid #8554c8;background:var(--surface)}
+.attachment-receiving-timeline li.is-completed{border-top-color:var(--green)}
+.attachment-receiving-timeline__status{display:block;margin-bottom:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.attachment-receiving-timeline .is-pending .attachment-receiving-timeline__status{color:#c7a4f5}
 .attachment-receiving-timeline time,.attachment-receiving-timeline li>span{font-size:.8rem;color:var(--green)}
 .attachment-receiving-timeline h3{font-size:1.1rem;margin:.75rem 0}
 .attachment-receiving-timeline p{margin:0;color:var(--muted)}
@@ -18,4 +21,11 @@
 .attachment-photo-placeholder{max-width:28rem;text-align:center;padding:1.5rem;color:var(--muted)}
 .attachment-photo-placeholder strong{display:block;margin-bottom:.75rem;color:var(--green)}
 .attachment-visual--loflin.attachment-visual--receiving img{object-fit:contain;object-position:center}
+.attachment-receiving-videos .attachment-check{border-top:3px solid #8554c8}
+.attachment-receiving-videos img{display:block;width:100%;height:auto;object-fit:contain;margin-bottom:1rem}
+.attachment-receiving-videos ul{padding-left:1.25rem;color:var(--muted)}
+.attachment-receiving-videos .equipment-watch{margin-top:2rem}
+.attachment-receiving-videos .equipment-watch__player{aspect-ratio:16/9;max-width:900px}
+.attachment-receiving-videos .equipment-watch__player iframe,.attachment-receiving-videos .equipment-watch__player button{width:100%;height:100%;border:1px solid var(--line);background:var(--surface);color:var(--green)}
+.attachment-receiving-videos .equipment-watch__player button strong,.attachment-receiving-videos .equipment-watch__player button span{display:block;margin:.75rem}
 @media(max-width:768px){.attachment-receiving-timeline{grid-template-columns:1fr}.attachment-receiving-gallery .attachment-checklist{grid-template-columns:1fr}.attachment-commissioning-list li{flex-direction:column;gap:.5rem}}
