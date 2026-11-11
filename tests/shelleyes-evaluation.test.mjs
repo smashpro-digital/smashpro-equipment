@@ -23,6 +23,13 @@ test('public text does not disclose the private sample quote or imply completed 
   assert.match(source, /manufacturer-reported/i);
 });
 
+test('equipment passport points to the standalone WordPress case study', () => {
+  assert.match(source, /https:\/\/smashpro\.app\/smashpro-live-view-contractor-camera-case-study\//);
+  const legacy = readFileSync(new URL('../shelleyes-s7p-field-study.html', import.meta.url), 'utf8');
+  assert.match(legacy, /http-equiv="refresh"/);
+  assert.match(legacy, /rel="canonical" href="https:\/\/smashpro\.app\/smashpro-live-view-contractor-camera-case-study\//);
+});
+
 test('both study routes have physical production HTML entries', () => {
   for (const file of ['shelleyes-s7p-evaluation.html', 'shelleyes-s7p-field-study.html']) {
     assert.ok(routing.includes(file));
