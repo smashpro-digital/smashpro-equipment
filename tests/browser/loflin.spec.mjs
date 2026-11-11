@@ -20,10 +20,25 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     await expect(page.locator("#grapple-freight")).toContainText("390 lbs freight shipment weight");
     await expect(page.locator("#attachment-commissioning .attachment-status")).toHaveCount(9);
     await expect(page.locator("#attachment-field-test-001")).toContainText("No test performed and no results recorded");
+    const timeline = page.locator("#attachment-procurement-timeline");
+    await expect(timeline.locator(".is-completed")).toHaveCount(7);
+    await expect(timeline.locator(".is-pending")).toHaveCount(2);
+    await expect(timeline).toContainText("November 9, 2026");
+    await expect(timeline).toContainText("Received by ACME Logistics");
+    const videos = page.locator("#attachment-videos");
+    await expect(videos.getByRole("heading", { name: "$2,297 Later... ARDHI's New Grapple Is HERE!", exact: true })).toBeVisible();
+    await expect(videos.getByRole("heading", { name: "Can ARDHI Handle This Brush Pile?", exact: true })).toBeVisible();
+    await expect(videos.locator("iframe, video, img")).toHaveCount(0);
+    await expect(videos).toContainText("Video production pending");
+    await expect(videos).toContainText("Field test pending");
     await expect(page.getByText(/Awaiting Shipment|In transit · Estes|shipment pending/i)).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
     const gallery = page.locator("#attachment-receiving-gallery");
+    for (const category of ["Delivery", "Equipment Overview", "Manufacturer Identification", "Mounting and Fitment"]) {
+      await expect(gallery.getByRole("heading", { name: category, exact: true })).toHaveCount(1);
+    }
+    await expect(gallery).toContainText("not certified mounting dimensions");
     expect(await gallery.locator(".factory-photo-frame img").evaluate(image => getComputedStyle(image).objectFit)).toBe("contain");
     await expect(gallery.getByText("Public photograph missing", { exact: true })).toHaveCount(10);
     await gallery.getByRole("button", { name: "Enlarge Actual delivered grapple hero" }).click();

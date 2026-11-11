@@ -145,7 +145,9 @@ export interface AttachmentFieldEvidence {
   image?: string;
   imageAlt?: string;
   projectUrl?: string;
-  category?: "Delivery" | "Identification" | "Construction" | "Inspection";
+  category?: "Delivery" | "Equipment Overview" | "Manufacturer Identification" | "Mounting and Fitment";
+  width?: number;
+  height?: number;
 }
 export interface AttachmentUpgradeRecord {
   id: string;
@@ -187,9 +189,21 @@ export interface AttachmentPassport {
       service: string;
       shipment: string;
     };
-    timeline: { id: string; label: string; date?: string; detail: string }[];
+    timeline: { id: string; label: string; date?: string; detail: string; status: "completed" | "pending" }[];
     commissioningChecklist: string[];
     fieldTestPlan: string;
+    videoSlots: {
+      id: string;
+      title: string;
+      status: "Video production pending" | "Field test pending";
+      description: string;
+      topics: string[];
+      publication?: {
+        video: import("./passportExperience").EquipmentVideo;
+        thumbnail?: GalleryImage;
+        duration?: string;
+      };
+    }[];
     manufacturerReference: GalleryImage;
   };
   fieldEvidence?: AttachmentFieldEvidence[];
