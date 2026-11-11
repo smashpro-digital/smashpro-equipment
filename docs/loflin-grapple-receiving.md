@@ -71,7 +71,20 @@ Neither has a thumbnail, duration, publication date, video ID or URL. No empty p
 
 The passport/showroom still use static repository data. Neither a commit nor a PR mutates production data. [Digital HQ Issue #311](https://github.com/smashpro-digital/digital-hq/issues/311) remains the reconciliation authority. HQ contains a prepared read-only gateway plan and payload; no live record or schema has been validated, and no update executed. Owner requested pending preparation because no production access was provided. Field mapping and audited apply must follow the established authenticated database gateway workflow after canonical record validation.
 
-No `smashpro-web` change is required: the existing equipment showroom/passport routes and WordPress image URL are reused. No production deployment has been performed.
+No `smashpro-web` change is required: the existing equipment showroom/passport routes and WordPress image URL are reused. The owner-authorized Equipment frontend deployment is verified below. Database synchronization remains pending.
+
+### Verified production release / November 11, 2026
+
+- V3 [PR #146](https://github.com/smashpro-digital/smashpro-equipment/pull/146) and incremental V3.1 [PR #147](https://github.com/smashpro-digital/smashpro-equipment/pull/147) merged; V3.1 source commit `171146c9d9f482daf16b0887cab0f4ec187a44d1`.
+- Deployed main commit: `60094ab340cb72f39160126dff23fd0c70d71eb1`.
+- [Manual deployment run 43069152131](https://github.com/smashpro-digital/smashpro-equipment/actions/runs/43069152131) succeeded: required validation and incremental FTP publish to the established Equipment directory. Shipment, ARDHI-delivery and AKASO feature-release flags remained false. Upload completed at 17:34 UTC.
+- Prior successful production run `42805205604`, commit `eecb59d58be0067687616bbf30caaf78be536e8f`, was retained privately for rollback. Prior normal-URL passport HTML SHA-256 `06e92ad2ca8f03b1f71bf5bf0ad46e3185bf398166a090f050c9ccd79f31263b` and four compressed live JS/CSS asset hashes matched that retained artifact before deployment.
+- Initial browser acceptance saw stale Brotli HTML while gzip served the new shell. Only Equipment home and grapple HTML were revalidated with `Cache-Control: no-cache` / `Pragma: no-cache` using Chromium. A separate fresh browser then verified the normal, query-free production URLs at **1440px and 390px**, using uploaded `main-ChFOl7EN.js` / `main-CyvXeQnS.css`. No successful proxy response, query-busted page or cache-bypassing context was used as final acceptance.
+- Live acceptance passed: serial/model/3,200 PSI; seven completed procurement milestones including November 9 ACME receipt; two pending operational milestones; nine pending commissioning checks; two pending video cards with no player; four gallery groups; real-image decoding, native dialog and Escape; manufacturer reference; preliminary measurement disclaimer; ten missing media slots; no horizontal overflow or JavaScript page errors; exactly one correct showroom passport link sharing the approved photo.
+- Local validation passed: **211 unit tests**, TypeScript, production build, **2 responsive browser tests**, public index/media/passport artifact checks and `git diff --check`. HQ pending planner syntax and ten PHP contract checks also passed.
+- [Digital HQ PR #312](https://github.com/smashpro-digital/digital-hq/pull/312) contains the prepared reconciliation plan and V3.1 follow-through commit `bef0600`; no live database inspection/apply or gateway installation occurred. [Issue #311 release receipt](https://github.com/smashpro-digital/digital-hq/issues/311#issuecomment-6802905522) retains the audit/status boundary.
+
+Remaining blockers: WordPress media authentication/records, preferred hero comparison and curated distinct-photo integration; canonical live database validation and audited apply; all commissioning/safety/first-field-test requirements. The public frontend is deployed, not an operationally released grapple.
 
 ## Validation
 
