@@ -16,10 +16,15 @@ export const ardhiLifecycleEvents: readonly FleetLifecycleEvent[] = [
   {
     id:'DEF-003',assetId:'SP-ARDHI-26',type:'repair',status:'repair_pending',
     title:'Thrown rubber track',occurredOn:'2026-11-08',reportedOn:null,
-    summary:'Owner photographed track displaced from undercarriage. Cause and repair unverified. Awaiting OEM tension and reinstallation procedure.',
+    summary:'Owner reports the rubber track was reinstalled after supplier guidance and field recovery. Final factory tension verification and remaining undercarriage checks are pending; service release remains blocked.',
     componentIds:['rubber-track','undercarriage'],relatedEventIds:[],
-    evidence:[{kind:'photo',label:'Owner track incident photo, WP media 967',reviewed:true},{kind:'photo',label:'Owner track incident photo, WP media 966',reviewed:true}],
-    article:{state:'draft',title:'Field Repair 003 | Thrown track: real-world recovery'},
+    evidence:[
+      {kind:'photo',label:'Owner track incident photo, WP media 967',reviewed:true},
+      {kind:'photo',label:'Owner track incident photo, WP media 966',reviewed:true},
+      {kind:'supplier',label:'Hailey Li track-tensioner demonstration, WP media 968',reviewed:true},
+      {kind:'video',label:'ARDHI thrown-track recovery documentary, YouTube nCxpwNWVlsw',reviewed:true}
+    ],
+    article:{state:'published',url:'https://smashpro.app/ardhi-thrown-track-field-repair-003/',title:'Field Repair 003 | Thrown Track: Real-World Recovery'},
     approval:'pending',serviceRelease:'blocked'
   },
   {

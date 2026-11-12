@@ -9,7 +9,8 @@ test('ARDHI lifecycle IDs are unique and open track repair blocks service releas
   const track = publicLifecycleForAsset('SP-ARDHI-26').find(e=>e.id==='DEF-003');
   assert.equal(track.status,'repair_pending');
   assert.equal(track.serviceRelease,'blocked');
-  assert.equal(track.article,undefined,'Draft WordPress content must not link publicly');
+  assert.equal(track.article?.state,'published','Published WordPress content should link publicly');
+  assert.equal(track.article?.url,'https://smashpro.app/ardhi-thrown-track-field-repair-003/');
 });
 test('verified throttle travel does not imply whole-machine service approval', () => {
   const throttle=publicLifecycleForAsset('SP-ARDHI-26').find(e=>e.id==='DEF-001');

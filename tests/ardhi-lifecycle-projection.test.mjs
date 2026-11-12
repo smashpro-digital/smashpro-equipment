@@ -7,6 +7,8 @@ const attachments = readFileSync(new URL('../src/data/attachments.ts', import.me
 const postDelivery = JSON.parse(readFileSync(new URL('../src/data/ardhiPostDelivery.json', import.meta.url), 'utf8'));
 const flagship = readFileSync(new URL('../src/data/ardhiFlagship.ts', import.meta.url), 'utf8');
 const ui = readFileSync(new URL('../src/components/ArdhiProduction.tsx', import.meta.url), 'utf8');
+const compiledLifecycle = ts.transpileModule(data, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const { publicLifecycleForAsset } = await import('data:text/javascript;base64,' + Buffer.from(compiledLifecycle).toString('base64'));
 const compiledFlagship = ts.transpileModule(flagship, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { commissioningChecks } = await import('data:text/javascript;base64,' + Buffer.from(compiledFlagship).toString('base64'));
 test('ARDHI maintenance renders lifecycle projection, not only legacy snapshots', () => {
@@ -19,6 +21,16 @@ test('ARDHI maintenance renders lifecycle projection, not only legacy snapshots'
 test('track remains blocked and throttle is verified', () => {
   assert.match(data, /id:'DEF-003'[\s\S]*?status:'repair_pending'[\s\S]*?serviceRelease:'blocked'/);
   assert.match(data, /id:'DEF-001'[\s\S]*?status:'verified'/);
+});
+test('published Field Repair 003 is linked while the reported repair remains blocked', () => {
+  const event = publicLifecycleForAsset('SP-ARDHI-26').find(item => item.id === 'DEF-003');
+  assert.equal(event.article?.state, 'published');
+  assert.equal(event.article?.url, 'https://smashpro.app/ardhi-thrown-track-field-repair-003/');
+  assert.equal(event.status, 'repair_pending');
+  assert.equal(event.serviceRelease, 'blocked');
+  assert.match(event.summary, /Owner reports the rubber track was reinstalled/);
+  assert.ok(event.evidence.some(item => item.label.includes('WP media 968')));
+  assert.ok(event.evidence.some(item => item.label.includes('YouTube nCxpwNWVlsw')));
 });
 test('pin repair has an unrecorded occurrence date and a separate report date', () => {
   assert.match(data, /id:'DEF-002'[\s\S]*?occurredOn:null,reportedOn:'2026-11-08'/);
