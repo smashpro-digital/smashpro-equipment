@@ -11,7 +11,8 @@ for (const width of [320, 390, 768, 1440]) test(`flagship narrative, evidence an
   await page.setViewportSize({ width, height: 1000 });
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await open(page);
-  await expect(page.locator('.passport-rail a')).toHaveText(['Overview', 'Journey', 'Inspections', 'Maintenance', 'Media', 'Attachments', 'History']);
+  await expect(page.locator('.passport-rail a')).toHaveText(['Overview', 'Journey', 'Inspections', 'Maintenance', 'Field Repair 003', 'Media', 'Attachments', 'History']);
+  await expect(page.locator('.passport-rail__repair-link')).toHaveAttribute('href', 'https://smashpro.app/ardhi-thrown-track-field-repair-003/');
   const order = await page.evaluate(() => ['.ardhi-v2-hero', '#mission-dashboard', '.passport-rail', '#passport', '.flagship-roadmap', '#journey', '#history', '#service', '#documents'].map(selector => document.querySelector(selector).getBoundingClientRect().top));
   expect(order).toEqual([...order].sort((a, b) => a - b));
   await expect(page.locator('#mission-dashboard')).toContainText('Commissioning & field evaluation');

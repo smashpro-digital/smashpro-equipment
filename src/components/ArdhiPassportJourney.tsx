@@ -1,5 +1,6 @@
 import postDelivery from '../data/ardhiPostDelivery.json';
 import { firstStartObservation, commissioningObservations } from '../data/ardhiFlagship';
+import { publicLifecycleForAsset } from '../data/fleetLifecycle';
 import { ArdhiInspections, ArdhiMaintenancePlan } from './ArdhiProduction';
 import { Fragment, lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
@@ -361,6 +362,7 @@ const payments = [
 ];
 export function ArdhiPassportJourney({ item }: { item: Equipment }) {
   const shipment = useShipment();
+  const trackArticle = publicLifecycleForAsset("SP-ARDHI-26").find(event => event.id === "DEF-003")?.article;
   const [historyOpen, setHistoryOpen] = useState(false);
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [expo, setExpo] = useState(() => isExpoSearch(window.location.search));
@@ -537,7 +539,9 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
       </PassportHero>
       <ArdhiMissionDashboard />
       <nav className="passport-rail" aria-label="Equipment passport chapters"><div className="shell">
-        <a href="#passport">Overview</a><a href="#journey">Journey</a><a href="#inspections">Inspections</a><a href="#maintenance">Maintenance</a><a href="#delivery-media">Media</a><a href="#capabilities">Attachments</a><a href="#history">History</a>
+        <a href="#passport">Overview</a><a href="#journey">Journey</a><a href="#inspections">Inspections</a><a href="#maintenance">Maintenance</a>
+        {trackArticle?.state === "published" && trackArticle.url && <a className="passport-rail__repair-link" href={trackArticle.url} aria-label="Read the published Field Repair 003 article">Field Repair 003</a>}
+        <a href="#delivery-media">Media</a><a href="#capabilities">Attachments</a><a href="#history">History</a>
       </div></nav>
       <section className="section shell ardhi-passport-ledger passport-reveal" id="passport" data-passport-reveal data-view="Passport|Identity|SP-ARDHI-26" aria-labelledby="passport-ledger-title">
         <div className="section-heading">

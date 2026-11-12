@@ -7,6 +7,7 @@ const attachments = readFileSync(new URL('../src/data/attachments.ts', import.me
 const postDelivery = JSON.parse(readFileSync(new URL('../src/data/ardhiPostDelivery.json', import.meta.url), 'utf8'));
 const flagship = readFileSync(new URL('../src/data/ardhiFlagship.ts', import.meta.url), 'utf8');
 const ui = readFileSync(new URL('../src/components/ArdhiProduction.tsx', import.meta.url), 'utf8');
+const passportNav = readFileSync(new URL('../src/components/ArdhiPassportJourney.tsx', import.meta.url), 'utf8');
 const compiledLifecycle = ts.transpileModule(data, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { publicLifecycleForAsset } = await import('data:text/javascript;base64,' + Buffer.from(compiledLifecycle).toString('base64'));
 const compiledFlagship = ts.transpileModule(flagship, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
@@ -35,7 +36,9 @@ test('published Field Repair 003 is linked while the reported repair remains blo
 test('published Field Repair 003 is promoted in the maintenance overview', () => {
   assert.match(ui, /trackArticle\?\.state === 'published'/);
   assert.match(ui, /className="ardhi-field-journal-callout"/);
-  assert.match(ui, /Read the repair story/);
+  assert.match(ui, /Read Field Repair 003/);
+  assert.match(passportNav, /trackArticle\?\.state === "published"/);
+  assert.match(passportNav, /className="passport-rail__repair-link"/);
 });
 test('pin repair has an unrecorded occurrence date and a separate report date', () => {
   assert.match(data, /id:'DEF-002'[\s\S]*?occurredOn:null,reportedOn:'2026-11-08'/);

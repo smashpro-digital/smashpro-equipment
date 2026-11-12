@@ -12,6 +12,8 @@
 .ardhi-flagship .passport-rail > div { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 0; }
 .ardhi-flagship .passport-rail a { display: grid; place-items: center; min-height: 54px; padding: .7rem .2rem; color: #f5f1e8; font-size: .82rem; letter-spacing: .02em; text-transform: none; text-decoration: none; }
 .ardhi-flagship .passport-rail a:hover { background: #1e352b; color: #e4c786; }
+.ardhi-documentary.ardhi-flagship .passport-rail a.passport-rail__repair-link { background: #90ce45; color: #091106; font-size: .75rem; font-weight: 800; }
+.ardhi-documentary.ardhi-flagship .passport-rail a.passport-rail__repair-link:hover { background: #a4e95e; color: #091106; }
 .ardhi-flagship > :is(.mini-passport,.now-viewing) { display: none; }
 .ardhi-flagship .flagship-dashboard { margin-block: 0; padding-block: 2.5rem; }
 .flagship-dashboard header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
