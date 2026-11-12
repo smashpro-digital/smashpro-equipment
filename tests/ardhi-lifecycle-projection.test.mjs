@@ -32,6 +32,11 @@ test('published Field Repair 003 is linked while the reported repair remains blo
   assert.ok(event.evidence.some(item => item.label.includes('WP media 968')));
   assert.ok(event.evidence.some(item => item.label.includes('YouTube nCxpwNWVlsw')));
 });
+test('published Field Repair 003 is promoted in the maintenance overview', () => {
+  assert.match(ui, /trackArticle\?\.state === 'published'/);
+  assert.match(ui, /className="ardhi-field-journal-callout"/);
+  assert.match(ui, /Read the repair story/);
+});
 test('pin repair has an unrecorded occurrence date and a separate report date', () => {
   assert.match(data, /id:'DEF-002'[\s\S]*?occurredOn:null,reportedOn:'2026-11-08'/);
   assert.match(data, /repair date was not separately recorded/);

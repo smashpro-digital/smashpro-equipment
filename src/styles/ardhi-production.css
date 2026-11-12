@@ -9,6 +9,10 @@
 .ardhi-production-actions a {padding:12px 18px;border:1px solid #7db839;color:#e9f2e0;background:#102014;font-weight:700;text-decoration:none}
 .ardhi-production-actions a:first-child {background:#90ce45;color:#091106}
 .ardhi-production a:focus-visible,.ardhi-production-actions a:focus-visible {outline:3px solid #d5b76e;outline-offset:4px}
+.ardhi-field-journal-callout {display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:20px 0;padding:16px 20px;border:1px solid #7db839;background:#102014;color:#e9f2e0}
+.ardhi-production .ardhi-field-journal-callout a {display:inline-flex;align-items:center;padding:12px 18px;background:#90ce45;color:#091106;font-weight:700;text-decoration:none}
+.ardhi-production .ardhi-field-journal-callout a:hover {background:#a4e95e}
+.ardhi-production .ardhi-field-journal-callout a:focus-visible {outline:3px solid #d5b76e;outline-offset:4px}
 .ardhi-production {scroll-margin-top:120px}.ardhi-production header {max-width:850px}.ardhi-observation {padding:24px;border-left:3px solid #d5b76e;background:#111a12;margin:28px 0}
 .ardhi-production-checks {padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ardhi-production-checks li {border:1px solid #34432d;background:#0e160f;padding:18px;scroll-margin-top:120px}
 .ardhi-production-checks summary {cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}.production-status {font-size:.8rem;color:#cbd5c7;flex-shrink:0}.production-status.is-needs_attention,.production-status.is-blocked {color:#dfc083}.production-status.is-passed {color:#9cdb65}
