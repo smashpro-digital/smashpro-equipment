@@ -13,6 +13,8 @@ for (const width of [320, 390, 768, 1440]) test(`flagship narrative, evidence an
   await open(page);
   await expect(page.locator('.passport-rail a')).toHaveText(['Overview', 'Journey', 'Inspections', 'Maintenance', 'Field Repair 003', 'Media', 'Attachments', 'History']);
   await expect(page.locator('.passport-rail__repair-link')).toHaveAttribute('href', 'https://smashpro.app/ardhi-thrown-track-field-repair-003/');
+  await expect(page.locator('.ardhi-baseline-thumbnail__placeholder')).toHaveCount(8);
+  await expect(page.locator('.ardhi-baseline-thumbnail').first()).toContainText('Add later');
   const order = await page.evaluate(() => ['.ardhi-v2-hero', '#mission-dashboard', '.passport-rail', '#passport', '.flagship-roadmap', '#journey', '#history', '#service', '#documents'].map(selector => document.querySelector(selector).getBoundingClientRect().top));
   expect(order).toEqual([...order].sort((a, b) => a - b));
   await expect(page.locator('#mission-dashboard')).toContainText('Commissioning & field evaluation');

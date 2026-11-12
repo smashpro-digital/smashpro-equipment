@@ -11,7 +11,7 @@ const passportNav = readFileSync(new URL('../src/components/ArdhiPassportJourney
 const compiledLifecycle = ts.transpileModule(data, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { publicLifecycleForAsset } = await import('data:text/javascript;base64,' + Buffer.from(compiledLifecycle).toString('base64'));
 const compiledFlagship = ts.transpileModule(flagship, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { commissioningChecks } = await import('data:text/javascript;base64,' + Buffer.from(compiledFlagship).toString('base64'));
+const { commissioningChecks, maintenanceBaselines } = await import('data:text/javascript;base64,' + Buffer.from(compiledFlagship).toString('base64'));
 test('ARDHI maintenance renders lifecycle projection, not only legacy snapshots', () => {
   assert.match(ui, /mergePublicLifecycleEvents\('SP-ARDHI-26'/);
   assert.match(ui, /Active service items/);
@@ -39,6 +39,13 @@ test('published Field Repair 003 is promoted in the maintenance overview', () =>
   assert.match(ui, /Read Field Repair 003/);
   assert.match(passportNav, /trackArticle\?\.state === "published"/);
   assert.match(passportNav, /className="passport-rail__repair-link"/);
+});
+test('maintenance baselines reserve an accessible thumbnail slot for future photos', () => {
+  assert.equal(maintenanceBaselines.length, 8);
+  assert.ok(maintenanceBaselines.every(item => item.thumbnailHint && !item.thumbnail));
+  assert.match(ui, /className="ardhi-baseline-thumbnail"/);
+  assert.match(ui, /role="img" aria-label=\{`Photo placeholder: \$\{baseline\.thumbnailHint\}`\}/);
+  assert.match(ui, /baseline\.thumbnail\s*\?/);
 });
 test('pin repair has an unrecorded occurrence date and a separate report date', () => {
   assert.match(data, /id:'DEF-002'[\s\S]*?occurredOn:null,reportedOn:'2026-11-08'/);
