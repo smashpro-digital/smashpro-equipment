@@ -36,11 +36,12 @@ test("one received serial-numbered grapple with distinct weight and lifecycle re
 
 test("passport renders verified identity, paid delivery, nine pending checks and planned test", () => {
   const html = render(AttachmentPassportPage, { slug: grapple.slug });
-  assert.match(html, /Received · Identification Verified · Commissioning Pending/);
+  assert.match(html, /Delivered · Fitment Review Required/);
   for (const value of ["2459685", "SMPRMINIRG", "2026-10-22", "16486-0001-001", "3,200 PSI", "ACME Logistics", "0178760094", "Front Door Service", "Hopkins, South Carolina", "$0 balance"]) {
     assert.ok(html.includes(value), `Missing ${value}`);
   }
   assert.equal(grapple.receiving.commissioningChecklist.length, 9);
+  assert.match(html, /both pins are fully engaged, inspected, and corrective action is verified/);
   assert.match(html, /throttle.control issue/);
   assert.match(html, /Field Test 001 · Planned/);
   assert.match(html, /No test performed and no results recorded/);
@@ -48,24 +49,29 @@ test("passport renders verified identity, paid delivery, nine pending checks and
   assert.match(html, /Not operational or customer-ready/);
 });
 
-test("authentic receiving hero and ten missing photographs, manufacturer image secondary only", () => {
-  assert.equal(grapple.image, "https://smashpro.app/wp-content/uploads/2026/11/20261111_092910.jpg");
-  assert.equal(grapple.fieldEvidence.length, 11);
-  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.id)).size, 11);
-  assert.equal(grapple.fieldEvidence[0].image, grapple.image);
-  assert.ok(grapple.fieldEvidence.slice(1).every(entry => entry.status === "pending" && !entry.image));
+test("approved mounted hero preserves delivery and secondary mounting evidence", () => {
+  assert.equal(grapple.image, "https://smashpro.app/wp-content/uploads/2026/11/20261113_152010.jpg");
+  assert.equal(grapple.imageMetadata.wordpressMediaId, 1067);
+  assert.equal(grapple.imageMetadata.width / grapple.imageMetadata.height, 0.75);
+  assert.equal(grapple.fieldEvidence.length, 12);
+  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.id)).size, 12);
+  assert.equal(grapple.fieldEvidence[0].image, "https://smashpro.app/wp-content/uploads/2026/11/20261111_092910.jpg");
+  const secondary = grapple.fieldEvidence.find(entry => entry.wordpressMediaId === 1063);
+  assert.equal(secondary.evidenceDate, "2026-11-13");
+  assert.match(secondary.image, /20261113_152047.jpg$/);
+  assert.ok(grapple.fieldEvidence.filter(entry => entry.status === "pending").every(entry => !entry.image));
   const html = render(AttachmentReceiving, { item: grapple });
   assert.equal((html.match(/Public photograph missing/g) ?? []).length, 10);
   assert.match(html, /<details class="attachment-manufacturer-reference">/);
   assert.match(html, /not the delivered serial-numbered SmashPro attachment/);
-  assert.equal((html.match(/<img /g) ?? []).length, 2);
+  assert.equal((html.match(/<img /g) ?? []).length, 3);
 });
 
 test("approved receiving image uses existing gallery; unapproved or missing-alt media stays a slot", () => {
   const entry = grapple.fieldEvidence[0];
   const approved = { ...entry, status: "verified", image: grapple.receiving.manufacturerReference.src, imageAlt: "Test fixture for gallery wiring" };
   const html = render(AttachmentReceiving, { item: { ...grapple, fieldEvidence: [approved] } });
-  assert.match(html, /Enlarge Actual delivered grapple hero/);
+  assert.match(html, /Enlarge Delivery and receiving photograph/);
   assert.match(html, /Test fixture for gallery wiring/);
   assert.doesNotMatch(html, /Public photograph missing/);
   for (const invalid of [{ ...approved, status: "pending" }, { ...approved, imageAlt: undefined }]) {
@@ -78,7 +84,8 @@ test("showroom links the existing grapple once in both featured and category pos
     const html = render(AttachmentShowroom, { attachments: items.map((item, index) => ({ ...item, featured: index === 0 })) });
     assert.equal((html.match(/href="\/equipment\/attachments\/sp-att-grp-001\/"/g) ?? []).length, 1);
     assert.match(html, /LOFLIN 42&quot; MINI ROOT GRAPPLE/);
-    assert.match(html, /Received · Commissioning Pending/);
+    assert.ok(html.includes(grapple.image));
+    assert.match(html, /Delivered · Fitment Review Required/);
     assert.doesNotMatch(html, /In transit · Estes freight/);
   }
 });

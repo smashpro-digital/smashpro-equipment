@@ -43,20 +43,20 @@ export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
     </div></section>
 
     <section className="section shell attachment-receiving-gallery" id="attachment-receiving-gallery">
-      <div className="section-heading"><div><p className="eyebrow">Receiving gallery</p><h2>The actual attachment, not a catalog substitute.</h2></div><p>Approved owner photographs document physical receipt only. Other requested public photographs remain unavailable in the labeled slots below. Publish only reviewed photographs with private labels and addresses excluded.</p></div>
+      <div className="section-heading"><div><p className="eyebrow">Receiving gallery</p><h2>The actual attachment, not a catalog substitute.</h2></div><p>Approved owner photographs distinguish delivery evidence, equipment identification, and initial mounting evaluation. Mounting photographs do not verify safe fitment or authorize operation. Other requested public photographs remain unavailable in the labeled slots below. Publish only reviewed photographs with private labels and addresses excluded.</p></div>
       {categories.map(category => {
         const entries = item.fieldEvidence?.filter(entry => entry.category === category) ?? [];
         const approved = entries.flatMap(entry => entry.status === "verified" && entry.image && entry.imageAlt ? [{
           id: entry.id, src: entry.image, originalSrc: entry.image, alt: entry.imageAlt,
           caption: entry.description, title: entry.title, equipmentId: item.passportId,
           width: entry.width, height: entry.height,
-          source: "Owner-provided, approved public receiving photograph",
-          evidenceDate: receiving.freight.deliveredAt, lifecycle: "Received; commissioning pending",
+          source: "Owner-provided, approved public photograph",
+          evidenceDate: entry.evidenceDate ?? receiving.freight.deliveredAt, lifecycle: receiving.statusLabel,
           classification: category,
         }] : []);
         return <div className="attachment-receiving-gallery__group" key={category}>
           <h3>{category}</h3>
-          {category === "Mounting and Fitment" && <p>Measurements are preliminary physical observations, not certified mounting dimensions. Physical mounting and hydraulic operation remain unverified.</p>}
+          {category === "Mounting and Fitment" && <p>Measurements are preliminary physical observations, not certified mounting dimensions. Initial mounting is photographed; safe locking-pin engagement and hydraulic operation remain unverified.</p>}
           {approved.length > 0 && <PassportFactoryGallery media={approved} />}
           <div className="attachment-checklist">{entries.filter(entry => !approved.some(image => image.id === entry.id)).map(entry => <article className="attachment-check attachment-check--pending" key={entry.id}>
             <div className="attachment-check__top"><span>Public photograph missing</span></div>
@@ -71,7 +71,7 @@ export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
     </section>
 
     <section className="attachment-detail" id="attachment-commissioning"><div className="shell">
-      <div className="section-heading"><div><p className="eyebrow">Commissioning checklist</p><h2>Received does not mean ready.</h2></div><p><a href="/equipment/sp-ardhi-26.html">{receiving.hostFleetId}</a> is unavailable due to its throttle-control issue. Every check below remains pending. No customer-facing service activation before commissioning and independent safety review are complete.</p></div>
+      <div className="section-heading"><div><p className="eyebrow">Commissioning checklist</p><h2>Received does not mean ready.</h2></div><p><a href="/equipment/sp-ardhi-26.html">{receiving.hostFleetId}</a> is unavailable due to its throttle-control issue. Quick-attach locking-pin engagement remains unresolved. Commissioning is blocked until both pins are fully engaged, inspected, and corrective action is verified. Every check below remains pending. No customer-facing service activation before commissioning and independent safety review are complete.</p></div>
       <ul className="attachment-commissioning-list">{receiving.commissioningChecklist.map(check => <li key={check}><span className="attachment-status attachment-status--commissioning">Pending</span><span>{check}</span></li>)}</ul>
     </div></section>
 

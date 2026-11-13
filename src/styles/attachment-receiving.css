@@ -29,3 +29,9 @@
 .attachment-receiving-videos .equipment-watch__player iframe,.attachment-receiving-videos .equipment-watch__player button{width:100%;height:100%;border:1px solid var(--line);background:var(--surface);color:var(--green)}
 .attachment-receiving-videos .equipment-watch__player button strong,.attachment-receiving-videos .equipment-watch__player button span{display:block;margin:.75rem}
 @media(max-width:768px){.attachment-receiving-timeline{grid-template-columns:1fr}.attachment-receiving-gallery .attachment-checklist{grid-template-columns:1fr}.attachment-commissioning-list li{flex-direction:column;gap:.5rem}}
+
+.attachment-passport-row__thumbnail{width:96px;height:96px;object-fit:contain;flex-shrink:0;background:#0b100c}
+.attachment-passport-hero__visual.attachment-visual--receiving .attachment-feature__fleet{position:static;max-width:100%;line-height:1.5}
+.attachment-visual--loflin.attachment-visual--receiving img{position:static;height:auto;max-height:740px;z-index:auto}
+.attachment-visual--loflin.attachment-visual--receiving::after{display:none}
+.attachment-passport-hero__visual.attachment-visual--receiving{display:flex;flex-direction:column;min-height:0}
