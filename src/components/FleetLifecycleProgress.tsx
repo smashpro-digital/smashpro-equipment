@@ -59,7 +59,7 @@ export function FleetLifecycleProgress({ stages, metrics, currentStage, nextStag
       if (!entry.isIntersecting) return;
       setStarted(true);
       observer.disconnect();
-    }, { threshold: 0.3 });
+    }, { threshold: 0.01 });
     observer.observe(section);
     return () => observer.disconnect();
   }, []);

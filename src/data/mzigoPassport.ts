@@ -17,6 +17,13 @@ export const mzigoFinalPayment = {
   summary: "Final payment completed on October 1, 2026. The remaining machine balance is paid in full.",
 };
 
+export const mzigoPublicLocation = {
+  label: "Qingdao · Export preparation",
+  verification: "Supplier-reported warehouse staging; not live tracking",
+  observedAt: "2026-10-07",
+  evidenceHref: "#history-mzigo-qingdao-staging",
+};
+
 export const mzigoLifecycle: FleetLifecycleStage[] = [
   { id: "build-approved", label: "Build Approved", status: "complete", progress: 100, href: "#history-mzigo-build-approved" },
   { id: "final-payment", label: "Final Payment", status: mzigoFinalPayment.status, progress: 100, href: "#history-mzigo-final-payment" },

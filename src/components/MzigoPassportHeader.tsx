@@ -5,8 +5,9 @@ export function MzigoPassportHeader({ item }: { item: Equipment }) {
   return <>
     <PassportHero titleId="mzigo-passport-title" image={item.heroImage} srcSet={item.heroMedia?.srcSet} sizes="100vw" width={item.heroMedia?.width} height={item.heroMedia?.height} alt={item.heroMedia?.alt ?? `${item.fleetId} equipment hero`} className="mzigo-passport-hero">
       <p className="eyebrow">{item.fleetId}</p>
-      <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br />Carrier <span>{item.identity.factoryModel}</span></h1>
+      <h1 id="mzigo-passport-title">SmashPro<br />Electric Material<br />Carrier <span className="mzigo-asset-number">Fleet Asset #002</span></h1>
       <p>{item.statusLabel}</p>
+      <p className="mzigo-hero-model">Factory model {item.identity.factoryModel} · 0 hours · pre-commissioning</p>
       <small className="mzigo-artwork-label">Brand poster · verified factory evidence remains available in Media History</small>
       <nav className="ardhi-v2-hero__actions" aria-label="MZIGO equipment passport chapters">
         <a href="#passport"><span aria-hidden="true">📘</span> Passport</a>

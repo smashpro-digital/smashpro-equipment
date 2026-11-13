@@ -465,7 +465,7 @@ test("SP-MZIGO-26E factory update keeps passport identity, dated media, and manu
   const passport = readFileSync("src/components/MzigoPassport.tsx", "utf8");
   const archive = readFileSync("src/components/MzigoMediaArchive.tsx", "utf8");
   assert.match(passport, /<MzigoBuildStory/);
-  assert.match(passport, /<FleetLifecycleProgress/);
+  assert.match(passport, /<FleetPassportJourney/);
   assert.match(archive, /<video/);
   assert.match(archive, /poster=/);
   for (const filename of [

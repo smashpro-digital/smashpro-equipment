@@ -91,8 +91,15 @@
 .factory-update[data-equipment="SP-MZIGO-26E"] .factory-update__gallery { grid-template-columns:1fr; margin-bottom:1rem; }
 .factory-update[data-equipment="SP-MZIGO-26E"] .factory-update__gallery img { width:100%; height:auto; max-height:420px; object-fit:contain; background:#080b09; }
 /* Inherit ARDHI's headline scale, gold accent, overlay, and outlined hero links. */
-.mzigo-passport-hero .ardhi-v2-hero__copy { padding-top:3rem; }
-.mzigo-passport-hero .ardhi-v2-hero__copy h1 { text-transform:uppercase; }
+.mzigo-passport-hero { min-height:min(900px,calc(100svh - 80px)); }
+.mzigo-passport-hero>img { object-position:67% center; animation:none; }
+.mzigo-passport-hero .ardhi-v2-hero__shade { background:linear-gradient(90deg,#050806ed 0%,#050806a6 36%,#05080615 75%),linear-gradient(0deg,#050806 0%,transparent 50%); }
+.mzigo-passport-hero .ardhi-v2-hero__copy { padding-block:4rem; }
+.mzigo-passport-hero .ardhi-v2-hero__copy h1 { max-width:850px; font-size:clamp(3rem,5.4vw,6.5rem); text-transform:uppercase; }
+.mzigo-passport-hero .mzigo-asset-number { display:block; margin-top:.3em; font-size:.8em; color:#c6a96b; }
+.mzigo-passport-hero .ardhi-v2-hero__copy .mzigo-hero-model { font-size:.75rem; color:var(--muted); }
+.mzigo-passport-hero .mzigo-artwork-label { display:block; max-width:36rem; color:var(--muted); font-size:.65rem; }
+.mzigo-passport-hero .ardhi-v2-hero__actions { max-width:680px; }
 .mzigo-passport-hero .ardhi-v2-hero__actions a { gap:.35rem; }
 .mzigo-passport-hero .ardhi-v2-hero__actions a:hover,.mzigo-passport-hero .ardhi-v2-hero__actions a:focus-visible { background:#20301f; border-color:#c6a96b; }
 .mzigo-passport-header .section-heading { margin-bottom:1rem; }
@@ -102,7 +109,7 @@
 .mzigo-service-record .service-record-status { max-width:680px; }
 @media(max-width:720px) {
  .mzigo-passport-hero { min-height:0; }
- .mzigo-passport-hero>img { height:310px; object-position:60% 35%; animation:none; }
+ .mzigo-passport-hero>img { height:310px; object-position:69% 35%; }
  .mzigo-passport-hero .ardhi-v2-hero__shade { background:linear-gradient(0deg,#050806 0%,#050806 47%,#05080615 88%); }
  .mzigo-passport-hero .ardhi-v2-hero__copy { padding-top:270px; padding-bottom:1.5rem; }
  .mzigo-passport-hero .ardhi-v2-hero__copy h1 { font-size:clamp(2.25rem,10vw,3rem); letter-spacing:-.025em; }

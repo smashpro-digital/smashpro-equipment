@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -187,6 +187,22 @@ test('Mzigo restores the polished poster hero while keeping factory evidence in 
   assert.match(html, /SmashPro<br\/>Electric Material<br\/>/);
   for (const anchor of ['passport', 'journey', 'history', 'service']) assert.ok(html.includes(`href="#${anchor}"`));
   assert.doesNotMatch(html, /Asset #001/);
+  assert.match(html, /Fleet Asset #002/);
+});
+
+test('shared journey uses asset-specific evidence and computes lifecycle position', () => {
+  const { FleetPassportJourney, PassportReadingStatus } = load('src/components/FleetPassportJourney.tsx');
+  const { mzigoLifecycle, mzigoPublicLocation, mzigoStatusDetail } = load('src/data/mzigoPassport.ts');
+  const html = renderToStaticMarkup(React.createElement(FleetPassportJourney, { assetId:mzigo.fleetId, stages:mzigoLifecycle, location:mzigoPublicLocation, description:mzigoStatusDetail, metrics:[] }));
+  assert.match(html, /Supplier-reported warehouse staging; not live tracking/);
+  assert.match(html, /2026-10-07/);
+  assert.match(html, /5 \/ 17/);
+  assert.match(html, /href="#history-mzigo-qingdao-staging"/);
+  assert.doesNotMatch(html, /EVER MAX|SP-ARDHI-26|latitude|longitude/);
+  const advanced = mzigoLifecycle.map((stage,index) => ({...stage,status:index<5?'complete':index===5?'current':'pending'}));
+  const status = renderToStaticMarkup(React.createElement(PassportReadingStatus, {assetId:mzigo.fleetId,stages:advanced}));
+  assert.match(status, /6 \/ 17/);
+  assert.match(status, /Freight Booked/);
 });
 
 test('shared hero preserves the ARDHI wrapper structure', () => {
@@ -233,7 +249,7 @@ test('August evidence and existing equipment identities remain available', () =>
 
 test('page uses shared lifecycle and retains one build story without DOM replacement', () => {
   const page = readFileSync('src/components/MzigoPassport.tsx','utf8');
-  assert.equal((page.match(/<FleetLifecycleProgress /g) || []).length, 1);
+  assert.equal((page.match(/<FleetPassportJourney /g) || []).length, 1);
   assert.equal((page.match(/<MzigoBuildStory \/>/g) || []).length, 1);
   assert.doesNotMatch(readFileSync('src/pages/MzigoPassportPage.tsx','utf8'), /innerHTML|querySelector|useEffect|createElement/);
 });
