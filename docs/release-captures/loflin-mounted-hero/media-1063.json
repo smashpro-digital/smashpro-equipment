@@ -1,0 +1,121 @@
+{
+  "id": 1063,
+  "caption": {
+    "raw": "",
+    "rendered": ""
+  },
+  "alt_text": "",
+  "mime_type": "image/jpeg",
+  "media_details": {
+    "width": 2000,
+    "height": 1500,
+    "file": "2026/11/20261113_152047.jpg",
+    "filesize": 636988,
+    "sizes": {
+      "medium": {
+        "file": "20261113_152047-300x225.jpg",
+        "width": 300,
+        "height": 225,
+        "filesize": 25493,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-300x225.jpg"
+      },
+      "large": {
+        "file": "20261113_152047-1024x768.jpg",
+        "width": 1024,
+        "height": 768,
+        "filesize": 210134,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-1024x768.jpg"
+      },
+      "thumbnail": {
+        "file": "20261113_152047-150x150.jpg",
+        "width": 150,
+        "height": 150,
+        "filesize": 9445,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-150x150.jpg"
+      },
+      "medium_large": {
+        "file": "20261113_152047-768x576.jpg",
+        "width": 768,
+        "height": 576,
+        "filesize": 130715,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-768x576.jpg"
+      },
+      "1536x1536": {
+        "file": "20261113_152047-1536x1152.jpg",
+        "width": 1536,
+        "height": 1152,
+        "filesize": 399155,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-1536x1152.jpg"
+      },
+      "smashpro-card": {
+        "file": "20261113_152047-720x480.jpg",
+        "width": 720,
+        "height": 480,
+        "filesize": 102500,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-720x480.jpg"
+      },
+      "smashpro-hero": {
+        "file": "20261113_152047-1600x900.jpg",
+        "width": 1600,
+        "height": 900,
+        "filesize": 302566,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-1600x900.jpg"
+      },
+      "woocommerce_thumbnail": {
+        "file": "20261113_152047-300x300.jpg",
+        "width": 300,
+        "height": 300,
+        "filesize": 32734,
+        "uncropped": false,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-300x300.jpg"
+      },
+      "woocommerce_single": {
+        "file": "20261113_152047-600x450.jpg",
+        "width": 600,
+        "height": 450,
+        "filesize": 87003,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047.jpg"
+      },
+      "woocommerce_gallery_thumbnail": {
+        "file": "20261113_152047-100x100.jpg",
+        "width": 100,
+        "height": 100,
+        "filesize": 4800,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047-100x100.jpg"
+      },
+      "full": {
+        "file": "20261113_152047.jpg",
+        "width": 2000,
+        "height": 1500,
+        "mime_type": "image/jpeg",
+        "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047.jpg"
+      }
+    },
+    "image_meta": {
+      "aperture": "1.7",
+      "credit": "",
+      "camera": "Galaxy S25 Ultra",
+      "caption": "",
+      "created_timestamp": "1794583247",
+      "copyright": "",
+      "focal_length": "6.3",
+      "iso": "250",
+      "shutter_speed": "0.0055670989901682",
+      "title": "",
+      "orientation": "1",
+      "keywords": [],
+      "alt": ""
+    }
+  },
+  "source_url": "https://smashpro.app/wp-content/uploads/2026/11/20261113_152047.jpg"
+}

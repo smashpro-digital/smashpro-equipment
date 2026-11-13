@@ -58,7 +58,7 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
           <article className="attachment-feature">
             <div className={`attachment-feature__visual${featured.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}${featured.receiving && featured.image ? " attachment-visual--receiving" : ""}`}>
               {featured.image ? (
-                <img src={featured.image} alt={featured.imageAlt ?? featured.name} loading="lazy" decoding="async" />
+                <img src={featured.image} srcSet={featured.imageMetadata?.srcSet} sizes="(max-width: 768px) 90vw, 45vw" width={featured.imageMetadata?.width} height={featured.imageMetadata?.height} alt={featured.imageAlt ?? featured.name} loading="lazy" decoding="async" />
               ) : (
                 featured.receiving ? <div className="attachment-photo-placeholder"><strong>Actual product photograph pending</strong><p>Approved owner receiving image unavailable.</p></div> : <div className="attachment-feature__monogram"><span>{featured.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>{featured.width ? "IN" : "ATT"}</small></div>
               )}
@@ -97,6 +97,7 @@ export function AttachmentShowroom({ attachments }: { attachments: AttachmentPas
               <div className="attachment-passport-list">
                 {items.map((item) => (
                   <a className="attachment-passport-row" href={item.publicPath} key={item.passportId}>
+                    {item.imageMetadata && <img className="attachment-passport-row__thumbnail" src={item.image} srcSet={item.imageMetadata.srcSet} sizes="96px" width={item.imageMetadata.width} height={item.imageMetadata.height} alt={item.imageAlt ?? item.name} loading="lazy" decoding="async" />}
                     <div>
                       <strong>{item.name}</strong>
                       <span>{item.passportId} · {item.plateRequirement?.label ?? "Plate TBD"}</span>

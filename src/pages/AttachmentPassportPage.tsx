@@ -25,9 +25,9 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
             <div className="button-row"><ButtonLink href="/equipment/#attachments" variant="outline">Back to attachment library</ButtonLink>{item.serviceUrl && <ButtonLink href={item.serviceUrl}>Explore supported work</ButtonLink>}</div>
           </div>
           <div className={`attachment-passport-hero__visual${item.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}${item.receiving && item.image ? " attachment-visual--receiving" : ""}`}>
-            {item.image ? <img src={item.image} alt={item.imageAlt ?? item.name} /> : item.receiving ? <div className="attachment-photo-placeholder"><strong>Actual delivered grapple photograph pending</strong><p>Approved owner hero image unavailable. Serial {item.receiving.serialNumber}; no catalog image substituted.</p></div> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
+            {item.image ? <img src={item.image} srcSet={item.imageMetadata?.srcSet} sizes="(max-width: 768px) 90vw, 45vw" width={item.imageMetadata?.width} height={item.imageMetadata?.height} alt={item.imageAlt ?? item.name} decoding="async" /> : item.receiving ? <div className="attachment-photo-placeholder"><strong>Actual delivered grapple photograph pending</strong><p>Approved owner hero image unavailable. Serial {item.receiving.serialNumber}; no catalog image substituted.</p></div> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
             {item.passportId === "SP-ATT-GRP-001" && item.image && <>
-              <span className="attachment-feature__fleet">Owner receiving photograph · November 11, 2026</span>
+              <span className="attachment-feature__fleet">{item.imageMetadata?.caption ?? "Owner receiving photograph · November 11, 2026"}</span>
             </>}
           </div>
         </div>

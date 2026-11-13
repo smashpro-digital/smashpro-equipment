@@ -145,6 +145,8 @@ export interface AttachmentFieldEvidence {
   image?: string;
   imageAlt?: string;
   projectUrl?: string;
+  evidenceDate?: string;
+  wordpressMediaId?: number;
   category?: "Delivery" | "Equipment Overview" | "Manufacturer Identification" | "Mounting and Fitment";
   width?: number;
   height?: number;
@@ -234,5 +236,6 @@ export interface AttachmentPassport {
   serviceUrl?: string;
   featured?: boolean;
   acquiredAt?: string;
+  imageMetadata?: { wordpressMediaId: number; width: number; height: number; srcSet: string; caption: string };
   commissionedAt?: string;
 }
