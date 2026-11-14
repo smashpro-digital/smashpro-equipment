@@ -1,0 +1,32 @@
+{
+  "removed_from_public_tip": [
+    "docs/release-captures/loflin-gallery/gallery-1440.png",
+    "docs/release-captures/loflin-gallery/gallery-390.png",
+    "docs/release-captures/loflin-gallery/photo-20261111_092933-1440.png",
+    "docs/release-captures/loflin-gallery/photo-20261111_092933-390.png",
+    "docs/release-captures/loflin-gallery/photo-20261111_093632-1440.png",
+    "docs/release-captures/loflin-gallery/photo-20261111_093632-390.png",
+    "docs/release-captures/loflin-gallery/photo-20261111_093751-1440.png",
+    "docs/release-captures/loflin-gallery/photo-20261111_093751-390.png",
+    "docs/release-captures/loflin-gallery/photo-20261113_153624-1440.png",
+    "docs/release-captures/loflin-gallery/photo-20261113_153624-390.png",
+    "docs/release-captures/loflin-gallery/photo-20261113_153914-1440.png",
+    "docs/release-captures/loflin-gallery/photo-20261113_153914-390.png",
+    "docs/release-captures/loflin-gallery/photo-delivery-image-scaled-1440.png",
+    "docs/release-captures/loflin-gallery/photo-delivery-image-scaled-390.png",
+    "docs/release-captures/loflin-mounted-hero/gallery-1440.png",
+    "docs/release-captures/loflin-mounted-hero/gallery-390.png",
+    "docs/release-captures/loflin-mounted-hero/passport-1440.png",
+    "docs/release-captures/loflin-mounted-hero/passport-390.png"
+  ],
+  "sanitized_text_paths": [
+    "docs/fleet/SP-MZIGO-26E-PASSPORT.md",
+    "docs/fleet/SP-MZIGO-26E-PROCUREMENT.md",
+    "docs/fleet/evidence/sp-mzigo-26e-export-20261007.json",
+    "docs/loflin-grapple-receiving.md",
+    "docs/mzigo-media-archive.md",
+    "docs/release-captures/loflin-gallery/media-mapping.json",
+    "scripts/capture-mzigo-export.mjs"
+  ],
+  "preservation": "unchanged original bytes retained outside public source; historical Git copies remain"
+}

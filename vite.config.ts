@@ -2,7 +2,7 @@ import { publicEquipmentIndexRow } from "./src/domain/publicEquipmentIndex";
 import { canonicalPassports } from "./src/data/passportRecords";
 import { projectPassportPublicRecord } from "./src/domain/passportAutomation";
 import { validatePassportIdentities } from "./src/domain/passportIdentity";
-import { cpSync, createReadStream, existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { cpSync, createReadStream, existsSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv, type Plugin } from "vite";
@@ -11,6 +11,7 @@ import { equipment } from "./src/data/equipment";
 import { mzigoStatusLabel, mzigoStatusDetail } from "./src/data/mzigoPassport";
 import { attachments } from "./src/data/attachments";
 import { passportPublicPlugin } from "./scripts/passport-public-plugin";
+import restrictedMedia from "./scripts/security/restricted-media.json";
 
 validatePassportIdentities(equipment);
 
@@ -41,7 +42,10 @@ function preserveEquipmentMedia(): Plugin {
       if (!isBuild) return;
       const output = resolve(projectDirectory, "dist/images");
       mkdirSync(output, { recursive: true });
-      cpSync(resolve(projectDirectory, "images"), output, { recursive: true });
+      cpSync(resolve(projectDirectory, "images"), output, {
+        recursive: true,
+        filter: path => !restrictedMedia.some(file => resolve(projectDirectory, file) === path),
+      });
       cpSync(
         resolve(projectDirectory, "public/equipment/images/sp-pcm-001"),
         resolve(output, "sp-pcm-001"),
@@ -57,6 +61,10 @@ function preserveEquipmentMedia(): Plugin {
       // refreshes, QR scans, and crawlers reach React before route matching.
       const shellIndex = resolve(projectDirectory, "dist/index.html");
       if (existsSync(shellIndex)) {
+        const currentMain = readFileSync(shellIndex, "utf8").match(/\/equipment\/assets\/main-([A-Za-z0-9_-]+)\.js/);
+        if (!currentMain) throw Error("Cannot establish current public bundle for historical identity revocation");
+        const rules = readFileSync(resolve(projectDirectory, "public/.htaccess"), "utf8").replaceAll("__CURRENT_MAIN_HASH__", currentMain[1]);
+        writeFileSync(resolve(projectDirectory, "dist/.htaccess"), rules);
         for (const attachment of attachments) {
           const attachmentRoute = resolve(projectDirectory, "dist/attachments", attachment.slug);
           mkdirSync(attachmentRoute, { recursive: true });

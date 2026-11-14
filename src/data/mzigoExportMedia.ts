@@ -3,22 +3,6 @@ import type { GalleryImage } from "../types/equipment";
 // Public factory evidence only. Private crate original stays outside the build.
 export const mzigoExportMedia: GalleryImage[] = [
   {
-    "id": "sp-mzigo-26e-manufacturer-nameplate-2026-10-06",
-    "src": "/equipment/images/sp-mzigo-26e-manufacturer-nameplate-2026-10-06.jpg",
-    "alt": "KYLIN K600 manufacturer plate: serial QLUP202609010001, load 750 kg, vehicle weight 320 kg, production year 2026",
-    "caption": "KYLIN K600 manufacturer plate: serial QLUP202609010001, load 750 kg, vehicle weight 320 kg, production year 2026. Photograph timestamp: October 6, 2026.",
-    "capturedAt": "2026-10-06",
-    "width": 960,
-    "height": 1280,
-    "kind": "image",
-    "group": "export",
-    "evidenceCategory": "qc",
-    "approvedChannels": [
-      "passport",
-      "equipment-gallery"
-    ]
-  },
-  {
     "id": "sp-mzigo-26e-charger-us-style-plugs-2026-10-06",
     "src": "/equipment/images/sp-mzigo-26e-charger-us-style-plugs-2026-10-06.jpg",
     "alt": "Battery charger and two cords with U.S.-style three-prong plugs; electrical ratings and certification are not established by plug shape",
@@ -45,38 +29,6 @@ export const mzigoExportMedia: GalleryImage[] = [
     "kind": "image",
     "group": "export",
     "evidenceCategory": "electrical",
-    "approvedChannels": [
-      "passport",
-      "equipment-gallery"
-    ]
-  },
-  {
-    "id": "sp-mzigo-26e-toolkit-maintenance-qr-2026-10-06",
-    "src": "/equipment/images/sp-mzigo-26e-toolkit-maintenance-qr-2026-10-06.jpg",
-    "alt": "Open tool case with a metal joint/shaft component, labeled bottle and rolled QR material; exact component and bottle contents need confirmation",
-    "caption": "Open tool case with a metal joint/shaft component, labeled bottle and rolled QR material; exact component and bottle contents need confirmation. Photograph timestamp: October 6, 2026.",
-    "capturedAt": "2026-10-06",
-    "width": 1280,
-    "height": 960,
-    "kind": "image",
-    "group": "export",
-    "evidenceCategory": "controls",
-    "approvedChannels": [
-      "passport",
-      "equipment-gallery"
-    ]
-  },
-  {
-    "id": "sp-mzigo-26e-product-certificate-2026-10-06",
-    "src": "/equipment/images/sp-mzigo-26e-product-certificate-2026-10-06.jpg",
-    "alt": "Kylin product certificate photographed in the tool case; document presence is not independent certification",
-    "caption": "Kylin product certificate photographed in the tool case; document presence is not independent certification. Photograph timestamp: October 6, 2026.",
-    "capturedAt": "2026-10-06",
-    "width": 1280,
-    "height": 960,
-    "kind": "image",
-    "group": "export",
-    "evidenceCategory": "qc",
     "approvedChannels": [
       "passport",
       "equipment-gallery"

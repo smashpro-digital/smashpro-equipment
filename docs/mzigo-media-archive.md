@@ -91,7 +91,7 @@ Photographs bear October 6 timestamps; they were received October 7. Video filen
 
 | Original source | Semantic filename | Visible evidence / handling |
 | --- | --- | --- |
-| `IMG-20261007-WA0000.jpg` | `sp-mzigo-26e-manufacturer-nameplate-2026-10-06.jpg` | KYLIN K600 manufacturer plate: serial QLUP202609010001, load 750 kg, vehicle weight 320 kg, production year 2026 |
+| `IMG-20261007-WA0000.jpg` | `sp-mzigo-26e-manufacturer-nameplate-2026-10-06.jpg` | KYLIN K600 manufacturer plate: serial Restricted identity retained in Digital HQ, load 750 kg, vehicle weight 320 kg, production year 2026 |
 | `IMG-20261007-WA0001.jpg` | `sp-mzigo-26e-charger-us-style-plugs-2026-10-06.jpg` | Battery charger and two cords with U.S.-style three-prong plugs; electrical ratings and certification are not established by plug shape |
 | `IMG-20261007-WA0002.jpg` | `sp-mzigo-26e-charger-plug-detail-2026-10-06.jpg` | Alternate close view of the battery charger and plug prongs; not a duplicate photograph |
 | `IMG-20261007-WA0003.jpg` | `sp-mzigo-26e-toolkit-maintenance-qr-2026-10-06.jpg` | Open tool case with a metal joint/shaft component, labeled bottle and rolled QR material; exact component and bottle contents need confirmation |

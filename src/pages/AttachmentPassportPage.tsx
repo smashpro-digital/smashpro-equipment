@@ -19,13 +19,13 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
           <div>
             <p className="eyebrow">Attachment passport · {item.passportId}</p>
             <h1>{item.name}</h1>
-            {item.receiving && <><p className="attachment-status attachment-status--commissioning">{item.receiving.statusLabel}</p><p>{item.manufacturer} · {item.model} · Serial {item.receiving.serialNumber}</p></>}
+            {item.receiving && <><p className="attachment-status attachment-status--commissioning">{item.receiving.statusLabel}</p><p>{item.manufacturer} · {item.model}</p></>}
             {item.passportId === "SP-ATT-BKT-001" && <><p className="bucket-upgrade-state">Six-tooth upgrade / Ordered</p><p className="bucket-hero-facts">42.91-inch factory width / SP-BKT-ARDHI-01<br />Toro Dingo / Mini Universal / SP-ARDHI-26</p></>}
             <p className="attachment-passport-hero__lede">{item.description}</p>
             <div className="button-row"><ButtonLink href="/equipment/#attachments" variant="outline">Back to attachment library</ButtonLink>{item.serviceUrl && <ButtonLink href={item.serviceUrl}>Explore supported work</ButtonLink>}</div>
           </div>
           <div className={`attachment-passport-hero__visual${item.passportId === "SP-ATT-GRP-001" ? " attachment-visual--loflin" : ""}${item.receiving && item.image ? " attachment-visual--receiving" : ""}`}>
-            {item.image ? <img src={item.image} srcSet={item.imageMetadata?.srcSet} sizes="(max-width: 768px) 90vw, 45vw" width={item.imageMetadata?.width} height={item.imageMetadata?.height} alt={item.imageAlt ?? item.name} decoding="async" /> : item.receiving ? <div className="attachment-photo-placeholder"><strong>Actual delivered grapple photograph pending</strong><p>Approved owner hero image unavailable. Serial {item.receiving.serialNumber}; no catalog image substituted.</p></div> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
+            {item.image ? <img src={item.image} srcSet={item.imageMetadata?.srcSet} sizes="(max-width: 768px) 90vw, 45vw" width={item.imageMetadata?.width} height={item.imageMetadata?.height} alt={item.imageAlt ?? item.name} decoding="async" /> : item.receiving ? <div className="attachment-photo-placeholder"><strong>Actual delivered grapple photograph pending</strong><p>Approved owner hero image unavailable. No catalog image substituted.</p></div> : <div className="attachment-feature__monogram"><span>{item.width?.replace(/[^0-9]/g, "") || "SP"}</span><small>ATT</small></div>}
             {item.passportId === "SP-ATT-GRP-001" && item.image && <>
               <span className="attachment-feature__fleet">{item.imageMetadata?.caption ?? "Owner receiving photograph · November 11, 2026"}</span>
             </>}
@@ -42,9 +42,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
           { label: "Attachment type", value: item.typeLabel },
           { label: "Manufacturer", value: item.manufacturer },
           { label: "Model", value: item.model },
-          { label: "Serial number", value: item.receiving?.serialNumber },
           { label: "Manufacture date", value: item.receiving?.manufacturedAt },
-          { label: "Manufacturer job ID", value: item.receiving?.manufacturerJobId },
           { label: "Width", value: item.width },
           { label: "Weight", value: item.weight },
           { label: "Physical nameplate weight", value: item.receiving?.nameplateWeight },
@@ -76,6 +74,7 @@ export function AttachmentPassportPage({ slug }: { slug: string }) {
       </section>
 
 
+      <p className="shell"><a href={`https://smashpro.app/dashboard/#/admin/fleet-identity?asset=${encodeURIComponent(item.passportId)}`}>Authorized fleet records in Digital HQ</a></p>
       <AttachmentReceiving item={item} />
       <AttachmentUpgradeRegistry item={item} />
 

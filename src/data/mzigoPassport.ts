@@ -1,6 +1,6 @@
 import type { FleetLifecycleStage } from "../components/FleetLifecycleProgress";
 
-export const mzigoObservedSpecLabels = new Set(["Platform", "Manufacturer serial number", "Manufacturer plate rated load", "Vehicle weight", "Production year", "Fleet ID", "Manufacturer", "Machine type", "Drive configuration", "Operation", "Dump bed", "Factory finish"]);
+export const mzigoObservedSpecLabels = new Set(["Platform", "Manufacturer plate rated load", "Vehicle weight", "Production year", "Fleet ID", "Manufacturer", "Machine type", "Drive configuration", "Operation", "Dump bed", "Factory finish"]);
 
 export const mzigoRequests = [
   { title: "Bolt-on fenders and mud guards", status: "Future wishlist", detail: "No fender or mud-guard installation is documented on the Founders Edition." },

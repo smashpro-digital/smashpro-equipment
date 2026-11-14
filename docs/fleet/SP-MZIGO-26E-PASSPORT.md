@@ -13,7 +13,7 @@
 |--------|-------|
 | Fleet Name | **SP-MZIGO-26E** |
 | Factory Model | **K600** — confirmed by the physical manufacturer plate photographed October 6, 2026 |
-| Manufacturer serial number | QLUP202609010001 |
+| Manufacturer serial number | Restricted identity retained in Digital HQ |
 | Manufacturer plate rated load | 750 kg |
 | Plate vehicle weight | 320 kg |
 | Production year | 2026 |
@@ -402,7 +402,7 @@ The canonical [procurement record](SP-MZIGO-26E-PROCUREMENT.md) retains the prio
 
 **Current: Paid in full · Qingdao export staging.** Final payment remains the existing October 1 milestone. October 6 timestamps document identity, accessories, skid preparation and completed crating. On October 7 the supplier statement relayed by the user said, “The machine is already in the warehouse at Qingdao Port.” This is a supplier report, not independent geolocation or evidence of sea departure.
 
-The physical KYLIN plate reads **K600**, serial **QLUP202609010001**, load **750 kg**, vehicle weight **320 kg**, production year **2026**. Every value was visually checked against the original photograph. The plate is the strongest physical-unit rating evidence currently available. The earlier 500 kg / approximately 1,100 lb supplier description remains in history; the reason for the difference is unknown. Neither rating is a field load test or commissioning clearance.
+The physical KYLIN plate reads **K600**, serial **Restricted identity retained in Digital HQ**, load **750 kg**, vehicle weight **320 kg**, production year **2026**. Every value was visually checked against the original photograph. The plate is the strongest physical-unit rating evidence currently available. The earlier 500 kg / approximately 1,100 lb supplier description remains in history; the reason for the difference is unknown. Neither rating is a field load test or commissioning clearance.
 
 The packing photographs show a HotRC remote, printed controller instructions, loose batteries, charger equipment and U.S.-style plugs, a tool case with a metal joint/shaft component and labeled bottle, maintenance QR material, a product certificate, and a spare wheel/tire. Exact spare identity, bottle contents, electrical ratings, complete manual coverage and final received inventory remain unverified. A QC PASS sticker and manufacturer certificate document factory markings/paperwork, not independent certification or a complete functional test.
 

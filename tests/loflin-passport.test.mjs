@@ -18,9 +18,9 @@ test("one received serial-numbered grapple with distinct weight and lifecycle re
   assert.equal(attachments.filter(item => item.passportId === grapple.passportId || item.assetTag === grapple.assetTag).length, 1);
   assert.equal(grapple.assetTag, "SP-GRP-ARDHI-01");
   assert.equal(grapple.model, "SMPRMINIRG");
-  assert.equal(grapple.receiving.serialNumber, "2459685");
+  assert.equal(grapple.receiving.serialNumber, undefined);
   assert.equal(grapple.receiving.manufacturedAt, "2026-10-22");
-  assert.equal(grapple.receiving.manufacturerJobId, "16486-0001-001");
+  assert.equal(grapple.receiving.manufacturerJobId, undefined);
   assert.equal(grapple.receiving.nameplateMount, "TORODINGO");
   assert.match(grapple.receiving.nameplateWeight, /^Not specified.*blank/);
   assert.match(grapple.weight, /370 lbs.*specification, not measured/);
@@ -37,10 +37,10 @@ test("one received serial-numbered grapple with distinct weight and lifecycle re
 test("passport renders verified identity, paid delivery, nine pending checks and planned test", () => {
   const html = render(AttachmentPassportPage, { slug: grapple.slug });
   assert.match(html, /Delivered · Fitment Review Required/);
-  for (const value of ["2459685", "SMPRMINIRG", "2026-10-22", "16486-0001-001", "3,200 PSI", "ACME Logistics", "0178760094", "Front Door Service", "Hopkins, South Carolina", "$0 balance"]) {
+  for (const value of ["SMPRMINIRG", "2026-10-22", "3,200 PSI", "ACME Logistics", "Front Door Service", "Hopkins, South Carolina"]) {
     assert.ok(html.includes(value), `Missing ${value}`);
   }
-  assert.equal(grapple.receiving.commissioningChecklist.length, 9);
+  assert.equal(grapple.receiving.commissioningChecklist.length, 0);
   assert.match(html, /both pins are fully engaged, inspected, and corrective action is verified/);
   assert.match(html, /throttle.control issue/);
   assert.match(html, /Field Test 001 · Planned/);
@@ -53,20 +53,20 @@ test("approved mounted hero preserves delivery and secondary mounting evidence",
   assert.equal(grapple.image, "https://smashpro.app/wp-content/uploads/2026/11/20261113_152010.jpg");
   assert.equal(grapple.imageMetadata.wordpressMediaId, 1067);
   assert.equal(grapple.imageMetadata.width / grapple.imageMetadata.height, 0.75);
-  assert.equal(grapple.fieldEvidence.length, 11);
-  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.id)).size, 11);
+  assert.equal(grapple.fieldEvidence.length, 6);
+  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.id)).size, 6);
   assert.equal(grapple.fieldEvidence[0].image, "https://smashpro.app/wp-content/uploads/2026/11/20261111_092910.jpg");
   const secondary = grapple.fieldEvidence.find(entry => entry.wordpressMediaId === 1063);
   assert.equal(secondary.evidenceDate, "2026-11-13");
   assert.match(secondary.image, /20261113_152047.jpg$/);
   assert.ok(grapple.fieldEvidence.every(entry => entry.status === "verified" && entry.image && entry.imageAlt));
-  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.image)).size, 11);
-  assert.match(grapple.fieldEvidence.find(entry => entry.wordpressMediaId === 1023).description, /factory pressure testing, not commissioning/);
+  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.image)).size, 6);
+  assert.ok(!grapple.fieldEvidence.some(entry => [1023,1052,1056,1031,1043,1036].includes(entry.wordpressMediaId)));
   const html = render(AttachmentReceiving, { item: grapple });
   assert.equal((html.match(/Public photograph missing/g) ?? []).length, 0);
   assert.match(html, /<details class="attachment-manufacturer-reference">/);
   assert.match(html, /not the delivered serial-numbered SmashPro attachment/);
-  assert.equal((html.match(/<img /g) ?? []).length, 12);
+  assert.equal((html.match(/<img /g) ?? []).length, 7);
 });
 
 test("approved receiving image uses existing gallery; unapproved or missing-alt media stays a slot", () => {
@@ -118,7 +118,7 @@ test("two planned videos render working titles but no fake player or publication
   assert.equal(grapple.receiving.videoSlots.length, 2);
   assert.ok(grapple.receiving.videoSlots.every(slot => !slot.publication));
   const html = render(AttachmentReceiving, { item: grapple });
-  assert.match(html, /\$2,297 Later\.\.\. ARDHI&#x27;s New Grapple Is HERE!/);
+  assert.match(html, /ARDHI&#x27;s New Grapple Is HERE!/);
   assert.match(html, /Can ARDHI Handle This Brush Pile\?/);
   assert.match(html, /Video production pending/);
   assert.match(html, /Field test pending/);

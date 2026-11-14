@@ -71,12 +71,12 @@ test('six build records link to canonical archive media without duplicate player
 
 test('archive has one canonical home for all 40 authentic records, including four videos', () => {
   const records = mzigoArchiveChapters.flatMap(chapter => mzigoArchiveSelection(mzigo.gallery, chapter.id));
-  assert.equal(records.length, 40);
+  assert.equal(records.length, 36);
   assert.equal(new Set(records.map(media => media.src)).size, records.length);
   assert.equal(new Set(records.map(mzigoMediaAnchor)).size, records.length);
   assert.equal(records.filter(media => media.kind === 'video').length, 4);
   assert.equal(mzigoArchiveSelection(mzigo.gallery, 'factory-build').length, 10);
-  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine').length, 14);
+  assert.equal(mzigoArchiveSelection(mzigo.gallery, 'finished-machine').length, 13);
   for (const media of [...Object.values(mzigoFactoryPhotos), mzigoFactoryWalkaround]) assert.equal(records.filter(record => record.src === media.src).length, 1);
   for (const media of records) {
     assert.ok(existsSync(media.src.replace('/equipment/', '')));
@@ -344,7 +344,7 @@ test('new marketing concepts are preserved as held source files and excluded fro
 
 test('manufacturer-unverified ratings remain recorded but are not marked confirmed', () => {
   for (const label of ['Payload','Battery','Battery runtime','Maximum speed','Maximum climbing grade','Remote control range']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, false, label);
-  for (const label of ['Platform','Manufacturer serial number','Manufacturer plate rated load','Vehicle weight','Production year','Fleet ID','Manufacturer','Operation','Dump bed','Factory finish']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, true, label);
+  for (const label of ['Platform','Manufacturer plate rated load','Vehicle weight','Production year','Fleet ID','Manufacturer','Operation','Dump bed','Factory finish']) assert.equal(mzigo.specifications.find(spec => spec.label === label).confirmed, true, label);
   const deposit = mzigo.timeline.find(event => event.id === 'mzigo-deposit');
   assert.equal(deposit.occurredAt, undefined);
   assert.doesNotMatch(deposit.detail, /\$\d/);
@@ -368,12 +368,12 @@ test('October provenance preserves original bytes and excludes private crate fro
   assert.equal(manifest.records.length, 17);
   assert.equal(new Set(manifest.records.map(r => r.sha256)).size, 17);
   const records = mzigoArchiveSelection(mzigo.gallery, 'export-journey');
-  assert.equal(records.length, 16);
+  assert.equal(records.length, 13);
   for (const r of manifest.records) {
     const media = records.find(m => m.src.endsWith(r.filename));
-    if (r.visibility === 'private') {
+    if (r.visibility === 'private' || /manufacturer-nameplate|product-certificate|toolkit-maintenance-qr/.test(r.filename)) {
       assert.equal(media, undefined);
-      assert.equal(existsSync('images/' + r.filename), false);
+      if (r.visibility === 'private') assert.equal(existsSync('images/' + r.filename), false);
       continue;
     }
     assert.ok(media, r.filename);
@@ -382,7 +382,7 @@ test('October provenance preserves original bytes and excludes private crate fro
     assert.equal(media.capturedAt,r.date);
     if (media.kind === 'video') assert.match(media.caption,/capture date unverified/);
   }
-  assert.equal(mzigo.identity.serialNumberPublic,'QLUP202609010001');
+  assert.equal(mzigo.identity.serialNumberPublic, undefined);
   assert.equal(mzigo.specifications.find(s => s.label === 'Manufacturer plate rated load').value,'750 kg');
   assert.match(mzigo.specifications.find(s => s.label === 'Payload').value,/500 kg/);
   const staging = mzigo.timeline.find(e => e.id === 'mzigo-qingdao-staging');

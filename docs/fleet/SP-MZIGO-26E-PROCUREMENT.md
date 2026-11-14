@@ -32,7 +32,7 @@ Not documented
 | Platform model | K600 — physical KYLIN plate photographed October 6, 2026; full specification sheet still pending |
 | Earlier supplier payload | 500 kg / approximately 1,100 lb; historical statement retained |
 | Physical plate rated load | 750 kg; photographed October 6, 2026; difference unexplained |
-| Manufacturer serial | QLUP202609010001; photographed plate |
+| Manufacturer serial | Restricted identity retained in Digital HQ; photographed plate |
 | Plate vehicle weight / production year | 320 kg / 2026 |
 | Drive | 4WD Electric |
 | Operation | Remote controlled |
@@ -148,7 +148,7 @@ Not documented. Banking instructions must be independently verified with the ven
 | Shipping documents | Pending | To be added |
 | Bill of lading | Pending | To be added |
 | Container number | Pending | To be added |
-| Serial number | Photographed | QLUP202609010001 on physical manufacturer plate |
+| Serial number | Photographed | Restricted identity retained in Digital HQ on physical manufacturer plate |
 | Motor serial numbers | Pending | To be added |
 | Battery specification sheet | Pending | To be added |
 | Factory QC report | Pending | To be added |

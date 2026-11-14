@@ -1,3 +1,5 @@
+> Historical release record. The November 13 security remediation supersedes the original gallery/identity references below. Restricted captures and original plates are preserved privately; current public gallery uses six approved photos, including a separately masked plate derivative. Historical Git copies remain exposed.
+
 # Loflin receiving gallery completion
 
 Reviewed the existing WordPress library through authenticated core REST and inspected original image bytes. The owner requested use of the missing photographs where applicable. No uploads, media edits, equipment duplicates or new passport routes.

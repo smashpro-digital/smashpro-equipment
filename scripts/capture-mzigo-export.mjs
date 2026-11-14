@@ -45,7 +45,7 @@ try {
         await page.locator('#export-evidence').screenshot({ path: `${out}/mzigo-evidence-${width}.png` });
         assert.match(record.text, /Paid in full.*Qingdao export staging/i);
         assert.match(record.text, /750 kg/); assert.match(record.text, /500 kg/);
-        assert.match(record.text, /QLUP202609010001/);
+        assert.match(record.text, /Restricted identity retained in Digital HQ/);
         assert.doesNotMatch(record.text, /Final Payment Pending|SP-MZIGO-27E.*production started/i);
         await page.getByRole('button', { name: /Export Journey/ }).click();
         await page.locator('.mzigo-media-archive img').first().waitFor();
@@ -62,7 +62,7 @@ try {
         record.exportImages = sources.length;
         console.log(`${width}: gallery and lightbox passed`);
         const search = page.getByRole('searchbox', { name: 'Search Export Journey media' });
-        await search.fill('QLUP202609010001');
+        await search.fill('Restricted identity retained in Digital HQ');
         assert.equal(await page.locator('.mzigo-media-archive .archive-grid img').count(), 1);
         await search.fill('');
         console.log(`${width}: search passed`);
