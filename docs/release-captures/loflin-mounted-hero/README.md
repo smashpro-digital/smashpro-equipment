@@ -1,3 +1,5 @@
+> Historical release record. The November 13 security remediation supersedes the original gallery/identity references below. Restricted captures and original plates are preserved privately; current public gallery uses six approved photos, including a separately masked plate derivative. Historical Git copies remain exposed.
+
 # Loflin mounted-grapple media update
 
 Owner approved WordPress attachment **1067**, `20261113_152010.jpg`, for the existing SP-ATT-GRP-001 hero and showroom thumbnail, and **1063** for the secondary gallery. Both were retrieved through the authenticated WordPress core REST integration and visually inspected. No media uploads or WordPress writes were performed.

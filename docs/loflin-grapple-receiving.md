@@ -1,6 +1,8 @@
+> Historical release record. The November 13 security remediation supersedes the original gallery/identity references below. Restricted captures and original plates are preserved privately; current public gallery uses six approved photos, including a separately masked plate derivative. Historical Git copies remain exposed.
+
 # Loflin grapple receiving passport V3.1
 
-The existing `SP-ATT-GRP-001` passport / `SP-GRP-ARDHI-01` asset represents serial **2459685**, model **SMPRMINIRG**, manufactured **October 22, 2026**, physically received **November 11, 2026**. No second attachment record is created.
+The existing `SP-ATT-GRP-001` passport / `SP-GRP-ARDHI-01` asset represents serial **Restricted identity retained in Digital HQ**, model **SMPRMINIRG**, manufactured **October 22, 2026**, physically received **November 11, 2026**. No second attachment record is created.
 
 ## Public truth and readiness
 

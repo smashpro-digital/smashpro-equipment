@@ -24,3 +24,7 @@ Local validation: TypeScript, 219 tests, production build, public index, media/a
 Owner approved deterministic solid masks on November 13. The separate lossless public Loflin plate derivative covers the serial value, manufacturer job value and QR code; all other decoded pixels remain identical. It has no metadata and is hash-pinned in the redaction recipe/test. Original WordPress bytes remain preserved privately; public URL containment is still a release gate. Gallery now contains six approved public photographs.
 
 Release packaging includes the generated `.htaccess` in the build artifact explicitly; production Apache enforcement and historical bundle/HTML cache invalidation still require live proof.
+
+Repository visibility verified: Equipment is public. After checksum comparison against the controlled private copies, the four restricted MZIGO original files are removed from the current Git index and ignored locally; their original bytes remain unchanged in private preservation. This does not remove historical Git copies, forks or downloads. No history rewrite occurred.
+
+Current-tip containment also preserves and removes 18 older identity/inspection screenshots, sanitizes known identifiers from seven tracked documentation/capture paths and scans tracked source text for the known fingerprints. The private preservation inventory records those paths; historical public exposure remains.

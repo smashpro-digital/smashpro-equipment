@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { createServer } from 'vite';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 const server=await createServer({configFile:false,esbuild:{jsx:'automatic'},optimizeDeps:{noDiscovery:true,include:[]},server:{middlewareMode:true,hmr:false},appType:'custom'});
 const {equipment}=await server.ssrLoadModule('/src/data/equipment.ts');
 const {attachments}=await server.ssrLoadModule('/src/data/attachments.ts');
@@ -24,6 +25,7 @@ test('Loflin public identity and hold survive restricted-data removal',()=>{
 test('restricted MZIGO originals cannot enter the public gallery',()=>{
   const held=JSON.parse(readFileSync('scripts/security/restricted-media.json','utf8'));
   for(const item of equipment) for(const media of item.gallery??[]) assert.ok(!held.some(path=>media.src?.endsWith(path)),`${item.fleetId}: held media reference`);
+  for(const path of held) assert.equal(execFileSync('git',['ls-files','--',path],{encoding:'utf8'}).trim(),'','Restricted original must not be tracked in public source');
 });
 
 test('approved public plate derivative matches reviewed lossless masks',()=>{
