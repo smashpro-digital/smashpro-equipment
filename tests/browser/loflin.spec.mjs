@@ -43,7 +43,18 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     }
     await expect(gallery).toContainText("not certified mounting dimensions");
     expect(await gallery.locator(".factory-photo-frame img").first().evaluate(image => getComputedStyle(image).objectFit)).toBe("contain");
-    await expect(gallery.getByText("Public photograph missing", { exact: true })).toHaveCount(10);
+    await expect(gallery.getByText("Public photograph missing", { exact: true })).toHaveCount(0);
+    await expect(gallery.locator(".factory-photo-frame img")).toHaveCount(11);
+    for (const image of await gallery.locator(".factory-photo-frame img").all()) {
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(() => image.evaluate(element => element.complete && element.naturalWidth > 0), { timeout: 15000 }).toBe(true);
+      await image.evaluate(element => element.decode());
+      const filename = (await image.getAttribute("src")).split("/").pop().replace(".jpg", "");
+      await image.screenshot({ path: testInfo.outputPath(`photo-${filename}-${viewport.width}.png`) });
+    }
+    await gallery.getByRole("button", { name: "Enlarge Manufacturer identification plate and factory pressure-test sticker" }).click();
+    await expect(page.getByRole("dialog").locator("img")).toHaveAttribute("src", "https://smashpro.app/wp-content/uploads/2026/11/20261111_093751.jpg");
+    await page.keyboard.press("Escape");
     await gallery.getByRole("button", { name: "Enlarge Delivery and receiving photograph" }).click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();

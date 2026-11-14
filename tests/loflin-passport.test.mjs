@@ -53,18 +53,20 @@ test("approved mounted hero preserves delivery and secondary mounting evidence",
   assert.equal(grapple.image, "https://smashpro.app/wp-content/uploads/2026/11/20261113_152010.jpg");
   assert.equal(grapple.imageMetadata.wordpressMediaId, 1067);
   assert.equal(grapple.imageMetadata.width / grapple.imageMetadata.height, 0.75);
-  assert.equal(grapple.fieldEvidence.length, 12);
-  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.id)).size, 12);
+  assert.equal(grapple.fieldEvidence.length, 11);
+  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.id)).size, 11);
   assert.equal(grapple.fieldEvidence[0].image, "https://smashpro.app/wp-content/uploads/2026/11/20261111_092910.jpg");
   const secondary = grapple.fieldEvidence.find(entry => entry.wordpressMediaId === 1063);
   assert.equal(secondary.evidenceDate, "2026-11-13");
   assert.match(secondary.image, /20261113_152047.jpg$/);
-  assert.ok(grapple.fieldEvidence.filter(entry => entry.status === "pending").every(entry => !entry.image));
+  assert.ok(grapple.fieldEvidence.every(entry => entry.status === "verified" && entry.image && entry.imageAlt));
+  assert.equal(new Set(grapple.fieldEvidence.map(entry => entry.image)).size, 11);
+  assert.match(grapple.fieldEvidence.find(entry => entry.wordpressMediaId === 1023).description, /factory pressure testing, not commissioning/);
   const html = render(AttachmentReceiving, { item: grapple });
-  assert.equal((html.match(/Public photograph missing/g) ?? []).length, 10);
+  assert.equal((html.match(/Public photograph missing/g) ?? []).length, 0);
   assert.match(html, /<details class="attachment-manufacturer-reference">/);
   assert.match(html, /not the delivered serial-numbered SmashPro attachment/);
-  assert.equal((html.match(/<img /g) ?? []).length, 3);
+  assert.equal((html.match(/<img /g) ?? []).length, 12);
 });
 
 test("approved receiving image uses existing gallery; unapproved or missing-alt media stays a slot", () => {

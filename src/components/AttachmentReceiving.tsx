@@ -43,7 +43,7 @@ export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
     </div></section>
 
     <section className="section shell attachment-receiving-gallery" id="attachment-receiving-gallery">
-      <div className="section-heading"><div><p className="eyebrow">Receiving gallery</p><h2>The actual attachment, not a catalog substitute.</h2></div><p>Approved owner photographs distinguish delivery evidence, equipment identification, and initial mounting evaluation. Mounting photographs do not verify safe fitment or authorize operation. Other requested public photographs remain unavailable in the labeled slots below. Publish only reviewed photographs with private labels and addresses excluded.</p></div>
+      <div className="section-heading"><div><p className="eyebrow">Receiving gallery</p><h2>The actual attachment, not a catalog substitute.</h2></div><p>Approved owner photographs distinguish delivery evidence, equipment identification, and initial mounting evaluation. Mounting photographs do not verify safe fitment or authorize operation. Photographs document the visible condition only; commissioning and independent fitment inspection remain pending.</p></div>
       {categories.map(category => {
         const entries = item.fieldEvidence?.filter(entry => entry.category === category) ?? [];
         const approved = entries.flatMap(entry => entry.status === "verified" && entry.image && entry.imageAlt ? [{
