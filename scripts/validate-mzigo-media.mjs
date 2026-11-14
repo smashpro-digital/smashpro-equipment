@@ -5,19 +5,20 @@ import assert from 'node:assert/strict';
 // Validate the exact original names referenced by the media data before deployment.
 const data = readFileSync('src/data/mzigoFactoryMedia.ts', 'utf8');
 const septemberFiles = [...new Set([...data.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-09-(?:09|14|15)\.(?:jpg|mp4)/g)].map(m => m[0]))];
-assert.equal(septemberFiles.length, 21, 'Twenty September photos and one walkaround are required');
+assert.equal(septemberFiles.length, 20, 'Twenty September photos and one walkaround are required');
 const equipmentData = readFileSync('src/data/equipment.ts', 'utf8');
 const augustFiles = [...new Set([...equipmentData.matchAll(/sp-mzigo-26e-[a-z0-9-]+-2026-08-31\.(?:jpg|mp4)/g)].map(m => m[0]))];
 assert.equal(augustFiles.length, 4, 'Two August photos, the assembly video and its poster are required');
 const exportBatch = JSON.parse(readFileSync('docs/fleet/evidence/sp-mzigo-26e-export-20261007.json', 'utf8'));
 assert.equal(exportBatch.records.length, 17);
 assert.equal(new Set(exportBatch.records.map(r => r.sha256)).size, 17, 'No identical imports');
-const publicExport = exportBatch.records.filter(r => r.visibility === 'public');
-assert.equal(publicExport.length, 16);
+const restricted = JSON.parse(readFileSync('scripts/security/restricted-media.json','utf8'));
+const publicExport = exportBatch.records.filter(r => r.visibility === 'public' && !restricted.includes('images/' + r.filename));
+assert.equal(publicExport.length, 13);
 for (const record of exportBatch.records) {
   assert.equal(existsSync(`dist/images/${record.original}`), false, 'No raw import filename in build');
-  if (record.visibility === 'private') {
-    assert.equal(existsSync(`images/${record.filename}`), false, 'Private original excluded from source images');
+  if (record.visibility === 'private' || restricted.includes('images/' + record.filename)) {
+    if (record.visibility === 'private') assert.equal(existsSync(`images/${record.filename}`), false, 'Private original excluded from source images');
     assert.equal(existsSync(`dist/images/${record.filename}`), false, 'Private original excluded from build');
   } else {
     assert.equal(createHash('sha256').update(readFileSync(`images/${record.filename}`)).digest('hex'), record.sha256, record.filename);

@@ -1,0 +1,39 @@
+{
+  "source_sha256": "d57f78e96164827a7ebe6139bf8fe339c487e8b6b44d962ef8043a1b67fade07",
+  "dimensions": [
+    2000,
+    1500
+  ],
+  "output": "images/sp-att-grp-001-public-plate-redacted.png",
+  "output_sha256": "c167a1648f1e2b8a40448b5d6c092684d82d7f92c5676c1f8b70d482cd1e46c5",
+  "method": "solid black masks, lossless RGB PNG, no metadata; all other decoded pixels unchanged",
+  "masks": [
+    {
+      "field": "manufacturer_serial",
+      "box": [
+        1340,
+        460,
+        1640,
+        512
+      ]
+    },
+    {
+      "field": "manufacturer_job_id",
+      "box": [
+        1340,
+        558,
+        1640,
+        612
+      ]
+    },
+    {
+      "field": "qr_code",
+      "box": [
+        1150,
+        608,
+        1310,
+        742
+      ]
+    }
+  ]
+}

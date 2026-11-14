@@ -41,7 +41,7 @@ export interface EquipmentHeroMedia {
 }
 export interface PassportScores { documentation: number; maintenance: number; }
 export interface PublicValuation { amount?: number; currency: "USD"; calculatedAt?: string; status: "current" | "pending"; }
-export interface EquipmentIdentity { passportId: string; model: string; factoryModel?: string; edition: string; finish?: string; serialNumberPublic?: string; assetClass: string; powertrain?: string; modelYear?: number; fleetEntryDate?: string; operatingHours?: number; }
+export interface EquipmentIdentity { passportId: string; model: string; factoryModel?: string; edition: string; finish?: string; assetClass: string; powertrain?: string; modelYear?: number; fleetEntryDate?: string; operatingHours?: number; }
 export interface EquipmentShippingStatus { status: string; vessel: string; voyage: string; nextMilestone: string; estimatedArrival: string; trackingReference?: string; }
 export interface EquipmentShippingRouteStep { label: string; status: "completed" | "current" | "upcoming"; }
 export interface EquipmentLifecycleMilestone { id: string; label: string; status: "completed" | "current" | "upcoming"; date?: string; photos: string[]; videos: string[]; notes?: string; }
@@ -174,9 +174,7 @@ export interface AttachmentPassport {
   receiving?: {
     statusLabel: string;
     showroomStatusLabel: string;
-    serialNumber: string;
     manufacturedAt: string;
-    manufacturerJobId: string;
     nameplateMount: string;
     nameplateWeight: string;
     factoryTest: string;

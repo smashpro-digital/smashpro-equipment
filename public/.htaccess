@@ -1,0 +1,15 @@
+# Retained source evidence is not public build content. Also deny old direct
+# URLs left on the static host by earlier releases. Preserve originals privately.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^images/sp-mzigo-26e-(manufacturer-nameplate|product-certificate|toolkit-maintenance-qr)-2026-10-06\.jpg$ - [F,L,NC]
+RewriteRule ^images/sp-mzigo-26e-control-panel-2026-09-09\.jpg$ - [F,L,NC]
+# Only the new sanitized main bundle is public. Old cached HTML must refresh;
+# old direct bundle URLs must not continue serving restricted identity.
+RewriteRule ^assets/main-(?!__CURRENT_MAIN_HASH__\.js$)[A-Za-z0-9_-]+\.js$ - [F,L]
+</IfModule>
+<IfModule mod_headers.c>
+<FilesMatch "\.(html|json)$">
+Header always set Cache-Control "no-store, max-age=0"
+</FilesMatch>
+</IfModule>
