@@ -3,11 +3,21 @@
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.4
 >
-> Status: Delivered / Field evaluation reported / Open service items
+> Status: Inspection Passed / Commissioning Approved (owner reported)
 >
-> Last Updated: 2026-11-03
+> Last Updated: 2026-11-16
 
 > **Historical October 6 snapshot (superseded by delivery below):** SP-ARDHI-26 is an owned SmashPro fleet asset in international delivery logistics. The freight-forwarder record carried an **October 5, 2026** planning target. Public vessel context now records EVER MAX voyage 1374-016E departing Colón on October 1 and reaching **Savannah anchorage on October 6 at 06:43 UTC**. This is a vessel-level checkpoint only. SP-ARDHI-26 cargo discharge, U.S. customs clearance, cargo release, final-mile delivery, receipt, and commissioning remain unconfirmed. Arrival is not commissioning. The machine must be received, inspected, commissioned, and cleared through the applicable operational/compliance gates before it is represented as available for customer work or as an active operating fleet asset.
+
+## Readiness update — November 16, 2026
+
+**Owner-reported fleet milestone:** SP-ARDHI-26 passed inspection and is approved for commissioning. General-purpose bucket and pallet forks have been tested. This is authorization/readiness to commission, not an independently verified declaration that all commissioning steps have been completed or that the machine is released for customer service.
+
+**Attachment status:** The 42-inch grapple (SP-ATT-GRP-042) has verified hydraulic connection and jaw operation, but its quick-attach locking pins cannot engage due to an obstruction. Grapple mechanical fitment and operational release remain **on hold**. The issue is being addressed in its separate attachment workstream; do not use the grapple for work until both locking pins fully engage and fitment is approved.
+
+**Ecosystem presentation rule:** Show ARDHI as *Inspection Passed / Commissioning Approved*, bucket and pallet forks as *Tested*, and grapple as *Hydraulic Function Verified / Mechanical Locking Hold*. Do not conflate attachment fitment with base-machine readiness. Do not automatically enable customer booking, rental, or operational authorization from this documentation update. Preserve prior historical events.
+
+---
 
 ## Current update - November 3, 2026
 
