@@ -85,3 +85,18 @@ These drawing values are preserved as **reference geometry** only. Do not presen
 ## Public-source reference
 
 Loflin Fabrication product page: `https://www.loflinfabrication.com/product/mini-skid-steer-compact-tractor-root-grapple/`
+
+## November 16, 2026 — Rhino Bite hydraulic coupler protection upgrade
+
+**Status: Approved for documentation and evaluation only. Not purchased or installed.** This is a functional protection accessory, separate from the Rhino Bite visual decal treatment. The canonical attachment identity remains `SP-ATT-GRP-001` (42-inch Loflin grapple); do not create a duplicate passport under the informal `SP-ATT-GRP-042` label.
+
+Owner-provided Amazon listing screenshots show two candidates:
+
+| Candidate | Listing claim | Screenshot price | Assessment |
+|---|---|---:|---|
+| BLUEAGLE 8-color cap/plug kit | 1/2-inch ISO 5675 agricultural / Pioneer style; colors include green, purple, black | $29.95 | Preferred palette, **fit unverified** |
+| Generic hinged covers, four-pack | 1/2-inch; listing claims ISO 5675 and ISO 7241-A; black, blue, green variants | $19.99 | Alternative for compatible machine-side receptacles, **fit unverified** |
+
+Neither listing proves compatibility with the actual Loflin grapple or ARDHI auxiliary couplers. Do not order solely on nominal size or listing claims. First capture front and side photographs of both disconnected hose ends, verify coupler standard/diameter and whether cap versus plug is required at each exposed interface, then check clearance and tether retention across full grapple jaw and loader lift/tilt travel. Keep covers away from pinch points, hydraulic hose routing, and moving structures. Record purchase, installation, and inspection separately when completed.
+
+**Public-page treatment:** Show this as a *planned protection upgrade* on the existing grapple passport, not a completed modification, installed accessory, verified fit, or commercial endorsement. No Amazon link or unverified price promise is needed on the public page.
