@@ -2,8 +2,8 @@
 
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.4<br>
-> Status: Paid in Full / Qingdao Export Staging (supplier-reported)<br>
-> Last Updated: 2026-10-07
+> Status: Shipped / Ocean Transit — Pacific Crossing<br>
+> Last Updated: 2026-11-16
 
 ---
 
@@ -277,7 +277,7 @@ SP-ARDHI-26 is intended for loading, digging, grading, and material placement. S
 
 # Shipping / Readiness
 
-Current public state: **Paid in Full / Shipping Preparation**
+Current public state: **Shipped / Ocean Transit — Pacific Crossing**
 
 Completed or visually documented:
 
@@ -343,6 +343,18 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 - ⬜ Delivery
 - ⬜ Fleet Commissioning
 - ⬜ Field Validation
+
+---
+
+# October 23–November 16, 2026 Shipping Update
+
+Supplier confirmation records shipment **QDOH26100023** as shipped on **October 23, 2026**. Supplier-provided vessel/voyage context is **NUE TALOS / 1289-045E**. The supplier ETA remains **November 28, 2026**.
+
+Public vessel observations through November 15 support completion of the East Asia port rotation and a Pacific crossing toward **Panama/Colón**. Newer public schedules indicate an evolving Savannah window around **November 28–December 2**. Savannah remains schedule-supported rather than cargo-confirmed because the container number and bill of lading have not yet been supplied.
+
+Lifecycle evidence now supports Packing Preparation, Wooden Crate, Qingdao Export Staging, Freight Booked, Factory Handoff, Vessel Assignment and Ocean Departure as complete. **Ocean Transit** is current. Container Loading remains pending because the supplier reported that port-loading photography/evidence was unavailable. Export Inspection also remains pending until documentary evidence is received.
+
+U.S. Arrival, Customs, Delivery, Commissioning and Field Validation remain pending.
 
 ---
 
