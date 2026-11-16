@@ -132,6 +132,26 @@ export const attachments: AttachmentPassport[] = [
       branding: "Removable SmashPro branding after delivery; custom colors/designs require 20-piece minimum",
       partnershipValue: "Field-test / content / long-term attachment-partner value under evaluation; not represented as sponsorship",
     },
+    upgrades: [{
+      id: "SP-UPG-GRP-COUPLER-COVERS-001",
+      name: "Hydraulic quick-coupler dust cap and plug protection",
+      status: "planned",
+      description: "November 16, 2026 owner-approved evaluation for protective dust caps/plugs on the grapple's disconnected auxiliary hydraulic couplers. No product purchased, installed, or fitment verified.",
+      specifications: [
+        { label: "Candidate A", value: "BLUEAGLE eight-color kit, advertised 1/2-inch ISO 5675 agricultural/Pioneer style; screenshot price $29.95" },
+        { label: "Candidate B", value: "Generic four-pack hinged covers, advertised 1/2-inch ISO 5675 / ISO 7241-A; screenshot price $19.99" },
+        { label: "Color preference", value: "Green and purple for paired lines; black as alternative" },
+        { label: "Fitment", value: "Unverified: confirm actual coupler profile, nominal size, and male/female positions" },
+      ],
+      fitmentRequirements: [
+        "Photograph both disconnected grapple hose couplers, front and side views",
+        "Identify coupler standard and nominal size from markings or measured dimensions",
+        "Select compatible caps and plugs for both exposed male and female connections",
+        "Keep tethers clear of hydraulic lines, pivots, pinch points and moving jaw travel",
+      ],
+      installationStatus: "Not ordered; compatibility review pending",
+      fieldTestStatus: "Pending after fitment and installation",
+    }],
     receiving: {
       statusLabel: "Delivered · Fitment Review Required",
       showroomStatusLabel: "Delivered · Fitment Review Required",
