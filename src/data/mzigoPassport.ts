@@ -18,10 +18,10 @@ export const mzigoFinalPayment = {
 };
 
 export const mzigoPublicLocation = {
-  label: "Qingdao · Export preparation",
-  verification: "Supplier-reported warehouse staging; not live tracking",
-  observedAt: "2026-10-07",
-  evidenceHref: "#history-mzigo-qingdao-staging",
+  label: "Pacific crossing · Panama next",
+  verification: "Supplier shipment evidence plus public vessel-route context; not cargo-specific live tracking",
+  observedAt: "2026-11-15",
+  evidenceHref: "#shipping-evidence",
 };
 
 export const mzigoLifecycle: FleetLifecycleStage[] = [
@@ -29,14 +29,14 @@ export const mzigoLifecycle: FleetLifecycleStage[] = [
   { id: "final-payment", label: "Final Payment", status: mzigoFinalPayment.status, progress: 100, href: "#history-mzigo-final-payment" },
   { id: "shipping-preparation", label: "Packing Preparation", status: "complete", progress: 100, href: "#mzigo-archive-export-journey" },
   { id: "wooden-crate", label: "Wooden Crate", status: "complete", progress: 100, href: "#history-mzigo-packing" },
-  { id: "port-arrival", label: "Qingdao Export Staging", status: "current", progress: 0, href: "#history-mzigo-qingdao-staging" },
-  { id: "freight-booking", label: "Freight Booked", status: "pending", progress: 0, href: "#shipping-evidence" },
+  { id: "port-arrival", label: "Qingdao Export Staging", status: "complete", progress: 100, href: "#history-mzigo-qingdao-staging" },
+  { id: "freight-booking", label: "Freight Booked", status: "complete", progress: 100, href: "#shipping-evidence" },
   { id: "export-inspection", label: "Export Inspection", status: "pending", progress: 0, href: "#documents" },
-  { id: "factory-departure", label: "Factory Handoff Record", status: "pending", progress: 0, href: "#shipping-evidence" },
+  { id: "factory-departure", label: "Factory Handoff Record", status: "complete", progress: 100, href: "#shipping-evidence" },
   { id: "container-loading", label: "Container Loading", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
-  { id: "vessel-assignment", label: "Vessel Assignment", status: "pending", progress: 0, href: "#shipping-evidence" },
-  { id: "ocean-departure", label: "Ocean Departure", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
-  { id: "ocean-tracking", label: "Ocean Transit", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
+  { id: "vessel-assignment", label: "Vessel Assignment", status: "complete", progress: 100, href: "#shipping-evidence" },
+  { id: "ocean-departure", label: "Ocean Departure", status: "complete", progress: 100, href: "#mzigo-archive-export-journey" },
+  { id: "ocean-tracking", label: "Ocean Transit", status: "current", progress: 70, href: "#mzigo-archive-export-journey" },
   { id: "us-arrival", label: "U.S. Arrival", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "customs", label: "Customs", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "delivery", label: "Delivery", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
@@ -47,5 +47,5 @@ export const mzigoLifecycle: FleetLifecycleStage[] = [
 const currentIndex = mzigoLifecycle.findIndex(stage => stage.status === "current");
 export const mzigoCurrentStage = mzigoLifecycle[currentIndex].label;
 export const mzigoNextStage = mzigoLifecycle[currentIndex + 1].label;
-export const mzigoStatusLabel = `Paid in full · ${mzigoCurrentStage.toLowerCase()}`;
-export const mzigoStatusDetail = "Paid in full. October 6 photographs document accessories, export-skid preparation and a completed wooden crate. On October 7 the supplier reported the machine at a warehouse at Qingdao Port. Awaiting freight booking / sailing evidence; no container, B/L, vessel, departure date or ETA is confirmed. It has not been verified as shipped by sea, received or commissioned. Rental availability has not been announced.";
+export const mzigoStatusLabel = `Shipped · ${mzigoCurrentStage.toLowerCase()}`;
+export const mzigoStatusDetail = "Supplier-confirmed shipment QDOH26100023 departed October 23, 2026 and remains in ocean transit aboard the supplier-provided vessel/voyage context NUE TALOS 1289-045E. Public vessel observations through November 15 support completion of the East Asia rotation and a Pacific crossing toward Panama/Colón. The supplier ETA remains November 28; newer public schedules indicate an evolving Savannah window around November 28 to December 2, but Savannah is not cargo-confirmed. Container loading remains pending because port-loading evidence was unavailable. Export inspection, container/B/L, U.S. arrival, customs, delivery, commissioning and field validation remain pending until shipment-specific evidence is received.";
