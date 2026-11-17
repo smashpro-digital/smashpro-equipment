@@ -1,10 +1,10 @@
 {
   "assetId": "SP-ARDHI-26",
-  "asOf": "2026-11-01",
+  "asOf": "2026-11-16",
   "source": "Operator report; supporting media pending where indicated",
-  "status": "Delivered / Commissioning and field evaluation underway",
-  "summary": "ARDHI is developing from factory delivery into field evaluation. His October 31 dirt-day activities are operator-reported; inspection follow-up and commissioning approval remain open.",
-  "readiness": "Commissioning approval and customer-service readiness remain pending. Field evaluation is not a release for customer work.",
+  "status": "Inspection passed / Commissioning approved",
+  "summary": "SP-ARDHI-26 passed inspection and was approved for commissioning on November 16, 2026 (owner-reported). The general-purpose bucket and pallet forks are tested, and the November 8 thrown track has been reinstalled with the repair reported complete. Commissioning completion sign-offs continue per the public checklist; the 42-inch grapple remains on a separate mechanical-locking hold.",
+  "readiness": "Approved for commissioning as of November 16, 2026 (owner-reported). Commissioning approval is authorization to commission — not completion of every commissioning procedure and not a release for customer work. Rental availability has not been announced.",
   "milestones": [
     {
       "key": "delivery",
@@ -26,6 +26,13 @@
       "title": "First dirt-day evaluation",
       "summary": "Operator-reported bucket handling, playground-area preparation, grading, dirt movement and pallet-fork practice. Field photographs await review. A full pallet lift is not documented.",
       "href": "#field-evaluation"
+    },
+    {
+      "key": "inspection",
+      "date": "November 16, 2026",
+      "title": "Inspection passed · commissioning approved",
+      "summary": "Owner-reported fleet milestone: SP-ARDHI-26 passed inspection and is approved for commissioning. Bucket and pallet forks are tested; the reinstalled track repair is reported complete. Completion sign-offs continue per the commissioning checklist.",
+      "href": "#inspections"
     }
   ],
   "fieldActivities": [
@@ -53,7 +60,7 @@
       "summary": "A dedicated auxiliary battery, protected independent circuits, fused distribution, weather-resistant enclosure and compatible charging are planned. A 12V 30Ah LiFePO4 battery is a candidate, not an installed upgrade."
     }
   ],
-  "maintenanceSummary": "Oil-level correction and restart after charging are operator-reported. Inspection follow-up remains open. Detailed troubleshooting, defect photographs, supplier messages and warranty discussions remain in Digital HQ.",
-  "upgradeSummary": "The six-tooth bucket configuration is owner-reported installed November 7, 2026; field performance testing and independent attachment safety review remain pending. Transport hooks, securing points, mirrors, extinguisher, lighting and recovery accessories remain under evaluation or procurement. The grapple is not received or installed.",
+  "maintenanceSummary": "Inspection passed November 16, 2026 (owner-reported). The November 8 thrown track was reinstalled following supplier guidance and the repair is reported complete; throttle travel was restored November 8; quick-change pin hardware was repaired with independent retention verification pending. Oil-level correction and restart after charging remain operator-reported. Detailed troubleshooting, defect photographs, supplier messages and warranty discussions remain in Digital HQ.",
+  "upgradeSummary": "The six-tooth bucket configuration is owner-reported installed November 7, 2026; field performance testing and independent attachment safety review remain pending. Transport hooks, securing points, mirrors, extinguisher, lighting and recovery accessories remain under evaluation or procurement. The 42-inch grapple was received November 11 with hydraulic connection and jaw operation verified; its quick-attach mechanical locking remains on hold pending obstruction resolution.",
   "mediaSummary": "Delivery, crate-opening photographs and factory startup guidance remain available. Field, charging, lighting and inspection evidence awaits review; factory footage is not presented as field-test proof."
 }

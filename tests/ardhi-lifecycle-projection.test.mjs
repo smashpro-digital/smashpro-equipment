@@ -19,16 +19,16 @@ test('ARDHI maintenance renders lifecycle projection, not only legacy snapshots'
   assert.match(ui, /Outstanding at snapshot/);
   assert.match(ui, /Reviewed Digital HQ database feed, supplemented by pending editorial records/);
 });
-test('track remains blocked and throttle is verified', () => {
-  assert.match(data, /id:'DEF-003'[\s\S]*?status:'repair_pending'[\s\S]*?serviceRelease:'blocked'/);
+test('track repair is recorded complete and throttle is verified', () => {
+  assert.match(data, /id:'DEF-003'[\s\S]*?status:'repaired'[\s\S]*?serviceRelease:'pending'/);
   assert.match(data, /id:'DEF-001'[\s\S]*?status:'verified'/);
 });
-test('published Field Repair 003 is linked while the reported repair remains blocked', () => {
+test('published Field Repair 003 is linked while independent verification remains pending', () => {
   const event = publicLifecycleForAsset('SP-ARDHI-26').find(item => item.id === 'DEF-003');
   assert.equal(event.article?.state, 'published');
   assert.equal(event.article?.url, 'https://smashpro.app/ardhi-thrown-track-field-repair-003/');
-  assert.equal(event.status, 'repair_pending');
-  assert.equal(event.serviceRelease, 'blocked');
+  assert.equal(event.status, 'repaired');
+  assert.equal(event.serviceRelease, 'pending');
   assert.match(event.summary, /Owner reports the rubber track was reinstalled/);
   assert.ok(event.evidence.some(item => item.label.includes('WP media 968')));
   assert.ok(event.evidence.some(item => item.label.includes('YouTube nCxpwNWVlsw')));
@@ -59,16 +59,16 @@ test('draft article links are excluded from public lifecycle projection', () => 
   assert.match(data, /id:e\.id,assetId:e\.assetId,type:e\.type,status:e\.status/);
   assert.doesNotMatch(data, /\.\.\.e,/);
 });
-test('commissioning copy shows restored throttle travel without implying approval', () => {
+test('commissioning copy shows restored throttle travel without implying completion', () => {
   const engine = commissioningChecks.find(check => check.id === 'engine');
   const approval = commissioningChecks.find(check => check.id === 'passport-complete');
   assert.match(engine.notes, /Throttle travel was restored November 8/);
   assert.match(engine.notes, /full lever travel was owner-verified/);
   assert.doesNotMatch(engine.notes, /throttle travel restriction is open/);
-  assert.match(approval.notes, /Throttle-travel repair is owner-verified and resolved/);
-  assert.match(approval.notes, /unresolved, service-blocking thrown track/);
-  assert.match(approval.notes, /quick-change retention verification/);
-  assert.match(ui, /Latest: lifecycle and open service items \(updated November 8\)/);
+  assert.match(approval.notes, /Inspection passed and commissioning approved November 16, 2026 \(owner-reported\)/);
+  assert.match(approval.notes, /thrown track is reinstalled with the repair reported complete/);
+  assert.match(approval.notes, /not completion of every commissioning procedure/);
+  assert.match(ui, /Latest: lifecycle and service items \(updated November 16\)/);
 });
 test('bucket installation is reconciled while fitment safety and field testing remain pending', () => {
   assert.match(attachments, /status: "installed"/);

@@ -13,7 +13,7 @@ for (const width of [1440, 390]) test(`confirmed forwarder context and derived l
   await expect(page.locator('.shipment-facts')).toContainText('Forwarder-reported voyage 1374-016E');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed vessel');
   await expect(page.locator('.shipment-facts')).not.toContainText('No forwarder-confirmed voyage');
-  await expect(page.locator('#mission-dashboard')).toContainText('Receiving inspection');
+  await expect(page.locator('#mission-dashboard')).toContainText('Commissioning approved');
   await expect(page.locator('.atlas-status')).toContainText('SmashPro Atlas');
   await expect(page.locator('.atlas-status')).toContainText('Ocean context');
   await expect(page.locator('.atlas-status')).toContainText('Verified checkpoint');

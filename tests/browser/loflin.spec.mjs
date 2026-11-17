@@ -10,7 +10,7 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     const response = await page.goto(passport);
     expect(response.status()).toBe(200);
     await expect(page.getByRole("heading", { name: 'LOFLIN 42" MINI ROOT GRAPPLE', exact: true })).toBeVisible();
-    await expect(page.locator(".attachment-passport-hero")).toContainText("Delivered · Fitment Review Required");
+    await expect(page.locator(".attachment-passport-hero")).toContainText("Hydraulic Function Verified · Mechanical Locking Hold");
     const hero = page.locator(".attachment-passport-hero__visual img");
     await expect(hero).toHaveAttribute("src", ownerPhoto);
     await expect.poll(() => hero.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
@@ -77,7 +77,7 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     await page.reload();
     const showroom = page.locator("#attachments");
     await expect(showroom.locator(`a[href="${passport}"]`)).toHaveCount(1);
-    await expect(showroom).toContainText("Delivered · Fitment Review Required");
+    await expect(showroom).toContainText("Hydraulic Function Verified · Mechanical Locking Hold");
     const product = showroom.locator(".attachment-feature__visual img");
     await expect(product).toHaveAttribute("src", ownerPhoto);
     await expect.poll(() => product.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);

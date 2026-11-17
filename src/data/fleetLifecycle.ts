@@ -14,18 +14,19 @@ export type FleetLifecycleEvent = {
 };
 export const ardhiLifecycleEvents: readonly FleetLifecycleEvent[] = [
   {
-    id:'DEF-003',assetId:'SP-ARDHI-26',type:'repair',status:'repair_pending',
-    title:'Thrown rubber track',occurredOn:'2026-11-08',reportedOn:null,
-    summary:'Owner reports the rubber track was reinstalled after supplier guidance and field recovery. Final factory tension verification and remaining undercarriage checks are pending; service release remains blocked.',
+    id:'DEF-003',assetId:'SP-ARDHI-26',type:'repair',status:'repaired',
+    title:'Thrown rubber track',occurredOn:'2026-11-08',reportedOn:'2026-11-16',
+    summary:'Owner reports the rubber track was reinstalled after supplier guidance and field recovery, and the repair is complete as of the November 16, 2026 passed inspection. Track operation was included in that owner-reported inspection pass; independent undercarriage verification continues under lifetime care.',
     componentIds:['rubber-track','undercarriage'],relatedEventIds:[],
     evidence:[
       {kind:'photo',label:'Owner track incident photo, WP media 967',reviewed:true},
       {kind:'photo',label:'Owner track incident photo, WP media 966',reviewed:true},
       {kind:'supplier',label:'Hailey Li track-tensioner demonstration, WP media 968',reviewed:true},
-      {kind:'video',label:'ARDHI thrown-track recovery documentary, YouTube nCxpwNWVlsw',reviewed:true}
+      {kind:'video',label:'ARDHI thrown-track recovery documentary, YouTube nCxpwNWVlsw',reviewed:true},
+      {kind:'inspection',label:'Owner-reported November 16 inspection pass covering track operation',reviewed:true}
     ],
     article:{state:'published',url:'https://smashpro.app/ardhi-thrown-track-field-repair-003/',title:'Field Repair 003 | Thrown Track: Real-World Recovery'},
-    approval:'pending',serviceRelease:'blocked'
+    approval:'reviewed',serviceRelease:'pending'
   },
   {
     id:'DEF-001',assetId:'SP-ARDHI-26',type:'repair',status:'verified',

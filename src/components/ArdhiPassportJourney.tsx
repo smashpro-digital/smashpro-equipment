@@ -532,7 +532,7 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
             Fleet Asset <span>#001</span>
           </h1>
           <p>
-            Arrived October 26, 2026 <b>/</b> Field evaluation underway
+            Inspection passed <b>/</b> Commissioning approved · November 16, 2026
           </p>
           <p className="flagship-hero-description">{postDelivery.summary}</p>
           <div className="ardhi-production-actions"><a href="#mission-dashboard">View Asset Status</a><a href="#journey">Explore Journey</a></div>
@@ -559,8 +559,8 @@ export function ArdhiPassportJourney({ item }: { item: Equipment }) {
               <h3>Operational Record</h3>
               <dl>
                 <div><dt>Current owner</dt><dd>SmashPro Fleet</dd></div>
-                <div><dt>Commissioning</dt><dd>Pending</dd></div>
-                <div><dt>Service hours</dt><dd>Hours unverified; commissioning pending</dd></div>
+                <div><dt>Commissioning</dt><dd>Approved November 16, 2026 (owner-reported) · completion sign-offs pending</dd></div>
+                <div><dt>Service hours</dt><dd>Roughly five hours reported · meter not verified</dd></div>
               </dl>
             </section>
             {specificationGroups.map(([group, specifications]) => (

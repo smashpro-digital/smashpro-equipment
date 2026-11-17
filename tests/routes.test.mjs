@@ -360,7 +360,7 @@ test("SP-ARDHI-26 export logistics tracker is canonical and media-ready", () => 
   assert.doesNotMatch(passport, /Engineering Decisions/);
   assert.match(passport, /Payment History/);
   assert.doesNotMatch(passport, /Approximate Journey Distance|daysUntilArrival|7300/);
-  assert.match(passport, /Arrived October 26, 2026/);
+  assert.match(passport, /Commissioning approved · November 16, 2026/);
   assert.match(passport, /ArdhiMissionTimeline/);
   assert.doesNotMatch(passport, /2 \/ 7|Stage 2/);
   assert.doesNotMatch(readFileSync("src/pages/ArdhiPassportPage.tsx", "utf8"), /2 \/ 7|Stage 2/);

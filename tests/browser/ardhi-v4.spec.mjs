@@ -63,7 +63,7 @@ for (const width of [320, 390, 768, 1440]) test(`Expo sponsor experience preserv
   await page.setViewportSize({ width, height: 1000 });
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await open(page, '?expo=true');
-  await expect(page.locator('.flagship-hero-description')).toContainText('commissioning approval remain open');
+  await expect(page.locator('.flagship-hero-description')).toContainText('Commissioning completion sign-offs continue');
   await expect(page.locator('#expo-title')).toHaveText('What could your company become part of?');
   await expect(page.locator('.sponsor-selector option')).toHaveCount(12);
   await page.locator('.sponsor-selector select').selectOption('insurance');

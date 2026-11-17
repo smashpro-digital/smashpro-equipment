@@ -4,11 +4,12 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 const compiled = ts.transpileModule(readFileSync('src/data/fleetLifecycle.ts','utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { ardhiLifecycleEvents, publicLifecycleForAsset, mergePublicLifecycleEvents } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
-test('ARDHI lifecycle IDs are unique and open track repair blocks service release', () => {
+test('ARDHI lifecycle IDs are unique and the completed track repair is reported without release', () => {
   assert.equal(new Set(ardhiLifecycleEvents.map(e=>e.id)).size,ardhiLifecycleEvents.length);
   const track = publicLifecycleForAsset('SP-ARDHI-26').find(e=>e.id==='DEF-003');
-  assert.equal(track.status,'repair_pending');
-  assert.equal(track.serviceRelease,'blocked');
+  assert.equal(track.status,'repaired');
+  assert.equal(track.serviceRelease,'pending');
+  assert.notEqual(track.serviceRelease,'approved');
   assert.equal(track.article?.state,'published','Published WordPress content should link publicly');
   assert.equal(track.article?.url,'https://smashpro.app/ardhi-thrown-track-field-repair-003/');
 });
@@ -25,8 +26,8 @@ test('partial reviewed database feeds retain pending editorial statuses and bloc
   assert.equal(byId.get('DEF-001').serviceRelease,'pending');
   assert.equal(byId.get('DEF-002').approval,'pending');
   assert.match(byId.get('DEF-002').summary,/verification remains pending/);
-  assert.equal(byId.get('DEF-003').status,'repair_pending');
-  assert.equal(byId.get('DEF-003').serviceRelease,'blocked');
+  assert.equal(byId.get('DEF-003').status,'repaired');
+  assert.equal(byId.get('DEF-003').serviceRelease,'pending');
   assert.equal(byId.get('UPG-BKT-006').status,'testing_pending');
   assert.equal(byId.get('UPG-BKT-006').approval,'pending');
 });
@@ -41,15 +42,16 @@ test('projection rejects unreviewed evidence, foreign article URLs and other ass
   assert.deepEqual(Object.keys(event.evidence[0]).sort(),['kind','label','reviewed','url'].sort());
   assert.deepEqual(publicLifecycleForAsset('OTHER-ASSET',[sample]),[]);
 });
-test('database lifecycle records replace editorial track content without releasing its blocker', () => {
+test('database lifecycle records replace editorial track content without granting release', () => {
   const database = publicLifecycleForAsset('SP-ARDHI-26').map(event => ({
     ...event,
     approval: 'reviewed',
-    ...(event.id === 'DEF-003' ? {summary:'Database-backed unresolved track record.'} : {})
+    ...(event.id === 'DEF-003' ? {summary:'Database-backed track repair record.'} : {})
   }));
   const track = mergePublicLifecycleEvents('SP-ARDHI-26',database).find(event=>event.id==='DEF-003');
-  assert.equal(track.summary,'Database-backed unresolved track record.');
-  assert.equal(track.serviceRelease,'blocked');
+  assert.equal(track.summary,'Database-backed track repair record.');
+  assert.equal(track.serviceRelease,'pending');
+  assert.notEqual(track.serviceRelease,'approved');
 });
 test('pin repair date is not confused with its report date', () => {
   const pins=publicLifecycleForAsset('SP-ARDHI-26').find(event=>event.id==='DEF-002');
