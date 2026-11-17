@@ -100,3 +100,8 @@ Owner-provided Amazon listing screenshots show two candidates:
 Neither listing proves compatibility with the actual Loflin grapple or ARDHI auxiliary couplers. Do not order solely on nominal size or listing claims. First capture front and side photographs of both disconnected hose ends, verify coupler standard/diameter and whether cap versus plug is required at each exposed interface, then check clearance and tether retention across full grapple jaw and loader lift/tilt travel. Keep covers away from pinch points, hydraulic hose routing, and moving structures. Record purchase, installation, and inspection separately when completed.
 
 **Public-page treatment:** Show this as a *planned protection upgrade* on the existing grapple passport, not a completed modification, installed accessory, verified fit, or commercial endorsement. No Amazon link or unverified price promise is needed on the public page.
+
+
+## November 17, 2026 — RHINO BITE graphics placement and measurement record
+
+RHINO BITE is a planned visual decal treatment for this existing attachment, not a separate passport or a completed installation. The [graphics placement and measurement register](SP-ATT-GRP-001-RHINO-BITE-GRAPHICS-PLACEMENT.md) documents owner photo evidence, proposed eye/mouth/side-plate locations, pending exact dimensions, exclusion zones, partner design responsibilities, and [Google Drive artwork library](https://drive.google.com/drive/folders/1ntCJoBpnDmyb2qMpuep1X_CihUDhkdy5). All measurements are preliminary and no production cut files are approved. Mechanical quick-attach locking fitment remains on hold independent of this branding project.
