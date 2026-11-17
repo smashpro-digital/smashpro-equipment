@@ -1,0 +1,63 @@
+.public-fleet-hours {
+  margin-top: .55rem;
+  color: #d7e3d9;
+  font-size: .75rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.public-fleet-hours__summary {
+  display: block;
+  color: #f5f1e8;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.public-fleet-hours__reading strong {
+  color: #f5f1e8;
+  font-size: .9rem;
+}
+
+.public-fleet-hours__reading p {
+  margin: .25rem 0 0;
+  color: #bdc7be;
+  font-size: .72rem;
+  font-weight: 400;
+}
+
+.public-fleet-hours__history {
+  margin-top: 1rem;
+  padding-top: .8rem;
+  border-top: 1px solid #43564a;
+}
+
+.public-fleet-hours__history h4 {
+  margin: 0 0 .65rem;
+  color: #e4c786;
+  font-size: .8rem;
+}
+
+.public-fleet-hours__history ol {
+  display: grid;
+  gap: .75rem;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.public-fleet-hours__panel {
+  margin-block: 1.5rem;
+  padding: 1.2rem;
+  border: 1px solid #43564a;
+  background: linear-gradient(120deg, #142e24, #0e1914);
+}
+
+.public-fleet-hours__panel > .eyebrow {
+  margin-top: 0;
+  color: #e4c786;
+}
+
+@media (max-width: 700px) {
+  .public-fleet-hours__panel {
+    padding: .9rem;
+  }
+}

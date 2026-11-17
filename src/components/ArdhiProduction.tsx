@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { factoryStartupReference, commissioningChecks, commissioningObservations, commissioningLifecycle, fieldFindings, firstStartObservation, maintenanceBaselines } from '../data/ardhiFlagship';
 import { isFleetLifecycleEvent, mergePublicLifecycleEvents, publicLifecycleForAsset } from '../data/fleetLifecycle';
 import type { FleetLifecycleEvent } from '../data/fleetLifecycle';
+import { usePublicFleetHours } from '../hooks/usePublicFleetHours';
+import { PublicFleetHours } from './PublicFleetHours';
+import '../styles/ardhi-fleet-hours.css';
 import '../styles/ardhi-production.css';
 const labels = { not_started: 'Not started', in_progress: 'In progress', passed: 'Passed', needs_attention: 'Needs attention', blocked: 'Blocked' };
 
@@ -41,6 +44,7 @@ export function ArdhiInspections() {
 }
 
 export function ArdhiMaintenancePlan() {
+  const fleetHours = usePublicFleetHours();
   const [dbEvents, setDbEvents] = useState<FleetLifecycleEvent[] | null>(null);
   const [feedState, setFeedState] = useState<'loading' | 'live' | 'unavailable'>('loading');
   useEffect(() => {
@@ -66,7 +70,8 @@ export function ArdhiMaintenancePlan() {
   };
   return <section className="section shell ardhi-production" id="maintenance" aria-labelledby="maintenance-title">
     <p className="eyebrow">Lifetime care / preparation</p><h2 id="maintenance-title">Maintenance starts with a verified baseline.</h2>
-    <p>The engine label is documented: a Runtong 739 cc twin-cylinder gasoline engine on the YF380 plate. Operating time is operator-reported — roughly five field hours — with no verified hour-meter reading. Service intervals follow manufacturer guidance once its applicability to the delivered YF380 is confirmed.</p>
+    <p>The engine label is documented: a Runtong 739 cc twin-cylinder gasoline engine on the YF380 plate. Current service hours come from the reviewed meter projection below. Earlier operator-reported durations remain historical estimates, not meter readings. Service intervals follow manufacturer guidance once its applicability to the delivered YF380 is confirmed.</p>
+    <div className="public-fleet-hours__panel"><p className="eyebrow">Current public meter projection</p><PublicFleetHours state={fleetHours} /></div>
     {trackArticle?.state === 'published' && trackArticle.url && <p className="ardhi-field-journal-callout"><span>Field Repair 003 · Thrown track recovery</span><a href={trackArticle.url}>Read Field Repair 003</a></p>}
     <section aria-labelledby="ardhi-active-service-title">
       <h3 id="ardhi-active-service-title">Active service items</h3>
