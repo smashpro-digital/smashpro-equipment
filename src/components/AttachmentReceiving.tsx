@@ -71,7 +71,7 @@ export function AttachmentReceiving({ item }: { item: AttachmentPassport }) {
     </section>
 
     <section className="attachment-detail" id="attachment-commissioning"><div className="shell">
-      <div className="section-heading"><div><p className="eyebrow">Commissioning checklist</p><h2>Received does not mean ready.</h2></div><p><a href="/equipment/sp-ardhi-26.html">{receiving.hostFleetId}</a> is unavailable due to its throttle-control issue. Quick-attach locking-pin engagement remains unresolved. Commissioning is blocked until both pins are fully engaged, inspected, and corrective action is verified. Every check below remains pending. No customer-facing service activation before commissioning and independent safety review are complete.</p></div>
+      <div className="section-heading"><div><p className="eyebrow">Commissioning checklist</p><h2>Received does not mean ready.</h2></div><p>Hydraulic connection and jaw operation on <a href="/equipment/sp-ardhi-26.html">{receiving.hostFleetId}</a> were verified November 16, 2026 (owner-reported). Quick-attach locking-pin engagement remains unresolved due to an obstruction. Commissioning is blocked until both pins are fully engaged, inspected, and corrective action is verified. The hold is attachment-specific and does not downgrade the host machine's readiness. No customer-facing service activation before commissioning and independent safety review are complete.</p></div>
       <ul className="attachment-commissioning-list">{receiving.commissioningChecklist.map(check => <li key={check}><span className="attachment-status attachment-status--commissioning">Pending</span><span>{check}</span></li>)}</ul>
     </div></section>
 

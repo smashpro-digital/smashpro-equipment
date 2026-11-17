@@ -7,15 +7,15 @@ import { commissioningChecks, firstJob, firstJobPresentation, futureAttachments,
 
 export function ArdhiMissionDashboard() {
   const fields = [
-    ['Current Mission', 'Commissioning & field evaluation'], ['Current Lifecycle', 'Delivered / pre-service'],
-    ['Current Chapter', 'First dirt-day evaluation'], ['Service Hours', '~5 reported · meter not verified'],
-    ['Fleet Status', 'Open service items'], ['Next Event', 'Throttle diagnosis / inspections'],
-    ['Current Evidence', 'Operator report / media review pending'], ['Current Location', 'Delivery complete / location withheld'],
+    ['Current Mission', 'Commissioning completion & field work'], ['Current Lifecycle', 'Inspection passed / commissioning approved'],
+    ['Current Chapter', 'Commissioning sign-offs'], ['Service Hours', '~5 reported · meter not verified'],
+    ['Fleet Status', 'Approved for commissioning · grapple hold separate'], ['Next Event', 'Commissioning completion sign-offs'],
+    ['Current Evidence', 'Owner report November 16 / media review pending'], ['Current Location', 'Delivery complete / location withheld'],
   ];
   return <section className="shell flagship-dashboard" id="mission-dashboard" aria-labelledby="mission-dashboard-title">
     <header><div><p className="eyebrow">Fleet Asset 001 / Mission Control</p><h2 id="mission-dashboard-title">SP-ARDHI-26</h2></div><p><span className="flagship-status-dot" aria-hidden="true" /> {ardhiDelivery.status}</p></header>
     <dl>{fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    <footer><span>Delivered October 26; field evaluation reported October 31; open service items; commissioning approval pending</span><a href="#field-evaluation">View current chapter ↗</a></footer>
+    <footer><span>Delivered October 26; field evaluation reported October 31; inspection passed and commissioning approved November 16 (owner-reported); grapple mechanical-locking hold remains separate</span><a href="#inspections">View current chapter ↗</a></footer>
   </section>;
 }
 
@@ -32,8 +32,8 @@ export function ArdhiMissionTimeline({ expo = false }: { expo?: boolean }) {
   const timeline = expo ? sponsorRoadmap : missionTimeline;
   const complete = timeline.filter(step => step.state === 'complete').length;
   return <section className="shell flagship-roadmap" aria-labelledby="mission-timeline-title">
-    <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Delivery is complete. Commissioning and field evaluation are underway; inspection follow-up and final approval remain pending.</p></header>
-    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; commissioning approval pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
+    <header><p className="eyebrow">Factory floor → first job → lifetime record</p><h2 id="mission-timeline-title">Mission Timeline</h2><p>Delivery and field evaluation are complete. Inspection passed and commissioning was approved November 16, 2026 (owner-reported); completion sign-offs remain tracked per check.</p></header>
+    <div className="flagship-progress" role="progressbar" aria-label="Documented mission milestones" aria-valuemin={0} aria-valuemax={timeline.length} aria-valuenow={complete} aria-valuetext={`${complete} of ${timeline.length} milestones complete; commissioning completion sign-offs pending`}><span style={{ '--mission-progress': `${complete / timeline.length * 100}%` } as CSSProperties} /></div>
     <ol>{timeline.map((step, i) => <li key={step.title} className={`is-${step.state}`} aria-current={step.state === 'current' ? 'step' : undefined}><span>{String(i + 1).padStart(2, '0')}</span><a href={step.href}>{step.title}</a><small>{step.detail}</small></li>)}</ol>
     <p className="flagship-note">{expo ? 'Future milestones are ambitions, not booked jobs, awarded contracts or connected automation. Each invites a scoped contribution.' : 'Hours are record milestones, not manufacturer service intervals. Follow the operator manual for maintenance.'}</p>
   </section>;

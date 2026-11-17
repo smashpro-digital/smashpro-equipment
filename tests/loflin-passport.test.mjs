@@ -34,15 +34,16 @@ test("one received serial-numbered grapple with distinct weight and lifecycle re
   assert.equal(grapple.serviceUrl, undefined);
 });
 
-test("passport renders verified identity, paid delivery, nine pending checks and planned test", () => {
+test("passport renders verified identity, paid delivery, seven pending checks and planned test", () => {
   const html = render(AttachmentPassportPage, { slug: grapple.slug });
-  assert.match(html, /Delivered · Fitment Review Required/);
+  assert.match(html, /Hydraulic Function Verified · Mechanical Locking Hold/);
   for (const value of ["2459685", "SMPRMINIRG", "2026-10-22", "16486-0001-001", "3,200 PSI", "ACME Logistics", "0178760094", "Front Door Service", "Hopkins, South Carolina", "$0 balance"]) {
     assert.ok(html.includes(value), `Missing ${value}`);
   }
-  assert.equal(grapple.receiving.commissioningChecklist.length, 9);
+  assert.equal(grapple.receiving.commissioningChecklist.length, 7);
   assert.match(html, /both pins are fully engaged, inspected, and corrective action is verified/);
-  assert.match(html, /throttle.control issue/);
+  assert.match(html, /obstruction/);
+  assert.match(html, /does not downgrade the host machine/);
   assert.match(html, /Field Test 001 · Planned/);
   assert.match(html, /No test performed and no results recorded/);
   assert.doesNotMatch(html, /Awaiting Shipment|In transit|shipment pending|balance due|ZIP 29061|803-217|estes\.delivery|Discover|card number/i);
@@ -87,20 +88,21 @@ test("showroom links the existing grapple once in both featured and category pos
     assert.equal((html.match(/href="\/equipment\/attachments\/sp-att-grp-001\/"/g) ?? []).length, 1);
     assert.match(html, /LOFLIN 42&quot; MINI ROOT GRAPPLE/);
     assert.ok(html.includes(grapple.image));
-    assert.match(html, /Delivered · Fitment Review Required/);
+    assert.match(html, /Hydraulic Function Verified · Mechanical Locking Hold/);
     assert.doesNotMatch(html, /In transit · Estes freight/);
   }
 });
 
-test("seven procurement milestones are complete and operational milestones remain pending", () => {
+test("eight procurement and verification milestones are complete and operational milestones remain pending", () => {
   const completed = grapple.receiving.timeline.filter(event => event.status === "completed");
   assert.deepEqual(completed.map(event => [event.id, event.date]), [
     ["order", "2026-09-09"], ["manufacture", "2026-10-22"], ["fabrication", "2026-10-28"],
     ["paid", "2026-11-05"], ["shipped", "2026-11-05"], ["handoff", "2026-11-09"], ["received", "2026-11-11"],
+    ["hydraulic-verification", "2026-11-16"],
   ]);
   assert.deepEqual(grapple.receiving.timeline.filter(event => event.status === "pending").map(event => event.id), ["commissioning", "field-test"]);
   const html = render(AttachmentReceiving, { item: grapple });
-  assert.equal((html.match(/class="is-completed"/g) ?? []).length, 7);
+  assert.equal((html.match(/class="is-completed"/g) ?? []).length, 8);
   assert.equal((html.match(/class="is-pending"/g) ?? []).length, 2);
   assert.match(html, /November 9, 2026/);
 });

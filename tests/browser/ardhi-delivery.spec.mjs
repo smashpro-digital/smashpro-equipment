@@ -8,7 +8,7 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await page.route('**/api/**', route => route.fulfill({ status: 503, body: 'Unavailable' }));
   await page.goto('/equipment/sp-ardhi-26.html');
   await expect(page.locator('#ardhi-v2-title')).toContainText('Fleet Asset');
-  await expect(page.locator('.ardhi-v2-hero')).toContainText('Arrived October 26, 2026');
+  await expect(page.locator('.ardhi-v2-hero')).toContainText('Inspection passed');
   await expect(page.locator('#journey')).toContainText('R+L Carriers');
   await expect(page.locator('#journey')).toContainText('IACO468333');
   await expect(page.locator('#mission-dashboard')).toContainText('Commissioning & field evaluation');
@@ -19,7 +19,7 @@ for (const width of [390, 768, 1440]) test(`delivery, history, media and keyboar
   await expect(page.locator('#watch-ardhi iframe')).toHaveCount(0);
   await expect(page.locator('#check-in')).toHaveAttribute('href', '/k/ARDHI26-K01/');
   await expect(page.locator('#commissioning-first-start')).toContainText('Milestone reached');
-  await expect(page.locator('#inspections')).toContainText('Open service items');
+  await expect(page.locator('#inspections')).toContainText('Completion sign-offs tracked per check');
   await expect(page.getByRole('heading', {name: 'Engine subsequently started - owner report'}).first()).toBeVisible();
   await expect(page.locator('[aria-label="October 26 historical observations"]')).toContainText('has not been repaired');
   await expect(page.locator('#commissioning-delivery')).toContainText('Passed');

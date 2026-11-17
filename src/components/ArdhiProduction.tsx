@@ -35,7 +35,7 @@ export function ArdhiInspections() {
       {!check.evidence.length && <p>AWAITING MEDIA / inspection evidence</p>}
       {check.issue && <p>Issue: {check.issue} Resolution: {check.resolution ?? 'Pending'}</p>}
       </details></li>)}</ol>
-    <p><a href="#maintenance">Latest: lifecycle and open service items (updated November 8)</a></p>
+    <p><a href="#maintenance">Latest: lifecycle and service items (updated November 16)</a></p>
     <p>Operator attribution, issue resolution and sign-off require protected records. This public checklist is read-only; no inspection is submitted here.</p>
   </section>;
 }

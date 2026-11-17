@@ -10,7 +10,7 @@ export const ardhiDelivery = {
   status: postDelivery.status,
   carrier: 'R+L Carriers', pro: 'IACO468333', origin: 'CONVOY USA-SAVANNAH',
   cratedWeight: 'Approximately 950 kg',
-  summary: 'ARDHI arrived October 26, 2026. Delivery and crate opening are documented; commissioning and field evaluation are underway. Inspection follow-up and commissioning approval remain pending.',
+  summary: 'ARDHI arrived October 26, 2026. Delivery, crate opening, receiving checks and field evaluation are documented. Inspection passed and commissioning was approved November 16, 2026 (owner-reported); completion sign-offs continue per the commissioning checklist.',
   evidence: 'Carrier confirmation and photographs of the wooden shipping crate on the ground, confirmed by the owner on October 26, 2026. Delivery photographs are published below; the carrier confirmation document remains unpublished.',
 } as const;
 
@@ -43,15 +43,15 @@ export const ardhiUnboxingEvent: TimelineEvent = {
 export const ardhiDeliveryVideos: EquipmentVideo[] = [];
 export const ardhiMediaSlots = [
   { id: 'unboxing', title: 'Unboxing video', detail: 'Video pending. Crate opening and panel removal are documented in the photo gallery.' },
-  { id: 'first-start', title: 'First startup', detail: 'Video pending. Startup and later restart are operator-reported; commissioning approval remains pending.' },
+  { id: 'first-start', title: 'First startup', detail: 'Video pending. Startup and later restart are operator-reported; commissioning was approved November 16, 2026 with completion sign-offs pending.' },
 ] as const;
 
 export const ardhiDeliveryStages = [
   { title: 'Factory', state: 'complete', detail: 'Build and testing documented', href: '#history-production-complete' },
   { title: 'Ocean', state: 'complete', detail: 'Historical port-arrival evidence retained', href: '#history-port-arrival' },
   { title: 'Delivery', state: 'complete', detail: 'October 26, 2026 · R+L Carriers', href: '#history-future-5' },
-  { title: 'Receiving inspection', state: 'current', detail: 'Inspection pending; no readiness claim', href: '#commissioning-crate-inspection' },
-  { title: 'Commissioning', state: 'pending', detail: 'Not yet verified', href: '#service' },
+  { title: 'Receiving inspection', state: 'complete', detail: 'Inspection passed November 16, 2026 (owner-reported)', href: '#commissioning-crate-inspection' },
+  { title: 'Commissioning', state: 'current', detail: 'Approved November 16, 2026 · sign-offs pending', href: '#service' },
 ] as const;
 
 export const ardhiFirstStartEvent: TimelineEvent = {

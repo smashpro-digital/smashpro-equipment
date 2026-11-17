@@ -5,7 +5,7 @@ import ts from 'typescript';
 const compiled = ts.transpileModule(readFileSync('src/data/ardhiFlagship.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { commissioningChecks, firstJob, firstJobPresentation, serviceEntries, verifiedEvidence } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
 const proof = { title: 'Reviewed inspection', href: '/equipment/documents/inspection.pdf', state: 'verified' };
-test('November 8 activity updates do not grant commissioning approval', () => {
+test('November 16 approval is recorded without granting commissioning completion', () => {
   for (const id of ['battery', 'first-drive', 'hydraulics', 'first-start']) {
     const check = commissioningChecks.find(c => c.id === id);
     assert.equal(check.status, 'in_progress', id);
@@ -14,9 +14,10 @@ test('November 8 activity updates do not grant commissioning approval', () => {
   }
   assert.equal(commissioningChecks.find(c => c.id === 'engine-oil').status, 'needs_attention');
   assert.equal(commissioningChecks.find(c => c.id === 'hydraulic-fluid').status, 'not_started');
-  assert.equal(commissioningChecks.find(c => c.id === 'passport-complete').status, 'blocked');
-  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /Throttle-travel repair is owner-verified and resolved/i);
-  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /service-blocking thrown track/i);
+  assert.equal(commissioningChecks.find(c => c.id === 'passport-complete').status, 'in_progress');
+  assert.equal(commissioningChecks.find(c => c.id === 'passport-complete').date, '2026-11-16');
+  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /Inspection passed and commissioning approved November 16, 2026 \(owner-reported\)/i);
+  assert.match(commissioningChecks.find(c => c.id === 'passport-complete').notes, /not completion of every commissioning procedure/i);
   assert.equal(commissioningChecks.find(c => c.id === 'first-start').date, '2026-10-26');
   assert.equal(commissioningChecks.find(c => c.id === 'first-drive').date, '2026-10-31');
   const attachment = commissioningChecks.find(c => c.id === 'attachment-test');
