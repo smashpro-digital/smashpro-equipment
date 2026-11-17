@@ -149,7 +149,7 @@ test("golf cart concept remains canonical and is visually subordinate on the sho
 test("equipment data does not claim public availability", () => {
   const data = readFileSync("src/data/equipment.ts", "utf8");
   assert.doesNotMatch(data, /available now|rent now|book now/i);
-  assert.match(readFileSync("src/data/mzigoPassport.ts", "utf8"), /Rental availability has not been announced/);
+  assert.match(readFileSync("src/components/MzigoPassport.tsx", "utf8"), /Rental availability has not been announced/);
 });
 
 test("shared navigation provides an obvious route to the main SmashPro site", () => {
@@ -199,7 +199,7 @@ test("both fleet passports retain identity sections and the current Mzigo eviden
     .forEach(heading => assert.ok(mzigoPassport.includes(`# ${heading}`), heading));
   assert.match(mzigoPassport, /\*\*SP-MZIGO-26E\*\*/);
   assert.match(mzigoPassport, /do \*\*not\*\* by themselves prove/);
-  assert.match(mzigoPassport, /Paid in Full \/ Shipping Preparation/);
+  assert.match(mzigoPassport, /Shipped \/ Ocean Transit — Pacific Crossing/);
 });
 
 test("SP-MZIGO-26E retains historical payload beside physical plate evidence", () => {
