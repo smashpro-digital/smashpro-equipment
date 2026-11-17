@@ -121,21 +121,22 @@ test('archive renders chapter controls, search, enlargement, inline video and se
   assert.doesNotMatch(html, /No branding media|No hydraulics media|No completed machine media/);
 });
 
-test('paid-in-full lifecycle has one current stage and does not advance shipping without evidence', () => {
+test('ocean-transit lifecycle has one current stage and does not advance arrival without evidence', () => {
   const { mzigoLifecycle, mzigoFinalPayment, mzigoStatusLabel, mzigoCurrentStage } = load('src/data/mzigoPassport.ts');
   assert.equal(mzigo.identity.factoryModel, 'K600');
   assert.equal(mzigo.identity.operatingHours, 0);
   assert.equal(mzigoFinalPayment.status, 'complete');
-  assert.equal(mzigo.statusLabel, 'Paid in full · qingdao export staging');
+  assert.equal(mzigo.statusLabel, 'Shipped · ocean transit');
   assert.equal(mzigo.statusLabel, mzigoStatusLabel);
   assert.equal(mzigo.factoryUpdate.heading, mzigoStatusLabel);
   assert.ok(mzigo.overview.startsWith(mzigoStatusLabel), "Client metadata must retain the canonical payment status");
   assert.equal(mzigo.factoryUpdate.date, '2026-10-07');
-  assert.equal(mzigoCurrentStage, 'Qingdao Export Staging');
-  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'complete').map(s => s.id), ['build-approved', 'final-payment', 'shipping-preparation', 'wooden-crate']);
-  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'current').map(s => s.id), ['port-arrival']);
-  assert.ok(mzigoLifecycle.slice(5).every(s => s.status === 'pending' && s.progress === 0));
-  assert.ok(mzigoLifecycle.filter(s => s.status !== 'complete').every(s => s.progress === 0));
+  assert.equal(mzigoCurrentStage, 'Ocean Transit');
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'complete').map(s => s.id), ['build-approved', 'final-payment', 'shipping-preparation', 'wooden-crate', 'port-arrival', 'freight-booking', 'factory-departure', 'vessel-assignment', 'ocean-departure']);
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'current').map(s => s.id), ['ocean-tracking']);
+  assert.deepEqual(mzigoLifecycle.filter(s => s.status === 'pending').slice(0, 2).map(s => s.id), ['export-inspection', 'container-loading'], 'undocumented inspection and container loading must stay pending');
+  assert.ok(mzigoLifecycle.slice(12).every(s => s.status === 'pending' && s.progress === 0), 'arrival and later stages must remain pending without evidence');
+  assert.ok(mzigoLifecycle.filter(s => s.status === 'pending').every(s => s.progress === 0));
   assert.deepEqual(mzigo.factoryUpdate.timeline.slice(6), mzigoLifecycle.map(s => ({label:s.label,status:s.status === 'complete' ? 'completed' : s.status === 'current' ? 'current' : 'upcoming'})));
   assert.equal(mzigoShippingEvidenceSlots.find(s => s.id === 'final-payment').status, 'Complete');
   assert.ok(mzigoShippingEvidenceSlots.filter(s => !['final-payment','packing-crating','port-milestones'].includes(s.id)).every(s => s.status === 'Pending'));
@@ -151,8 +152,8 @@ test('complete payment cannot coexist with stale payment copy in rendered or exp
     assert.doesNotMatch(text, /final payment pending|payment pending|final payment is current|final payment is planned|payment, export, transport/i);
     assert.doesNotMatch(text, /I020261001784090010205|880\.57|855\.00|25\.57/);
   }
-  assert.match(html, /Paid in full/);
-  assert.match(html, /Current stage Qingdao Export Staging/);
+  assert.match(html, /Shipped · ocean transit/);
+  assert.match(html, /Current stage Ocean Transit/);
   assert.match(html, /is-complete[^]*?Final Payment/);
   assert.equal(mzigo.timeline.filter(e => e.id === 'mzigo-final-payment').length, 1);
   assert.equal(mzigo.timeline.find(e => e.id === 'mzigo-final-payment').occurredAt, '2026-10-01');
@@ -194,10 +195,10 @@ test('shared journey uses asset-specific evidence and computes lifecycle positio
   const { FleetPassportJourney, PassportReadingStatus } = load('src/components/FleetPassportJourney.tsx');
   const { mzigoLifecycle, mzigoPublicLocation, mzigoStatusDetail } = load('src/data/mzigoPassport.ts');
   const html = renderToStaticMarkup(React.createElement(FleetPassportJourney, { assetId:mzigo.fleetId, stages:mzigoLifecycle, location:mzigoPublicLocation, description:mzigoStatusDetail, metrics:[] }));
-  assert.match(html, /Supplier-reported warehouse staging; not live tracking/);
-  assert.match(html, /2026-10-07/);
-  assert.match(html, /5 \/ 17/);
-  assert.match(html, /href="#history-mzigo-qingdao-staging"/);
+  assert.match(html, /Supplier shipment evidence plus public vessel-route context; not cargo-specific live tracking/);
+  assert.match(html, /2026-11-15/);
+  assert.match(html, /12 \/ 17/);
+  assert.match(html, /href="#shipping-evidence"/);
   assert.doesNotMatch(html, /EVER MAX|SP-ARDHI-26|latitude|longitude/);
   const advanced = mzigoLifecycle.map((stage,index) => ({...stage,status:index<5?'complete':index===5?'current':'pending'}));
   const status = renderToStaticMarkup(React.createElement(PassportReadingStatus, {assetId:mzigo.fleetId,stages:advanced}));
@@ -355,7 +356,7 @@ test('generated MZIGO record qualifies ratings while the shared ARDHI sticker re
   const render = (item, evidenceMode) => renderToStaticMarkup(React.createElement(WindowSticker, {item, evidenceMode, packages:[], scores:{documentation:0,maintenance:0}}));
   const html = render(mzigo, true);
   assert.match(html, /not an OEM certificate/);
-  assert.match(html, /Paid in full · qingdao export staging/);
+  assert.match(html, /Shipped · ocean transit/);
   assert.doesNotMatch(html, /K600 - verification pending/);
   assert.match(html, /750 kg/);
   assert.doesNotMatch(html, /Maintenance Score|No package currently qualified|Estimated Fleet Value/);
