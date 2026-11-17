@@ -4,6 +4,7 @@ import { ShelleyesEvaluationPassportPage, ShelleyesFieldStudyPage } from "../pag
 import { NyasiPassportPage } from "../pages/NyasiPassportPage";
 import { Route, Switch } from "react-router-dom";
 import { ArdhiPassportPage } from "../pages/ArdhiPassportPage";
+import { ArdhiMediaCollectionPage } from "../pages/ArdhiMediaCollectionPage";
 import { MzigoPassportPage } from "../pages/MzigoPassportPage";
 import { GenericPassportRoute, genericPassportRoutes } from "../pages/GenericPassportRoute";
 import { GolfCartTechBuildPage } from "../pages/GolfCartTechBuildPage";
@@ -23,6 +24,7 @@ export function App() {
       <Route exact path="/shelleyes-s7p-evaluation.html" component={ShelleyesEvaluationPassportPage} />
       <Route exact path="/shelleyes-s7p-field-study.html" component={ShelleyesFieldStudyPage} />
       <Route exact path="/sp-ardhi-26.html" component={ArdhiPassportPage} />
+      <Route exact path="/sp-ardhi-26-media.html" component={ArdhiMediaCollectionPage} />
       <Route exact path="/sp-mzigo-26.html" component={MzigoPassportPage} />
       <Route exact path="/sp-umba-26.html" render={() => <EquipmentPassportPage slug="sp-umba-26" />} />
       {genericPassportRoutes.map(route => <Route exact key={route.path} path={route.path} render={() => <GenericPassportRoute assetId={route.assetId} />} />)}
