@@ -69,7 +69,7 @@ SmashPro supplies the **exact existing approved SmashPro logo vector** (previous
 |---|---|---|
 | 2026-11-17 | RHINO BITE concept and actual grapple geometry documented | Concept approved, production pending |
 | 2026-11-17 | Measurement and placement photo batches received in conversation | Preliminary only |
-| 2026-11-17 | Google Drive artwork folders created | Completed; awaiting asset uploads |
+| 2026-11-17 | Google Drive artwork folders created | Completed; 21 measurement JPGs uploaded and indexed (file-level dimensions pending) |
 | Pending | Verify master logo and SP-ID vectors | Not started |
 | Pending | Validate panel dimensions and exclusions | Not completed |
 | Pending | Approve illustration, production proof, quote and rights | Not completed |
@@ -77,3 +77,35 @@ SmashPro supplies the **exact existing approved SmashPro logo vector** (previous
 | Pending | Field durability inspections | Not completed |
 
 **Commissioning separation:** Hydraulic operation was owner-verified, but grapple quick-attach mechanical locking remains on hold. This graphics project does not change attachment readiness, safe-to-operate status, or commissioning sign-off.
+
+## November 17, 2026 — Verified Google Drive measurement-photo inventory
+
+**Source folder:** [03 — Measurements & Placement](https://drive.google.com/drive/folders/1zJwQTZvg_2KG148XTrcj1tgMzmowzB8O). Google Drive image-only folder listing verified **21 JPEG originals** after a generic file listing incorrectly returned zero. The links below are verified Drive IDs; original filenames are preserved. Upload verification does **not** mean each scale reading or proposed decal boundary has been independently validated.
+
+| Original filename | Drive evidence | Measurement / placement classification |
+|---|---|---|
+| `20261117_134316.jpg` | [Open original](https://drive.google.com/file/d/1gpvu3S1nfvERFxsbkySUTxEtOd8iqY_c/view) | Caliper / local steel geometry (batch; individual datum pending) |
+| `20261117_134332.jpg` | [Open original](https://drive.google.com/file/d/1KMEnkFHvcwMK_QehpLtmn-H9RAZGmV9d/view) | Caliper / local steel geometry (batch; individual datum pending) |
+| `20261117_134343.jpg` | [Open original](https://drive.google.com/file/d/1RSvuECjXFoHrviT1lQxSs99nEcI8x-kK/view) | Caliper / local steel geometry (batch; individual datum pending) |
+| `20261117_134358.jpg` | [Open original](https://drive.google.com/file/d/1ZZ7LphVwlLoAXatnp6XoamKHPmE27zkP/view) | Caliper / local steel geometry (batch; individual datum pending) |
+| `20261117_134442.jpg` | [Open original](https://drive.google.com/file/d/1c75e7gxGLC-6IKiPdJ3mLxrHu9XtO3z2/view) | Caliper / local steel geometry (batch; individual datum pending) |
+| `20261117_134452.jpg` | [Open original](https://drive.google.com/file/d/1dlvJvSuKQpmOKVrbzhd57PStmHL_Gh6U/view) | Tape / upper-jaw and structural geometry (batch; individual datum pending) |
+| `20261117_134506.jpg` | [Open original](https://drive.google.com/file/d/1gf6zpDo06jZPu0K0Dv7VZ1oOY2JkmHFV/view) | Tape / upper-jaw and structural geometry (batch; individual datum pending) |
+| `20261117_134520.jpg` | [Open original](https://drive.google.com/file/d/1J1RIaBVTx5-ZHB9SqlLcxKj53kk-VYXV/view) | Tape / upper-jaw and structural geometry (batch; individual datum pending) |
+| `20261117_134530.jpg` | [Open original](https://drive.google.com/file/d/13jwLn9BTEt0TiX00w3Kon16zP3dlzMZo/view) | Tape / upper-jaw and structural geometry (batch; individual datum pending) |
+| `20261117_134556.jpg` | [Open original](https://drive.google.com/file/d/1zcosqF_b0mCknmNesE4dE1yXYQdDBbHk/view) | Tape / upper-jaw and structural geometry (batch; individual datum pending) |
+| `20261117_134603.jpg` | [Open original](https://drive.google.com/file/d/1L5WizeE7BVZVYCPnLyHRJXyWxHAuOfJU/view) | Tape / upper-jaw and structural geometry (batch; individual datum pending) |
+| `20261117_134917.jpg` | [Open original](https://drive.google.com/file/d/1ZTQFRjnmkfwJvLNk44ubXD1SvpJJmDkb/view) | Lower-jaw and interior geometry (batch; individual datum pending) |
+| `20261117_134618.jpg` | [Open original](https://drive.google.com/file/d/1ePlfhZkGMerdX1FUpUvPmdIopsnS-OTM/view) | Lower-jaw and interior geometry (batch; individual datum pending) |
+| `20261117_134629.jpg` | [Open original](https://drive.google.com/file/d/16BqskHA_s1yMavspZr5mUtVKbBOeM1aJ/view) | Lower-jaw and interior geometry (batch; individual datum pending) |
+| `20261117_134658_001.jpg` | [Open original](https://drive.google.com/file/d/1BOQN5kJkwLJ3v6TdaCgt9l82GFnDAKeL/view) | Lower-jaw and interior geometry (batch; individual datum pending) |
+| `20261117_134712.jpg` | [Open original](https://drive.google.com/file/d/1jmNPEAea7sw8_o3HrSTkjW7IF5We_f15/view) | Lower-jaw and interior geometry (batch; individual datum pending) |
+| `20261117_135048.jpg` | [Open original](https://drive.google.com/file/d/1tc_X-gW2G-3LCjZgnLC_T-xUbOq3ncmz/view) | Overall jaw, crossbar or placement reference (batch; individual datum pending) |
+| `20261117_135058.jpg` | [Open original](https://drive.google.com/file/d/1LTiq0bIval-1zGbZUKYNMoRfRh_IOsHg/view) | Overall jaw, crossbar or placement reference (batch; individual datum pending) |
+| `20261117_135057.jpg` | [Open original](https://drive.google.com/file/d/1VYofOFSVgfyMZ2HgBB_IJQ0BWpSKEaGb/view) | Overall jaw, crossbar or placement reference (batch; individual datum pending) |
+| `20261117_135107.jpg` | [Open original](https://drive.google.com/file/d/1vWpx-uTjWpuBdsdRasYQDcvdJoHjWF0-/view) | Overall jaw, crossbar or placement reference (batch; individual datum pending) |
+| `20261117_135126.jpg` | [Open original](https://drive.google.com/file/d/10Ayizuo39WLGuf8JzYujayFmVewxsP-v/view) | Overall jaw, crossbar or placement reference (batch; individual datum pending) |
+
+**Classification limitation:** Batch descriptions are provisional based on the user's Nov 17 conversation photo sequence, not a file-by-file visual validation of these exact Drive IDs. Do not interpret the table as a final one-to-one image-to-dimension mapping. Before vendor proofing, inspect each original, annotate the precise steel datum and endpoints, confirm readings and units, and record the maximum safe vinyl footprint by location. No cut-ready dimensions approved.
+
+**Cross-system placement IDs for follow-up:** `RB-EYE-L`, `RB-EYE-R`, `RB-MOUTH-RIB-01..`, `RB-SIDE-L`, `RB-SIDE-R`, `RB-LOGO`, `RB-ASSET-ID`. Associate each with verified Drive photo IDs and physical measurement only after inspection.
