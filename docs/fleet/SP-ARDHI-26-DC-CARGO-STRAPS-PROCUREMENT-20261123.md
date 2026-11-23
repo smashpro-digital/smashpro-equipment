@@ -104,7 +104,39 @@ Editorial destination: [Fence Line to Load-Out field study](https://smashpro.app
 
 Internal progress: [Equipment issue #159](https://github.com/smashpro-digital/smashpro-equipment/issues/159). Commercial confirmations and raw receipts should stay out of customer-facing passport bundles, machine indexes, photos and public gallery data.
 
-## 8. Next milestones
+## 8. Supplier responsiveness assessment — first order (November 23, 2026)
+
+> **SmashPro owner assessment:** The direct DC Cargo correspondence has been **top-tier**, particularly the combination of executive routing, transparent product guidance, rapid documentation and same-day fulfillment coordination. This reflects **pre-delivery communication quality only**, not a product-performance rating, completed delivery or formal supplier endorsement. Keep this assessment distinct from independently verified service-level commitments.
+
+### Documented communication milestones
+
+| Time (Eastern) | DC Cargo action | Customer-service significance |
+| --- | --- | --- |
+| Nov 23, about 2:00 PM | **Joe Engel, President**, forwarded SmashPro's inquiry to **Shiv Shiwcharan, Operations Manager – Warehouse & Distribution** | Direct escalation to a person able to discuss inventory, configuration and shipping |
+| 2:39 PM | Shiv identified specific green 12-ft/18-ft strap SKUs, acknowledged the color preference and estimated **$59.33** expedited shipping with a Friday arrival target | Concrete recommendation addressing the project's deadline, not a generic marketing reply |
+| 3:07 PM | Shiv explained that retractable straps were out of local stock and only available in black; gave an Amazon alternative without promising its delivery | Clear constraint disclosure instead of overselling unavailable options |
+| 3:43 PM | Shiv supplied itemized quote **#6067920**, a payment route, and separate SKU-specific WLL sew-tag artwork | Fast commercial response with technical rating evidence; resolved the online product-rating ambiguity |
+| 4:07 PM | Shiv confirmed that the receiving address had been corrected and the supplied **J-hooks** matched the listed design | Responded directly to a checkout blocker and configuration question |
+| 4:09 PM | SmashPro's **$183.27 payment** was confirmed by the payment processor | Completed purchase event, not a supplier response metric |
+| **4:21 PM** | Shiv personally acknowledged payment and stated production was planned **Tuesday morning, Nov 24**, for dispatch that day toward a **Friday, Nov 27 delivery target** | Proactive next-step communication shortly after payment; **not proof of shipment or delivery** |
+
+### Qualitative scorecard (initial purchase communication only)
+
+| Dimension | Owner assessment | Supporting observation |
+| --- | --- | --- |
+| Access to decision-makers | **Excellent** | President routed inquiry directly to operations |
+| Timeliness of communication | **Excellent** | Multiple substantive same-day replies from inquiry through payment acknowledgment |
+| Clarity and honesty | **Excellent** | Out-of-stock retractable models and limitations disclosed |
+| Technical specificity | **Strong** | Exact models, hardware, WLL sew tags and tailored lengths provided |
+| Purchase support | **Excellent** | Itemized quote, payment channel, address correction and payment acknowledgment |
+| Delivery execution | **Not yet assessed** | Production and shipment only planned, no carrier scan/tracking or receipt yet |
+| Product quality / field performance | **Not yet assessed** | No physical inspection or field use recorded |
+
+**Relationship implication:** Mark DC Cargo as a **high-priority supplier for future quote requests** based on responsive pre-sale and checkout correspondence. Reassess after actual delivery, packaging inspection and field results. The submitted affiliate/custom-color proposal remains a separate, unapproved conversation.
+
+**Evidence provenance:** SmashPro Gmail correspondence from November 23, 2026, including supplier quote reply, retractable stock response, WLL tag attachments, shipping-address confirmation, and Shiv's 4:21 PM payment acknowledgment; seller payment confirmation. Raw email bodies, private contact/address details and payment credentials remain outside the public repository.
+
+## 9. Next milestones
 
 1. DC Cargo warehouse confirmation and carrier tracking.
 2. Arrival at Hopkins and inspection of all six assemblies.
