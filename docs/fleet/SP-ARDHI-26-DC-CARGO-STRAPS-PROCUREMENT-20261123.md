@@ -143,3 +143,16 @@ Internal progress: [Equipment issue #159](https://github.com/smashpro-digital/sm
 3. Independent verification of actual intended cargo-securement use and restrictions.
 4. November 28 job documentation; only publish proven results.
 5. Separate, optional follow-up with Shiv/Joe about affiliate and custom strap opportunity.
+
+## Post-field-study partnership follow-up (owner-directed, November 23, 2026)
+
+**Trigger:** After Field Study 001 (fence cleanup scheduled November 28) is completed and the actual strap evaluation is documented. If no safe strap evaluation occurs, state that candidly rather than representing the straps as tested.
+
+**Owner intention:** Re-engage **Shiv Shiwcharan** and **Joe Engel** at DC Cargo Mall after the field study to discuss:
+
+1. **Retractable product seed / sample evaluation**, preferably **green**, with **purple** as a secondary brand color. Seek a properly rated and length-appropriate retractable configuration for future ARDHI/attachment transport, not an assumption that the purchased standard straps and retractables have equivalent WLL or hook compatibility. DC Cargo previously reported warehouse retractables out of stock and available only in black; ask whether production/inventory or custom-color options have changed.
+2. **Trackable affiliate/referral program:** request a SmashPro affiliate link, commission and attribution rules, return/reversal handling, reporting/payment process and whether branded product listings qualify.
+3. **SMASHPRO customer code / contractor terms:** request available customer discount, eligibility and stacking with referral tracking; explore a longer-term preferred-supplier relationship and potential custom green/purple webbing.
+4. **Evidence-led review offer:** share the WordPress [fence-removal field study](https://smashpro.app/ardhi-grapple-fence-removal-field-study/) and actual photographs, tested fitment and operator observations, clearly labeling any untested portion. Offer an unbiased field review and future case-study placements subject to product delivery, safe approved use and sponsorship disclosure.
+
+**Follow-up package:** actual receipt date, physical sewn-label photos, configured trailer/anchor measurements, confirmed strap use (or non-use), real positives/limitations, edited short demo, case-study URL, and recommendation for a next-phase retractable prototype. Do not send a partnership pitch, call DC Cargo a sponsor, promise an endorsement or invent test outcomes before recording the results. Draft outreach for owner review before sending.
