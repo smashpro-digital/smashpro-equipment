@@ -1,6 +1,6 @@
 # SP-ARDHI-26 | DC Cargo Green Ratchet Straps Procurement Record
 
-> **Status as of November 23, 2026:** **Purchased and paid in full.** Production, shipment, tracking, receipt, inspection, operational suitability, field-use results and any affiliate/sponsorship agreement remain pending.  
+> **Status as of November 23, 2026:** **Purchased and paid in full; DC Cargo shipment notice issued with FedEx tracking.** Independent carrier pickup/scan, delivery, inspection, operational suitability, field-use results and any affiliate/sponsorship agreement remain pending.  
 > **Record type:** Supporting cargo-securement gear for [SP-ARDHI-26](SP-ARDHI-26-PASSPORT.md), its separate [Loflin grapple](SP-ARDHI-26-GRAPPLE-PROCUREMENT.md), and [Field Study 001](https://smashpro.app/ardhi-grapple-fence-removal-field-study/). These straps are **not a new machine or attachment passport**.  
 > **Procurement evidence:** DC Cargo quote #6067920, sewn-label documents for both SKUs and payment confirmation on 2026-11-23. Raw invoice, full billing/shipping addresses, phone, payment reference, payment-link token and other sensitive records remain in the private procurement/email system, not this repository.
 
@@ -19,9 +19,9 @@
 | Delivery region | Hopkins, South Carolina 29061; private street and contact omitted |
 | Order contents | Six green, 2-inch-wide, **standard non-retractable** ratchet straps with wire/double-J hooks |
 | Intended application | Evaluate cargo-securement ergonomics and appropriate rated restraint options for ARDHI and detachable Loflin attachment when approved |
-| Confirmed state | **Paid / awaiting production or shipping confirmation** |
+| Confirmed state | **Paid / vendor shipment notification issued; awaiting carrier scan and delivery** |
 | Field-study appointment | Saturday, **2026-11-28**, actual usage not recorded |
-| Proposed shipping target | Tuesday **2026-11-24** dispatch and Friday **2026-11-27** arrival; **not a guarantee** |
+| Proposed shipping target | Vendor emailed a **shipped** notice on November 23, identifying **FedEx** and all six straps. Target arrival Friday **2026-11-27**; carrier pickup/scan and delivery still to be verified. |
 
 ## 2. Purchased configuration and commercial reconciliation
 
@@ -64,7 +64,8 @@ The supplier explicitly confirmed that the order's shipping street was corrected
 | Nov 23, 3:43 PM ET | Quote #6067920 and sewn labels provided; payment requested by end of day for Tuesday production/dispatch | Commercial offer and precise WLL evidence |
 | Nov 23, 4:07 PM ET | Ship-to corrected, J-hooks confirmed as pictured | Supplier confirmation; labels and shipment yet to be inspected |
 | **Nov 23, 4:09 PM ET** | **Payment confirmation: $183.27 paid to DC Cargo** | **Procurement stage completed** |
-| Nov 24 onward | Production, dispatch, parcel tracking, receipt | **Not confirmed in this record** |
+| **Nov 23, 5:00 PM ET** | **Automated DC Cargo shipment email** identified FedEx tracking and all six purchased strap units | **Vendor shipment notice received**; does not independently establish FedEx possession, carrier scan or delivery |
+| Nov 24 onward | Carrier events, physical receipt, inspection | **Carrier possession and delivery pending verification** |
 | Nov 28 | Fence-removal/cleanup field study | **Scheduled, not performed** |
 
 ## 5. Load planning and verification gates
@@ -83,7 +84,8 @@ The supplier explicitly confirmed that the order's shipping street was corrected
 - [x] Capture supplier quote/order and payment confirmation privately; reconcile $183.27 total.
 - [x] Obtain 12-ft and 18-ft manufacturer sewn-label artwork showing 1,500-lb WLL and 4,500-lb break strength.
 - [x] Confirm vendor-stated wire J-hooks and corrected ship-to location.
-- [ ] Obtain production/dispatch confirmation and carrier tracking.
+- [x] Receive vendor shipment notice with FedEx tracking and the full 4 + 2 SKU quantity; full tracking number retained in connected private Gmail.
+- [ ] Verify first FedEx acceptance/in-transit scan and projected arrival.
 - [ ] Confirm actual delivery date and photograph shipping carton (redact private label data).
 - [ ] Photograph six physical straps, hooks, stitching and exact visible WLL labels; compare to SKU records.
 - [ ] Inspect every strap for transit/manufacturing damage and record actual condition.
@@ -138,7 +140,7 @@ Internal progress: [Equipment issue #159](https://github.com/smashpro-digital/sm
 
 ## 9. Next milestones
 
-1. DC Cargo warehouse confirmation and carrier tracking.
+1. Verify FedEx acceptance, movement scans and any updated delivery estimate (vendor shipment email received November 23).
 2. Arrival at Hopkins and inspection of all six assemblies.
 3. Independent verification of actual intended cargo-securement use and restrictions.
 4. November 28 job documentation; only publish proven results.
@@ -156,3 +158,7 @@ Internal progress: [Equipment issue #159](https://github.com/smashpro-digital/sm
 4. **Evidence-led review offer:** share the WordPress [fence-removal field study](https://smashpro.app/ardhi-grapple-fence-removal-field-study/) and actual photographs, tested fitment and operator observations, clearly labeling any untested portion. Offer an unbiased field review and future case-study placements subject to product delivery, safe approved use and sponsorship disclosure.
 
 **Follow-up package:** actual receipt date, physical sewn-label photos, configured trailer/anchor measurements, confirmed strap use (or non-use), real positives/limitations, edited short demo, case-study URL, and recommendation for a next-phase retractable prototype. Do not send a partnership pitch, call DC Cargo a sponsor, promise an endorsement or invent test outcomes before recording the results. Draft outreach for owner review before sending.
+
+## Vendor shipment notice — November 23, 2026
+
+DC Cargo emailed SmashPro at approximately **5:00 PM Eastern, November 23, 2026** with subject **“A shipment from order 6067920 is on the way.”** The message explicitly identifies **FedEx**, a tracking number, the expected ship-to locality, and **all four `218GRSWH` plus two `212GRSWH` straps**. The full tracking number and recipient street/telephone remain in private email, rather than this publicly accessible repository. The email's phrase “Your order has shipped” is **vendor-generated fulfillment status**, which must not be confused with an independently verified FedEx pickup or arrival scan. The seller had previously described a Friday, November 27 delivery target; no delivery has occurred in the evidence reviewed here.
