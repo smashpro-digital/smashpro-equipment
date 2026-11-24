@@ -34,6 +34,14 @@ These fleet IDs are reserved and approved but not yet purchased, owned, or in se
 | SP-GARI-26E | Electric utility / promotional golf-cart rebuild (planned) | [SP-GARI-26E-PASSPORT.md](SP-GARI-26E-PASSPORT.md) | [SP-GARI-26E-PROCUREMENT.md](SP-GARI-26E-PROCUREMENT.md) |
 | SP-INAMA-26 | Low-profile hydraulic tilt/lowering equipment trailer (planned) | [SP-INAMA-26-PASSPORT.md](SP-INAMA-26-PASSPORT.md) | [SP-INAMA-26-PROCUREMENT.md](SP-INAMA-26-PROCUREMENT.md) |
 
+## Supporting Field Gear Procurements
+
+These purchases support existing equipment or field studies; they are **not separate fleet assets or commissioned attachments**.
+
+| Associated equipment | Supporting gear | Procurement record | Current state |
+| --- | --- | --- | --- |
+| SP-ARDHI-26 / SP-ATT-GRP-001 | Six DC Cargo green ratchet straps (four 18-ft + two 12-ft) | [DC Cargo strap procurement — Nov 23, 2026](SP-ARDHI-26-DC-CARGO-STRAPS-PROCUREMENT-20261123.md) | **Paid November 23; awaiting shipment, receipt and safe-use verification** |
+
 ## Supporting Media Records
 
 | Fleet ID | Media and source register |
