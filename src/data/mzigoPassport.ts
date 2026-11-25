@@ -18,9 +18,9 @@ export const mzigoFinalPayment = {
 };
 
 export const mzigoPublicLocation = {
-  label: "Pacific crossing · Panama next",
+  label: "Panama arrived · Canal transit next",
   verification: "Supplier shipment evidence plus public vessel-route context; not cargo-specific live tracking",
-  observedAt: "2026-11-15",
+  observedAt: "2026-11-25",
   evidenceHref: "#shipping-evidence",
 };
 
@@ -36,7 +36,7 @@ export const mzigoLifecycle: FleetLifecycleStage[] = [
   { id: "container-loading", label: "Container Loading", status: "pending", progress: 0, href: "#mzigo-archive-export-journey" },
   { id: "vessel-assignment", label: "Vessel Assignment", status: "complete", progress: 100, href: "#shipping-evidence" },
   { id: "ocean-departure", label: "Ocean Departure", status: "complete", progress: 100, href: "#mzigo-archive-export-journey" },
-  { id: "ocean-tracking", label: "Ocean Transit", status: "current", progress: 70, href: "#mzigo-archive-export-journey" },
+  { id: "ocean-tracking", label: "Ocean Transit", status: "current", progress: 82, href: "#mzigo-archive-export-journey" },
   { id: "us-arrival", label: "U.S. Arrival", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "customs", label: "Customs", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
   { id: "delivery", label: "Delivery", status: "pending", progress: 0, href: "#mzigo-archive-delivery" },
@@ -48,4 +48,4 @@ const currentIndex = mzigoLifecycle.findIndex(stage => stage.status === "current
 export const mzigoCurrentStage = mzigoLifecycle[currentIndex].label;
 export const mzigoNextStage = mzigoLifecycle[currentIndex + 1].label;
 export const mzigoStatusLabel = `Shipped · ${mzigoCurrentStage.toLowerCase()}`;
-export const mzigoStatusDetail = "Supplier-confirmed shipment QDOH26100023 departed October 23, 2026 and remains in ocean transit aboard the supplier-provided vessel/voyage context NUE TALOS 1289-045E. Public vessel observations through November 15 support completion of the East Asia rotation and a Pacific crossing toward Panama/Colón. The supplier ETA remains November 28; newer public schedules indicate an evolving Savannah window around November 28 to December 2, but Savannah is not cargo-confirmed. Container loading remains pending because port-loading evidence was unavailable. Export inspection, container/B/L, U.S. arrival, customs, delivery, commissioning and field validation remain pending until shipment-specific evidence is received.";
+export const mzigoStatusDetail = "Supplier-confirmed shipment QDOH26100023 remains in ocean transit on the supplier-provided NUE TALOS 1289-045E voyage context. Public vessel observations on November 25 place TALOS at/near Balboa on the Pacific side of the Panama Canal, advancing the route context to Panama arrived with canal transit next. The original supplier ETA of November 28 is retained in history; current vessel schedules support a Savannah window around December 1–2, but Savannah is not cargo-confirmed. Container loading remains pending because port-loading evidence was unavailable. Export inspection, container/B/L, U.S. arrival, customs, delivery, commissioning and field validation remain pending until shipment-specific evidence is received.";
