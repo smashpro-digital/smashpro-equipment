@@ -3,7 +3,7 @@
 > **SmashPro Fleet Equipment Passport**  
 > Version: 1.4<br>
 > Status: Shipped / Ocean Transit — Pacific Crossing<br>
-> Last Updated: 2026-11-16
+> Last Updated: 2026-11-25
 
 ---
 
@@ -350,7 +350,7 @@ Prepared evidence slots retain separate gates for final-payment evidence, the fi
 
 Supplier confirmation records shipment **QDOH26100023** as shipped on **October 23, 2026**. Supplier-provided vessel/voyage context is **NUE TALOS / 1289-045E**. The supplier ETA remains **November 28, 2026**.
 
-Public vessel observations through November 15 support completion of the East Asia port rotation and a Pacific crossing toward **Panama/Colón**. Newer public schedules indicate an evolving Savannah window around **November 28–December 2**. Savannah remains schedule-supported rather than cargo-confirmed because the container number and bill of lading have not yet been supplied.
+Public vessel observations on **November 25** place TALOS at/near **Balboa on the Pacific side of the Panama Canal**, completing the tracked trans-Pacific leg and advancing the route context to **Panama Arrived / Canal Transit Next**. The original supplier ETA of **November 28** is retained as historical supplier evidence. Current vessel schedules support a Savannah window around **December 1–2**. Savannah remains schedule-supported rather than cargo-confirmed because the container number and bill of lading have not yet been supplied.
 
 Lifecycle evidence now supports Packing Preparation, Wooden Crate, Qingdao Export Staging, Freight Booked, Factory Handoff, Vessel Assignment and Ocean Departure as complete. **Ocean Transit** is current. Container Loading remains pending because the supplier reported that port-loading photography/evidence was unavailable. Export Inspection also remains pending until documentary evidence is received.
 
