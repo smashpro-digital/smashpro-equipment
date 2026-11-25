@@ -1,0 +1,54 @@
+.ardhi-media-collection{background:var(--ink)}
+.ardhi-media-collection [id]{scroll-margin-top:84px}
+.ardhi-collection-hero{position:relative;display:grid;align-items:end;min-height:640px;overflow:hidden;background:#070a08}
+.ardhi-collection-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 68%}
+.ardhi-collection-hero__shade{position:absolute;inset:0;background:linear-gradient(90deg,#070a08f2 0%,#070a0880 46%,transparent 72%),linear-gradient(0deg,#070a08f0,transparent 55%)}
+.ardhi-collection-hero__copy{position:relative;max-width:680px;padding-block:72px 48px}
+.ardhi-collection-hero h1{margin:.3rem 0;font-size:clamp(2.8rem,7vw,5.6rem);line-height:.9;letter-spacing:-.03em}
+.ardhi-collection-hero .lead{color:#dfe7dd;max-width:560px}
+.ardhi-collection-hero__actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+.ardhi-collection-hero__actions a{display:inline-flex;min-height:46px;align-items:center;padding:.7rem 1.1rem;border:1px solid var(--green);color:#eaf4e6;font-weight:800;font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;text-decoration:none}
+.ardhi-collection-hero__actions a:first-child{background:var(--green);color:#081006}
+.ardhi-collection-hero small{display:block;margin-top:1.1rem;color:#b9c6b7;max-width:520px}
+.ardhi-collection-stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:1.4rem}
+.ardhi-collection-stories article{display:flex;flex-direction:column;gap:.5rem;padding:1.4rem;border:1px solid var(--line);background:linear-gradient(150deg,#101611,#0b100c)}
+.ardhi-collection-stories article .eyebrow{color:#b48ae0}
+.ardhi-collection-stories h3{margin:0;font-size:1.25rem;line-height:1.25}
+.ardhi-collection-stories p{margin:0;color:var(--muted)}
+.ardhi-collection-stories a{margin-top:auto;color:var(--green-bright);font-weight:700;text-decoration:none}
+.ardhi-collection-note{margin-top:1rem;color:#8f9a8f;font-size:.85rem}
+.ardhi-collection-filters{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;padding-block:12px;background:#070a08ee;backdrop-filter:blur(6px);border-block:1px solid var(--line)}
+.ardhi-collection-filters [role=group]{display:flex;flex-wrap:wrap;gap:.45rem}
+.ardhi-collection-filters button{padding:.5rem .8rem;border:1px solid var(--line);background:#0e140f;color:#cdd7cc;font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.ardhi-collection-filters button[aria-pressed=true]{border-color:var(--green);background:#14240f;color:#d8f5c7}
+.ardhi-collection-chapter header{max-width:760px}
+.ardhi-collection-chapter header p{color:var(--muted)}
+.ardhi-collection-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:1.4rem}
+.ardhi-collection-card{position:relative;margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0e140f}
+.ardhi-collection-card button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.ardhi-collection-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center 40%;transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+.ardhi-collection-card:hover img,.ardhi-collection-card:focus-within img{transform:scale(1.04)}
+.ardhi-collection-card__badge{position:absolute;top:10px;left:10px;padding:.3rem .55rem;border-radius:999px;background:#060a06d9;color:#cff3b8;font-size:.72rem;font-weight:800;letter-spacing:.05em}
+.ardhi-collection-card figcaption{padding:.8rem .95rem 1rem}
+.ardhi-collection-card time{color:var(--green-bright);font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.ardhi-collection-card figcaption p{margin:.3rem 0 0;color:#c2cdc1;font-size:.86rem;line-height:1.5}
+.ardhi-collection-card button:focus-visible{outline:3px solid var(--green-bright);outline-offset:-3px}
+.ardhi-collection-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ardhi-collection-links article{padding:1.3rem;border:1px solid var(--line);background:#0e140f}
+.ardhi-collection-links h3{margin:0 0 .4rem}
+.ardhi-collection-links p{margin:0 0 .8rem;color:var(--muted)}
+.ardhi-collection-links a{color:var(--green-bright);font-weight:700;text-decoration:none}
+.ardhi-collection-lightbox{width:min(1080px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:1px solid #33402f;border-radius:16px;background:#0a0f0b;color:var(--white)}
+.ardhi-collection-lightbox::backdrop{background:#030503e0}
+.ardhi-collection-lightbox__body{display:grid}
+.ardhi-collection-lightbox img,.ardhi-collection-lightbox video{display:block;width:100%;max-height:min(72vh,900px);object-fit:contain;background:#000}
+.ardhi-collection-lightbox figcaption{padding:.9rem 1.1rem 0}
+.ardhi-collection-lightbox figcaption strong{display:block;color:var(--green-bright);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.ardhi-collection-lightbox figcaption span{display:block;margin-top:.35rem;color:#ccd6cb;line-height:1.5}
+.ardhi-collection-lightbox__controls{display:flex;justify-content:space-between;gap:.6rem;padding:1rem 1.1rem 1.1rem}
+.ardhi-collection-lightbox__controls button{min-height:44px;padding:.55rem 1rem;border:1px solid var(--line);background:#121a13;color:#dfe9dd;font-weight:700;cursor:pointer}
+.ardhi-collection-lightbox__controls button:last-child{border-color:var(--green);background:var(--green);color:#081006}
+.ardhi-collection-lightbox__controls button:focus-visible,.ardhi-collection-hero__actions a:focus-visible,.ardhi-collection-filters button:focus-visible,.ardhi-collection-stories a:focus-visible,.ardhi-collection-links a:focus-visible{outline:3px solid var(--green-bright);outline-offset:3px}
+@media(max-width:1000px){.ardhi-collection-grid,.ardhi-collection-stories,.ardhi-collection-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.ardhi-collection-hero{min-height:540px}.ardhi-collection-grid,.ardhi-collection-stories,.ardhi-collection-links{grid-template-columns:1fr}.ardhi-collection-filters{position:static}.ardhi-collection-card img{aspect-ratio:3/2}}
+@media(prefers-reduced-motion:reduce){.ardhi-collection-card img{transition:none}}
