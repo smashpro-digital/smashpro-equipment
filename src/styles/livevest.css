@@ -1,0 +1,61 @@
+.livevest{--lv-green:#39ff88;--lv-purple:#9b5cff;padding-bottom:4rem;overflow-wrap:anywhere}
+.livevest-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-top:140px;padding-bottom:4rem}
+.livevest-eyebrow{margin:0 0 .8rem;color:var(--lv-green);font-size:.72rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+.livevest-concept{display:inline-block;margin:0 0 1.2rem;padding:.45rem .7rem;border:1px solid var(--lv-purple);background:#9b5cff1f;color:#d7c2ff;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.livevest h1{font-size:clamp(2.8rem,7vw,6rem)}
+.livevest h1 span{display:block;margin-top:.8rem;color:var(--lv-green);font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.16em}
+.livevest-lead{max-width:640px;color:#d3dad4;font-size:1.12rem}
+.livevest-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+.livevest-visual{margin:0;border:1px solid var(--line);background:radial-gradient(circle at 50% 35%,#9b5cff26,transparent 55%),#090c0a}
+.livevest-visual img{width:100%;height:auto}
+.livevest-visual figcaption{padding:.8rem 1rem;border-top:1px solid var(--line);color:#d7c2ff;font-size:.78rem;font-weight:700}
+.livevest-section{padding-block:4.5rem;scroll-margin-top:90px}
+.livevest-band{border-block:1px solid var(--line);background:#0b0f0c}
+.livevest h2{margin-bottom:1.2rem;font-size:clamp(2rem,4.5vw,3.6rem);line-height:1;letter-spacing:-.04em;text-transform:uppercase}
+.livevest-intro{max-width:760px;color:var(--muted);font-size:1.05rem}
+.livevest-note{margin-top:1rem;color:var(--muted);font-size:.82rem}
+.livevest-features{display:grid;gap:0;margin:1.5rem 0 0;padding:0;border-top:1px solid var(--line);list-style:none}
+.livevest-features li{position:relative;padding:1rem 0 1rem 1.6rem;border-bottom:1px solid var(--line)}
+.livevest-features li:before{position:absolute;left:0;color:var(--lv-green);content:"+"}
+.livevest-grid,.lv-product-grid,.lv-partner-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.5rem}
+.livevest-grid article,.lv-product,.lv-partner{display:flex;flex-direction:column;gap:.5rem;padding:1.4rem;border:1px solid var(--line);background:var(--surface)}
+.livevest-grid h3,.lv-product h3{margin:0;font-size:1.15rem}
+.livevest-grid p,.lv-product p,.lv-partner p{margin:0;color:var(--muted)}
+.livevest-plan{display:grid;margin:1.5rem 0 0;padding:0;border-top:1px solid var(--line);list-style:none}
+.livevest-plan li{display:grid;grid-template-columns:48px 1fr auto;gap:1rem;align-items:center;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.livevest-plan span{color:var(--lv-green);font-weight:900}
+.livevest-plan p{margin:.2rem 0 0;color:var(--muted)}
+.livevest-plan em{padding:.35rem .55rem;border:1px solid var(--line);color:var(--muted);font-size:.66rem;font-style:normal;font-weight:900;text-transform:uppercase}
+.livevest-status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:1.5rem 0 0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.livevest-status div{padding:1.2rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.livevest-status dt{color:var(--muted);font-size:.7rem;text-transform:uppercase}
+.livevest-status dd{margin:.6rem 0 0;font-weight:900}
+.lv-availability{align-self:flex-start;padding:.35rem .55rem;border:1px solid var(--line);color:var(--muted);font-size:.64rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.lv-availability--concept{border-color:var(--lv-purple);color:#d7c2ff}
+.lv-availability--partner_evaluation,.lv-availability--prototype,.lv-availability--field_testing{border-color:#d39b36;color:#e9b657}
+.lv-availability--coming_soon,.lv-availability--available{border-color:var(--lv-green);color:var(--lv-green)}
+.lv-product__role{color:#fff!important;font-size:.8rem;font-weight:800;text-transform:uppercase}
+.lv-product__sourcing{font-size:.82rem}
+.lv-product__cta{margin-top:auto!important;padding-top:.6rem;font-size:.82rem}
+.lv-product__cta a,.lv-partner a{color:var(--lv-green);font-weight:900}
+.lv-partner-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lv-partner__name{font-size:1.2rem}
+.lv-partner__status{align-self:flex-start;padding:.3rem .5rem;border:1px solid var(--line);color:#e9b657;font-size:.64rem;font-weight:900;text-transform:uppercase}
+.lv-partner--prospective .lv-partner__status{color:#d7c2ff;border-color:var(--lv-purple)}
+.lv-partner small{margin-top:auto;padding-top:.6rem;color:#7f8a82;font-size:.74rem}
+.lv-interest{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;max-width:860px;margin-top:1.5rem;padding:1.5rem;border:1px solid var(--line);background:var(--surface)}
+.lv-interest--contact{display:block}
+.lv-interest--contact p{color:var(--muted)}
+.lv-interest label{display:grid;gap:.4rem;color:#c8d0ca;font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.lv-interest input,.lv-interest select,.lv-interest textarea{width:100%;min-height:48px;padding:.75rem;border:1px solid #3a463d;background:#080c09;color:#fff;font:inherit;text-transform:none}
+.lv-interest__wide,.lv-interest__check,.lv-interest button,.lv-interest__status{grid-column:1/-1}
+.lv-interest__check{grid-template-columns:auto 1fr!important;align-items:start;font-weight:600!important;letter-spacing:0!important;text-transform:none!important}
+.lv-interest__check input{width:22px;min-height:22px}
+.lv-interest__hp{position:absolute;left:-9999px}
+.lv-interest button{min-height:56px;border:0;background:var(--lv-green);color:#04100a;font-weight:950;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.lv-interest button:disabled{opacity:.6}
+.lv-interest__status{margin:0;padding:.9rem;background:#080c09}
+.lv-interest__status--success{color:var(--lv-green)}
+.lv-interest__status--error{color:#ffb4a8}
+@media(max-width:900px){.livevest-hero{grid-template-columns:1fr;padding-top:120px}.livevest-visual{max-width:440px}.livevest-grid,.lv-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.livevest-status{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.livevest-grid,.lv-product-grid,.lv-partner-grid,.livevest-status,.lv-interest{grid-template-columns:1fr}.livevest-plan li{grid-template-columns:36px 1fr}.livevest-plan em{grid-column:2;justify-self:start}.livevest-actions{display:grid}}

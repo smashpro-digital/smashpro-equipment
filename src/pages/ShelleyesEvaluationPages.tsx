@@ -8,7 +8,7 @@ const studyUrl = 'https://smashpro.app/smashpro-live-view-contractor-camera-case
 
 const capabilities = [
   { label: 'Connectivity', value: 'LTE / Wi-Fi 6 / Bluetooth 5.4', note: 'Manufacturer-reported. Carrier support is unconfirmed.' },
-  { label: 'Streaming', value: 'RTMP / RTMPS', note: 'Manufacturer-reported protocol support; integration not yet tested.' },
+  { label: 'Streaming', value: 'RTMP', note: 'Current manufacturer integration documentation lists RTMP media ingest; RTMPS is reserved for a future firmware release. Integration not yet tested.' },
   { label: 'Local evidence', value: '32 GB sample configuration', note: 'Recording, timestamp and GPS workflows require validation.' },
   { label: 'Integration', value: 'Third-party API proposed', note: 'Documentation, licensing, security and activation remain open questions.' },
 ];

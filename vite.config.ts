@@ -107,6 +107,7 @@ export default defineConfig(({ mode }) => {
         productCatalog: resolve(projectDirectory, "catalog/index.html"),
         powerControlModuleCatalog: resolve(projectDirectory, "catalog/sp-pcm-001/index.html"),
         mzigo27eCatalog: resolve(projectDirectory, "catalog/sp-mzigo-27e/index.html"),
+        liveVestCatalog: resolve(projectDirectory, "catalog/sp-livevest-01/index.html"),
         powerControlModuleLegacyRedirect: resolve(projectDirectory, "sp-pcm-001.html"),
         admin: resolve(projectDirectory, "admin.html"),
       },
