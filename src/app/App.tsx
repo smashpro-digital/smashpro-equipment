@@ -12,6 +12,7 @@ import { NotFoundPage } from "../pages/NotFoundPage";
 import { PowerControlModulePage } from "../pages/PowerControlModulePage";
 import { CatalogPage } from "../pages/CatalogPage";
 import { Mzigo27eCatalogPage } from "../pages/Mzigo27eCatalogPage";
+import { LiveVestCatalogPage } from "../pages/LiveVestCatalogPage";
 import { AttachmentPassportPage } from "../pages/AttachmentPassportPage";
 
 export function App() {
@@ -32,6 +33,8 @@ export function App() {
       <Route exact path="/catalog/" component={CatalogPage} />
       <Route exact path="/catalog/sp-pcm-001" component={PowerControlModulePage} />
       <Route exact path="/catalog/sp-pcm-001/" component={PowerControlModulePage} />
+      <Route exact path="/catalog/sp-livevest-01" component={LiveVestCatalogPage} />
+      <Route exact path="/catalog/sp-livevest-01/" component={LiveVestCatalogPage} />
       <Route exact path="/catalog/sp-mzigo-27e" component={Mzigo27eCatalogPage} />
       <Route exact path="/catalog/sp-mzigo-27e/" component={Mzigo27eCatalogPage} />
       <Route exact path="/attachments/:slug" render={({ match }) => <AttachmentPassportPage slug={match.params.slug} />} />
