@@ -99,3 +99,64 @@ test("public camera evaluation no longer advertises RTMPS or hardware push-to-ta
   assert.match(shelleyes, /RTMPS is reserved/);
   assert.doesNotMatch(page + components, /push.to.talk|two.way audio is (live|available)|encrypted (video|stream)/i);
 });
+
+// ---- Sprint 2: commercial readiness guards ----
+const confirmedPartner = { id: "maker", name: "Example Workwear", category: "safety-workwear", status: "confirmed", agreementRef: "AGR-2027-001", relationship: "Manufacturing partner." };
+const approvedImage = { src: "/equipment/images/x.webp", alt: "Vest front", kind: "render", stage: "concept", approvalRef: "EMAIL-1", approvedBy: "Owner", approvedAt: "2027-01-05" };
+const base = () => ({ ...liveViewProducts[0] });
+
+test("shipped LiveView data has no unbacked commercial claims", () => {
+  for (const p of liveViewProducts) assert.deepEqual(lv.commercialRecordErrors(p, liveViewPartners), [], p.sku);
+  for (const p of liveViewPartners) assert.deepEqual(lv.partnerRecordErrors(p), [], p.id);
+  for (const p of liveViewProducts) for (const k of ["images", "manufacturer", "affiliate", "pricing"]) assert.equal(p[k], undefined, `${p.sku}.${k}`);
+});
+
+test("partner confirmation, sponsorship and logos need recorded approvals", () => {
+  assert.ok(lv.partnerRecordErrors({ ...confirmedPartner, agreementRef: undefined }).length);
+  assert.ok(lv.partnerRecordErrors({ ...liveViewPartners[0], sponsorship: { approvalRef: "X", description: "d" } }).length, "sponsorship needs confirmed partner");
+  assert.ok(lv.partnerRecordErrors({ ...confirmedPartner, approvedLogo: { ...approvedImage, kind: "logo", approvalRef: "" } }).length);
+  assert.deepEqual(lv.partnerRecordErrors({ ...confirmedPartner, approvedLogo: { ...approvedImage, kind: "logo" } }), []);
+  assert.match(lv.partnerDisclosure({ ...confirmedPartner, agreementRef: undefined }), /not a sponsor, endorser or confirmed partner/);
+  assert.match(lv.partnerDisclosure(confirmedPartner), /confirmed SmashPro partner\. Not a sponsorship\./);
+});
+
+test("manufacturer attribution depends on a signed agreement", () => {
+  const info = { partnerId: "shelleyes", productName: "S7+", specs: [], verified: false };
+  assert.match(lv.manufacturerAttribution(info, liveViewPartners), /^Candidate supplier: Shelleyes \(under evaluation\)$/);
+  assert.equal(lv.manufacturerAttribution({ ...info, partnerId: "maker" }, [confirmedPartner]), "Manufactured by Example Workwear");
+  assert.equal(lv.manufacturerAttribution({ ...info, partnerId: "ghost" }, liveViewPartners), null);
+});
+
+test("images, specs, pricing and affiliate links are rejected without evidence", () => {
+  const partners = [...liveViewPartners, confirmedPartner];
+  assert.deepEqual(lv.commercialRecordErrors({ ...base(), images: [approvedImage] }, partners), []);
+  assert.ok(lv.commercialRecordErrors({ ...base(), images: [{ ...approvedImage, approvalRef: "" }] }, partners).length);
+  assert.ok(lv.commercialRecordErrors({ ...base(), manufacturer: { partnerId: "maker", productName: "V", specs: [{ label: "Class", value: "3", source: "" }], verified: true } }, partners).length, "verified spec needs source");
+  assert.ok(lv.commercialRecordErrors({ ...base(), pricing: { display: "$149", approvalRef: "PRICE-1" } }, partners).length, "pricing needs pricingApproved gate");
+  const aff = { partnerId: "maker", url: "https://retailer.example/vest?ref=smashpro", programTermsRef: "AFF-TERMS-1", disclosure: "SmashPro may earn an affiliate commission." };
+  assert.deepEqual(lv.commercialRecordErrors({ ...base(), affiliate: aff }, partners), []);
+  assert.ok(lv.commercialRecordErrors({ ...base(), affiliate: { ...aff, partnerId: "shelleyes" } }, partners).length, "unconfirmed partner");
+  assert.ok(lv.commercialRecordErrors({ ...base(), affiliate: { ...aff, url: aff.url + "&coupon=SAVE10" } }, partners).length, "no discount codes");
+  assert.ok(lv.commercialRecordErrors({ ...base(), affiliate: { ...aff, programTermsRef: "" } }, partners).length);
+  assert.ok(lv.commercialRecordErrors({ ...base(), affiliate: { ...aff, disclosure: "Great deal!" } }, partners).length);
+  assert.ok(lv.commercialRecordErrors({ ...base(), availability: "AVAILABLE" }, partners).length, "AVAILABLE needs gates");
+});
+
+test("cards fail closed and affiliate links are marked sponsored", () => {
+  assert.match(components, /commercialRecordErrors\(product, partners\)\.length === 0/);
+  assert.match(components, /rel="sponsored nofollow noopener"/);
+  assert.match(components, /partnerRecordErrors\(partner\)\.length === 0/);
+});
+
+test("fleet inquiries route to interest registration with fleet-manager preselected", () => {
+  assert.equal(lv.fleetInquiryHref("SP-LiveVest 01"), "?interest=fleet-manager&product=SP-LiveVest%2001#interest");
+  assert.ok(liveViewProducts.filter((p) => p.fleetInquiry).every((p) => p.plannedModels.includes("b2b-fleet-inquiry")));
+  assert.match(components, /q\.get\("interest"\)/);
+});
+
+test("production build never enables the interest form or checkout implicitly", () => {
+  const deploy = readFileSync(".github/workflows/deploy.yml", "utf8");
+  assert.doesNotMatch(deploy, /VITE_LIVEVIEW_PRODUCT_INTEREST/);
+  assert.doesNotMatch(readFileSync(".env.example", "utf8"), /VITE_LIVEVIEW_PRODUCT_INTEREST=1/);
+  assert.match(components, /const checkoutEnabled = false/);
+});

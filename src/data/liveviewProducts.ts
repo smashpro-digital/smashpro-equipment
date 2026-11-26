@@ -5,7 +5,7 @@ import { NO_COMMERCIAL_READINESS, type LiveViewProduct, type PartnerRecord } fro
 export const liveViewProducts: LiveViewProduct[] = [
   {
     sku: "SP-LIVEVEST-01", name: "SP-LiveVest 01", role: "Camera-ready technician vest", availability: "CONCEPT",
-    plannedModels: ["direct-sale", "co-branded", "b2b-fleet-inquiry"], readiness: NO_COMMERCIAL_READINESS,
+    plannedModels: ["direct-sale", "co-branded", "b2b-fleet-inquiry"], readiness: NO_COMMERCIAL_READINESS, fleetInquiry: true,
     summary: "Premium high-visibility, multi-pocket vest designed around a stable chest-camera position.",
     sourcing: "Manufacturing partner not selected.", interestSku: "SP-LIVEVEST-01",
   },
@@ -17,7 +17,7 @@ export const liveViewProducts: LiveViewProduct[] = [
   },
   {
     sku: "SP-LV-CAM-S7P", name: "Snake Eyes body camera", role: "4G LTE body camera candidate", availability: "PARTNER_EVALUATION",
-    plannedModels: ["direct-sale", "bundle", "b2b-fleet-inquiry"], readiness: NO_COMMERCIAL_READINESS,
+    plannedModels: ["direct-sale", "bundle", "b2b-fleet-inquiry"], readiness: NO_COMMERCIAL_READINESS, fleetInquiry: true,
     summary: "Working name for the Shelleyes S7+ 4G US LTE camera being evaluated for SP-LiveView. Not yet field tested.",
     sourcing: "Shelleyes S7+ under supplier evaluation.", interestSku: "SP-LIVEVIEW",
   },
@@ -39,7 +39,7 @@ export const liveViewProducts: LiveViewProduct[] = [
   },
   {
     sku: "SP-LV-STARTER", name: "Connected technician starter kit", role: "Hardware bundle", availability: "CONCEPT",
-    plannedModels: ["bundle", "b2b-fleet-inquiry"], readiness: NO_COMMERCIAL_READINESS,
+    plannedModels: ["bundle", "b2b-fleet-inquiry"], readiness: NO_COMMERCIAL_READINESS, fleetInquiry: true,
     summary: "Vest, camera, dock, case and charging defined as one kit once each part is validated.",
     sourcing: "Depends on every component above.", interestSku: "SP-LIVEVIEW",
   },

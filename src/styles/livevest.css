@@ -59,3 +59,12 @@
 .lv-interest__status--error{color:#ffb4a8}
 @media(max-width:900px){.livevest-hero{grid-template-columns:1fr;padding-top:120px}.livevest-visual{max-width:440px}.livevest-grid,.lv-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.livevest-status{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.livevest-grid,.lv-product-grid,.lv-partner-grid,.livevest-status,.lv-interest{grid-template-columns:1fr}.livevest-plan li{grid-template-columns:36px 1fr}.livevest-plan em{grid-column:2;justify-self:start}.livevest-actions{display:grid}}
+.lv-product__media{position:relative;margin:-1.4rem -1.4rem .4rem;border-bottom:1px solid var(--line);background:#080c09}
+.lv-product__media img{display:block;width:100%;aspect-ratio:3/2;object-fit:contain}
+.lv-product__media figcaption{position:absolute;top:.6rem;left:.6rem;padding:.25rem .45rem;background:var(--lv-purple);color:#fff;font-size:.62rem;font-weight:900;text-transform:uppercase}
+.lv-product__maker{color:#fff!important;font-size:.82rem;font-weight:800}
+.lv-product__specs{display:grid;gap:.3rem;margin:.2rem 0 0;font-size:.82rem}
+.lv-product__specs div{display:flex;justify-content:space-between;gap:.6rem;border-bottom:1px solid var(--line);padding-bottom:.3rem}
+.lv-product__specs dt{color:var(--muted)}.lv-product__specs dd{margin:0;font-weight:800}
+.lv-product__price{color:#fff!important;font-size:1.2rem;font-weight:900}
+.lv-product__affiliate{display:grid;gap:.3rem}.lv-product__affiliate small{color:#7f8a82;font-size:.72rem}

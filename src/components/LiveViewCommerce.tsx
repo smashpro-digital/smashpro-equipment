@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { liveViewPartners, liveViewProducts } from "../data/liveviewProducts";
 import {
-  availabilityLabels, buildInterestPayload, callToActionFor, interestCategoryLabels, interestMailto,
-  partnerDisclosure, partnerStatusLabels, type InterestCategory, type LiveViewProduct, type PartnerRecord,
+  availabilityLabels, buildInterestPayload, callToActionFor, commercialRecordErrors, fleetInquiryHref, interestCategoryLabels,
+  interestMailto, manufacturerAttribution, partnerDisclosure, partnerRecordErrors, partnerStatusLabels,
+  type InterestCategory, type LiveViewProduct, type PartnerRecord,
 } from "../domain/liveviewCommerce";
 
 export const liveViewInterestEnabled = import.meta.env.VITE_LIVEVIEW_PRODUCT_INTEREST === "1";
@@ -12,19 +13,41 @@ export function AvailabilityBadge({ product }: { product: LiveViewProduct }) {
   return <span className={`lv-availability lv-availability--${product.availability.toLowerCase()}`}>{availabilityLabels[product.availability]}</span>;
 }
 
-export function LiveViewProductGrid({ products = liveViewProducts }: { products?: LiveViewProduct[] }) {
+export function LiveViewProductGrid({ products = liveViewProducts, partners = liveViewPartners }: { products?: LiveViewProduct[]; partners?: PartnerRecord[] }) {
   return (
     <div className="lv-product-grid">
       {products.map((product) => {
         const cta = callToActionFor(product, checkoutEnabled);
+        // Fail closed: a record with any unbacked commercial claim renders as a plain concept card.
+        const valid = commercialRecordErrors(product, partners).length === 0;
+        const image = valid ? product.images?.[0] : undefined;
+        const attribution = valid ? manufacturerAttribution(product.manufacturer, partners) : null;
+        const specs = valid && product.manufacturer?.verified ? product.manufacturer.specs : [];
         return (
           <article key={product.sku} className="lv-product">
+            {image ? (
+              <figure className="lv-product__media">
+                <img src={image.src} alt={image.alt} loading="lazy" />
+                {image.stage !== "production" ? <figcaption>{image.stage === "concept" ? "Concept render" : "Prototype"}</figcaption> : null}
+              </figure>
+            ) : null}
             <AvailabilityBadge product={product} />
             <h3>{product.name}</h3>
             <p className="lv-product__role">{product.role}</p>
             <p>{product.summary}</p>
-            <p className="lv-product__sourcing">{product.sourcing}</p>
-            <p className="lv-product__cta">{cta.kind === "interest" ? <><a href="#interest">Register interest</a> · {cta.reason}</> : null}</p>
+            {attribution ? <p className="lv-product__maker">{attribution}</p> : <p className="lv-product__sourcing">{product.sourcing}</p>}
+            {specs.length ? <dl className="lv-product__specs">{specs.map((spec) => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl> : null}
+            {valid && product.pricing && product.readiness.pricingApproved ? <p className="lv-product__price">{product.pricing.display}</p> : null}
+            {valid && product.affiliate ? (
+              <p className="lv-product__affiliate">
+                <a href={product.affiliate.url} rel="sponsored nofollow noopener" target="_blank">View at retailer<span aria-hidden="true"> ↗</span></a>
+                <small>{product.affiliate.disclosure}</small>
+              </p>
+            ) : null}
+            <p className="lv-product__cta">
+              {cta.kind === "interest" ? <><a href="#interest">Register interest</a> · {cta.reason}</> : null}
+              {product.fleetInquiry ? <> · <a href={fleetInquiryHref(product.name)}>Fleet inquiry</a></> : null}
+            </p>
           </article>
         );
       })}
@@ -35,7 +58,7 @@ export function LiveViewProductGrid({ products = liveViewProducts }: { products?
 export function PartnerCard({ partner }: { partner: PartnerRecord }) {
   return (
     <article className={`lv-partner lv-partner--${partner.status}`}>
-      {partner.approvedLogo ? <img src={partner.approvedLogo} alt={`${partner.name} logo`} height={32} /> : <strong className="lv-partner__name">{partner.name}</strong>}
+      {partner.approvedLogo && partnerRecordErrors(partner).length === 0 ? <img src={partner.approvedLogo.src} alt={partner.approvedLogo.alt} height={32} /> : <strong className="lv-partner__name">{partner.name}</strong>}
       <span className="lv-partner__status">{partnerStatusLabels[partner.status]}</span>
       <p>{partner.relationship}</p>
       {partner.caseStudyHref ? <a href={partner.caseStudyHref}>Read the evaluation record</a> : null}
@@ -50,7 +73,18 @@ export function PartnerGrid({ partners = liveViewPartners }: { partners?: Partne
 
 const categories = Object.keys(interestCategoryLabels) as InterestCategory[];
 
+function preselected(productOptions: string[]): { category: InterestCategory; product: string } {
+  const q = typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search);
+  const category = q.get("interest") as InterestCategory | null;
+  const product = q.get("product");
+  return {
+    category: category && category in interestCategoryLabels ? category : "early-access",
+    product: product && productOptions.includes(product) ? product : productOptions[0],
+  };
+}
+
 export function LiveViewInterestForm({ sku, productOptions, campaign }: { sku: "SP-LIVEVEST-01" | "SP-LIVEVIEW"; productOptions: string[]; campaign: string }) {
+  const [initial] = useState(() => preselected(productOptions));
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<{ kind: "success" | "error"; message: string } | null>(null);
 
@@ -89,8 +123,8 @@ export function LiveViewInterestForm({ sku, productOptions, campaign }: { sku: "
 
   return (
     <form className="lv-interest" onSubmit={submit} noValidate={false}>
-      <label>I am a<select name="category" required defaultValue="early-access">{categories.map((c) => <option key={c} value={c}>{interestCategoryLabels[c]}</option>)}</select></label>
-      <label>Interested in<select name="product_interest" defaultValue={productOptions[0]}>{productOptions.map((p) => <option key={p} value={p}>{p}</option>)}</select></label>
+      <label>I am a<select name="category" required defaultValue={initial.category}>{categories.map((c) => <option key={c} value={c}>{interestCategoryLabels[c]}</option>)}</select></label>
+      <label>Interested in<select name="product_interest" defaultValue={initial.product}>{productOptions.map((p) => <option key={p} value={p}>{p}</option>)}</select></label>
       <label>Full name<input name="full_name" autoComplete="name" /></label>
       <label>Email<input name="email" type="email" autoComplete="email" required /></label>
       <label>Phone (optional)<input name="phone" type="tel" autoComplete="tel" /></label>
